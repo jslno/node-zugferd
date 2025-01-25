@@ -1,0 +1,25 @@
+{
+	"name": "zugferd",
+	"description": "Create zugferd invoices in Node.js",
+	"version": "1.0.0",
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"scripts": {
+		"build": "tsup"
+	},
+	"keywords": [],
+	"author": "jslno",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^22.10.7",
+		"tsup": "^8.3.5",
+		"typescript": "^5.7.3"
+	},
+	"dependencies": {
+		"defu": "^6.1.4",
+		"fast-xml-parser": "^4.5.1",
+		"xsd-schema-validator": "^0.10.0",
+		"zod": "^3.24.1"
+	}
+}
