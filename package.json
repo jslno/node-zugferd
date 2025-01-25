@@ -1,7 +1,7 @@
 {
 	"name": "zugferd",
-	"description": "Create zugferd invoices in Node.js",
-	"version": "1.0.0",
+	"description": "",
+	"version": "0.0.1",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
@@ -9,7 +9,7 @@
 		"build": "tsup"
 	},
 	"keywords": [],
-	"author": "jslno",
+	"author": "Joél de Oliveira Solano da Silva",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^22.10.7",
