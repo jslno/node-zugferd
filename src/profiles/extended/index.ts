@@ -1,5 +1,5 @@
 import { getAsset } from '../../helper'
-import { createProfile } from '../../profiles'
+import { createProfile } from '../../profile'
 import { InferSchema } from '../../types/schema'
 import { EN16931 } from '../en16931'
 import { extendedSchema } from './schema'
@@ -11,4 +11,4 @@ export const EXTENDED = createProfile({
 	xsdPath: getAsset('Factur-X_1.07.2_EXTENDED.xsd')
 })
 
-export type ExtendedSchema = InferSchema<typeof EXTENDED>
+export type ProfileExtended = InferSchema<typeof EXTENDED>

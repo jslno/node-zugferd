@@ -1,5 +1,5 @@
 import { getAsset } from '../../helper'
-import { createProfile } from '../../profiles'
+import { createProfile } from '../../profile'
 import { InferSchema } from '../../types/schema'
 import { BASIC } from '../basic'
 import { en16931Schema } from './schema'

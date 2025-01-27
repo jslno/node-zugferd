@@ -4,6 +4,20 @@ import { Schema } from '../../types/schema'
 
 export const minimumSchema = {
 	/**
+	 * Business process type
+	 * 
+	 * Identifies the business process context in which the transaction appears, to enable the Buyer to process the Invoice in an appropriate way.
+	 * 
+	 * To be specifid by the Buyer.
+	 * 
+	 * CHORUSPRO: this data makes it possible to inform the "cadre de facturation" (billing framework, which could be invoice from agent, co-contractor, subcontractor, invoicing part of a public works contract, etc.). The codes to be used are defined in the CHORUSPRO specifications: A1 (invoice deposit), A2 (prepaid invoice deposit), ... By default (in the absence of this field), the case A1 is applied.
+	 */
+	businessProcessType: {
+		type: 'string',
+		required: false,
+		xpath: '/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID'
+	},
+	/**
 	 * Invoice number
 	 *
 	 * A unique identification of the Invoice.

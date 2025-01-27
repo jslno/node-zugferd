@@ -1,5 +1,5 @@
 import { getAsset } from '../../helper'
-import { createProfile } from '../../profiles'
+import { createProfile } from '../../profile'
 import { InferSchema } from '../../types/schema'
 import { MINIMUM } from '../minimum'
 import { basicWlSchema } from './schema'

@@ -8,6 +8,7 @@ export type FieldType =
 	| 'number'
 	| 'number[]'
 	| 'date'
+	| 'boolean'
 	| 'object'
 	| 'object[]'
 	| 'string | number'
@@ -47,6 +48,8 @@ export type InferValueType<T extends FieldType> = T extends 'string'
 	? number
 	: T extends 'string | number'
 	? string | number
+	: T extends 'boolean'
+	? boolean
 	: T extends 'date'
 	? Date
 	: T extends 'string[]'

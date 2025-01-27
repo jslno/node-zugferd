@@ -1,14 +1,30 @@
 import { InferSchema, Schema } from './schema'
 import { ZugferdContext } from '../init'
+import { z, ZodSchema } from 'zod'
+import { LiteralString } from './helper'
 
 export type Profile = {
 	extends?: Profile
 	schema: Schema
-	contextParameter: string
+	contextParameter: LiteralString
 	xsdPath: string
 }
 
+export type ProfileParseHandlerContext<P extends Profile = Profile> = {
+	context: ZugferdContext
+	data: InferSchema<P>
+}
+
+export type ProfileParseHandler<P extends Profile = Profile> = (ctx: {
+	context: ZugferdContext
+	data: InferSchema<P>
+}) => any
+
+export type ProfileValidateHandler = (
+	data: string | Buffer | { file: string }
+) => Promise<boolean>
+
 export type ProfileContext<P extends Profile = Profile> = P & {
-	parse: (ctx: { context: ZugferdContext; data: InferSchema<P> }) => any
-	validate: (data: string | Buffer | { file: string }) => Promise<boolean>
+	parse: ProfileParseHandler<P>
+	validate: ProfileValidateHandler
 }

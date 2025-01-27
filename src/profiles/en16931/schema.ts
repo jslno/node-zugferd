@@ -703,7 +703,7 @@ export const en16931Schema = {
 							/**
 							 * Details of the associated order
 							 */
-							associatedOrder: {
+							buyerOrderReference: {
 								type: 'object',
 								required: false,
 								shape: {
@@ -714,8 +714,8 @@ export const en16931Schema = {
 									 *
 									 * The purchase order identifier is referenced on document level.
 									 */
-									reference: {
-										type: 'string',
+									lineID: {
+										type: 'string | number',
 										required: false,
 										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:BuyerOrderReferencedDocument/ram:LineID'
 									}

@@ -52,7 +52,7 @@ export const basicSchema = {
 							 *
 							 * BR-64: The Item standard identifier (BT-157) shall have a Scheme identifier
 							 */
-							identifier: {
+							globalIdentifier: {
 								type: 'object',
 								shape: {
 									/**
