@@ -163,7 +163,7 @@ export const basicWlSchema = {
 								}
 							},
 
-							address: {
+							postalAddress: {
 								type: 'object',
 								shape: {
 									/**
@@ -298,7 +298,7 @@ export const basicWlSchema = {
 							 *
 							 * BR-19: The  Seller  tax  representative  postal  address  (BG-12)  shall be provided in the Invoice, if the Seller (BG-4) has a Seller tax representative party (BG-11).
 							 */
-							address: {
+							postalAddress: {
 								type: 'object',
 								shape: {
 									/**
@@ -461,7 +461,7 @@ export const basicWlSchema = {
 								}
 							},
 
-							address: {
+							postalAddress: {
 								type: 'object',
 								shape: {
 									/**
@@ -680,7 +680,7 @@ export const basicWlSchema = {
 							 *
 							 * Like any address, the fields necessary to define the address must appear. The country code is mandatory.
 							 */
-							address: {
+							postalAddress: {
 								type: 'object',
 								required: false,
 								shape: {
@@ -806,7 +806,7 @@ export const basicWlSchema = {
 							 *
 							 * CHORUS PRO : not used
 							 */
-							reference: {
+							issuerAssignedID: {
 								type: 'string',
 								required: false,
 								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:IssuerAssignedID'

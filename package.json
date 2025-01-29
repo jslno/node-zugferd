@@ -1,20 +1,43 @@
 {
 	"name": "zugferd",
-	"description": "",
+	"description": "A library to create XML for ZUGFeRD invoices and append it to PDF files, generating PDF/A compliant documents.",
 	"version": "0.0.1",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"scripts": {
-		"build": "tsup"
+		"build": "tsup",
+		"test": "vitest"
 	},
-	"keywords": [],
+	"keywords": [
+		"zugferd",
+		"invoice",
+		"xml",
+		"pdf",
+		"pdfa",
+		"append",
+		"generate",
+		"invoice-xml",
+		"pdf-invoice",
+		"pdf-xml",
+		"e-invoice",
+		"electronic-invoice",
+		"invoice-generation",
+		"pdf-attachment",
+		"xml-creation"
+	],
 	"author": "Joél de Oliveira Solano da Silva",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jslno/node-zugferd.git"
+	},
+	"readme": "README.md",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^22.10.7",
 		"tsup": "^8.3.5",
-		"typescript": "^5.7.3"
+		"typescript": "^5.7.3",
+		"vitest": "^3.0.4"
 	},
 	"dependencies": {
 		"defu": "^6.1.4",

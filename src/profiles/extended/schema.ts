@@ -1,6 +1,8 @@
 import { validateHeaderName } from 'http'
 import { dateTimeStringFormatter } from '../../helper'
 import { Schema } from '../../types/schema'
+import { date, z } from 'zod'
+import { count } from 'console'
 
 export const extendedSchema = {
 	/**
@@ -51,6 +53,7 @@ export const extendedSchema = {
 	},
 	includedNote: {
 		type: 'object[]',
+		required: false,
 		shape: {
 			/**
 			 * Free text on header level (qualifying the content)
@@ -88,6 +91,6135 @@ export const extendedSchema = {
 	transaction: {
 		type: 'object',
 		shape: {
+			tradeAgreement: {
+				type: 'object',
+				shape: {
+					seller: {
+						type: 'object',
+						shape: {
+							/**
+							 * Seller Role (code)
+							 *
+							 * A code qualifying the role of the party
+							 *
+							 * To be chosen from UNTDID 3035.
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:RoleCode'
+							},
+
+							organization: {
+								type: 'object',
+								shape: {
+									/**
+									 * Seller legal address
+									 *
+									 * Legal address of the seller in case the seller address is different
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									}
+								}
+							},
+
+							tradeContact: {
+								type: 'object',
+								shape: {
+									/**
+									 * Type of contact (code)
+									 *
+									 * The code specifying the type of trade contact
+									 *
+									 * To be chosen from the entries of UNTDID 3139
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+									},
+									/**
+									 * Seller contact fax number
+									 *
+									 * A fax number for the contact point.
+									 */
+									faxNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+									}
+								}
+							}
+						}
+					},
+					buyer: {
+						type: 'object',
+						shape: {
+							/**
+							 * Role (code)
+							 *
+							 * A code qualifying the role
+							 *
+							 * To be chosen from UNTDID 3035.
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:RoleCode'
+							},
+							/**
+							 * Buyer additional legal information
+							 *
+							 * Additional legal information relevant for the buyer.
+							 *
+							 * Such as share capital.
+							 */
+							description: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Description'
+							},
+							organization: {
+								type: 'object',
+								shape: {
+									/**
+									 * Detailed information about the business address
+									 *
+									 * Legal address of the buyerr in case the Buyer address is different
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									}
+								}
+							},
+							tradeContact: {
+								type: 'object',
+								shape: {
+									/**
+									 * Type of contact (code)
+									 *
+									 * The code specifying the type of trade contact
+									 *
+									 * To be chosen from the entries of UNTDID 3139
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+									},
+									/**
+									 * Buyer contact fax number
+									 *
+									 * A fax number for the contact point.
+									 */
+									faxNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+									}
+								}
+							}
+						}
+					},
+					/**
+					 * Detailed information about the sales agent
+					 *
+					 * A group of business terms providing information about the Sales Agent
+					 */
+					salesAgent: {
+						type: 'object',
+						required: false,
+						shape: {
+							/**
+							 * Sales agent identifier
+							 *
+							 * A previously exchanged assigned identifier of the business partner.
+							 */
+							identifier: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:ID'
+							},
+							/**
+							 * Sales agent global identifier
+							 *
+							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+							 */
+							globalIdentifier: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Sales agent global identifier
+									 *
+									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+									 */
+									value: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:GlobalID'
+									},
+									/**
+									 * Scheme identifier
+									 *
+									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
+									 */
+									schemeIdentifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:GlobalID/@schemeID'
+									}
+								}
+							},
+							/**
+							 * Sales agent identifier Name / Company Name
+							 */
+							name: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:Name'
+							},
+							/**
+							 * Role (code)
+							 *
+							 * A code qualifying the role
+							 *
+							 * To be chosen from UNTDID 3035.
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:RoleCode'
+							},
+							/**
+							 * Details about the organization
+							 */
+							organization: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Sales Agent Registration Number
+									 *
+									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+									 */
+									identifier: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Sales Agent Registration Number
+											 *
+											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+											 */
+											value: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+											},
+											/**
+											 * Scheme identifier
+											 *
+											 * The identification scheme identifier of the Buyer legal registration identifier.
+											 *
+											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
+											}
+										}
+									},
+									/**
+									 * Trading Business Name
+									 *
+									 * A name by which the party is known, other than party name (also known as business name).
+									 *
+									 * This may be used if different from the party name.
+									 */
+									businessName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
+									},
+									/**
+									 * Detailed information about the business address
+									 *
+									 * Legal address of the buyer in case the Sales Agent address is different
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									},
+									/**
+									 * Detailed contact information of the deviating end user
+									 */
+									tradeContact: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Name of the contact
+											 *
+											 * If a contact person is indicated, either the name or the department is to be transmitted.
+											 */
+											name: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:DefinedTradeContact/ram:PersonName'
+											},
+											/**
+											 * Department name
+											 *
+											 * If a contact person is indicated, either the name or the department is to be transmitted.
+											 */
+											departmentName: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:DefinedTradeContact/ram:DepartmentName'
+											},
+											/**
+											 * Type of contact (code)
+											 *
+											 * The code specifying the type of trade contact
+											 *
+											 * To be chosen from the entries of UNTDID 3139
+											 */
+											typeCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+											},
+											/**
+											 * Contact telephone number
+											 *
+											 * A phone number for the contact point.
+											 */
+											telephoneNumber: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber'
+											},
+											/**
+											 * Contact point fax number
+											 */
+											faxNumber: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+											},
+											/**
+											 * Contact email address
+											 *
+											 * An e-mail address for the contact point.
+											 */
+											emailAddress: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed information about the address
+							 */
+							postalAddress: {
+								type: 'object',
+								shape: {
+									/**
+									 * Post code
+									 *
+									 * The identifier for an addressable group of properties according to the relevant postal service.
+									 *
+									 * Such as a ZIP code or a post code.
+									 */
+									postCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+									},
+									/**
+									 * Address line 1
+									 *
+									 * The main address line in an address.
+									 *
+									 * Usually the street name and number or post office box.
+									 */
+									line1: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:PostalTradeAddress/ram:LineOne'
+									},
+									/**
+									 * Address line 2
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line2: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+									},
+									/**
+									 * Address line 3
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line3: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:PostalTradeAddress/ram:LineThree'
+									},
+									/**
+									 * City
+									 *
+									 * The common name of the city, town or village.
+									 */
+									city: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:PostalTradeAddress/ram:CityName'
+									},
+									/**
+									 * Country code
+									 *
+									 * A code that identifies the country.
+									 *
+									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+									 */
+									countryCode: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:PostalTradeAddress/ram:CountryID'
+									},
+									/**
+									 * Country subdivision
+									 *
+									 * The subdivision of a country.
+									 *
+									 * Such as a region, a county, a state, a province, etc.
+									 */
+									countrySubdivision: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+									},
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Electronic address
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:URIUniversalCommunication/ram:URIID'
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed information on tax information
+							 */
+							taxRegistration: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * VAT ID
+									 */
+									identifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID':
+												'VA'
+										}
+									}
+								}
+							}
+						}
+					},
+					/**
+					 * Detailed information about the buyer tax representative
+					 */
+					buyerTaxRepresentative: {
+						type: 'object',
+						required: false,
+						shape: {
+							/**
+							 * Identifier
+							 *
+							 * A previously exchanged assigned identifier of the business partner.
+							 */
+							identifier: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:ID'
+							},
+							/**
+							 * Global identifier
+							 *
+							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+							 */
+							globalIdentifier: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Global identifier
+									 *
+									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+									 */
+									value: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:GlobalID'
+									},
+									/**
+									 * Scheme identifier
+									 *
+									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
+									 */
+									schemeIdentifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:GlobalID/@schemeID'
+									}
+								}
+							},
+							/**
+							 * Identifier Name / Company Name
+							 */
+							name: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:Name'
+							},
+							/**
+							 * Role (code)
+							 *
+							 * A code qualifying the role
+							 *
+							 * To be chosen from UNTDID 3035.
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:RoleCode'
+							},
+							/**
+							 * Details about the organization
+							 */
+							organization: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Company Registration Number
+									 *
+									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+									 */
+									identifier: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Company Registration Number
+											 *
+											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+											},
+											/**
+											 * Scheme identifier
+											 *
+											 * The identification scheme identifier of the Buyer legal registration identifier.
+											 *
+											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
+											}
+										}
+									},
+									/**
+									 * Trading Business Name
+									 *
+									 * A name by which the party is known, other than party name (also known as business name).
+									 *
+									 * This may be used if different from the party name.
+									 */
+									businessName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
+									},
+									/**
+									 * Detailed information about the business address
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed contact information of the deviating end user
+							 */
+							tradeContact: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Name of the contact
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									name: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:DefinedTradeContact/ram:PersonName'
+									},
+									/**
+									 * Department name
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									departmentName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:DefinedTradeContact/ram:DepartmentName'
+									},
+									/**
+									 * Type of contact (code)
+									 *
+									 * The code specifying the type of trade contact
+									 *
+									 * To be chosen from the entries of UNTDID 3139
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+									},
+									/**
+									 * Contact telephone number
+									 *
+									 * A phone number for the contact point.
+									 */
+									telephoneNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact point fax number
+									 */
+									faxNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact email address
+									 *
+									 * An e-mail address for the contact point.
+									 */
+									emailAddress: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID'
+									}
+								}
+							},
+							/**
+							 * Detailed information about the address
+							 */
+							postalAddress: {
+								type: 'object',
+								shape: {
+									/**
+									 * Post code
+									 *
+									 * The identifier for an addressable group of properties according to the relevant postal service.
+									 *
+									 * Such as a ZIP code or a post code.
+									 */
+									postCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+									},
+									/**
+									 * Address line 1
+									 *
+									 * The main address line in an address.
+									 *
+									 * Usually the street name and number or post office box.
+									 */
+									line1: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:LineOne'
+									},
+									/**
+									 * Address line 2
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line2: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+									},
+									/**
+									 * Address line 3
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line3: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:LineThree'
+									},
+									/**
+									 * City
+									 *
+									 * The common name of the city, town or village.
+									 */
+									city: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:CityName'
+									},
+									/**
+									 * Country code
+									 *
+									 * A code that identifies the country.
+									 *
+									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+									 */
+									countryCode: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:CountryID'
+									},
+									/**
+									 * Country subdivision
+									 *
+									 * The subdivision of a country.
+									 *
+									 * Such as a region, a county, a state, a province, etc.
+									 */
+									countrySubdivision: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+									},
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Electronic address
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID'
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed information on tax information
+							 */
+							taxRegistration: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * VAT ID
+									 */
+									identifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID':
+												'VA'
+										}
+									}
+								}
+							}
+						}
+					},
+					sellerTaxRepresentative: {
+						type: 'object',
+						shape: {
+							/**
+							 * Identifier
+							 *
+							 * A previously exchanged assigned identifier of the business partner.
+							 */
+							identifier: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:ID'
+							},
+							/**
+							 * Global identifier
+							 *
+							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+							 */
+							globalIdentifier: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Global identifier
+									 *
+									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+									 */
+									value: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:GlobalID'
+									},
+									/**
+									 * Scheme identifier
+									 *
+									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
+									 */
+									schemeIdentifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:GlobalID/@schemeID'
+									}
+								}
+							},
+							/**
+							 * Role (code)
+							 *
+							 * A code qualifying the role
+							 *
+							 * To be chosen from UNTDID 3035.
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:RoleCode'
+							},
+							/**
+							 * Details about the organization
+							 */
+							organization: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Legal registration identifier
+									 *
+									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+									 */
+									identifier: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Legal registration identifier
+											 *
+											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+											},
+											/**
+											 * Scheme identifier
+											 *
+											 * The identification scheme identifier of the Buyer legal registration identifier.
+											 *
+											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
+											}
+										}
+									},
+									/**
+									 * Trading name
+									 *
+									 * A name by which the party is known, other than party name (also known as business name).
+									 *
+									 * This may be used if different from the party name.
+									 */
+									businessName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
+									},
+									/**
+									 * Detailed information about the business address
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed contact information
+							 */
+							tradeContact: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Name of the contact
+									 */
+									name: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:DefinedTradeContact/ram:PersonName'
+									},
+									/**
+									 * Department name
+									 */
+									departmentName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:DefinedTradeContact/ram:DepartmentName'
+									},
+									/**
+									 * Type of contact (code)
+									 *
+									 * The code specifying the type of trade contact
+									 *
+									 * To be chosen from the entries of UNTDID 3139
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+									},
+									/**
+									 * Contact telephone number
+									 *
+									 * A phone number for the contact point.
+									 */
+									telephoneNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact point fax number
+									 */
+									faxNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact email address
+									 *
+									 * An e-mail address for the contact point.
+									 */
+									emailAddress: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID'
+									}
+								}
+							},
+							postalAddress: {
+								type: 'object',
+								shape: {
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Electronic address
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID'
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					/**
+					 * Detailed information about the deviating end user
+					 */
+					productEndUser: {
+						type: 'object',
+						required: false,
+						shape: {
+							/**
+							 * Deviating end user identifier
+							 *
+							 * A previously exchanged assigned identifier of the business partner.
+							 */
+							identifier: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:ID'
+							},
+							/**
+							 * Deviating end user global identifier
+							 *
+							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+							 */
+							globalIdentifier: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Deviating end user global identifier
+									 *
+									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+									 */
+									value: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:GlobalID'
+									},
+									/**
+									 * Scheme identifier
+									 *
+									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
+									 */
+									schemeIdentifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:GlobalID/@schemeID'
+									}
+								}
+							},
+							/**
+							 * Deviating end user identifier Name / Company Name
+							 */
+							name: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:Name'
+							},
+							/**
+							 * Role (code)
+							 *
+							 * A code qualifying the role
+							 *
+							 * To be chosen from UNTDID 3035.
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:RoleCode'
+							},
+							/**
+							 * Details about the organization
+							 */
+							organization: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Company Registration Number
+									 *
+									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+									 */
+									identifier: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Company Registration Number
+											 *
+											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+											 */
+											value: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+											},
+											/**
+											 * Scheme identifier
+											 *
+											 * The identification scheme identifier of the Buyer legal registration identifier.
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
+											}
+										}
+									},
+									/**
+									 * Trading Business Name
+									 *
+									 * A name by which the party is known, other than party name (also known as business name).
+									 *
+									 * This may be used if different from the party name.
+									 */
+									businessName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
+									},
+									/**
+									 * Detailed information about the business address
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed contact information of the deviating end user
+							 */
+							tradeContact: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Name of the contact
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									name: {
+										type: 'string',
+										required: false,
+										xpath: ''
+									},
+									/**
+									 * Department name
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									departmentName: {
+										type: 'string',
+										required: false,
+										xpath: ''
+									},
+									/**
+									 * Type of contact (code)
+									 *
+									 * The code specifying the type of trade contact
+									 *
+									 * To be chosen from the entries of UNTDID 3139
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+									},
+									/**
+									 * Contact telephone number, value
+									 *
+									 * A phone number for the contact point.
+									 */
+									telephoneNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact point fax number
+									 */
+									faxNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact email address
+									 *
+									 * An e-mail address for the contact point.
+									 */
+									emailAddress: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID'
+									}
+								}
+							},
+							/**
+							 * Detailed information about the address of the deviating end user
+							 */
+							postalAddress: {
+								type: 'object',
+								shape: {
+									/**
+									 * Post code
+									 *
+									 * The identifier for an addressable group of properties according to the relevant postal service.
+									 *
+									 * Such as a ZIP code or a post code.
+									 */
+									postCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+									},
+									/**
+									 * Address line 1
+									 *
+									 * The main address line in an address.
+									 *
+									 * Usually the street name and number or post office box.
+									 */
+									line1: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:PostalTradeAddress/ram:LineOne'
+									},
+									/**
+									 * Address line 2
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line2: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+									},
+									/**
+									 * Address line 3
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line3: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:PostalTradeAddress/ram:LineThree'
+									},
+									/**
+									 * City
+									 *
+									 * The common name of the city, town or village.
+									 */
+									city: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:PostalTradeAddress/ram:CityName'
+									},
+									/**
+									 * Country code
+									 *
+									 * A code that identifies the country.
+									 *
+									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+									 */
+									countryCode: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:PostalTradeAddress/ram:CountryID'
+									},
+									/**
+									 * Country subdivision
+									 *
+									 * The subdivision of a country.
+									 *
+									 * Such as a region, a county, a state, a province, etc.
+									 */
+									countrySubdivision: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+									},
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Electronic address
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:URIUniversalCommunication/ram:URIID'
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed information on tax information
+							 */
+							taxRegistration: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * VAT ID
+									 */
+									identifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedTaxRegistration/ram:ID',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID':
+												'VA'
+										}
+									}
+								}
+							}
+						}
+					},
+					/**
+					 * Details of the delivery conditions
+					 */
+					tradeDeliveryTerms: {
+						type: 'object',
+						required: false,
+						shape: {
+							/**
+							 * Delivery condition (Code)
+							 *
+							 * The code specifying the type of delivery for these trade delivery terms.
+							 *
+							 * To be chosen from the entries in UNTDID 4053 + INCOTERMS List
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ApplicableTradeDeliveryTerms/ram:DeliveryTypeCode'
+							}
+						}
+					},
+					associatedOrderConfirmation: {
+						type: 'object',
+						shape: {
+							/**
+							 * Order confirmation date
+							 */
+							date: {
+								type: 'date',
+								required: false,
+								transform: {
+									input: dateTimeStringFormatter
+								},
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString',
+								additionalXml: {
+									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+										'102'
+								}
+							}
+						}
+					},
+					associatedOrder: {
+						type: 'object',
+						shape: {
+							/**
+							 * Order Date
+							 */
+							date: {
+								type: 'date',
+								required: false,
+								transform: {
+									input: dateTimeStringFormatter
+								},
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString',
+								additionalXml: {
+									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+										'102'
+								}
+							}
+						}
+					},
+					/**
+					 * Details on referenced quotation
+					 */
+					quotationReference: {
+						type: 'object[]',
+						required: false,
+						group: 'quotation-reference',
+						shape: {
+							/**
+							 * Quotation number
+							 */
+							issuerAssignedID: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:QuotationReferencedDocument[quotation-reference]/ram:IssuerAssignedID'
+							},
+							/**
+							 * Document date
+							 */
+							date: {
+								type: 'date',
+								required: false,
+								transform: {
+									input: dateTimeStringFormatter
+								},
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:QuotationReferencedDocument[quotation-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString',
+								additionalXml: {
+									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:QuotationReferencedDocument[quotation-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+										'102'
+								}
+							}
+						}
+					},
+					associatedContract: {
+						type: 'object',
+						shape: {
+							/**
+							 * Type of contract (code)
+							 *
+							 * Use codes from UNTDID 1153
+							 *
+							 * CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument/ram:ReferenceTypeCode'
+							},
+							/**
+							 * Contract Date
+							 */
+							date: {
+								type: 'date',
+								required: false,
+								transform: {
+									input: dateTimeStringFormatter
+								},
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString',
+								additionalXml: {
+									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+										'102'
+								}
+							}
+						}
+					},
+					supportingDocuments: {
+						type: 'object[]',
+						shape: {
+							/**
+							 * Document date
+							 */
+							date: {
+								type: 'date',
+								required: false,
+								transform: {
+									input: dateTimeStringFormatter
+								},
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[supporting-documents]/ram:FormattedIssueDateTime/qdt:DateTimeString',
+								additionalXml: {
+									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[supporting-documents]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+										'102'
+								}
+							}
+						}
+					},
+					tenderOrLotReference: {
+						type: 'object[]',
+						shape: {
+							/**
+							 * Document date
+							 */
+							date: {
+								type: 'date',
+								required: false,
+								transform: {
+									input: dateTimeStringFormatter
+								},
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[tender-lot-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString',
+								additionalXml: {
+									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[tender-lot-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+										'102'
+								}
+							}
+						}
+					},
+					objectIdentifier: {
+						type: 'object[]',
+						shape: {
+							/**
+							 * Document date
+							 */
+							date: {
+								type: 'date',
+								transform: {
+									input: dateTimeStringFormatter
+								},
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[object-identifier]/ram:FormattedIssueDateTime/qdt:DateTimeString',
+								additionalXml: {
+									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[object-identifier]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+										'102'
+								}
+							}
+						}
+					},
+					/**
+					 * Detailed information about the buyer agent
+					 */
+					buyerAgent: {
+						type: 'object',
+						required: false,
+						shape: {
+							/**
+							 * Identifier
+							 *
+							 * A previously exchanged assigned identifier of the business partner.
+							 */
+							identifier: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:ID'
+							},
+							/**
+							 * Global identifier
+							 *
+							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+							 */
+							globalIdentifier: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Global identifier
+									 *
+									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+									 */
+									value: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:GlobalID'
+									},
+									/**
+									 * Scheme identifier
+									 *
+									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
+									 */
+									schemeIdentifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:GlobalID/@schemeID'
+									}
+								}
+							},
+							/**
+							 * Name / Company Name
+							 */
+							name: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:Name'
+							},
+							/**
+							 * Role (code)
+							 *
+							 * A code qualifying the role
+							 *
+							 * To be chosen from UNTDID 3035.
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:RoleCode'
+							},
+							/**
+							 * Details about the organization
+							 */
+							organization: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Company Registration Number
+									 *
+									 * The identification scheme identifier of the Buyer Agent legal registration identifier.
+									 *
+									 * If the identification scheme is used, it must be selected from the entries in the list published by the ISO/IEC 6523 Maintenance Agency.
+									 */
+									identifier: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Company Registration Number
+											 *
+											 * The identification scheme identifier of the Buyer Agent legal registration identifier.
+											 *
+											 * If the identification scheme is used, it must be selected from the entries in the list published by the ISO/IEC 6523 Maintenance Agency.
+											 */
+											value: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+											},
+											/**
+											 * Scheme identifier
+											 *
+											 * The identification scheme identifier of the Buyer Agent legal registration identifier.
+											 *
+											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
+											}
+										}
+									},
+									/**
+									 * Trading Business Name
+									 *
+									 * A name by which the party is known, other than party name (also known as business name).
+									 *
+									 * This may be used if different from the party name.
+									 */
+									businessName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
+									},
+									/**
+									 * Detailed information about the business address
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed contact information of the deviating buyer agent
+							 */
+							tradeContact: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Name of the contact
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									name: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:DefinedTradeContact/ram:PersonName'
+									},
+									/**
+									 * Department name
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									departmentName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:DefinedTradeContact/ram:DepartmentName'
+									},
+									/**
+									 * Type of contact (code)
+									 *
+									 * The code specifying the type of trade contact
+									 *
+									 * To be chosen from the entries of UNTDID 3139
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+									},
+									/**
+									 * Contact telephone number
+									 *
+									 * A phone number for the contact point.
+									 */
+									telephoneNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact point fax number
+									 */
+									faxNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact email address
+									 */
+									emailAddress: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID'
+									}
+								}
+							},
+							/**
+							 * Detailed information about the address
+							 */
+							postalAddress: {
+								type: 'object',
+								shape: {
+									/**
+									 * Post code
+									 *
+									 * The identifier for an addressable group of properties according to the relevant postal service.
+									 *
+									 * Such as a ZIP code or a post code.
+									 */
+									postCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+									},
+									/**
+									 * Address line 1
+									 *
+									 * The main address line in an address.
+									 *
+									 * Usually the street name and number or post office box.
+									 */
+									line1: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:PostalTradeAddress/ram:LineOne'
+									},
+									/**
+									 * Address line 2
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line2: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+									},
+									/**
+									 * Address line 3
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line3: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:PostalTradeAddress/ram:LineThree'
+									},
+									/**
+									 * City
+									 *
+									 * The common name of the city, town or village.
+									 */
+									city: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:PostalTradeAddress/ram:CityName'
+									},
+									/**
+									 * Country code
+									 *
+									 * A code that identifies the country.
+									 *
+									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+									 */
+									countryCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:PostalTradeAddress/ram:CountryID'
+									},
+									/**
+									 * Country subdivision
+									 *
+									 * The subdivision of a country.
+									 *
+									 * Such as a region, a county, a state, a province, etc.
+									 */
+									countrySubdivision: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+									},
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Electronic address
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:URIUniversalCommunication/ram:URIID'
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
+											}
+										}
+									},
+									/**
+									 * Detailed information on tax information
+									 */
+									taxRegistration: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * VAT ID
+											 */
+											identifier: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID',
+												additionalXml: {
+													'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID':
+														'VA'
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					/**
+					 * Details on referenced customer order
+					 */
+					customerOrderReference: {
+						type: 'object[]',
+						group: 'customer-order-reference',
+						required: false,
+						shape: {
+							/**
+							 * Ultimate Customer Order number of the final customer
+							 */
+							issuerAssignedID: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument/ram:IssuerAssignedID'
+							},
+							/**
+							 * Document date
+							 */
+							date: {
+								type: 'date',
+								required: false,
+								transform: {
+									input: dateTimeStringFormatter
+								},
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString',
+								additionalXml: {
+									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+										'102'
+								}
+							}
+						}
+					}
+				}
+			},
+			tradeDelivery: {
+				type: 'object',
+				shape: {
+					/**
+					 * Related SupplyChain Consignment
+					 *
+					 * A consignment, at header level, related to this trade delivery.
+					 */
+					relatedConsignment: {
+						type: 'object',
+						required: false,
+						shape: {
+							/**
+							 * Specified Logistics Transport Movement
+							 *
+							 * The code specifying the mode, such as air, sea, rail, road or inland waterway, for this logistics transport movement.
+							 */
+							transportMovement: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:RelatedSupplyChainConsignment/ram:SpecifiedLogisticsTransportMovement'
+							},
+							/**
+							 * Delivery method (Code)
+							 *
+							 * A logistics transport movement specified for this supply chain consignment.
+							 */
+							deliveryMethod: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:RelatedSupplyChainConsignment/ram:SpecifiedLogisticsTransportMovement/ram:ModeCode'
+							}
+						}
+					},
+					shipTo: {
+						type: 'object',
+						shape: {
+							/**
+							 * Role (code)
+							 *
+							 * A code qualifying the role
+							 *
+							 * To be chosen from UNTDID 3035, for instance:
+							 * - DL: Factor
+							 * - DS: Distributor
+							 * - MOP: Market operator
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:RoleCode'
+							},
+							/**
+							 * Details about the organization
+							 */
+							organization: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Legal registration identifier
+									 *
+									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+									 */
+									identifier: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Legal registration identifier
+											 *
+											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+											 */
+											value: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+											},
+											/**
+											 * Scheme identifier
+											 *
+											 * The identification scheme identifier of the Buyer legal registration identifier.
+											 *
+											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
+											}
+										}
+									},
+									/**
+									 * Trading name
+									 *
+									 * A name by which the party is known, other than party name (also known as business name).
+									 *
+									 * This may be used if different from the party name.
+									 */
+									tradingName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
+									},
+									/**
+									 * Detailed information about the business address
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed contact information
+							 */
+							tradeContact: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Name of the contact
+									 */
+									name: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:DefinedTradeContact/ram:PersonName'
+									},
+									/**
+									 * Department name
+									 */
+									departmentName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:DefinedTradeContact/ram:DepartmentName'
+									},
+									/**
+									 * Type of contact (code)
+									 *
+									 * The code specifying the type of trade contact
+									 *
+									 * To be chosen from the entries of UNTDID 3139
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+									},
+									/**
+									 * Contact telephone number
+									 *
+									 * A phone number for the contact point.
+									 */
+									telephoneNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact point fax number
+									 */
+									faxNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact email address
+									 *
+									 * An e-mail address for the contact point.
+									 */
+									emailAddress: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID'
+									}
+								}
+							},
+							postalAddress: {
+								type: 'object',
+								shape: {
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Electronic address
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID'
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed information on tax information of the goods recipient
+							 */
+							taxRegistration: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * VAT identifier
+									 */
+									identifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID':
+												'VA'
+										}
+									}
+								}
+							}
+						}
+					},
+					/**
+					 * Detailed information about the final recipient
+					 */
+					finalShipTo: {
+						type: 'object',
+						required: false,
+						shape: {
+							/**
+							 * Final recipient identifier
+							 */
+							identifier: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:ID'
+							},
+							/**
+							 * Final recipient global identifier
+							 *
+							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+							 */
+							globalIdentifier: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Final recipient global identifier
+									 *
+									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+									 */
+									value: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:GlobalID'
+									},
+									/**
+									 * Scheme identifier
+									 *
+									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
+									 */
+									schemeIdentifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:GlobalID/@schemeID'
+									}
+								}
+							},
+							/**
+							 * Final Recipient Name / Company Name
+							 */
+							name: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:Name'
+							},
+							/**
+							 * Role (code)
+							 *
+							 * A code qualifying the role
+							 *
+							 * To be chosen from UNTDID 3035.
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:RoleCode'
+							},
+							/**
+							 * Details about the organization
+							 */
+							organization: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Company Registration Number
+									 *
+									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+									 */
+									identifier: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Company Registration Number
+											 *
+											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+											 */
+											value: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+											},
+											/**
+											 * Scheme identifier
+											 *
+											 * The identification scheme identifier of the Buyer legal registration identifier.
+											 *
+											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
+											}
+										}
+									},
+									/**
+									 * Trading Business Name
+									 *
+									 * A name by which the party is known, other than party name (also known as business name).
+									 *
+									 * This may be used if different from the party name.
+									 */
+									businessName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
+									},
+									/**
+									 * Detailed information about the business address
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed contact information
+							 */
+							tradeContact: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Name of the contact
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									name: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:DefinedTradeContact/ram:PersonName'
+									},
+									/**
+									 * Department name
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									departmentName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:DefinedTradeContact/ram:DepartmentName'
+									},
+									/**
+									 * Type of contact (code)
+									 *
+									 * The code specifying the type of trade contact
+									 *
+									 * To be chosen from the entries of UNTDID 3139
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+									},
+									/**
+									 * Contact telephone number
+									 *
+									 * A phone number for the contact point.
+									 */
+									telephoneNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact point fax number
+									 */
+									faxNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact email address
+									 *
+									 * An e-mail address for the contact point.
+									 */
+									emailAddress: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID'
+									}
+								}
+							},
+							/**
+							 * Detailed information about the address of the final recipient
+							 */
+							postalAddress: {
+								type: 'object',
+								shape: {
+									/**
+									 * Post code
+									 *
+									 * The identifier for an addressable group of properties according to the relevant postal service.
+									 *
+									 * Such as a ZIP code or a post code.
+									 */
+									postCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+									},
+									/**
+									 * Address line 1
+									 *
+									 * The main address line in an address.
+									 *
+									 * Usually the street name and number or post office box.
+									 */
+									line1: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:PostalTradeAddress/ram:LineOne'
+									},
+									/**
+									 * Address line 2
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line2: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+									},
+									/**
+									 * Address line 3
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line3: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:PostalTradeAddress/ram:LineThree'
+									},
+									/**
+									 * City
+									 *
+									 * The common name of the city, town or village.
+									 */
+									city: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:PostalTradeAddress/ram:CityName'
+									},
+									/**
+									 * Country code
+									 *
+									 * A code that identifies the country.
+									 *
+									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+									 */
+									countryCode: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:PostalTradeAddress/ram:CountryID'
+									},
+									/**
+									 * Country subdivision
+									 *
+									 * The subdivision of a country.
+									 *
+									 * Such as a region, a county, a state, a province, etc.
+									 */
+									countrySubdivision: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+									},
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Electronic address
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID'
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed information on tax information
+							 */
+							taxRegistration: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * VAT ID
+									 */
+									identifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID':
+												'VA'
+										}
+									}
+								}
+							}
+						}
+					},
+					/**
+					 * Identification of the deviating sender
+					 */
+					shipFrom: {
+						type: 'object',
+						required: false,
+						shape: {
+							/**
+							 * Deviating sender identifier
+							 */
+							identifier: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:ID'
+							},
+							/**
+							 * Deviating sender global identifier
+							 *
+							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+							 */
+							globalIdentifier: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Deviating sender global identifier
+									 *
+									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+									 */
+									value: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:GlobalID'
+									},
+									/**
+									 * Scheme identifier
+									 *
+									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
+									 */
+									schemeIdentifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:GlobalID/@schemeID'
+									}
+								}
+							},
+							/**
+							 * Deviating sender name / company name
+							 */
+							name: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:Name'
+							},
+							/**
+							 * Role (code)
+							 *
+							 * A code qualifying the role
+							 *
+							 * To be chosen from UNTDID 3035.
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:RoleCode'
+							},
+							/**
+							 * Details about the organization
+							 */
+							organization: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Company Registration Number
+									 *
+									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+									 */
+									identifier: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Company Registration Number
+											 *
+											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+											 */
+											value: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+											},
+											/**
+											 * Scheme identifier
+											 *
+											 * The identification scheme identifier of the Buyer legal registration identifier.
+											 *
+											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
+											}
+										}
+									},
+									/**
+									 * Trading Business Name
+									 *
+									 * A name by which the party is known, other than party name (also known as business name).
+									 *
+									 * This may be used if different from the party name.
+									 */
+									businessName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
+									},
+									/**
+									 * Detailed information about the business address
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed contact information
+							 */
+							tradeContact: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Name of the contact
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									name: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:DefinedTradeContact/ram:PersonName'
+									},
+									/**
+									 * Department name
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									departmentName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:DefinedTradeContact/ram:DepartmentName'
+									},
+									/**
+									 * Type of contact (code)
+									 *
+									 * The code specifying the type of trade contact
+									 *
+									 * To be chosen from the entries of UNTDID 3139
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+									},
+									/**
+									 * Contact telephone number
+									 *
+									 * A phone number for the contact point.
+									 */
+									telephoneNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact point fax number
+									 */
+									faxNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact email address
+									 *
+									 * An e-mail address for the contact point.
+									 */
+									emailAddress: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID'
+									}
+								}
+							},
+							/**
+							 * Detailed information about the address of the deviating sender
+							 */
+							postalAddress: {
+								type: 'object',
+								shape: {
+									/**
+									 * Post code
+									 *
+									 * The identifier for an addressable group of properties according to the relevant postal service.
+									 *
+									 * Such as a ZIP code or a post code.
+									 */
+									postCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+									},
+									/**
+									 * Address line 1
+									 *
+									 * The main address line in an address.
+									 *
+									 * Usually the street name and number or post office box.
+									 */
+									line1: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:PostalTradeAddress/ram:LineOne'
+									},
+									/**
+									 * Address line 2
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line2: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+									},
+									/**
+									 * Address line 3
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line3: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:PostalTradeAddress/ram:LineThree'
+									},
+									/**
+									 * City
+									 *
+									 * The common name of the city, town or village.
+									 */
+									city: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:PostalTradeAddress/ram:CityName'
+									},
+									/**
+									 * Country code
+									 *
+									 * A code that identifies the country.
+									 *
+									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+									 */
+									countryCode: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:PostalTradeAddress/ram:CountryID'
+									},
+									/**
+									 * Country subdivision
+									 *
+									 * The subdivision of a country.
+									 *
+									 * Such as a region, a county, a state, a province, etc.
+									 */
+									countrySubdivision: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+									},
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Electronic address
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:URIUniversalCommunication/ram:URIID'
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed information on tax information
+							 */
+							taxRegistration: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * VAT ID
+									 */
+									identifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedTaxRegistration/ram:ID',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID':
+												'VA'
+										}
+									}
+								}
+							}
+						}
+					},
+					despatchAdvice: {
+						type: 'object',
+						shape: {
+							/**
+							 * Despatch advice date
+							 */
+							date: {
+								type: 'date',
+								required: false,
+								transform: {
+									input: dateTimeStringFormatter
+								},
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString',
+								additionalXml: {
+									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+										'102'
+								}
+							}
+						}
+					},
+					associatedGoodsReceipt: {
+						type: 'object',
+						shape: {
+							/**
+							 * Goods receipt date
+							 */
+							date: {
+								type: 'date',
+								required: false,
+								transform: {
+									input: dateTimeStringFormatter
+								},
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString',
+								additionalXml: {
+									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+										'102'
+								}
+							},
+							/**
+							 * Detailed information about the corresponding delivery note
+							 */
+							deliveryNote: {
+								type: 'object[]',
+								required: false,
+								group: 'delivery-note',
+								shape: {
+									/**
+									 * Delivery note reference
+									 */
+									issuerAssignedID: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DeliveryNoteReferencedDocument[delivery-note]/ram:IssuerAssignedID'
+									},
+									/**
+									 * Delivery note date
+									 */
+									date: {
+										type: 'date',
+										required: false,
+										transform: {
+											input: dateTimeStringFormatter
+										},
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+												'102'
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			tradeSettlement: {
+				type: 'object',
+				shape: {
+					/**
+					 * Seller reference number
+					 *
+					 * Given seller reference number for routing purposes after biliteral agreement
+					 */
+					issuerReference: {
+						type: 'string',
+						required: false,
+						xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceIssuerReference'
+					},
+					/**
+					 * Deviating invoicing party
+					 */
+					invoicer: {
+						type: 'object',
+						required: false,
+						shape: {
+							/**
+							 * Deviating invoicer identifier
+							 */
+							identifier: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:ID'
+							},
+							/**
+							 * Deviating invoicer global identifier
+							 *
+							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+							 */
+							globalIdentifier: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Deviating invoicer global identifier
+									 *
+									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+									 */
+									value: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:GlobalID'
+									},
+									/**
+									 * Scheme identifier
+									 *
+									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
+									 */
+									schemeIdentifier: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:GlobalID/@schemeID'
+									}
+								}
+							},
+							/**
+							 * Name
+							 */
+							name: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:Name'
+							},
+							/**
+							 * Role (code)
+							 *
+							 * A code qualifying the role
+							 *
+							 * To be chosen from UNTDID 3035.
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:RoleCode'
+							},
+							/**
+							 * Details about the organization
+							 */
+							organization: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Company Registration Number
+									 *
+									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+									 */
+									identifier: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Company Registration Number
+											 *
+											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+											 */
+											value: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+											},
+											/**
+											 * Scheme identifier
+											 *
+											 * The identification scheme identifier of the Buyer legal registration identifier.
+											 *
+											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
+											}
+										}
+									},
+									/**
+									 * Trading Business Name
+									 *
+									 * A name by which the party is known, other than party name (also known as business name).
+									 *
+									 * This may be used if different from the party name.
+									 */
+									businessName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
+									},
+									/**
+									 * Detailed information about the business address
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed contact information
+							 */
+							tradeContact: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Name of the contact
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									name: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:DefinedTradeContact/ram:PersonName'
+									},
+									/**
+									 * Department name
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									departmentName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:DefinedTradeContact/ram:DepartmentName'
+									},
+									/**
+									 * Type of contact (code)
+									 *
+									 * The code specifying the type of trade contact
+									 *
+									 * To be chosen from the entries of UNTDID 3139
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+									},
+									/**
+									 * Contact telephone number
+									 *
+									 * A phone number for the contact point.
+									 */
+									telephoneNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact point fax number
+									 */
+									faxNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact email address
+									 *
+									 * An e-mail address for the contact point.
+									 */
+									emailAddress: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID'
+									}
+								}
+							},
+							/**
+							 * Detailed information about the address
+							 */
+							postalAddress: {
+								type: 'object',
+								shape: {
+									/**
+									 * Post code
+									 *
+									 * The identifier for an addressable group of properties according to the relevant postal service.
+									 *
+									 * Such as a ZIP code or a post code.
+									 */
+									postCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+									},
+									/**
+									 * Address line 1
+									 *
+									 * The main address line in an address.
+									 *
+									 * Usually the street name and number or post office box.
+									 */
+									line1: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:PostalTradeAddress/ram:LineOne'
+									},
+									/**
+									 * Address line 2
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line2: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+									},
+									/**
+									 * Address line 3
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line3: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:PostalTradeAddress/ram:LineThree'
+									},
+									/**
+									 * City
+									 *
+									 * The common name of the city, town or village.
+									 */
+									city: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:PostalTradeAddress/ram:CityName'
+									},
+									/**
+									 * Country code
+									 *
+									 * A code that identifies the country.
+									 *
+									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+									 */
+									countryCode: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:PostalTradeAddress/ram:CountryID'
+									},
+									/**
+									 * Country subdivision
+									 *
+									 * The subdivision of a country.
+									 *
+									 * Such as a region, a county, a state, a province, etc.
+									 */
+									countrySubdivision: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+									},
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Electronic address
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:URIUniversalCommunication/ram:URIID'
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed information on tax information
+							 */
+							taxRegistration: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * VAT ID
+									 */
+									identifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedTaxRegistration/ram:ID',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID':
+												'VA'
+										}
+									}
+								}
+							}
+						}
+					},
+					/**
+					 * Detailed information about the deviating invoice recipient
+					 */
+					invoicee: {
+						type: 'object',
+						required: false,
+						shape: {
+							/**
+							 * Deviating invoice recipient identifier
+							 */
+							identifier: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:ID'
+							},
+							/**
+							 * Deviating invoice recipient global identifier
+							 *
+							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+							 */
+							globalIdentifier: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Deviating invoice recipient global identifier
+									 *
+									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+									 */
+									value: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:GlobalID'
+									},
+									/**
+									 * Scheme identifier
+									 *
+									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
+									 */
+									schemeIdentifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:GlobalID/@schemeID'
+									}
+								}
+							},
+							/**
+							 * Deviating invoice recipient name / company name
+							 */
+							name: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:Name'
+							},
+							/**
+							 * Role (code)
+							 *
+							 * A code qualifying the role
+							 *
+							 * To be chosen from UNTDID 3035.
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:RoleCode'
+							},
+							/**
+							 * Details about the organization
+							 */
+							organization: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Company Registration Number
+									 *
+									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+									 */
+									identifier: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Company Registration Number
+											 *
+											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+											 */
+											value: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+											},
+											/**
+											 * Scheme identifier
+											 *
+											 * The identification scheme identifier of the Buyer legal registration identifier.
+											 *
+											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
+											}
+										}
+									},
+									/**
+									 * Trading Business Name
+									 *
+									 * A name by which the party is known, other than party name (also known as business name).
+									 *
+									 * This may be used if different from the party name.
+									 */
+									businessName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
+									},
+									/**
+									 * Detailed information about the business address
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed contact information
+							 */
+							tradeContact: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Name of the contact
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									name: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:DefinedTradeContact/ram:PersonName'
+									},
+									/**
+									 * Department name
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									departmentName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:DefinedTradeContact/ram:DepartmentName'
+									},
+									/**
+									 * Type of contact (code)
+									 *
+									 * The code specifying the type of trade contact
+									 *
+									 * To be chosen from the entries of UNTDID 3139
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+									},
+									/**
+									 * Contact telephone number
+									 *
+									 * A phone number for the contact point.
+									 */
+									telephoneNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact point fax number
+									 */
+									faxNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact email address
+									 *
+									 * An e-mail address for the contact point.
+									 */
+									emailAddress: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID'
+									}
+								}
+							},
+							/**
+							 * Detailed information about the address
+							 */
+							postalAddress: {
+								type: 'object',
+								shape: {
+									/**
+									 * Post code
+									 *
+									 * The identifier for an addressable group of properties according to the relevant postal service.
+									 *
+									 * Such as a ZIP code or a post code.
+									 */
+									postCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+									},
+									/**
+									 * Address line 1
+									 *
+									 * The main address line in an address.
+									 *
+									 * Usually the street name and number or post office box.
+									 */
+									line1: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:PostalTradeAddress/ram:LineOne'
+									},
+									/**
+									 * Address line 2
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line2: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+									},
+									/**
+									 * Address line 3
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line3: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:PostalTradeAddress/ram:LineThree'
+									},
+									/**
+									 * City
+									 *
+									 * The common name of the city, town or village.
+									 */
+									city: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:PostalTradeAddress/ram:CityName'
+									},
+									/**
+									 * Country code
+									 *
+									 * A code that identifies the country.
+									 *
+									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+									 */
+									countryCode: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:PostalTradeAddress/ram:CountryID'
+									},
+									/**
+									 * Country subdivision
+									 *
+									 * The subdivision of a country.
+									 *
+									 * Such as a region, a county, a state, a province, etc.
+									 */
+									countrySubdivision: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+									},
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Electronic address
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:URIUniversalCommunication/ram:URIID'
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed information on tax information
+							 */
+							taxRegistration: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * VAT ID
+									 */
+									identifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedTaxRegistration/ram:ID',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID':
+												'VA'
+										}
+									}
+								}
+							}
+						}
+					},
+					payee: {
+						type: 'object',
+						shape: {
+							/**
+							 * Payee role (code)
+							 *
+							 * A code qualifying the role of the payee
+							 *
+							 * To be chosen from UNTDID 3035, for instance:
+							 * - DL: Factor
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:RoleCode'
+							},
+							organization: {
+								type: 'object',
+								shape: {
+									/**
+									 * Trading name
+									 *
+									 * A name by which the party is known, other than party name (also known as business name).
+									 *
+									 * This may be used if different from the party name.
+									 */
+									businessName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
+									},
+									/**
+									 * Detailed information about the business address
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed contact information
+							 */
+							tradeContact: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Name of the contact
+									 */
+									name: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:DefinedTradeContact/ram:PersonName'
+									},
+									/**
+									 * Department name
+									 */
+									departmentName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:DefinedTradeContact/ram:DepartmentName'
+									},
+									/**
+									 * Type of contact (code)
+									 *
+									 * The code specifying the type of trade contact
+									 *
+									 * To be chosen from the entries of UNTDID 3139
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+									},
+									/**
+									 * Contact telephone number
+									 *
+									 * A phone number for the contact point.
+									 */
+									telephoneNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact point fax number
+									 */
+									faxNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact email address
+									 *
+									 * An e-mail address for the contact point.
+									 */
+									emailAddress: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID'
+									}
+								}
+							},
+							/**
+							 * Detailed information about the payee postal address
+							 */
+							postalAddress: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Post code
+									 *
+									 * The identifier for an addressable group of properties according to the relevant postal service.
+									 *
+									 * Such as a ZIP code or a post code.
+									 */
+									postCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+									},
+									/**
+									 * Address line 1
+									 *
+									 * The main address line in an address.
+									 *
+									 * Usually the street name and number or post office box.
+									 */
+									line1: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:LineOne'
+									},
+									/**
+									 * Address line 2
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line2: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+									},
+									/**
+									 * Address line 3
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line3: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:LineThree'
+									},
+									/**
+									 * City
+									 *
+									 * The common name of the city, town or village.
+									 */
+									city: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:CityName'
+									},
+									/**
+									 * Country code
+									 *
+									 * A code that identifies the country.
+									 *
+									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+									 */
+									countryCode: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:CountryID'
+									},
+									/**
+									 * Country subdivision
+									 *
+									 * The subdivision of a country.
+									 *
+									 * Such as a region, a county, a state, a province, etc.
+									 */
+									countrySubdivision: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+									},
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Electronic address
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID'
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed tax information
+							 */
+							taxRegistration: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * VAT identifier
+									 */
+									identifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID':
+												'VA'
+										}
+									}
+								}
+							}
+						}
+					},
+					/**
+					 * Detailed information about the deviating invoice payer
+					 *
+					 * A group of business terms providing information about the Payer, i.e. the role that makes the payment.
+					 *
+					 * The role of Payer may be fulfilled by another party than the Buyer, e.g. a third Party like a mother company
+					 */
+					payer: {
+						type: 'object',
+						required: false,
+						shape: {
+							/**
+							 * Deviating invoice payer identifier
+							 */
+							identifier: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:ID'
+							},
+							/**
+							 * Deviating invoice payer global identifier
+							 *
+							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+							 */
+							globalIdentifier: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Deviating invoice payer global identifier
+									 *
+									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+									 */
+									value: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:GlobalID'
+									},
+									/**
+									 * Payer identifier Scheme identifier
+									 *
+									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
+									 */
+									schemeIdentifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:GlobalID/@schemeID'
+									}
+								}
+							},
+							/**
+							 * Name/company name of the deviating invoice payer
+							 */
+							name: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:Name'
+							},
+							/**
+							 * Role (code)
+							 *
+							 * A code qualifying the role
+							 *
+							 * To be chosen from UNTDID 3035.
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:RoleCode'
+							},
+							/**
+							 * Details about the organization
+							 */
+							organization: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Company Registration Number
+									 *
+									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+									 */
+									identifier: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Company Registration Number
+											 *
+											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+											 */
+											value: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+											},
+											/**
+											 * Scheme identifier
+											 *
+											 * The identification scheme identifier of the Payer legal registration identifier.
+											 *
+											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
+											}
+										}
+									},
+									/**
+									 * Trading Business Name
+									 *
+									 * A name by which the party is known, other than party name (also known as business name).
+									 *
+									 * This may be used if different from the party name.
+									 */
+									businessName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
+									},
+									/**
+									 * Detailed information about the business address
+									 */
+									postalAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed contact information
+							 */
+							tradeContact: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Name of the contact
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									name: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:DefinedTradeContact/ram:PersonName'
+									},
+									/**
+									 * Department name
+									 *
+									 * If a contact person is indicated, either the name or the department is to be transmitted.
+									 */
+									departmentName: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:DefinedTradeContact/ram:DepartmentName'
+									},
+									/**
+									 * Type of contact (code)
+									 *
+									 * The code specifying the type of trade contact
+									 *
+									 * To be chosen from the entries of UNTDID 3139
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+									},
+									/**
+									 * Contact telephone number
+									 *
+									 * A phone number for the contact point.
+									 */
+									telephoneNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact point fax number
+									 */
+									faxNumber: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+									},
+									/**
+									 * Contact email address
+									 *
+									 * An e-mail address for the contact point.
+									 */
+									emailAddress: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID'
+									}
+								}
+							},
+							/**
+							 * Detailed information about the address
+							 */
+							postalAddress: {
+								type: 'object',
+								shape: {
+									/**
+									 * Post code
+									 *
+									 * The identifier for an addressable group of properties according to the relevant postal service.
+									 *
+									 * Such as a ZIP code or a post code.
+									 */
+									postCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+									},
+									/**
+									 * Address line 1
+									 *
+									 * The main address line in an address.
+									 *
+									 * Usually the street name and number or post office box.
+									 */
+									line1: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:PostalTradeAddress/ram:LineOne'
+									},
+									/**
+									 * Address line 2
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line2: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+									},
+									/**
+									 * Address line 3
+									 *
+									 * An additional address line in an address that can be used to give further details supplementing the main line.
+									 */
+									line3: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:PostalTradeAddress/ram:LineThree'
+									},
+									/**
+									 * City
+									 *
+									 * The common name of the city, town or village.
+									 */
+									city: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:PostalTradeAddress/ram:CityName'
+									},
+									/**
+									 * Country code
+									 *
+									 * A code that identifies the country.
+									 *
+									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+									 */
+									countryCode: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:PostalTradeAddress/ram:CountryID'
+									},
+									/**
+									 * Country subdivision
+									 *
+									 * The subdivision of a country.
+									 *
+									 * Such as a region, a county, a state, a province, etc.
+									 */
+									countrySubdivision: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+									},
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Payer Electronic address
+											 */
+											value: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:URIUniversalCommunication/ram:URIID'
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
+											}
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed information on tax information
+							 */
+							taxRegistration: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * VAT ID
+									 */
+									identifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedTaxRegistration/ram:ID',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID':
+												'VA'
+										}
+									}
+								}
+							}
+						}
+					},
+					/**
+					 * Specification of the invoice currency, local currency and exchange rate
+					 */
+					tradeCurrencyExchange: {
+						type: 'object',
+						required: false,
+						shape: {
+							/**
+							 * Invoice currency
+							 */
+							invoiceCurrency: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:SourceCurrencyCode'
+							},
+							/**
+							 * Local currency
+							 */
+							localCurrency: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:TargetCurrencyCode'
+							},
+							/**
+							 * Exchange rate
+							 */
+							exchangeRate: {
+								type: 'string | number',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:ConversionRate'
+							},
+							/**
+							 * Exchange rate date
+							 */
+							exchangeRateDate: {
+								type: 'date',
+								required: false,
+								transform: {
+									input: dateTimeStringFormatter
+								},
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:ConversionRateDateTime/udt:DateTimeString',
+								additionalXml: {
+									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:ConversionRateDateTime/udt:DateTimeString/@format':
+										'102'
+								}
+							}
+						}
+					},
+					vatBreakdown: {
+						type: 'object[]',
+						shape: {
+							/**
+							 * Line Total Basis Amount
+							 *
+							 * A monetary value used as the line total basis on which this trade related tax, levy or duty is calculated
+							 */
+							lineTotalBasisAmount: {
+								type: 'string | number',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:LineTotalBasisAmount'
+							},
+							/**
+							 * Total amount of charges / allowances on document level
+							 */
+							allowanceChargeBasisAmount: {
+								type: 'string | number',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:AllowanceChargeBasisAmount'
+							}
+						}
+					},
+					invoicingPeriod: {
+						type: 'object',
+						shape: {
+							/**
+							 * Invoicing period description (free text)
+							 */
+							description: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:Description'
+							}
+						}
+					},
+					allowances: {
+						type: 'object[]',
+						shape: {
+							/**
+							 * Calculation sequence
+							 */
+							calculationSequence: {
+								type: 'string | number',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:SequenceNumeric'
+							},
+							/**
+							 * Allowance / charge base quantity
+							 */
+							baseQuantity: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Allowance / charge base quantity
+									 */
+									value: {
+										type: 'string | number',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:BasisQuantity'
+									},
+									/**
+									 * Unit code
+									 */
+									unit: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:BasisQuantity/@unitCode'
+									}
+								}
+							}
+						}
+					},
+					charges: {
+						type: 'object[]',
+						shape: {
+							/**
+							 * Calculation sequence
+							 */
+							calculationSequence: {
+								type: 'string | number',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:SequenceNumeric'
+							},
+							/**
+							 * Allowance / charge base quantity
+							 */
+							baseQuantity: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Allowance / charge base quantity
+									 */
+									value: {
+										type: 'string | number',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:BasisQuantity'
+									},
+									/**
+									 * Unit code
+									 */
+									unit: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:BasisQuantity/@unitCode'
+									}
+								}
+							}
+						}
+					},
+					logisticsServiceCharge: {
+						type: 'object[]',
+						required: false,
+						group: 'logistics-service-charge',
+						shape: {
+							/**
+							 * Service fee description
+							 */
+							description: {
+								type: 'string',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedLogisticsServiceCharge[logistics-service-charge]/ram:Description'
+							},
+							/**
+							 * Service fee amount
+							 */
+							amount: {
+								type: 'string | number',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedLogisticsServiceCharge[logistics-service-charge]/ram:AppliedAmount'
+							},
+							/**
+							 * Detailed tax information
+							 */
+							tradeTax: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Tax type (Code)
+									 */
+									typeCode: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedLogisticsServiceCharge[logistics-service-charge]/ram:AppliedTradeTax/ram:TypeCode'
+									},
+									/**
+									 * VAT category code
+									 *
+									 * Coded identification of a VAT category.
+									 */
+									categoryCode: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedLogisticsServiceCharge[logistics-service-charge]/ram:AppliedTradeTax/ram:CategoryCode'
+									},
+									/**
+									 * VAT category rate
+									 */
+									rateApplicablePercent: {
+										type: 'string | number',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedLogisticsServiceCharge[logistics-service-charge]/ram:AppliedTradeTax/ram:RateApplicablePercent'
+									}
+								}
+							}
+						}
+					},
+					paymentTerms: {
+						type: 'object',
+						shape: {
+							/**
+							 * Partial payment amount
+							 */
+							partialPaymentAmount: {
+								type: 'string | number',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PartialPaymentAmount'
+							},
+							/**
+							 * Detailed information about penalties
+							 */
+							penaltyTerms: {
+								type: 'object[]',
+								required: false,
+								group: 'penalty-terms',
+								shape: {
+									/**
+									 * Maturity Reference Date
+									 */
+									date: {
+										type: 'date',
+										required: false,
+										transform: {
+											input: dateTimeStringFormatter
+										},
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentPenaltyTerms[penalty-terms]/ram:BasisDateTime/udt:DateTimeString',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentPenaltyTerms[penalty-terms]/ram:BasisDateTime/udt:DateTimeString/@format':
+												'102'
+										}
+									},
+									/**
+									 * Due date period basis
+									 *
+									 * The period for the due date, e.g. as a number of days (15 days)
+									 */
+									datePeriodMeasure: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Due date period basis
+											 *
+											 * The period for the due date, e.g. as a number of days (15 days)
+											 */
+											value: {
+												type: 'string | number',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentPenaltyTerms[penalty-terms]/ram:BasisPeriodMeasure'
+											},
+											/**
+											 * Maturity Period, Unit code
+											 */
+											unit: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentPenaltyTerms[penalty-terms]/ram:BasisPeriodMeasure/@unitCode'
+											}
+										}
+									},
+									/**
+									 * Payment penalty base amount
+									 */
+									basisAmount: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentPenaltyTerms[penalty-terms]/ram:BasisAmount'
+									},
+									/**
+									 * Payment penalty percentage
+									 */
+									calculationPercent: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentPenaltyTerms[penalty-terms]/ram:CalculationPercent'
+									},
+									/**
+									 * Payment penalty amount
+									 */
+									penaltyAmount: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentPenaltyTerms[penalty-terms]/ram:ActualPenaltyAmount'
+									}
+								}
+							},
+							/**
+							 * Detailed information about payment discounts
+							 */
+							discountTerms: {
+								type: 'object[]',
+								required: false,
+								group: 'discount-terms',
+								shape: {
+									/**
+									 * Maturity Reference Date
+									 */
+									date: {
+										type: 'date',
+										required: false,
+										transform: {
+											input: dateTimeStringFormatter
+										},
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentDiscountTerms[discount-terms]/ram:BasisDateTime/udt:DateTimeString',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentDiscountTerms[discount-terms]/ram:BasisDateTime/udt:DateTimeString/@format':
+												'102'
+										}
+									},
+									/**
+									 * Due date period basis
+									 *
+									 * The period for the due date, e.g. as a number of days (15 days)
+									 */
+									datePeriodMeasure: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Due date period basis
+											 *
+											 * The period for the due date, e.g. as a number of days (15 days)
+											 */
+											value: {
+												type: 'string | number',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentDiscountTerms[discount-terms]/ram:BasisPeriodMeasure'
+											},
+											/**
+											 * Maturity Period, Unit code
+											 */
+											unit: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentDiscountTerms[discount-terms]/ram:BasisPeriodMeasure/@unitCode'
+											}
+										}
+									},
+									/**
+									 * Payment discount base amount
+									 */
+									basisAmount: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentDiscountTerms[discount-terms]/ram:BasisAmount'
+									},
+									/**
+									 * Payment discount percentage
+									 */
+									calculationPercent: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentDiscountTerms/ram:CalculationPercent'
+									},
+									/**
+									 * Payment discount amount
+									 */
+									discountAmount: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentDiscountTerms/ram:ActualDiscountAmount'
+									}
+								}
+							},
+							/**
+							 * Deviating payee per payment
+							 *
+							 * Group of business terms providing information about the payee, i.e. the role that receives the payment, IN CASE OF MULTIPLE PAYEES
+							 *
+							 * The role of beneficiary may be filled by a party other than the seller, e.g. a factoring service. THIS GROUP IS ONLY USED WHEN THERE ARE MULTIPLE BENEFICIARIES (e.g. withholding tax or split payment).
+							 */
+							payee: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Deviating invoice payee identifier
+									 */
+									identifier: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:ID'
+									},
+									/**
+									 * Deviating invoice payer global identifier
+									 *
+									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+									 */
+									globalIdentifier: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Deviating invoice payer global identifier
+											 *
+											 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
+											 */
+											value: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:GlobalID'
+											},
+											/**
+											 * Payee scheme identifier
+											 *
+											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
+											 */
+											schemeIdentifier: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:GlobalID/@schemeID'
+											}
+										}
+									},
+									/**
+									 * Name/company name of Payee
+									 *
+									 * The name of the Payee.
+									 *
+									 * Shall be used when the Payee is different from the Seller. The Payee name may however be the same as the Seller name.
+									 */
+									name: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:Name'
+									},
+									/**
+									 * Role (code)
+									 *
+									 * A code qualifying the role
+									 *
+									 * To be chosen from UNTDID 3035.
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:RoleCode'
+									},
+									/**
+									 * Details about the organization
+									 */
+									organization: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Company Registration Number
+											 *
+											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+											 */
+											identifier: {
+												type: 'object',
+												required: false,
+												shape: {
+													/**
+													 * Company Registration Number
+													 *
+													 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
+													 */
+													value: {
+														type: 'string',
+														xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+													},
+													/**
+													 * Scheme identifier
+													 *
+													 * The identification scheme identifier of the Payee legal registration identifier.
+													 *
+													 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
+													 */
+													schemeIdentifier: {
+														type: 'string',
+														required: false,
+														xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
+													}
+												}
+											},
+											/**
+											 * Trading Business Name
+											 *
+											 * A name by which the party is known, other than party name (also known as business name).
+											 *
+											 * This may be used if different from the party name.
+											 */
+											businessName: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
+											},
+											/**
+											 * Detailed information about the business address
+											 */
+											postalAddress: {
+												type: 'object',
+												shape: {
+													/**
+													 * Post code
+													 *
+													 * The identifier for an addressable group of properties according to the relevant postal service.
+													 *
+													 * Such as a ZIP code or a post code.
+													 */
+													postCode: {
+														type: 'string',
+														required: false,
+														xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:PostcodeCode'
+													},
+													/**
+													 * Address line 1
+													 *
+													 * The main address line in an address.
+													 *
+													 * Usually the street name and number or post office box.
+													 */
+													line1: {
+														type: 'string',
+														required: false,
+														xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineOne'
+													},
+													/**
+													 * Address line 2
+													 *
+													 * An additional address line in an address that can be used to give further details supplementing the main line.
+													 */
+													line2: {
+														type: 'string',
+														required: false,
+														xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineTwo'
+													},
+													/**
+													 * Address line 3
+													 *
+													 * An additional address line in an address that can be used to give further details supplementing the main line.
+													 */
+													line3: {
+														type: 'string',
+														required: false,
+														xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:LineThree'
+													},
+													/**
+													 * City
+													 *
+													 * The common name of the city, town or village.
+													 */
+													city: {
+														type: 'string',
+														required: false,
+														xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CityName'
+													},
+													/**
+													 * Country code
+													 *
+													 * A code that identifies the country.
+													 *
+													 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+													 */
+													countryCode: {
+														type: 'string',
+														xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountryID'
+													},
+													/**
+													 * Country subdivision
+													 *
+													 * The subdivision of a country.
+													 *
+													 * Such as a region, a county, a state, a province, etc.
+													 */
+													countrySubdivision: {
+														type: 'string',
+														required: false,
+														xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+													}
+												}
+											}
+										}
+									},
+									/**
+									 * Detailed contact information
+									 */
+									tradeContact: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * Name of the contact
+											 *
+											 * If a contact person is indicated, either the name or the department is to be transmitted.
+											 */
+											name: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:DefinedTradeContact/ram:PersonName'
+											},
+											/**
+											 * Department name
+											 *
+											 * If a contact person is indicated, either the name or the department is to be transmitted.
+											 */
+											departmentName: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:DefinedTradeContact/ram:DepartmentName'
+											},
+											/**
+											 * Type of contact (code)
+											 *
+											 * The code specifying the type of trade contact
+											 *
+											 * To be chosen from the entries of UNTDID 3139
+											 */
+											typeCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:DefinedTradeContact/ram:TypeCode'
+											},
+											/**
+											 * Contact telephone number
+											 *
+											 * A phone number for the contact point.
+											 */
+											telephoneNumber: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber'
+											},
+											/**
+											 * Contact point fax number
+											 */
+											faxNumber: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:DefinedTradeContact/ram:FaxUniversalCommunication/ram:CompleteNumber'
+											},
+											/**
+											 * Contact email address
+											 *
+											 * An e-mail address for the contact point.
+											 */
+											emailAddress: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID'
+											}
+										}
+									},
+									/**
+									 * Detailed information about the address
+									 */
+									postalAddress: {
+										type: 'object',
+										shape: {
+											/**
+											 * Post code
+											 *
+											 * The identifier for an addressable group of properties according to the relevant postal service.
+											 *
+											 * Such as a ZIP code or a post code.
+											 */
+											postCode: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+											},
+											/**
+											 * Address line 1
+											 *
+											 * The main address line in an address.
+											 *
+											 * Usually the street name and number or post office box.
+											 */
+											line1: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:LineOne'
+											},
+											/**
+											 * Address line 2
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line2: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+											},
+											/**
+											 * Address line 3
+											 *
+											 * An additional address line in an address that can be used to give further details supplementing the main line.
+											 */
+											line3: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:LineThree'
+											},
+											/**
+											 * City
+											 *
+											 * The common name of the city, town or village.
+											 */
+											city: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:CityName'
+											},
+											/**
+											 * Country code
+											 *
+											 * A code that identifies the country.
+											 *
+											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
+											 */
+											countryCode: {
+												type: 'string',
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:CountryID'
+											},
+											/**
+											 * Country subdivision
+											 *
+											 * The subdivision of a country.
+											 *
+											 * Such as a region, a county, a state, a province, etc.
+											 */
+											countrySubdivision: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+											},
+											/**
+											 * Details about the electronic address
+											 */
+											electronicAddress: {
+												type: 'object',
+												required: false,
+												shape: {
+													/**
+													 * Electronic address
+													 */
+													value: {
+														type: 'string',
+														required: false,
+														xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID'
+													},
+													/**
+													 * Scheme identifier
+													 */
+													schemeIdentifier: {
+														type: 'string',
+														xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
+													}
+												}
+											}
+										}
+									},
+									/**
+									 * Detailed information on tax information
+									 */
+									taxRegistration: {
+										type: 'object',
+										required: false,
+										shape: {
+											/**
+											 * VAT ID
+											 */
+											identifier: {
+												type: 'string',
+												required: false,
+												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID',
+												additionalXml: {
+													'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID':
+														'VA'
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					precendingInvoices: {
+						type: 'object[]', // precending-invoices
+						shape: {
+							/**
+							 * Preceding incoive type code
+							 *
+							 * The same rules apply as for BT-3
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument[precending-invoices]/ram:TypeCode'
+							}
+						}
+					},
+					buyerAccountant: {
+						type: 'object',
+						shape: {
+							/**
+							 * Accounting reference type (Code)
+							 */
+							typeCode: {
+								type: 'string',
+								required: false,
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ReceivableSpecifiedTradeAccountingAccount/ram:TypeCode'
+							}
+						}
+					},
+					/**
+					 * Included tax for advanced payment
+					 */
+					advancePayment: {
+						type: 'object[]',
+						required: false,
+						group: 'advance-payment',
+						shape: {
+							/**
+							 * Advanced payment, value
+							 */
+							paidAmount: {
+								type: 'string | number',
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:PaidAmount'
+							},
+							/**
+							 * Date of advanced payment
+							 */
+							date: {
+								type: 'date',
+								required: false,
+								transform: {
+									input: dateTimeStringFormatter
+								},
+								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:FormattedReceivedDateTime/qdt:DateTimeString',
+								additionalXml: {
+									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:FormattedReceivedDateTime/qdt:DateTimeString/@format':
+										'102'
+								}
+							},
+							/**
+							 * Tax information on advanced payments
+							 */
+							tradeTax: {
+								type: 'object[]',
+								validator: z.array(z.any()).min(1),
+								group: 'advance-payment-trade-tax',
+								shape: {
+									/**
+									 * Included tax
+									 */
+									calculatedAmount: {
+										type: 'string | number',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:IncludedTradeTax[advance-payment-trade-tax]/ram:CalculatedAmount',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:IncludedTradeTax[advance-payment-trade-tax]/ram:TypeCode':
+												'VAT'
+										}
+									},
+									/**
+									 * VAT exemption reason text
+									 *
+									 * A textual statement of the reason why the amount is exempted from VAT or why no VAT is being charged
+									 */
+									exemptionReason: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:IncludedTradeTax[advance-payment-trade-tax]/ram:ExemptionReason'
+									},
+									/**
+									 * VAT exemption reason code
+									 * 
+									 * A coded statement of the reason for why the amount is exempted from VAT.
+									 * 
+									 * Code list issued and maintained by the Connecting Europe Facility.
+									 */
+									exemptionReasonCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:IncludedTradeTax[advance-payment-trade-tax]/ram:ExemptionReasonCode'
+									},
+									/**
+									 * VAT category code
+									 *
+									 * Coded identification of a VAT category.
+									 *
+									 * The following entries of UNTDID 5305 [6] are used (further clarification between brackets):
+									 * - Standard rate (Liable for VAT in a standard way)
+									 * - Zero rated goods (Liable for VAT with a percentage rate of zero)
+									 * - Exempt from tax (VAT/IGIC/IPSI)
+									 * - VAT Reverse Charge (Reverse charge VAT/IGIC/IPSI rules apply)
+									 * - VAT exempt for intra community supply of goods (VAT/IGIC/IPSI not levied due to Intra-community supply rules)
+									 * - Free export item, tax not charged (VAT/IGIC/IPSI not levied due to export outside of the EU)
+									 * - Services outside scope of tax (Sale is not subject to VAT/IGIC/IPSI)
+									 * - Canary Islands General Indirect Tax (Liable for IGIC tax)
+									 * - Liable for IPSI (Ceuta/Melilla tax)
+									 */
+									categoryCode: {
+										// ! TODO: Add literals
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:IncludedTradeTax[advance-payment-trade-tax]/ram:CategoryCode'
+									},
+									/**
+									 * VAT category rate
+									 * 
+									 * The VAT rate, represented as percentage that applies for the relevant VAT category.
+									 * 
+									 * The VAT category code and the VAT category rate shall be consistent.
+									 */
+									rateApplicablePercent: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:IncludedTradeTax[advance-payment-trade-tax]/ram:RateApplicablePercent'
+									}
+								}
+							},
+							/**
+							 * Precending invoice reference for advance payment
+							 * 
+							 * A group of business terms providing information on the advance payment related preceding invoice. The individual invoide shall be stated so that combined payments need to be split per invoice.
+							 * 
+							 * To be used in case: 
+							 * - preceding partial invoices are refered to from a final invoice 
+							 * - preceding pre-payment invoices are refered to from a final invoice
+							 */
+							precendingInvoice: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Preceding Invoice reference
+									 * 
+									 * The identification of an Invoice that was previously sent by the Seller.
+									 */
+									issuerAssignedID: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:InvoiceSpecifiedReferencedDocument/ram:IssuerAssignedID'
+									},
+									/**
+									 * Preceding Invoice issue date
+									 * 
+									 * The date when the Preceding Invoice was issued.
+									 * 
+									 * The Preceding Invoice issue date shall be provided in case the Preceding Invoice identifier is not unique.
+									 */
+									date: {
+										type: 'date',
+										required: false,
+										transform: {
+											input: dateTimeStringFormatter
+										},
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:InvoiceSpecifiedReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:InvoiceSpecifiedReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format': '102'
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
 			line: {
 				type: 'object[]',
 				shape: {
@@ -1609,6 +7741,287 @@ export const extendedSchema = {
 											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString/@format':
 												'102'
 										}
+									}
+								}
+							},
+							/**
+							 * Detailed information on the corresponding despatch advice
+							 */
+							despatchAdvice: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Despatch advice number
+									 */
+									issuerAssignedID: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:IssuerAssignedID'
+									},
+									/**
+									 * Despatch advice item
+									 */
+									lineID: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:LineID'
+									},
+									/**
+									 * Document date
+									 */
+									date: {
+										type: 'date',
+										transform: {
+											input: dateTimeStringFormatter
+										},
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+												'102'
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed information on the corresponding goods receipt
+							 */
+							receivingAdvice: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Goods receipt number
+									 */
+									issuerAssignedID: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:IssuerAssignedID'
+									},
+									/**
+									 * Goods receipt item
+									 */
+									lineID: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:LineID'
+									},
+									/**
+									 * Document date
+									 */
+									date: {
+										type: 'date',
+										transform: {
+											input: dateTimeStringFormatter
+										},
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+												'102'
+										}
+									}
+								}
+							},
+							/**
+							 * Detailed information about the corresponding delivery note
+							 */
+							deliveryNote: {
+								type: 'object',
+								required: false,
+								shape: {
+									/**
+									 * Delivery note number
+									 */
+									issuerAssignedID: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:IssuerAssignedID'
+									},
+									/**
+									 * Delivery note item
+									 */
+									lineID: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:LineID'
+									},
+									/**
+									 * Document date
+									 */
+									date: {
+										type: 'date',
+										required: false,
+										transform: {
+											input: dateTimeStringFormatter
+										},
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+												'102'
+										}
+									}
+								}
+							}
+						}
+					},
+					tradeSettlement: {
+						type: 'object',
+						shape: {
+							tradeTax: {
+								type: 'object',
+								shape: {
+									/**
+									 * Tax amount
+									 *
+									 * Specification only for taxes that are not VAT
+									 */
+									calculatedAmount: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax/ram:CalculatedAmount'
+									},
+									/**
+									 * VAT exemption reason text
+									 *
+									 * A textual statement of the reason why the amount is exempted from VAT or why no VAT is being charged
+									 */
+									exemptionReason: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax/ram:ExemptionReason'
+									},
+									/**
+									 * VAT exemption reason code
+									 *
+									 * A coded statement of the reason for why the amount is exempted from VAT.
+									 *
+									 * Code list issued and maintained by the Connecting Europe Facility.
+									 */
+									exemptionReasonCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax/ram:ExemptionReasonCode'
+									}
+								}
+							},
+							monetarySummation: {
+								type: 'object',
+								shape: {
+									/**
+									 * Total amount of line item charges
+									 */
+									chargeTotalAmount: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:ChargeTotalAmount'
+									},
+									/**
+									 * Total amount of line item allowances
+									 */
+									allowanceTotalAmount: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:AllowanceTotalAmount'
+									},
+									/**
+									 * Total amount of line item taxes
+									 */
+									taxTotalAmount: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:TaxTotalAmount'
+									},
+									/**
+									 * Total line item gross amount
+									 */
+									grandTotalAmount: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:GrandTotalAmount'
+									},
+									/**
+									 * Total amount of allowances / charges
+									 */
+									totalAllowanceChargeAmount: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:TotalAllowanceChargeAmount'
+									}
+								}
+							},
+							/**
+							 * Precending invoice reference
+							 *
+							 * A group of business terms providing information on one or more preceding Invoices.
+							 *
+							 * To be used in case:
+							 * - a preceding invoice is corrected
+							 * - preceding partial invoices are refered to from a final invoice
+							 * - preceding pre-payment invoices are refered to from a final invoice
+							 */
+							precendingInvoices: {
+								type: 'object[]',
+								required: false,
+								group: 'line-item-precending-invoice',
+								shape: {
+									/**
+									 * Preceding Invoice reference
+									 *
+									 * The identification of an Invoice that was previously sent by the Seller.
+									 */
+									issuerAssignedID: {
+										type: 'string',
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument[line-item-precending-invoice]/ram:IssuerAssignedID'
+									},
+									/**
+									 * Referenced position
+									 */
+									lineID: {
+										type: 'string | number',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument[line-item-precending-invoice]/ram:LineID'
+									},
+									/**
+									 * Preceding incoive type code
+									 *
+									 * Can be used in case of final invoive after prepaid invoice, in order to refernce the previous prepaid invoices.
+									 * Codelist UNCL 1001 restricted like BT-3.
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument[line-item-precending-invoice]/ram:TypeCode'
+									},
+									/**
+									 * Preceding Invoice issue date
+									 *
+									 * The date on which the preceding Invoice was issued.
+									 *
+									 * The Preceding Invoice issue date shall be provided in case the Preceding Invoice identifier is not unique.
+									 */
+									date: {
+										type: 'date',
+										required: false,
+										transform: {
+											input: dateTimeStringFormatter
+										},
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument[line-item-precending-invoice]/ram:FormattedIssueDateTime/qdt:DateTimeString',
+										additionalXml: {
+											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument[line-item-precending-invoice]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
+												'102'
+										}
+									}
+								}
+							},
+							buyerAccountant: {
+								type: 'object',
+								shape: {
+									/**
+									 * Accounting reference (Code)
+									 */
+									typeCode: {
+										type: 'string',
+										required: false,
+										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:ReceivableSpecifiedTradeAccountingAccount/ram:TypeCode'
 									}
 								}
 							}

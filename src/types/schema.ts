@@ -62,22 +62,25 @@ export type InferValueType<T extends FieldType> = T extends 'string'
 	? T[number]
 	: never
 
-export type InferSchema<
-	P extends Profile,
-	Depth extends number = 6
-> = Depth extends 0
-	? any
-	: InferRawSchema<P['schema']> &
-			(P['extends'] extends Profile
-				? InferSchema<
-						P['extends'],
-						Depth extends infer D
-							? D extends number
-								? D
-								: never
-							: never
-				  >
+type UnionToIntersection<U> = (U extends U ? (x: U) => void : never) extends (
+	x: infer I
+) => void
+	? I
+	: never
+
+// The main type to infer the schema
+export type InferSchema<P extends Profile> = InferRawSchema<P['schema']> &
+	(P['extends'] extends Profile[]
+		? UnionToIntersection<InferSchemaHelper<P['extends'][number]>>
+		: {})
+
+// Helper type to recursively infer schema for each profile in `extends`
+type InferSchemaHelper<E> = E extends Profile
+	? InferRawSchema<E['schema']> &
+			(E['extends'] extends Profile[]
+				? InferSchemaHelper<E['extends'][number]>
 				: {})
+	: {}
 
 export type InferRawSchema<S extends Schema> = {
 	[K in keyof S as S[K]['required'] extends false

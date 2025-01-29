@@ -7,17 +7,11 @@ export const createProfile = <P extends Profile>(options: P) => {
 	const ctx = {
 		...options,
 		parse: (ctx) => {
-			const combinedSchemas = ctx.context.mergeSchemas(
-				options.schema,
-				options.extends
-			)
-
 			const xmlObj = ctx.context.parseSchema(
 				ctx.data as InferSchema<P>,
-				combinedSchemas,
+				ctx.context.mergeSchemas(options),
 				{
-					contextParameter: options.contextParameter,
-					groupIndices: {}
+					contextParameter: options.contextParameter
 				},
 				{},
 				ctx.data

@@ -6,7 +6,7 @@ export const mergeSchemas = (schema: Schema, use?: Profile): Schema => {
 	if (!use) {
 		return schema
 	}
-	return defu(schema, mergeSchemas(use.schema, use.extends))
+	return defu(schema, mergeSchemas(use.schema, ...(use.extends || [])))
 }
 
 export type ParseSchemaOptions = {
@@ -274,16 +274,19 @@ import defu from 'defu'
 import type { InferRawSchema, Schema, SchemaField } from './types/schema'
 import type { Profile } from './types/profile'
 
-export const mergeSchemas = (schema: Schema, use?: Profile): Schema => {
-	if (!use) {
-		return schema
+export const mergeSchemas = (profile: Profile): Schema => {
+	if (!profile.extends) {
+		return profile.schema
 	}
-	return defu(schema, mergeSchemas(use.schema, use.extends))
+	return defu(
+		profile.schema,
+		...profile.extends?.map((profile) => profile.schema)
+	)
 }
 
 export type ParseSchemaOptions = {
 	contextParameter: string
-	groupIndices: GroupIndices
+	groupIndices?: GroupIndices
 }
 
 export const parseSchema = <S extends Schema>(
@@ -293,6 +296,8 @@ export const parseSchema = <S extends Schema>(
 	parentGroupIndices: GroupIndices = {},
 	fullData: any = null
 ): any => {
+	options.groupIndices ??= {}
+
 	let xml: any = {
 		'?xml': {
 			'@version': '1.0',
@@ -353,7 +358,7 @@ export const parseSchema = <S extends Schema>(
 		}
 
 		const processAdditionalXml = (value: any) => {
-			if (field.additionalXml) {
+			if (field.additionalXml && !!value) {
 				for (const [aKey, aValue] of Object.entries(
 					field.additionalXml
 				)) {

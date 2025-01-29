@@ -4,7 +4,7 @@ import { z, ZodSchema } from 'zod'
 import { LiteralString } from './helper'
 
 export type Profile = {
-	extends?: Profile
+	extends?: Profile[]
 	schema: Schema
 	contextParameter: LiteralString
 	xsdPath: string

@@ -198,7 +198,7 @@ export const minimumSchema = {
 							 *
 							 * BR-8: An Invoice shall contain the Seller postal address (BG-5).
 							 */
-							address: {
+							postalAddress: {
 								type: 'object',
 								shape: {
 									/**
