@@ -1,9 +1,13 @@
+<h1 align="center" id="title">node-zugferd</h1>
+
 <p align="center">
-<img src="https://socialify.git.ci/jslno/node-zugferd/image?custom_description=A+library+to+create+XML+for+ZUGFeRD+invoices+and+append+it+to+PDF+files%2C+generating+PDF%2FA+compliant+documents.&description=1&issues=0&language=1&name=1&owner=1&pattern=Transparent&pulls=0&stargazers=1&theme=Auto" alt="node-zugferd" />
+<img src="https://socialify.git.ci/jslno/node-zugferd/image?description=0&language=1&name=1&owner=1&pattern=Transparent&stargazers=1&theme=Auto" alt="project-image" />
 </p>
 
 > [!CAUTION]
 > **[WIP]** This package is still under development.
+
+A Node.js library for creating ZUGFeRD XML documents and embedding them into PDF/A files, enabling seamless e-invoicing and digital document compliance.
 
 <h2>Table of Contents</h2>
 
@@ -102,6 +106,7 @@ If you encounter invalid or missing fields, feel free to open a new [Issue](http
 * [ ] Allow attaching additional files to pdf
 * [ ] Add Schematron for validation
 * [ ] Native support for XRechnung
+* [ ] Parse ZUGFeRD/Factur-X documents
 
 <h2>Dependencies</h2>
 
