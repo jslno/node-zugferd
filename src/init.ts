@@ -1,4 +1,12 @@
-import { mergeSchemas, parseSchema } from './xml-formatter'
+import { formatXml, mergeSchemas, parseSchema } from './xml-formatter'
+import {
+	addPdfMetadata,
+	addPdfTrailerInfoId,
+	fixPdfLinkAnnotations,
+	addPdfStructTreeRoot,
+	addPdfMarkInfo,
+	addPdfICC
+} from './pdf-formatter'
 import { ZugferdOptions } from './types/options'
 
 export const init = (options: ZugferdOptions) => {
@@ -18,5 +26,16 @@ type InternalTools = ReturnType<typeof getInternalTools>
 
 const getInternalTools = (_options: ZugferdOptions) => ({
 	parseSchema,
-	mergeSchemas
+	mergeSchemas,
+	xml: {
+		format: formatXml
+	},
+	pdf: {
+		addMetadata: addPdfMetadata,
+		addTrailerInfoId: addPdfTrailerInfoId,
+		fixLinkAnnotations: fixPdfLinkAnnotations,
+		addStructTreeRoot: addPdfStructTreeRoot,
+		addMarkInfo: addPdfMarkInfo,
+		addICC: addPdfICC
+	}
 })

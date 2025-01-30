@@ -8,6 +8,13 @@ export type Profile = {
 	schema: Schema
 	contextParameter: LiteralString
 	xsdPath: string
+	conformanceLevel: string
+	documentFileName: string
+	/**
+	 * @default 'INVOICE'
+	 */
+	documentType?: 'INVOICE' | 'ORDER'
+	version: string
 }
 
 export type ProfileParseHandlerContext<P extends Profile = Profile> = {

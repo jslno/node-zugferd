@@ -21,3 +21,6 @@ export const getAsset = (...paths: string[]) => {
 		...([!!isSrc && 'assets', ...paths].filter((val) => !!val) as string[])
 	)
 }
+
+export const base64ToUint8Array = (base64: string) =>
+	new Uint8Array([...atob(base64)].map((char) => char.charCodeAt(0)))
