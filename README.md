@@ -85,10 +85,8 @@ If you encounter invalid or missing fields, feel free to open a new [Issue]() or
     <details open>
     <summary>as PDF/A-3b</summary>
 
-    > [!CAUTION]
-    > The data in your pdf must exactly match the provided data!
-
     ```ts
+    // The data in your pdf must exactly match the provided data!
     const pdf = fs.readFileSync('./your/invoice.pdf')
 
     const pdfA = invoice.attachToPdf(pdf, {
