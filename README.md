@@ -7,7 +7,7 @@
 > [!CAUTION]
 > **[WIP]** This package is still under development.
 
-A Node.js library for creating ZUGFeRD XML documents and embedding them into PDF/A files, enabling seamless e-invoicing and digital document compliance.
+A Node.js library for creating ZUGFeRD/Factur-X compliant documents. Generating XML and embedding it into PDF/A files, enabling seamless e-invoicing and digital document compliance.
 
 <h2>Table of Contents</h2>
 
