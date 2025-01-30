@@ -89,7 +89,7 @@ If you encounter invalid or missing fields, feel free to open a new [Issue](http
     // The data in your pdf must exactly match the provided data!
     const pdf = fs.readFileSync('./your/invoice.pdf')
 
-    const pdfA = invoice.attachToPdf(pdf, {
+    const pdfA = await invoice.attachToPdf(pdf, {
         title: 'New Invoice',
         // ... additional metadata
     })
