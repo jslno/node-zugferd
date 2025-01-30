@@ -1,4 +1,4 @@
-<!-- omit from toc -->
+<!-- omit in toc -->
 <h1 align="center" id="title">node-zugferd</h1>
 
 <p align="center">
