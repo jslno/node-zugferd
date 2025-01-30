@@ -47,7 +47,7 @@ npm install node-zugferd@latest
 > [!TIP]
 > You can also create your own Profiles.
 
-If you encounter invalid or missing fields, feel free to open a new [Issue]() or [Pull Request]().
+If you encounter invalid or missing fields, feel free to open a new [Issue](https://github.com/jslno/node-zugferd/issues) or [Pull Request](https://github.com/jslno/node-zugferd/pulls).
 
 <h2>Basic Usage</h2>
 
