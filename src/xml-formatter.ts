@@ -2,6 +2,7 @@ import defu from 'defu'
 import type { InferRawSchema, Schema, SchemaField } from './types/schema'
 import type { Profile } from './types/profile'
 import { XMLBuilder, XmlBuilderOptions } from 'fast-xml-parser'
+import { ZugferdError } from './error'
 
 export const mergeSchemas = (profile: Profile): Schema => {
 	if (!profile.extends) {
@@ -177,7 +178,6 @@ export const parseSchema = <S extends Schema>(
 				xml = mergeXml(xml, childXml)
 
 				if (field.additionalXml) {
-					const itemGroupIndicies = { ...newGroupIndices }
 					processAdditionalXml(value)
 				}
 			})
@@ -187,7 +187,16 @@ export const parseSchema = <S extends Schema>(
 	for (const [key, field] of Object.entries(def)) {
 		let rawValue = (data as any)[key]
 		if (field.validator) {
-			rawValue = field.validator.parse(rawValue)
+			const { data, success, error } = field.validator.safeParse(rawValue)
+
+			if (!success) {
+				throw new ZugferdError(
+					'INVALID_FIELD',
+					`${key} - ${error.errors[0].message}`
+				)
+			}
+
+			rawValue = data
 		}
 		const value = field.transform?.input
 			? field.transform.input(rawValue ?? field.defaultValue)
@@ -219,7 +228,6 @@ const mergeXml = (target: any, source: any): any => {
 				Array.isArray(target[key]) ||
 				Array.isArray(source[key])
 			) {
-				// Convert both to arrays if either is an array
 				const targetArray = Array.isArray(target[key])
 					? target[key]
 					: [target[key]]
@@ -227,7 +235,6 @@ const mergeXml = (target: any, source: any): any => {
 					? source[key]
 					: [source[key]]
 
-				// Merge arrays
 				target[key] = targetArray.map((item, index) => {
 					if (sourceArray[index] === undefined) {
 						return item
@@ -241,7 +248,6 @@ const mergeXml = (target: any, source: any): any => {
 					}
 				})
 
-				// Append any remaining items from sourceArray
 				if (sourceArray.length > targetArray.length) {
 					target[key] = target[key].concat(
 						sourceArray.slice(targetArray.length)
@@ -313,15 +319,26 @@ const buildXmlStructure = (
 	return result
 }
 
-export const formatXml = (doc: any, options?: Omit<XmlBuilderOptions, 'attributeNamePrefix' | 'attributesGroupName' | 'textNodeName'>) => {
-	const parser = new XMLBuilder(defu({
-		ignoreAttributes: false,
-		attributeNamePrefix: '@',
-		textNodeName: '#',
-		format: true,
-		suppressBooleanAttributes: false,
-		suppressEmptyNode: true
-	}, options))
+export const formatXml = (
+	doc: any,
+	options?: Omit<
+		XmlBuilderOptions,
+		'attributeNamePrefix' | 'attributesGroupName' | 'textNodeName'
+	>
+) => {
+	const parser = new XMLBuilder(
+		defu(
+			{
+				ignoreAttributes: false,
+				attributeNamePrefix: '@',
+				textNodeName: '#',
+				format: true,
+				suppressBooleanAttributes: false,
+				suppressEmptyNode: true
+			},
+			options
+		)
+	)
 
 	return parser.build(doc) as string
 }

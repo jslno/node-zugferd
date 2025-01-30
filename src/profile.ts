@@ -2,6 +2,7 @@ import type { Profile, ProfileContext } from './types/profile'
 import type { InferSchema } from './types/schema'
 import { ZugferdContext } from './init'
 import { validateXML } from 'xsd-schema-validator'
+import { ZugferdError } from './error'
 
 export const createProfile = <P extends Profile>(options: P) => {
 	const ctx = {
@@ -20,9 +21,16 @@ export const createProfile = <P extends Profile>(options: P) => {
 			return xmlObj
 		},
 		validate: async (data: string | Buffer | { file: string }) => {
-			const res = await validateXML(data, options.xsdPath)
+			try {
+				const res = await validateXML(data, options.xsdPath)
 
-			return res.valid
+				return res.valid
+			} catch (err: any) {
+				throw new ZugferdError(
+					'INVALID_XML',
+					err?.message || 'invalid xml'
+				)
+			}
 		}
 	} satisfies ProfileContext
 
