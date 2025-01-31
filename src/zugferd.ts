@@ -75,7 +75,7 @@ export const zugferd = <O extends ZugferdOptions>(options: O) => {
 					pdfDoc = context.pdf.addStructTreeRoot(pdfDoc)
 					pdfDoc = context.pdf.fixLinkAnnotations(pdfDoc)
 					pdfDoc = context.pdf.addICC(pdfDoc)
-					pdfDoc = context.pdf.addMetadata(pdfDoc, {
+					context.pdf.addMetadata(pdfDoc, {
 						...metadata,
 						createDate: metadata.createDate!,
 						modifyDate: metadata.modifyDate!,

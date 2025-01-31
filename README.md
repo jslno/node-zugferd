@@ -50,7 +50,7 @@ npm install node-zugferd@latest
 > By default this package only provides support for the CII-Syntax
 
 > [!TIP]
-> You can also create your own Profiles.
+> You can also define your own Profiles.
 
 If you encounter invalid or missing fields, feel free to open a new [Issue](https://github.com/jslno/node-zugferd/issues) or [Pull Request](https://github.com/jslno/node-zugferd/pulls).
 

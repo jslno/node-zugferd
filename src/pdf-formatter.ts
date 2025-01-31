@@ -1,4 +1,12 @@
-import { PDFArray, PDFDict, PDFDocument, PDFHexString, PDFName, PDFNumber, PDFString } from 'pdf-lib'
+import {
+	PDFArray,
+	PDFDict,
+	PDFDocument,
+	PDFHexString,
+	PDFName,
+	PDFNumber,
+	PDFString
+} from 'pdf-lib'
 import { formatXml } from './xml-formatter'
 import crypto from 'crypto'
 import { COLOR_PROFILE } from './constants'
@@ -23,12 +31,13 @@ export type PDFAMetadata = {
 	}
 }
 
-export const addPdfMetadata = (pdfDoc: PDFDocument, metadata: PickRequired<PDFAMetadata, 'createDate' | 'modifyDate'> & { now: Date }) => {
-	const xmp = formatXml({
-		'?xpacket': {
-			'@begin': '\uFEFF',
-			'@id': 'W5M0MpCehiHzreSzNTczkc9d'
-		},
+export const addPdfMetadata = (
+	pdfDoc: PDFDocument,
+	metadata: PickRequired<PDFAMetadata, 'createDate' | 'modifyDate'> & {
+		now: Date
+	}
+) => {
+	let xmp = formatXml({
 		'x:xmpmeta': {
 			'@xmlns:x': 'adobe:ns:meta/',
 			'rdf:RDF': {
@@ -151,7 +160,8 @@ export const addPdfMetadata = (pdfDoc: PDFDocument, metadata: PickRequired<PDFAM
 							'urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#',
 						'@xmlns:about': '',
 						'fx:DocumentType': metadata.facturX.documentType,
-						'fx:DocumentFileName': metadata.facturX.documentFileName,
+						'fx:DocumentFileName':
+							metadata.facturX.documentFileName,
 						'fx:Version': metadata.facturX.version,
 						'fx:ConformanceLevel': metadata.facturX.conformanceLevel
 					}
@@ -159,7 +169,8 @@ export const addPdfMetadata = (pdfDoc: PDFDocument, metadata: PickRequired<PDFAM
 			}
 		}
 	})
-
+	xmp = `<?xpacket begin="\uFEFF" id="W5M0MpCehiHzreSzNTczkc9d"?>${xmp}<?xpacket end="w"?>`
+	
 	const metadataStream = pdfDoc.context.stream(xmp, {
 		Type: 'Metadata',
 		Subtype: 'XML',
@@ -173,10 +184,16 @@ export const addPdfMetadata = (pdfDoc: PDFDocument, metadata: PickRequired<PDFAM
 	return pdfDoc
 }
 
-export const addPdfTrailerInfoId = (pdfDoc: PDFDocument, trailerInfoId: string) => {
-	const hash = crypto.createHash('SHA256').update(trailerInfoId + new Date().toISOString()).digest()
+export const addPdfTrailerInfoId = (
+	pdfDoc: PDFDocument,
+	trailerInfoId: string
+) => {
+	const hash = crypto
+		.createHash('SHA256')
+		.update(trailerInfoId + new Date().toISOString())
+		.digest()
 	const hashArr = Array.from(new Uint8Array(hash))
-	const hashHex = hashArr.map(b => b.toString(16).padStart(2, '0')).join('')
+	const hashHex = hashArr.map((b) => b.toString(16).padStart(2, '0')).join('')
 	const permanentDocId = PDFHexString.of(hashHex)
 	const changingDocId = permanentDocId
 
