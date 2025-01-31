@@ -1,7 +1,7 @@
 {
 	"name": "node-zugferd",
-	"description": "A library to create XML for ZUGFeRD invoices and append it to PDF files, generating PDF/A compliant documents.",
-	"version": "0.0.1",
+	"description": "A Node.js library for creating ZUGFeRD/Factur-X compliant documents. Generating XML and embedding it into PDF/A files, enabling seamless e-invoicing and digital document compliance.",
+	"version": "0.0.2",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
@@ -31,7 +31,7 @@
 		"type": "git",
 		"url": "https://github.com/jslno/node-zugferd.git"
 	},
-	"readme": "README.md",
+	"readme": "README.npm.md",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^22.10.7",
