@@ -1,5 +1,5 @@
 {
-	"name": "zugferd",
+	"name": "node-zugferd",
 	"description": "A library to create XML for ZUGFeRD invoices and append it to PDF files, generating PDF/A compliant documents.",
 	"version": "0.0.1",
 	"main": "./dist/index.js",
