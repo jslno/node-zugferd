@@ -1,5 +1,5 @@
 import z from "zod";
-import { Schema } from "../../types/schema";
+import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../helper";
 
 export const basicSchema = {

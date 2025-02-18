@@ -1,6 +1,6 @@
 import z from "zod";
 import { dateTimeStringFormatter } from "../../helper";
-import { Schema } from "../../types/schema";
+import { type Schema } from "../../types/schema";
 
 export const minimumSchema = {
 	/**
