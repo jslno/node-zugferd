@@ -1,5 +1,5 @@
-import { ProfileContext } from "./profile"
+import { ProfileContext } from "./profile";
 
 export type ZugferdOptions = {
-    profile: ProfileContext
-}
+	profile: ProfileContext;
+};

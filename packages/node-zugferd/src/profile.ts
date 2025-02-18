@@ -1,8 +1,7 @@
-import type { Profile, ProfileContext } from './types/profile'
-import type { InferSchema } from './types/schema'
-import { ZugferdContext } from './init'
-import { validateXML } from 'xsd-schema-validator'
-import { ZugferdError } from './error'
+import type { Profile, ProfileContext } from "./types/profile";
+import type { InferSchema } from "./types/schema";
+import { validateXML } from "xsd-schema-validator";
+import { ZugferdError } from "./error";
 
 export const createProfile = <P extends Profile>(options: P) => {
 	const ctx = {
@@ -12,27 +11,24 @@ export const createProfile = <P extends Profile>(options: P) => {
 				ctx.data as InferSchema<P>,
 				ctx.context.mergeSchemas(options),
 				{
-					contextParameter: options.contextParameter
+					contextParameter: options.contextParameter,
 				},
 				{},
-				ctx.data
-			)
+				ctx.data,
+			);
 
-			return xmlObj
+			return xmlObj;
 		},
 		validate: async (data: string | Buffer | { file: string }) => {
 			try {
-				const res = await validateXML(data, options.xsdPath)
+				const res = await validateXML(data, options.xsdPath);
 
-				return res.valid
+				return res.valid;
 			} catch (err: any) {
-				throw new ZugferdError(
-					'INVALID_XML',
-					err?.message || 'invalid xml'
-				)
+				throw new ZugferdError("INVALID_XML", err?.message || "invalid xml");
 			}
-		}
-	} satisfies ProfileContext
+		},
+	} satisfies ProfileContext;
 
-	return ctx
-}
+	return ctx;
+};
