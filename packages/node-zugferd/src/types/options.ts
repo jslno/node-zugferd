@@ -1,4 +1,4 @@
-import { ProfileContext } from "./profile";
+import { type ProfileContext } from "./profile";
 
 export type ZugferdOptions = {
 	profile: ProfileContext;

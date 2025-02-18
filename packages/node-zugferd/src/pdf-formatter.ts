@@ -10,7 +10,7 @@ import {
 import { formatXml } from "./xml-formatter";
 import crypto from "crypto";
 import { COLOR_PROFILE } from "./constants";
-import { PickRequired } from "./types/helper";
+import { type PickRequired } from "./types/helper";
 import { base64ToUint8Array } from "./helper";
 
 export type PDFAMetadata = {

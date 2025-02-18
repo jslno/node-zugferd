@@ -7,7 +7,7 @@ import {
 	addPdfMarkInfo,
 	addPdfICC,
 } from "./pdf-formatter";
-import { ZugferdOptions } from "./types/options";
+import { type ZugferdOptions } from "./types/options";
 
 export const init = (options: ZugferdOptions) => {
 	const ctx: ZugferdContext = {

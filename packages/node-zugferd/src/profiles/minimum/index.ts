@@ -1,5 +1,5 @@
 import { createProfile } from "../../profile";
-import { InferSchema } from "../../types/schema";
+import { type InferSchema } from "../../types/schema";
 import { minimumSchema } from "./schema";
 
 export const MINIMUM = createProfile({

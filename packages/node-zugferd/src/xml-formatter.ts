@@ -1,7 +1,7 @@
 import defu from "defu";
 import type { InferRawSchema, Schema, SchemaField } from "./types/schema";
 import type { Profile } from "./types/profile";
-import { XMLBuilder, XmlBuilderOptions } from "fast-xml-parser";
+import { XMLBuilder, type XmlBuilderOptions } from "fast-xml-parser";
 import { ZugferdError } from "./error";
 
 export const mergeSchemas = (profile: Profile): Schema => {

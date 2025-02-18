@@ -1,6 +1,6 @@
 import { ZodSchema } from "zod";
-import { LiteralString } from "./helper";
-import { Profile } from "./profile";
+import { type LiteralString } from "./helper";
+import { type Profile } from "./profile";
 
 export type FieldType =
 	| "string"

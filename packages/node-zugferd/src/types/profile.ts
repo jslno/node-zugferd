@@ -1,6 +1,6 @@
-import { InferSchema, Schema } from "./schema";
-import { ZugferdContext } from "../init";
-import { LiteralString } from "./helper";
+import { type InferSchema, type Schema } from "./schema";
+import { type ZugferdContext } from "../init";
+import { type LiteralString } from "./helper";
 
 export type Profile = {
 	extends?: Profile[];
