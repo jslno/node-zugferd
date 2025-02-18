@@ -1,21 +1,22 @@
-import z from 'zod'
-import { dateTimeStringFormatter } from '../../helper'
-import { Schema } from '../../types/schema'
+import z from "zod";
+import { dateTimeStringFormatter } from "../../helper";
+import { Schema } from "../../types/schema";
 
 export const minimumSchema = {
 	/**
 	 * Business process type
-	 * 
+	 *
 	 * Identifies the business process context in which the transaction appears, to enable the Buyer to process the Invoice in an appropriate way.
-	 * 
+	 *
 	 * To be specifid by the Buyer.
-	 * 
+	 *
 	 * CHORUSPRO: this data makes it possible to inform the "cadre de facturation" (billing framework, which could be invoice from agent, co-contractor, subcontractor, invoicing part of a public works contract, etc.). The codes to be used are defined in the CHORUSPRO specifications: A1 (invoice deposit), A2 (prepaid invoice deposit), ... By default (in the absence of this field), the case A1 is applied.
 	 */
 	businessProcessType: {
-		type: 'string',
+		type: "string",
 		required: false,
-		xpath: '/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID'
+		xpath:
+			"/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID",
 	},
 	/**
 	 * Invoice number
@@ -29,8 +30,8 @@ export const minimumSchema = {
 	 * BR-2: An Invoice shall have an Invoice number (BT-1).
 	 */
 	number: {
-		type: 'string',
-		xpath: '/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID'
+		type: "string",
+		xpath: "/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID",
 	},
 	/**
 	 * Invoice type code
@@ -51,8 +52,8 @@ export const minimumSchema = {
 	 * BR-4: An Invoice shall have an Invoice type code (BT-3).
 	 */
 	typeCode: {
-		type: ['380', '381', '384', '389', '261', '386', '751'],
-		xpath: '/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode'
+		type: ["380", "381", "384", "389", "261", "386", "751"],
+		xpath: "/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode",
 	},
 	/**
 	 * Invoice issue date
@@ -62,29 +63,30 @@ export const minimumSchema = {
 	 * CHORUSPRO: the issue date must be before or equal to the deposit date.
 	 */
 	issueDate: {
-		type: 'date',
-		xpath: '/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTimeString',
+		type: "date",
+		xpath:
+			"/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTimeString",
 		additionalXml: {
-			'/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTimeString/@format':
-				'102'
+			"/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTimeString/@format":
+				"102",
 		},
 		transform: {
-			input: dateTimeStringFormatter
-		}
+			input: dateTimeStringFormatter,
+		},
 	},
 
 	/**
 	 * Grouping of information about the business transaction
 	 */
 	transaction: {
-		type: 'object',
+		type: "object",
 		required: false,
 		shape: {
 			/**
 			 * Grouping of contract information
 			 */
 			tradeAgreement: {
-				type: 'object',
+				type: "object",
 				required: false,
 				shape: {
 					/**
@@ -97,15 +99,16 @@ export const minimumSchema = {
 					 * CHORUS PRO: for the public sector, it is the "Service Exécutant". It is mandatory for some buyers. It must belong to the Chorus Pro repository. It is limited to 100 characters.
 					 */
 					buyerReference: {
-						type: 'string',
+						type: "string",
 						required: false,
-						xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference'
+						xpath:
+							"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference",
 					},
 					/**
 					 * Details of the associated order
 					 */
 					associatedOrder: {
-						type: 'object',
+						type: "object",
 						required: false,
 						shape: {
 							/**
@@ -116,17 +119,18 @@ export const minimumSchema = {
 							 * CHORUS PRO: for the public sector, this is the "Engagement Juridique" (Legal Commitment). It is mandatory for some buyers. You should refer to the ChorusPro Directory to identify these public entity buyers that make it mandatory.
 							 */
 							purchaseOrderReference: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID'
-							}
-						}
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID",
+							},
+						},
 					},
 					/**
 					 * A group of business terms providing information about the Seller.
 					 */
 					seller: {
-						type: 'object',
+						type: "object",
 						shape: {
 							/**
 							 * Seller name
@@ -134,15 +138,16 @@ export const minimumSchema = {
 							 * The full formal name by which the Seller is registered in the national registry of legal entities or as a Taxable person or otherwise trades as a person or persons.
 							 */
 							name: {
-								type: 'string',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Name'
+								type: "string",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Name",
 							},
 
 							/**
 							 * Details about the organization
 							 */
 							organization: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -153,7 +158,7 @@ export const minimumSchema = {
 									 * If no identification scheme is specified, it must be known by Buyer and Seller.
 									 */
 									registrationIdentifier: {
-										type: 'object',
+										type: "object",
 										required: false,
 										shape: {
 											/**
@@ -164,9 +169,10 @@ export const minimumSchema = {
 											 * If no identification scheme is specified, it must be known by Buyer and Seller.
 											 */
 											value: {
-												type: 'string',
+												type: "string",
 												required: false,
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID",
 											},
 											/**
 											 * Scheme identifier
@@ -178,13 +184,14 @@ export const minimumSchema = {
 											 * For a SIREN or a SIRET, the value of this field is "0002"
 											 */
 											schemeIdentifier: {
-												type: 'string',
+												type: "string",
 												required: false,
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
-											}
-										}
-									}
-								}
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID",
+											},
+										},
+									},
+								},
 							},
 
 							/**
@@ -199,7 +206,7 @@ export const minimumSchema = {
 							 * BR-8: An Invoice shall contain the Seller postal address (BG-5).
 							 */
 							postalAddress: {
-								type: 'object',
+								type: "object",
 								shape: {
 									/**
 									 * Seller country code
@@ -209,17 +216,18 @@ export const minimumSchema = {
 									 * If no tax representative is specified, this is the country where VAT is liable. The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: 'string',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID'
-									}
-								}
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID",
+									},
+								},
 							},
 
 							/**
 							 * Detailed information on tax information of the seller
 							 */
 							taxRegistration: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -230,13 +238,14 @@ export const minimumSchema = {
 									 * VAT number prefixed by a country code. A VAT registered Supplier shall include his VAT ID, except when he uses a tax representative.
 									 */
 									vatIdentifier: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID',
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID",
 										additionalXml: {
-											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID/@schemeID':
-												'VA'
-										}
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID/@schemeID":
+												"VA",
+										},
 									},
 									/**
 									 * Seller tax registration identifier
@@ -246,24 +255,25 @@ export const minimumSchema = {
 									 * This information may affect how the Buyer settles the payment (such as for social security fees). E.g. in some countries, if the Seller is not registered as a tax paying entity then the Buyer is required to withhold the amount of the tax and pay it on behalf of the Seller.
 									 */
 									localIdentifier: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration[1]/ram:ID',
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration[1]/ram:ID",
 										additionalXml: {
-											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration[1]/ram:ID/@schemeID':
-												'FC'
-										}
-									}
-								}
-							}
-						}
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration[1]/ram:ID/@schemeID":
+												"FC",
+										},
+									},
+								},
+							},
+						},
 					},
 
 					/**
 					 * A group of business terms providing information about the Buyer.
 					 */
 					buyer: {
-						type: 'object',
+						type: "object",
 						shape: {
 							/**
 							 * Buyer name
@@ -275,15 +285,16 @@ export const minimumSchema = {
 							 * BR-7: An Invoice shall contain the Buyer name (BT-44).
 							 */
 							name: {
-								type: 'string',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Name'
+								type: "string",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Name",
 							},
 
 							/**
 							 * Details about the organization
 							 */
 							organization: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -296,7 +307,7 @@ export const minimumSchema = {
 									 * CHORUSPRO: the identifier of the buyer (public entity) is mandatory and is always a SIRET number
 									 */
 									registrationIdentifier: {
-										type: 'object',
+										type: "object",
 										required: false,
 										shape: {
 											/**
@@ -309,9 +320,10 @@ export const minimumSchema = {
 											 * CHORUSPRO: the identifier of the buyer (public entity) is mandatory and is always a SIRET number
 											 */
 											value: {
-												type: 'string',
+												type: "string",
 												required: false,
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID",
 											},
 											/**
 											 * Scheme identifier
@@ -323,27 +335,29 @@ export const minimumSchema = {
 											 * For a SIREN or a SIRET, the value of this field is "0002"
 											 */
 											schemeIdentifier: {
-												type: 'string',
+												type: "string",
 												required: false,
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID",
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 			/**
 			 * Grouping of delivery details
 			 */
 			tradeDelivery: {
-				type: 'object',
-				xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery',
+				type: "object",
+				xpath:
+					"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery",
 				defaultValue: [],
 				required: false,
-				shape: {}
+				shape: {},
 			},
 			/**
 			 * Direct Debit
@@ -355,7 +369,7 @@ export const minimumSchema = {
 			 * CHORUS PRO : not used
 			 */
 			tradeSettlement: {
-				type: 'object',
+				type: "object",
 				shape: {
 					/**
 					 * Invoice currency code
@@ -370,8 +384,9 @@ export const minimumSchema = {
 					 * BR-5: An Invoice shall have an Invoice currency code (BT-5).
 					 */
 					currencyCode: {
-						type: 'string',
-						xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode'
+						type: "string",
+						xpath:
+							"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode",
 					},
 
 					/**
@@ -383,7 +398,7 @@ export const minimumSchema = {
 					 * They can not have more than two decimals. The separator is ". "
 					 */
 					monetarySummation: {
-						type: 'object',
+						type: "object",
 						shape: {
 							/**
 							 * Invoice total amount without VAT
@@ -395,8 +410,9 @@ export const minimumSchema = {
 							 * For EXTENDED profile only, BR-CO-13 is replaced by BR-FXEXT-CO-13, which add a tolerance of 0,01 euro per line, document level charge and allowance in calculation.
 							 */
 							taxBasisTotalAmount: {
-								type: 'string | number',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount'
+								type: "string | number",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount",
 							},
 							/**
 							 * Invoice total VAT amount
@@ -406,7 +422,7 @@ export const minimumSchema = {
 							 * The Invoice total VAT amount is the sum of all VAT category tax amounts.
 							 */
 							taxTotal: {
-								type: 'object',
+								type: "object",
 								shape: {
 									/**
 									 * Invoice total VAT amount
@@ -416,18 +432,20 @@ export const minimumSchema = {
 									 * The Invoice total VAT amount is the sum of all VAT category tax amounts.
 									 */
 									amount: {
-										type: 'string | number',
+										type: "string | number",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[0]'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[0]",
 									},
 									/**
 									 * Invoice currency code
 									 */
 									currencyCode: {
-										type: 'string',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[0]/@currencyID'
-									}
-								}
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[0]/@currencyID",
+									},
+								},
 							},
 							/**
 							 * Invoice total amount with VAT
@@ -437,8 +455,9 @@ export const minimumSchema = {
 							 * The Invoice total amount with VAT is the Invoice total amount without VAT plus the Invoice total VAT amount.
 							 */
 							grandTotalAmount: {
-								type: 'string | number',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount'
+								type: "string | number",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount",
 							},
 							/**
 							 * Amount due for payment
@@ -448,10 +467,11 @@ export const minimumSchema = {
 							 * This amount is the Invoice total amount with VAT minus the paid amount that has been paid in advance. The amount is zero in case of a fully paid Invoice. The amount may be negative; in that case the Seller owes the amount to the Buyer.
 							 */
 							duePayableAmount: {
-								type: 'string | number',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:DuePayableAmount'
-							}
-						}
+								type: "string | number",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:DuePayableAmount",
+							},
+						},
 					},
 					/**
 					 * VAT Breakdown
@@ -459,8 +479,8 @@ export const minimumSchema = {
 					 * A group of business terms providing information about VAT breakdown by different categories, rates and exemption reasons
 					 */
 					vatBreakdown: {
-						type: 'object[]',
-						group: 'vat-breakdown',
+						type: "object[]",
+						group: "vat-breakdown",
 						validator: z.array(z.any()).min(1),
 						shape: {
 							/**
@@ -473,8 +493,9 @@ export const minimumSchema = {
 							 * For EXTENDED profile only, BR-CO-17 is not applied.
 							 */
 							calculatedAmount: {
-								type: 'string | number',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:CalculatedAmount'
+								type: "string | number",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:CalculatedAmount",
 							},
 							/**
 							 * Type of tax (code)
@@ -484,8 +505,9 @@ export const minimumSchema = {
 							 * The VAT category code and the VAT category rate shall be consistent. For more information on the recommended codes, please refer to subclause 6.3.3.2 - Specification of VAT category codes.
 							 */
 							typeCode: {
-								type: 'string',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:TypeCode'
+								type: "string",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:TypeCode",
 							},
 							/**
 							 * VAT exemption reason text
@@ -497,9 +519,10 @@ export const minimumSchema = {
 							 * CHORUS PRO: this field is limited to 1024 characters
 							 */
 							exemptionReasonText: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:ExemptionReason'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:ExemptionReason",
 							},
 							/**
 							 * VAT category taxable amount
@@ -509,8 +532,9 @@ export const minimumSchema = {
 							 * The sum of Invoice line net amount minus allowances plus charges on document level which are subject to a specific VAT category code and VAT category rate (if the VAT category rate is applicable).
 							 */
 							basisAmount: {
-								type: 'string | number',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:BasisAmount'
+								type: "string | number",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:BasisAmount",
 							},
 							/**
 							 * VAT category code
@@ -544,18 +568,9 @@ export const minimumSchema = {
 							 * For EXTENDED profile only, BR-O-11, BR-O-12, BR-O-13 and BR-O-14 are not applied.
 							 */
 							categoryCode: {
-								type: [
-									'S',
-									'Z',
-									'E',
-									'AE',
-									'K',
-									'G',
-									'O',
-									'L',
-									'M'
-								],
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:CategoryCode'
+								type: ["S", "Z", "E", "AE", "K", "G", "O", "L", "M"],
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:CategoryCode",
 							},
 							/**
 							 * VAT exemption reason code
@@ -565,9 +580,10 @@ export const minimumSchema = {
 							 * Code list issued and maintained by the Connecting Europe Facility.
 							 */
 							exemptionReasonCode: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:ExemptionReasonCode'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:ExemptionReasonCode",
 							},
 							/**
 							 * Value added tax point date code
@@ -588,9 +604,10 @@ export const minimumSchema = {
 							 * BR-CO-3: Value added tax point date (BT-7) and Value added tax point date code (BT-8) are mutually exclusive.
 							 */
 							dueDateTypeCode: {
-								type: ['5', '29', '72'],
+								type: ["5", "29", "72"],
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:DueDateTypeCode'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:DueDateTypeCode",
 							},
 							/**
 							 * VAT category rate
@@ -604,11 +621,12 @@ export const minimumSchema = {
 							 * BR-48: Each  VAT  breakdown  (BG-23)  shall  have  a  VAT  category rate (BT-119), except if the Invoice is not subject to VAT.
 							 */
 							rateApplicablePercent: {
-								type: 'string | number',
+								type: "string | number",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:RateApplicablePercent'
-							}
-						}
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:RateApplicablePercent",
+							},
+						},
 					},
 					/**
 					 * Invoicing period
@@ -618,7 +636,7 @@ export const minimumSchema = {
 					 * Used to indicate when the period covered by the invoice starts and when it ends. Also called delivery period.
 					 */
 					invoicingPeriod: {
-						type: 'object',
+						type: "object",
 						required: false,
 						shape: {
 							/**
@@ -633,16 +651,17 @@ export const minimumSchema = {
 							 * BR-CO-19: If Invoicing period (BG-14) is used, the Invoicing period start date (BT-73) or the Invoicing period end date (BT-74) shall be filled, or both.
 							 */
 							startDate: {
-								type: 'date',
+								type: "date",
 								required: false,
 								transform: {
-									input: dateTimeStringFormatter
+									input: dateTimeStringFormatter,
 								},
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString',
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString",
 								additionalXml: {
-									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString/@format':
-										'102'
-								}
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString/@format":
+										"102",
+								},
 							},
 							/**
 							 * Invoicing period end date
@@ -654,21 +673,22 @@ export const minimumSchema = {
 							 * BR-CO-19: If Invoicing period (BG-14) is used, the Invoicing period start date (BT-73) or the Invoicing period end date (BT-74) shall be filled, or both.
 							 */
 							endDate: {
-								type: 'date',
+								type: "date",
 								required: false,
 								transform: {
-									input: dateTimeStringFormatter
+									input: dateTimeStringFormatter,
 								},
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString',
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString",
 								additionalXml: {
-									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString/@format':
-										'102'
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-} satisfies Schema
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString/@format":
+										"102",
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	},
+} satisfies Schema;

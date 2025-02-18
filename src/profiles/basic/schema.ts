@@ -1,10 +1,10 @@
-import z from 'zod'
-import { Schema } from '../../types/schema'
-import { dateTimeStringFormatter } from '../../helper'
+import z from "zod";
+import { Schema } from "../../types/schema";
+import { dateTimeStringFormatter } from "../../helper";
 
 export const basicSchema = {
 	transaction: {
-		type: 'object',
+		type: "object",
 		required: false,
 		shape: {
 			/**
@@ -13,17 +13,18 @@ export const basicSchema = {
 			 * A group of business terms providing information on individual Invoice lines.
 			 */
 			line: {
-				type: 'object[]',
+				type: "object[]",
 				validator: z.array(z.any()).min(1),
-				group: 'line',
+				group: "line",
 				shape: {
 					/**
 					 * Grouping of general position information
 					 */
 					identifier: {
-						type: 'string',
+						type: "string",
 						required: false,
-						xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:AssociatedDocumentLineDocument/ram:LineID'
+						xpath:
+							"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:AssociatedDocumentLineDocument/ram:LineID",
 					},
 					/**
 					 * Invoice line note
@@ -31,9 +32,10 @@ export const basicSchema = {
 					 * A textual note that gives unstructured information that is relevant to the Invoice line.
 					 */
 					note: {
-						type: 'string',
+						type: "string",
 						required: false,
-						xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:AssociatedDocumentLineDocument/ram:IncludedNote/ram:Content'
+						xpath:
+							"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:AssociatedDocumentLineDocument/ram:IncludedNote/ram:Content",
 					},
 					/**
 					 * Item information
@@ -41,7 +43,7 @@ export const basicSchema = {
 					 * A group of business terms providing information about the goods and services invoiced.
 					 */
 					tradeProduct: {
-						type: 'object',
+						type: "object",
 						shape: {
 							/**
 							 * Item standard identifier
@@ -53,7 +55,7 @@ export const basicSchema = {
 							 * BR-64: The Item standard identifier (BT-157) shall have a Scheme identifier
 							 */
 							globalIdentifier: {
-								type: 'object',
+								type: "object",
 								shape: {
 									/**
 									 * Item standard identifier
@@ -65,9 +67,10 @@ export const basicSchema = {
 									 * BR-64: The Item standard identifier (BT-157) shall have a Scheme identifier
 									 */
 									value: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedTradeProduct/ram:GlobalID'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedTradeProduct/ram:GlobalID",
 									},
 									/**
 									 * Scheme identifier
@@ -77,10 +80,11 @@ export const basicSchema = {
 									 * The identification scheme shall be identified from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: 'string',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedTradeProduct/ram:GlobalID/@schemeID'
-									}
-								}
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedTradeProduct/ram:GlobalID/@schemeID",
+									},
+								},
 							},
 							/**
 							 * Item name
@@ -88,10 +92,11 @@ export const basicSchema = {
 							 * A name for an item.
 							 */
 							name: {
-								type: 'string',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedTradeProduct/ram:Name'
-							}
-						}
+								type: "string",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedTradeProduct/ram:Name",
+							},
+						},
 					},
 					/**
 					 * Price details
@@ -99,13 +104,13 @@ export const basicSchema = {
 					 * A group of business terms providing information about the price applied for the goods and services invoiced on the Invoice line.
 					 */
 					tradeAgreement: {
-						type: 'object',
+						type: "object",
 						shape: {
 							/**
 							 * Detailed information on the gross price of the item
 							 */
 							grossTradePrice: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -118,9 +123,10 @@ export const basicSchema = {
 									 * BR-28: The Item gross price (BT-148) shall NOT be negative.
 									 */
 									chargeAmount: {
-										type: 'string | number',
+										type: "string | number",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:ChargeAmount'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:ChargeAmount",
 									},
 									/**
 									 * Item price base quantity
@@ -130,7 +136,7 @@ export const basicSchema = {
 									 * Optional, if filled and if BT-148 is present (EN16931 and EXTENDED profiles), then it should be the same value than BT-149-1
 									 */
 									basisQuantity: {
-										type: 'object',
+										type: "object",
 										required: false,
 										shape: {
 											/**
@@ -141,9 +147,10 @@ export const basicSchema = {
 											 * Optional, if filled and if BT-148 is present (EN16931 and EXTENDED profiles), then it should be the same value than BT-149-1
 											 */
 											amount: {
-												type: 'string | number',
+												type: "string | number",
 												required: false,
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:BasisQuantity'
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:BasisQuantity",
 											},
 											/**
 											 * Item price base quantity unit of measure code
@@ -163,18 +170,12 @@ export const basicSchema = {
 											 * BT-130, BT-150 and BT-150-1 must be equal if stated.
 											 */
 											unitMeasureCode: {
-												type: [
-													'LTR',
-													'MTQ',
-													'KGM',
-													'MTR',
-													'C62',
-													'TNE'
-												],
+												type: ["LTR", "MTQ", "KGM", "MTR", "C62", "TNE"],
 												required: false,
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:BasisQuantity/@unitCode'
-											}
-										}
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:BasisQuantity/@unitCode",
+											},
+										},
 									},
 									/**
 									 * Price-related discounts
@@ -182,7 +183,7 @@ export const basicSchema = {
 									 * Detailed information on discounts and charges
 									 */
 									discounts: {
-										type: 'object',
+										type: "object",
 										required: false,
 										shape: {
 											/**
@@ -193,17 +194,18 @@ export const basicSchema = {
 											 * Only applies if the discount is provided per unit and if it is not included in the Item gross price.
 											 */
 											actualAmount: {
-												type: 'string | number',
+												type: "string | number",
 												required: false,
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ActualAmount'
-											}
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ActualAmount",
+											},
 										},
 										additionalXml: {
-											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator':
-												'false'
-										}
-									}
-								}
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator":
+												"false",
+										},
+									},
+								},
 							},
 							/**
 							 * Detailed information on the net price of the item
@@ -211,7 +213,7 @@ export const basicSchema = {
 							 * The net price includes all surchages and discounts, except for VAT.
 							 */
 							netTradePrice: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -228,8 +230,9 @@ export const basicSchema = {
 									 * BR-27: The Item net price (BT-146) shall NOT be negative.
 									 */
 									chargeAmount: {
-										type: 'string | number',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:ChargeAmount'
+										type: "string | number",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:ChargeAmount",
 									},
 									/**
 									 * Item price base quantity
@@ -239,7 +242,7 @@ export const basicSchema = {
 									 * Optional, if filled and if BT-148 is present (EN16931 and EXTENDED profiles), then it should be the same value than BT-149-1
 									 */
 									basisQuantity: {
-										type: 'object',
+										type: "object",
 										required: false,
 										shape: {
 											/**
@@ -250,9 +253,10 @@ export const basicSchema = {
 											 * Optional, if filled and if BT-148 is present (EN16931 and EXTENDED profiles), then it should be the same value than BT-149-1
 											 */
 											amount: {
-												type: 'string | number',
+												type: "string | number",
 												required: false,
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:BasisQuantity'
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:BasisQuantity",
 											},
 											/**
 											 * Item price base quantity unit of measure code
@@ -272,28 +276,22 @@ export const basicSchema = {
 											 * BT-130, BT-150 and BT-150-1 must be equal if stated.
 											 */
 											unitMeasureCode: {
-												type: [
-													'LTR',
-													'MTQ',
-													'KGM',
-													'MTR',
-													'C62',
-													'TNE'
-												],
+												type: ["LTR", "MTQ", "KGM", "MTR", "C62", "TNE"],
 												required: false,
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:BasisQuantity/@unitCode'
-											}
-										}
-									}
-								}
-							}
-						}
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:BasisQuantity/@unitCode",
+											},
+										},
+									},
+								},
+							},
+						},
 					},
 					/**
 					 * Grouping of delivery details on line level
 					 */
 					tradeDelivery: {
-						type: 'object',
+						type: "object",
 						required: false,
 						shape: {
 							/**
@@ -306,7 +304,7 @@ export const basicSchema = {
 							 * BR-22: Each  Invoice  line  (BG-25)  shall  have  an  Invoiced  quantity (BT-129).
 							 */
 							billedQuantity: {
-								type: 'object',
+								type: "object",
 								shape: {
 									/**
 									 * Invoiced quantity
@@ -318,8 +316,9 @@ export const basicSchema = {
 									 * BR-22: Each  Invoice  line  (BG-25)  shall  have  an  Invoiced  quantity (BT-129).
 									 */
 									amount: {
-										type: 'string | number',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:BilledQuantity'
+										type: "string | number",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:BilledQuantity",
 									},
 									/**
 									 * Invoiced quantity unit of measure
@@ -339,26 +338,20 @@ export const basicSchema = {
 									 * BR-23: An Invoice line (BG-25) shall have an Invoiced quantity unit of measure code (BT-130).
 									 */
 									unitMeasureCode: {
-										type: [
-											'LTR',
-											'MTQ',
-											'KGM',
-											'MTR',
-											'C62',
-											'TNE'
-										],
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:BilledQuantity/@unitCode'
-									}
-								}
-							}
-						}
+										type: ["LTR", "MTQ", "KGM", "MTR", "C62", "TNE"],
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:BilledQuantity/@unitCode",
+									},
+								},
+							},
+						},
 					},
 
 					/**
 					 * Grouping of billing information at line level
 					 */
 					tradeSettlement: {
-						type: 'object',
+						type: "object",
 						required: false,
 						shape: {
 							/**
@@ -367,7 +360,7 @@ export const basicSchema = {
 							 * A group of business terms providing information about the VAT applicable for the goods and services invoiced on the Invoice line.
 							 */
 							tradeTax: {
-								type: 'object',
+								type: "object",
 								shape: {
 									/**
 									 * Invoiced item VAT category code, Content
@@ -377,8 +370,9 @@ export const basicSchema = {
 									 * For more information on the recommended codes, please refer to subclause 6.3.3.2 - Specification of VAT category codes.
 									 */
 									typeCode: {
-										type: 'string',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax/ram:TypeCode'
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax/ram:TypeCode",
 									},
 									/**
 									 * Invoiced item VAT category code
@@ -410,18 +404,9 @@ export const basicSchema = {
 									 * BR-CO-4: Each Invoice line  (BG-25) shall be categorized with an Invoiced item VAT category code (BT-151).
 									 */
 									categoryCode: {
-										type: [
-											'S',
-											'Z',
-											'E',
-											'AE',
-											'K',
-											'G',
-											'O',
-											'L',
-											'M'
-										],
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax/ram:CategoryCode'
+										type: ["S", "Z", "E", "AE", "K", "G", "O", "L", "M"],
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax/ram:CategoryCode",
 									},
 									/**
 									 * Invoiced item VAT rate
@@ -431,11 +416,12 @@ export const basicSchema = {
 									 * The value to enter is the percentage. For example, for 20%, it must be given as 20 (and not 0.2)
 									 */
 									rateApplicablePercent: {
-										type: 'string | number',
+										type: "string | number",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax/ram:RateApplicablePercent'
-									}
-								}
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax/ram:RateApplicablePercent",
+									},
+								},
 							},
 							/**
 							 * Invoice Line Period
@@ -445,7 +431,7 @@ export const basicSchema = {
 							 * Is also called Invoice line delivery period.
 							 */
 							linePeriod: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -460,16 +446,17 @@ export const basicSchema = {
 									 * BR-CO-20: If  Invoice  line  period  (BG-26)  is  used,  the  Invoice  line period start date (BT-134) or the Invoice line period end date (BT-135) shall be filled, or both.
 									 */
 									startDate: {
-										type: 'date',
+										type: "date",
 										required: false,
 										transform: {
-											input: dateTimeStringFormatter
+											input: dateTimeStringFormatter,
 										},
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString',
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString",
 										additionalXml: {
-											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString/@format':
-												'102'
-										}
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString/@format":
+												"102",
+										},
 									},
 									/**
 									 * End of the invoice line billing period
@@ -487,18 +474,19 @@ export const basicSchema = {
 									 * BR-CO-20: If  Invoice  line  period  (BG-26)  is  used,  the  Invoice  line period start date (BT-134) or the Invoice line period end date (BT-135) shall be filled, or both.
 									 */
 									endDate: {
-										type: 'date',
+										type: "date",
 										required: false,
 										transform: {
-											input: dateTimeStringFormatter
+											input: dateTimeStringFormatter,
 										},
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString',
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString",
 										additionalXml: {
-											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString/@format':
-												'102'
-										}
-									}
-								}
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString/@format":
+												"102",
+										},
+									},
+								},
 							},
 							/**
 							 * Invoice Line Allowances
@@ -508,9 +496,9 @@ export const basicSchema = {
 							 * Invoice line allowancess are subject to the same VAT rate as the line they relate to. If invoice line allowances are subject to a different VAT rate, they must be treated as standalone (negative) invoice lines
 							 */
 							allowances: {
-								type: 'object[]',
+								type: "object[]",
 								required: false,
-								group: 'line-allowances',
+								group: "line-allowances",
 								shape: {
 									/**
 									 * Invoice line allowance amount
@@ -518,12 +506,13 @@ export const basicSchema = {
 									 * The amount of an allowance, without VAT.
 									 */
 									actualAmount: {
-										type: 'string | number',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-allowances]/ram:ActualAmount',
+										type: "string | number",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-allowances]/ram:ActualAmount",
 										additionalXml: {
-											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-allowances]/ram:ChargeIndicator/udt:Indicator':
-												'false'
-										}
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-allowances]/ram:ChargeIndicator/udt:Indicator":
+												"false",
+										},
 									},
 									/**
 									 * Invoice line allowance reason code
@@ -542,17 +531,10 @@ export const basicSchema = {
 									 * - LA = Labeling
 									 */
 									reasonCode: {
-										type: [
-											'AA',
-											'ABL',
-											'ADR',
-											'ADT',
-											'FC',
-											'FI',
-											'LA'
-										],
+										type: ["AA", "ABL", "ADR", "ADT", "FC", "FI", "LA"],
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-allowances]/ram:ReasonCode'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-allowances]/ram:ReasonCode",
 									},
 									/**
 									 * Invoice line allowance reason
@@ -560,11 +542,12 @@ export const basicSchema = {
 									 * The reason for the Invoice line allowance, expressed as text.
 									 */
 									reason: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-allowances]/ram:Reason'
-									}
-								}
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-allowances]/ram:Reason",
+									},
+								},
 							},
 							/**
 							 * Invoice Line Charges
@@ -576,12 +559,11 @@ export const basicSchema = {
 							 * Invoice line charges are subject to the same VAT rate as that of the line to which they relate. If invoice line charges are subject to a different VAT rate, they must be treated as stand-alone invoice lines.
 							 */
 							charges: {
-								type: 'object[]',
+								type: "object[]",
 								required: false,
-								group: 'line-charges',
+								group: "line-charges",
 								sibling: (data, { line }) =>
-									data.transaction.line[line]?.tradeSettlement
-										?.allowances,
+									data.transaction.line[line]?.tradeSettlement?.allowances,
 								shape: {
 									/**
 									 * Invoice line charge amount
@@ -589,12 +571,13 @@ export const basicSchema = {
 									 * The amount of a charge, without VAT.
 									 */
 									actualAmount: {
-										type: 'string | number',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-charges]/ram:ActualAmount',
+										type: "string | number",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-charges]/ram:ActualAmount",
 										additionalXml: {
-											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-charges]/ram:ChargeIndicator/udt:Indicator':
-												'true'
-										}
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-charges]/ram:ChargeIndicator/udt:Indicator":
+												"true",
+										},
 									},
 									/**
 									 * Invoice line charge reason code
@@ -619,54 +602,49 @@ export const basicSchema = {
 									 * BR-CO-24: Each Invoice line charge (BG-28) shall contain an Invoice line  charge  reason  (BT-144)  or  an  Invoice  line  charge reason code (BT-145), or both.
 									 */
 									reasonCode: {
-										type: [
-											'AA',
-											'ABL',
-											'ADR',
-											'ADT',
-											'FC',
-											'FI',
-											'LA'
-										],
+										type: ["AA", "ABL", "ADR", "ADT", "FC", "FI", "LA"],
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-charges]/ram:ReasonCode'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-charges]/ram:ReasonCode",
 									},
 									/**
 									 * Invoice line charge reason
-									 * 
+									 *
 									 * The reason for the Invoice line charge, expressed as text.
 									 */
 									reason: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-charges]/ram:Reason'
-									}
-								}
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-charges]/ram:Reason",
+									},
+								},
 							},
 							/**
 							 * Detailed information about item totals
 							 */
 							monetarySummation: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
 									 * Invoice line net amount
-									 * 
+									 *
 									 * The total amount of the Invoice line.
-									 * 
+									 *
 									 * The amount is “net” without VAT, i.e. inclusive of line level allowances and charges as well as other relevant taxes.
 									 */
 									lineTotalAmount: {
-										type: 'string | number',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount'
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-} satisfies Schema
+										type: "string | number",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	},
+} satisfies Schema;

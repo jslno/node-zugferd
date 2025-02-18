@@ -1,34 +1,34 @@
-import { formatXml, mergeSchemas, parseSchema } from './xml-formatter'
+import { formatXml, mergeSchemas, parseSchema } from "./xml-formatter";
 import {
 	addPdfMetadata,
 	addPdfTrailerInfoId,
 	fixPdfLinkAnnotations,
 	addPdfStructTreeRoot,
 	addPdfMarkInfo,
-	addPdfICC
-} from './pdf-formatter'
-import { ZugferdOptions } from './types/options'
+	addPdfICC,
+} from "./pdf-formatter";
+import { ZugferdOptions } from "./types/options";
 
 export const init = (options: ZugferdOptions) => {
 	const ctx: ZugferdContext = {
 		options,
-		...getInternalTools(options)
-	}
+		...getInternalTools(options),
+	};
 
-	return ctx
-}
+	return ctx;
+};
 
 export type ZugferdContext = {
-	options: ZugferdOptions
-} & InternalTools
+	options: ZugferdOptions;
+} & InternalTools;
 
-type InternalTools = ReturnType<typeof getInternalTools>
+type InternalTools = ReturnType<typeof getInternalTools>;
 
 const getInternalTools = (_options: ZugferdOptions) => ({
 	parseSchema,
 	mergeSchemas,
 	xml: {
-		format: formatXml
+		format: formatXml,
 	},
 	pdf: {
 		addMetadata: addPdfMetadata,
@@ -36,6 +36,6 @@ const getInternalTools = (_options: ZugferdOptions) => ({
 		fixLinkAnnotations: fixPdfLinkAnnotations,
 		addStructTreeRoot: addPdfStructTreeRoot,
 		addMarkInfo: addPdfMarkInfo,
-		addICC: addPdfICC
-	}
-})
+		addICC: addPdfICC,
+	},
+});

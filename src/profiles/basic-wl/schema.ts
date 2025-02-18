@@ -1,5 +1,5 @@
-import { dateTimeStringFormatter } from '../../helper'
-import { Schema } from '../../types/schema'
+import { dateTimeStringFormatter } from "../../helper";
+import { Schema } from "../../types/schema";
 
 export const basicWlSchema = {
 	/**
@@ -8,9 +8,9 @@ export const basicWlSchema = {
 	 * A group of business terms providing textual notes that are relevant for the invoice, together with an indication of the note subject.
 	 */
 	includedNote: {
-		type: 'object[]',
+		type: "object[]",
 		required: false,
-		group: 'notes',
+		group: "notes",
 		shape: {
 			/**
 			 * Invoice note
@@ -20,8 +20,9 @@ export const basicWlSchema = {
 			 * Such as the reason for any correction or assignment note in case the invoice has been factored.
 			 */
 			content: {
-				type: 'string',
-				xpath: '/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IncludedNote[notes]/ram:Content'
+				type: "string",
+				xpath:
+					"/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IncludedNote[notes]/ram:Content",
 			},
 			/**
 			 * Invoice note subject code
@@ -39,24 +40,25 @@ export const basicWlSchema = {
 			 * - CUS: Customs Information
 			 */
 			subjectCode: {
-				type: ['AAI', 'SUR', 'REG', 'ABL', 'TXD', 'CUS'],
+				type: ["AAI", "SUR", "REG", "ABL", "TXD", "CUS"],
 				required: false,
-				xpath: '/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IncludedNote[notes]/ram:SubjectCode'
-			}
-		}
+				xpath:
+					"/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IncludedNote[notes]/ram:SubjectCode",
+			},
+		},
 	},
 
 	transaction: {
-		type: 'object',
+		type: "object",
 		shape: {
 			tradeAgreement: {
-				type: 'object',
+				type: "object",
 				shape: {
 					/**
 					 * Details of the associated contract
 					 */
 					associatedContract: {
-						type: 'object',
+						type: "object",
 						required: false,
 						shape: {
 							/**
@@ -69,15 +71,16 @@ export const basicWlSchema = {
 							 * CHORUSPRO : This is the "numéro de Marché" (contract number)
 							 */
 							reference: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument/ram:IssuerAssignedID'
-							}
-						}
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument/ram:IssuerAssignedID",
+							},
+						},
 					},
 
 					seller: {
-						type: 'object',
+						type: "object",
 						shape: {
 							/**
 							 * Seller identifier
@@ -89,10 +92,11 @@ export const basicWlSchema = {
 							 * BR-CO-26: In   order   for   the   buyer   to   automatically   identify   a supplier,  the  Seller  identifier  (BT-29),  the  Seller  legal registration  identifier  (BT-30)  and/or  the  Seller  VAT identifier (BT-31) shall be present.
 							 */
 							identifier: {
-								type: 'string[]',
+								type: "string[]",
 								required: false,
-								group: 'seller-id',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:ID[i]'
+								group: "seller-id",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:ID[i]",
 							},
 
 							/**
@@ -105,7 +109,7 @@ export const basicWlSchema = {
 							 * If the seller has a GlobalID, he can qualify it with this attribute. Otherwise, he uses the ID.
 							 */
 							gloablIdentifier: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -118,9 +122,10 @@ export const basicWlSchema = {
 									 * If the seller has a GlobalID, he can qualify it with this attribute. Otherwise, he uses the ID.
 									 */
 									value: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:GlobalID'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:GlobalID",
 									},
 									/**
 									 * Seller identifier identification scheme identifier
@@ -136,14 +141,15 @@ export const basicWlSchema = {
 									 * - 0177 : ODETTE
 									 */
 									schemeIdentifier: {
-										type: ['0021', '0060', '0088', '0177'],
+										type: ["0021", "0060", "0088", "0177"],
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:GlobalID/@schemeID'
-									}
-								}
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:GlobalID/@schemeID",
+									},
+								},
 							},
 							organization: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -156,15 +162,16 @@ export const basicWlSchema = {
 									 * CHORUS PRO: this field is limied to 99 characters.
 									 */
 									tradingName: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName'
-									}
-								}
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName",
+									},
+								},
 							},
 
 							postalAddress: {
-								type: 'object',
+								type: "object",
 								shape: {
 									/**
 									 * Seller post code
@@ -174,9 +181,10 @@ export const basicWlSchema = {
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
-										type: 'string | number',
+										type: "string | number",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode",
 									},
 									/**
 									 * Seller address line 1
@@ -186,9 +194,10 @@ export const basicWlSchema = {
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineOne'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineOne",
 									},
 									/**
 									 * Seller address line 2
@@ -196,9 +205,10 @@ export const basicWlSchema = {
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineTwo",
 									},
 									/**
 									 * Seller address line 3
@@ -206,9 +216,10 @@ export const basicWlSchema = {
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineThree'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineThree",
 									},
 									/**
 									 * Seller city
@@ -216,9 +227,10 @@ export const basicWlSchema = {
 									 * The common name of the city, town or village, where the Seller address is located.
 									 */
 									city: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CityName'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CityName",
 									},
 									/**
 									 * Seller country subdivision
@@ -228,16 +240,17 @@ export const basicWlSchema = {
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
 
 									/**
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
-										type: 'object',
+										type: "object",
 										required: false,
 										shape: {
 											/**
@@ -246,9 +259,10 @@ export const basicWlSchema = {
 											 * Identifies the Seller's electronic address to which a business document may be delivered.
 											 */
 											value: {
-												type: 'string',
+												type: "string",
 												required: false,
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID'
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID",
 											},
 											/**
 											 * Scheme identifier
@@ -258,14 +272,15 @@ export const basicWlSchema = {
 											 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
 											 */
 											schemeIdentifier: {
-												type: 'string',
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
-											}
-										}
-									}
-								}
-							}
-						}
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
+											},
+										},
+									},
+								},
+							},
+						},
 					},
 					/**
 					 * Seller Tax Representative Party
@@ -275,7 +290,7 @@ export const basicWlSchema = {
 					 * The "Seller Tax Representative party" block must be filled in if the seller has a tax representative.
 					 */
 					sellerTaxRepresentative: {
-						type: 'object',
+						type: "object",
 						required: false,
 						shape: {
 							/**
@@ -284,8 +299,9 @@ export const basicWlSchema = {
 							 * The full name of the Seller's tax representative party.
 							 */
 							name: {
-								type: 'string',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:Name'
+								type: "string",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:Name",
 							},
 							/**
 							 * Seller Tax Representative Postal Address
@@ -299,7 +315,7 @@ export const basicWlSchema = {
 							 * BR-19: The  Seller  tax  representative  postal  address  (BG-12)  shall be provided in the Invoice, if the Seller (BG-4) has a Seller tax representative party (BG-11).
 							 */
 							postalAddress: {
-								type: 'object',
+								type: "object",
 								shape: {
 									/**
 									 * Tax representative post code
@@ -309,9 +325,10 @@ export const basicWlSchema = {
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:PostcodeCode",
 									},
 									/**
 									 * Tax representative address line 1
@@ -321,9 +338,10 @@ export const basicWlSchema = {
 									 * Usually the street name and number or the post office box.
 									 */
 									line1: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:LineOne'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:LineOne",
 									},
 									/**
 									 * Tax representative address line 2
@@ -331,9 +349,10 @@ export const basicWlSchema = {
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:LineTwo",
 									},
 									/**
 									 * Tax representative address line 3
@@ -341,9 +360,10 @@ export const basicWlSchema = {
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:LineThree'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:LineThree",
 									},
 									/**
 									 * Tax representative city
@@ -351,9 +371,10 @@ export const basicWlSchema = {
 									 * The common name of the city, town or village, where the tax representative address is located.
 									 */
 									city: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:CityName'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:CityName",
 									},
 									/**
 									 * Tax representative country code
@@ -363,8 +384,9 @@ export const basicWlSchema = {
 									 * Country where VAT is liable. The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: 'string',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:CountryID'
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:CountryID",
 									},
 									/**
 									 * Tax representative country subdivision
@@ -374,17 +396,18 @@ export const basicWlSchema = {
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
-									}
-								}
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
+									},
+								},
 							},
 							/**
 							 * Detailed information on tax information
 							 */
 							taxRegistration: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -395,19 +418,20 @@ export const basicWlSchema = {
 									 * VAT number prefixed by a country code based on EN ISO 3166-1 "Codes for the representation of names of countries and their subdivisions".
 									 */
 									vatIdentifier: {
-										type: 'string',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID',
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID",
 										additionalXml: {
-											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID/@schemeID':
-												'VA'
-										}
-									}
-								}
-							}
-						}
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID/@schemeID":
+												"VA",
+										},
+									},
+								},
+							},
+						},
 					},
 					buyer: {
-						type: 'object',
+						type: "object",
 						shape: {
 							/**
 							 * Buyer identifier
@@ -417,9 +441,10 @@ export const basicWlSchema = {
 							 * If no scheme is specified, it must be known by Buyer and Seller.
 							 */
 							identifier: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:ID'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:ID",
 							},
 							/**
 							 * Buyer global identifier
@@ -430,7 +455,7 @@ export const basicWlSchema = {
 							 * The global identifier of a buyer is the specific identification given to him by a global registry organization.
 							 */
 							gloablIdentifier: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -442,9 +467,10 @@ export const basicWlSchema = {
 									 * The global identifier of a buyer is the specific identification given to him by a global registry organization.
 									 */
 									value: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:GlobalID'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:GlobalID",
 									},
 									/**
 									 * Scheme identifier
@@ -454,15 +480,16 @@ export const basicWlSchema = {
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:GlobalID/@schemeID'
-									}
-								}
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:GlobalID/@schemeID",
+									},
+								},
 							},
 
 							postalAddress: {
-								type: 'object',
+								type: "object",
 								shape: {
 									/**
 									 * Buyer post code
@@ -472,9 +499,10 @@ export const basicWlSchema = {
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
-										type: 'string | number',
+										type: "string | number",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode",
 									},
 									/**
 									 * Buyer address line 1
@@ -484,9 +512,10 @@ export const basicWlSchema = {
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:LineOne'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:LineOne",
 									},
 									/**
 									 * Buyer address line 2
@@ -494,9 +523,10 @@ export const basicWlSchema = {
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:LineTwo",
 									},
 									/**
 									 * Buyer address line 3
@@ -504,9 +534,10 @@ export const basicWlSchema = {
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:LineThree'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:LineThree",
 									},
 									/**
 									 * Buyer city
@@ -514,9 +545,10 @@ export const basicWlSchema = {
 									 * The common name of the city, town or village, where the Buyer's address is located.
 									 */
 									city: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CityName'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CityName",
 									},
 									/**
 									 * Buyer country code
@@ -526,8 +558,9 @@ export const basicWlSchema = {
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: 'string',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CountryID'
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CountryID",
 									},
 									/**
 									 * Buyer country subdivision
@@ -537,15 +570,16 @@ export const basicWlSchema = {
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
 									/**
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
-										type: 'object',
+										type: "object",
 										required: false,
 										shape: {
 											/**
@@ -554,9 +588,10 @@ export const basicWlSchema = {
 											 * Identifies the Buyer's electronic address to which a business document should be delivered.
 											 */
 											value: {
-												type: 'string',
+												type: "string",
 												required: false,
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID'
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID",
 											},
 											/**
 											 * Scheme identifier
@@ -566,18 +601,19 @@ export const basicWlSchema = {
 											 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
 											 */
 											schemeIdentifier: {
-												type: 'string',
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID'
-											}
-										}
-									}
-								}
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
+											},
+										},
+									},
+								},
 							},
 							/**
 							 * Detailed information on buyer tax information
 							 */
 							taxRegistration: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -592,22 +628,23 @@ export const basicWlSchema = {
 									 * BR-CO-9: The Seller VAT identifier (BT-31), the Seller tax representative VAT identifier (BT-63) and the Buyer VAT identifier (BT-48) shall have a prefix in accordance with ISO code ISO 3166-1 alpha-2 by which the country of issue may be identified. Nevertheless, Greece may use the prefix ‘EL’.
 									 */
 									vatIdentifier: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID',
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID",
 										additionalXml: {
-											'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID/@schemeID':
-												'VA'
-										}
-									}
-								}
-							}
-						}
-					}
-				}
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID/@schemeID":
+												"VA",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 			tradeDelivery: {
-				type: 'object',
+				type: "object",
 				shape: {
 					/**
 					 * Delivery Information
@@ -615,7 +652,7 @@ export const basicWlSchema = {
 					 * A group of business terms providing information about where and when the goods and services invoiced are delivered.
 					 */
 					shipTo: {
-						type: 'object',
+						type: "object",
 						required: false,
 						shape: {
 							/**
@@ -626,24 +663,26 @@ export const basicWlSchema = {
 							 * If no scheme is specified, it should be known by Buyer and Seller, e.g. a previously exchanged Buyer or Seller assigned identifier.
 							 */
 							identifier: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:ID'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:ID",
 							},
 							/**
 							 * Deliver to location global identifier
 							 */
 							globalIdentifier: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
 									 * Deliver to location global identifier
 									 */
 									value: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:GlobalID'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:GlobalID",
 									},
 									/**
 									 * Scheme identifier
@@ -653,11 +692,12 @@ export const basicWlSchema = {
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:GlobalID/@schemeID'
-									}
-								}
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:GlobalID/@schemeID",
+									},
+								},
 							},
 							/**
 							 * Deliver to party name
@@ -667,9 +707,10 @@ export const basicWlSchema = {
 							 * Shall be used if the Deliver to party is different from the Buyer.
 							 */
 							name: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:Name'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:Name",
 							},
 							/**
 							 * Deliver to address
@@ -681,7 +722,7 @@ export const basicWlSchema = {
 							 * Like any address, the fields necessary to define the address must appear. The country code is mandatory.
 							 */
 							postalAddress: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -692,9 +733,10 @@ export const basicWlSchema = {
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
-										type: 'string | number',
+										type: "string | number",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:PostcodeCode'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:PostcodeCode",
 									},
 									/**
 									 * Deliver to address line 1
@@ -704,9 +746,10 @@ export const basicWlSchema = {
 									 * Usually the street name and number.
 									 */
 									line1: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:LineOne'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:LineOne",
 									},
 									/**
 									 * Deliver to address line 2
@@ -714,9 +757,10 @@ export const basicWlSchema = {
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:LineTwo'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:LineTwo",
 									},
 									/**
 									 * Deliver to address line 3
@@ -724,9 +768,10 @@ export const basicWlSchema = {
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:LineThree'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:LineThree",
 									},
 									/**
 									 * Deliver to city
@@ -734,9 +779,10 @@ export const basicWlSchema = {
 									 * The common name of the city, town or village, where the deliver to address is located.
 									 */
 									city: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:CityName'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:CityName",
 									},
 									/**
 									 * Deliver to country code
@@ -746,8 +792,9 @@ export const basicWlSchema = {
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: 'string',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:CountryID'
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:CountryID",
 									},
 									/**
 									 * Deliver to country subdivision
@@ -757,19 +804,20 @@ export const basicWlSchema = {
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName'
-									}
-								}
-							}
-						}
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
+									},
+								},
+							},
+						},
 					},
 					/**
 					 * Detailed information about the actual Delivery
 					 */
 					information: {
-						type: 'object',
+						type: "object",
 						required: false,
 						shape: {
 							/**
@@ -780,23 +828,24 @@ export const basicWlSchema = {
 							 * In Germany, the date of delivery and performance is a mandatory information on invoices. This can also be indicated at item level, but must in any case be indicated here.
 							 */
 							deliveryDate: {
-								type: 'date',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString',
+								type: "date",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString",
 								transform: {
-									input: dateTimeStringFormatter
+									input: dateTimeStringFormatter,
 								},
 								additionalXml: {
-									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString/@format':
-										'102'
-								}
-							}
-						}
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString/@format":
+										"102",
+								},
+							},
+						},
 					},
 					/**
 					 * Detailed information on the corresponding despatch advice
 					 */
 					despatchAdvice: {
-						type: 'object',
+						type: "object",
 						required: false,
 						shape: {
 							/**
@@ -807,16 +856,17 @@ export const basicWlSchema = {
 							 * CHORUS PRO : not used
 							 */
 							issuerAssignedID: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:IssuerAssignedID'
-							}
-						}
-					}
-				}
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:IssuerAssignedID",
+							},
+						},
+					},
+				},
 			},
 			tradeSettlement: {
-				type: 'object',
+				type: "object",
 				shape: {
 					/**
 					 * Bank assigned creditor identifier
@@ -828,9 +878,10 @@ export const basicWlSchema = {
 					 * This is the ICS for SEPA direct debits
 					 */
 					creditorIdentifier: {
-						type: 'string',
+						type: "string",
 						required: false,
-						xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceID'
+						xpath:
+							"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceID",
 					},
 					/**
 					 * Remittance information
@@ -847,9 +898,10 @@ export const basicWlSchema = {
 					 * If remittance information is to be mapped to the End To End Identification field or to the Structured Remittance Information Creditor Reference field in SEPA payments messages, then in addition to the Latin character set restriction, the content shall not start or end with a '/' and the content shall not contain '//'s. See reference [15].
 					 */
 					remittanceInformation: {
-						type: 'string',
+						type: "string",
 						required: false,
-						xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentReference'
+						xpath:
+							"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentReference",
 					},
 					/**
 					 * VAT accounting currency code
@@ -860,9 +912,10 @@ export const basicWlSchema = {
 					 * The lists of valid currencies are registered with the ISO 4217 Maintenance Agency ""Codes for the representation of currencies and funds"". Please refer to Article 230 of the Council Directive 2006/112/EC [2] for more information.
 					 */
 					vatAccountingCurrencyCode: {
-						type: 'string',
+						type: "string",
 						required: false,
-						xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxCurrencyCode'
+						xpath:
+							"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxCurrencyCode",
 					},
 
 					/**
@@ -877,7 +930,7 @@ export const basicWlSchema = {
 					 * In this case, the bank identifier oresent in the invoice is the factor one.
 					 */
 					payee: {
-						type: 'object',
+						type: "object",
 						required: false,
 						shape: {
 							/**
@@ -886,24 +939,26 @@ export const basicWlSchema = {
 							 * If no scheme is specified, it should be known by Buyer and Seller, e.g. a previously exchanged Buyer or Seller assigned identifier.
 							 */
 							identifier: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:ID'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:ID",
 							},
 							/**
 							 * Payee global identifier
 							 */
 							globalIdentifier: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
 									 * Payee global identifier
 									 */
 									value: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:GlobalID'
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:GlobalID",
 									},
 									/**
 									 * Scheme identifier
@@ -913,11 +968,12 @@ export const basicWlSchema = {
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:GlobalID/@schemeID'
-									}
-								}
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:GlobalID/@schemeID",
+									},
+								},
 							},
 							/**
 							 * Payee name
@@ -931,15 +987,16 @@ export const basicWlSchema = {
 							 * BR-17: The Payee name (BT-59) shall be provided in the Invoice, if the Payee (BG-10) is different from the Seller (BG-4).
 							 */
 							name: {
-								type: 'string',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:Name'
+								type: "string",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:Name",
 							},
 
 							/**
 							 * Details about the organization
 							 */
 							organization: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -950,7 +1007,7 @@ export const basicWlSchema = {
 									 * If no scheme is specified, it should be known by Buyer and Seller, e.g. the identifier that is exclusively used in the applicable legal environment.
 									 */
 									registrationIdentifier: {
-										type: 'object',
+										type: "object",
 										required: false,
 										shape: {
 											/**
@@ -961,9 +1018,10 @@ export const basicWlSchema = {
 											 * If no scheme is specified, it should be known by Buyer and Seller, e.g. the identifier that is exclusively used in the applicable legal environment.
 											 */
 											value: {
-												type: 'string',
+												type: "string",
 												required: false,
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:ID'
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:ID",
 											},
 											/**
 											 * Scheme identifier
@@ -975,15 +1033,16 @@ export const basicWlSchema = {
 											 * For a SIREN or a SIRET, the value of this field is "0002"
 											 */
 											schemeIdentifier: {
-												type: 'string',
+												type: "string",
 												required: false,
-												xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID'
-											}
-										}
-									}
-								}
-							}
-						}
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedLegalOrganization/ram:ID/@schemeID",
+											},
+										},
+									},
+								},
+							},
+						},
 					},
 					/**
 					 * Payment instructions
@@ -991,7 +1050,7 @@ export const basicWlSchema = {
 					 * A group of business terms providing information about the payment.
 					 */
 					paymentInstruction: {
-						type: 'object',
+						type: "object",
 						required: false,
 						shape: {
 							/**
@@ -1019,19 +1078,20 @@ export const basicWlSchema = {
 							 */
 							typeCode: {
 								type: [
-									'10',
-									'20',
-									'30',
-									'42',
-									'48',
-									'49',
-									'57',
-									'58',
-									'59',
-									'97',
-									'ZZZ'
+									"10",
+									"20",
+									"30",
+									"42",
+									"48",
+									"49",
+									"57",
+									"58",
+									"59",
+									"97",
+									"ZZZ",
 								],
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:TypeCode'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:TypeCode",
 							},
 
 							/**
@@ -1040,9 +1100,10 @@ export const basicWlSchema = {
 							 * The account to be debited by the direct debit.
 							 */
 							debitedAccountIdentifier: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:PayerPartyDebtorFinancialAccount/ram:IBANID'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:PayerPartyDebtorFinancialAccount/ram:IBANID",
 							},
 
 							/**
@@ -1051,8 +1112,8 @@ export const basicWlSchema = {
 							 * A group of business terms to specify credit transfer payments.
 							 */
 							transfers: {
-								type: 'object[]',
-								group: 'transfers',
+								type: "object[]",
+								group: "transfers",
 								shape: {
 									/**
 									 * Payment account identifier
@@ -1062,8 +1123,9 @@ export const basicWlSchema = {
 									 * Such as IBAN (in case of SEPA payment) or a national account number.
 									 */
 									paymentAccountIdentifier: {
-										type: 'string',
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:PayeePartyCreditorFinancialAccount[transfers]/ram:IBANID'
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:PayeePartyCreditorFinancialAccount[transfers]/ram:IBANID",
 									},
 									/**
 									 * National account number (not SEPA)
@@ -1071,13 +1133,14 @@ export const basicWlSchema = {
 									 * Use IBANID when appropriate, otherwise use ProprietaryID
 									 */
 									nationalAccountNumber: {
-										type: 'string',
+										type: "string",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:PayeePartyCreditorFinancialAccount[transfers]/ram:ProprietaryID'
-									}
-								}
-							}
-						}
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:PayeePartyCreditorFinancialAccount[transfers]/ram:ProprietaryID",
+									},
+								},
+							},
+						},
 					},
 					/**
 					 * Document Level Allowances
@@ -1087,9 +1150,9 @@ export const basicWlSchema = {
 					 * Deductions, such as withheld tax may also be specified in this group.
 					 */
 					allowances: {
-						type: 'object[]',
+						type: "object[]",
 						required: false,
-						group: 'allowances',
+						group: "allowances",
 						shape: {
 							/**
 							 * Document level allowance percentage
@@ -1097,9 +1160,10 @@ export const basicWlSchema = {
 							 * The percentage that may be used, in conjunction with the document level allowance base amount, to calculate the document level allowance amount.
 							 */
 							calculationPercent: {
-								type: 'string | number',
+								type: "string | number",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:CalculationPercent'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:CalculationPercent",
 							},
 							/**
 							 * Document level allowance base amount
@@ -1107,9 +1171,10 @@ export const basicWlSchema = {
 							 * The base amount that may be used, in conjunction with the document level allowance percentage, to calculate the document level allowance amount.
 							 */
 							basisAmount: {
-								type: 'string | number',
+								type: "string | number",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:BasisAmount'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:BasisAmount",
 							},
 							/**
 							 * Document level allowance amount
@@ -1117,12 +1182,13 @@ export const basicWlSchema = {
 							 * The amount of an allowance, without VAT.
 							 */
 							actualAmount: {
-								type: 'string | number',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:ActualAmount',
+								type: "string | number",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:ActualAmount",
 								additionalXml: {
-									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:ChargeIndicator/udt:Indicator':
-										'false'
-								}
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:ChargeIndicator/udt:Indicator":
+										"false",
+								},
 							},
 							/**
 							 * Document level allowance reason code
@@ -1138,9 +1204,10 @@ export const basicWlSchema = {
 							 * BR-CO-21: Each Document level allowance (BG-20) shall contain a Document level allowance reason (BT-97) or a Document level allowance reason code (BT-98), or both.
 							 */
 							reasonCode: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:ReasonCode'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:ReasonCode",
 							},
 							/**
 							 * Document level allowance reason
@@ -1156,15 +1223,16 @@ export const basicWlSchema = {
 							 * BR-CO-21: Each Document level allowance (BG-20) shall contain a Document level allowance reason (BT-97) or a Document level allowance reason code (BT-98), or both.
 							 */
 							reason: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:Reason'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:Reason",
 							},
 							/**
 							 * VAT type code for document level allowances
 							 */
 							categoryTradeTax: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -1197,18 +1265,9 @@ export const basicWlSchema = {
 									 * BR-32: Each Document level allowance (BG-20) shall have a Document level allowance VAT category code (BT-95).
 									 */
 									categoryCode: {
-										type: [
-											'S',
-											'Z',
-											'E',
-											'AE',
-											'K',
-											'G',
-											'O',
-											'L',
-											'M'
-										],
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:CategoryTradeTax/ram:CategoryCode'
+										type: ["S", "Z", "E", "AE", "K", "G", "O", "L", "M"],
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:CategoryTradeTax/ram:CategoryCode",
 									},
 									/**
 									 * Document level allowance VAT rate
@@ -1218,17 +1277,18 @@ export const basicWlSchema = {
 									 * The value to enter is the percentage. For example, for 20%, it must be given as 20 (and not 0.2)
 									 */
 									vatRate: {
-										type: 'string | number',
+										type: "string | number",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:CategoryTradeTax/ram:RateApplicablePercent'
-									}
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:CategoryTradeTax/ram:RateApplicablePercent",
+									},
 								},
 								additionalXml: {
-									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:CategoryTradeTax/ram:TypeCode':
-										'VAT'
-								}
-							}
-						}
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:CategoryTradeTax/ram:TypeCode":
+										"VAT",
+								},
+							},
+						},
 					},
 					/**
 					 * Document Level Charges
@@ -1236,11 +1296,10 @@ export const basicWlSchema = {
 					 * A group of business terms providing information about charges and taxes other than VAT, applicable to the Invoice as a whole.
 					 */
 					charges: {
-						type: 'object[]',
-						group: 'charges',
+						type: "object[]",
+						group: "charges",
 						sibling: (data) =>
-							data?.transaction?.tradeSettlement?.allowances ||
-							[],
+							data?.transaction?.tradeSettlement?.allowances || [],
 						required: false,
 						shape: {
 							/**
@@ -1249,9 +1308,10 @@ export const basicWlSchema = {
 							 * The percentage that may be used, in conjunction with the document level charge base amount, to calculate the document level charge amount.
 							 */
 							calculationPercent: {
-								type: 'string | number',
+								type: "string | number",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:CalculationPercent'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:CalculationPercent",
 							},
 							/**
 							 * Document level charge base amount
@@ -1259,9 +1319,10 @@ export const basicWlSchema = {
 							 * The base amount that may be used, in conjunction with the document level charge percentage, to calculate the document level charge amount.
 							 */
 							basisAmount: {
-								type: 'string | number',
+								type: "string | number",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:BasisAmount'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:BasisAmount",
 							},
 							/**
 							 * Document level charge amount
@@ -1269,12 +1330,13 @@ export const basicWlSchema = {
 							 * The amount of a charge, without VAT.
 							 */
 							actualAmount: {
-								type: 'string | number',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:ActualAmount',
+								type: "string | number",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:ActualAmount",
 								additionalXml: {
-									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:ChargeIndicator/udt:Indicator':
-										'true'
-								}
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:ChargeIndicator/udt:Indicator":
+										"true",
+								},
 							},
 							/**
 							 * Document level charge reason code
@@ -1299,17 +1361,10 @@ export const basicWlSchema = {
 							 * BR-CO-22: Each Document level charge (BG-21) shall contain a Document level charge reason (BT-104) or a Document level charge reason code (BT-105), or both.
 							 */
 							reasonCode: {
-								type: [
-									'AA',
-									'ABL',
-									'ADR',
-									'ADT',
-									'FC',
-									'FI',
-									'LA'
-								],
+								type: ["AA", "ABL", "ADR", "ADT", "FC", "FI", "LA"],
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:ReasonCode'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:ReasonCode",
 							},
 							/**
 							 * Document level charge reason
@@ -1325,9 +1380,10 @@ export const basicWlSchema = {
 							 * BR-CO-22: Each  Document  level  charge  (BG-21)  shall  contain  a Document level charge reason (BT-104) or a Document level charge reason code (BT-105), or both.
 							 */
 							reason: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:Reason'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:Reason",
 							},
 							/**
 							 * Detailed information on tax information
@@ -1335,7 +1391,7 @@ export const basicWlSchema = {
 							 * A finite sequence of characters.
 							 */
 							categoryTradeTax: {
-								type: 'object',
+								type: "object",
 								required: false,
 								shape: {
 									/**
@@ -1368,18 +1424,9 @@ export const basicWlSchema = {
 									 * BR-37: Each Document level charge (BG-21) shall have a Document level charge VAT category code (BT-102).
 									 */
 									categoryCode: {
-										type: [
-											'S',
-											'Z',
-											'E',
-											'AE',
-											'K',
-											'G',
-											'O',
-											'L',
-											'M'
-										],
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:CategoryTradeTax/ram:CategoryCode'
+										type: ["S", "Z", "E", "AE", "K", "G", "O", "L", "M"],
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:CategoryTradeTax/ram:CategoryCode",
 									},
 									/**
 									 * Document level charge VAT rate
@@ -1389,23 +1436,24 @@ export const basicWlSchema = {
 									 * The value to enter is the percentage. For example, for 20%, it must be given as 20 (and not 0.2)
 									 */
 									vatRate: {
-										type: 'string | number',
+										type: "string | number",
 										required: false,
-										xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:CategoryTradeTax/ram:RateApplicablePercent'
-									}
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:CategoryTradeTax/ram:RateApplicablePercent",
+									},
 								},
 								additionalXml: {
-									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:CategoryTradeTax/ram:TypeCode':
-										'VAT'
-								}
-							}
-						}
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:CategoryTradeTax/ram:TypeCode":
+										"VAT",
+								},
+							},
+						},
 					},
 					/**
 					 * Detailed information about payment terms
 					 */
 					paymentTerms: {
-						type: 'object',
+						type: "object",
 						required: false,
 						shape: {
 							/**
@@ -1416,9 +1464,10 @@ export const basicWlSchema = {
 							 * This element may contain multiple lines and multiple terms.
 							 */
 							description: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:Description'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:Description",
 							},
 							/**
 							 * Payment due date
@@ -1428,16 +1477,17 @@ export const basicWlSchema = {
 							 * The payment due date reflects the due date of the net payment. For partial payments it states the first net due date. The corresponding description of more complex payment terms can be stated in BT-20 Payment terms.
 							 */
 							dueDate: {
-								type: 'date',
+								type: "date",
 								required: false,
 								transform: {
-									input: dateTimeStringFormatter
+									input: dateTimeStringFormatter,
 								},
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:DueDateDateTime/udt:DateTimeString',
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:DueDateDateTime/udt:DateTimeString",
 								additionalXml: {
-									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:DueDateDateTime/udt:DateTimeString/@format':
-										'102'
-								}
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:DueDateDateTime/udt:DateTimeString/@format":
+										"102",
+								},
 							},
 							/**
 							 * Mandate reference identifier
@@ -1449,14 +1499,15 @@ export const basicWlSchema = {
 							 * This is the RUM (Unique Mandate Reference) for SEPA direct debits
 							 */
 							mandateReferenceIdentifier: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:DirectDebitMandateID'
-							}
-						}
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:DirectDebitMandateID",
+							},
+						},
 					},
 					monetarySummation: {
-						type: 'object',
+						type: "object",
 						shape: {
 							/**
 							 * Sum of Invoice line net amount
@@ -1466,8 +1517,9 @@ export const basicWlSchema = {
 							 * For EXTENDED profile only, BR-CO-10 is replaced by BR-FXEXT-CO-10, which add a tolerance of 0,01 euro per line, document level charge and allowance in calculation.
 							 */
 							lineTotalAmount: {
-								type: 'string | number',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:LineTotalAmount'
+								type: "string | number",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:LineTotalAmount",
 							},
 							/**
 							 * Sum of charges on document level
@@ -1479,9 +1531,10 @@ export const basicWlSchema = {
 							 * For EXTENDED profile only, BR-CO-12 is replaced by BR-FXEXT-CO-12, which add a tolerance of 0,01 euro per line, document level charge and allowance in calculation.
 							 */
 							chargeTotalAmount: {
-								type: 'string | number',
+								type: "string | number",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:ChargeTotalAmount'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:ChargeTotalAmount",
 							},
 							/**
 							 * Sum of allowances on document level
@@ -1493,9 +1546,10 @@ export const basicWlSchema = {
 							 * For EXTENDED profile only, BR-CO-11 is replaced by BR-FXEXT-CO-11, which add a tolerance of 0,01 euro per line, document level charge and allowance in calculation.
 							 */
 							allowanceTotalAmount: {
-								type: 'string | number',
+								type: "string | number",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:AllowanceTotalAmount'
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:AllowanceTotalAmount",
 							},
 							/**
 							 * Paid amount
@@ -1505,11 +1559,12 @@ export const basicWlSchema = {
 							 * This amount is subtracted from the invoice total amount with VAT to calculate the amount due for payment.
 							 */
 							paidAmount: {
-								type: 'string | number',
+								type: "string | number",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalPrepaidAmount'
-							}
-						}
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalPrepaidAmount",
+							},
+						},
 					},
 					/**
 					 * Precending Invoice Reference
@@ -1524,9 +1579,9 @@ export const basicWlSchema = {
 					 * This business group is mandatory in case of a Credit Note in order to reference the invoices it credits, unless the Credit Note refers to a period which must then be present in group BG-14.
 					 */
 					precendingInvoices: {
-						type: 'object[]',
+						type: "object[]",
 						required: false,
-						group: 'precending-invoices',
+						group: "precending-invoices",
 						shape: {
 							/**
 							 * Preceding Invoice reference
@@ -1534,8 +1589,9 @@ export const basicWlSchema = {
 							 * The identification of an Invoice that was previously sent by the Seller.
 							 */
 							reference: {
-								type: 'string',
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument[precending-invoices]/ram:IssuerAssignedID'
+								type: "string",
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument[precending-invoices]/ram:IssuerAssignedID",
 							},
 							/**
 							 * Preceding Invoice issue date
@@ -1545,18 +1601,19 @@ export const basicWlSchema = {
 							 * The Preceding Invoice issue date shall be provided in case the Preceding Invoice identifier is not unique.
 							 */
 							issueDate: {
-								type: 'date',
+								type: "date",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument[precending-invoices]/ram:FormattedIssueDateTime/qdt:DateTimeString',
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument[precending-invoices]/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								transform: {
-									input: dateTimeStringFormatter
+									input: dateTimeStringFormatter,
 								},
 								additionalXml: {
-									'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument[precending-invoices]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format':
-										'102'
-								}
-							}
-						}
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument[precending-invoices]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
+										"102",
+								},
+							},
+						},
 					},
 					/**
 					 * Buyer accounting reference
@@ -1566,18 +1623,19 @@ export const basicWlSchema = {
 					 * CHORUS PRO: not used
 					 */
 					buyerAccountant: {
-						type: 'object',
+						type: "object",
 						required: false,
 						shape: {
 							reference: {
-								type: 'string',
+								type: "string",
 								required: false,
-								xpath: '/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ReceivableSpecifiedTradeAccountingAccount/ram:ID'
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-} satisfies Schema
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ReceivableSpecifiedTradeAccountingAccount/ram:ID",
+							},
+						},
+					},
+				},
+			},
+		},
+	},
+} satisfies Schema;
