@@ -1,7 +1,12 @@
-/dist
-/node_modules
+dist/
+node_modules/
 
-/tests/*.ts
+.idea
 
 .env
 .DS_Store
+
+.next/
+
+.turbo/
+.tsup

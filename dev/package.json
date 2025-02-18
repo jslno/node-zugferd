@@ -1,0 +1,14 @@
+{
+  "name": "dev",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2"
+  },
+  "dependencies": {
+    "node-zugferd": "workspace:*"
+  }
+}

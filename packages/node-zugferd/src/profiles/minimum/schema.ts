@@ -461,7 +461,8 @@ export const minimumSchema = {
 					vatBreakdown: {
 						type: 'object[]',
 						group: 'vat-breakdown',
-						validator: z.array(z.any()).min(1),
+						required: false,
+						validator: z.array(z.any()).min(1).optional(),
 						shape: {
 							/**
 							 * VAT category tax amount

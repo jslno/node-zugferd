@@ -1,53 +1,34 @@
 {
-	"name": "node-zugferd",
-	"description": "A Node.js library for creating ZUGFeRD/Factur-X compliant documents. Generating XML and embedding it into PDF/A files, enabling seamless e-invoicing and digital document compliance.",
-	"version": "0.0.3",
-	"main": "./dist/index.js",
-	"module": "./dist/index.mjs",
-	"types": "./dist/index.d.ts",
-	"scripts": {
-		"build": "tsup",
-		"test": "vitest",
-		"format": "biome format . --write",
-		"lint": "biome check .",
-		"lint:fix": "biome check . --apply"
-	},
-	"keywords": [
-		"zugferd",
-		"invoice",
-		"xml",
-		"pdf",
-		"pdfa",
-		"append",
-		"generate",
-		"invoice-xml",
-		"pdf-invoice",
-		"pdf-xml",
-		"e-invoice",
-		"electronic-invoice",
-		"invoice-generation",
-		"pdf-attachment",
-		"xml-creation"
-	],
-	"author": "Joél de Oliveira Solano da Silva",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/jslno/node-zugferd.git"
-	},
-	"readme": "README.md",
-	"license": "MIT",
-	"devDependencies": {
-		"@biomejs/biome": "1.9.4",
-		"@types/node": "^22.10.7",
-		"tsup": "^8.3.5",
-		"typescript": "^5.7.3",
-		"vitest": "^3.0.4"
-	},
-	"dependencies": {
-		"defu": "^6.1.4",
-		"fast-xml-parser": "^4.5.1",
-		"pdf-lib": "^1.17.1",
-		"xsd-schema-validator": "^0.10.0",
-		"zod": "^3.24.1"
-	}
+  "name": "@node-zugferd/root",
+  "private": true,
+  "version": "0.0.1",
+  "packageManager": "pnpm@9.15.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jslno/node-zugferd.git"
+  },
+  "scripts": {
+    "build": "turbo --filter \"./packages/*\" build",
+    "dev": "turbo --filter \"./packages/*\" dev",
+    "dev:dts": "turbo --filter \"./packages/*\" dev:dts",
+    "clean": "turbo --filter \"./packages/*\" clean && rm -rf node_modules",
+    "format": "biome format . --write",
+    "lint": "biome check .",
+    "lint:fix": "biome check . --write",
+    "release": "turbo --filter \"./packages/*\" build && bumpp && pnpm -r publish --access public --no-git-checks",
+    "release:no-build": "bumpp && pnpm -r publish --access public --no-git-checks --tag next",
+    "release:canary": "turbo --filter \"./packages/*\" build && bumpp && pnpm -r publish --access public --tag canary --no-git-checks",
+    "bump": "bumpp",
+    "test": "turbo --filter \"./packages/*\" test",
+    "typecheck": "turbo --filter \"./packages/*\" typecheck"
+  },
+  "dependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "^22.10.7",
+    "bumpp": "^10.0.3",
+    "cross-env": "^7.0.3",
+    "tinyglobby": "^0.2.11",
+    "turbo": "^2.4.2",
+    "typescript": "^5.7.3"
+  }
 }
