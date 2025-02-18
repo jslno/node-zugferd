@@ -1,0 +1,68 @@
+{
+	"name": "node-zugferd",
+	"description": "A Node.js library for creating ZUGFeRD/Factur-X compliant documents. Generating XML and embedding it into PDF/A files, enabling seamless e-invoicing and digital document compliance.",
+	"version": "0.0.3",
+	"type": "module",
+	"scripts": {
+		"build": "tsup --clean --dts",
+		"dev": "tsup --watch --sourcemap",
+		"dev:dts": "tsup --watch --dts",
+		"bump": "bumpp",
+		"test": "vitest",
+		"typecheck": "tsc --noEmit"
+	},
+	"keywords": [
+		"zugferd",
+		"invoice",
+		"xml",
+		"pdf",
+		"pdfa",
+		"append",
+		"generate",
+		"invoice-xml",
+		"pdf-invoice",
+		"pdf-xml",
+		"e-invoice",
+		"electronic-invoice",
+		"invoice-generation",
+		"pdf-attachment",
+		"xml-creation"
+	],
+	"author": "Joél de Oliveira Solano da Silva",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jslno/node-zugferd.git",
+		"directory": "packages/node-zugferd"
+	},
+	"readme": "README.md",
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/node": "^22.10.7",
+		"tsup": "^8.3.5",
+		"typescript": "^5.7.3",
+		"vitest": "^3.0.4"
+	},
+	"dependencies": {
+		"defu": "^6.1.4",
+		"fast-xml-parser": "^4.5.1",
+		"pdf-lib": "^1.17.1",
+		"xsd-schema-validator": "^0.10.0",
+		"zod": "^3.24.1"
+	},
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			},
+			"require": {
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
+			}
+		}
+	},
+	"files": ["dist"]
+}

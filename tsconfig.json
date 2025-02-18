@@ -1,17 +1,19 @@
 {
 	"compilerOptions": {
-		"strict": true,
-		"noImplicitAny": true,
 		"esModuleInterop": true,
-		"strictNullChecks": true,
+		"skipLibCheck": true,
 		"target": "ES2022",
-		"moduleResolution": "node16",
-		"module": "Node16",
-		"declaration": true,
-		"isolatedModules": true,
+		"allowJs": true,
+		"resolveJsonModule": true,
+		"module": "Preserve",
 		"noEmit": true,
-		"outDir": "dist"
+		"moduleDetection": "force",
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"noFallthroughCasesInSwitch": true
 	},
-	"include": ["src"],
-	"exclude": ["node_modules"]
+	"exclude": ["**/dist/**", "**/node_modules/**", "**/examples/**"]
 }
