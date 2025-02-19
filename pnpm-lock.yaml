@@ -42,6 +42,12 @@ importers:
 
   docs:
     dependencies:
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       fumadocs-core:
         specifier: 15.0.9
         version: 15.0.9(@types/react@19.0.10)(next@15.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -51,6 +57,9 @@ importers:
       fumadocs-ui:
         specifier: 15.0.9
         version: 15.0.9(@types/react-dom@19.0.4(@types/react@19.0.10))(@types/react@19.0.10)(fumadocs-core@15.0.9(@types/react@19.0.10)(next@15.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(next@15.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(tailwindcss@4.0.7)
+      lucide-react:
+        specifier: ^0.475.0
+        version: 0.475.0(react@19.0.0)
       next:
         specifier: 15.1.7
         version: 15.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -60,6 +69,12 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
+      tailwind-merge:
+        specifier: ^3.0.1
+        version: 3.0.1
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@4.0.7)
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4.0.6
@@ -2700,6 +2715,11 @@ packages:
 
   tailwind-merge@3.0.1:
     resolution: {integrity: sha512-AvzE8FmSoXC7nC+oU5GlQJbip2UO7tmOhOfQyOmPhrStOGXHU08j8mZEHZ4BmCqY5dWTCo4ClWkNyRNx1wpT0g==}
+
+  tailwindcss-animate@1.0.7:
+    resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
 
   tailwindcss@4.0.7:
     resolution: {integrity: sha512-yH5bPPyapavo7L+547h3c4jcBXcrKwybQRjwdEIVAd9iXRvy/3T1CC6XSQEgZtRySjKfqvo3Cc0ZF1DTheuIdA==}
@@ -5715,6 +5735,10 @@ snapshots:
       ts-interface-checker: 0.1.13
 
   tailwind-merge@3.0.1: {}
+
+  tailwindcss-animate@1.0.7(tailwindcss@4.0.7):
+    dependencies:
+      tailwindcss: 4.0.7
 
   tailwindcss@4.0.7: {}
 
