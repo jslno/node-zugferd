@@ -28,6 +28,12 @@
 		}
 	},
 	"files": {
-		"ignore": ["dist", "package.json", ".turbo", ".next", ".cache"]
+		"ignore": [
+			"dist",
+			"package.json",
+			".turbo",
+			".next",
+			".cache"
+		]
 	}
 }
