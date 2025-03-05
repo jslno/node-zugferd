@@ -8,16 +8,16 @@ import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
  * Docs Layout: app/docs/layout.tsx
  */
 export const baseOptions: BaseLayoutProps = {
-  nav: {
-    component: (
-      <div className="flex items-center justify-between py-4 px-2.5 md:hidden"></div>
-    ),
-  },
-  links: [
-    {
-      text: "Documentation",
-      url: "/docs",
-      active: "nested-url",
-    },
-  ],
+	nav: {
+		component: (
+			<div className="flex items-center justify-between py-4 px-2.5 md:hidden"></div>
+		),
+	},
+	links: [
+		{
+			text: "Documentation",
+			url: "/docs",
+			active: "nested-url",
+		},
+	],
 };

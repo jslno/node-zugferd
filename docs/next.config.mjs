@@ -10,10 +10,10 @@ const config = {
 			{
 				source: "/docs",
 				destination: "/docs/introduction",
-				permanent: true
-			}
-		]
-	}
+				permanent: true,
+			},
+		];
+	},
 };
 
 export default withMDX(config);

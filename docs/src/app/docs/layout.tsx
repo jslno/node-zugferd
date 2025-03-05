@@ -5,19 +5,19 @@ import { source } from "@/app/source";
 import { SideBar } from "@/components/side-bar";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  return (
-    <DocsLayout
-      tree={source.pageTree}
-      {...baseOptions}
-      sidebar={{
-        component: (
-          <div className="mr-(--fd-sidebar-width)">
-            <SideBar />
-          </div>
-        ),
-      }}
-    >
-      {children}
-    </DocsLayout>
-  );
+	return (
+		<DocsLayout
+			tree={source.pageTree}
+			{...baseOptions}
+			sidebar={{
+				component: (
+					<div className="mr-(--fd-sidebar-width)">
+						<SideBar />
+					</div>
+				),
+			}}
+		>
+			{children}
+		</DocsLayout>
+	);
 }
