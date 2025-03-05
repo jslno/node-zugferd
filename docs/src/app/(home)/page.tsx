@@ -1,19 +1,10 @@
-import Link from "next/link";
+import { Hero } from "@/components/landing/hero";
 
 export default function HomePage() {
-	return (
-		<main className="flex flex-1 flex-col justify-center text-center">
-			<h1 className="mb-4 text-2xl font-bold">Hello World</h1>
-			<p className="text-fd-muted-foreground">
-				You can open{" "}
-				<Link
-					href="/docs"
-					className="text-fd-foreground font-semibold underline"
-				>
-					/docs
-				</Link>{" "}
-				and see the documentation.
-			</p>
-		</main>
-	);
+  return (
+    <div className="relative h-min">
+      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+      <Hero />
+    </div>
+  );
 }
