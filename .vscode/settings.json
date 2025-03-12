@@ -25,8 +25,5 @@
 	},
 	"[mdx]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[github-actions-workflow]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }
