@@ -88,7 +88,7 @@ export const addPdfMetadata = (
 						"pdfaExtension:schemas": {
 							"rdf:Bag": {
 								"rdf:li": {
-									"@rdf:parseSchema": "Resource",
+									"@rdf:parseType": "Resource",
 									"pdfaSchema:schema": "Factur-X PDFA Extension Schema",
 									"pdfaSchema:namespaceURI":
 										"urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#",
