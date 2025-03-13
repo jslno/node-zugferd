@@ -41,7 +41,7 @@ export const NavLink = ({
 						: "text-foreground",
 					className,
 				)}
-				target={external ? "_blank" : "_parent"}
+				target={external ? "_blank" : undefined}
 			>
 				{children}
 
