@@ -13,7 +13,7 @@ const config = {
 				permanent: true,
 			},
 		];
-	}
+	},
 };
 
 export default withMDX(config);
