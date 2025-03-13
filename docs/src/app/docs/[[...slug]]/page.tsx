@@ -98,11 +98,38 @@ export async function generateMetadata(props: {
 }) {
 	const params = await props.params;
 	const page = source.getPage(params.slug);
-	if (!page) notFound();
+	if (page == null) notFound();
+	const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+	const url = new URL(`${baseUrl}/api/og`);
+	const { title, description } = page.data;
+	const pageSlug = page.file.path;
+	url.searchParams.set("type", "Documentation");
+	url.searchParams.set("mode", "dark");
+	url.searchParams.set("heading", `${title}`);
 
 	return {
-		title: page.data.title,
-		description: page.data.description,
+		title,
+		description,
+		openGraph: {
+			title,
+			description,
+			type: "website",
+			url: `${baseUrl}/docs/${pageSlug}`,
+			images: [
+				{
+					url: url.toString(),
+					width: 1200,
+					height: 630,
+					alt: title,
+				},
+			],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
+			images: [url.toString()],
+		}
 	};
 }
 
