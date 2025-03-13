@@ -94,7 +94,7 @@ const Button = React.forwardRef<
 				{Icon &&
 					iconPlacement === "left" &&
 					(effect === "expandIcon" ? (
-						<div className="w-0 translate-x-[0%] pr-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-100 group-hover:pr-2 group-hover:opacity-100">
+						<div className="w-0 translate-x-[0%] pr-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-100 group-hover:pr-2 group-hover:opacity-60">
 							<Icon />
 						</div>
 					) : (
@@ -104,7 +104,7 @@ const Button = React.forwardRef<
 				{Icon &&
 					iconPlacement === "right" &&
 					(effect === "expandIcon" ? (
-						<div className="w-0 translate-x-[100%] pl-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pl-2 group-hover:opacity-100">
+						<div className="w-0 translate-x-[100%] pl-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pl-2 group-hover:opacity-60">
 							<Icon />
 						</div>
 					) : (

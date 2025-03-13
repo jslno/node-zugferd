@@ -11,6 +11,10 @@
 @source '../../node_modules/fumadocs-ui/dist/**/*.js';
 
 :root {
+	.hljs {
+		background: none !important;
+	}
+
 	@media (width >= 64rem) {
 		--fd-sidebar-width: 286px !important;
 	}
