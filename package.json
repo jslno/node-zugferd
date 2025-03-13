@@ -25,16 +25,10 @@
   "dependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/node": "^22.10.7",
-    "@vercel/og": "^0.6.5",
     "bumpp": "^10.0.3",
     "cross-env": "^7.0.3",
-    "docs": "0.3.2-canary.0",
-    "next-themes": "^0.4.4",
-    "prism-react-renderer": "^2.4.1",
-    "react-use-measure": "^2.1.7",
     "tinyglobby": "^0.2.11",
     "turbo": "^2.4.2",
-    "typescript": "^5.7.3",
-    "zod": "^3.24.1"
+    "typescript": "^5.7.3"
   }
 }
