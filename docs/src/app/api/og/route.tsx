@@ -11,12 +11,9 @@ const ogSchema = z.object({
 
 export const GET = async (req: Request) => {
 	try {
-		const geist = await fetch(
-			new URL("../../../assets/Geist.tff", import.meta.url),
-		).then((res) => res.arrayBuffer());
-		const geistMono = await fetch(
-			new URL("../../../assets/GeistMono.tff", import.meta.url),
-		).then((res) => res.arrayBuffer());
+		const geist = await fetch(new URL("../../../assets/Geist.ttf", import.meta.url)).then(res => res.arrayBuffer());
+
+		const geistMono = await fetch(new URL("../../../assets/GeistMono.ttf", import.meta.url)).then(res => res.arrayBuffer());
 		const url = new URL(req.url);
 		const urlParamsValues = Object.fromEntries(url.searchParams);
 		const validParams = ogSchema.parse(urlParamsValues);
@@ -72,12 +69,11 @@ export const GET = async (req: Request) => {
 								</div>
 							)}
 							<div
-								tw="flex max-w-[70%] mt-5 tracking-tighter leading-[1.1] text-[30px] font-bold"
+								tw="flex max-w-[70%] w-full mt-5 tracking-tighter leading-[1.1] text-[30px] font-bold"
 								style={{
 									fontWeight: "bold",
 									marginLeft: "-3px",
 									fontSize,
-
 									fontFamily: "GeistMono",
 								}}
 							>
