@@ -1,9 +1,8 @@
 import { type MetadataRoute } from "next";
-import { ENV } from "@/lib/constants";
 import { source } from "./source";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-	const WEBSITE_URL = ENV.NEXT_PUBLIC_WEBSITE_URL;
+	const WEBSITE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 	const pages = source.getPages().map((page) => ({
 		slug: page.slugs,
 	}));

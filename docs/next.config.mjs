@@ -13,9 +13,6 @@ const config = {
 				permanent: true,
 			},
 		];
-	},
-	typescript: {
-		ignoreBuildErrors: true
 	}
 };
 
