@@ -11,9 +11,13 @@ const ogSchema = z.object({
 
 export const GET = async (req: Request) => {
 	try {
-		const geist = await fetch(new URL("../../../assets/Geist.ttf", import.meta.url)).then(res => res.arrayBuffer());
+		const geist = await fetch(
+			new URL("../../../assets/Geist.ttf", import.meta.url),
+		).then((res) => res.arrayBuffer());
 
-		const geistMono = await fetch(new URL("../../../assets/GeistMono.ttf", import.meta.url)).then(res => res.arrayBuffer());
+		const geistMono = await fetch(
+			new URL("../../../assets/GeistMono.ttf", import.meta.url),
+		).then((res) => res.arrayBuffer());
 		const url = new URL(req.url);
 		const urlParamsValues = Object.fromEntries(url.searchParams);
 		const validParams = ogSchema.parse(urlParamsValues);
