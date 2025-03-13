@@ -129,7 +129,7 @@ export async function generateMetadata(props: {
 			title,
 			description,
 			images: [url.toString()],
-		}
+		},
 	};
 }
 
