@@ -1,4 +1,7 @@
-import { DocsNavBarMobileTitle, DocsNavMobileButton } from "@/components/nav-mobile";
+import {
+	DocsNavBarMobileTitle,
+	DocsNavMobileButton,
+} from "@/components/nav-mobile";
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 
 /**
@@ -15,7 +18,7 @@ export const baseOptions: BaseLayoutProps = {
 				<DocsNavBarMobileTitle />
 				<DocsNavMobileButton />
 			</div>
-		)
+		),
 	},
 	links: [
 		{

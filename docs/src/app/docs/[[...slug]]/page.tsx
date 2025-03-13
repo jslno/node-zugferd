@@ -11,7 +11,6 @@ import { buttonVariants } from "@/components/ui/button";
 import { contents } from "@/data/sidebar-items";
 import { Card, Cards } from "fumadocs-ui/components/card";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Footer } from "@/components/footer";
 
 export default async function Page(props: {
 	params: Promise<{ slug?: string[] }>;

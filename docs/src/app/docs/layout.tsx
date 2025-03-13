@@ -7,23 +7,23 @@ import { Footer } from "@/components/footer";
 import { DocsNavBarMobile } from "@/components/nav-mobile";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  return (
-    <>
-      <DocsLayout
-        tree={source.pageTree}
-        {...baseOptions}
-        sidebar={{
-          component: (
-            <div className="mr-(--fd-sidebar-width)">
-              <SideBar />
-            </div>
-          ),
-        }}
-      >
-        <DocsNavBarMobile />
-        {children}
-      </DocsLayout>
-      <Footer className="ml-(--fd-sidebar-width) w-[calc(100%-var(--fd-sidebar-width))]" />
-    </>
-  );
+	return (
+		<>
+			<DocsLayout
+				tree={source.pageTree}
+				{...baseOptions}
+				sidebar={{
+					component: (
+						<div className="mr-(--fd-sidebar-width)">
+							<SideBar />
+						</div>
+					),
+				}}
+			>
+				<DocsNavBarMobile />
+				{children}
+			</DocsLayout>
+			<Footer className="ml-(--fd-sidebar-width) w-[calc(100%-var(--fd-sidebar-width))]" />
+		</>
+	);
 }
