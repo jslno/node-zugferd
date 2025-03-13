@@ -10,7 +10,7 @@ import defaultMdxComponents from "fumadocs-ui/mdx";
 import { buttonVariants } from "@/components/ui/button";
 import { contents } from "@/data/sidebar-items";
 import { Card, Cards } from "fumadocs-ui/components/card";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Lightbulb } from "lucide-react";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 import { File, Folder, Files } from "fumadocs-ui/components/files";
 import { TypeTable } from "fumadocs-ui/components/type-table";
@@ -128,11 +128,16 @@ export default async function Page(props: {
 									props,
 									"bg-none rounded-none border-dashed border-border",
 									props.type === "info" && "border-l-blue-500/50",
+									props.type === "tip" && "border-l-emerald-500/50",
 									props.type === "warn" && "border-l-amber-500/50",
 									props.type === "error" && "border-l-red-500/50",
 								)}
 							>
-								{children}
+								{props.type === "tip" ? <div className="inline-flex items-center align-middle not-prose gap-2">
+									<Lightbulb className="size-5 text-emerald-500" />
+									{children}
+									</div>
+									: children}
 							</defaultMdxComponents.Callout>
 						),
 						iframe: (props) => (

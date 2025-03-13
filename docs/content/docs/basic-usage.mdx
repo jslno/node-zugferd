@@ -1,0 +1,121 @@
+---
+title: Basic Usage
+description: Getting started with node-zugferd
+---
+
+<Steps>
+
+<Step>
+### Install the Package
+
+Let's start by adding node-zugferd to your project:
+
+```package-install
+node-zugferd
+```
+</Step>
+
+<Step>
+### Create a new Instance
+
+Create a file named `invoicer.ts` in preferably one of those locations:
+  - Project root
+  - `lib/` folder
+  - `utils/` folder
+
+In this file, import node-zugferd and create your instance. Make sure to export the instance.
+
+```ts title="invoicer.ts"
+import { zugferd } from "node-zugferd";
+
+export const invoicer = zugferd({
+  //...
+});
+```
+</Step>
+
+<Step>
+### Select a Profile
+
+node-zugferd requires a profile to generate the invoice. You can easily configure node-zugferd to use these built-in profiles:
+
+<Callout type="warn">
+Documents containing only information of the first two profiles (MINIMUM and BASIC WL) are not considered to be invoices according to German fiscal law ([&#8594; GoBD](https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Weitere_Steuerthemen/Abgabenordnung/2019-11-28-GoBD.html)); they may therefore not be used as electronic invoices in Germany. They will not be considered as invoices in France anymore once the einvoicing B2B mandate CTC reform has been fully deployed (2028). **It is then highly recommended to target the BASIC profile at minimum.**
+</Callout>
+
+  - [MINIMUM](/docs/profiles/minimum)
+  - [BASIC](/docs/profiles/basic)
+  - [BASIC WL](/docs/profiles/basic-wl)
+  - [EN16931 (COMFORT)](/docs/profiles/en16931)
+  - [EXTENDED](/docs/profiles/extended)
+
+<Callout type="info">
+By default this package only provides support for the CII-Syntax
+</Callout>
+<Callout type="tip">
+You can also define your own Profiles.
+</Callout>
+
+```ts title="invoicer.ts"
+import { zugferd, BASIC } from "node-zugferd"; // [!code highlight]
+
+export const invoicer = zugferd({
+  profile: BASIC // [!code highlight]
+});
+```
+
+</Step>
+
+<Step>
+### Your first invoice
+</Step>
+
+<Step>
+
+#### Define the documents data
+
+```ts
+import type { ProfileBasic } from "node-zugferd";
+import { invoicer } from "./your/path";
+
+const data: ProfileBasic = {
+  //...
+};
+
+const invoice = await invoicer.create(data); // [!code highlight]
+```
+
+</Step>
+
+<Step>
+
+#### Save the document
+
+<Tabs items={["PDF/A-3b", "XML"]}>
+<Tab value="PDF/A-3b">
+
+<Callout type="error">
+The data in your pdf must exactly match the provided data!
+</Callout>
+
+```ts
+const pdf = fs.readFileSync("./your/invoice.pdf");
+
+const pdfA = await invoice.embedInPdf(pdf, {
+  metadata: {
+    title: "New Invoice"
+  }
+})
+```
+</Tab>
+
+<Tab value="XML">
+```ts
+const xml = invoice.toXML();
+```
+</Tab>
+</Tabs>
+
+</Step>
+
+</Steps>

@@ -14,6 +14,12 @@ const config = {
 			},
 		];
 	},
+	serverExternalPackages: [
+		"@ts-morph",
+		"typescript",
+		"oxc-transform",
+		"@shikijs/twoslash"
+	]
 };
 
 export default withMDX(config);
