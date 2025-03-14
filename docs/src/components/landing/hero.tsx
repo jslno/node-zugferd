@@ -244,7 +244,7 @@ export const Hero = () => {
 							<div className="relative mt-4 flex items-center">
 								<Input
 									ref={inputRef}
-									className="ps-32 pe-9 bg-background"
+									className="ps-28 pe-9 bg-background"
 									type="text"
 									defaultValue="npm install node-zugferd"
 									readOnly
