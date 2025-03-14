@@ -96,5 +96,5 @@ export const contents: Content[] = [
 				href: "/docs/guides/create-your-first-profile",
 			},
 		],
-	}
+	},
 ] satisfies Content[];
