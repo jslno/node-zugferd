@@ -1,7 +1,3 @@
-import {
-	DocsNavBarMobileTitle,
-	DocsNavMobileButton,
-} from "@/components/nav-mobile";
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 
 /**
@@ -13,12 +9,7 @@ import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
  */
 export const baseOptions: BaseLayoutProps = {
 	nav: {
-		component: (
-			<div className="flex items-center justify-between py-4 px-2.5 md:hidden">
-				<DocsNavBarMobileTitle />
-				<DocsNavMobileButton />
-			</div>
-		),
+		enabled: false
 	},
 	links: [
 		{
