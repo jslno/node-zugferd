@@ -18,8 +18,8 @@ const config = {
 		"@ts-morph",
 		"typescript",
 		"oxc-transform",
-		"@shikijs/twoslash"
-	]
+		"@shikijs/twoslash",
+	],
 };
 
 export default withMDX(config);

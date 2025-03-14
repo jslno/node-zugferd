@@ -134,17 +134,20 @@ export default async function Page(props: {
 									props.type === "error" && "border-l-red-500/50",
 								)}
 							>
-								{props.type === "tip" ? <div className="inline-flex items-center align-middle not-prose gap-2">
-									<Lightbulb className="size-5 text-emerald-500" />
-									{children}
+								{props.type === "tip" ? (
+									<div className="inline-flex items-center align-middle not-prose gap-2">
+										<Lightbulb className="size-5 text-emerald-500" />
+										{children}
 									</div>
-									: children}
+								) : (
+									children
+								)}
 							</defaultMdxComponents.Callout>
 						),
 						iframe: (props) => (
 							<iframe {...props} className="w-full h-[500px]" />
 						),
-						Features
+						Features,
 					}}
 				/>
 			</DocsBody>
