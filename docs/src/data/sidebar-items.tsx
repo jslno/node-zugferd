@@ -3,7 +3,6 @@ import {
 	BookOpenIcon,
 	ChartColumn,
 	CirclePlayIcon,
-	DownloadIcon,
 	FlaskConicalIcon,
 	GitPullRequestArrowIcon,
 	HandHelpingIcon,
@@ -35,11 +34,6 @@ export const contents: Content[] = [
 				title: "Introduction",
 				href: "/docs/introduction",
 				Icon: BookOpenIcon,
-			},
-			{
-				title: "Installation",
-				href: "/docs/installation",
-				Icon: DownloadIcon,
 			},
 			{
 				title: "Basic Usage",
