@@ -20,6 +20,7 @@ import { createTypeTable } from "fumadocs-typescript/ui";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { AnimatePresence } from "motion/react";
+import { Features } from "@/components/blocks/features";
 
 const { AutoTypeTable } = createTypeTable();
 
@@ -143,6 +144,7 @@ export default async function Page(props: {
 						iframe: (props) => (
 							<iframe {...props} className="w-full h-[500px]" />
 						),
+						Features
 					}}
 				/>
 			</DocsBody>
