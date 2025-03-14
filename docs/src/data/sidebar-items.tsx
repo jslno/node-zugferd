@@ -1,14 +1,9 @@
 import {
-	BookOpenCheckIcon,
 	BookOpenIcon,
 	ChartColumn,
 	CirclePlayIcon,
-	FlaskConicalIcon,
-	GitPullRequestArrowIcon,
-	HandHelpingIcon,
 	LayoutGridIcon,
 	LucideIcon,
-	NotebookPenIcon,
 	PencilRulerIcon,
 } from "lucide-react";
 import { ReactNode, SVGProps } from "react";
@@ -101,31 +96,5 @@ export const contents: Content[] = [
 				href: "/docs/guides/create-your-first-profile",
 			},
 		],
-	},
-	{
-		title: "Contributing",
-		Icon: GitPullRequestArrowIcon,
-		list: [
-			{
-				title: "Getting Started",
-				Icon: BookOpenCheckIcon,
-				href: "/docs/contribute/getting-started",
-			},
-			{
-				title: "Areas to Contribute",
-				Icon: HandHelpingIcon,
-				href: "/docs/contribute/areas-to-contribute",
-			},
-			{
-				title: "Testing",
-				Icon: FlaskConicalIcon,
-				href: "/docs/contribute/testing",
-			},
-			{
-				title: "Documenting",
-				Icon: NotebookPenIcon,
-				href: "/docs/contribute/documenting",
-			},
-		],
-	},
+	}
 ] satisfies Content[];
