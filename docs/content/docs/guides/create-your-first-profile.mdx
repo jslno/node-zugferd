@@ -1,0 +1,110 @@
+---
+title: Create your first profile
+description: In this guide, we'll walk you through the steps of creating your first node-zugferd profile.
+---
+
+<Callout type="error">
+This will be available on the next release.
+</Callout>
+
+<Callout type="warn">
+This guide assumes you have [setup the basics](/docs/basic-usage) of node-zugferd and are ready to create your first profile.
+</Callout>
+
+<Steps>
+
+<Step>
+### Plan your idea
+
+Before beginning, you must know what profile and version you intend to create.
+
+In this guide, we'll create a **demo profile** to showcase the basic profile usage.
+</Step>
+
+<Step>
+### Profile Configuration
+
+Go ahead and find a suitable location to create an demo plugin folder, with an `index.ts` file within.
+
+<Files>
+    <Folder name="demo-profile" defaultOpen>
+        <File name="index.ts" />
+    </Folder>
+</Files>
+
+In the `index.ts` file, we'll export a variable with the return of `createProfile` that represents our profile. This will be what we'll later set as profile in our instance inside `invoicer.ts`.
+
+```ts title="index.ts"
+import { createProfile } from "node-zugferd/profile";
+
+export const demo = createProfile({
+    contextParameter:
+		"urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic",
+	extends: [...BASIC_WL.extends, BASIC_WL],
+	xsdPath: "Factur-X_1.07.2_BASIC.xsd",
+	conformanceLevel: "BASIC",
+	documentFileName: "factur-x.xml",
+	documentType: "INVOICE",
+	version: "1.0",
+});
+```
+
+This will throw an type error, as we still have to define our schema.
+
+</Step>
+
+<Step>
+### Defining a schema
+
+In order to generate documents from the profile, we must create a schema which is mapping the documents xml structure to an typescript object.
+Because the schema, depending on its size, quickly gets unreadable we create it inside a `schema.ts` file, thats exporting the profiles schema.
+
+Our structure should now look something like this:
+
+<Files>
+    <Folder name="demo-profile" defaultOpen>
+        <File name="index.ts" />
+        <File name="schema.ts" />
+    </Folder>
+</Files>
+
+```ts title="schema.ts"
+import type { Schema } from "node-zugferd/profile";
+
+export const demoSchema = {
+    /**
+     * Business process type
+    */
+    businessProcessType: {
+		type: "string",
+		required: false,
+		xpath:
+			"/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID",
+	},
+    /**
+     * Invoice number
+    */
+    number: {
+		type: "string",
+		xpath: "/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID",
+	},
+
+    //...
+} satisfies Schema;
+```
+
+Now we still have to update the configuration in `index.ts` to use the schema from `schema.ts`:
+
+```ts title="index.ts"
+//...
+import { demoSchema } from "./schema"; // [!code highlight]
+
+export const demo = createProfile({
+    //...
+    schema: demoSchema, // [!code highlight]
+});
+```
+
+</Step>
+
+</Steps>

@@ -15,4 +15,8 @@ export const BASIC = createProfile({
 	version: "1.0",
 });
 
+const x = createProfile({
+	
+})
+
 export type ProfileBasic = InferSchema<typeof BASIC>;
