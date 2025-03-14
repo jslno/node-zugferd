@@ -109,22 +109,22 @@ export const contents: Content[] = [
 			{
 				title: "Getting Started",
 				Icon: BookOpenCheckIcon,
-				href: "/docs/contributing/getting-started",
+				href: "/docs/contribute/getting-started",
 			},
 			{
 				title: "Areas to Contribute",
 				Icon: HandHelpingIcon,
-				href: "/docs/contributing/areas-to-contribute",
+				href: "/docs/contribute/areas-to-contribute",
 			},
 			{
 				title: "Testing",
 				Icon: FlaskConicalIcon,
-				href: "/docs/contributing/testing",
+				href: "/docs/contribute/testing",
 			},
 			{
 				title: "Documenting",
 				Icon: NotebookPenIcon,
-				href: "/docs/contributing/documenting",
+				href: "/docs/contribute/documenting",
 			},
 		],
 	},
