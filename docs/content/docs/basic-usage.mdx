@@ -68,11 +68,15 @@ export const invoicer = zugferd({
 
 <Step>
 ### Your first invoice
+
+Once the necessary setup is complete, it's time to create your first invoice. This involves defining the invoice data and embedding it into a PDF to ensure it meets electronic invoicing standards.
 </Step>
 
 <Step>
 
-#### Define the documents data
+#### Define the data
+
+Invoices contain essential details like transaction information, participant details, and line items. This data will be structured in a way that allows it to be processed electronically and integrated seamlessly into business workflows.
 
 ```ts
 import type { ProfileBasic } from "node-zugferd";
@@ -91,10 +95,14 @@ const invoice = await invoicer.create(data); // [!code highlight]
 
 #### Save the document
 
+After creating the invoice, it needs to be saved in a format that meets the necessary standards for distribution and compliance. This ensures the document is both human-readable and machine-readable, allowing for automated processing within business workflows.
+
 <Tabs items={["PDF/A-3b", "XML"]}>
 <Tab value="PDF/A-3b">
 
-<Callout type="error">
+The most common practice for saving invoices is embedding them in a PDF/A document. This format retains the visual appearance of the invoice while also embedding the structured data. PDF/A ensures that the invoice can be archived and retrieved in a standardized, legally-compliant manner.
+
+<Callout type="warn">
 The data in your pdf must exactly match the provided data!
 </Callout>
 
@@ -107,15 +115,30 @@ const pdfA = await invoice.embedInPdf(pdf, {
   }
 })
 ```
+
+PDF/A is the preferred format for ZUGFeRD invoices, as it complies with the necessary legal standards for document archiving and submission.
+
 </Tab>
 
 <Tab value="XML">
+
+Alternatively, you can generate the invoice as an XML file. However, it's important to note that just the XML does not meet the full ZUGFeRD standard. Without embedding the data into a PDF/A file, the invoice is incomplete for compliance and automated processing in most cases.
+
+<Callout type="warn">
+While generating the XML alone may be suitable in some situations, embedding it in PDF/A is the recommended and compliant method for ZUGFeRD invoices.
+</Callout>
+
 ```ts
 const xml = invoice.toXML();
 ```
 </Tab>
 </Tabs>
 
+</Step>
+
+<Step>
+### &#x1F389; That's it [#thats-it]
+That's it! You've successfully set up node-zugferd, generated your first invoice, and learned how to save it as a PDF/A-3b file or XML. You can now automate the generation of invoices with structured data in the format that fits your needs.
 </Step>
 
 </Steps>
