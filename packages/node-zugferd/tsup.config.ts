@@ -14,6 +14,7 @@ export default defineConfig((env) => {
 		},
 		format: ["cjs", "esm"],
 		bundle: true,
+		publicDir: "./src/assets",
 		splitting: false,
 		cjsInterop: true,
 		skipNodeModulesBundle: true,
