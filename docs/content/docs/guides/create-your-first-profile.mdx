@@ -3,10 +3,6 @@ title: Create your first profile
 description: In this guide, we'll walk you through the steps of creating your first node-zugferd profile.
 ---
 
-<Callout type="error">
-This will be available on the next release.
-</Callout>
-
 <Callout type="warn">
 This guide assumes you have [setup the basics](/docs/basic-usage) of node-zugferd and are ready to create your first profile.
 </Callout>
@@ -69,7 +65,7 @@ Our structure should now look something like this:
 </Files>
 
 ```ts title="schema.ts"
-import type { Schema } from "node-zugferd/profile";
+import type { Schema } from "node-zugferd/types";
 
 export const demoSchema = {
     /**
