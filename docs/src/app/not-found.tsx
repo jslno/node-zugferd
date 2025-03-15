@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { ArrowLeftIcon, ArrowRightIcon, BookIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -26,7 +25,10 @@ export default function NotFound() {
 						</div>
 						<ArrowRightIcon className="ml-auto invisible opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 group-hover:visible size-4 text-muted-foreground transition-all" />
 					</Link>
-					<Link href="/" className="group w-fit mx-auto flex items-center h-9 hover:bg-muted px-4 transition-colors text-muted-foreground hover:text-foreground">
+					<Link
+						href="/"
+						className="group w-fit mx-auto flex items-center h-9 hover:bg-muted px-4 transition-colors text-muted-foreground hover:text-foreground"
+					>
 						<ArrowLeftIcon className="mr-2 invisible opacity-0 translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 group-hover:visible size-4 text-muted-foreground transition-all" />
 						<span>Back to Home</span>
 					</Link>
