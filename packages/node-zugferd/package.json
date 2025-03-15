@@ -61,6 +61,86 @@
 				"types": "./dist/index.d.cts",
 				"default": "./dist/index.cjs"
 			}
+		},
+		"./profile": {
+			"import": {
+				"types": "./dist/profile.d.ts",
+				"default": "./dist/profile.js"
+			},
+			"require": {
+				"types": "./dist/profile.d.cts",
+				"default": "./dist/profile.cjs"
+			}
+		},
+		"./profile/minimum": {
+			"import": {
+				"types": "./dist/profile/minimum.d.ts",
+				"default": "./dist/profile/minimum.js"
+			},
+			"require": {
+				"types": "./dist/profile/minimum.d.cts",
+				"default": "./dist/profile/minimum.cjs"
+			}
+		},
+		"./profile/basic": {
+			"import": {
+				"types": "./dist/profile/basic.d.ts",
+				"default": "./dist/profile/basic.js"
+			},
+			"require": {
+				"types": "./dist/profile/basic.d.cts",
+				"default": "./dist/profile/basic.cjs"
+			}
+		},
+		"./profile/basic-wl": {
+			"import": {
+				"types": "./dist/profile/basic-wl.d.ts",
+				"default": "./dist/profile/basic-wl.js"
+			},
+			"require": {
+				"types": "./dist/profile/basic-wl.d.cts",
+				"default": "./dist/profile/basic-wl.cjs"
+			}
+		},
+		"./profile/en16931": {
+			"import": {
+				"types": "./dist/profile/en16931.d.ts",
+				"default": "./dist/profile/en16931.js"
+			},
+			"require": {
+				"types": "./dist/profile/en16931.d.cts",
+				"default": "./dist/profile/en16931.cjs"
+			}
+		},
+		"./profile/comfort": {
+			"import": {
+				"types": "./dist/profile/en16931.d.ts",
+				"default": "./dist/profile/en16931.js"
+			},
+			"require": {
+				"types": "./dist/profile/en16931.d.cts",
+				"default": "./dist/profile/en16931.cjs"
+			}
+		},
+		"./profile/extended": {
+			"import": {
+				"types": "./dist/profile/extended.d.ts",
+				"default": "./dist/profile/extended.js"
+			},
+			"require": {
+				"types": "./dist/profile/extended.d.cts",
+				"default": "./dist/profile/extended.cjs"
+			}
+		},
+		"./types": {
+			"import": {
+				"types": "./dist/types.d.ts",
+				"default": "./dist/types.js"
+			},
+			"require": {
+				"types": "./dist/types.d.cts",
+				"default": "./dist/types.cjs"
+			}
 		}
 	},
 	"files": ["dist"]
