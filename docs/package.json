@@ -30,15 +30,16 @@
     "motion": "^12.4.5",
     "next": "15.1.7",
     "next-themes": "^0.4.4",
+    "node-zugferd": "workspace:*",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.0.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
     "react-use-measure": "^2.1.7",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.24.1",
-    "node-zugferd": "latest"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.6",

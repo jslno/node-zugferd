@@ -22,6 +22,7 @@ export type SchemaFieldConfig<T extends FieldType = FieldType> = {
 	validator?: ZodSchema;
 	xpath?: string;
 	group?: LiteralString;
+	description?: string
 	required?: boolean;
 	sibling?: T extends "object[]"
 		? (data: any, groupIndicies: { [key: string]: number }) => any
