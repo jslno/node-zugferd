@@ -5,7 +5,7 @@
 <img src="https://socialify.git.ci/jslno/node-zugferd/image?description=0&language=1&name=1&owner=1&pattern=Transparent&stargazers=1&theme=Auto" alt="project-image" />
 </p>
 
-> [!CAUTION]
+> 🚨 Caution    
 > **[WIP]** This package is still under development.
 
 A Node.js library for creating ZUGFeRD/Factur-X compliant documents. Generating XML and embedding it into PDF/A files, enabling seamless e-invoicing and digital document compliance.
@@ -36,7 +36,7 @@ npm install node-zugferd@latest
 
 <h2>Default Supported Profiles</h2>
 
-> [!WARNING]
+> ⚠️ Warning    
 > Documents containing only information of the first two profiles (MINIMUM and BASIC WL) are not considered to be invoices according to German fiscal law ([&#8594; GoBD](https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Weitere_Steuerthemen/Abgabenordnung/2019-11-28-GoBD.html)); they may therefore not be used as electronic invoices in Germany. They will not be considered as invoices in France anymore once the einvoicing B2B mandate CTC reform has been fully deployed (2028). **It is then highly recommended to target the BASIC profile at minimum.**
 
 * MINIMUM
@@ -46,10 +46,10 @@ npm install node-zugferd@latest
 * EXTENDED
 
 
-> [!NOTE]
+> 📝 Note   
 > By default this package only provides support for the CII-Syntax
 
-> [!TIP]
+> 💡 Tip    
 > You can also define your own Profiles.
 
 If you encounter invalid or missing fields, feel free to open a new [Issue](https://github.com/jslno/node-zugferd/issues) or [Pull Request](https://github.com/jslno/node-zugferd/pulls).
