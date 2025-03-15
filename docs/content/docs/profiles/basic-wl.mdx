@@ -3,8 +3,27 @@ title: Basic WL
 description: Includes MINIMUM profile plus additional data for buyer's process automation.
 ---
 
+import { BASIC_WL } from "node-zugferd/profile/basic-wl"
+
 This includes the profile [MINIMUM](/docs/profiles/minimum) plus some
 additional data which is typically required for process automation on the buyer’s side. Such data may
 be optional or conditional, depending on the underlying business transaction. This profile does not
 include any invoice information at line level, but it contains all mandatory fields on document level,
 including those on which business rules from the EN 16931 may apply.
+
+### Setup the Profile
+
+```ts title="invoicer.ts"
+//...
+import { BASIC_WL } from "node-zugferd/profile/basic-wl" // [!code highlight]
+
+export const invoicer = createProfile({
+    profile: BASIC_WL // [!code highlight]
+})
+```
+
+### Schema
+
+Extends [MINIMUM](/docs/profiles/minimum)
+
+<ProfileTree schema={BASIC_WL.schema} />

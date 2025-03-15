@@ -3,6 +3,23 @@ title: Minimum
 description: This profile contains the minimum required data, some dependent.
 ---
 
+import { MINIMUM } from "node-zugferd/profile/minimum";
+
 This profile contains the minimum of data which must be present in the
 structured data file, some of which may depend on the data being actually available, like the
 supplier's intra-community VAT identifier number which is mandatory if the supplier has one.
+
+### Setup the Profile
+
+```ts title="invoicer.ts"
+//...
+import { MINIMUM } from "node-zugferd/profile/minimum" // [!code highlight]
+
+export const invoicer = createProfile({
+    profile: MINIMUM // [!code highlight]
+})
+```
+
+### Schema
+
+<ProfileTree schema={MINIMUM.schema} />

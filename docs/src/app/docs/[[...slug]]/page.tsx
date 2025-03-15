@@ -21,6 +21,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { AnimatePresence } from "motion/react";
 import { Features } from "@/components/blocks/features";
+import { ProfileTree } from "@/components/blocks/profile-tree";
 
 const { AutoTypeTable } = createTypeTable();
 
@@ -148,6 +149,7 @@ export default async function Page(props: {
 							<iframe {...props} className="w-full h-[500px]" />
 						),
 						Features,
+						ProfileTree
 					}}
 				/>
 			</DocsBody>
