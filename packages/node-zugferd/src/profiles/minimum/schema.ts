@@ -183,7 +183,8 @@ CHORUS PRO: for the public sector, this is the "Engagement Juridique" (Legal Com
 					 */
 					seller: {
 						type: "object",
-						description: "A group of business terms providing information about the Seller.",
+						description:
+							"A group of business terms providing information about the Seller.",
 						shape: {
 							/**
 							 * Seller name
@@ -316,7 +317,8 @@ If no tax representative is specified, this is the country where VAT is liable. 
 							 */
 							taxRegistration: {
 								type: "object",
-								description: "Detailed information on tax information of the seller",
+								description:
+									"Detailed information on tax information of the seller",
 								required: false,
 								shape: {
 									/**
@@ -373,7 +375,8 @@ This information may affect how the Buyer settles the payment (such as for socia
 					 */
 					buyer: {
 						type: "object",
-						description: "A group of business terms providing information about the Buyer.",
+						description:
+							"A group of business terms providing information about the Buyer.",
 						shape: {
 							/**
 							 * Buyer name
