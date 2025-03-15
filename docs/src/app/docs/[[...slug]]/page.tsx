@@ -149,7 +149,7 @@ export default async function Page(props: {
 							<iframe {...props} className="w-full h-[500px]" />
 						),
 						Features,
-						ProfileTree
+						ProfileTree,
 					}}
 				/>
 			</DocsBody>

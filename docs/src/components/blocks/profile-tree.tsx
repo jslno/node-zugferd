@@ -52,7 +52,9 @@ const TreeItem = ({ data }: { data: [string, SchemaField] }) => {
 						)}
 					</div>
 					{!!def.xpath && (
-						<span className="text-muted-foreground text-xs">{def.xpath.split("/").pop()}</span>
+						<span className="text-muted-foreground text-xs">
+							{def.xpath.split("/").pop()}
+						</span>
 					)}
 				</div>
 
