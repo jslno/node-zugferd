@@ -10,7 +10,7 @@ export default defineConfig((env) => {
 			"profile/basic-wl": "./src/profiles/basic-wl/index.ts",
 			"profile/en16931": "./src/profiles/en16931/index.ts",
 			"profile/extended": "./src/profiles/extended/index.ts",
-			types: "./src/types/index.ts"
+			types: "./src/types/index.ts",
 		},
 		format: ["cjs", "esm"],
 		bundle: true,
