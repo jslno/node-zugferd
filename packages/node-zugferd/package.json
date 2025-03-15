@@ -1,7 +1,7 @@
 {
 	"name": "node-zugferd",
 	"description": "A Node.js library for creating ZUGFeRD/Factur-X compliant documents. Generating XML and embedding it into PDF/A files, enabling seamless e-invoicing and digital document compliance.",
-	"version": "0.0.5-beta.2",
+	"version": "0.0.5-beta.3",
 	"type": "module",
 	"scripts": {
 		"build": "tsup --clean --dts",
