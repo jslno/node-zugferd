@@ -9,7 +9,7 @@
 		"allowJs": true,
 
 		// Bundler mode
-		"moduleResolution": "Node",
+		"moduleResolution": "bundler",
 		"allowImportingTsExtensions": true,
 		"verbatimModuleSyntax": true,
 		"noEmit": true,
