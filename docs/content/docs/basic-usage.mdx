@@ -57,7 +57,8 @@ You can also define your own Profiles.
 </Callout>
 
 ```ts title="invoicer.ts"
-import { zugferd, BASIC } from "node-zugferd"; // [!code highlight]
+import { zugferd } from "node-zugferd"; // [!code highlight]
+import { BASIC } from "node-zugferd/profile/basic"; // [!code highlight]
 
 export const invoicer = zugferd({
   profile: BASIC // [!code highlight]
@@ -79,7 +80,7 @@ Once the necessary setup is complete, it's time to create your first invoice. Th
 Invoices contain essential details like transaction information, participant details, and line items. This data will be structured in a way that allows it to be processed electronically and integrated seamlessly into business workflows.
 
 ```ts
-import type { ProfileBasic } from "node-zugferd";
+import type { ProfileBasic } from "node-zugferd/profile/basic";
 import { invoicer } from "./your/path";
 
 const data: ProfileBasic = {
