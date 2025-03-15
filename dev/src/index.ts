@@ -1,4 +1,5 @@
-import { zugferd, MINIMUM, type ProfileMinimum } from "node-zugferd";
+import { zugferd } from "node-zugferd";
+import { MINIMUM, type ProfileMinimum } from "node-zugferd/profile/minimum";
 
 const main = async () => {
 	const invoicer = zugferd({

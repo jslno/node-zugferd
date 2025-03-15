@@ -59,7 +59,8 @@ If you encounter invalid or missing fields, feel free to open a new [Issue](http
 1. Create a new instance:
 
     ```ts
-    import { zugferd, BASIC } from 'node-zugferd'
+    import { zugferd } from 'node-zugferd'
+    import { BASIC } from 'node-zugferd/profile/basic'
 
     export const invoicer = zugferd({
         profile: BASIC
@@ -69,7 +70,7 @@ If you encounter invalid or missing fields, feel free to open a new [Issue](http
 2. Define the documents data
 
     ```ts
-    import type { ProfileBasic } from 'node-zugferd'
+    import type { ProfileBasic } from 'node-zugferd/profile/basic'
     import { invoicer } from './your/path'
 
     const data: ProfileBasic = {
