@@ -16,7 +16,7 @@ business rules of the EN 16931 apply.
 //...
 import { BASIC } from "node-zugferd/profile/basic"; // [!code highlight]
 
-export const invoicer = createProfile({
+export const invoicer = zugferd({
   profile: BASIC, // [!code highlight]
 });
 ```

@@ -15,7 +15,7 @@ supplier's intra-community VAT identifier number which is mandatory if the suppl
 //...
 import { MINIMUM } from "node-zugferd/profile/minimum"; // [!code highlight]
 
-export const invoicer = createProfile({
+export const invoicer = zugferd({
   profile: MINIMUM, // [!code highlight]
 });
 ```
