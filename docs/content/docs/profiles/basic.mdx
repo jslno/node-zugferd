@@ -3,7 +3,7 @@ title: Basic
 description: Includes BASIC WL with line-level details and EN 16931 compliance.
 ---
 
-import { BASIC } from "node-zugferd/profile/basic"
+import { BASIC } from "node-zugferd/profile/basic";
 
 This profile includes [BASIC WL](/docs/profiles/basic-wl) with some details at line level. It is a subset
 of EN 16931, which contains all mandatory fields including those on which business rules from the
@@ -14,11 +14,11 @@ business rules of the EN 16931 apply.
 
 ```ts title="invoicer.ts"
 //...
-import { BASIC } from "node-zugferd/profile/basic" // [!code highlight]
+import { BASIC } from "node-zugferd/profile/basic"; // [!code highlight]
 
 export const invoicer = createProfile({
-    profile: BASIC // [!code highlight]
-})
+  profile: BASIC, // [!code highlight]
+});
 ```
 
 ### Schema
