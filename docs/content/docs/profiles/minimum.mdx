@@ -13,11 +13,11 @@ supplier's intra-community VAT identifier number which is mandatory if the suppl
 
 ```ts title="invoicer.ts"
 //...
-import { MINIMUM } from "node-zugferd/profile/minimum" // [!code highlight]
+import { MINIMUM } from "node-zugferd/profile/minimum"; // [!code highlight]
 
 export const invoicer = createProfile({
-    profile: MINIMUM // [!code highlight]
-})
+  profile: MINIMUM, // [!code highlight]
+});
 ```
 
 ### Schema

@@ -3,7 +3,7 @@ title: Extended
 description: Extension of EN16931 for complex processes and French business cases.
 ---
 
-import { EXTENDED } from "node-zugferd/profile/extended"
+import { EXTENDED } from "node-zugferd/profile/extended";
 
 This profile constitutes an extension of [EN16931 (Comfort)](/docs/profiles/en16931)
 aimed at supporting complex business processes (i.e. invoices which are being invoiced across
@@ -17,11 +17,11 @@ which are not part of the [European Norm EN 16931 code lists](https://ec.europa.
 
 ```ts title="invoicer.ts"
 //...
-import { EXTENDED } from "node-zugferd/profile/extended" // [!code highlight]
+import { EXTENDED } from "node-zugferd/profile/extended"; // [!code highlight]
 
 export const invoicer = createProfile({
-    profile: EXTENDED // [!code highlight]
-})
+  profile: EXTENDED, // [!code highlight]
+});
 ```
 
 ### Schema

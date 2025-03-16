@@ -1,5 +1,6 @@
 import { CheckIcon, XIcon } from "lucide-react";
 import type { Schema, SchemaField } from "node-zugferd/types";
+import Markdown from "react-markdown";
 
 export const ProfileTree = ({
 	schema,
@@ -24,7 +25,7 @@ const TreeItem = ({ data }: { data: [string, SchemaField] }) => {
 
 	return (
 		<div className="flex">
-			<div className="pl-5 border-l">
+			<div className="pl-5 border-l w-full">
 				<div className="relative">
 					<code>{name}</code>
 					<div className="w-3 h-[1.5px] -left-5 bg-muted absolute top-1/2 -translate-y-1/2"></div>
@@ -51,6 +52,11 @@ const TreeItem = ({ data }: { data: [string, SchemaField] }) => {
 							<CheckIcon className="size-4 text-emerald-500" />
 						)}
 					</div>
+					{!!def.description && (
+						<div className="px-4 text-muted-foreground bg-gradient-to-tr w-full from-muted/10 via-muted/25 to-muted/10 border rounded-lg">
+							<Markdown>{def.description}</Markdown>
+						</div>
+					)}
 					{!!def.xpath && (
 						<span className="text-muted-foreground text-xs">
 							{def.xpath.split("/").pop()}
