@@ -47,22 +47,47 @@ export const contents: Content[] = [
 				group: true,
 			},
 			{
+				Icon: () => (
+					<div className="size-4 flex items-center justify-center">
+						<div className="size-1.5 rounded-full bg-muted-foreground" />
+					</div>
+				),
 				title: "Minimum",
 				href: "/docs/profiles/minimum",
 			},
 			{
+				Icon: () => (
+					<div className="size-4 flex items-center justify-center">
+						<div className="size-1.5 rounded-full bg-emerald-500" />
+					</div>
+				),
 				title: "Basic WL",
 				href: "/docs/profiles/basic-wl",
 			},
 			{
+				Icon: () => (
+					<div className="size-4 flex items-center justify-center">
+						<div className="size-1.5 rounded-full bg-blue-500" />
+					</div>
+				),
 				title: "Basic",
 				href: "/docs/profiles/basic",
 			},
 			{
+				Icon: () => (
+					<div className="size-4 flex items-center justify-center">
+						<div className="size-1.5 rounded-full bg-amber-500" />
+					</div>
+				),
 				title: "EN16931 (Comfort)",
 				href: "/docs/profiles/en16931",
 			},
 			{
+				Icon: () => (
+					<div className="size-4 flex items-center justify-center">
+						<div className="size-1.5 rounded-full bg-purple-500" />
+					</div>
+				),
 				title: "Extended",
 				href: "/docs/profiles/extended",
 			},
