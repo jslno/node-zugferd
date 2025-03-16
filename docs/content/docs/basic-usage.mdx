@@ -13,15 +13,17 @@ Let's start by adding node-zugferd to your project:
 ```package-install
 node-zugferd
 ```
+
 </Step>
 
 <Step>
 ### Create a new Instance
 
 Create a file named `invoicer.ts` in preferably one of those locations:
-  - Project root
-  - `lib/` folder
-  - `utils/` folder
+
+- Project root
+- `lib/` folder
+- `utils/` folder
 
 In this file, import node-zugferd and create your instance. Make sure to export the instance.
 
@@ -32,6 +34,7 @@ export const invoicer = zugferd({
   //...
 });
 ```
+
 </Step>
 
 <Step>
@@ -40,28 +43,33 @@ export const invoicer = zugferd({
 node-zugferd requires a profile to generate the invoice. You can easily configure node-zugferd to use these built-in profiles:
 
 <Callout type="warn">
-Documents containing only information of the first two profiles (MINIMUM and BASIC WL) are not considered to be invoices according to German fiscal law ([&#8594; GoBD](https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Weitere_Steuerthemen/Abgabenordnung/2019-11-28-GoBD.html)); they may therefore not be used as electronic invoices in Germany. They will not be considered as invoices in France anymore once the einvoicing B2B mandate CTC reform has been fully deployed (2028). **It is then highly recommended to target the BASIC profile at minimum.**
+  Documents containing only information of the first two profiles (MINIMUM and
+  BASIC WL) are not considered to be invoices according to German fiscal law
+  ([&#8594;
+  GoBD](https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Weitere_Steuerthemen/Abgabenordnung/2019-11-28-GoBD.html));
+  they may therefore not be used as electronic invoices in Germany. They will
+  not be considered as invoices in France anymore once the einvoicing B2B
+  mandate CTC reform has been fully deployed (2028). **It is then highly
+  recommended to target the BASIC profile at minimum.**
 </Callout>
 
-  - [MINIMUM](/docs/profiles/minimum)
-  - [BASIC](/docs/profiles/basic)
-  - [BASIC WL](/docs/profiles/basic-wl)
-  - [EN16931 (COMFORT)](/docs/profiles/en16931)
-  - [EXTENDED](/docs/profiles/extended)
+- [MINIMUM](/docs/profiles/minimum)
+- [BASIC WL](/docs/profiles/basic-wl)
+- [BASIC](/docs/profiles/basic)
+- [EN16931 (COMFORT)](/docs/profiles/en16931)
+- [EXTENDED](/docs/profiles/extended)
 
 <Callout type="info">
-By default this package only provides support for the CII-Syntax
+  By default this package only provides support for the CII-Syntax
 </Callout>
-<Callout type="tip">
-You can also define your own Profiles.
-</Callout>
+<Callout type="tip">You can also define your own Profiles.</Callout>
 
 ```ts title="invoicer.ts"
 import { zugferd } from "node-zugferd"; // [!code highlight]
 import { BASIC } from "node-zugferd/profile/basic"; // [!code highlight]
 
 export const invoicer = zugferd({
-  profile: BASIC // [!code highlight]
+  profile: BASIC, // [!code highlight]
 });
 ```
 
@@ -71,6 +79,7 @@ export const invoicer = zugferd({
 ### Your first invoice
 
 Once the necessary setup is complete, it's time to create your first invoice. This involves defining the invoice data and embedding it into a PDF to ensure it meets electronic invoicing standards.
+
 </Step>
 
 <Step>
@@ -104,7 +113,7 @@ After creating the invoice, it needs to be saved in a format that meets the nece
 The most common practice for saving invoices is embedding them in a PDF/A document. This format retains the visual appearance of the invoice while also embedding the structured data. PDF/A ensures that the invoice can be archived and retrieved in a standardized, legally-compliant manner.
 
 <Callout type="warn">
-The data in your pdf must exactly match the provided data!
+  The data in your pdf must exactly match the provided data!
 </Callout>
 
 ```ts
@@ -112,9 +121,9 @@ const pdf = fs.readFileSync("./your/invoice.pdf");
 
 const pdfA = await invoice.embedInPdf(pdf, {
   metadata: {
-    title: "New Invoice"
-  }
-})
+    title: "New Invoice",
+  },
+});
 ```
 
 PDF/A is the preferred format for ZUGFeRD invoices, as it complies with the necessary legal standards for document archiving and submission.
@@ -126,20 +135,24 @@ PDF/A is the preferred format for ZUGFeRD invoices, as it complies with the nece
 Alternatively, you can generate the invoice as an XML file. However, it's important to note that just the XML does not meet the full ZUGFeRD standard. Without embedding the data into a PDF/A file, the invoice is incomplete for compliance and automated processing in most cases.
 
 <Callout type="warn">
-While generating the XML alone may be suitable in some situations, embedding it in PDF/A is the recommended and compliant method for ZUGFeRD invoices.
+  While generating the XML alone may be suitable in some situations, embedding
+  it in PDF/A is the recommended and compliant method for ZUGFeRD invoices.
 </Callout>
 
 ```ts
 const xml = invoice.toXML();
 ```
+
 </Tab>
 </Tabs>
 
 </Step>
 
 <Step>
-### &#x1F389; That's it [#thats-it]
-That's it! You've successfully set up node-zugferd, generated your first invoice, and learned how to save it as a PDF/A-3b file or XML. You can now automate the generation of invoices with structured data in the format that fits your needs.
+  ### &#x1F389; That's it [#thats-it] That's it! You've successfully set up
+  node-zugferd, generated your first invoice, and learned how to save it as a
+  PDF/A-3b file or XML. You can now automate the generation of invoices with
+  structured data in the format that fits your needs.
 </Step>
 
 </Steps>
