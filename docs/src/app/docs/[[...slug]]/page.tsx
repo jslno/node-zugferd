@@ -52,6 +52,7 @@ export default async function Page(props: {
 			}}
 			tableOfContent={{
 				style: "clerk",
+				enabled: true,
 				header: <div className="w-10 h-4"></div>,
 			}}
 			footer={{
