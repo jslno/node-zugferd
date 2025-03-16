@@ -15,7 +15,7 @@ conditional. It is **fully compliant to EN 16931**, focussing on the core elemen
 //...
 import { EN16931 } from "node-zugferd/profile/en16931"; // [!code highlight]
 
-export const invoicer = createProfile({
+export const invoicer = zugferd({
   profile: EN16931, // [!code highlight]
 });
 ```
