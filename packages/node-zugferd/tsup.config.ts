@@ -4,7 +4,7 @@ export default defineConfig((env) => {
 	return {
 		entry: {
 			index: "./src/index.ts",
-			profile: "./src/profile.ts",
+			profile: "./src/profiles/index.ts",
 			"profile/minimum": "./src/profiles/minimum/index.ts",
 			"profile/basic": "./src/profiles/basic/index.ts",
 			"profile/basic-wl": "./src/profiles/basic-wl/index.ts",

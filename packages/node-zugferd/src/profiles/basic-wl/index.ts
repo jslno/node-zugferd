@@ -1,4 +1,4 @@
-import { createProfile } from "../../profile";
+import { createProfile } from "../factory";
 import { type InferSchema } from "../../types/schema";
 import { MINIMUM } from "../minimum";
 import { basicWlSchema } from "./schema";
