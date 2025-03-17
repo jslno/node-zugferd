@@ -38,6 +38,6 @@ const getInternalTools = (_options: ZugferdOptions) => ({
 		addStructTreeRoot: addPdfStructTreeRoot,
 		addMarkInfo: addPdfMarkInfo,
 		addICC: addPdfICC,
-		getAttachments: getPdfAttachments
+		getAttachments: getPdfAttachments,
 	},
 });
