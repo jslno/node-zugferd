@@ -7,7 +7,6 @@ import type { ProfileValidateHandler } from "./types";
 
 export const zugferd = <O extends ZugferdOptions>(options: O) => {
 	const context = init(options);
-	
 	const validate: ProfileValidateHandler = async (data) => {
 		if (options.strict === false) {
 			return true;
