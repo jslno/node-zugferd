@@ -1,10 +1,13 @@
 import {
+	decodePDFRawStream,
 	PDFArray,
 	PDFDict,
 	PDFDocument,
 	PDFHexString,
 	PDFName,
 	PDFNumber,
+	PDFRawStream,
+	PDFStream,
 	PDFString,
 } from "pdf-lib";
 import { formatXml } from "./xml-formatter";
@@ -244,4 +247,51 @@ export const addPdfICC = (pdfDoc: PDFDocument) => {
 	);
 
 	return pdfDoc;
+};
+
+// https://github.com/cantoo-scribe/pdf-lib/pull/80/files#top
+const getRawAttachments = (pdfDoc: PDFDocument) => {
+	if (!pdfDoc.catalog.has(PDFName.of("Names"))) {
+		return [];
+	}
+	const Names = pdfDoc.catalog.lookup(PDFName.of("Names"), PDFDict);
+
+	if (!Names.has(PDFName.of("EmbeddedFiles"))) {
+		return [];
+	}
+	const EmbeddedFiles = Names.lookup(PDFName.of("EmbeddedFiles"), PDFDict);
+
+	if (!EmbeddedFiles.has(PDFName.of("Names"))) {
+		return [];
+	}
+	const EFNames = EmbeddedFiles.lookup(PDFName.of("Names"), PDFArray);
+
+	const rawAttachments: {
+		fileName: PDFHexString | PDFString;
+		fileSpec: PDFDict;
+	}[] = [];
+	for (let i = 0; i < EFNames.size(); i += 2) {
+		const fileName = EFNames.lookup(i) as PDFHexString | PDFString;
+		const fileSpec = EFNames.lookup(i + 1, PDFDict);
+		rawAttachments.push({
+			fileName,
+			fileSpec,
+		});
+	}
+
+	return rawAttachments;
+};
+
+export const getPdfAttachments = (pdfDoc: PDFDocument) => {
+	const rawAttachments = getRawAttachments(pdfDoc);
+	return rawAttachments.map(({ fileName, fileSpec }) => {
+		const stream = fileSpec
+			.lookup(PDFName.of("EF"), PDFDict)
+			.lookup(PDFName.of("F"), PDFStream) as PDFRawStream;
+
+		return {
+			name: fileName.decodeText(),
+			data: decodePDFRawStream(stream).decode(),
+		};
+	});
 };
