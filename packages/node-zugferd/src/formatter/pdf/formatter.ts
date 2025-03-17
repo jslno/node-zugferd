@@ -12,9 +12,9 @@ import {
 } from "pdf-lib";
 import { formatXml } from "../xml";
 import crypto from "crypto";
-import { COLOR_PROFILE } from "../../constants";
+import { COLOR_PROFILE } from "../../utils/color-profile";
 import { type PickRequired } from "../../types/helper";
-import { base64ToUint8Array } from "../../helper";
+import { base64ToUint8Array } from "../../utils/helper";
 
 export type PDFAMetadata = {
 	author?: string;
