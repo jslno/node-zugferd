@@ -152,7 +152,7 @@ export default async function Page(props: {
 						),
 						Features,
 						ProfileTree,
-						NeedHelp
+						NeedHelp,
 					}}
 				/>
 			</DocsBody>
