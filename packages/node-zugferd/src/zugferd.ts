@@ -2,7 +2,7 @@ import { type InferSchema } from "./types/schema";
 import { init } from "./init";
 import { type ZugferdOptions } from "./types/options";
 import { AFRelationship, type AttachmentOptions, PDFDocument } from "pdf-lib";
-import { type PDFAMetadata } from "./pdf-formatter";
+import { type PDFAMetadata } from "./formatter/pdf";
 
 export const zugferd = <O extends ZugferdOptions>(options: O) => {
 	const context = init(options);
