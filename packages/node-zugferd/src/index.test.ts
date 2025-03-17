@@ -1,16 +1,17 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, suite } from "vitest";
 import { zugferd } from "./zugferd";
 import { BASIC, type ProfileBasic } from "./profiles";
 import fs from "fs/promises";
 import { PDFDocument } from "pdf-lib";
 import { isPdfA3b } from "./test-utils/pdf";
+import path from "path";
 
 describe("Application Tests", () => {
 	const invoicer = zugferd({
 		profile: BASIC,
 	});
 
-	it("should create a basic invoice", async () => {
+	suite("generate basic invoice", async () => {
 		const data: ProfileBasic = {
 			number: "471102",
 			typeCode: "380",
@@ -134,20 +135,29 @@ Trennblätter A4`,
 
 		const invoice = await invoicer.create(data);
 
-		const pdf = await fs.readFile("./src/test-utils/input.pdf");
+		expect(invoice).toBeDefined();
+
+		const pdf = await fs.readFile(
+			path.resolve(__dirname, "./test-utils/input.pdf"),
+		);
 		const pdfA = await invoice.embedInPdf(pdf);
 
-		const doc = await PDFDocument.load(pdfA);
-		const attachments = invoicer.context.pdf.getAttachments(doc);
-		const facturXFile = attachments.find(
-			(val) => val.name === BASIC.documentFileName,
-		);
+		it("should generate a valid PDF/A-3b document", () => {
+			expect(isPdfA3b(pdfA)).toBe(true);
+		});
 
-		expect(facturXFile).toBeDefined();
+		it("should have factur-x.xml embedded", async () => {
+			const doc = await PDFDocument.load(pdfA);
+			const attachments = invoicer.context.pdf.getAttachments(doc);
+			const facturXFile = attachments.find(
+				(val) => val.name === BASIC.documentFileName,
+			);
 
-		const facturX = new TextDecoder("utf-8").decode(facturXFile?.data);
+			expect(facturXFile).toBeDefined();
 
-		expect(facturX).toEqual(invoice.toXML());
-		expect(isPdfA3b(pdfA)).toBe(true);
+			const facturX = new TextDecoder("utf-8").decode(facturXFile?.data);
+
+			expect(facturX).toEqual(invoice.toXML());
+		});
 	});
 });
