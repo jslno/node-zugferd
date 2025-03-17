@@ -10,6 +10,7 @@ import {
 	addPdfStructTreeRoot,
 	addPdfMarkInfo,
 	addPdfICC,
+	getPdfAttachments,
 } from "./formatter/pdf";
 import { type ZugferdOptions } from "./types/options";
 
@@ -41,5 +42,6 @@ const getInternalTools = (_options: ZugferdOptions) => ({
 		addStructTreeRoot: addPdfStructTreeRoot,
 		addMarkInfo: addPdfMarkInfo,
 		addICC: addPdfICC,
+		getAttachments: getPdfAttachments,
 	},
 });
