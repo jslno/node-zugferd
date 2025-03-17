@@ -21,6 +21,9 @@ export const createProfile = <P extends Profile>(options: P) => {
 		},
 		validate: async (data: string | Buffer | { file: string }) => {
 			try {
+				if (!validateXML) {
+					throw new Error("Missing dependency xsd-schema-validator");
+				}
 				const res = await validateXML(data, options.xsdPath);
 
 				return res.valid;

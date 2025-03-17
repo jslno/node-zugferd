@@ -169,12 +169,13 @@ importers:
       pdf-lib:
         specifier: ^1.17.1
         version: 1.17.1
-      xsd-schema-validator:
-        specifier: ^0.10.0
-        version: 0.10.0
       zod:
         specifier: ^3.24.1
         version: 3.24.2
+    optionalDependencies:
+      xsd-schema-validator:
+        specifier: ^0.10.0
+        version: 0.10.0
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.4
