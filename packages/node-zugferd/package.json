@@ -34,6 +34,7 @@
 		"url": "https://github.com/jslno/node-zugferd.git",
 		"directory": "packages/node-zugferd"
 	},
+	"homepage": "https://node-zugferd.jsolano.de",
 	"license": "MIT",
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
