@@ -1,4 +1,8 @@
-import { formatXml, mergeSchemas, parseSchema } from "./formatter/xml/formatter";
+import {
+	formatXml,
+	mergeSchemas,
+	parseSchema,
+} from "./formatter/xml/formatter";
 import {
 	addPdfMetadata,
 	addPdfTrailerInfoId,
