@@ -1,4 +1,8 @@
-import { formatXml, mergeSchemas, parseSchema } from "./xml-formatter";
+import {
+	formatXml,
+	mergeSchemas,
+	parseSchema,
+} from "./formatter/xml/formatter";
 import {
 	addPdfMetadata,
 	addPdfTrailerInfoId,
@@ -6,7 +10,7 @@ import {
 	addPdfStructTreeRoot,
 	addPdfMarkInfo,
 	addPdfICC,
-} from "./pdf-formatter";
+} from "./formatter/pdf";
 import { type ZugferdOptions } from "./types/options";
 
 export const init = (options: ZugferdOptions) => {
