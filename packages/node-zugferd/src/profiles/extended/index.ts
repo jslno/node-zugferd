@@ -1,4 +1,4 @@
-import { createProfile } from "../../profile";
+import { createProfile } from "../factory";
 import { type InferSchema } from "../../types/schema";
 import { EN16931 } from "../en16931";
 import { extendedSchema } from "./schema";

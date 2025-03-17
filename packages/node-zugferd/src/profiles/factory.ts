@@ -1,7 +1,7 @@
-import type { Profile, ProfileContext } from "./types/profile";
-import type { InferSchema } from "./types/schema";
+import type { Profile, ProfileContext } from "../types/profile";
+import type { InferSchema } from "../types/schema";
 import { validateXML } from "xsd-schema-validator";
-import { ZugferdError } from "./error";
+import { ZugferdError } from "../error";
 
 export const createProfile = <P extends Profile>(options: P) => {
 	const ctx = {
