@@ -7,11 +7,11 @@ import {
 	PDFNumber,
 	PDFString,
 } from "pdf-lib";
-import { formatXml } from "./xml-formatter";
+import { formatXml } from "../xml";
 import crypto from "crypto";
-import { COLOR_PROFILE } from "./constants";
-import { type PickRequired } from "./types/helper";
-import { base64ToUint8Array } from "./helper";
+import { COLOR_PROFILE } from "../../constants";
+import { type PickRequired } from "../../types/helper";
+import { base64ToUint8Array } from "../../helper";
 
 export type PDFAMetadata = {
 	author?: string;
