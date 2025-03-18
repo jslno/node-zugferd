@@ -3,6 +3,7 @@ import { type Schema } from "../../types/schema";
 import { z } from "zod";
 import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
 import { UNTDID_5189 } from "../../codelists/generated/untdid.5189";
+import { UNTDID_1153 } from "../../codelists/generated/untdid.1153";
 
 export const extendedSchema = {
 	/**
@@ -2728,7 +2729,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 							 * CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_1153.map(({ code }) => code),
 								description: `**Type of contract (code)**
 
 Use codes from UNTDID 1153

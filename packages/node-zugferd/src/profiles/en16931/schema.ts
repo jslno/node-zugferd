@@ -1,6 +1,7 @@
 import z from "zod";
 import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
+import { UNTDID_1153 } from "../../codelists/generated/untdid.1153";
 
 export const en16931Schema = {
 	transaction: {
@@ -458,7 +459,7 @@ It may be a subscription number, telephone number, meter point, vehicle, person 
 							 * If it may be not clear for the receiver what scheme is used for the identifier, a onditional scheme identifier should be used that shall be chosen from the UNTDID 1153 code list [6] entries.
 							 */
 							referenceTypeCode: {
-								type: "string",
+								type: UNTDID_1153.map(({ code }) => code),
 								description: `**Scheme identifier**
 
 The identification scheme identifier of the Invoiced object identifier.
@@ -1067,7 +1068,7 @@ It may be a subscription number, telephone number, meter point etc., as applicab
 									 * If it may be not clear for the receiver what scheme is used for the identifier, a conditional scheme identifier should be used that shall be chosen from the UNTDID 1153 code list [6] entries.
 									 */
 									referenceTypeCode: {
-										type: "string",
+										type: UNTDID_1153.map(({ code }) => code),
 										description: `**Scheme identifier**
 Invocice line object identifier
 
