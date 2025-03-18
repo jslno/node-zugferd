@@ -20,17 +20,17 @@ const main = async ([filePath]) => {
   {
     code: ${
       formattedCode.length >= 80 - 6
-        ? `\n\t\t\t${formattedCode}`
+        ? `\n\t\t${formattedCode}`
         : formattedCode
     },
     name: ${
       formattedName.length >= 80 - 6
-        ? `\n\t\t\t${formattedName}`
+        ? `\n\t\t${formattedName}`
         : formattedName
     },
     description: ${
       formattedDescription.length >= 80 - 13
-        ? `\n\t\t\t${formattedDescription}`
+        ? `\n\t\t${formattedDescription}`
         : formattedDescription
     },
   },`;
