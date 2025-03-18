@@ -3,6 +3,7 @@ import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
 import { UNTDID_1001 } from "../../codelists/generated/untdid.1001";
 import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
+import { UNTDID_2005 } from "../../codelists/generated/untdid.2005";
 
 export const minimumSchema = {
 	/**
@@ -852,7 +853,7 @@ Code list issued and maintained by the Connecting Europe Facility.`,
 							 * BR-CO-3: Value added tax point date (BT-7) and Value added tax point date code (BT-8) are mutually exclusive.
 							 */
 							dueDateTypeCode: {
-								type: ["5", "29", "72"],
+								type: UNTDID_2005.map(({ code }) => code),
 								description: `**Value added tax point date code**
 
 The code of the date when the VAT becomes accountable for the Seller and for the Buyer.
