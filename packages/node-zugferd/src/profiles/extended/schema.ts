@@ -5,6 +5,7 @@ import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
 import { UNTDID_5189 } from "../../codelists/generated/untdid.5189";
 import { UNTDID_1153 } from "../../codelists/generated/untdid.1153";
 import { UNTDID_7161 } from "../../codelists/generated/untdid.7161";
+import { UNTDID_4451 } from "../../codelists/generated/untdid.4451";
 
 export const extendedSchema = {
 	/**
@@ -8513,7 +8514,7 @@ The code is agreed bilaterally and must have the same meaning as BT-127.`,
 					 * To be chosen from the entries in UNTDID 4451 [6].
 					 */
 					noteSubjectCode: {
-						type: "string",
+						type: UNTDID_4451.map(({ code }) => code),
 						description: `**Invoice line note subject code**
 
 To be chosen from the entries in UNTDID 4451 [6].`,

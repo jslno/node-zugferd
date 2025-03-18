@@ -4,6 +4,7 @@ import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
 import { UNTDID_5189 } from "../../codelists/generated/untdid.5189";
 import { UNTDID_4461 } from "../../codelists/generated/untdid.4461";
 import { UNTDID_7161 } from "../../codelists/generated/untdid.7161";
+import { UNTDID_4451 } from "../../codelists/generated/untdid.4451";
 
 export const basicWlSchema = {
 	/**
@@ -52,7 +53,7 @@ Such as the reason for any correction or assignment note in case the invoice has
 			 * - CUS: Customs Information
 			 */
 			subjectCode: {
-				type: ["AAI", "SUR", "REG", "ABL", "TXD", "CUS"],
+				type: UNTDID_4451.map(({ code }) => code),
 				description: `**Invoice note subject code**
 
 The subject of the textual note in BT-22.
