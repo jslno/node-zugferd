@@ -1,6 +1,7 @@
 import z from "zod";
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
+import { UNTDID_1001 } from "../../codelists/generated/untdid.1001";
 
 export const minimumSchema = {
 	/**
@@ -68,7 +69,7 @@ BR-2: An Invoice shall have an Invoice number (BT-1).`,
 	 * BR-4: An Invoice shall have an Invoice type code (BT-3).
 	 */
 	typeCode: {
-		type: ["380", "381", "384", "389", "261", "386", "751"],
+		type: UNTDID_1001.map(({ code }) => code),
 		description: `**Invoice type code**
 
 A code specifying the functional type of the Invoice.
