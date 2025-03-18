@@ -2,6 +2,7 @@ import z from "zod";
 import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { UNTDID_1153 } from "../../codelists/generated/untdid.1153";
+import { UNTDID_7143 } from "../../codelists/generated/untdid.7143";
 
 export const en16931Schema = {
 	transaction: {
@@ -898,7 +899,7 @@ Classification codes are used to allow grouping of similar items for a various p
 											 * The identification scheme shall be chosen from the entries in UNTDID 7143 [6].
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: UNTDID_7143.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Item classification identifier
