@@ -17,31 +17,31 @@ const main = async ([filePath]) => {
       : "undefined";
 
     return `
-  {
-    code: ${
-      formattedCode.length >= 80 - 6
-        ? `\n\t\t${formattedCode}`
-        : formattedCode
+\t{
+\t\tcode:${
+      formattedCode.length >= 80 - 8
+        ? `\n\t\t\t${formattedCode}`
+        : ` ${formattedCode}`
     },
-    name: ${
-      formattedName.length >= 80 - 6
-        ? `\n\t\t${formattedName}`
-        : formattedName
+\t\tname:${
+      formattedName.length >= 80 - 8
+        ? `\n\t\t\t${formattedName}`
+        : ` ${formattedName}`
     },
-    description: ${
-      formattedDescription.length >= 80 - 13
-        ? `\n\t\t${formattedDescription}`
-        : formattedDescription
+\t\tdescription:${
+      formattedDescription.length >= 80 - 15
+        ? `\n\t\t\t${formattedDescription}`
+        : ` ${formattedDescription}`
     },
-  },`;
+\t},`;
   });
 
   await fs.writeFile(
     "./packages/node-zugferd/src/codelists/generated/untdid.1001.ts",
     `export type Untdid1001Definition = {
-  code: string;
-  name?: string;
-  description?: string;
+\tcode: string;
+\tname?: string;
+\tdescription?: string;
 };
 
 export type Untdid1001Code = (typeof UNTDID_1001)[number]["code"];
@@ -53,7 +53,8 @@ export type Untdid1001Code = (typeof UNTDID_1001)[number]["code"];
  */
 export const UNTDID_1001 = [${mappedData.join("")}${
       mappedData.length > 0 ? "\n" : ""
-    }] as const satisfies Untdid1001Definition[];`
+    }] as const satisfies Untdid1001Definition[];
+`
   );
 };
 
