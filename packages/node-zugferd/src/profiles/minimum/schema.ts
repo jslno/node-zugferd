@@ -1,6 +1,9 @@
 import z from "zod";
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
+import { UNTDID_1001 } from "../../codelists/untdid/1001";
+import { UNTDID_5305 } from "../../codelists/untdid/5305";
+import { UNTDID_2005 } from "../../codelists/untdid/2005";
 
 export const minimumSchema = {
 	/**
@@ -68,7 +71,7 @@ BR-2: An Invoice shall have an Invoice number (BT-1).`,
 	 * BR-4: An Invoice shall have an Invoice type code (BT-3).
 	 */
 	typeCode: {
-		type: ["380", "381", "384", "389", "261", "386", "751"],
+		type: UNTDID_1001.map(({ code }) => code),
 		description: `**Invoice type code**
 
 A code specifying the functional type of the Invoice.
@@ -780,7 +783,7 @@ The sum of Invoice line net amount minus allowances plus charges on document lev
 							 * For EXTENDED profile only, BR-O-11, BR-O-12, BR-O-13 and BR-O-14 are not applied.
 							 */
 							categoryCode: {
-								type: ["S", "Z", "E", "AE", "K", "G", "O", "L", "M"],
+								type: UNTDID_5305.map(({ code }) => code),
 								description: `**VAT category code**
 
 Coded identification of a VAT category.
@@ -850,7 +853,7 @@ Code list issued and maintained by the Connecting Europe Facility.`,
 							 * BR-CO-3: Value added tax point date (BT-7) and Value added tax point date code (BT-8) are mutually exclusive.
 							 */
 							dueDateTypeCode: {
-								type: ["5", "29", "72"],
+								type: UNTDID_2005.map(({ code }) => code),
 								description: `**Value added tax point date code**
 
 The code of the date when the VAT becomes accountable for the Seller and for the Buyer.

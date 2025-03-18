@@ -144,6 +144,96 @@
 				"types": "./dist/types.d.cts",
 				"default": "./dist/types.cjs"
 			}
+		},
+		"./codelist/untdid.1001": {
+			"import": {
+				"types": "./dist/codelist/untdid.1001.d.ts",
+				"default": "./dist/codelist/untdid.1001.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.1001.d.cts",
+				"default": "./dist/codelist/untdid.1001.cjs"
+			}
+		},
+		"./codelist/untdid.1153": {
+			"import": {
+				"types": "./dist/codelist/untdid.1153.d.ts",
+				"default": "./dist/codelist/untdid.1153.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.1153.d.cts",
+				"default": "./dist/codelist/untdid.1153.cjs"
+			}
+		},
+		"./codelist/untdid.2005": {
+			"import": {
+				"types": "./dist/codelist/untdid.2005.d.ts",
+				"default": "./dist/codelist/untdid.2005.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.2005.d.cts",
+				"default": "./dist/codelist/untdid.2005.cjs"
+			}
+		},
+		"./codelist/untdid.4451": {
+			"import": {
+				"types": "./dist/codelist/untdid.4451.d.ts",
+				"default": "./dist/codelist/untdid.4451.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.4451.d.cts",
+				"default": "./dist/codelist/untdid.4451.cjs"
+			}
+		},
+		"./codelist/untdid.4461": {
+			"import": {
+				"types": "./dist/codelist/untdid.4461.d.ts",
+				"default": "./dist/codelist/untdid.4461.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.4461.d.cts",
+				"default": "./dist/codelist/untdid.4461.cjs"
+			}
+		},
+		"./codelist/untdid.5189": {
+			"import": {
+				"types": "./dist/codelist/untdid.5189.d.ts",
+				"default": "./dist/codelist/untdid.5189.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.5189.d.cts",
+				"default": "./dist/codelist/untdid.5189.cjs"
+			}
+		},
+		"./codelist/untdid.5305": {
+			"import": {
+				"types": "./dist/codelist/untdid.5305.d.ts",
+				"default": "./dist/codelist/untdid.5305.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.5305.d.cts",
+				"default": "./dist/codelist/untdid.5305.cjs"
+			}
+		},
+		"./codelist/untdid.7143": {
+			"import": {
+				"types": "./dist/codelist/untdid.7143.d.ts",
+				"default": "./dist/codelist/untdid.7143.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.7143.d.cts",
+				"default": "./dist/codelist/untdid.7143.cjs"
+			}
+		},
+		"./codelist/untdid.7161": {
+			"import": {
+				"types": "./dist/codelist/untdid.7161.d.ts",
+				"default": "./dist/codelist/untdid.7161.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.7161.d.cts",
+				"default": "./dist/codelist/untdid.7161.cjs"
+			}
 		}
 	},
 	"files": ["dist"]

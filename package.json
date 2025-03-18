@@ -20,7 +20,8 @@
     "release:canary": "turbo --filter \"./packages/*\" build && bumpp && pnpm -r publish --access public --tag canary --no-git-checks",
     "bump": "bumpp",
     "test": "turbo --filter \"./packages/*\" test",
-    "typecheck": "turbo --filter \"./packages/*\" typecheck"
+    "typecheck": "turbo --filter \"./packages/*\" typecheck",
+    "untdid:update": "node ./scripts/untdid/update.js"
   },
   "dependencies": {
     "@biomejs/biome": "1.9.4",

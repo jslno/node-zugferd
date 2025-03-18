@@ -1,0 +1,47 @@
+[
+    {
+        "id": "1001",
+        "source": "https://www.xrepository.de/api/xrepository/urn:xoev-de:kosit:codeliste:untdid.1001_4/download/UNTDID_1001_4.json",
+        "see": "https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.1001"
+    },
+    {
+        "id": "1153",
+        "source": "https://www.xrepository.de/api/xrepository/urn:xoev-de:kosit:codeliste:untdid.1153_3/download/UNTDID_1153_3.json",
+        "see": "https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.1153"
+    },
+    {
+        "id": "2005",
+        "source": "https://www.xrepository.de/api/xrepository/urn:xoev-de:kosit:codeliste:untdid.2005_4/download/UNTDID_2005_4.json",
+        "see": "https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.2005"
+    },
+    {
+        "id": "4451",
+        "source": "https://www.xrepository.de/api/xrepository/urn:xoev-de:kosit:codeliste:untdid.4451_4/download/UNTDID_4451_4.json",
+        "see": "https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.4451"
+    },
+    {
+        "id": "4461",
+        "source": "https://www.xrepository.de/api/xrepository/urn:xoev-de:xrechnung:codeliste:untdid.4461_3/download/UNTDID_4461_3.json",
+        "see": "https://www.xrepository.de/details/urn:xoev-de:xrechnung:codeliste:untdid.4461"
+    },
+    {
+        "id": "5189",
+        "source": "https://www.xrepository.de/api/xrepository/urn:xoev-de:kosit:codeliste:untdid.5189_3/download/UNTDID_5189_3.json",
+        "see": "https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.5189"
+    },
+    {
+        "id": "5305",
+        "source": "https://www.xrepository.de/api/xrepository/urn:xoev-de:kosit:codeliste:untdid.5305_3/download/UNTDID_5305_3.json",
+        "see": "https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.5305"
+    },
+    {
+        "id": "7143",
+        "source": "https://www.xrepository.de/api/xrepository/urn:xoev-de:kosit:codeliste:untdid.7143_4/download/UNTDID_7143_4.json",
+        "see": "https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.7143"
+    },
+    {
+        "id": "7161",
+        "source": "https://www.xrepository.de/api/xrepository/urn:xoev-de:kosit:codeliste:untdid.7161_3/download/UNTDID_7161_3.json",
+        "see": "https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.7161"
+    }
+]

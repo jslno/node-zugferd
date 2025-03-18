@@ -1,6 +1,9 @@
 import z from "zod";
 import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
+import { UNTDID_5305 } from "../../codelists/untdid/5305";
+import { UNTDID_5189 } from "../../codelists/untdid/5189";
+import { UNTDID_7161 } from "../../codelists/untdid/7161";
 
 export const basicSchema = {
 	transaction: {
@@ -559,7 +562,7 @@ For more information on the recommended codes, please refer to subclause 6.3.3.2
 									 * BR-CO-4: Each Invoice line  (BG-25) shall be categorized with an Invoiced item VAT category code (BT-151).
 									 */
 									categoryCode: {
-										type: ["S", "Z", "E", "AE", "K", "G", "O", "L", "M"],
+										type: UNTDID_5305.map(({ code }) => code),
 										description: `**Invoiced item VAT category code**
 
 The VAT category code for the invoiced item.
@@ -753,7 +756,7 @@ The amount of an allowance, without VAT.`,
 									 * - LA = Labeling
 									 */
 									reasonCode: {
-										type: ["AA", "ABL", "ADR", "ADT", "FC", "FI", "LA"],
+										type: UNTDID_5189.map(({ code }) => code),
 										description: `**Invoice line allowance reason code**
 
 The reason for the Invoice line allowance, expressed as a code.
@@ -851,7 +854,7 @@ The amount of a charge, without VAT.`,
 									 * BR-CO-24: Each Invoice line charge (BG-28) shall contain an Invoice line  charge  reason  (BT-144)  or  an  Invoice  line  charge reason code (BT-145), or both.
 									 */
 									reasonCode: {
-										type: ["AA", "ABL", "ADR", "ADT", "FC", "FI", "LA"],
+										type: UNTDID_7161.map(({ code }) => code),
 										description: `**Invoice line charge reason code**
 
 The reason for the Invoice line charge, expressed as a code.
