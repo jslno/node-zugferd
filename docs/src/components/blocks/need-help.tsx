@@ -9,7 +9,7 @@ export const NeedHelp = () => (
 			<p className="text-muted-foreground">
 				Don't hesitate to ask for help! You can open an{" "}
 				<Link
-					href="https://github.com/jslno/node-zugferd/issues"
+					href="https://github.com/jslno/node-zugferd/issues/new"
 					className="text-foreground font-medium underline underline-offset-4"
 				>
 					issue
