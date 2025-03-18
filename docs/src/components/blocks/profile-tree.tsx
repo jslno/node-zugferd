@@ -34,15 +34,7 @@ const TreeItem = ({ data }: { data: [string, SchemaField] }) => {
 				<div className="text-sm leading-none space-y-4 py-4">
 					<div className="flex items-center gap-2">
 						<span>Type:</span>
-						<code>
-							{Array.isArray(def.type)
-								? def.type
-										.map((item) =>
-											typeof item === "string" ? `"${item}"` : item,
-										)
-										.join(" | ")
-								: def.type}
-						</code>
+						<code>{Array.isArray(def.type) ? "string" : def.type}</code>
 					</div>
 					<div className="flex gap-2 items-center">
 						<span>Required:</span>

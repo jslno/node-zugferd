@@ -1,5 +1,10 @@
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
+import { UNTDID_5305 } from "../../codelists/untdid/5305";
+import { UNTDID_5189 } from "../../codelists/untdid/5189";
+import { UNTDID_4461 } from "../../codelists/untdid/4461";
+import { UNTDID_7161 } from "../../codelists/untdid/7161";
+import { UNTDID_4451 } from "../../codelists/untdid/4451";
 
 export const basicWlSchema = {
 	/**
@@ -48,7 +53,7 @@ Such as the reason for any correction or assignment note in case the invoice has
 			 * - CUS: Customs Information
 			 */
 			subjectCode: {
-				type: ["AAI", "SUR", "REG", "ABL", "TXD", "CUS"],
+				type: UNTDID_4451.map(({ code }) => code),
 				description: `**Invoice note subject code**
 
 The subject of the textual note in BT-22.
@@ -1443,19 +1448,7 @@ A group of business terms providing information about the payment.`,
 							 * BR-49: A  Payment  instruction  (BG-16)  shall  specify  the  Payment means type code (BT-81).
 							 */
 							typeCode: {
-								type: [
-									"10",
-									"20",
-									"30",
-									"42",
-									"48",
-									"49",
-									"57",
-									"58",
-									"59",
-									"97",
-									"ZZZ",
-								],
+								type: UNTDID_4461.map(({ code }) => code),
 								description: `**Payment means type code**
 
 The means, expressed as code, for how a payment is expected to be or has been settled.
@@ -1619,7 +1612,7 @@ The amount of an allowance, without VAT.`,
 							 * BR-CO-21: Each Document level allowance (BG-20) shall contain a Document level allowance reason (BT-97) or a Document level allowance reason code (BT-98), or both.
 							 */
 							reasonCode: {
-								type: "string",
+								type: UNTDID_5189.map(({ code }) => code),
 								description: `**Document level allowance reason code**
 
 The reason for the document level allowance, expressed as a code.
@@ -1703,7 +1696,7 @@ BR-CO-21: Each Document level allowance (BG-20) shall contain a Document level a
 									 * BR-32: Each Document level allowance (BG-20) shall have a Document level allowance VAT category code (BT-95).
 									 */
 									categoryCode: {
-										type: ["S", "Z", "E", "AE", "K", "G", "O", "L", "M"],
+										type: UNTDID_5305.map(({ code }) => code),
 										description: `**Document level allowance VAT category code**
 
 A coded identification of what VAT category applies to the document level allowance.
@@ -1843,7 +1836,7 @@ The amount of a charge, without VAT.`,
 							 * BR-CO-22: Each Document level charge (BG-21) shall contain a Document level charge reason (BT-104) or a Document level charge reason code (BT-105), or both.
 							 */
 							reasonCode: {
-								type: ["AA", "ABL", "ADR", "ADT", "FC", "FI", "LA"],
+								type: UNTDID_7161.map(({ code }) => code),
 								description: `**Document level charge reason code**
 
 The reason for the document level charge, expressed as a code.
@@ -1940,7 +1933,7 @@ A finite sequence of characters.`,
 									 * BR-37: Each Document level charge (BG-21) shall have a Document level charge VAT category code (BT-102).
 									 */
 									categoryCode: {
-										type: ["S", "Z", "E", "AE", "K", "G", "O", "L", "M"],
+										type: UNTDID_5305.map(({ code }) => code),
 										description: `**Document level charge VAT category code**
 
 A coded identification of what VAT category applies to the document level charge.

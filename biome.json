@@ -28,6 +28,15 @@
 		}
 	},
 	"files": {
-		"ignore": ["dist", "package.json", ".turbo", ".next", ".cache", ".source"]
+		"ignore": [
+			"dist",
+			"package.json",
+			".turbo",
+			".next",
+			".cache",
+			".source",
+			"./packages/node-zugferd/src/codelists/untdid/*",
+			"scripts/*"
+		]
 	}
 }

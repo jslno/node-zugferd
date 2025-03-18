@@ -1,6 +1,11 @@
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
 import { z } from "zod";
+import { UNTDID_5305 } from "../../codelists/untdid/5305";
+import { UNTDID_5189 } from "../../codelists/untdid/5189";
+import { UNTDID_1153 } from "../../codelists/untdid/1153";
+import { UNTDID_7161 } from "../../codelists/untdid/7161";
+import { UNTDID_4451 } from "../../codelists/untdid/4451";
 
 export const extendedSchema = {
 	/**
@@ -2726,7 +2731,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 							 * CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_1153.map(({ code }) => code),
 								description: `**Type of contract (code)**
 
 Use codes from UNTDID 1153
@@ -8324,8 +8329,7 @@ Code list issued and maintained by the Connecting Europe Facility.`,
 									 * - Liable for IPSI (Ceuta/Melilla tax)
 									 */
 									categoryCode: {
-										// ! TODO: Add literals
-										type: "string",
+										type: UNTDID_5305.map(({ code }) => code),
 										description: `**VAT category code**
 
 Coded identification of a VAT category.
@@ -8510,7 +8514,7 @@ The code is agreed bilaterally and must have the same meaning as BT-127.`,
 					 * To be chosen from the entries in UNTDID 4451 [6].
 					 */
 					noteSubjectCode: {
-						type: "string",
+						type: UNTDID_4451.map(({ code }) => code),
 						description: `**Invoice line note subject code**
 
 To be chosen from the entries in UNTDID 4451 [6].`,
@@ -9203,7 +9207,7 @@ The file name of the attached document`,
 											 * Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance reason code and the Invoice line level allowance reason shall indicate the same allowance reason.
 											 */
 											reasonCode: {
-												type: "string",
+												type: UNTDID_5189.map(({ code }) => code),
 												description: `**Reason for the discount (code)**
 
 Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance reason code and the Invoice line level allowance reason shall indicate the same allowance reason.`,
@@ -9294,7 +9298,7 @@ Only applies if the surcharge is given per unit and is not included in the gross
 											 * Use entries of the UNTDID 7161 code list [6]. The Invoice line charge reason code and the Invoice line charge reason shall indicate the same charge reason.
 											 */
 											reasonCode: {
-												type: "string",
+												type: UNTDID_7161.map(({ code }) => code),
 												description: `**Reason for the charge (code)**
 
 Use entries of the UNTDID 7161 code list [6]. The Invoice line charge reason code and the Invoice line charge reason shall indicate the same charge reason.`,
@@ -9393,8 +9397,7 @@ Code list issued and maintained by the Connecting Europe Facility.`,
 											 * - Liable for IPSI (Ceuta/Melilla tax)
 											 */
 											categoryCode: {
-												// ! TODO: Add correct literals
-												type: "string",
+												type: UNTDID_5305.map(({ code }) => code),
 												description: `**VAT category code**
 
 Coded identification of a VAT category.
