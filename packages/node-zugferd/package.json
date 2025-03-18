@@ -234,6 +234,16 @@
 				"types": "./dist/codelist/untdid.7161.d.cts",
 				"default": "./dist/codelist/untdid.7161.cjs"
 			}
+		},
+		"./codelist/vatex": {
+			"import": {
+				"types": "./dist/codelist/vatex.d.ts",
+				"default": "./dist/codelist/vatex.js"
+			},
+			"require": {
+				"types": "./dist/codelist/vatex.d.cts",
+				"default": "./dist/codelist/vatex.cjs"
+			}
 		}
 	},
 	"files": ["dist"]

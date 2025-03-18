@@ -1,0 +1,55 @@
+---
+title: VATEX
+description: VAT exemption reason code list
+---
+
+import {
+  VATEX,
+  VATEX_IDENTIFIER,
+  VATEX_VERSION,
+} from "node-zugferd/codelist/vatex";
+import { MinusIcon } from "lucide-react";
+
+## Definition [toc]
+
+Identifier: <span className="text-fd-muted-foreground">{VATEX_IDENTIFIER}</span>
+
+Version: <span className="text-fd-muted-foreground">{VATEX_VERSION}</span>
+
+<div className="w-fit">
+  <Link
+    href="https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:vatex_1"
+    target="_blank"
+  >
+    Source
+  </Link>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Remark</th>
+    </tr>
+  </thead>
+  <tbody>
+    {VATEX.map(({ code, name, description, remark }) => (
+      <tr key={code}>
+        <td className="text-center">
+          <code>{code}</code>
+        </td>
+        <td>{name}</td>
+        <td>{description}</td>
+        <td>
+          {!remark ? (
+            <MinusIcon className="mx-auto text-fd-muted-foreground" />
+          ) : (
+            remark
+          )}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>

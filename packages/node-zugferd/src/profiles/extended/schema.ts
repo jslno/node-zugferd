@@ -6,6 +6,7 @@ import { UNTDID_5189 } from "../../codelists/untdid/5189";
 import { UNTDID_1153 } from "../../codelists/untdid/1153";
 import { UNTDID_7161 } from "../../codelists/untdid/7161";
 import { UNTDID_4451 } from "../../codelists/untdid/4451";
+import { VATEX } from "../../codelists/vatex";
 
 export const extendedSchema = {
 	/**
@@ -8302,7 +8303,7 @@ A textual statement of the reason why the amount is exempted from VAT or why no 
 									 * Code list issued and maintained by the Connecting Europe Facility.
 									 */
 									exemptionReasonCode: {
-										type: "string",
+										type: VATEX.map(({ code }) => code),
 										description: `**VAT exemption reason code**
 
 A coded statement of the reason for why the amount is exempted from VAT.
@@ -9370,7 +9371,7 @@ A textual statement of the reason why the amount is exempted from VAT or why no 
 											 * Code list issued and maintained by the Connecting Europe Facility.
 											 */
 											exemptionReasonCode: {
-												type: "string",
+												type: VATEX.map(({ code }) => code),
 												description: `**VAT exemption reason code**
 
 A coded statement of the reason for why the amount is exempted from VAT.
@@ -10623,7 +10624,7 @@ A textual statement of the reason why the amount is exempted from VAT or why no 
 									 * Code list issued and maintained by the Connecting Europe Facility.
 									 */
 									exemptionReasonCode: {
-										type: "string",
+										type: VATEX.map(({ code }) => code),
 										description: `**VAT exemption reason code**
 
 A coded statement of the reason for why the amount is exempted from VAT.

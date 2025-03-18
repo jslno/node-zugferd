@@ -20,6 +20,7 @@ export default defineConfig((env) => {
 			"codelist/untdid.5305": "./src/codelists/untdid/5305.ts",
 			"codelist/untdid.7143": "./src/codelists/untdid/7143.ts",
 			"codelist/untdid.7161": "./src/codelists/untdid/7161.ts",
+			"codelist/vatex": "./src/codelists/vatex.ts",
 		},
 		format: ["cjs", "esm"],
 		bundle: true,

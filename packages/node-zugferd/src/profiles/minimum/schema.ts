@@ -4,6 +4,7 @@ import { type Schema } from "../../types/schema";
 import { UNTDID_1001 } from "../../codelists/untdid/1001";
 import { UNTDID_5305 } from "../../codelists/untdid/5305";
 import { UNTDID_2005 } from "../../codelists/untdid/2005";
+import { VATEX } from "../../codelists/vatex";
 
 export const minimumSchema = {
 	/**
@@ -824,7 +825,7 @@ For EXTENDED profile only, BR-O-11, BR-O-12, BR-O-13 and BR-O-14 are not applied
 							 * Code list issued and maintained by the Connecting Europe Facility.
 							 */
 							exemptionReasonCode: {
-								type: "string",
+								type: VATEX.map(({ code }) => code),
 								description: `**VAT exemption reason code**
 
 A coded statement of the reason for why the amount is exempted from VAT.
