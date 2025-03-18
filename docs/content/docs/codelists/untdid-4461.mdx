@@ -3,9 +3,26 @@ title: UNTDID 4461
 description: Payment means code
 ---
 
-import { UNTDID_4461 } from "node-zugferd/codelist/untdid.4461";
+import {
+  UNTDID_4461,
+  UNTDID_4461_IDENTIFIER,
+  UNTDID_4461_VERSION,
+} from "node-zugferd/codelist/untdid.4461";
 
 ## Definition [toc]
+
+Identifier: <span className="text-fd-muted-foreground">{UNTDID_4461_IDENTIFIER}</span>
+
+Version: <span className="text-fd-muted-foreground">{UNTDID_4461_VERSION}</span>
+
+<div className="w-fit">
+  <Link
+    href="https://www.xrepository.de/details/urn:xoev-de:xrechnung:codeliste:untdid.4461"
+    target="_blank"
+  >
+    Source
+  </Link>
+</div>
 
 <table>
   <thead>
@@ -19,7 +36,7 @@ import { UNTDID_4461 } from "node-zugferd/codelist/untdid.4461";
     {UNTDID_4461.map(({ code, name, description }) => (
       <tr key={code}>
         <td className="text-center">
-            <code>{code}</code>
+          <code>{code}</code>
         </td>
         <td>{name}</td>
         <td>{description}</td>

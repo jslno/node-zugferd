@@ -3,9 +3,26 @@ title: UNTDID 5189
 description: Allowance or charge identification code
 ---
 
-import { UNTDID_5189 } from "node-zugferd/codelist/untdid.5189";
+import {
+  UNTDID_5189,
+  UNTDID_5189_IDENTIFIER,
+  UNTDID_5189_VERSION,
+} from "node-zugferd/codelist/untdid.5189";
 
 ## Definition [toc]
+
+Identifier: <span className="text-fd-muted-foreground">{UNTDID_5189_IDENTIFIER}</span>
+
+Version: <span className="text-fd-muted-foreground">{UNTDID_5189_VERSION}</span>
+
+<div className="w-fit">
+  <Link
+    href="https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.5189"
+    target="_blank"
+  >
+    Source
+  </Link>
+</div>
 
 <table>
   <thead>
@@ -19,7 +36,7 @@ import { UNTDID_5189 } from "node-zugferd/codelist/untdid.5189";
     {UNTDID_5189.map(({ code, name, description }) => (
       <tr key={code}>
         <td className="text-center">
-            <code>{code}</code>
+          <code>{code}</code>
         </td>
         <td>{name}</td>
         <td>{description}</td>
