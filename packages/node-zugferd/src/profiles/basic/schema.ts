@@ -2,6 +2,7 @@ import z from "zod";
 import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
+import { UNTDID_5189 } from "../../codelists/generated/untdid.5189";
 
 export const basicSchema = {
 	transaction: {
@@ -754,7 +755,7 @@ The amount of an allowance, without VAT.`,
 									 * - LA = Labeling
 									 */
 									reasonCode: {
-										type: ["AA", "ABL", "ADR", "ADT", "FC", "FI", "LA"],
+										type: UNTDID_5189.map(({ code }) => code),
 										description: `**Invoice line allowance reason code**
 
 The reason for the Invoice line allowance, expressed as a code.

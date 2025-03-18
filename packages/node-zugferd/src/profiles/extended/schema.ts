@@ -2,6 +2,7 @@ import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
 import { z } from "zod";
 import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
+import { UNTDID_5189 } from "../../codelists/generated/untdid.5189";
 
 export const extendedSchema = {
 	/**
@@ -9203,7 +9204,7 @@ The file name of the attached document`,
 											 * Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance reason code and the Invoice line level allowance reason shall indicate the same allowance reason.
 											 */
 											reasonCode: {
-												type: "string",
+												type: UNTDID_5189.map(({ code }) => code),
 												description: `**Reason for the discount (code)**
 
 Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance reason code and the Invoice line level allowance reason shall indicate the same allowance reason.`,

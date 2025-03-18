@@ -1,6 +1,7 @@
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
 import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
+import { UNTDID_5189 } from "../../codelists/generated/untdid.5189";
 
 export const basicWlSchema = {
 	/**
@@ -1620,7 +1621,7 @@ The amount of an allowance, without VAT.`,
 							 * BR-CO-21: Each Document level allowance (BG-20) shall contain a Document level allowance reason (BT-97) or a Document level allowance reason code (BT-98), or both.
 							 */
 							reasonCode: {
-								type: "string",
+								type: UNTDID_5189.map(({ code }) => code),
 								description: `**Document level allowance reason code**
 
 The reason for the document level allowance, expressed as a code.
