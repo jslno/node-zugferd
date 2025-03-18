@@ -1,6 +1,7 @@
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
 import { z } from "zod";
+import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
 
 export const extendedSchema = {
 	/**
@@ -8324,8 +8325,7 @@ Code list issued and maintained by the Connecting Europe Facility.`,
 									 * - Liable for IPSI (Ceuta/Melilla tax)
 									 */
 									categoryCode: {
-										// ! TODO: Add literals
-										type: "string",
+										type: UNTDID_5305.map(({ code }) => code),
 										description: `**VAT category code**
 
 Coded identification of a VAT category.
@@ -9393,8 +9393,7 @@ Code list issued and maintained by the Connecting Europe Facility.`,
 											 * - Liable for IPSI (Ceuta/Melilla tax)
 											 */
 											categoryCode: {
-												// ! TODO: Add correct literals
-												type: "string",
+												type: UNTDID_5305.map(({ code }) => code),
 												description: `**VAT category code**
 
 Coded identification of a VAT category.

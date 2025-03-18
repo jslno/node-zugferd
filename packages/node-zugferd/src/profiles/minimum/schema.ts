@@ -2,6 +2,7 @@ import z from "zod";
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
 import { UNTDID_1001 } from "../../codelists/generated/untdid.1001";
+import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
 
 export const minimumSchema = {
 	/**
@@ -781,7 +782,7 @@ The sum of Invoice line net amount minus allowances plus charges on document lev
 							 * For EXTENDED profile only, BR-O-11, BR-O-12, BR-O-13 and BR-O-14 are not applied.
 							 */
 							categoryCode: {
-								type: ["S", "Z", "E", "AE", "K", "G", "O", "L", "M"],
+								type: UNTDID_5305.map(({ code }) => code),
 								description: `**VAT category code**
 
 Coded identification of a VAT category.

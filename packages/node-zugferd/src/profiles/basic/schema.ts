@@ -1,6 +1,7 @@
 import z from "zod";
 import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
+import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
 
 export const basicSchema = {
 	transaction: {
@@ -559,7 +560,7 @@ For more information on the recommended codes, please refer to subclause 6.3.3.2
 									 * BR-CO-4: Each Invoice line  (BG-25) shall be categorized with an Invoiced item VAT category code (BT-151).
 									 */
 									categoryCode: {
-										type: ["S", "Z", "E", "AE", "K", "G", "O", "L", "M"],
+										type: UNTDID_5305.map(({ code }) => code),
 										description: `**Invoiced item VAT category code**
 
 The VAT category code for the invoiced item.

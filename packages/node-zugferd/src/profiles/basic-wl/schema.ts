@@ -1,5 +1,6 @@
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
+import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
 
 export const basicWlSchema = {
 	/**
@@ -1703,7 +1704,7 @@ BR-CO-21: Each Document level allowance (BG-20) shall contain a Document level a
 									 * BR-32: Each Document level allowance (BG-20) shall have a Document level allowance VAT category code (BT-95).
 									 */
 									categoryCode: {
-										type: ["S", "Z", "E", "AE", "K", "G", "O", "L", "M"],
+										type: UNTDID_5305.map(({ code }) => code),
 										description: `**Document level allowance VAT category code**
 
 A coded identification of what VAT category applies to the document level allowance.
@@ -1940,7 +1941,7 @@ A finite sequence of characters.`,
 									 * BR-37: Each Document level charge (BG-21) shall have a Document level charge VAT category code (BT-102).
 									 */
 									categoryCode: {
-										type: ["S", "Z", "E", "AE", "K", "G", "O", "L", "M"],
+										type: UNTDID_5305.map(({ code }) => code),
 										description: `**Document level charge VAT category code**
 
 A coded identification of what VAT category applies to the document level charge.
