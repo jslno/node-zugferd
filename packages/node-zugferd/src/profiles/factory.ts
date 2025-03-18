@@ -1,6 +1,5 @@
 import type { Profile, ProfileContext } from "../types/profile";
 import type { InferSchema } from "../types/schema";
-import type XSDValidator from "xsd-schema-validator";
 import { ZugferdError } from "../error";
 
 export const createProfile = <P extends Profile>(options: P) => {
@@ -21,7 +20,7 @@ export const createProfile = <P extends Profile>(options: P) => {
 		},
 		validate: async (data: string | Buffer | { file: string }) => {
 			try {
-				let xsdValidator: typeof XSDValidator;
+				let xsdValidator: any;
 				try {
 					xsdValidator = await import("xsd-schema-validator");
 				} catch {
@@ -30,7 +29,7 @@ export const createProfile = <P extends Profile>(options: P) => {
 
 				const res = await xsdValidator.validateXML(data, options.xsdPath);
 
-				return res.valid;
+				return res.valid === true;
 			} catch (err: any) {
 				throw new ZugferdError("INVALID_XML", err?.message || "invalid xml");
 			}
