@@ -1,0 +1,29 @@
+---
+title: UNTDID 5305
+description: Duty or tax or fee category code
+---
+
+import { UNTDID_5305 } from "node-zugferd/codelist/untdid.5305";
+
+## Definition [toc]
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {UNTDID_5305.map(({ code, name, description }) => (
+      <tr key={code}>
+        <td className="text-center">
+            <code>{code}</code>
+        </td>
+        <td>{name}</td>
+        <td>{description}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>

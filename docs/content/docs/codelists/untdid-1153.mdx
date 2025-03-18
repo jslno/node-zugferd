@@ -1,0 +1,29 @@
+---
+title: UNTDID 1153
+description: Reference code qualifier
+---
+
+import { UNTDID_1153 } from "node-zugferd/codelist/untdid.1153";
+
+## Definition [toc]
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {UNTDID_1153.map(({ code, name, description }) => (
+      <tr key={code}>
+        <td className="text-center">
+            <code>{code}</code>
+        </td>
+        <td>{name}</td>
+        <td>{description}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>

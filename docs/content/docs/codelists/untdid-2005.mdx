@@ -1,0 +1,29 @@
+---
+title: UNTDID 2005
+description: Date or time or period function code qualifier
+---
+
+import { UNTDID_2005 } from "node-zugferd/codelist/untdid.2005";
+
+## Definition [toc]
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {UNTDID_2005.map(({ code, name, description }) => (
+      <tr key={code}>
+        <td className="text-center">
+            <code>{code}</code>
+        </td>
+        <td>{name}</td>
+        <td>{description}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>

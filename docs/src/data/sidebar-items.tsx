@@ -6,6 +6,7 @@ import {
 	LibraryIcon,
 	LucideIcon,
 	PencilRulerIcon,
+	ScrollIcon,
 } from "lucide-react";
 import { ReactNode, SVGProps } from "react";
 
@@ -91,6 +92,48 @@ export const contents: Content[] = [
 				),
 				title: "Extended",
 				href: "/docs/profiles/extended",
+			},
+		],
+	},
+	{
+		title: "Codelists",
+		Icon: ScrollIcon,
+		list: [
+			{
+				title: "UNTDID 1001",
+				href: "/docs/codelists/untdid-1001",
+			},
+			{
+				title: "UNTDID 1153",
+				href: "/docs/codelists/untdid-1153",
+			},
+			{
+				title: "UNTDID 2005",
+				href: "/docs/codelists/untdid-2005",
+			},
+			{
+				title: "UNTDID 4451",
+				href: "/docs/codelists/untdid-4451",
+			},
+			{
+				title: "UNTDID 4461",
+				href: "/docs/codelists/untdid-4461",
+			},
+			{
+				title: "UNTDID 5189",
+				href: "/docs/codelists/untdid-5189",
+			},
+			{
+				title: "UNTDID 5305",
+				href: "/docs/codelists/untdid-5305",
+			},
+			{
+				title: "UNTDID 7143",
+				href: "/docs/codelists/untdid-7143",
+			},
+			{
+				title: "UNTDID 7161",
+				href: "/docs/codelists/untdid-7161",
 			},
 		],
 	},
