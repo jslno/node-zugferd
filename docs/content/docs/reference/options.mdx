@@ -1,0 +1,36 @@
+---
+title: Options
+description: node-zugferd configuration options reference.
+---
+
+import { X } from "lucide-react";
+
+List of all the available options for configuring node-zugferd. See [node-zugferd Options](https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/src/types/options.ts)
+
+## `profile`
+
+Specifies the ZUGFeRD profile, defining the structure and required field of the document.
+
+```ts
+import { zugferd } from "node-zugferd";
+import { BASIC } from "node-zugferd/profile/basic";
+
+export const invoicer = zugferd({
+  profile: BASIC,
+});
+```
+
+## `strict?`
+
+Determines whether to skip validation checks.
+Defaults to `true`
+
+```ts
+import { zugferd } from "node-zugferd";
+
+export const invoicer = zugferd({
+  strict: false,
+});
+```
+
+If set to false `xsd-schema-validator` will not be used.
