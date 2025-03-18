@@ -35,7 +35,8 @@
 			".next",
 			".cache",
 			".source",
-			"generated/*"
+			"generated/*",
+			"scripts/*"
 		]
 	}
 }
