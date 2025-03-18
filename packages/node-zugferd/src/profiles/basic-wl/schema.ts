@@ -3,6 +3,7 @@ import { type Schema } from "../../types/schema";
 import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
 import { UNTDID_5189 } from "../../codelists/generated/untdid.5189";
 import { UNTDID_4461 } from "../../codelists/generated/untdid.4461";
+import { UNTDID_7161 } from "../../codelists/generated/untdid.7161";
 
 export const basicWlSchema = {
 	/**
@@ -1834,7 +1835,7 @@ The amount of a charge, without VAT.`,
 							 * BR-CO-22: Each Document level charge (BG-21) shall contain a Document level charge reason (BT-104) or a Document level charge reason code (BT-105), or both.
 							 */
 							reasonCode: {
-								type: ["AA", "ABL", "ADR", "ADT", "FC", "FI", "LA"],
+								type: UNTDID_7161.map(({ code }) => code),
 								description: `**Document level charge reason code**
 
 The reason for the document level charge, expressed as a code.

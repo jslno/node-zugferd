@@ -4,6 +4,7 @@ import { z } from "zod";
 import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
 import { UNTDID_5189 } from "../../codelists/generated/untdid.5189";
 import { UNTDID_1153 } from "../../codelists/generated/untdid.1153";
+import { UNTDID_7161 } from "../../codelists/generated/untdid.7161";
 
 export const extendedSchema = {
 	/**
@@ -9296,7 +9297,7 @@ Only applies if the surcharge is given per unit and is not included in the gross
 											 * Use entries of the UNTDID 7161 code list [6]. The Invoice line charge reason code and the Invoice line charge reason shall indicate the same charge reason.
 											 */
 											reasonCode: {
-												type: "string",
+												type: UNTDID_7161.map(({ code }) => code),
 												description: `**Reason for the charge (code)**
 
 Use entries of the UNTDID 7161 code list [6]. The Invoice line charge reason code and the Invoice line charge reason shall indicate the same charge reason.`,

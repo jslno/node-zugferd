@@ -3,6 +3,7 @@ import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
 import { UNTDID_5189 } from "../../codelists/generated/untdid.5189";
+import { UNTDID_7161 } from "../../codelists/generated/untdid.7161";
 
 export const basicSchema = {
 	transaction: {
@@ -853,7 +854,7 @@ The amount of a charge, without VAT.`,
 									 * BR-CO-24: Each Invoice line charge (BG-28) shall contain an Invoice line  charge  reason  (BT-144)  or  an  Invoice  line  charge reason code (BT-145), or both.
 									 */
 									reasonCode: {
-										type: ["AA", "ABL", "ADR", "ADT", "FC", "FI", "LA"],
+										type: UNTDID_7161.map(({ code }) => code),
 										description: `**Invoice line charge reason code**
 
 The reason for the Invoice line charge, expressed as a code.
