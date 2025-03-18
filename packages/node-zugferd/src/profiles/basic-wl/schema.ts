@@ -2,6 +2,7 @@ import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
 import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
 import { UNTDID_5189 } from "../../codelists/generated/untdid.5189";
+import { UNTDID_4461 } from "../../codelists/generated/untdid.4461";
 
 export const basicWlSchema = {
 	/**
@@ -1445,19 +1446,7 @@ A group of business terms providing information about the payment.`,
 							 * BR-49: A  Payment  instruction  (BG-16)  shall  specify  the  Payment means type code (BT-81).
 							 */
 							typeCode: {
-								type: [
-									"10",
-									"20",
-									"30",
-									"42",
-									"48",
-									"49",
-									"57",
-									"58",
-									"59",
-									"97",
-									"ZZZ",
-								],
+								type: UNTDID_4461.map(({ code }) => code),
 								description: `**Payment means type code**
 
 The means, expressed as code, for how a payment is expected to be or has been settled.
