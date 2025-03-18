@@ -2,13 +2,14 @@ const fs = require("fs/promises");
 const path = require("path");
 
 const main = async () => {
-  const registryData = await fs.readFile(path.resolve(__dirname, "./registry.json"));
+  const registryData = await fs.readFile(
+    path.resolve(__dirname, "./registry.json")
+  );
 
   for (const entry of JSON.parse(registryData.toString("utf-8"))) {
     console.info(
       `
 Updating UNTDID ${entry.id}
-to destination "${entry.destination}"
 from ${entry.source}
 `
     );
@@ -68,9 +69,12 @@ export const UNTDID_${entry.id} = [${mappedData.join("")}${
     }] as const satisfies Untdid${entry.id}Definition[];
 `;
 
-    await fs.writeFile(entry.destination, content);
+    await fs.writeFile(
+      `./packages/node-zugferd/src/codelists/untdid/${entry.id}.ts`,
+      content
+    );
 
-    console.log(`Finished Updating UNTDID ${entry.id}`)
+    console.log(`Finished Updating UNTDID ${entry.id}`);
   }
 };
 

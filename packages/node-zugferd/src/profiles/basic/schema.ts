@@ -1,9 +1,9 @@
 import z from "zod";
 import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
-import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
-import { UNTDID_5189 } from "../../codelists/generated/untdid.5189";
-import { UNTDID_7161 } from "../../codelists/generated/untdid.7161";
+import { UNTDID_5305 } from "../../codelists/untdid/5305";
+import { UNTDID_5189 } from "../../codelists/untdid/5189";
+import { UNTDID_7161 } from "../../codelists/untdid/7161";
 
 export const basicSchema = {
 	transaction: {

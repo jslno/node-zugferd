@@ -1,9 +1,9 @@
 import z from "zod";
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
-import { UNTDID_1001 } from "../../codelists/generated/untdid.1001";
-import { UNTDID_5305 } from "../../codelists/generated/untdid.5305";
-import { UNTDID_2005 } from "../../codelists/generated/untdid.2005";
+import { UNTDID_1001 } from "../../codelists/untdid/1001";
+import { UNTDID_5305 } from "../../codelists/untdid/5305";
+import { UNTDID_2005 } from "../../codelists/untdid/2005";
 
 export const minimumSchema = {
 	/**
