@@ -35,7 +35,7 @@
 			".next",
 			".cache",
 			".source",
-			"./packages/node-zugferd/src/codelists/*.gen",
+			"*.gen.ts",
 			"scripts/*"
 		]
 	}
