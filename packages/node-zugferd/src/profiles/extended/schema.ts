@@ -12,6 +12,7 @@ import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
 import { UNTDID_1229 } from "../../codelists/untdid/1229";
 import { UNTDID_3139 } from "../../codelists/untdid/3139";
 import { UNTDID_3035 } from "../../codelists/untdid/3035";
+import { ISO_6523 } from "../../codelists/iso/6523.gen";
 
 export const extendedSchema = {
 	/**
@@ -673,7 +674,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -1237,7 +1238,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -1784,7 +1785,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -2971,7 +2972,7 @@ If the identification scheme is used, it must be selected from the entries in th
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer Agent legal registration identifier.
@@ -3548,7 +3549,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -3978,7 +3979,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -4533,7 +4534,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -5188,7 +5189,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -5743,7 +5744,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -6740,7 +6741,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Payer legal registration identifier.
@@ -7767,7 +7768,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 													 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 													 */
 													schemeIdentifier: {
-														type: "string",
+														type: ISO_6523.map(({ code }) => code),
 														description: `**Scheme identifier**
 
 The identification scheme identifier of the Payee legal registration identifier.
@@ -9686,7 +9687,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 													 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 													 */
 													schemeIdentifier: {
-														type: "string",
+														type: ISO_6523.map(({ code }) => code),
 														description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -10121,7 +10122,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 													 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 													 */
 													schemeIdentifier: {
-														type: "string",
+														type: ISO_6523.map(({ code }) => code),
 														description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.

@@ -6,6 +6,7 @@ import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
 import { UNTDID_2005 } from "../../codelists/untdid/2005.gen";
 import { VATEX } from "../../codelists/vatex.gen";
 import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
+import { ISO_6523 } from "../../codelists/iso/6523.gen";
 
 export const minimumSchema = {
 	/**
@@ -465,7 +466,7 @@ CHORUSPRO: the identifier of the buyer (public entity) is mandatory and is alway
 											 * For a SIREN or a SIRET, the value of this field is "0002"
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
