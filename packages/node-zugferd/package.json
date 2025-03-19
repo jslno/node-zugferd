@@ -244,6 +244,16 @@
 				"types": "./dist/codelist/vatex.d.cts",
 				"default": "./dist/codelist/vatex.cjs"
 			}
+		},
+		"./codelist/eas": {
+			"import": {
+				"types": "./dist/codelist/eas.d.ts",
+				"default": "./dist/codelist/eas.js"
+			},
+			"require": {
+				"types": "./dist/codelist/eas.d.cts",
+				"default": "./dist/codelist/eas.cjs"
+			}
 		}
 	},
 	"files": ["dist"]
