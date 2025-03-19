@@ -11,6 +11,7 @@ import { EAS } from "../../codelists/eas";
 import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
 import { UNTDID_1229 } from "../../codelists/untdid/1229";
 import { UNTDID_3139 } from "../../codelists/untdid/3139";
+import { UNTDID_3035 } from "../../codelists/untdid/3035";
 
 export const extendedSchema = {
 	/**
@@ -145,7 +146,7 @@ Information only required if the contractual due date differs from due date of t
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Seller Role (code)**
 
 A code qualifying the role of the party
@@ -339,7 +340,7 @@ A fax number for the contact point.`,
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -621,7 +622,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -1184,7 +1185,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -1731,7 +1732,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -2141,7 +2142,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -2911,7 +2912,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -3493,7 +3494,7 @@ A logistics transport movement specified for this supply chain consignment.`,
 							 * - MOP: Market operator
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -3926,7 +3927,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -4481,7 +4482,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -5136,7 +5137,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -5691,7 +5692,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -6181,7 +6182,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * - DL: Factor
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Payee role (code)**
 
 A code qualifying the role of the payee
@@ -6688,7 +6689,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -7715,7 +7716,7 @@ Shall be used when the Payee is different from the Seller. The Payee name may ho
 									 * To be chosen from UNTDID 3035.
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3035.map(({ code }) => code),
 										description: `**Role (code)**
 
 A code qualifying the role
@@ -9634,7 +9635,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 * To be chosen from UNTDID 3035.
 									 */
 									roleCode: {
-										type: "string",
+										type: UNTDID_3035.map(({ code }) => code),
 										description: `**Role (code)**
 
 A code qualifying the role
@@ -10069,7 +10070,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 * To be chosen from UNTDID 3035.
 									 */
 									roleCode: {
-										type: "string",
+										type: UNTDID_3035.map(({ code }) => code),
 										description: `**Role (code)**
 
 A code qualifying the role
