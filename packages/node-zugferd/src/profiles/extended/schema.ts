@@ -10,6 +10,7 @@ import { VATEX } from "../../codelists/vatex";
 import { EAS } from "../../codelists/eas";
 import { CURRENCY_CODES } from "../../codelists/currency-codes";
 import { UNTDID_1229 } from "../../codelists/untdid/1229";
+import { UNTDID_3139 } from "../../codelists/untdid/3139";
 
 export const extendedSchema = {
 	/**
@@ -299,7 +300,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -508,7 +509,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -873,7 +874,7 @@ If a contact person is indicated, either the name or the department is to be tra
 											 * To be chosen from the entries of UNTDID 3139
 											 */
 											typeCode: {
-												type: "string",
+												type: UNTDID_3139.map(({ code }) => code),
 												description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -1436,7 +1437,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -1974,7 +1975,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -2387,7 +2388,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -3170,7 +3171,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -3738,7 +3739,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -4176,7 +4177,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -4731,7 +4732,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -5386,7 +5387,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -5941,7 +5942,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 									 *
 									 * The code specifying the type of trade contact
@@ -6374,7 +6375,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -6938,7 +6939,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -7964,7 +7965,7 @@ If a contact person is indicated, either the name or the department is to be tra
 											 * To be chosen from the entries of UNTDID 3139
 											 */
 											typeCode: {
-												type: "string",
+												type: UNTDID_3139.map(({ code }) => code),
 												description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -9755,7 +9756,7 @@ If a contact person is indicated, either the name or the department is to be tra
 													 * To be chosen from the entries of UNTDID 3139
 													 */
 													typeCode: {
-														type: "string",
+														type: UNTDID_3139.map(({ code }) => code),
 														description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -10196,7 +10197,7 @@ If a contact person is indicated, either the name or the department is to be tra
 											 * To be chosen from the entries of UNTDID 3139
 											 */
 											typeCode: {
-												type: "string",
+												type: UNTDID_3139.map(({ code }) => code),
 												description: `**Type of contact (code)**
 
 The code specifying the type of trade contact

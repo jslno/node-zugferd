@@ -15,6 +15,7 @@ export default defineConfig((env) => {
 			"codelist/untdid.1153": "./src/codelists/untdid/1153.ts",
 			"codelist/untdid.1229": "./src/codelists/untdid/1229.ts",
 			"codelist/untdid.2005": "./src/codelists/untdid/2005.ts",
+			"codelist/untdid.3139": "./src/codelists/untdid/3139.ts",
 			"codelist/untdid.4451": "./src/codelists/untdid/4451.ts",
 			"codelist/untdid.4461": "./src/codelists/untdid/4461.ts",
 			"codelist/untdid.5189": "./src/codelists/untdid/5189.ts",

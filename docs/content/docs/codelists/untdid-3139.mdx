@@ -1,0 +1,43 @@
+---
+title: UNTDID 3139
+description: Contact function code
+---
+
+import {
+  UNTDID_3139,
+  UNTDID_3139_IDENTIFIER,
+} from "node-zugferd/codelist/untdid.3139";
+
+## Definition [toc]
+
+Identifier: <span className="text-fd-muted-foreground">{UNTDID_3139_IDENTIFIER}</span>
+
+<div className="w-fit">
+  <Link
+    href="https://service.unece.org/trade/untdid/d99b/tred/tred1229.htm"
+    target="_blank"
+  >
+    Source
+  </Link>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {UNTDID_3139.map(({ code, name, description }) => (
+      <tr key={code}>
+        <td className="text-center">
+          <code>{code}</code>
+        </td>
+        <td>{name}</td>
+        <td>{description}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
