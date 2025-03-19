@@ -76,7 +76,7 @@ export const UNTDID_${entry.id} = [${mappedData.join("")}${
 `;
 
     await fs.writeFile(
-      `./packages/node-zugferd/src/codelists/untdid/${entry.id}.ts`,
+      `./packages/node-zugferd/src/codelists/untdid/${entry.id}.gen.ts`,
       content
     );
 

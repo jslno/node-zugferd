@@ -1,14 +1,14 @@
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
 import { z } from "zod";
-import { UNTDID_5305 } from "../../codelists/untdid/5305";
-import { UNTDID_5189 } from "../../codelists/untdid/5189";
-import { UNTDID_1153 } from "../../codelists/untdid/1153";
-import { UNTDID_7161 } from "../../codelists/untdid/7161";
-import { UNTDID_4451 } from "../../codelists/untdid/4451";
-import { VATEX } from "../../codelists/vatex";
+import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
+import { UNTDID_5189 } from "../../codelists/untdid/5189.gen";
+import { UNTDID_1153 } from "../../codelists/untdid/1153.gen";
+import { UNTDID_7161 } from "../../codelists/untdid/7161.gen";
+import { UNTDID_4451 } from "../../codelists/untdid/4451.gen";
+import { VATEX } from "../../codelists/vatex.gen";
 import { EAS } from "../../codelists/eas";
-import { CURRENCY_CODES } from "../../codelists/currency-codes";
+import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
 import { UNTDID_1229 } from "../../codelists/untdid/1229";
 import { UNTDID_3139 } from "../../codelists/untdid/3139";
 

@@ -284,6 +284,26 @@
 				"types": "./dist/codelist/currency-codes.d.cts",
 				"default": "./dist/codelist/currency-codes.cjs"
 			}
+		},
+		"./codelist/rec20": {
+			"import": {
+				"types": "./dist/codelist/rec20.d.ts",
+				"default": "./dist/codelist/rec20.js"
+			},
+			"require": {
+				"types": "./dist/codelist/rec20.d.cts",
+				"default": "./dist/codelist/rec20.cjs"
+			}
+		},
+		"./codelist/rec21": {
+			"import": {
+				"types": "./dist/codelist/rec21.d.ts",
+				"default": "./dist/codelist/rec21.js"
+			},
+			"require": {
+				"types": "./dist/codelist/rec21.d.cts",
+				"default": "./dist/codelist/rec21.cjs"
+			}
 		}
 	},
 	"files": ["dist"]

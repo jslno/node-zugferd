@@ -63,7 +63,7 @@ export const CURRENCY_CODES = [${mappedData.join("")}${
   }] as const satisfies CurrencyCodesDefinition[];
 `;
 
-  await fs.writeFile(`./packages/node-zugferd/src/codelists/currency-codes.ts`, content);
+  await fs.writeFile(`./packages/node-zugferd/src/codelists/currency-codes.gen.ts`, content);
 
   console.log(`Finished Updating CURRENCY_CODES`);
 };

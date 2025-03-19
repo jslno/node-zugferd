@@ -57,7 +57,7 @@ Trennblätter A4`,
 						},
 						tradeDelivery: {
 							billedQuantity: {
-								unitMeasureCode: "H87" as any,
+								unitMeasureCode: "H87",
 								amount: "20.0000",
 							},
 						},

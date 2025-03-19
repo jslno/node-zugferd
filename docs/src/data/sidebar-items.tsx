@@ -155,6 +155,10 @@ export const contents: Content[] = [
 				title: "Currency Codes",
 				href: "/docs/codelists/currency-codes",
 			},
+			{
+				title: "UN/ECE Recommendation N°20",
+				href: "/docs/codelists/rec20",
+			},
 		],
 	},
 	{

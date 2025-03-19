@@ -1,12 +1,12 @@
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
-import { UNTDID_5305 } from "../../codelists/untdid/5305";
-import { UNTDID_5189 } from "../../codelists/untdid/5189";
-import { UNTDID_4461 } from "../../codelists/untdid/4461";
-import { UNTDID_7161 } from "../../codelists/untdid/7161";
-import { UNTDID_4451 } from "../../codelists/untdid/4451";
+import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
+import { UNTDID_5189 } from "../../codelists/untdid/5189.gen";
+import { UNTDID_4461 } from "../../codelists/untdid/4461.gen";
+import { UNTDID_7161 } from "../../codelists/untdid/7161.gen";
+import { UNTDID_4451 } from "../../codelists/untdid/4451.gen";
 import { EAS } from "../../codelists/eas";
-import { CURRENCY_CODES } from "../../codelists/currency-codes";
+import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
 
 export const basicWlSchema = {
 	/**

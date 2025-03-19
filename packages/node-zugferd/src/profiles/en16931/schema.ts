@@ -1,8 +1,8 @@
 import z from "zod";
 import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
-import { UNTDID_1153 } from "../../codelists/untdid/1153";
-import { UNTDID_7143 } from "../../codelists/untdid/7143";
+import { UNTDID_1153 } from "../../codelists/untdid/1153.gen";
+import { UNTDID_7143 } from "../../codelists/untdid/7143.gen";
 
 export const en16931Schema = {
 	transaction: {

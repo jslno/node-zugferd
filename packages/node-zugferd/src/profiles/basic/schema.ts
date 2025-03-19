@@ -1,9 +1,11 @@
 import z from "zod";
 import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
-import { UNTDID_5305 } from "../../codelists/untdid/5305";
-import { UNTDID_5189 } from "../../codelists/untdid/5189";
-import { UNTDID_7161 } from "../../codelists/untdid/7161";
+import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
+import { UNTDID_5189 } from "../../codelists/untdid/5189.gen";
+import { UNTDID_7161 } from "../../codelists/untdid/7161.gen";
+import { REC20 } from "../../codelists/rec20.gen";
+import { REC21 } from "../../codelists/rec21.gen";
 
 export const basicSchema = {
 	transaction: {
@@ -227,7 +229,10 @@ Optional, if filled and if BT-148 is present (EN16931 and EXTENDED profiles), th
 											 * BT-130, BT-150 and BT-150-1 must be equal if stated.
 											 */
 											unitMeasureCode: {
-												type: ["LTR", "MTQ", "KGM", "MTR", "C62", "TNE"],
+												type: [
+													...REC20.map(({ code }) => code),
+													...REC21.map(({ code }) => code),
+												],
 												description: `**Item price base quantity unit of measure code**
 
 The unit of measure that applies to the Item price base quantity.
@@ -380,7 +385,10 @@ Optional, if filled and if BT-148 is present (EN16931 and EXTENDED profiles), th
 											 * BT-130, BT-150 and BT-150-1 must be equal if stated.
 											 */
 											unitMeasureCode: {
-												type: ["LTR", "MTQ", "KGM", "MTR", "C62", "TNE"],
+												type: [
+													...REC20.map(({ code }) => code),
+													...REC21.map(({ code }) => code),
+												],
 												description: `**Item price base quantity unit of measure code**
 
 The unit of measure that applies to the Item price base quantity.
@@ -472,7 +480,10 @@ BR-22: Each  Invoice  line  (BG-25)  shall  have  an  Invoiced  quantity (BT-129
 									 * BR-23: An Invoice line (BG-25) shall have an Invoiced quantity unit of measure code (BT-130).
 									 */
 									unitMeasureCode: {
-										type: ["LTR", "MTQ", "KGM", "MTR", "C62", "TNE"],
+										type: [
+											...REC20.map(({ code }) => code),
+											...REC21.map(({ code }) => code),
+										],
 										description: `**Invoiced quantity unit of measure**
 
 The unit of measure that applies to the invoiced quantity.
