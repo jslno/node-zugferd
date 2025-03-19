@@ -135,6 +135,10 @@ export const contents: Content[] = [
 				title: "UNTDID 7161",
 				href: "/docs/codelists/untdid-7161",
 			},
+			{
+				title: "VATEX",
+				href: "/docs/codelists/vatex",
+			},
 		],
 	},
 	{
