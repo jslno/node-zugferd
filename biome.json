@@ -36,6 +36,7 @@
 			".cache",
 			".source",
 			"./packages/node-zugferd/src/codelists/untdid/*",
+			"./packages/node-zugferd/src/codelists/vatex.ts",
 			"scripts/*"
 		]
 	}
