@@ -159,6 +159,10 @@ export const contents: Content[] = [
 				title: "UN/ECE Recommendation N°20",
 				href: "/docs/codelists/rec20",
 			},
+			{
+				title: "UN/ECE Recommendation N°21",
+				href: "/docs/codelists/rec21",
+			},
 		],
 	},
 	{
