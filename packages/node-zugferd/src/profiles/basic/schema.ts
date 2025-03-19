@@ -6,6 +6,7 @@ import { UNTDID_5189 } from "../../codelists/untdid/5189.gen";
 import { UNTDID_7161 } from "../../codelists/untdid/7161.gen";
 import { REC20 } from "../../codelists/rec20.gen";
 import { REC21 } from "../../codelists/rec21.gen";
+import { ISO_6523 } from "../../codelists/iso/6523.gen";
 
 export const basicSchema = {
 	transaction: {
@@ -109,7 +110,7 @@ BR-64: The Item standard identifier (BT-157) shall have a Scheme identifier`,
 									 * The identification scheme shall be identified from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Item standard identifier

@@ -7,6 +7,7 @@ import { UNTDID_7161 } from "../../codelists/untdid/7161.gen";
 import { UNTDID_4451 } from "../../codelists/untdid/4451.gen";
 import { EAS } from "../../codelists/eas";
 import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
+import { ISO_6523 } from "../../codelists/iso/6523.gen";
 
 export const basicWlSchema = {
 	/**
@@ -657,7 +658,7 @@ The global identifier of a buyer is the specific identification given to him by 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer identifier.
@@ -932,7 +933,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. a previo
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Deliver to location identifier.
@@ -1306,7 +1307,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. a previo
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Payee identifier.
@@ -1396,7 +1397,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. the iden
 											 * For a SIREN or a SIRET, the value of this field is "0002"
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Payee legal registration identifier.

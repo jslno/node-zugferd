@@ -258,7 +258,7 @@ If no identification scheme is specified, it must be known by Buyer and Seller.`
 											 * For a SIREN or a SIRET, the value of this field is "0002"
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Seller legal registration identifier.

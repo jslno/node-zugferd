@@ -596,7 +596,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -1159,7 +1159,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -1715,7 +1715,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -2116,7 +2116,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -2886,7 +2886,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -2955,7 +2955,7 @@ If the identification scheme is used, it must be selected from the entries in th
 											 * If the identification scheme is used, it must be selected from the entries in the list published by the ISO/IEC 6523 Maintenance Agency.
 											 */
 											value: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Company Registration Number**
 
 The identification scheme identifier of the Buyer Agent legal registration identifier.
@@ -3901,7 +3901,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -4456,7 +4456,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -5112,7 +5112,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -5666,7 +5666,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -6663,7 +6663,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Payer identifier Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -7682,7 +7682,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Payee scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -8767,7 +8767,7 @@ An item identifier based on a registered scheme.`,
 											 * The identification scheme shall be identified from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Item standard identifier
@@ -9609,7 +9609,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -10044,7 +10044,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
