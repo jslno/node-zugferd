@@ -9,6 +9,7 @@ import { UNTDID_4451 } from "../../codelists/untdid/4451";
 import { VATEX } from "../../codelists/vatex";
 import { EAS } from "../../codelists/eas";
 import { CURRENCY_CODES } from "../../codelists/currency-codes";
+import { UNTDID_1229 } from "../../codelists/untdid/1229";
 
 export const extendedSchema = {
 	/**
@@ -8458,7 +8459,7 @@ The value given here refers to the superior line. In this way, a hierarchy tree 
 					 * Use codes from codelist UNTDID 1229. The following code should be applied per default: 39
 					 */
 					typeCode: {
-						type: "string",
+						type: UNTDID_1229.map(({ code }) => code),
 						description: `**Type of the inovice line item (Code)**
 
 Indicating whether an item includes the prices which must be taken into account when calculating the invoice amount, or whether it only contains information.

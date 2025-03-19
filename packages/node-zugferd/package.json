@@ -165,6 +165,16 @@
 				"default": "./dist/codelist/untdid.1153.cjs"
 			}
 		},
+		"./codelist/untdid.1229": {
+			"import": {
+				"types": "./dist/codelist/untdid.1229.d.ts",
+				"default": "./dist/codelist/untdid.1229.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.1229.d.cts",
+				"default": "./dist/codelist/untdid.1229.cjs"
+			}
+		},
 		"./codelist/untdid.2005": {
 			"import": {
 				"types": "./dist/codelist/untdid.2005.d.ts",

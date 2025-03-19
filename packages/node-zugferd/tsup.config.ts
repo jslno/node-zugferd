@@ -13,6 +13,7 @@ export default defineConfig((env) => {
 			types: "./src/types/index.ts",
 			"codelist/untdid.1001": "./src/codelists/untdid/1001.ts",
 			"codelist/untdid.1153": "./src/codelists/untdid/1153.ts",
+			"codelist/untdid.1229": "./src/codelists/untdid/1229.ts",
 			"codelist/untdid.2005": "./src/codelists/untdid/2005.ts",
 			"codelist/untdid.4451": "./src/codelists/untdid/4451.ts",
 			"codelist/untdid.4461": "./src/codelists/untdid/4461.ts",
