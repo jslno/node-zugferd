@@ -7,6 +7,7 @@ import { UNTDID_1153 } from "../../codelists/untdid/1153";
 import { UNTDID_7161 } from "../../codelists/untdid/7161";
 import { UNTDID_4451 } from "../../codelists/untdid/4451";
 import { VATEX } from "../../codelists/vatex";
+import { EAS } from "../../codelists/eas";
 
 export const extendedSchema = {
 	/**
@@ -1064,7 +1065,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -1625,7 +1626,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -2046,7 +2047,7 @@ An e-mail address for the contact point.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -2577,7 +2578,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -3356,7 +3357,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -3810,7 +3811,7 @@ An e-mail address for the contact point.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -4366,7 +4367,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -4921,7 +4922,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -5575,7 +5576,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -6130,7 +6131,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -6565,7 +6566,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -7127,7 +7128,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -8153,7 +8154,7 @@ Such as a region, a county, a state, a province, etc.`,
 													 * Scheme identifier
 													 */
 													schemeIdentifier: {
-														type: "string",
+														type: EAS.map(({ code }) => code),
 														description: "Scheme identifier",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -9948,7 +9949,7 @@ Such as a region, a county, a state, a province, etc.`,
 													 * Scheme identifier
 													 */
 													schemeIdentifier: {
-														type: "string",
+														type: EAS.map(({ code }) => code),
 														description: "Scheme identifier",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -10372,7 +10373,7 @@ Such as a region, a county, a state, a province, etc.`,
 													 * Scheme identifier
 													 */
 													schemeIdentifier: {
-														type: "string",
+														type: EAS.map(({ code }) => code),
 														description: "Scheme identifier",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",

@@ -139,6 +139,10 @@ export const contents: Content[] = [
 				title: "VATEX",
 				href: "/docs/codelists/vatex",
 			},
+			{
+				title: "EAS",
+				href: "/docs/codelists/eas",
+			},
 		],
 	},
 	{

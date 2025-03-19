@@ -5,6 +5,7 @@ import { UNTDID_5189 } from "../../codelists/untdid/5189";
 import { UNTDID_4461 } from "../../codelists/untdid/4461";
 import { UNTDID_7161 } from "../../codelists/untdid/7161";
 import { UNTDID_4451 } from "../../codelists/untdid/4451";
+import { EAS } from "../../codelists/eas";
 
 export const basicWlSchema = {
 	/**
@@ -373,7 +374,7 @@ Identifies the Seller's electronic address to which a business document may be d
 											 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Seller electronic address
@@ -814,7 +815,7 @@ Identifies the Buyer's electronic address to which a business document should be
 											 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer electronic address.
