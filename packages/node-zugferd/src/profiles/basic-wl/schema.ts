@@ -6,6 +6,7 @@ import { UNTDID_4461 } from "../../codelists/untdid/4461";
 import { UNTDID_7161 } from "../../codelists/untdid/7161";
 import { UNTDID_4451 } from "../../codelists/untdid/4451";
 import { EAS } from "../../codelists/eas";
+import { CURRENCY_CODES } from "../../codelists/currency-codes";
 
 export const basicWlSchema = {
 	/**
@@ -1229,7 +1230,7 @@ If remittance information is to be mapped to the End To End Identification field
 					 * The lists of valid currencies are registered with the ISO 4217 Maintenance Agency ""Codes for the representation of currencies and funds"". Please refer to Article 230 of the Council Directive 2006/112/EC [2] for more information.
 					 */
 					vatAccountingCurrencyCode: {
-						type: "string",
+						type: CURRENCY_CODES.map(({ code }) => code),
 						description: `**VAT accounting currency code**
 
 The currency used for VAT accounting and reporting purposes as accepted or required in the country of the Seller.

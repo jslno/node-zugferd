@@ -254,6 +254,16 @@
 				"types": "./dist/codelist/eas.d.cts",
 				"default": "./dist/codelist/eas.cjs"
 			}
+		},
+		"./codelist/currency-codes": {
+			"import": {
+				"types": "./dist/codelist/currency-codes.d.ts",
+				"default": "./dist/codelist/currency-codes.js"
+			},
+			"require": {
+				"types": "./dist/codelist/currency-codes.d.cts",
+				"default": "./dist/codelist/currency-codes.cjs"
+			}
 		}
 	},
 	"files": ["dist"]

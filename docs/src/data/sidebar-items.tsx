@@ -143,6 +143,10 @@ export const contents: Content[] = [
 				title: "EAS",
 				href: "/docs/codelists/eas",
 			},
+			{
+				title: "Currency Codes",
+				href: "/docs/codelists/currency-codes",
+			},
 		],
 	},
 	{

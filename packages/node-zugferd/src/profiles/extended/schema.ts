@@ -8,6 +8,7 @@ import { UNTDID_7161 } from "../../codelists/untdid/7161";
 import { UNTDID_4451 } from "../../codelists/untdid/4451";
 import { VATEX } from "../../codelists/vatex";
 import { EAS } from "../../codelists/eas";
+import { CURRENCY_CODES } from "../../codelists/currency-codes";
 
 export const extendedSchema = {
 	/**
@@ -7176,7 +7177,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Invoice currency
 							 */
 							invoiceCurrency: {
-								type: "string",
+								type: CURRENCY_CODES.map(({ code }) => code),
 								description: "Invoice currency",
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:SourceCurrencyCode",
@@ -7185,7 +7186,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Local currency
 							 */
 							localCurrency: {
-								type: "string",
+								type: CURRENCY_CODES.map(({ code }) => code),
 								description: "Local currency",
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:TargetCurrencyCode",

@@ -5,6 +5,7 @@ import { UNTDID_1001 } from "../../codelists/untdid/1001";
 import { UNTDID_5305 } from "../../codelists/untdid/5305";
 import { UNTDID_2005 } from "../../codelists/untdid/2005";
 import { VATEX } from "../../codelists/vatex";
+import { CURRENCY_CODES } from "../../codelists/currency-codes";
 
 export const minimumSchema = {
 	/**
@@ -528,7 +529,7 @@ CHORUS PRO : not used`,
 					 * BR-5: An Invoice shall have an Invoice currency code (BT-5).
 					 */
 					currencyCode: {
-						type: "string",
+						type: CURRENCY_CODES.map(({ code }) => code),
 						description: `**Invoice currency code**
 
 The currency in which all Invoice amounts are given, except for the Total VAT amount in accounting currency.
@@ -618,7 +619,7 @@ The Invoice total VAT amount is the sum of all VAT category tax amounts.`,
 									 * Invoice currency code
 									 */
 									currencyCode: {
-										type: "string",
+										type: CURRENCY_CODES.map(({ code }) => code),
 										description: "Invoice currency code",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[0]/@currencyID",

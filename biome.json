@@ -37,6 +37,7 @@
 			".source",
 			"./packages/node-zugferd/src/codelists/untdid/*",
 			"./packages/node-zugferd/src/codelists/vatex.ts",
+			"./packages/node-zugferd/src/codelists/currency-codes.ts",
 			"scripts/*"
 		]
 	}
