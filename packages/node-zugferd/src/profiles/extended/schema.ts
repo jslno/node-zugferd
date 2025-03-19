@@ -1,11 +1,18 @@
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
 import { z } from "zod";
-import { UNTDID_5305 } from "../../codelists/untdid/5305";
-import { UNTDID_5189 } from "../../codelists/untdid/5189";
-import { UNTDID_1153 } from "../../codelists/untdid/1153";
-import { UNTDID_7161 } from "../../codelists/untdid/7161";
-import { UNTDID_4451 } from "../../codelists/untdid/4451";
+import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
+import { UNTDID_5189 } from "../../codelists/untdid/5189.gen";
+import { UNTDID_1153 } from "../../codelists/untdid/1153.gen";
+import { UNTDID_7161 } from "../../codelists/untdid/7161.gen";
+import { UNTDID_4451 } from "../../codelists/untdid/4451.gen";
+import { VATEX } from "../../codelists/vatex.gen";
+import { EAS } from "../../codelists/eas";
+import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
+import { UNTDID_1229 } from "../../codelists/untdid/1229";
+import { UNTDID_3139 } from "../../codelists/untdid/3139";
+import { UNTDID_3035 } from "../../codelists/untdid/3035";
+import { ISO_6523 } from "../../codelists/iso/6523.gen";
 
 export const extendedSchema = {
 	/**
@@ -140,7 +147,7 @@ Information only required if the contractual due date differs from due date of t
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Seller Role (code)**
 
 A code qualifying the role of the party
@@ -295,7 +302,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -334,7 +341,7 @@ A fax number for the contact point.`,
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -504,7 +511,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -589,7 +596,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -616,7 +623,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -667,7 +674,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -869,7 +876,7 @@ If a contact person is indicated, either the name or the department is to be tra
 											 * To be chosen from the entries of UNTDID 3139
 											 */
 											typeCode: {
-												type: "string",
+												type: UNTDID_3139.map(({ code }) => code),
 												description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -1063,7 +1070,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -1152,7 +1159,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -1179,7 +1186,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -1231,7 +1238,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -1432,7 +1439,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -1624,7 +1631,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -1708,7 +1715,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -1726,7 +1733,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -1778,7 +1785,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -1970,7 +1977,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -2045,7 +2052,7 @@ An e-mail address for the contact point.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -2109,7 +2116,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -2136,7 +2143,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -2383,7 +2390,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -2576,7 +2583,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -2879,7 +2886,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -2906,7 +2913,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -2948,7 +2955,7 @@ If the identification scheme is used, it must be selected from the entries in th
 											 * If the identification scheme is used, it must be selected from the entries in the list published by the ISO/IEC 6523 Maintenance Agency.
 											 */
 											value: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Company Registration Number**
 
 The identification scheme identifier of the Buyer Agent legal registration identifier.
@@ -2965,7 +2972,7 @@ If the identification scheme is used, it must be selected from the entries in th
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer Agent legal registration identifier.
@@ -3166,7 +3173,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -3355,7 +3362,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -3488,7 +3495,7 @@ A logistics transport movement specified for this supply chain consignment.`,
 							 * - MOP: Market operator
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -3542,7 +3549,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -3734,7 +3741,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -3809,7 +3816,7 @@ An e-mail address for the contact point.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -3894,7 +3901,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -3921,7 +3928,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -3972,7 +3979,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -4172,7 +4179,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -4365,7 +4372,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -4449,7 +4456,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -4476,7 +4483,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -4527,7 +4534,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -4727,7 +4734,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -4920,7 +4927,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -5105,7 +5112,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -5131,7 +5138,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -5182,7 +5189,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -5382,7 +5389,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -5574,7 +5581,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -5659,7 +5666,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -5686,7 +5693,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -5737,7 +5744,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -5937,7 +5944,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 									 *
 									 * The code specifying the type of trade contact
@@ -6129,7 +6136,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -6176,7 +6183,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * - DL: Factor
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Payee role (code)**
 
 A code qualifying the role of the payee
@@ -6370,7 +6377,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -6564,7 +6571,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -6656,7 +6663,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Payer identifier Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -6683,7 +6690,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
-								type: "string",
+								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -6734,7 +6741,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Payer legal registration identifier.
@@ -6934,7 +6941,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -7126,7 +7133,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -7174,7 +7181,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Invoice currency
 							 */
 							invoiceCurrency: {
-								type: "string",
+								type: CURRENCY_CODES.map(({ code }) => code),
 								description: "Invoice currency",
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:SourceCurrencyCode",
@@ -7183,7 +7190,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Local currency
 							 */
 							localCurrency: {
-								type: "string",
+								type: CURRENCY_CODES.map(({ code }) => code),
 								description: "Local currency",
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:TargetCurrencyCode",
@@ -7675,7 +7682,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Payee scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -7710,7 +7717,7 @@ Shall be used when the Payee is different from the Seller. The Payee name may ho
 									 * To be chosen from UNTDID 3035.
 									 */
 									typeCode: {
-										type: "string",
+										type: UNTDID_3035.map(({ code }) => code),
 										description: `**Role (code)**
 
 A code qualifying the role
@@ -7761,7 +7768,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 													 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 													 */
 													schemeIdentifier: {
-														type: "string",
+														type: ISO_6523.map(({ code }) => code),
 														description: `**Scheme identifier**
 
 The identification scheme identifier of the Payee legal registration identifier.
@@ -7960,7 +7967,7 @@ If a contact person is indicated, either the name or the department is to be tra
 											 * To be chosen from the entries of UNTDID 3139
 											 */
 											typeCode: {
-												type: "string",
+												type: UNTDID_3139.map(({ code }) => code),
 												description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -8152,7 +8159,7 @@ Such as a region, a county, a state, a province, etc.`,
 													 * Scheme identifier
 													 */
 													schemeIdentifier: {
-														type: "string",
+														type: EAS.map(({ code }) => code),
 														description: "Scheme identifier",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -8302,7 +8309,7 @@ A textual statement of the reason why the amount is exempted from VAT or why no 
 									 * Code list issued and maintained by the Connecting Europe Facility.
 									 */
 									exemptionReasonCode: {
-										type: "string",
+										type: VATEX.map(({ code }) => code),
 										description: `**VAT exemption reason code**
 
 A coded statement of the reason for why the amount is exempted from VAT.
@@ -8455,7 +8462,7 @@ The value given here refers to the superior line. In this way, a hierarchy tree 
 					 * Use codes from codelist UNTDID 1229. The following code should be applied per default: 39
 					 */
 					typeCode: {
-						type: "string",
+						type: UNTDID_1229.map(({ code }) => code),
 						description: `**Type of the inovice line item (Code)**
 
 Indicating whether an item includes the prices which must be taken into account when calculating the invoice amount, or whether it only contains information.
@@ -8760,7 +8767,7 @@ An item identifier based on a registered scheme.`,
 											 * The identification scheme shall be identified from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Item standard identifier
@@ -9370,7 +9377,7 @@ A textual statement of the reason why the amount is exempted from VAT or why no 
 											 * Code list issued and maintained by the Connecting Europe Facility.
 											 */
 											exemptionReasonCode: {
-												type: "string",
+												type: VATEX.map(({ code }) => code),
 												description: `**VAT exemption reason code**
 
 A coded statement of the reason for why the amount is exempted from VAT.
@@ -9602,7 +9609,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -9629,7 +9636,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 * To be chosen from UNTDID 3035.
 									 */
 									roleCode: {
-										type: "string",
+										type: UNTDID_3035.map(({ code }) => code),
 										description: `**Role (code)**
 
 A code qualifying the role
@@ -9680,7 +9687,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 													 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 													 */
 													schemeIdentifier: {
-														type: "string",
+														type: ISO_6523.map(({ code }) => code),
 														description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -9751,7 +9758,7 @@ If a contact person is indicated, either the name or the department is to be tra
 													 * To be chosen from the entries of UNTDID 3139
 													 */
 													typeCode: {
-														type: "string",
+														type: UNTDID_3139.map(({ code }) => code),
 														description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -9947,7 +9954,7 @@ Such as a region, a county, a state, a province, etc.`,
 													 * Scheme identifier
 													 */
 													schemeIdentifier: {
-														type: "string",
+														type: EAS.map(({ code }) => code),
 														description: "Scheme identifier",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -10037,7 +10044,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -10064,7 +10071,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 * To be chosen from UNTDID 3035.
 									 */
 									roleCode: {
-										type: "string",
+										type: UNTDID_3035.map(({ code }) => code),
 										description: `**Role (code)**
 
 A code qualifying the role
@@ -10115,7 +10122,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 													 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 													 */
 													schemeIdentifier: {
-														type: "string",
+														type: ISO_6523.map(({ code }) => code),
 														description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -10192,7 +10199,7 @@ If a contact person is indicated, either the name or the department is to be tra
 											 * To be chosen from the entries of UNTDID 3139
 											 */
 											typeCode: {
-												type: "string",
+												type: UNTDID_3139.map(({ code }) => code),
 												description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -10371,7 +10378,7 @@ Such as a region, a county, a state, a province, etc.`,
 													 * Scheme identifier
 													 */
 													schemeIdentifier: {
-														type: "string",
+														type: EAS.map(({ code }) => code),
 														description: "Scheme identifier",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -10623,7 +10630,7 @@ A textual statement of the reason why the amount is exempted from VAT or why no 
 									 * Code list issued and maintained by the Connecting Europe Facility.
 									 */
 									exemptionReasonCode: {
-										type: "string",
+										type: VATEX.map(({ code }) => code),
 										description: `**VAT exemption reason code**
 
 A coded statement of the reason for why the amount is exempted from VAT.

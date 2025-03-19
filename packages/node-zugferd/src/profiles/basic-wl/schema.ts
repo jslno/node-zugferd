@@ -1,10 +1,13 @@
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
-import { UNTDID_5305 } from "../../codelists/untdid/5305";
-import { UNTDID_5189 } from "../../codelists/untdid/5189";
-import { UNTDID_4461 } from "../../codelists/untdid/4461";
-import { UNTDID_7161 } from "../../codelists/untdid/7161";
-import { UNTDID_4451 } from "../../codelists/untdid/4451";
+import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
+import { UNTDID_5189 } from "../../codelists/untdid/5189.gen";
+import { UNTDID_4461 } from "../../codelists/untdid/4461.gen";
+import { UNTDID_7161 } from "../../codelists/untdid/7161.gen";
+import { UNTDID_4451 } from "../../codelists/untdid/4451.gen";
+import { EAS } from "../../codelists/eas";
+import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
+import { ISO_6523 } from "../../codelists/iso/6523.gen";
 
 export const basicWlSchema = {
 	/**
@@ -373,7 +376,7 @@ Identifies the Seller's electronic address to which a business document may be d
 											 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Seller electronic address
@@ -655,7 +658,7 @@ The global identifier of a buyer is the specific identification given to him by 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer identifier.
@@ -814,7 +817,7 @@ Identifies the Buyer's electronic address to which a business document should be
 											 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: EAS.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer electronic address.
@@ -930,7 +933,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. a previo
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Deliver to location identifier.
@@ -1228,7 +1231,7 @@ If remittance information is to be mapped to the End To End Identification field
 					 * The lists of valid currencies are registered with the ISO 4217 Maintenance Agency ""Codes for the representation of currencies and funds"". Please refer to Article 230 of the Council Directive 2006/112/EC [2] for more information.
 					 */
 					vatAccountingCurrencyCode: {
-						type: "string",
+						type: CURRENCY_CODES.map(({ code }) => code),
 						description: `**VAT accounting currency code**
 
 The currency used for VAT accounting and reporting purposes as accepted or required in the country of the Seller.
@@ -1304,7 +1307,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. a previo
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Payee identifier.
@@ -1394,7 +1397,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. the iden
 											 * For a SIREN or a SIRET, the value of this field is "0002"
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Payee legal registration identifier.

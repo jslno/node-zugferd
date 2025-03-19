@@ -100,6 +100,10 @@ export const contents: Content[] = [
 		Icon: ScrollIcon,
 		list: [
 			{
+				title: "ISO 6523",
+				href: "/docs/codelists/iso-6523",
+			},
+			{
 				title: "UNTDID 1001",
 				href: "/docs/codelists/untdid-1001",
 			},
@@ -108,8 +112,20 @@ export const contents: Content[] = [
 				href: "/docs/codelists/untdid-1153",
 			},
 			{
+				title: "UNTDID 1229",
+				href: "/docs/codelists/untdid-1229",
+			},
+			{
 				title: "UNTDID 2005",
 				href: "/docs/codelists/untdid-2005",
+			},
+			{
+				title: "UNTDID 3035",
+				href: "/docs/codelists/untdid-3035",
+			},
+			{
+				title: "UNTDID 3139",
+				href: "/docs/codelists/untdid-3139",
 			},
 			{
 				title: "UNTDID 4451",
@@ -134,6 +150,26 @@ export const contents: Content[] = [
 			{
 				title: "UNTDID 7161",
 				href: "/docs/codelists/untdid-7161",
+			},
+			{
+				title: "VATEX",
+				href: "/docs/codelists/vatex",
+			},
+			{
+				title: "EAS",
+				href: "/docs/codelists/eas",
+			},
+			{
+				title: "Currency Codes",
+				href: "/docs/codelists/currency-codes",
+			},
+			{
+				title: "UN/ECE Recommendation N°20",
+				href: "/docs/codelists/rec20",
+			},
+			{
+				title: "UN/ECE Recommendation N°21",
+				href: "/docs/codelists/rec21",
 			},
 		],
 	},

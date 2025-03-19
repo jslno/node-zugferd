@@ -145,6 +145,16 @@
 				"default": "./dist/types.cjs"
 			}
 		},
+		"./codelist/iso.6523": {
+			"import": {
+				"types": "./dist/codelist/iso.6523.d.ts",
+				"default": "./dist/codelist/iso.6523.js"
+			},
+			"require": {
+				"types": "./dist/codelist/iso.6523.d.cts",
+				"default": "./dist/codelist/iso.6523.cjs"
+			}
+		},
 		"./codelist/untdid.1001": {
 			"import": {
 				"types": "./dist/codelist/untdid.1001.d.ts",
@@ -165,6 +175,16 @@
 				"default": "./dist/codelist/untdid.1153.cjs"
 			}
 		},
+		"./codelist/untdid.1229": {
+			"import": {
+				"types": "./dist/codelist/untdid.1229.d.ts",
+				"default": "./dist/codelist/untdid.1229.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.1229.d.cts",
+				"default": "./dist/codelist/untdid.1229.cjs"
+			}
+		},
 		"./codelist/untdid.2005": {
 			"import": {
 				"types": "./dist/codelist/untdid.2005.d.ts",
@@ -173,6 +193,26 @@
 			"require": {
 				"types": "./dist/codelist/untdid.2005.d.cts",
 				"default": "./dist/codelist/untdid.2005.cjs"
+			}
+		},
+		"./codelist/untdid.3035": {
+			"import": {
+				"types": "./dist/codelist/untdid.3035.d.ts",
+				"default": "./dist/codelist/untdid.3035.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.3035.d.cts",
+				"default": "./dist/codelist/untdid.3035.cjs"
+			}
+		},
+		"./codelist/untdid.3139": {
+			"import": {
+				"types": "./dist/codelist/untdid.3139.d.ts",
+				"default": "./dist/codelist/untdid.3139.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.3139.d.cts",
+				"default": "./dist/codelist/untdid.3139.cjs"
 			}
 		},
 		"./codelist/untdid.4451": {
@@ -233,6 +273,56 @@
 			"require": {
 				"types": "./dist/codelist/untdid.7161.d.cts",
 				"default": "./dist/codelist/untdid.7161.cjs"
+			}
+		},
+		"./codelist/vatex": {
+			"import": {
+				"types": "./dist/codelist/vatex.d.ts",
+				"default": "./dist/codelist/vatex.js"
+			},
+			"require": {
+				"types": "./dist/codelist/vatex.d.cts",
+				"default": "./dist/codelist/vatex.cjs"
+			}
+		},
+		"./codelist/eas": {
+			"import": {
+				"types": "./dist/codelist/eas.d.ts",
+				"default": "./dist/codelist/eas.js"
+			},
+			"require": {
+				"types": "./dist/codelist/eas.d.cts",
+				"default": "./dist/codelist/eas.cjs"
+			}
+		},
+		"./codelist/currency-codes": {
+			"import": {
+				"types": "./dist/codelist/currency-codes.d.ts",
+				"default": "./dist/codelist/currency-codes.js"
+			},
+			"require": {
+				"types": "./dist/codelist/currency-codes.d.cts",
+				"default": "./dist/codelist/currency-codes.cjs"
+			}
+		},
+		"./codelist/rec20": {
+			"import": {
+				"types": "./dist/codelist/rec20.d.ts",
+				"default": "./dist/codelist/rec20.js"
+			},
+			"require": {
+				"types": "./dist/codelist/rec20.d.cts",
+				"default": "./dist/codelist/rec20.cjs"
+			}
+		},
+		"./codelist/rec21": {
+			"import": {
+				"types": "./dist/codelist/rec21.d.ts",
+				"default": "./dist/codelist/rec21.js"
+			},
+			"require": {
+				"types": "./dist/codelist/rec21.d.cts",
+				"default": "./dist/codelist/rec21.cjs"
 			}
 		}
 	},

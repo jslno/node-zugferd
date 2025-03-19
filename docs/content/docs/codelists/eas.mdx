@@ -1,0 +1,53 @@
+---
+title: EAS
+description: Electronic Address Scheme code list
+---
+
+import { EAS, EAS_IDENTIFIER, EAS_VERSION } from "node-zugferd/codelist/eas";
+import { MinusIcon } from "lucide-react";
+
+## Definition [toc]
+
+Identifier: <span className="text-fd-muted-foreground">{EAS_IDENTIFIER}</span>
+
+Version: <span className="text-fd-muted-foreground">{EAS_VERSION}</span>
+
+<div className="w-fit">
+  <Link
+    href="https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-CEN/TC434EN16931"
+    target="_blank"
+  >
+    Source
+  </Link>
+</div>
+
+```ts
+import { EAS, type EASCodes } from "node-zugferd/codelist/eas";
+```
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Remark</th>
+    </tr>
+  </thead>
+  <tbody>
+    {EAS.map(({ code, name, remark }) => (
+      <tr key={code}>
+        <td className="text-center">
+          <code>{code}</code>
+        </td>
+        <td>{name}</td>
+        <td>
+          {!remark ? (
+            <MinusIcon className="mx-auto text-fd-muted-foreground" />
+          ) : (
+            remark
+          )}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
