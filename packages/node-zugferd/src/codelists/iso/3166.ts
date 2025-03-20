@@ -1235,7 +1235,7 @@ export const ISO_3166 = [
 	{
 		name: "Myanmar",
 		code: {
-			alpha2: "MN",
+			alpha2: "MM",
 			alpha3: "MMR",
 			numeric: "104",
 		},
