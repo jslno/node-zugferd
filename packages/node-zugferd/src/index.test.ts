@@ -157,7 +157,7 @@ Trennblätter A4`,
 
 			const facturX = new TextDecoder("utf-8").decode(facturXFile?.data);
 
-			expect(facturX).toEqual(invoice.toXML());
+			expect(facturX).toEqual(await invoice.toXML());
 		});
 	});
 });
