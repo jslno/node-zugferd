@@ -391,7 +391,7 @@ The file name of the attached document`,
 						type: "object[]",
 						required: false,
 						description: "Details on tender or lot reference",
-						validator: z.array(z.any()).max(1),
+						validator: z.array(z.any()).max(1).optional(),
 						sibling: (data) =>
 							data.transaction.tradeAgreement.supportingDocuments,
 						group: "tender-lot-reference",
@@ -427,10 +427,10 @@ In some countries a reference to the call for tender that has led to the contrac
 						type: "object[]",
 						required: false,
 						sibling: (data) => [
-							...data.transaction.tradeAgreement.tenderOrLotReference,
-							...data.transaction.tradeAgreement.supportingDocuments,
+							...(data.transaction.tradeAgreement.tenderOrLotReference || []),
+							...(data.transaction.tradeAgreement.supportingDocuments || []),
 						],
-						validator: z.array(z.any()).max(1),
+						validator: z.array(z.any()).max(1).optional(),
 						group: "object-identifier",
 						shape: {
 							/**
