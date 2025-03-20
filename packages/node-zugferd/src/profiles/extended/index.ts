@@ -5,6 +5,7 @@ import { extendedSchema } from "./schema";
 import { getAsset } from "../../utils/asset";
 
 export const EXTENDED = createProfile({
+	id: "extended",
 	contextParameter:
 		"urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended",
 	extends: [...EN16931.extends, EN16931],

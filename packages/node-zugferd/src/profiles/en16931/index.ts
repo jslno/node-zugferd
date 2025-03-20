@@ -5,6 +5,7 @@ import { en16931Schema } from "./schema";
 import { getAsset } from "../../utils/asset";
 
 export const EN16931 = createProfile({
+	id: "en16931",
 	contextParameter: "urn:cen.eu:en16931:2017",
 	extends: [...BASIC.extends, BASIC],
 	schema: en16931Schema,

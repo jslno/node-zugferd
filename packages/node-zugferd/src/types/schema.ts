@@ -18,6 +18,7 @@ export type FieldType =
 type Primitive = string | number | Date | null | undefined | object;
 
 export type SchemaFieldConfig<T extends FieldType = FieldType> = {
+	key?: string;
 	defaultValue?: Primitive | (() => Primitive);
 	validator?: ZodSchema;
 	xpath?: string;
