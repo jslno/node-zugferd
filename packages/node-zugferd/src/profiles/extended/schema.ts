@@ -13,6 +13,7 @@ import { UNTDID_1229 } from "../../codelists/untdid/1229";
 import { UNTDID_3139 } from "../../codelists/untdid/3139";
 import { UNTDID_3035 } from "../../codelists/untdid/3035";
 import { ISO_6523 } from "../../codelists/iso/6523.gen";
+import { ISO_3166 } from "../../codelists/iso/3166";
 
 export const extendedSchema = {
 	/**
@@ -259,7 +260,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -470,7 +471,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -802,7 +803,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -1021,7 +1022,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
 A code that identifies the country.
@@ -1363,7 +1364,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -1582,7 +1583,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
 A code that identifies the country.
@@ -1910,7 +1911,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -2314,7 +2315,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -2534,7 +2535,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
 A code that identifies the country.
@@ -3097,7 +3098,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -3312,7 +3313,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
 A code that identifies the country.
@@ -3674,7 +3675,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -4104,7 +4105,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -4323,7 +4324,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
 A code that identifies the country.
@@ -4659,7 +4660,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -4878,7 +4879,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
 A code that identifies the country.
@@ -5314,7 +5315,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -5532,7 +5533,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
 A code that identifies the country.
@@ -5869,7 +5870,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -6087,7 +6088,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
 A code that identifies the country.
@@ -6310,7 +6311,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -6522,7 +6523,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
 A code that identifies the country.
@@ -6866,7 +6867,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -7084,7 +7085,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
 A code that identifies the country.
@@ -7892,7 +7893,7 @@ The common name of the city, town or village.`,
 													 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 													 */
 													countryCode: {
-														type: "string",
+														type: ISO_3166.map(({ code }) => code.alpha2),
 														description: `**Country code**
 
 A code that identifies the country.
@@ -8110,7 +8111,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -9905,7 +9906,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.
@@ -10329,7 +10330,7 @@ An additional address line in an address that can be used to give further detail
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: "string",
+												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
 A code that identifies the country.

@@ -145,6 +145,16 @@
 				"default": "./dist/types.cjs"
 			}
 		},
+		"./codelist/iso.3166": {
+			"import": {
+				"types": "./dist/codelist/iso.3166.d.ts",
+				"default": "./dist/codelist/iso.3166.js"
+			},
+			"require": {
+				"types": "./dist/codelist/iso.3166.d.cts",
+				"default": "./dist/codelist/iso.3166.cjs"
+			}
+		},
 		"./codelist/iso.6523": {
 			"import": {
 				"types": "./dist/codelist/iso.6523.d.ts",

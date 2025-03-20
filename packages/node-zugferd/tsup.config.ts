@@ -11,6 +11,7 @@ export default defineConfig((env) => {
 			"profile/en16931": "./src/profiles/en16931/index.ts",
 			"profile/extended": "./src/profiles/extended/index.ts",
 			types: "./src/types/index.ts",
+			"codelist/iso.3166": "./src/codelists/iso/3166.ts",
 			"codelist/iso.6523": "./src/codelists/iso/6523.gen.ts",
 			"codelist/untdid.1001": "./src/codelists/untdid/1001.gen.ts",
 			"codelist/untdid.1153": "./src/codelists/untdid/1153.gen.ts",
