@@ -243,8 +243,8 @@ export const basicWlMask = {
 						{
 							description: "BT-20",
 							dueDate: "BT-9",
-							mandateReferenceIdentifier: "BT-89"
-						}
+							mandateReferenceIdentifier: "BT-89",
+						},
 					],
 					monetarySummation: [
 						"BG-22",
@@ -263,15 +263,15 @@ export const basicWlMask = {
 						"BG-3",
 						{
 							reference: "BT-25",
-							issueDate: "BT-26"
-						}
+							issueDate: "BT-26",
+						},
 					],
 					buyerAccountant: [
 						"BT-19-00",
 						{
-							reference: "BT-19"
-						}
-					]
+							reference: "BT-19",
+						},
+					],
 				},
 			],
 		},
