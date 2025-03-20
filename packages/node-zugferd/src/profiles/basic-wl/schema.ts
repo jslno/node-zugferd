@@ -8,6 +8,7 @@ import { UNTDID_4451 } from "../../codelists/untdid/4451.gen";
 import { EAS } from "../../codelists/eas";
 import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
 import { ISO_6523 } from "../../codelists/iso/6523.gen";
+import { ISO_3166 } from "../../codelists/iso/3166";
 
 export const basicWlSchema = {
 	/**
@@ -529,7 +530,7 @@ The common name of the city, town or village, where the tax representative addre
 									 * Country where VAT is liable. The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Tax representative country code**
 
 A code that identifies the country.
@@ -760,7 +761,7 @@ The common name of the city, town or village, where the Buyer's address is locat
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Buyer country code**
 
 A code that identifies the country.
@@ -1069,7 +1070,7 @@ The common name of the city, town or village, where the deliver to address is lo
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Deliver to country code**
 
 A code that identifies the country.

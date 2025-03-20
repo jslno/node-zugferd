@@ -7,6 +7,7 @@ import { UNTDID_2005 } from "../../codelists/untdid/2005.gen";
 import { VATEX } from "../../codelists/vatex.gen";
 import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
 import { ISO_6523 } from "../../codelists/iso/6523.gen";
+import { ISO_3166 } from "../../codelists/iso/3166";
 
 export const minimumSchema = {
 	/**
@@ -306,7 +307,7 @@ BR-8: An Invoice shall contain the Seller postal address (BG-5).`,
 									 * If no tax representative is specified, this is the country where VAT is liable. The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Seller country code**
 
 A code that identifies the country.

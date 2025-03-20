@@ -3,6 +3,7 @@ import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { UNTDID_1153 } from "../../codelists/untdid/1153.gen";
 import { UNTDID_7143 } from "../../codelists/untdid/7143.gen";
+import { ISO_3166 } from "../../codelists/iso/3166";
 
 export const en16931Schema = {
 	transaction: {
@@ -942,7 +943,7 @@ The version of the identification scheme.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Item country of origin**
 
 The code identifying the country from which the item originates.
