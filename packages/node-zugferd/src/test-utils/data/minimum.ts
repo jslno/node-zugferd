@@ -36,7 +36,7 @@ const data: ProfileMinimum = {
 				purchaseOrderReference: "orderReference",
 			},
 		},
-        tradeDelivery: {},
+		tradeDelivery: {},
 		tradeSettlement: {
 			currencyCode: "EUR",
 			/*vatBreakdown: [

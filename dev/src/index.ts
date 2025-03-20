@@ -4,7 +4,7 @@ import { BASIC, type ProfileBasic } from "node-zugferd/profile/basic";
 const main = async () => {
 	const invoicer = zugferd({
 		profile: BASIC,
-		strict: false
+		strict: false,
 	});
 
 	const data: ProfileBasic = {
