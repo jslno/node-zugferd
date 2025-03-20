@@ -158,34 +158,6 @@ CHORUS PRO: for the public sector, it is the "Service Exécutant". It is mandato
 							"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference",
 					},
 					/**
-					 * Details of the associated order
-					 */
-					associatedOrder: {
-						type: "object",
-						description: "Details of the associated order",
-						required: false,
-						shape: {
-							/**
-							 * Purchase order reference
-							 *
-							 * An identifier of a referenced purchase order, issued by the Buyer.
-							 *
-							 * CHORUS PRO: for the public sector, this is the "Engagement Juridique" (Legal Commitment). It is mandatory for some buyers. You should refer to the ChorusPro Directory to identify these public entity buyers that make it mandatory.
-							 */
-							purchaseOrderReference: {
-								type: "string",
-								description: `**Purchase order reference**
-
-An identifier of a referenced purchase order, issued by the Buyer.
-
-CHORUS PRO: for the public sector, this is the "Engagement Juridique" (Legal Commitment). It is mandatory for some buyers. You should refer to the ChorusPro Directory to identify these public entity buyers that make it mandatory.`,
-								required: false,
-								xpath:
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID",
-							},
-						},
-					},
-					/**
 					 * A group of business terms providing information about the Seller.
 					 */
 					seller: {
@@ -376,7 +348,6 @@ This information may affect how the Buyer settles the payment (such as for socia
 							},
 						},
 					},
-
 					/**
 					 * A group of business terms providing information about the Buyer.
 					 */
@@ -482,6 +453,34 @@ For a SIREN or a SIRET, the value of this field is "0002"`,
 										},
 									},
 								},
+							},
+						},
+					},
+					/**
+					 * Details of the associated order
+					 */
+					associatedOrder: {
+						type: "object",
+						description: "Details of the associated order",
+						required: false,
+						shape: {
+							/**
+							 * Purchase order reference
+							 *
+							 * An identifier of a referenced purchase order, issued by the Buyer.
+							 *
+							 * CHORUS PRO: for the public sector, this is the "Engagement Juridique" (Legal Commitment). It is mandatory for some buyers. You should refer to the ChorusPro Directory to identify these public entity buyers that make it mandatory.
+							 */
+							purchaseOrderReference: {
+								type: "string",
+								description: `**Purchase order reference**
+
+An identifier of a referenced purchase order, issued by the Buyer.
+
+CHORUS PRO: for the public sector, this is the "Engagement Juridique" (Legal Commitment). It is mandatory for some buyers. You should refer to the ChorusPro Directory to identify these public entity buyers that make it mandatory.`,
+								required: false,
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID",
 							},
 						},
 					},
