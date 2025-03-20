@@ -389,6 +389,7 @@ The file name of the attached document`,
 					 */
 					tenderOrLotReference: {
 						type: "object[]",
+						required: false,
 						description: "Details on tender or lot reference",
 						validator: z.array(z.any()).max(1),
 						sibling: (data) =>
@@ -424,6 +425,7 @@ In some countries a reference to the call for tender that has led to the contrac
 					 */
 					objectIdentifier: {
 						type: "object[]",
+						required: false,
 						sibling: (data) => [
 							...data.transaction.tradeAgreement.tenderOrLotReference,
 							...data.transaction.tradeAgreement.supportingDocuments,
@@ -551,6 +553,7 @@ An identifier of a referenced receiving advice.`,
 				shape: {
 					paymentInstruction: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Payment means text
@@ -621,6 +624,7 @@ The name of the payment card holder.`,
 							},
 							transfers: {
 								type: "object[]",
+								required: false,
 								shape: {
 									/**
 									 * Payment account name
@@ -680,6 +684,7 @@ Use for credit transfer`,
 					},
 					vatBreakdown: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Value added tax point date
@@ -995,6 +1000,7 @@ The purchase order identifier is referenced on document level.`,
 						shape: {
 							allowances: {
 								type: "object[]",
+								required: false,
 								shape: {
 									/**
 									 * Invoice line allowance base amount
@@ -1014,6 +1020,7 @@ The base amount that may be used, in conjunction with the Invoice line allowance
 							},
 							charges: {
 								type: "object[]",
+								required: false,
 								shape: {
 									/**
 									 * Invoice line charge base amount

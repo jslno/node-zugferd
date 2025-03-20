@@ -77,6 +77,7 @@ A group of business terms providing information about the goods and services inv
 							globalIdentifier: {
 								key: "BT-157",
 								type: "object",
+								required: false,
 								description: `**Item standard identifier**
 
 An item identifier based on a registered scheme.
@@ -752,12 +753,12 @@ BR-CO-20: If  Invoice  line  period  (BG-26)  is  used,  the  Invoice  line peri
 							allowances: {
 								key: "BG-27",
 								type: "object[]",
+								required: false,
 								description: `**Invoice Line Allowances**
 
 A group of business terms providing information about allowances applicable to the individual Invoice line.
 
 Invoice line allowancess are subject to the same VAT rate as the line they relate to. If invoice line allowances are subject to a different VAT rate, they must be treated as standalone (negative) invoice lines`,
-								required: false,
 								group: "line-allowances",
 								shape: {
 									/**
@@ -844,6 +845,7 @@ The reason for the Invoice line allowance, expressed as text.`,
 							charges: {
 								key: "BG-28",
 								type: "object[]",
+								required: false,
 								description: `**Invoice Line Charges**
 
 A group of business terms providing information about charges and taxes other than VAT applicable to the individual Invoice line.
@@ -851,7 +853,6 @@ A group of business terms providing information about charges and taxes other th
 All charges and taxes are assumed to be liable to the same VAT rate as the Invoice line.
 
 Invoice line charges are subject to the same VAT rate as that of the line to which they relate. If invoice line charges are subject to a different VAT rate, they must be treated as stand-alone invoice lines.`,
-								required: false,
 								group: "line-charges",
 								sibling: (data, { line }) =>
 									data.transaction.line[line]?.tradeSettlement?.allowances,

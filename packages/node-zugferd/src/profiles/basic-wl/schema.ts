@@ -1565,6 +1565,7 @@ The account to be debited by the direct debit.`,
 							transfers: {
 								key: "BG-17",
 								type: "object[]",
+								required: false,
 								description: `**Credit transfer**
 
 A group of business terms to specify credit transfer payments.`,
@@ -1580,6 +1581,7 @@ A group of business terms to specify credit transfer payments.`,
 									paymentAccountIdentifier: {
 										key: "BT-84",
 										type: "string",
+										required: false,
 										description: `**Payment account identifier**
 
 A unique identifier of the financial payment account, at a payment service provider, to which payment should be made.
