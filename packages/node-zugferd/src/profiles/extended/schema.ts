@@ -161,6 +161,7 @@ To be chosen from UNTDID 3035.`,
 
 							organization: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Seller legal address
@@ -294,6 +295,7 @@ Such as a region, a county, a state, a province, etc.`,
 
 							tradeContact: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Type of contact (code)
@@ -372,6 +374,7 @@ Such as share capital.`,
 							},
 							organization: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Detailed information about the business address
@@ -503,6 +506,7 @@ Such as a region, a county, a state, a province, etc.`,
 							},
 							tradeContact: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Type of contact (code)
@@ -1669,6 +1673,7 @@ Such as a region, a county, a state, a province, etc.`,
 					},
 					sellerTaxRepresentative: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Identifier
@@ -2649,6 +2654,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 					},
 					associatedOrderConfirmation: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Order confirmation date
@@ -2671,6 +2677,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 					},
 					associatedOrder: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Order Date
@@ -2730,6 +2737,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 					},
 					associatedContract: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Type of contract (code)
@@ -2770,6 +2778,7 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 					},
 					supportingDocuments: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Document date
@@ -2792,6 +2801,7 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 					},
 					tenderOrLotReference: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Document date
@@ -2814,6 +2824,7 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 					},
 					objectIdentifier: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Document date
@@ -4965,6 +4976,7 @@ Such as a region, a county, a state, a province, etc.`,
 					},
 					despatchAdvice: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Despatch advice date
@@ -4987,6 +4999,7 @@ Such as a region, a county, a state, a province, etc.`,
 					},
 					associatedGoodsReceipt: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Goods receipt date
@@ -6174,6 +6187,7 @@ Such as a region, a county, a state, a province, etc.`,
 					},
 					payee: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Payee role (code)
@@ -7256,6 +7270,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 					},
 					invoicingPeriod: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Invoicing period description (free text)
@@ -7271,6 +7286,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 					},
 					allowances: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Calculation sequence
@@ -7315,6 +7331,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 					},
 					charges: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Calculation sequence
@@ -8199,6 +8216,7 @@ Such as a region, a county, a state, a province, etc.`,
 					},
 					precendingInvoices: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Preceding incoive type code
@@ -8218,6 +8236,7 @@ The same rules apply as for BT-3`,
 					},
 					buyerAccountant: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Accounting reference type (Code)
@@ -8615,6 +8634,7 @@ The brand name, expressed as text, for this item.`,
 							},
 							attributes: {
 								type: "object[]",
+								required: false,
 								shape: {
 									/**
 									 * Item Attribute Type (Code)
@@ -8654,6 +8674,7 @@ To ensure automated processing of the article attributes without bilateral recon
 							},
 							classification: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Classification name
@@ -8924,6 +8945,7 @@ The Item description allows for describing the item and its features in more det
 							},
 							buyerOrderReference: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Order Id
@@ -8959,6 +8981,7 @@ The Item description allows for describing the item and its features in more det
 							 */
 							quotationReference: {
 								type: "object",
+								required: false,
 								description: "Details of an quotation document reference",
 								shape: {
 									/**
@@ -9185,6 +9208,7 @@ The file name of the attached document`,
 							},
 							grossTradePrice: {
 								type: "object",
+								required: false,
 								shape: {
 									discounts: {
 										type: "object",
@@ -9338,6 +9362,7 @@ Use entries of the UNTDID 7161 code list [6]. The Invoice line charge reason cod
 							},
 							netTradePrice: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Included tax for B2C
@@ -10789,6 +10814,7 @@ The Preceding Invoice issue date shall be provided in case the Preceding Invoice
 							},
 							buyerAccountant: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Accounting reference (Code)
