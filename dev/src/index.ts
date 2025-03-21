@@ -5,7 +5,6 @@ const main = async () => {
 	const invoicer = zugferd({
 		profile: BASIC,
 		strict: false,
-		plugins: [(ctx) => ({})],
 	});
 
 	const data: ProfileBasic = {
