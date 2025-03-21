@@ -10,11 +10,6 @@
         "see": "https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.1153"
     },
     {
-        "id": "2005",
-        "source": "https://www.xrepository.de/api/xrepository/urn:xoev-de:kosit:codeliste:untdid.2005_4/download/UNTDID_2005_4.json",
-        "see": "https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.2005"
-    },
-    {
         "id": "4451",
         "source": "https://www.xrepository.de/api/xrepository/urn:xoev-de:kosit:codeliste:untdid.4451_4/download/UNTDID_4451_4.json",
         "see": "https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.4451"
