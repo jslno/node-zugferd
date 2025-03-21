@@ -2,8 +2,10 @@ import { createRequire } from "module";
 import path from "path";
 
 export const getAsset = (_path: string) => {
-	const require = createRequire(import.meta.url);
-	const x = require.resolve("node-zugferd");
+	let req =
+		typeof import.meta !== "undefined"
+			? createRequire(import.meta.url)
+			: require;
 
-	return path.join(path.dirname(x), _path);
+	return path.join(path.dirname(req.resolve("node-zugferd")), _path);
 };
