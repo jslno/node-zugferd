@@ -124,10 +124,6 @@ export const contents: Content[] = [
 				href: "/docs/codelists/untdid-1229",
 			},
 			{
-				title: "UNTDID 2005",
-				href: "/docs/codelists/untdid-2005",
-			},
-			{
 				title: "UNTDID 2475",
 				href: "/docs/codelists/untdid-2475",
 			},
