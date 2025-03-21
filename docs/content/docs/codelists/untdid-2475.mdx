@@ -1,0 +1,50 @@
+---
+title: UNTDID 2475
+description: Event time reference code
+---
+
+import {
+  UNTDID_2475,
+  UNTDID_2475_IDENTIFIER,
+} from "node-zugferd/codelist/untdid.2475";
+
+## Definition [toc]
+
+Identifier: <span className="text-fd-muted-foreground">{UNTDID_2475_IDENTIFIER}</span>
+
+<div className="w-fit">
+  <Link
+    href="https://unece.org/fileadmin/DAM/trade/untdid/d18a/tred/tred2475.htm"
+    target="_blank"
+  >
+    Source
+  </Link>
+</div>
+
+```ts
+import {
+  UNTDID_2475,
+  type Untdid2475Code,
+} from "node-zugferd/codelist/untdid.2475";
+```
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {UNTDID_2475.map(({ code, name, description }) => (
+      <tr key={code}>
+        <td className="text-center">
+          <code>{code}</code>
+        </td>
+        <td>{name}</td>
+        <td>{description}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>

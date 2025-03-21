@@ -7,6 +7,7 @@ import { VATEX } from "../../codelists/vatex.gen";
 import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
 import { ISO_6523 } from "../../codelists/iso/6523.gen";
 import { ISO_3166 } from "../../codelists/iso/3166";
+import { UNTDID_2475 } from "../../codelists/untdid/2475";
 
 export const minimumSchema = {
 	/**
@@ -891,8 +892,7 @@ Code list issued and maintained by the Connecting Europe Facility.`,
 							 */
 							dueDateTypeCode: {
 								key: "BT-8",
-								// TODO: Add UNTDID_2475
-								type: "string",
+								type: UNTDID_2475.map(({ code }) => code),
 								description: `**Value added tax point date code**
 
 The code of the date when the VAT becomes accountable for the Seller and for the Buyer.
