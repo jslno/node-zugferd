@@ -14,6 +14,7 @@ import { UNTDID_3139 } from "../../codelists/untdid/3139";
 import { UNTDID_3035 } from "../../codelists/untdid/3035";
 import { ISO_6523 } from "../../codelists/iso/6523.gen";
 import { ISO_3166 } from "../../codelists/iso/3166";
+import { ISO_639_2 } from "../../codelists/iso/639-2";
 
 export const extendedSchema = {
 	/**
@@ -77,7 +78,7 @@ With indicator = true, the document is a copy.`,
 	 */
 	language: {
 		key: "BT-X-4",
-		type: "string",
+		type: ISO_639_2.map(({ code }) => code),
 		description: `**Invoice language code**
 
 Indicates the language used in the invoice document.
