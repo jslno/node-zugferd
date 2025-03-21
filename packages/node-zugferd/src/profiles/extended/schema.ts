@@ -8941,6 +8941,7 @@ The identification of an Invoice that was previously sent by the Seller.`,
 									typeCode: {
 										key: "BT-X-559",
 										type: "string",
+										required: false,
 										description: `**Preceding incoive type code**
  
 The same rules apply as for BT-3`,
