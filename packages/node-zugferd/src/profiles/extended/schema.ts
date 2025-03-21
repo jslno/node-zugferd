@@ -24,6 +24,7 @@ export const extendedSchema = {
 	 * To be used only in case of a test invoice, with Indicator = true
 	 */
 	testIndicator: {
+		key: "BT-X-1-00",
 		type: "boolean",
 		description: `**Test Indicator**
 
@@ -40,6 +41,7 @@ To be used only in case of a test invoice, with Indicator = true`,
 	 * Text is the actual wording of anything written or printed. This EN 16931_ Text. Type is based on the Text. Type as defined in ISO 15000-5:2014, Annex B. Line breaks in the text may be present.
 	 */
 	name: {
+		key: "BT-X-2",
 		type: "string",
 		description: `**Document name**
 
@@ -55,6 +57,7 @@ Text is the actual wording of anything written or printed. This EN 16931_ Text. 
 	 * With indicator = true, the document is a copy.
 	 */
 	copyIndicator: {
+		key: "BT-X-3-00",
 		type: "boolean",
 		description: `**Copy Indicator**
 
@@ -73,6 +76,7 @@ With indicator = true, the document is a copy.`,
 	 * Valid languages are registered with the ISO 639-2 "Codes for the representation of names of languages" Maintenance Agency.
 	 */
 	language: {
+		key: "BT-X-4",
 		type: "string",
 		description: `**Invoice language code**
 
@@ -114,6 +118,7 @@ The code is bilaterally agreed on and must have the same meaning as BT-22.`,
 	 * Information only required if the contractual due date differs from due date of the payment (i.e. for SEPA direct debit).
 	 */
 	contractualDueDate: {
+		key: "BT-X-6",
 		type: "date",
 		description: `**Contractual due date of the invoice**
 
@@ -148,6 +153,7 @@ Information only required if the contractual due date differs from due date of t
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
+								key: "BT-X-543",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Seller Role (code)**
 
@@ -161,6 +167,7 @@ To be chosen from UNTDID 3035.`,
 
 							organization: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Seller legal address
@@ -168,6 +175,7 @@ To be chosen from UNTDID 3035.`,
 									 * Legal address of the seller in case the seller address is different
 									 */
 									postalAddress: {
+										key: "BG-X-14",
 										type: "object",
 										description: `**Seller legal address**
 
@@ -182,6 +190,7 @@ Legal address of the seller in case the seller address is different`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-100",
 												type: "string",
 												description: `**Post code**
 
@@ -200,6 +209,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-101",
 												type: "string",
 												description: `**Address line 1**
 
@@ -216,6 +226,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-102",
 												type: "string",
 												description: `**Address line 2**
 
@@ -230,6 +241,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-103",
 												type: "string",
 												description: `**Address line 3**
 
@@ -244,6 +256,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-104",
 												type: "string",
 												description: `**City**
 
@@ -260,6 +273,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-105",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -277,6 +291,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-106",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -294,6 +309,7 @@ Such as a region, a county, a state, a province, etc.`,
 
 							tradeContact: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Type of contact (code)
@@ -303,6 +319,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
+										key: "BT-X-317",
 										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
@@ -319,6 +336,7 @@ To be chosen from the entries of UNTDID 3139`,
 									 * A fax number for the contact point.
 									 */
 									faxNumber: {
+										key: "BT-X-107",
 										type: "string",
 										description: `**Seller contact fax number**
 
@@ -342,6 +360,7 @@ A fax number for the contact point.`,
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
+								key: "BT-X-544",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
@@ -360,6 +379,7 @@ To be chosen from UNTDID 3035.`,
 							 * Such as share capital.
 							 */
 							description: {
+								key: "BT-X-334",
 								type: "string",
 								description: `**Buyer additional legal information**
 
@@ -372,6 +392,7 @@ Such as share capital.`,
 							},
 							organization: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Detailed information about the business address
@@ -379,6 +400,7 @@ Such as share capital.`,
 									 * Legal address of the buyerr in case the Buyer address is different
 									 */
 									postalAddress: {
+										key: "BG-X-15",
 										type: "object",
 										description: `**Detailed information about the business address**
 
@@ -393,6 +415,7 @@ Legal address of the buyerr in case the Buyer address is different`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-108",
 												type: "string",
 												description: `**Post code**
 
@@ -411,6 +434,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-109",
 												type: "string",
 												description: `**Address line 1**
 
@@ -427,6 +451,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-110",
 												type: "string",
 												description: `**Address line 2**
 
@@ -441,6 +466,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-111",
 												type: "string",
 												description: `**Address line 3**
 
@@ -455,6 +481,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-112",
 												type: "string",
 												description: `**City**
 
@@ -471,6 +498,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-113",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -488,6 +516,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-114",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -503,6 +532,7 @@ Such as a region, a county, a state, a province, etc.`,
 							},
 							tradeContact: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Type of contact (code)
@@ -512,6 +542,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
+										key: "BT-X-318",
 										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
@@ -528,6 +559,7 @@ To be chosen from the entries of UNTDID 3139`,
 									 * A fax number for the contact point.
 									 */
 									faxNumber: {
+										key: "BT-X-115",
 										type: "string",
 										description: `**Buyer contact fax number**
 
@@ -546,6 +578,7 @@ A fax number for the contact point.`,
 					 * A group of business terms providing information about the Sales Agent
 					 */
 					salesAgent: {
+						key: "BG-X-49",
 						type: "object",
 						description: `**Detailed information about the sales agent**
 
@@ -558,6 +591,7 @@ A group of business terms providing information about the Sales Agent`,
 							 * A previously exchanged assigned identifier of the business partner.
 							 */
 							identifier: {
+								key: "BT-X-337",
 								type: "string",
 								description: `**Sales agent identifier**
 
@@ -572,6 +606,7 @@ A previously exchanged assigned identifier of the business partner.`,
 							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
 							 */
 							globalIdentifier: {
+								key: "BT-X-338",
 								type: "object",
 								description: `**Sales agent global identifier**
 
@@ -611,6 +646,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * Sales agent identifier Name / Company Name
 							 */
 							name: {
+								key: "BT-X-335",
 								type: "string",
 								description: "Sales agent identifier Name / Company Name",
 								xpath:
@@ -624,6 +660,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
+								key: "BT-X-545",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
@@ -638,6 +675,7 @@ To be chosen from UNTDID 3035.`,
 							 * Details about the organization
 							 */
 							organization: {
+								key: "BG-X-50",
 								type: "object",
 								description: "Details about the organization",
 								required: false,
@@ -648,6 +686,7 @@ To be chosen from UNTDID 3035.`,
 									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
 									 */
 									identifier: {
+										key: "BT-X-339",
 										type: "object",
 										description: `**Sales Agent Registration Number**
 
@@ -694,7 +733,8 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 *
 									 * This may be used if different from the party name.
 									 */
-									businessName: {
+									tradingName: {
+										key: "BT-X-336",
 										type: "string",
 										description: `**Trading Business Name**
 
@@ -711,6 +751,7 @@ This may be used if different from the party name.`,
 									 * Legal address of the buyer in case the Sales Agent address is different
 									 */
 									postalAddress: {
+										key: "BG-X-53",
 										type: "object",
 										description: `**Detailed information about the business address**
 
@@ -725,6 +766,7 @@ Legal address of the buyer in case the Sales Agent address is different`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-355",
 												type: "string",
 												description: `**Post code**
 
@@ -743,6 +785,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-356",
 												type: "string",
 												description: `**Address line 1**
 
@@ -759,6 +802,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-357",
 												type: "string",
 												description: `**Address line 2**
 
@@ -773,6 +817,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-358",
 												type: "string",
 												description: `**Address line 3**
 
@@ -787,6 +832,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-359",
 												type: "string",
 												description: `**City**
 
@@ -803,6 +849,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-360",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -820,6 +867,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-361",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -836,6 +884,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Detailed contact information of the deviating end user
 									 */
 									tradeContact: {
+										key: "BG-X-51",
 										type: "object",
 										description:
 											"Detailed contact information of the deviating end user",
@@ -847,6 +896,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * If a contact person is indicated, either the name or the department is to be transmitted.
 											 */
 											name: {
+												key: "BT-X-342",
 												type: "string",
 												description: `**Name of the contact**
 
@@ -861,6 +911,7 @@ If a contact person is indicated, either the name or the department is to be tra
 											 * If a contact person is indicated, either the name or the department is to be transmitted.
 											 */
 											departmentName: {
+												key: "BT-X-343",
 												type: "string",
 												description: `**Department name**
 
@@ -877,6 +928,7 @@ If a contact person is indicated, either the name or the department is to be tra
 											 * To be chosen from the entries of UNTDID 3139
 											 */
 											typeCode: {
+												key: "BT-X-347",
 												type: UNTDID_3139.map(({ code }) => code),
 												description: `**Type of contact (code)**
 
@@ -892,7 +944,8 @@ To be chosen from the entries of UNTDID 3139`,
 											 *
 											 * A phone number for the contact point.
 											 */
-											telephoneNumber: {
+											phoneNumber: {
+												key: "BT-X-344",
 												type: "string",
 												description: `**Contact telephone number**
 
@@ -905,6 +958,7 @@ A phone number for the contact point.`,
 											 * Contact point fax number
 											 */
 											faxNumber: {
+												key: "BT-X-345",
 												type: "string",
 												description: "Contact point fax number",
 												required: false,
@@ -917,6 +971,7 @@ A phone number for the contact point.`,
 											 * An e-mail address for the contact point.
 											 */
 											emailAddress: {
+												key: "BT-X-346",
 												type: "string",
 												description: `**Contact email address**
 
@@ -933,6 +988,7 @@ An e-mail address for the contact point.`,
 							 * Detailed information about the address
 							 */
 							postalAddress: {
+								key: "BG-X-52",
 								type: "object",
 								description: "Detailed information about the address",
 								shape: {
@@ -944,6 +1000,7 @@ An e-mail address for the contact point.`,
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-X-348",
 										type: "string",
 										description: `**Post code**
 
@@ -962,6 +1019,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
+										key: "BT-X-349",
 										type: "string",
 										description: `**Address line 1**
 
@@ -978,6 +1036,7 @@ Usually the street name and number or post office box.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-X-350",
 										type: "string",
 										description: `**Address line 2**
 
@@ -992,6 +1051,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-X-351",
 										type: "string",
 										description: `**Address line 3**
 
@@ -1006,6 +1066,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village.
 									 */
 									city: {
+										key: "BT-X-352",
 										type: "string",
 										description: `**City**
 
@@ -1022,6 +1083,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
+										key: "BT-X-353",
 										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
@@ -1039,6 +1101,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-X-354",
 										type: "string",
 										description: `**Country subdivision**
 
@@ -1053,6 +1116,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-341-00",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -1084,6 +1148,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed information on tax information
 							 */
 							taxRegistration: {
+								key: "BT-X-340-00",
 								type: "object",
 								description: "Detailed information on tax information",
 								required: false,
@@ -1092,6 +1157,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * VAT ID
 									 */
 									identifier: {
+										key: "BT-X-340",
 										type: "string",
 										description: "VAT ID",
 										required: false,
@@ -1110,6 +1176,7 @@ Such as a region, a county, a state, a province, etc.`,
 					 * Detailed information about the buyer tax representative
 					 */
 					buyerTaxRepresentative: {
+						key: "BG-X-54",
 						type: "object",
 						description:
 							"Detailed information about the buyer tax representative",
@@ -1121,6 +1188,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * A previously exchanged assigned identifier of the business partner.
 							 */
 							identifier: {
+								key: "BT-X-364",
 								type: "string",
 								description: `**Identifier**
 
@@ -1135,6 +1203,7 @@ A previously exchanged assigned identifier of the business partner.`,
 							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
 							 */
 							globalIdentifier: {
+								key: "BT-X-365",
 								type: "object",
 								description: `**Global identifier**
 
@@ -1174,6 +1243,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * Identifier Name / Company Name
 							 */
 							name: {
+								key: "BT-X-362",
 								type: "string",
 								description: "Identifier Name / Company Name",
 								xpath:
@@ -1187,6 +1257,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
+								key: "BT-X-546",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
@@ -1201,6 +1272,7 @@ To be chosen from UNTDID 3035.`,
 							 * Details about the organization
 							 */
 							organization: {
+								key: "BG-X-58",
 								type: "object",
 								description: "Details about the organization",
 								required: false,
@@ -1211,6 +1283,7 @@ To be chosen from UNTDID 3035.`,
 									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
 									 */
 									identifier: {
+										key: "BT-X-366",
 										type: "object",
 										description: `**Company Registration Number**
 
@@ -1258,7 +1331,8 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 *
 									 * This may be used if different from the party name.
 									 */
-									businessName: {
+									tradingName: {
+										key: "BT-X-363",
 										type: "string",
 										description: `**Trading Business Name**
 
@@ -1273,6 +1347,7 @@ This may be used if different from the party name.`,
 									 * Detailed information about the business address
 									 */
 									postalAddress: {
+										key: "BG-X-57",
 										type: "object",
 										description:
 											"Detailed information about the business address",
@@ -1286,6 +1361,7 @@ This may be used if different from the party name.`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-382",
 												type: "string",
 												description: `**Post code**
 
@@ -1304,6 +1380,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-383",
 												type: "string",
 												description: `**Address line 1**
 
@@ -1320,6 +1397,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-384",
 												type: "string",
 												description: `**Address line 2**
 
@@ -1334,6 +1412,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-385",
 												type: "string",
 												description: `**Address line 3**
 
@@ -1348,6 +1427,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-386",
 												type: "string",
 												description: `**City**
 
@@ -1364,6 +1444,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-387",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -1381,6 +1462,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-388",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -1399,6 +1481,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed contact information of the deviating end user
 							 */
 							tradeContact: {
+								key: "BG-X-55",
 								type: "object",
 								description:
 									"Detailed contact information of the deviating end user",
@@ -1410,6 +1493,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									name: {
+										key: "BT-X-369",
 										type: "string",
 										description: `**Name of the contact**
 
@@ -1424,6 +1508,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									departmentName: {
+										key: "BT-X-370",
 										type: "string",
 										description: `**Department name**
 
@@ -1440,6 +1525,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
+										key: "BT-X-371",
 										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
@@ -1455,7 +1541,8 @@ To be chosen from the entries of UNTDID 3139`,
 									 *
 									 * A phone number for the contact point.
 									 */
-									telephoneNumber: {
+									phoneNumber: {
+										key: "BT-X-372",
 										type: "string",
 										description: `**Contact telephone number**
 
@@ -1468,6 +1555,7 @@ A phone number for the contact point.`,
 									 * Contact point fax number
 									 */
 									faxNumber: {
+										key: "BT-X-373",
 										type: "string",
 										description: "Contact point fax number",
 										required: false,
@@ -1480,6 +1568,7 @@ A phone number for the contact point.`,
 									 * An e-mail address for the contact point.
 									 */
 									emailAddress: {
+										key: "BT-X-374",
 										type: "string",
 										description: `**Contact email address**
 
@@ -1494,6 +1583,7 @@ An e-mail address for the contact point.`,
 							 * Detailed information about the address
 							 */
 							postalAddress: {
+								key: "BG-X-56",
 								type: "object",
 								description: "Detailed information about the address",
 								shape: {
@@ -1505,6 +1595,7 @@ An e-mail address for the contact point.`,
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-X-375",
 										type: "string",
 										description: `**Post code**
 
@@ -1523,6 +1614,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
+										key: "BT-X-376",
 										type: "string",
 										description: `**Address line 1**
 
@@ -1539,6 +1631,7 @@ Usually the street name and number or post office box.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-X-377",
 										type: "string",
 										description: `**Address line 2**
 
@@ -1553,6 +1646,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-X-378",
 										type: "string",
 										description: `**Address line 3**
 
@@ -1567,6 +1661,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village.
 									 */
 									city: {
+										key: "BT-X-379",
 										type: "string",
 										description: `**City**
 
@@ -1583,6 +1678,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
+										key: "BT-X-380",
 										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
@@ -1600,6 +1696,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-X-381",
 										type: "string",
 										description: `**Country subdivision**
 
@@ -1614,6 +1711,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-368",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -1645,6 +1743,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed information on tax information
 							 */
 							taxRegistration: {
+								key: "BT-X-367-00",
 								type: "object",
 								description: "Detailed information on tax information",
 								required: false,
@@ -1653,6 +1752,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * VAT ID
 									 */
 									identifier: {
+										key: "BT-X-367",
 										type: "string",
 										description: "VAT ID",
 										required: false,
@@ -1669,6 +1769,7 @@ Such as a region, a county, a state, a province, etc.`,
 					},
 					sellerTaxRepresentative: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Identifier
@@ -1676,6 +1777,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * A previously exchanged assigned identifier of the business partner.
 							 */
 							identifier: {
+								key: "BT-X-116",
 								type: "string",
 								description: `**Identifier**
 
@@ -1690,6 +1792,7 @@ A previously exchanged assigned identifier of the business partner.`,
 							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
 							 */
 							globalIdentifier: {
+								key: "BT-X-117",
 								type: "object",
 								description: `**Global identifier**
 
@@ -1734,6 +1837,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
+								key: "BT-X-547",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
@@ -1748,6 +1852,7 @@ To be chosen from UNTDID 3035.`,
 							 * Details about the organization
 							 */
 							organization: {
+								key: "BG-X-16",
 								type: "object",
 								description: "Details about the organization",
 								required: false,
@@ -1758,6 +1863,7 @@ To be chosen from UNTDID 3035.`,
 									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
 									 */
 									identifier: {
+										key: "BT-X-118",
 										type: "object",
 										description: `**Legal registration identifier**
 
@@ -1805,7 +1911,8 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 *
 									 * This may be used if different from the party name.
 									 */
-									businessName: {
+									tradingName: {
+										key: "BT-X-119",
 										type: "string",
 										description: `**Trading name**
 
@@ -1820,6 +1927,7 @@ This may be used if different from the party name.`,
 									 * Detailed information about the business address
 									 */
 									postalAddress: {
+										key: "BG-X-59",
 										type: "object",
 										description:
 											"Detailed information about the business address",
@@ -1833,6 +1941,7 @@ This may be used if different from the party name.`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-389",
 												type: "string",
 												description: `**Post code**
 
@@ -1851,6 +1960,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-390",
 												type: "string",
 												description: `**Address line 1**
 
@@ -1867,6 +1977,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-391",
 												type: "string",
 												description: `**Address line 2**
 
@@ -1881,6 +1992,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-392",
 												type: "string",
 												description: `**Address line 3**
 
@@ -1895,6 +2007,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-393",
 												type: "string",
 												description: `**City**
 
@@ -1911,6 +2024,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-394",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -1928,6 +2042,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-395",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -1946,6 +2061,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed contact information
 							 */
 							tradeContact: {
+								key: "BG-X-17",
 								type: "object",
 								description: "Detailed contact information",
 								required: false,
@@ -1954,6 +2070,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Name of the contact
 									 */
 									name: {
+										key: "BT-X-120",
 										type: "string",
 										description: "Name of the contact",
 										required: false,
@@ -1964,6 +2081,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Department name
 									 */
 									departmentName: {
+										key: "BT-X-121",
 										type: "string",
 										description: "Department name",
 										required: false,
@@ -1978,6 +2096,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
+										key: "BT-X-319",
 										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
@@ -1993,7 +2112,8 @@ To be chosen from the entries of UNTDID 3139`,
 									 *
 									 * A phone number for the contact point.
 									 */
-									telephoneNumber: {
+									phoneNumber: {
+										key: "BT-X-122",
 										type: "string",
 										description: `**Contact telephone number**
 
@@ -2006,6 +2126,7 @@ A phone number for the contact point.`,
 									 * Contact point fax number
 									 */
 									faxNumber: {
+										key: "BT-X-123",
 										type: "string",
 										description: "Contact point fax number",
 										required: false,
@@ -2018,6 +2139,7 @@ A phone number for the contact point.`,
 									 * An e-mail address for the contact point.
 									 */
 									emailAddress: {
+										key: "BT-X-124",
 										type: "string",
 										description: `**Contact email address**
 
@@ -2035,6 +2157,7 @@ An e-mail address for the contact point.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-125",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -2078,6 +2201,7 @@ An e-mail address for the contact point.`,
 							 * A previously exchanged assigned identifier of the business partner.
 							 */
 							identifier: {
+								key: "BT-X-126",
 								type: "string",
 								description: `**Deviating end user identifier**
 
@@ -2092,6 +2216,7 @@ A previously exchanged assigned identifier of the business partner.`,
 							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
 							 */
 							globalIdentifier: {
+								key: "BT-X-127",
 								type: "object",
 								description: `**Deviating end user global identifier**
 
@@ -2131,6 +2256,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * Deviating end user identifier Name / Company Name
 							 */
 							name: {
+								key: "BT-X-128",
 								type: "string",
 								description: `Deviating end user identifier Name / Company Name`,
 								xpath:
@@ -2144,6 +2270,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
+								key: "BT-X-548",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
@@ -2158,6 +2285,7 @@ To be chosen from UNTDID 3035.`,
 							 * Details about the organization
 							 */
 							organization: {
+								key: "BG-X-19",
 								type: "object",
 								description: "Details about the organization",
 								required: false,
@@ -2168,6 +2296,7 @@ To be chosen from UNTDID 3035.`,
 									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
 									 */
 									identifier: {
+										key: "BT-X-129",
 										type: "object",
 										description: `**Company Registration Number**
 
@@ -2209,7 +2338,8 @@ The identification scheme identifier of the Buyer legal registration identifier.
 									 *
 									 * This may be used if different from the party name.
 									 */
-									businessName: {
+									tradingName: {
+										key: "BT-X-130",
 										type: "string",
 										description: `**Trading Business Name**
 
@@ -2224,6 +2354,7 @@ This may be used if different from the party name.`,
 									 * Detailed information about the business address
 									 */
 									postalAddress: {
+										key: "BG-X-60",
 										type: "object",
 										description:
 											"Detailed information about the business address",
@@ -2237,6 +2368,7 @@ This may be used if different from the party name.`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-396",
 												type: "string",
 												description: `**Post code**
 
@@ -2255,6 +2387,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-397",
 												type: "string",
 												description: `**Address line 1**
 
@@ -2271,6 +2404,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-398",
 												type: "string",
 												description: `**Address line 2**
 
@@ -2285,6 +2419,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-399",
 												type: "string",
 												description: `**Address line 3**
 
@@ -2299,6 +2434,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-400",
 												type: "string",
 												description: `**City**
 
@@ -2315,6 +2451,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-401",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -2332,6 +2469,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-402",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -2350,6 +2488,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed contact information of the deviating end user
 							 */
 							tradeContact: {
+								key: "BG-X-20",
 								type: "object",
 								description:
 									"Detailed contact information of the deviating end user",
@@ -2361,6 +2500,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									name: {
+										key: "BT-X-131",
 										type: "string",
 										description: `**Name of the contact**
 
@@ -2375,6 +2515,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									departmentName: {
+										key: "BT-X-132",
 										type: "string",
 										description: `**Department name**
 
@@ -2391,6 +2532,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
+										key: "BT-X-320",
 										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
@@ -2406,7 +2548,8 @@ To be chosen from the entries of UNTDID 3139`,
 									 *
 									 * A phone number for the contact point.
 									 */
-									telephoneNumber: {
+									phoneNumber: {
+										key: "BT-X-133",
 										type: "string",
 										description: `**Contact telephone number, value**
 
@@ -2419,6 +2562,7 @@ A phone number for the contact point.`,
 									 * Contact point fax number
 									 */
 									faxNumber: {
+										key: "BT-X-134",
 										type: "string",
 										description: "Contact point fax number",
 										required: false,
@@ -2431,6 +2575,7 @@ A phone number for the contact point.`,
 									 * An e-mail address for the contact point.
 									 */
 									emailAddress: {
+										key: "BT-X-135",
 										type: "string",
 										description: `**Contact email address**
 
@@ -2445,6 +2590,7 @@ An e-mail address for the contact point.`,
 							 * Detailed information about the address of the deviating end user
 							 */
 							postalAddress: {
+								key: "BG-X-21",
 								type: "object",
 								description:
 									"Detailed information about the address of the deviating end user",
@@ -2457,6 +2603,7 @@ An e-mail address for the contact point.`,
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-X-136",
 										type: "string",
 										description: `**Post code**
 
@@ -2475,6 +2622,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
+										key: "BT-X-137",
 										type: "string",
 										description: `**Address line 1**
 
@@ -2491,6 +2639,7 @@ Usually the street name and number or post office box.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-X-138",
 										type: "string",
 										description: `**Address line 2**
 
@@ -2505,6 +2654,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-X-139",
 										type: "string",
 										description: `**Address line 3**
 
@@ -2519,6 +2669,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village.
 									 */
 									city: {
+										key: "BT-X-140",
 										type: "string",
 										description: `**City**
 
@@ -2535,6 +2686,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
+										key: "BT-X-141",
 										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
@@ -2552,6 +2704,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-X-142",
 										type: "string",
 										description: `**Country subdivision**
 
@@ -2566,6 +2719,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-143",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -2597,6 +2751,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed information on tax information
 							 */
 							taxRegistration: {
+								key: "BT-X-144-00",
 								type: "object",
 								description: "Detailed information on tax information",
 								required: false,
@@ -2605,6 +2760,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * VAT ID
 									 */
 									identifier: {
+										key: "BT-X-144",
 										type: "string",
 										description: "VAT ID",
 										required: false,
@@ -2623,6 +2779,7 @@ Such as a region, a county, a state, a province, etc.`,
 					 * Details of the delivery conditions
 					 */
 					tradeDeliveryTerms: {
+						key: "",
 						type: "object",
 						description: "Details of the delivery conditions",
 						required: false,
@@ -2635,13 +2792,13 @@ Such as a region, a county, a state, a province, etc.`,
 							 * To be chosen from the entries in UNTDID 4053 + INCOTERMS List
 							 */
 							typeCode: {
+								key: "BT-X-145",
 								type: "string",
 								description: `**Delivery condition (Code)**
 
 The code specifying the type of delivery for these trade delivery terms.
 
 To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
-								required: false,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ApplicableTradeDeliveryTerms/ram:DeliveryTypeCode",
 							},
@@ -2649,11 +2806,13 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 					},
 					associatedOrderConfirmation: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Order confirmation date
 							 */
 							date: {
+								key: "BT-X-146",
 								type: "date",
 								description: "Order confirmation date",
 								required: false,
@@ -2671,11 +2830,13 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 					},
 					associatedOrder: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Order Date
 							 */
 							date: {
+								key: "BT-X-147",
 								type: "date",
 								description: "Order Date",
 								required: false,
@@ -2695,6 +2856,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 					 * Details on referenced quotation
 					 */
 					quotationReference: {
+						key: "BG-X-61",
 						type: "object[]",
 						description: "Details on referenced quotation",
 						required: false,
@@ -2704,6 +2866,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 							 * Quotation number
 							 */
 							issuerAssignedID: {
+								key: "BT-X-403",
 								type: "string",
 								description: "Quotation number",
 								xpath:
@@ -2713,6 +2876,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 							 * Document date
 							 */
 							date: {
+								key: "BT-X-404",
 								type: "date",
 								description: "Document date",
 								required: false,
@@ -2730,6 +2894,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 					},
 					associatedContract: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Type of contract (code)
@@ -2739,6 +2904,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 							 * CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)
 							 */
 							typeCode: {
+								key: "BT-X-405",
 								type: UNTDID_1153.map(({ code }) => code),
 								description: `**Type of contract (code)**
 
@@ -2753,6 +2919,7 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 							 * Contract Date
 							 */
 							date: {
+								key: "BT-X-148",
 								type: "date",
 								description: "Contract Date",
 								required: false,
@@ -2770,11 +2937,13 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 					},
 					supportingDocuments: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Document date
 							 */
 							date: {
+								key: "BT-X-149",
 								type: "date",
 								description: "Document date",
 								required: false,
@@ -2792,11 +2961,13 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 					},
 					tenderOrLotReference: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Document date
 							 */
 							date: {
+								key: "BT-X-556",
 								type: "date",
 								description: "Document date",
 								required: false,
@@ -2814,11 +2985,13 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 					},
 					objectIdentifier: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Document date
 							 */
 							date: {
+								key: "BT-X-557",
 								type: "date",
 								description: "Document date",
 								transform: {
@@ -2838,6 +3011,7 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 					 * Detailed information about the buyer agent
 					 */
 					buyerAgent: {
+						key: "BG-X-62",
 						type: "object",
 						description: "Detailed information about the buyer agent",
 						required: false,
@@ -2848,6 +3022,7 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 							 * A previously exchanged assigned identifier of the business partner.
 							 */
 							identifier: {
+								key: "BT-X-408",
 								type: "string",
 								description: `**Identifier**
 
@@ -2862,6 +3037,7 @@ A previously exchanged assigned identifier of the business partner.`,
 							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
 							 */
 							globalIdentifier: {
+								key: "BT-X-409",
 								type: "object",
 								description: `**Global identifier**
 
@@ -2901,6 +3077,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * Name / Company Name
 							 */
 							name: {
+								key: "BT-X-406",
 								type: "string",
 								description: "Name / Company Name",
 								xpath:
@@ -2914,6 +3091,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
+								key: "BT-X-549",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
@@ -2928,6 +3106,7 @@ To be chosen from UNTDID 3035.`,
 							 * Details about the organization
 							 */
 							organization: {
+								key: "BG-X-63",
 								type: "object",
 								description: "Details about the organization",
 								required: false,
@@ -2940,6 +3119,7 @@ To be chosen from UNTDID 3035.`,
 									 * If the identification scheme is used, it must be selected from the entries in the list published by the ISO/IEC 6523 Maintenance Agency.
 									 */
 									identifier: {
+										key: "BT-X-410",
 										type: "object",
 										description: `**Company Registration Number**
 
@@ -2992,7 +3172,8 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 *
 									 * This may be used if different from the party name.
 									 */
-									businessName: {
+									tradingName: {
+										key: "BT-X-407",
 										type: "string",
 										description: `**Trading Business Name**
 
@@ -3007,6 +3188,7 @@ This may be used if different from the party name.`,
 									 * Detailed information about the business address
 									 */
 									postalAddress: {
+										key: "BG-X-66",
 										type: "object",
 										description:
 											"Detailed information about the business address",
@@ -3020,6 +3202,7 @@ This may be used if different from the party name.`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-426",
 												type: "string",
 												description: `**Post code**
 
@@ -3038,6 +3221,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-427",
 												type: "string",
 												description: `**Address line 1**
 
@@ -3054,6 +3238,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-428",
 												type: "string",
 												description: `**Address line 2**
 
@@ -3068,6 +3253,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-429",
 												type: "string",
 												description: `**Address line 3**
 
@@ -3082,6 +3268,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-430",
 												type: "string",
 												description: `**City**
 
@@ -3098,6 +3285,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-431",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -3115,6 +3303,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-432",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -3133,6 +3322,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed contact information of the deviating buyer agent
 							 */
 							tradeContact: {
+								key: "BG-X-64",
 								type: "object",
 								description:
 									"Detailed contact information of the deviating buyer agent",
@@ -3144,6 +3334,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									name: {
+										key: "BT-X-413",
 										type: "string",
 										description: `**Name of the contact**
 
@@ -3158,6 +3349,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									departmentName: {
+										key: "BT-X-414",
 										type: "string",
 										description: `**Department name**
 
@@ -3174,6 +3366,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
+										key: "BT-X-415",
 										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
@@ -3189,7 +3382,8 @@ To be chosen from the entries of UNTDID 3139`,
 									 *
 									 * A phone number for the contact point.
 									 */
-									telephoneNumber: {
+									phoneNumber: {
+										key: "BT-X-416",
 										type: "string",
 										description: `**Contact telephone number**
 
@@ -3202,6 +3396,7 @@ A phone number for the contact point.`,
 									 * Contact point fax number
 									 */
 									faxNumber: {
+										key: "BT-X-417",
 										type: "string",
 										description: "Contact point fax number",
 										required: false,
@@ -3212,6 +3407,7 @@ A phone number for the contact point.`,
 									 * Contact email address
 									 */
 									emailAddress: {
+										key: "BT-X-418",
 										type: "string",
 										description: "Contact email address",
 										required: false,
@@ -3224,6 +3420,7 @@ A phone number for the contact point.`,
 							 * Detailed information about the address
 							 */
 							postalAddress: {
+								key: "BG-X-65",
 								type: "object",
 								description: "Detailed information about the address",
 								shape: {
@@ -3235,6 +3432,7 @@ A phone number for the contact point.`,
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-X-419",
 										type: "string",
 										description: `**Post code**
 
@@ -3253,6 +3451,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
+										key: "BT-X-420",
 										type: "string",
 										description: `**Address line 1**
 
@@ -3269,6 +3468,7 @@ Usually the street name and number or post office box.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-X-421",
 										type: "string",
 										description: `**Address line 2**
 
@@ -3283,6 +3483,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-X-422",
 										type: "string",
 										description: `**Address line 3**
 
@@ -3297,6 +3498,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village.
 									 */
 									city: {
+										key: "BT-X-423",
 										type: "string",
 										description: `**City**
 
@@ -3313,6 +3515,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
+										key: "BT-X-424",
 										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
@@ -3331,6 +3534,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-X-425",
 										type: "string",
 										description: `**Country subdivision**
 
@@ -3345,6 +3549,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-412",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -3370,28 +3575,30 @@ Such as a region, a county, a state, a province, etc.`,
 											},
 										},
 									},
+								},
+							},
+							/**
+							 * Detailed information on tax information
+							 */
+							taxRegistration: {
+								key: "BT-X-411-00",
+								type: "object",
+								description: "Detailed information on tax information",
+								required: false,
+								shape: {
 									/**
-									 * Detailed information on tax information
+									 * VAT ID
 									 */
-									taxRegistration: {
-										type: "object",
-										description: "Detailed information on tax information",
+									identifier: {
+										key: "BT-X-411",
+										type: "string",
+										description: "VAT ID",
 										required: false,
-										shape: {
-											/**
-											 * VAT ID
-											 */
-											identifier: {
-												type: "string",
-												description: "VAT ID",
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
-												additionalXml: {
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-														"VA",
-												},
-											},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
+										additionalXml: {
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
+												"VA",
 										},
 									},
 								},
@@ -3402,6 +3609,7 @@ Such as a region, a county, a state, a province, etc.`,
 					 * Details on referenced customer order
 					 */
 					customerOrderReference: {
+						key: "BG-X-23",
 						type: "object[]",
 						group: "customer-order-reference",
 						description: "Details on referenced customer order",
@@ -3411,6 +3619,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Ultimate Customer Order number of the final customer
 							 */
 							issuerAssignedID: {
+								key: "BT-X-150",
 								type: "string",
 								description:
 									"Ultimate Customer Order number of the final customer",
@@ -3421,6 +3630,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Document date
 							 */
 							date: {
+								key: "BT-X-151",
 								type: "date",
 								description: "Document date",
 								required: false,
@@ -3447,6 +3657,7 @@ Such as a region, a county, a state, a province, etc.`,
 					 * A consignment, at header level, related to this trade delivery.
 					 */
 					relatedConsignment: {
+						key: "BG-X-24",
 						type: "object",
 						description: `**Related SupplyChain Consignment**
 
@@ -3459,6 +3670,7 @@ A consignment, at header level, related to this trade delivery.`,
 							 * The code specifying the mode, such as air, sea, rail, road or inland waterway, for this logistics transport movement.
 							 */
 							transportMovement: {
+								key: "BT-X-152-00",
 								type: "string",
 								description: `**Specified Logistics Transport Movement**
 
@@ -3473,6 +3685,7 @@ The code specifying the mode, such as air, sea, rail, road or inland waterway, f
 							 * A logistics transport movement specified for this supply chain consignment.
 							 */
 							deliveryMethod: {
+								key: "BT-X-152",
 								type: "string",
 								description: `**Delivery method (Code)**
 
@@ -3496,6 +3709,7 @@ A logistics transport movement specified for this supply chain consignment.`,
 							 * - MOP: Market operator
 							 */
 							typeCode: {
+								key: "BT-X-550",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
@@ -3513,6 +3727,7 @@ To be chosen from UNTDID 3035, for instance:
 							 * Details about the organization
 							 */
 							organization: {
+								key: "BG-X-25",
 								type: "object",
 								description: "Details about the organization",
 								required: false,
@@ -3523,6 +3738,7 @@ To be chosen from UNTDID 3035, for instance:
 									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
 									 */
 									identifier: {
+										key: "BT-X-153",
 										type: "object",
 										description: `**Legal registration identifier**
 
@@ -3570,6 +3786,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 * This may be used if different from the party name.
 									 */
 									tradingName: {
+										key: "BT-X-154",
 										type: "string",
 										description: `**Trading name**
 
@@ -3584,6 +3801,7 @@ This may be used if different from the party name.`,
 									 * Detailed information about the business address
 									 */
 									postalAddress: {
+										key: "BG-X-67",
 										type: "object",
 										description:
 											"Detailed information about the business address",
@@ -3597,6 +3815,7 @@ This may be used if different from the party name.`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-433",
 												type: "string",
 												description: `**Post code**
 
@@ -3615,6 +3834,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-434",
 												type: "string",
 												description: `**Address line 1**
 
@@ -3631,6 +3851,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-435",
 												type: "string",
 												description: `**Address line 2**
 
@@ -3645,6 +3866,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-436",
 												type: "string",
 												description: `**Address line 3**
 
@@ -3659,6 +3881,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-437",
 												type: "string",
 												description: `**City**
 
@@ -3675,6 +3898,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-438",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -3692,6 +3916,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-439",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -3710,6 +3935,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed contact information
 							 */
 							tradeContact: {
+								key: "BG-X-26",
 								type: "object",
 								description: "Detailed contact information",
 								required: false,
@@ -3718,6 +3944,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Name of the contact
 									 */
 									name: {
+										key: "BT-X-155",
 										type: "string",
 										description: "Name of the contact",
 										required: false,
@@ -3728,6 +3955,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Department name
 									 */
 									departmentName: {
+										key: "BT-X-156",
 										type: "string",
 										description: "Department name",
 										required: false,
@@ -3742,6 +3970,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
+										key: "BT-X-321",
 										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
@@ -3757,7 +3986,8 @@ To be chosen from the entries of UNTDID 3139`,
 									 *
 									 * A phone number for the contact point.
 									 */
-									telephoneNumber: {
+									phoneNumber: {
+										key: "BT-X-157",
 										type: "string",
 										description: `**Contact telephone number**
 
@@ -3770,6 +4000,7 @@ A phone number for the contact point.`,
 									 * Contact point fax number
 									 */
 									faxNumber: {
+										key: "BT-X-158",
 										type: "string",
 										description: "Contact point fax number",
 										required: false,
@@ -3782,6 +4013,7 @@ A phone number for the contact point.`,
 									 * An e-mail address for the contact point.
 									 */
 									emailAddress: {
+										key: "BT-X-159",
 										type: "string",
 										description: `**Contact email address**
 
@@ -3799,6 +4031,7 @@ An e-mail address for the contact point.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-160",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -3830,6 +4063,7 @@ An e-mail address for the contact point.`,
 							 * Detailed information on tax information of the goods recipient
 							 */
 							taxRegistration: {
+								key: "BT-X-161-00",
 								type: "object",
 								description:
 									"Detailed information on tax information of the goods recipient",
@@ -3839,6 +4073,7 @@ An e-mail address for the contact point.`,
 									 * VAT identifier
 									 */
 									identifier: {
+										key: "BT-X-161",
 										type: "string",
 										description: "VAT identifier",
 										required: false,
@@ -3857,6 +4092,7 @@ An e-mail address for the contact point.`,
 					 * Detailed information about the final recipient
 					 */
 					finalShipTo: {
+						key: "BG-X-27",
 						type: "object",
 						description: "Detailed information about the final recipient",
 						required: false,
@@ -3865,6 +4101,7 @@ An e-mail address for the contact point.`,
 							 * Final recipient identifier
 							 */
 							identifier: {
+								key: "BT-X-162",
 								type: "string",
 								description: "Final recipient identifier",
 								required: false,
@@ -3877,6 +4114,7 @@ An e-mail address for the contact point.`,
 							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
 							 */
 							globalIdentifier: {
+								key: "BT-X-163",
 								type: "object",
 								description: `**Final recipient global identifier**
 
@@ -3916,6 +4154,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * Final Recipient Name / Company Name
 							 */
 							name: {
+								key: "BT-X-164",
 								type: "string",
 								description: "Final Recipient Name / Company Name",
 								xpath:
@@ -3929,6 +4168,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
+								key: "BT-X-551",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
@@ -3943,6 +4183,7 @@ To be chosen from UNTDID 3035.`,
 							 * Details about the organization
 							 */
 							organization: {
+								key: "BT-X-165-00",
 								type: "object",
 								description: "Details about the organization",
 								required: false,
@@ -3953,6 +4194,7 @@ To be chosen from UNTDID 3035.`,
 									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
 									 */
 									identifier: {
+										key: "BT-X-165",
 										type: "object",
 										description: `**Company Registration Number**
 
@@ -3999,7 +4241,8 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 *
 									 * This may be used if different from the party name.
 									 */
-									businessName: {
+									tradingName: {
+										key: "BT-X-166",
 										type: "string",
 										description: `**Trading Business Name**
 
@@ -4014,6 +4257,7 @@ This may be used if different from the party name.`,
 									 * Detailed information about the business address
 									 */
 									postalAddress: {
+										key: "BG-X-68",
 										type: "object",
 										description:
 											"Detailed information about the business address",
@@ -4027,6 +4271,7 @@ This may be used if different from the party name.`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-440",
 												type: "string",
 												description: `**Post code**
 
@@ -4045,6 +4290,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-441",
 												type: "string",
 												description: `**Address line 1**
 
@@ -4061,6 +4307,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-442",
 												type: "string",
 												description: `**Address line 2**
 
@@ -4075,6 +4322,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-443",
 												type: "string",
 												description: `**Address line 3**
 
@@ -4089,6 +4337,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-444",
 												type: "string",
 												description: `**City**
 
@@ -4105,6 +4354,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-445",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -4122,6 +4372,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-446",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -4140,6 +4391,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed contact information
 							 */
 							tradeContact: {
+								key: "BG-X-28",
 								type: "object",
 								description: "Detailed contact information",
 								required: false,
@@ -4150,6 +4402,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									name: {
+										key: "BT-X-167",
 										type: "string",
 										description: `**Name of the contact**
 
@@ -4164,6 +4417,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									departmentName: {
+										key: "BT-X-168",
 										type: "string",
 										description: `**Department name**
 
@@ -4180,6 +4434,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
+										key: "BT-X-322",
 										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
@@ -4195,7 +4450,8 @@ To be chosen from the entries of UNTDID 3139`,
 									 *
 									 * A phone number for the contact point.
 									 */
-									telephoneNumber: {
+									phoneNumber: {
+										key: "BT-X-169",
 										type: "string",
 										description: `**Contact telephone number**
 
@@ -4208,6 +4464,7 @@ A phone number for the contact point.`,
 									 * Contact point fax number
 									 */
 									faxNumber: {
+										key: "BT-X-170",
 										type: "string",
 										description: "Contact point fax number",
 										required: false,
@@ -4220,6 +4477,7 @@ A phone number for the contact point.`,
 									 * An e-mail address for the contact point.
 									 */
 									emailAddress: {
+										key: "BT-X-171",
 										type: "string",
 										description: `**Contact email address**
 
@@ -4234,6 +4492,7 @@ An e-mail address for the contact point.`,
 							 * Detailed information about the address of the final recipient
 							 */
 							postalAddress: {
+								key: "BG-X-29",
 								type: "object",
 								description:
 									"Detailed information about the address of the final recipient",
@@ -4246,6 +4505,7 @@ An e-mail address for the contact point.`,
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-X-172",
 										type: "string",
 										description: `**Post code**
 
@@ -4264,6 +4524,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
+										key: "BT-X-173",
 										type: "string",
 										description: `**Address line 1**
 
@@ -4280,6 +4541,7 @@ Usually the street name and number or post office box.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-X-174",
 										type: "string",
 										description: `**Address line 2**
 
@@ -4294,6 +4556,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-X-175",
 										type: "string",
 										description: `**Address line 3**
 
@@ -4308,6 +4571,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village.
 									 */
 									city: {
+										key: "BT-X-176",
 										type: "string",
 										description: `**City**
 
@@ -4324,6 +4588,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
+										key: "BT-X-177",
 										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
@@ -4341,6 +4606,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-X-178",
 										type: "string",
 										description: `**Country subdivision**
 
@@ -4355,6 +4621,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-179",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -4386,6 +4653,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed information on tax information
 							 */
 							taxRegistration: {
+								key: "BT-X-180-00",
 								type: "object",
 								description: "Detailed information on tax information",
 								required: false,
@@ -4394,6 +4662,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * VAT ID
 									 */
 									identifier: {
+										key: "BT-X-180",
 										type: "string",
 										description: "VAT ID",
 										required: false,
@@ -4412,6 +4681,7 @@ Such as a region, a county, a state, a province, etc.`,
 					 * Identification of the deviating sender
 					 */
 					shipFrom: {
+						key: "BG-X-30",
 						type: "object",
 						description: "Identification of the deviating sender",
 						required: false,
@@ -4420,6 +4690,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Deviating sender identifier
 							 */
 							identifier: {
+								key: "BT-X-181",
 								type: "string",
 								description: "Deviating sender identifier",
 								required: false,
@@ -4432,6 +4703,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
 							 */
 							globalIdentifier: {
+								key: "BT-X-182",
 								type: "object",
 								required: false,
 								description: `**Deviating sender global identifier**
@@ -4471,6 +4743,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * Deviating sender name / company name
 							 */
 							name: {
+								key: "BT-X-183",
 								type: "string",
 								description: "Deviating sender name / company name",
 								xpath:
@@ -4484,6 +4757,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
+								key: "BT-X-552",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
@@ -4498,6 +4772,7 @@ To be chosen from UNTDID 3035.`,
 							 * Details about the organization
 							 */
 							organization: {
+								key: "BT-X-184-00",
 								type: "object",
 								description: "Details about the organization",
 								required: false,
@@ -4508,6 +4783,7 @@ To be chosen from UNTDID 3035.`,
 									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
 									 */
 									identifier: {
+										key: "BT-X-184",
 										type: "object",
 										description: `**Company Registration Number**
 
@@ -4554,7 +4830,8 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 *
 									 * This may be used if different from the party name.
 									 */
-									businessName: {
+									tradingName: {
+										key: "BT-X-185",
 										type: "string",
 										description: `**Trading Business Name**
 
@@ -4569,6 +4846,7 @@ This may be used if different from the party name.`,
 									 * Detailed information about the business address
 									 */
 									postalAddress: {
+										key: "BG-X-69",
 										type: "object",
 										description:
 											"Detailed information about the business address",
@@ -4582,6 +4860,7 @@ This may be used if different from the party name.`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-447",
 												type: "string",
 												description: `**Post code**
 
@@ -4600,6 +4879,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-448",
 												type: "string",
 												description: `**Address line 1**
 
@@ -4616,6 +4896,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-449",
 												type: "string",
 												description: `**Address line 2**
 
@@ -4630,6 +4911,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-450",
 												type: "string",
 												description: `**Address line 3**
 
@@ -4644,6 +4926,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-451",
 												type: "string",
 												description: `**City**
 
@@ -4660,6 +4943,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-452",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -4677,6 +4961,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-453",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -4695,6 +4980,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed contact information
 							 */
 							tradeContact: {
+								key: "BG-X-31",
 								type: "object",
 								description: "Detailed contact information",
 								required: false,
@@ -4705,6 +4991,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									name: {
+										key: "BT-X-186",
 										type: "string",
 										description: `**Name of the contact**
 
@@ -4719,6 +5006,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									departmentName: {
+										key: "BT-X-187",
 										type: "string",
 										description: `**Department name**
 
@@ -4735,6 +5023,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
+										key: "BT-X-323",
 										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
@@ -4750,7 +5039,8 @@ To be chosen from the entries of UNTDID 3139`,
 									 *
 									 * A phone number for the contact point.
 									 */
-									telephoneNumber: {
+									phoneNumber: {
+										key: "BT-X-188",
 										type: "string",
 										description: `**Contact telephone number**
 
@@ -4763,6 +5053,7 @@ A phone number for the contact point.`,
 									 * Contact point fax number
 									 */
 									faxNumber: {
+										key: "BT-X-189",
 										type: "string",
 										description: "Contact point fax number",
 										required: false,
@@ -4775,6 +5066,7 @@ A phone number for the contact point.`,
 									 * An e-mail address for the contact point.
 									 */
 									emailAddress: {
+										key: "BT-X-190",
 										type: "string",
 										description: `**Contact email address**
 
@@ -4789,6 +5081,7 @@ An e-mail address for the contact point.`,
 							 * Detailed information about the address of the deviating sender
 							 */
 							postalAddress: {
+								key: "BG-X-32",
 								type: "object",
 								description:
 									"Detailed information about the address of the deviating sender",
@@ -4801,6 +5094,7 @@ An e-mail address for the contact point.`,
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-X-191",
 										type: "string",
 										description: `**Post code**
 
@@ -4819,6 +5113,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
+										key: "BT-X-192",
 										type: "string",
 										description: `**Address line 1**
 
@@ -4835,6 +5130,7 @@ Usually the street name and number or post office box.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-X-193",
 										type: "string",
 										description: `**Address line 2**
 
@@ -4849,6 +5145,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-X-194",
 										type: "string",
 										description: `**Address line 3**
 
@@ -4863,6 +5160,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village.
 									 */
 									city: {
+										key: "BT-X-195",
 										type: "string",
 										description: `**City**
 
@@ -4879,6 +5177,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
+										key: "BT-X-196",
 										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
@@ -4896,6 +5195,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-X-197",
 										type: "string",
 										description: `**Country subdivision**
 
@@ -4910,6 +5210,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-198",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -4941,6 +5242,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed information on tax information
 							 */
 							taxRegistration: {
+								key: "BT-X-199-00",
 								type: "object",
 								description: "Detailed information on tax information",
 								required: false,
@@ -4949,6 +5251,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * VAT ID
 									 */
 									identifier: {
+										key: "BT-X-199",
 										type: "string",
 										description: "VAT ID",
 										required: false,
@@ -4965,11 +5268,13 @@ Such as a region, a county, a state, a province, etc.`,
 					},
 					despatchAdvice: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Despatch advice date
 							 */
 							date: {
+								key: "BT-X-200",
 								type: "date",
 								description: "Despatch advice date",
 								required: false,
@@ -4987,11 +5292,13 @@ Such as a region, a county, a state, a province, etc.`,
 					},
 					associatedGoodsReceipt: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Goods receipt date
 							 */
 							date: {
+								key: "BT-X-201",
 								type: "date",
 								description: "Goods receipt date",
 								required: false,
@@ -5009,6 +5316,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed information about the corresponding delivery note
 							 */
 							deliveryNote: {
+								key: "BT-X-202-00",
 								type: "object[]",
 								description:
 									"Detailed information about the corresponding delivery note",
@@ -5019,6 +5327,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Delivery note reference
 									 */
 									issuerAssignedID: {
+										key: "BT-X-202",
 										type: "string",
 										description: "Delivery note reference",
 										xpath:
@@ -5028,6 +5337,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Delivery note date
 									 */
 									date: {
+										key: "BT-X-203",
 										type: "date",
 										description: "Delivery note date",
 										required: false,
@@ -5056,6 +5366,7 @@ Such as a region, a county, a state, a province, etc.`,
 					 * Given seller reference number for routing purposes after biliteral agreement
 					 */
 					issuerReference: {
+						key: "BT-X-204",
 						type: "string",
 						description: `**Seller reference number**
 
@@ -5068,6 +5379,7 @@ Given seller reference number for routing purposes after biliteral agreement`,
 					 * Deviating invoicing party
 					 */
 					invoicer: {
+						key: "BG-X-33",
 						type: "object",
 						description: "Deviating invoicing party",
 						required: false,
@@ -5076,6 +5388,7 @@ Given seller reference number for routing purposes after biliteral agreement`,
 							 * Deviating invoicer identifier
 							 */
 							identifier: {
+								key: "BT-X-205",
 								type: "string",
 								description: "Deviating invoicer identifier",
 								required: false,
@@ -5088,6 +5401,7 @@ Given seller reference number for routing purposes after biliteral agreement`,
 							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
 							 */
 							globalIdentifier: {
+								key: "BT-X-206",
 								type: "object",
 								description: `**Deviating invoicer global identifier**
 
@@ -5126,6 +5440,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * Name
 							 */
 							name: {
+								key: "BT-X-207",
 								type: "string",
 								description: "Name",
 								xpath:
@@ -5139,6 +5454,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
+								key: "BT-X-553",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
@@ -5153,6 +5469,7 @@ To be chosen from UNTDID 3035.`,
 							 * Details about the organization
 							 */
 							organization: {
+								key: "BT-X-208-00",
 								type: "object",
 								description: "Details about the organization",
 								required: false,
@@ -5163,6 +5480,7 @@ To be chosen from UNTDID 3035.`,
 									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
 									 */
 									identifier: {
+										key: "BT-X-208",
 										type: "object",
 										description: `**Company Registration Number**
 
@@ -5209,7 +5527,8 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 *
 									 * This may be used if different from the party name.
 									 */
-									businessName: {
+									tradingName: {
+										key: "BT-X-209",
 										type: "string",
 										description: `**Trading Business Name**
 
@@ -5224,6 +5543,7 @@ This may be used if different from the party name.`,
 									 * Detailed information about the business address
 									 */
 									postalAddress: {
+										key: "BG-X-70",
 										type: "object",
 										description:
 											"Detailed information about the business address",
@@ -5237,6 +5557,7 @@ This may be used if different from the party name.`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-454",
 												type: "string",
 												description: `**Post code**
 
@@ -5255,6 +5576,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-455",
 												type: "string",
 												description: `**Address line 1**
 
@@ -5271,6 +5593,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-456",
 												type: "string",
 												description: `**Address line 2**
 
@@ -5285,6 +5608,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-457",
 												type: "string",
 												description: `**Address line 3**
 
@@ -5299,6 +5623,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-458",
 												type: "string",
 												description: `**City**
 
@@ -5315,6 +5640,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-459",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -5332,6 +5658,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-460",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -5350,6 +5677,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed contact information
 							 */
 							tradeContact: {
+								key: "BG-X-34",
 								type: "object",
 								description: "Detailed contact information",
 								required: false,
@@ -5360,6 +5688,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									name: {
+										key: "BT-X-210",
 										type: "string",
 										description: `**Name of the contact**
 
@@ -5374,6 +5703,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									departmentName: {
+										key: "BT-X-211",
 										type: "string",
 										description: `**Department name**
 
@@ -5390,6 +5720,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
+										key: "BT-X-324",
 										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
@@ -5405,7 +5736,8 @@ To be chosen from the entries of UNTDID 3139`,
 									 *
 									 * A phone number for the contact point.
 									 */
-									telephoneNumber: {
+									phoneNumber: {
+										key: "BT-X-212",
 										type: "string",
 										description: `**Contact telephone number**
 
@@ -5418,6 +5750,7 @@ A phone number for the contact point.`,
 									 * Contact point fax number
 									 */
 									faxNumber: {
+										key: "BT-X-213",
 										type: "string",
 										description: "Contact point fax number",
 										required: false,
@@ -5430,6 +5763,7 @@ A phone number for the contact point.`,
 									 * An e-mail address for the contact point.
 									 */
 									emailAddress: {
+										key: "BT-X-214",
 										type: "string",
 										description: `**Contact email address**
 
@@ -5444,6 +5778,7 @@ An e-mail address for the contact point.`,
 							 * Detailed information about the address
 							 */
 							postalAddress: {
+								key: "BG-X-35",
 								type: "object",
 								description: `Detailed information about the address`,
 								shape: {
@@ -5455,6 +5790,7 @@ An e-mail address for the contact point.`,
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-X-215",
 										type: "string",
 										description: `**Post code**
 
@@ -5473,6 +5809,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
+										key: "BT-X-216",
 										type: "string",
 										description: `**Address line 1**
 
@@ -5489,6 +5826,7 @@ Usually the street name and number or post office box.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-X-217",
 										type: "string",
 										description: `**Address line 2**
 
@@ -5503,6 +5841,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-X-218",
 										type: "string",
 										description: `**Address line 3**
 
@@ -5517,6 +5856,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village.
 									 */
 									city: {
+										key: "BT-X-219",
 										type: "string",
 										description: `**City**
 
@@ -5533,6 +5873,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
+										key: "BT-X-220",
 										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
@@ -5550,6 +5891,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-X-221",
 										type: "string",
 										description: `**Country subdivision**
 
@@ -5564,6 +5906,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-222",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -5595,6 +5938,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed information on tax information
 							 */
 							taxRegistration: {
+								key: "BT-X-223-00",
 								type: "object",
 								description: "Detailed information on tax information",
 								required: false,
@@ -5603,6 +5947,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * VAT ID
 									 */
 									identifier: {
+										key: "BT-X-223",
 										type: "string",
 										description: "VAT ID",
 										required: false,
@@ -5621,6 +5966,7 @@ Such as a region, a county, a state, a province, etc.`,
 					 * Detailed information about the deviating invoice recipient
 					 */
 					invoicee: {
+						key: "BG-X-36",
 						type: "object",
 						description:
 							"Detailed information about the deviating invoice recipient",
@@ -5630,6 +5976,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Deviating invoice recipient identifier
 							 */
 							identifier: {
+								key: "BT-X-224",
 								type: "string",
 								description: "Deviating invoice recipient identifier",
 								required: false,
@@ -5642,6 +5989,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
 							 */
 							globalIdentifier: {
+								key: "BT-X-225",
 								type: "object",
 								description: `**Deviating invoice recipient global identifier**
 
@@ -5681,6 +6029,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * Deviating invoice recipient name / company name
 							 */
 							name: {
+								key: "BT-X-226",
 								type: "string",
 								description: "Deviating invoice recipient name / company name",
 								xpath:
@@ -5694,6 +6043,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
+								key: "BT-X-554",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
@@ -5708,6 +6058,7 @@ To be chosen from UNTDID 3035.`,
 							 * Details about the organization
 							 */
 							organization: {
+								key: "BT-X-227-00",
 								type: "object",
 								description: "Details about the organization",
 								required: false,
@@ -5718,6 +6069,7 @@ To be chosen from UNTDID 3035.`,
 									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
 									 */
 									identifier: {
+										key: "BT-X-227",
 										type: "object",
 										description: `**Company Registration Number**
 
@@ -5764,7 +6116,8 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 *
 									 * This may be used if different from the party name.
 									 */
-									businessName: {
+									tradingName: {
+										key: "BT-X-228",
 										type: "string",
 										description: `**Trading Business Name**
 
@@ -5779,6 +6132,7 @@ This may be used if different from the party name.`,
 									 * Detailed information about the business address
 									 */
 									postalAddress: {
+										key: "BG-X-71",
 										type: "object",
 										description:
 											"Detailed information about the business address",
@@ -5792,6 +6146,7 @@ This may be used if different from the party name.`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-461",
 												type: "string",
 												description: `**Post code**
 
@@ -5810,6 +6165,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-462",
 												type: "string",
 												description: `**Address line 1**
 
@@ -5826,6 +6182,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-463",
 												type: "string",
 												description: `**Address line 2**
 
@@ -5840,6 +6197,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-464",
 												type: "string",
 												description: `**Address line 3**
 
@@ -5854,6 +6212,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-465",
 												type: "string",
 												description: `**City**
 
@@ -5870,6 +6229,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-466",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -5887,6 +6247,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-467",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -5905,6 +6266,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed contact information
 							 */
 							tradeContact: {
+								key: "BG-X-37",
 								type: "object",
 								description: "Detailed contact information",
 								required: false,
@@ -5915,6 +6277,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									name: {
+										key: "BT-X-229",
 										type: "string",
 										description: `**Name of the contact**
 
@@ -5929,6 +6292,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									departmentName: {
+										key: "BT-X-230",
 										type: "string",
 										description: `**Department name**
 
@@ -5945,6 +6309,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
+										key: "BT-X-325",
 										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 									 *
@@ -5960,7 +6325,8 @@ If a contact person is indicated, either the name or the department is to be tra
 									 *
 									 * A phone number for the contact point.
 									 */
-									telephoneNumber: {
+									phoneNumber: {
+										key: "BT-X-231",
 										type: "string",
 										description: `**Contact telephone number**
 
@@ -5973,6 +6339,7 @@ A phone number for the contact point.`,
 									 * Contact point fax number
 									 */
 									faxNumber: {
+										key: "BT-X-232",
 										type: "string",
 										description: "Contact point fax number",
 										required: false,
@@ -5985,6 +6352,7 @@ A phone number for the contact point.`,
 									 * An e-mail address for the contact point.
 									 */
 									emailAddress: {
+										key: "BT-X-233",
 										type: "string",
 										description: `**Contact email address**
 
@@ -5999,6 +6367,7 @@ An e-mail address for the contact point.`,
 							 * Detailed information about the address
 							 */
 							postalAddress: {
+								key: "BG-X-38",
 								type: "object",
 								description: "Detailed information about the address",
 								shape: {
@@ -6010,6 +6379,7 @@ An e-mail address for the contact point.`,
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-X-234",
 										type: "string",
 										description: `**Post code**
 
@@ -6028,6 +6398,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
+										key: "BT-X-235",
 										type: "string",
 										description: `**Address line 1**
 
@@ -6044,6 +6415,7 @@ Usually the street name and number or post office box.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-X-236",
 										type: "string",
 										description: `**Address line 2**
 
@@ -6058,6 +6430,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-X-237",
 										type: "string",
 										description: `**Address line 3**
 
@@ -6072,6 +6445,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village.
 									 */
 									city: {
+										key: "BT-X-238",
 										type: "string",
 										description: `**City**
 
@@ -6088,6 +6462,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
+										key: "BT-X-239",
 										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
@@ -6105,6 +6480,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-X-240",
 										type: "string",
 										description: `**Country subdivision**
 
@@ -6119,6 +6495,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-241",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -6150,6 +6527,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed information on tax information
 							 */
 							taxRegistration: {
+								key: "BT-X-242-00",
 								type: "object",
 								description: "Detailed information on tax information",
 								required: false,
@@ -6158,6 +6536,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * VAT ID
 									 */
 									identifier: {
+										key: "BT-X-242",
 										type: "string",
 										description: "VAT ID",
 										required: false,
@@ -6174,6 +6553,7 @@ Such as a region, a county, a state, a province, etc.`,
 					},
 					payee: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Payee role (code)
@@ -6184,6 +6564,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * - DL: Factor
 							 */
 							typeCode: {
+								key: "BT-X-468",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Payee role (code)**
 
@@ -6205,7 +6586,8 @@ To be chosen from UNTDID 3035, for instance:
 									 *
 									 * This may be used if different from the party name.
 									 */
-									businessName: {
+									tradingName: {
+										key: "BT-X-243",
 										type: "string",
 										description: `**Trading name**
 
@@ -6220,6 +6602,7 @@ This may be used if different from the party name.`,
 									 * Detailed information about the business address
 									 */
 									postalAddress: {
+										key: "BG-X-72",
 										type: "object",
 										description:
 											"Detailed information about the business address",
@@ -6233,6 +6616,7 @@ This may be used if different from the party name.`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-469",
 												type: "string",
 												description: `**Post code**
 
@@ -6251,6 +6635,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-470",
 												type: "string",
 												description: `**Address line 1**
 
@@ -6267,6 +6652,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-471",
 												type: "string",
 												description: `**Address line 2**
 
@@ -6281,6 +6667,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-472",
 												type: "string",
 												description: `**Address line 3**
 
@@ -6295,6 +6682,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-473",
 												type: "string",
 												description: `**City**
 
@@ -6311,6 +6699,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-474",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -6328,6 +6717,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-475",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -6346,6 +6736,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed contact information
 							 */
 							tradeContact: {
+								key: "BG-X-39",
 								type: "object",
 								description: "Detailed contact information",
 								required: false,
@@ -6354,6 +6745,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Name of the contact
 									 */
 									name: {
+										key: "BT-X-244",
 										type: "string",
 										description: "Name of the contact",
 										required: false,
@@ -6364,6 +6756,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Department name
 									 */
 									departmentName: {
+										key: "BT-X-245",
 										type: "string",
 										description: "Department name",
 										required: false,
@@ -6378,6 +6771,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
+										key: "BT-X-326",
 										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
@@ -6393,7 +6787,8 @@ To be chosen from the entries of UNTDID 3139`,
 									 *
 									 * A phone number for the contact point.
 									 */
-									telephoneNumber: {
+									phoneNumber: {
+										key: "BT-X-246",
 										type: "string",
 										description: `**Contact telephone number**
 
@@ -6406,6 +6801,7 @@ A phone number for the contact point.`,
 									 * Contact point fax number
 									 */
 									faxNumber: {
+										key: "BT-X-247",
 										type: "string",
 										description: "Contact point fax number",
 										required: false,
@@ -6418,6 +6814,7 @@ A phone number for the contact point.`,
 									 * An e-mail address for the contact point.
 									 */
 									emailAddress: {
+										key: "BT-X-248",
 										type: "string",
 										description: `**Contact email address**
 
@@ -6432,6 +6829,7 @@ An e-mail address for the contact point.`,
 							 * Detailed information about the payee postal address
 							 */
 							postalAddress: {
+								key: "BG-X-40",
 								type: "object",
 								description:
 									"Detailed information about the payee postal address",
@@ -6445,6 +6843,7 @@ An e-mail address for the contact point.`,
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-X-249",
 										type: "string",
 										description: `**Post code**
 
@@ -6463,6 +6862,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
+										key: "BT-X-250",
 										type: "string",
 										description: `**Address line 1**
 
@@ -6479,6 +6879,7 @@ Usually the street name and number or post office box.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-X-251",
 										type: "string",
 										description: `**Address line 2**
 
@@ -6493,6 +6894,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-X-252",
 										type: "string",
 										description: `**Address line 3**
 
@@ -6507,6 +6909,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village.
 									 */
 									city: {
+										key: "BT-X-253",
 										type: "string",
 										description: `**City**
 
@@ -6523,6 +6926,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
+										key: "BT-X-254",
 										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
@@ -6540,6 +6944,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-X-255",
 										type: "string",
 										description: `**Country subdivision**
 
@@ -6554,6 +6959,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-256",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -6585,6 +6991,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed tax information
 							 */
 							taxRegistration: {
+								key: "BT-X-257-00",
 								type: "object",
 								description: "Detailed tax information",
 								required: false,
@@ -6593,6 +7000,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * VAT identifier
 									 */
 									identifier: {
+										key: "BT-X-257",
 										type: "string",
 										description: "VAT identifier",
 										required: false,
@@ -6615,6 +7023,7 @@ Such as a region, a county, a state, a province, etc.`,
 					 * The role of Payer may be fulfilled by another party than the Buyer, e.g. a third Party like a mother company
 					 */
 					payer: {
+						key: "BG-X-73",
 						type: "object",
 						description: `**Detailed information about the deviating invoice payer**
 
@@ -6627,6 +7036,7 @@ The role of Payer may be fulfilled by another party than the Buyer, e.g. a third
 							 * Deviating invoice payer identifier
 							 */
 							identifier: {
+								key: "BT-X-478",
 								type: "string",
 								description: "Deviating invoice payer identifier",
 								required: false,
@@ -6639,6 +7049,7 @@ The role of Payer may be fulfilled by another party than the Buyer, e.g. a third
 							 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
 							 */
 							globalIdentifier: {
+								key: "BT-X-479",
 								type: "object",
 								description: `**Deviating invoice payer global identifier**
 
@@ -6678,6 +7089,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * Name/company name of the deviating invoice payer
 							 */
 							name: {
+								key: "BT-X-476",
 								type: "string",
 								description: "Name/company name of the deviating invoice payer",
 								xpath:
@@ -6691,6 +7103,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * To be chosen from UNTDID 3035.
 							 */
 							typeCode: {
+								key: "BT-X-483",
 								type: UNTDID_3035.map(({ code }) => code),
 								description: `**Role (code)**
 
@@ -6705,6 +7118,7 @@ To be chosen from UNTDID 3035.`,
 							 * Details about the organization
 							 */
 							organization: {
+								key: "BT-X-480-00",
 								type: "object",
 								description: "Details about the organization",
 								required: false,
@@ -6715,6 +7129,7 @@ To be chosen from UNTDID 3035.`,
 									 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
 									 */
 									identifier: {
+										key: "BT-X-480",
 										type: "object",
 										description: `**Company Registration Number**
 
@@ -6761,7 +7176,8 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 *
 									 * This may be used if different from the party name.
 									 */
-									businessName: {
+									tradingName: {
+										key: "BT-X-477",
 										type: "string",
 										description: `**Trading Business Name**
 
@@ -6776,6 +7192,7 @@ This may be used if different from the party name.`,
 									 * Detailed information about the business address
 									 */
 									postalAddress: {
+										key: "BG-X-76",
 										type: "object",
 										description:
 											"Detailed information about the business address",
@@ -6789,6 +7206,7 @@ This may be used if different from the party name.`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-497",
 												type: "string",
 												description: `**Post code**
 
@@ -6807,6 +7225,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-498",
 												type: "string",
 												description: `**Address line 1**
 
@@ -6823,6 +7242,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-499",
 												type: "string",
 												description: `**Address line 2**
 
@@ -6837,6 +7257,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-500",
 												type: "string",
 												description: `**Address line 3**
 
@@ -6851,6 +7272,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-501",
 												type: "string",
 												description: `**City**
 
@@ -6867,6 +7289,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-502",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -6884,6 +7307,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-503",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -6902,6 +7326,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed contact information
 							 */
 							tradeContact: {
+								key: "BG-X-74",
 								type: "object",
 								description: "Detailed contact information",
 								required: false,
@@ -6912,6 +7337,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									name: {
+										key: "BT-X-484",
 										type: "string",
 										description: `**Name of the contact**
 
@@ -6926,6 +7352,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * If a contact person is indicated, either the name or the department is to be transmitted.
 									 */
 									departmentName: {
+										key: "BT-X-485",
 										type: "string",
 										description: `**Department name**
 
@@ -6942,6 +7369,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 * To be chosen from the entries of UNTDID 3139
 									 */
 									typeCode: {
+										key: "BT-X-486",
 										type: UNTDID_3139.map(({ code }) => code),
 										description: `**Type of contact (code)**
 
@@ -6958,6 +7386,7 @@ To be chosen from the entries of UNTDID 3139`,
 									 * A phone number for the contact point.
 									 */
 									telephoneNumber: {
+										key: "BT-X-487",
 										type: "string",
 										description: `**Contact telephone number**
 
@@ -6970,6 +7399,7 @@ A phone number for the contact point.`,
 									 * Contact point fax number
 									 */
 									faxNumber: {
+										key: "BT-X-488",
 										type: "string",
 										description: "Contact point fax number",
 										required: false,
@@ -6982,6 +7412,7 @@ A phone number for the contact point.`,
 									 * An e-mail address for the contact point.
 									 */
 									emailAddress: {
+										key: "BT-X-489",
 										type: "string",
 										description: `**Contact email address**
 
@@ -6996,6 +7427,7 @@ An e-mail address for the contact point.`,
 							 * Detailed information about the address
 							 */
 							postalAddress: {
+								key: "BG-X-75",
 								type: "object",
 								description: "Detailed information about the address",
 								shape: {
@@ -7007,6 +7439,7 @@ An e-mail address for the contact point.`,
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-X-490",
 										type: "string",
 										description: `**Post code**
 
@@ -7025,6 +7458,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
+										key: "BT-X-491",
 										type: "string",
 										description: `**Address line 1**
 
@@ -7041,6 +7475,7 @@ Usually the street name and number or post office box.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-X-492",
 										type: "string",
 										description: `**Address line 2**
 
@@ -7055,6 +7490,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-X-493",
 										type: "string",
 										description: `**Address line 3**
 
@@ -7069,6 +7505,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village.
 									 */
 									city: {
+										key: "BT-X-494",
 										type: "string",
 										description: `**City**
 
@@ -7085,6 +7522,7 @@ The common name of the city, town or village.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
+										key: "BT-X-495",
 										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Country code**
 
@@ -7102,6 +7540,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-X-496",
 										type: "string",
 										description: `**Country subdivision**
 
@@ -7116,6 +7555,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-482",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -7147,6 +7587,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed information on tax information
 							 */
 							taxRegistration: {
+								key: "BT-X-481-00",
 								type: "object",
 								description: "Detailed information on tax information",
 								required: false,
@@ -7155,6 +7596,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * VAT ID
 									 */
 									identifier: {
+										key: "BT-X-481",
 										type: "string",
 										description: "VAT ID",
 										required: false,
@@ -7173,6 +7615,7 @@ Such as a region, a county, a state, a province, etc.`,
 					 * Specification of the invoice currency, local currency and exchange rate
 					 */
 					tradeCurrencyExchange: {
+						key: "BG-X-41",
 						type: "object",
 						description:
 							"Specification of the invoice currency, local currency and exchange rate",
@@ -7182,6 +7625,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Invoice currency
 							 */
 							invoiceCurrency: {
+								key: "BT-X-258",
 								type: CURRENCY_CODES.map(({ code }) => code),
 								description: "Invoice currency",
 								xpath:
@@ -7191,6 +7635,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Local currency
 							 */
 							localCurrency: {
+								key: "BT-X-259",
 								type: CURRENCY_CODES.map(({ code }) => code),
 								description: "Local currency",
 								xpath:
@@ -7200,6 +7645,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Exchange rate
 							 */
 							exchangeRate: {
+								key: "BT-X-260",
 								type: "string | number",
 								description: "Exchange rate",
 								xpath:
@@ -7209,6 +7655,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Exchange rate date
 							 */
 							exchangeRateDate: {
+								key: "BT-X-261",
 								type: "date",
 								description: "Exchange rate date",
 								required: false,
@@ -7233,6 +7680,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * A monetary value used as the line total basis on which this trade related tax, levy or duty is calculated
 							 */
 							lineTotalBasisAmount: {
+								key: "BT-X-262",
 								type: "string | number",
 								description: `**Line Total Basis Amount**
 
@@ -7245,6 +7693,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 							 * Total amount of charges / allowances on document level
 							 */
 							allowanceChargeBasisAmount: {
+								key: "BT-X-263",
 								type: "string | number",
 								description:
 									"Total amount of charges / allowances on document level",
@@ -7256,11 +7705,13 @@ A monetary value used as the line total basis on which this trade related tax, l
 					},
 					invoicingPeriod: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Invoicing period description (free text)
 							 */
 							description: {
+								key: "BT-X-264",
 								type: "string",
 								description: "Invoicing period description (free text)",
 								required: false,
@@ -7271,11 +7722,13 @@ A monetary value used as the line total basis on which this trade related tax, l
 					},
 					allowances: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Calculation sequence
 							 */
 							calculationSequence: {
+								key: "BT-X-265",
 								type: "string | number",
 								description: "Calculation sequence",
 								required: false,
@@ -7285,7 +7738,8 @@ A monetary value used as the line total basis on which this trade related tax, l
 							/**
 							 * Allowance / charge base quantity
 							 */
-							baseQuantity: {
+							basisQuantity: {
+								key: "BT-X-266",
 								type: "object",
 								description: "Allowance / charge base quantity",
 								required: false,
@@ -7315,11 +7769,13 @@ A monetary value used as the line total basis on which this trade related tax, l
 					},
 					charges: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Calculation sequence
 							 */
 							calculationSequence: {
+								key: "BT-X-268",
 								type: "string | number",
 								description: "Calculation sequence",
 								required: false,
@@ -7330,6 +7786,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 							 * Allowance / charge base quantity
 							 */
 							baseQuantity: {
+								key: "BT-X-269",
 								type: "object",
 								description: "Allowance / charge base quantity",
 								required: false,
@@ -7358,6 +7815,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 						},
 					},
 					logisticsServiceCharge: {
+						key: "BG-X-42",
 						type: "object[]",
 						required: false,
 						group: "logistics-service-charge",
@@ -7366,6 +7824,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 							 * Service fee description
 							 */
 							description: {
+								key: "BT-X-271",
 								type: "string",
 								description: "Service fee description",
 								xpath:
@@ -7375,6 +7834,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 							 * Service fee amount
 							 */
 							amount: {
+								key: "BT-X-272",
 								type: "string | number",
 								description: "Service fee amount",
 								xpath:
@@ -7384,6 +7844,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 							 * Detailed tax information
 							 */
 							tradeTax: {
+								key: "BT-X-273-00",
 								type: "object",
 								description: "Detailed tax information",
 								required: false,
@@ -7392,6 +7853,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 									 * Tax type (Code)
 									 */
 									typeCode: {
+										key: "BT-X-273-0",
 										type: "string",
 										description: "Tax type (Code)",
 										xpath:
@@ -7403,6 +7865,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 									 * Coded identification of a VAT category.
 									 */
 									categoryCode: {
+										key: "BT-X-273",
 										type: "string",
 										description: `**VAT category code**
 
@@ -7414,6 +7877,7 @@ Coded identification of a VAT category.`,
 									 * VAT category rate
 									 */
 									rateApplicablePercent: {
+										key: "BT-X-274",
 										type: "string | number",
 										description: "VAT category rate",
 										xpath:
@@ -7430,6 +7894,7 @@ Coded identification of a VAT category.`,
 							 * Partial payment amount
 							 */
 							partialPaymentAmount: {
+								key: "BT-X-275",
 								type: "string | number",
 								description: "Partial payment amount",
 								required: false,
@@ -7440,6 +7905,7 @@ Coded identification of a VAT category.`,
 							 * Detailed information about penalties
 							 */
 							penaltyTerms: {
+								key: "BG-X-43",
 								type: "object[]",
 								description: "Detailed information about penalties",
 								required: false,
@@ -7449,6 +7915,7 @@ Coded identification of a VAT category.`,
 									 * Maturity Reference Date
 									 */
 									date: {
+										key: "BT-X-276",
 										type: "date",
 										description: "Maturity Reference Date",
 										required: false,
@@ -7468,6 +7935,7 @@ Coded identification of a VAT category.`,
 									 * The period for the due date, e.g. as a number of days (15 days)
 									 */
 									datePeriodMeasure: {
+										key: "BT-X-277",
 										type: "object",
 										description: `**Due date period basis**
 
@@ -7503,6 +7971,7 @@ The period for the due date, e.g. as a number of days (15 days)`,
 									 * Payment penalty base amount
 									 */
 									basisAmount: {
+										key: "BT-X-279",
 										type: "string | number",
 										description: "Payment penalty base amount",
 										required: false,
@@ -7513,6 +7982,7 @@ The period for the due date, e.g. as a number of days (15 days)`,
 									 * Payment penalty percentage
 									 */
 									calculationPercent: {
+										key: "BT-X-280",
 										type: "string | number",
 										description: "Payment penalty percentage",
 										required: false,
@@ -7523,6 +7993,7 @@ The period for the due date, e.g. as a number of days (15 days)`,
 									 * Payment penalty amount
 									 */
 									penaltyAmount: {
+										key: "BT-X-281",
 										type: "string | number",
 										description: "Payment penalty amount",
 										required: false,
@@ -7535,6 +8006,7 @@ The period for the due date, e.g. as a number of days (15 days)`,
 							 * Detailed information about payment discounts
 							 */
 							discountTerms: {
+								key: "BG-X-44",
 								type: "object[]",
 								description: "Detailed information about payment discounts",
 								required: false,
@@ -7544,6 +8016,7 @@ The period for the due date, e.g. as a number of days (15 days)`,
 									 * Maturity Reference Date
 									 */
 									date: {
+										key: "BT-X-282",
 										type: "date",
 										description: "Maturity Reference Date",
 										required: false,
@@ -7563,6 +8036,7 @@ The period for the due date, e.g. as a number of days (15 days)`,
 									 * The period for the due date, e.g. as a number of days (15 days)
 									 */
 									datePeriodMeasure: {
+										key: "BT-X-283",
 										type: "object",
 										description: `**Due date period basis**
 
@@ -7598,6 +8072,7 @@ The period for the due date, e.g. as a number of days (15 days)`,
 									 * Payment discount base amount
 									 */
 									basisAmount: {
+										key: "BT-X-285",
 										type: "string | number",
 										description: "Payment discount base amount",
 										required: false,
@@ -7608,6 +8083,7 @@ The period for the due date, e.g. as a number of days (15 days)`,
 									 * Payment discount percentage
 									 */
 									calculationPercent: {
+										key: "BT-X-286",
 										type: "string | number",
 										description: "Payment discount percentage",
 										required: false,
@@ -7618,6 +8094,7 @@ The period for the due date, e.g. as a number of days (15 days)`,
 									 * Payment discount amount
 									 */
 									discountAmount: {
+										key: "BT-X-287",
 										type: "string | number",
 										description: "Payment discount amount",
 										required: false,
@@ -7634,6 +8111,7 @@ The period for the due date, e.g. as a number of days (15 days)`,
 							 * The role of beneficiary may be filled by a party other than the seller, e.g. a factoring service. THIS GROUP IS ONLY USED WHEN THERE ARE MULTIPLE BENEFICIARIES (e.g. withholding tax or split payment).
 							 */
 							payee: {
+								key: "BG-X-77",
 								type: "object",
 								description: `**Deviating payee per payment**
 
@@ -7646,6 +8124,7 @@ The role of beneficiary may be filled by a party other than the seller, e.g. a f
 									 * Deviating invoice payee identifier
 									 */
 									identifier: {
+										key: "BT-X-506",
 										type: "string",
 										description: "Deviating invoice payee identifier",
 										required: false,
@@ -7658,6 +8137,7 @@ The role of beneficiary may be filled by a party other than the seller, e.g. a f
 									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
 									 */
 									globalIdentifier: {
+										key: "BT-X-507",
 										type: "object",
 										description: `**Deviating invoice payer global identifier**
 
@@ -7701,6 +8181,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 * Shall be used when the Payee is different from the Seller. The Payee name may however be the same as the Seller name.
 									 */
 									name: {
+										key: "BT-X-504",
 										type: "string",
 										description: `**Name/company name of Payee**
 
@@ -7718,6 +8199,7 @@ Shall be used when the Payee is different from the Seller. The Payee name may ho
 									 * To be chosen from UNTDID 3035.
 									 */
 									typeCode: {
+										key: "BT-X-511",
 										type: UNTDID_3035.map(({ code }) => code),
 										description: `**Role (code)**
 
@@ -7732,6 +8214,7 @@ To be chosen from UNTDID 3035.`,
 									 * Details about the organization
 									 */
 									organization: {
+										key: "BT-X-508-00",
 										type: "object",
 										description: "Details about the organization",
 										required: false,
@@ -7742,6 +8225,7 @@ To be chosen from UNTDID 3035.`,
 											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
 											 */
 											identifier: {
+												key: "BT-X-508",
 												type: "object",
 												description: `**Company Registration Number**
 
@@ -7788,7 +8272,8 @@ If used, the identification scheme shall be chosen from the entries of the list 
 											 *
 											 * This may be used if different from the party name.
 											 */
-											businessName: {
+											tradingName: {
+												key: "BT-X-505",
 												type: "string",
 												description: `**Trading Business Name**
 
@@ -7803,6 +8288,7 @@ This may be used if different from the party name.`,
 											 * Detailed information about the business address
 											 */
 											postalAddress: {
+												key: "BG-X-80",
 												type: "object",
 												description:
 													"Detailed information about the business address",
@@ -7815,6 +8301,7 @@ This may be used if different from the party name.`,
 													 * Such as a ZIP code or a post code.
 													 */
 													postCode: {
+														key: "BT-X-525",
 														type: "string",
 														description: `**Post code**
 
@@ -7833,6 +8320,7 @@ Such as a ZIP code or a post code.`,
 													 * Usually the street name and number or post office box.
 													 */
 													line1: {
+														key: "BT-X-526",
 														type: "string",
 														description: `**Address line 1**
 
@@ -7849,6 +8337,7 @@ Usually the street name and number or post office box.`,
 													 * An additional address line in an address that can be used to give further details supplementing the main line.
 													 */
 													line2: {
+														key: "BT-X-527",
 														type: "string",
 														description: `**Address line 2**
 
@@ -7863,6 +8352,7 @@ An additional address line in an address that can be used to give further detail
 													 * An additional address line in an address that can be used to give further details supplementing the main line.
 													 */
 													line3: {
+														key: "BT-X-528",
 														type: "string",
 														description: `**Address line 3**
 
@@ -7877,6 +8367,7 @@ An additional address line in an address that can be used to give further detail
 													 * The common name of the city, town or village.
 													 */
 													city: {
+														key: "BT-X-529",
 														type: "string",
 														description: `**City**
 
@@ -7893,6 +8384,7 @@ The common name of the city, town or village.`,
 													 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 													 */
 													countryCode: {
+														key: "BT-X-530",
 														type: ISO_3166.map(({ code }) => code.alpha2),
 														description: `**Country code**
 
@@ -7910,6 +8402,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 													 * Such as a region, a county, a state, a province, etc.
 													 */
 													countrySubdivision: {
+														key: "BT-X-531",
 														type: "string",
 														description: `**Country subdivision**
 
@@ -7928,6 +8421,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Detailed contact information
 									 */
 									tradeContact: {
+										key: "BG-X-78",
 										type: "object",
 										description: "Detailed contact information",
 										required: false,
@@ -7938,6 +8432,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * If a contact person is indicated, either the name or the department is to be transmitted.
 											 */
 											name: {
+												key: "BT-X-512",
 												type: "string",
 												description: `**Name of the contact**
 
@@ -7952,6 +8447,7 @@ If a contact person is indicated, either the name or the department is to be tra
 											 * If a contact person is indicated, either the name or the department is to be transmitted.
 											 */
 											departmentName: {
+												key: "BT-X-513",
 												type: "string",
 												description: `**Department name**
 
@@ -7968,6 +8464,7 @@ If a contact person is indicated, either the name or the department is to be tra
 											 * To be chosen from the entries of UNTDID 3139
 											 */
 											typeCode: {
+												key: "BT-X-514",
 												type: UNTDID_3139.map(({ code }) => code),
 												description: `**Type of contact (code)**
 
@@ -7983,7 +8480,8 @@ To be chosen from the entries of UNTDID 3139`,
 											 *
 											 * A phone number for the contact point.
 											 */
-											telephoneNumber: {
+											phoneNumber: {
+												key: "BT-X-515",
 												type: "string",
 												description: `**Contact telephone number**
 
@@ -7996,6 +8494,7 @@ A phone number for the contact point.`,
 											 * Contact point fax number
 											 */
 											faxNumber: {
+												key: "BT-X-516",
 												type: "string",
 												description: "Contact point fax number",
 												required: false,
@@ -8008,6 +8507,7 @@ A phone number for the contact point.`,
 											 * An e-mail address for the contact point.
 											 */
 											emailAddress: {
+												key: "BT-X-517",
 												type: "string",
 												description: `**Contact email address**
 
@@ -8022,6 +8522,7 @@ An e-mail address for the contact point.`,
 									 * Detailed information about the address
 									 */
 									postalAddress: {
+										key: "BG-X-79",
 										type: "object",
 										description: "Detailed information about the address",
 										shape: {
@@ -8033,6 +8534,7 @@ An e-mail address for the contact point.`,
 											 * Such as a ZIP code or a post code.
 											 */
 											postCode: {
+												key: "BT-X-518",
 												type: "string",
 												description: `**Post code**
 
@@ -8051,6 +8553,7 @@ Such as a ZIP code or a post code.`,
 											 * Usually the street name and number or post office box.
 											 */
 											line1: {
+												key: "BT-X-519",
 												type: "string",
 												description: `**Address line 1**
 
@@ -8067,6 +8570,7 @@ Usually the street name and number or post office box.`,
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line2: {
+												key: "BT-X-520",
 												type: "string",
 												description: `**Address line 2**
 
@@ -8081,6 +8585,7 @@ An additional address line in an address that can be used to give further detail
 											 * An additional address line in an address that can be used to give further details supplementing the main line.
 											 */
 											line3: {
+												key: "BT-X-521",
 												type: "string",
 												description: `**Address line 3**
 
@@ -8095,6 +8600,7 @@ An additional address line in an address that can be used to give further detail
 											 * The common name of the city, town or village.
 											 */
 											city: {
+												key: "BT-X-522",
 												type: "string",
 												description: `**City**
 
@@ -8111,6 +8617,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
+												key: "BT-X-523",
 												type: ISO_3166.map(({ code }) => code.alpha2),
 												description: `**Country code**
 
@@ -8128,6 +8635,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 											 * Such as a region, a county, a state, a province, etc.
 											 */
 											countrySubdivision: {
+												key: "BT-X-524",
 												type: "string",
 												description: `**Country subdivision**
 
@@ -8142,6 +8650,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Details about the electronic address
 											 */
 											electronicAddress: {
+												key: "BT-X-510",
 												type: "object",
 												description: "Details about the electronic address",
 												required: false,
@@ -8173,6 +8682,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Detailed information on tax information
 									 */
 									taxRegistration: {
+										key: "BT-X-509-00",
 										type: "object",
 										description: "Detailed information on tax information",
 										required: false,
@@ -8181,6 +8691,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * VAT ID
 											 */
 											identifier: {
+												key: "BT-X-509",
 												type: "string",
 												description: "VAT ID",
 												required: false,
@@ -8199,6 +8710,7 @@ Such as a region, a county, a state, a province, etc.`,
 					},
 					precendingInvoices: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Preceding incoive type code
@@ -8206,6 +8718,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * The same rules apply as for BT-3
 							 */
 							typeCode: {
+								key: "BT-X-555",
 								type: "string",
 								description: `**Preceding incoive type code**
 
@@ -8218,11 +8731,13 @@ The same rules apply as for BT-3`,
 					},
 					buyerAccountant: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Accounting reference type (Code)
 							 */
 							typeCode: {
+								key: "BT-X-290",
 								type: "string",
 								description: "Accounting reference type (Code)",
 								required: false,
@@ -8235,6 +8750,7 @@ The same rules apply as for BT-3`,
 					 * Included tax for advanced payment
 					 */
 					advancePayment: {
+						key: "BG-X-45",
 						type: "object[]",
 						description: "Included tax for advanced payment",
 						required: false,
@@ -8244,6 +8760,7 @@ The same rules apply as for BT-3`,
 							 * Advanced payment, value
 							 */
 							paidAmount: {
+								key: "BT-X-291",
 								type: "string | number",
 								description: "Advanced payment, value",
 								xpath:
@@ -8253,6 +8770,7 @@ The same rules apply as for BT-3`,
 							 * Date of advanced payment
 							 */
 							date: {
+								key: "BT-X-292",
 								type: "date",
 								description: "Date of advanced payment",
 								required: false,
@@ -8270,6 +8788,7 @@ The same rules apply as for BT-3`,
 							 * Tax information on advanced payments
 							 */
 							tradeTax: {
+								key: "BG-X-46",
 								type: "object[]",
 								description: "Tax information on advanced payments",
 								validator: z.array(z.any()).min(1),
@@ -8279,6 +8798,7 @@ The same rules apply as for BT-3`,
 									 * Included tax
 									 */
 									calculatedAmount: {
+										key: "BT-X-293",
 										type: "string | number",
 										description: "Included tax",
 										xpath:
@@ -8294,6 +8814,7 @@ The same rules apply as for BT-3`,
 									 * A textual statement of the reason why the amount is exempted from VAT or why no VAT is being charged
 									 */
 									exemptionReason: {
+										key: "BT-X-295",
 										type: "string",
 										description: `**VAT exemption reason text**
 
@@ -8310,6 +8831,7 @@ A textual statement of the reason why the amount is exempted from VAT or why no 
 									 * Code list issued and maintained by the Connecting Europe Facility.
 									 */
 									exemptionReasonCode: {
+										key: "BT-X-297",
 										type: VATEX.map(({ code }) => code),
 										description: `**VAT exemption reason code**
 
@@ -8337,6 +8859,7 @@ Code list issued and maintained by the Connecting Europe Facility.`,
 									 * - Liable for IPSI (Ceuta/Melilla tax)
 									 */
 									categoryCode: {
+										key: "BT-X-296",
 										type: UNTDID_5305.map(({ code }) => code),
 										description: `**VAT category code**
 
@@ -8363,6 +8886,7 @@ The following entries of UNTDID 5305 [6] are used (further clarification between
 									 * The VAT category code and the VAT category rate shall be consistent.
 									 */
 									rateApplicablePercent: {
+										key: "BT-X-298",
 										type: "string",
 										description: `**VAT category rate**
 
@@ -8384,6 +8908,7 @@ The VAT category code and the VAT category rate shall be consistent.`,
 							 * - preceding pre-payment invoices are refered to from a final invoice
 							 */
 							precendingInvoice: {
+								key: "BG-X-85",
 								type: "object",
 								description: `**Precending invoice reference for advance payment**
 
@@ -8400,12 +8925,28 @@ To be used in case:
 									 * The identification of an Invoice that was previously sent by the Seller.
 									 */
 									issuerAssignedID: {
+										key: "BT-X-558",
 										type: "string",
 										description: `**Preceding Invoice reference**
 
 The identification of an Invoice that was previously sent by the Seller.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:InvoiceSpecifiedReferencedDocument/ram:IssuerAssignedID",
+									},
+									/**
+									 * Preceding incoive type code
+									 *
+									 * The same rules apply as for BT-3
+									 */
+									typeCode: {
+										key: "BT-X-559",
+										type: "string",
+										required: false,
+										description: `**Preceding incoive type code**
+ 
+The same rules apply as for BT-3`,
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:InvoiceSpecifiedReferencedDocument/ram:TypeCode",
 									},
 									/**
 									 * Preceding Invoice issue date
@@ -8415,6 +8956,7 @@ The identification of an Invoice that was previously sent by the Seller.`,
 									 * The Preceding Invoice issue date shall be provided in case the Preceding Invoice identifier is not unique.
 									 */
 									date: {
+										key: "BT-X-560",
 										type: "date",
 										description: `**Preceding Invoice issue date**
 
@@ -8447,6 +8989,7 @@ The Preceding Invoice issue date shall be provided in case the Preceding Invoice
 					 * The value given here refers to the superior line. In this way, a hierarchy tree of invoice items can be mapped.
 					 */
 					parentIdentifier: {
+						key: "BT-X-304",
 						type: "string",
 						description: `**Parent line ID**
 
@@ -8463,6 +9006,7 @@ The value given here refers to the superior line. In this way, a hierarchy tree 
 					 * Use codes from codelist UNTDID 1229. The following code should be applied per default: 39
 					 */
 					typeCode: {
+						key: "BT-X-7",
 						type: UNTDID_1229.map(({ code }) => code),
 						description: `**Type of the inovice line item (Code)**
 
@@ -8485,6 +9029,7 @@ Use codes from codelist UNTDID 1229. The following code should be applied per de
 					 * If the LineStatusCode element is used, the LineStatusReasonCode must be filled in: DETAIL, GROUP, INFORMATION
 					 */
 					subTypeCode: {
+						key: "BT-X-8",
 						type: ["DETAIL", "GROUP", "INFORMATION"],
 						description: `**Subtype of the invoice line item**
 
@@ -8506,6 +9051,7 @@ If the LineStatusCode element is used, the LineStatusReasonCode must be filled i
 					 * The code is agreed bilaterally and must have the same meaning as BT-127.
 					 */
 					noteContentCode: {
+						key: "BT-X-9",
 						type: "string",
 						description: `**Free text on line level (code)**
 
@@ -8522,6 +9068,7 @@ The code is agreed bilaterally and must have the same meaning as BT-127.`,
 					 * To be chosen from the entries in UNTDID 4451 [6].
 					 */
 					noteSubjectCode: {
+						key: "BT-X-10",
 						type: UNTDID_4451.map(({ code }) => code),
 						description: `**Invoice line note subject code**
 
@@ -8539,6 +9086,7 @@ To be chosen from the entries in UNTDID 4451 [6].`,
 							 * This identifier can be additionally specified to be interoperable with Order-X.
 							 */
 							identifier: {
+								key: "BT-X-305",
 								type: "string",
 								description: `**Product identifier**
 
@@ -8553,6 +9101,7 @@ This identifier can be additionally specified to be interoperable with Order-X.`
 							 * An identifier, assigned by the Industry, for the item.
 							 */
 							industryIdentifier: {
+								key: "BT-X-532",
 								type: "string",
 								description: `**Industry assigned product identifier**
 
@@ -8567,6 +9116,7 @@ An identifier, assigned by the Industry, for the item.`,
 							 * A unique model identifier for this item.
 							 */
 							modelIdentifier: {
+								key: "BT-X-533",
 								type: "string",
 								description: `**Model identification of the item**
 
@@ -8581,6 +9131,7 @@ A unique model identifier for this item.`,
 							 * A batch identifier for this item.
 							 */
 							batchIdentifier: {
+								key: "BT-X-534",
 								type: "string",
 								description: `**Batch (lot) identification of the item**
 
@@ -8595,6 +9146,7 @@ A batch identifier for this item.`,
 							 * The brand name, expressed as text, for this item.
 							 */
 							brandName: {
+								key: "BT-X-535",
 								type: "string",
 								description: `**Item brand name**
 
@@ -8607,6 +9159,7 @@ The brand name, expressed as text, for this item.`,
 							 * Item model name
 							 */
 							modelName: {
+								key: "BT-X-536",
 								type: "string",
 								description: "Item model name",
 								required: false,
@@ -8615,6 +9168,7 @@ The brand name, expressed as text, for this item.`,
 							},
 							attributes: {
 								type: "object[]",
+								required: false,
 								shape: {
 									/**
 									 * Item Attribute Type (Code)
@@ -8622,6 +9176,7 @@ The brand name, expressed as text, for this item.`,
 									 * To ensure automated processing of the article attributes without bilateral reconciliation, only values from the code list UNTDED 6313+Factur-X-Extension should be used.
 									 */
 									typeCode: {
+										key: "BT-X-11",
 										type: "string",
 										description: `**Item Attribute Type (Code)**
 
@@ -8634,6 +9189,7 @@ To ensure automated processing of the article attributes without bilateral recon
 									 * Item Attribute Value (numerical measurand)
 									 */
 									measureValue: {
+										key: "BT-X-12",
 										type: "string | number",
 										description: "Item Attribute Value (numerical measurand)",
 										required: false,
@@ -8644,6 +9200,7 @@ To ensure automated processing of the article attributes without bilateral recon
 									 * Unit of measure
 									 */
 									measureUnit: {
+										key: "BT-X-12-0",
 										type: "string",
 										description: "Unit of measure",
 										required: false,
@@ -8654,6 +9211,7 @@ To ensure automated processing of the article attributes without bilateral recon
 							},
 							classification: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Classification name
@@ -8661,6 +9219,7 @@ To ensure automated processing of the article attributes without bilateral recon
 									 * Name used to classify an item according to its type or nature.
 									 */
 									name: {
+										key: "BT-X-13",
 										type: "string",
 										description: `**Classification name**
 
@@ -8675,6 +9234,7 @@ Name used to classify an item according to its type or nature.`,
 							 * Item (Trade Product) Instances
 							 */
 							instances: {
+								key: "BG-X-84",
 								type: "object[]",
 								description: "Item (Trade Product) Instances",
 								group: "line-item-instances",
@@ -8686,6 +9246,7 @@ Name used to classify an item according to its type or nature.`,
 									 * The unique batch identifier for this trade product instance
 									 */
 									batchIdentifier: {
+										key: "BT-X-306",
 										type: "string",
 										description: `**Item (Trade Product) Instances Batch ID**
 
@@ -8700,6 +9261,7 @@ The unique batch identifier for this trade product instance`,
 									 * The unique supplier assigned serial identifier for this trade product instance
 									 */
 									supplierSerialIdentifier: {
+										key: "BT-X-307",
 										type: "string",
 										description: `**Item (Trade Product) Instances Supplier Serial ID**
 
@@ -8714,6 +9276,7 @@ The unique supplier assigned serial identifier for this trade product instance`,
 							 * An included product referenced from this trade product.
 							 */
 							referencedProduct: {
+								key: "BG-X-1",
 								type: "object[]",
 								description:
 									"An included product referenced from this trade product.",
@@ -8726,6 +9289,7 @@ The unique supplier assigned serial identifier for this trade product instance`,
 									 * Article identifier for interoperability with Order-X
 									 */
 									identifier: {
+										key: "BT-X-308",
 										type: "string",
 										description: `**ID of Included Referenced Product**
 
@@ -8740,6 +9304,7 @@ Article identifier for interoperability with Order-X`,
 									 * An item identifier based on a registered scheme.
 									 */
 									globalIdentifier: {
+										key: "BT-X-15",
 										type: "object",
 										description: `**Global ID of Included Referenced Product**
 
@@ -8786,6 +9351,7 @@ The identification scheme shall be identified from the entries of the list publi
 									 * An identifier, assigned by the Seller, for the item.
 									 */
 									sellerAssignedID: {
+										key: "BT-X-16",
 										type: "string",
 										description: `**SellerAssignedID of Included Referenced Product**
 
@@ -8800,6 +9366,7 @@ An identifier, assigned by the Seller, for the item.`,
 									 * An identifier, assigned by the Buyer, for the item.
 									 */
 									buyerAssignedID: {
+										key: "BT-X-17",
 										type: "string",
 										description: `**BuyerAssignedID of Included Referenced Product**
 
@@ -8814,6 +9381,7 @@ An identifier, assigned by the Buyer, for the item.`,
 									 * Article identifier for interoperability with Order-X
 									 */
 									industryAssignedID: {
+										key: "BT-X-309",
 										type: "string",
 										description: `**IndustryAssignedID of Included Referenced Product**
 
@@ -8826,6 +9394,7 @@ Article identifier for interoperability with Order-X`,
 									 * Name of Included Referenced Product
 									 */
 									name: {
+										key: "BT-X-18",
 										type: "string",
 										description: "Name of Included Referenced Product",
 										xpath:
@@ -8839,6 +9408,7 @@ Article identifier for interoperability with Order-X`,
 									 * The Item description allows for describing the item and its features in more detail than the Item name.
 									 */
 									description: {
+										key: "BT-X-19",
 										type: "string",
 										description: `**Description of Included Referenced Product**
 
@@ -8853,6 +9423,7 @@ The Item description allows for describing the item and its features in more det
 									 * UnitQuantity of Included Referenced Product
 									 */
 									measureValue: {
+										key: "BT-X-20",
 										type: "string | number",
 										description: "UnitQuantity of Included Referenced Product",
 										required: false,
@@ -8863,6 +9434,7 @@ The Item description allows for describing the item and its features in more det
 									 * Measurement unit
 									 */
 									measureUnit: {
+										key: "BT-X-20-1",
 										type: "string",
 										description: "Measurement unit",
 										required: false,
@@ -8924,6 +9496,7 @@ The Item description allows for describing the item and its features in more det
 							},
 							buyerOrderReference: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Order Id
@@ -8959,6 +9532,7 @@ The Item description allows for describing the item and its features in more det
 							 */
 							quotationReference: {
 								type: "object",
+								required: false,
 								description: "Details of an quotation document reference",
 								shape: {
 									/**
@@ -9185,6 +9759,7 @@ The file name of the attached document`,
 							},
 							grossTradePrice: {
 								type: "object",
+								required: false,
 								shape: {
 									discounts: {
 										type: "object",
@@ -9338,6 +9913,7 @@ Use entries of the UNTDID 7161 code list [6]. The Invoice line charge reason cod
 							},
 							netTradePrice: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Included tax for B2C
@@ -10789,6 +11365,7 @@ The Preceding Invoice issue date shall be provided in case the Preceding Invoice
 							},
 							buyerAccountant: {
 								type: "object",
+								required: false,
 								shape: {
 									/**
 									 * Accounting reference (Code)

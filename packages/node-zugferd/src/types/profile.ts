@@ -3,12 +3,14 @@ import { type ZugferdContext } from "../init";
 import { type LiteralString } from "./helper";
 
 export type Profile = {
+	id: LiteralString;
 	extends?: Profile[];
 	schema: Schema;
 	contextParameter: LiteralString;
 	xsdPath: string;
 	conformanceLevel: string;
 	documentFileName: string;
+	mask?: Record<string, any>;
 	/**
 	 * @default 'INVOICE'
 	 */

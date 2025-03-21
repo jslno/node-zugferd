@@ -23,6 +23,7 @@ export const en16931Schema = {
 							 * Such as share capital.
 							 */
 							description: {
+								key: "BT-33",
 								type: "string",
 								description: `**Seller additional legal information**
 
@@ -39,6 +40,7 @@ Such as share capital.`,
 							 * A group of business terms providing contact information about the Seller.
 							 */
 							tradeContact: {
+								key: "BG-6",
 								type: "object",
 								description: `**Seller Contact**
 
@@ -53,6 +55,7 @@ A group of business terms providing contact information about the Seller.`,
 									 * Such as person name, contact identification, department or office identification.
 									 */
 									name: {
+										key: "BT-41",
 										type: "string",
 										description: `**Seller contact point**
 
@@ -67,6 +70,7 @@ Such as person name, contact identification, department or office identification
 									 * Department name
 									 */
 									departmentName: {
+										key: "BT-41-0",
 										type: "string",
 										description: "Department name",
 										required: false,
@@ -79,6 +83,7 @@ Such as person name, contact identification, department or office identification
 									 * A phone number for the contact point.
 									 */
 									phoneNumber: {
+										key: "BT-42",
 										type: "string",
 										description: `**Seller contact telephone number**
 
@@ -93,6 +98,7 @@ A phone number for the contact point.`,
 									 * An e-mail address for the contact point.
 									 */
 									emailAddress: {
+										key: "BT-43",
 										type: "string",
 										description: `**Seller contact email address**
 
@@ -108,23 +114,30 @@ An e-mail address for the contact point.`,
 					buyer: {
 						type: "object",
 						shape: {
-							/**
-							 * Buyer trading name
-							 *
-							 * A name by which the Buyer is known, other than Buyer name (also known as Business name).
-							 *
-							 * This may be used if different from the Buyer name.
-							 */
-							tradingName: {
-								type: "string",
-								description: `**Buyer trading name**
+							organization: {
+								type: "object",
+								required: false,
+								shape: {
+									/**
+									 * Buyer trading name
+									 *
+									 * A name by which the Buyer is known, other than Buyer name (also known as Business name).
+									 *
+									 * This may be used if different from the Buyer name.
+									 */
+									tradingName: {
+										key: "BT-45",
+										type: "string",
+										description: `**Buyer trading name**
 
 A name by which the Buyer is known, other than Buyer name (also known as Business name).
 
 This may be used if different from the Buyer name.`,
-								required: false,
-								xpath:
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName",
+										required: false,
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName",
+									},
+								},
 							},
 							/**
 							 * Buyer Contact
@@ -134,6 +147,7 @@ This may be used if different from the Buyer name.`,
 							 * Contacting details can be given by the Buyer at the time of the ordering or as master data exchanged prior to ordering. It is recommended not to use contacting details for the purpose of routing the received Invoice internally by the recipient; the Buyer reference identifier should be used for this purpose.
 							 */
 							tradeContact: {
+								key: "BG-9",
 								type: "object",
 								description: `**Buyer Contact**
 
@@ -150,6 +164,7 @@ Contacting details can be given by the Buyer at the time of the ordering or as m
 									 * Such as person name, contact identification, department or office identification.
 									 */
 									name: {
+										key: "BT-56",
 										type: "string",
 										description: `**Buyer contact point**
 
@@ -164,6 +179,7 @@ Such as person name, contact identification, department or office identification
 									 * Department name
 									 */
 									departmentName: {
+										key: "BT-56-0",
 										type: "string",
 										description: "Department name",
 										required: false,
@@ -176,6 +192,7 @@ Such as person name, contact identification, department or office identification
 									 * A phone number for the contact point.
 									 */
 									phoneNumber: {
+										key: "BT-57",
 										type: "string",
 										description: `**Buyer contact telephone number**
 
@@ -190,6 +207,7 @@ A phone number for the contact point.`,
 									 * An e-mail address for the contact point.
 									 */
 									emailAddress: {
+										key: "BT-58",
 										type: "string",
 										description: `**Buyer contact email address**
 
@@ -206,6 +224,7 @@ An e-mail address for the contact point.`,
 					 * Details about the associated order confirmation
 					 */
 					associatedOrderConfirmation: {
+						key: "BT-14-00",
 						type: "object",
 						description: "Details about the associated order confirmation",
 						required: false,
@@ -216,6 +235,7 @@ An e-mail address for the contact point.`,
 							 * An identifier of a referenced sales order, issued by the Seller.
 							 */
 							salesOrderReference: {
+								key: "BT-14",
 								type: "string",
 								description: `**Sales order reference**
 
@@ -236,6 +256,7 @@ An identifier of a referenced sales order, issued by the Seller.`,
 					 * CHORUS PRO: If the group "ADDITIONAL SUPPORTING DOCUMENTS" is filled in, one of the following two business terms must be present: Attached Document (BT-125) or External document location (URI) (BT-124)
 					 */
 					supportingDocuments: {
+						key: "BG-24",
 						type: "object[]",
 						group: "supporting-documents",
 						description: `**Additional Supporting Documents**
@@ -253,6 +274,7 @@ CHORUS PRO: If the group "ADDITIONAL SUPPORTING DOCUMENTS" is filled in, one of 
 							 * An identifier of the supporting document.
 							 */
 							reference: {
+								key: "BT-122",
 								type: "string",
 								description: `**Supporting document reference**
 
@@ -274,6 +296,7 @@ An identifier of the supporting document.`,
 							 * External documents do not form part of the invoice. Risks can be involved when accessing external documents.
 							 */
 							externalLocation: {
+								key: "BT-124",
 								type: "string",
 								description: `**External document location**
 
@@ -297,6 +320,7 @@ External documents do not form part of the invoice. Risks can be involved when a
 							 * In the case of a PDF / A-3 (Factur-X), only the type of complementary attachment is allowed.
 							 */
 							description: {
+								key: "BT-123",
 								type: "string",
 								description: `**Supporting document description**
 
@@ -320,6 +344,7 @@ In the case of a PDF / A-3 (Factur-X), only the type of complementary attachment
 							 * CHORUS PRO : The attachment must be contained in a ZIP file. The maximum size of the attachment is 100 MB.
 							 */
 							content: {
+								key: "BT-125",
 								// ! TODO: Allow Binary
 								type: "string",
 								description: `**Attached document**
@@ -347,6 +372,7 @@ CHORUS PRO : The attachment must be contained in a ZIP file. The maximum size of
 							 * - application/vnd.oasis.opendocument.spreadsheet
 							 */
 							mimeCode: {
+								key: "BT-125-1",
 								type: [
 									"application/pdf",
 									"image/png",
@@ -375,6 +401,7 @@ Allowed mime codes:
 							 * The file name of the attached document
 							 */
 							filename: {
+								key: "BT-125-2",
 								type: "string",
 								description: `**Attached document Filename**
 
@@ -388,9 +415,11 @@ The file name of the attached document`,
 					 * Details on tender or lot reference
 					 */
 					tenderOrLotReference: {
+						key: "BT-17-00",
 						type: "object[]",
+						required: false,
 						description: "Details on tender or lot reference",
-						validator: z.array(z.any()).max(1),
+						validator: z.array(z.any()).max(1).optional(),
 						sibling: (data) =>
 							data.transaction.tradeAgreement.supportingDocuments,
 						group: "tender-lot-reference",
@@ -403,6 +432,7 @@ The file name of the attached document`,
 							 * In some countries a reference to the call for tender that has led to the contract shall be provided.
 							 */
 							reference: {
+								key: "BT-17",
 								type: "string",
 								description: `**Tender or lot reference**
 
@@ -423,12 +453,14 @@ In some countries a reference to the call for tender that has led to the contrac
 					 * Details on invoiced object identifier
 					 */
 					objectIdentifier: {
+						key: "BT-18-00",
 						type: "object[]",
+						required: false,
 						sibling: (data) => [
-							...data.transaction.tradeAgreement.tenderOrLotReference,
-							...data.transaction.tradeAgreement.supportingDocuments,
+							...(data.transaction.tradeAgreement.tenderOrLotReference || []),
+							...(data.transaction.tradeAgreement.supportingDocuments || []),
 						],
-						validator: z.array(z.any()).max(1),
+						validator: z.array(z.any()).max(1).optional(),
 						group: "object-identifier",
 						shape: {
 							/**
@@ -439,6 +471,7 @@ In some countries a reference to the call for tender that has led to the contrac
 							 * It may be a subscription number, telephone number, meter point, vehicle, person etc., as applicable.
 							 */
 							reference: {
+								key: "BT-18",
 								type: "string",
 								description: `**Invoiced object identifier**
 
@@ -461,6 +494,7 @@ It may be a subscription number, telephone number, meter point, vehicle, person 
 							 * If it may be not clear for the receiver what scheme is used for the identifier, a onditional scheme identifier should be used that shall be chosen from the UNTDID 1153 code list [6] entries.
 							 */
 							referenceTypeCode: {
+								key: "BT-18-1",
 								type: UNTDID_1153.map(({ code }) => code),
 								description: `**Scheme identifier**
 
@@ -481,6 +515,7 @@ If it may be not clear for the receiver what scheme is used for the identifier, 
 					 * Details about a project reference
 					 */
 					project: {
+						key: "BT-11-00",
 						type: "object",
 						description: "Details about a project reference",
 						required: false,
@@ -491,6 +526,7 @@ If it may be not clear for the receiver what scheme is used for the identifier, 
 							 * The identification of the project the invoice refers to.
 							 */
 							reference: {
+								key: "BT-11",
 								type: "string",
 								description: `**Project reference**
 
@@ -505,6 +541,7 @@ The identification of the project the invoice refers to.`,
 							 * The identification of the project the invoice refers to
 							 */
 							name: {
+								key: "BT-11-0",
 								type: "string",
 								description: `**Project name**
 
@@ -523,6 +560,7 @@ The identification of the project the invoice refers to`,
 					 * Detailed information about the associated goods receipt
 					 */
 					associatedGoodsReceipt: {
+						key: "BT-15-00",
 						type: "object",
 						description:
 							"Detailed information about the associated goods receipt",
@@ -534,6 +572,7 @@ The identification of the project the invoice refers to`,
 							 * An identifier of a referenced receiving advice.
 							 */
 							reference: {
+								key: "BT-15",
 								type: "string",
 								description: `**Receiving advice reference**
 
@@ -551,6 +590,7 @@ An identifier of a referenced receiving advice.`,
 				shape: {
 					paymentInstruction: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Payment means text
@@ -560,6 +600,7 @@ An identifier of a referenced receiving advice.`,
 							 * Such as cash, credit transfer, direct debit, credit card, etc.
 							 */
 							information: {
+								key: "BT-82",
 								type: "string",
 								description: `**Payment means text**
 
@@ -594,6 +635,7 @@ Only used if the Buyer has opted to pay by using a payment card such as a credit
 									 * In accordance with card payments security standards an invoice should never include a full card primary account number. At the moment PCI Security Standards Council has defined following: The first 6 digits and last 4 digits are the maximum number of digits to be shown.
 									 */
 									primaryAccountNumber: {
+										key: "BT-87",
 										type: "string",
 										description: `**Payment card primary account number**
 
@@ -609,6 +651,7 @@ In accordance with card payments security standards an invoice should never incl
 									 * The name of the payment card holder.
 									 */
 									holderName: {
+										key: "BT-88",
 										type: "string",
 										description: `**Payment card holder name**
 
@@ -621,6 +664,7 @@ The name of the payment card holder.`,
 							},
 							transfers: {
 								type: "object[]",
+								required: false,
 								shape: {
 									/**
 									 * Payment account name
@@ -628,6 +672,7 @@ The name of the payment card holder.`,
 									 * The name of the payment account, at a payment service provider, to which payment should be made.
 									 */
 									accountName: {
+										key: "BT-85",
 										type: "string",
 										description: `**Payment account name**
 
@@ -642,6 +687,7 @@ The name of the payment account, at a payment service provider, to which payment
 							 * Seller bank information
 							 */
 							sellerBankInformation: {
+								key: "BT-86-00",
 								type: "object",
 								description: "Seller bank information",
 								required: false,
@@ -659,6 +705,7 @@ The name of the payment account, at a payment service provider, to which payment
 									 * Use for credit transfer
 									 */
 									serviceProdiverIdentifier: {
+										key: "BT-86",
 										type: "string",
 										description: `**Payment service provider identifier**
 
@@ -680,6 +727,7 @@ Use for credit transfer`,
 					},
 					vatBreakdown: {
 						type: "object[]",
+						required: false,
 						shape: {
 							/**
 							 * Value added tax point date
@@ -697,7 +745,9 @@ Use for credit transfer`,
 							 * BR-CO-3: Value added tax point date (BT-7) and Value added tax point date code (BT-8) are mutually exclusive.
 							 */
 							taxDueDate: {
+								key: "BT-7",
 								type: "date",
+								required: false,
 								description: `**Value added tax point date**
 
 This does not apply in Germany. Use date of delivery instead.
@@ -711,7 +761,6 @@ Both Buyer and Seller should use the Tax Point Date when provided by the Seller.
 This date shall not be present if the Value added tax point date is expressed in code in the "Value added tax point date code" (BT-8)
 
 BR-CO-3: Value added tax point date (BT-7) and Value added tax point date code (BT-8) are mutually exclusive.`,
-								required: false,
 								transform: {
 									input: dateTimeStringFormatter,
 								},
@@ -735,6 +784,7 @@ BR-CO-3: Value added tax point date (BT-7) and Value added tax point date code (
 							 * This case is not applied in France.
 							 */
 							roundingAmount: {
+								key: "BT-114",
 								type: "string | number",
 								description: `**Rounding amount**
 
@@ -761,6 +811,7 @@ This case is not applied in France.`,
 							 * An identifier, assigned by the Seller, for the item.
 							 */
 							sellerAssignedID: {
+								key: "BT-155",
 								type: "string",
 								description: `**Item Seller's identifier**
 
@@ -775,6 +826,7 @@ An identifier, assigned by the Seller, for the item.`,
 							 * An identifier, assigned by the Buyer, for the item.
 							 */
 							buyerAssignedID: {
+								key: "BT-156",
 								type: "string",
 								description: `**Item Buyer's identifier**
 
@@ -791,6 +843,7 @@ An identifier, assigned by the Buyer, for the item.`,
 							 * The Item description allows for describing the item and its features in more detail than the Item name.
 							 */
 							description: {
+								key: "BT-154",
 								type: "string",
 								description: `**Item description**
 
@@ -807,6 +860,7 @@ The Item description allows for describing the item and its features in more det
 							 * A group of business terms providing information about properties of the goods and services invoiced.
 							 */
 							attributes: {
+								key: "BG-32",
 								type: "object[]",
 								description: `**Item attributes**
 
@@ -822,6 +876,7 @@ A group of business terms providing information about properties of the goods an
 									 * Such as "Colour".
 									 */
 									name: {
+										key: "BT-160",
 										type: "string",
 										description: `**Item attribute name**
 
@@ -839,6 +894,7 @@ Such as "Colour".`,
 									 * Such as "Red".
 									 */
 									value: {
+										key: "BT-161",
 										type: "string",
 										description: `**Item attribute value**
 
@@ -854,6 +910,7 @@ Such as "Red".`,
 							 * Detailed information on the item classification
 							 */
 							classification: {
+								key: "BT-158-00",
 								type: "object",
 								description: "Detailed information on the item classification",
 								required: false,
@@ -866,6 +923,7 @@ Such as "Red".`,
 									 * Classification codes are used to allow grouping of similar items for a various purposes e.g. public procurement (CPV), e-Commerce (UNSPSC) etc.
 									 */
 									identifier: {
+										key: "BT-158",
 										type: "object[]",
 										description: `**Item classification identifier**
 
@@ -931,6 +989,7 @@ The version of the identification scheme.`,
 							 * Detailed information on the item origin
 							 */
 							origin: {
+								key: "BT-159-00",
 								type: "object",
 								description: "Detailed information on the item origin",
 								required: false,
@@ -943,6 +1002,7 @@ The version of the identification scheme.`,
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
+										key: "BT-159",
 										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Item country of origin**
 
@@ -964,6 +1024,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 							 * Details of the associated order
 							 */
 							buyerOrderReference: {
+								key: "BT-132-00",
 								type: "object",
 								description: "Details of the associated order",
 								required: false,
@@ -976,6 +1037,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 									 * The purchase order identifier is referenced on document level.
 									 */
 									lineID: {
+										key: "BT-132",
 										type: "string | number",
 										description: `**Referenced purchase order line reference**
 
@@ -995,6 +1057,7 @@ The purchase order identifier is referenced on document level.`,
 						shape: {
 							allowances: {
 								type: "object[]",
+								required: false,
 								shape: {
 									/**
 									 * Invoice line allowance base amount
@@ -1002,6 +1065,7 @@ The purchase order identifier is referenced on document level.`,
 									 * The base amount that may be used, in conjunction with the Invoice line allowance percentage, to calculate the Invoice line allowance amount.
 									 */
 									basisAmount: {
+										key: "BT-137",
 										type: "string | number",
 										required: false,
 										description: `**Invoice line allowance base amount**
@@ -1014,6 +1078,7 @@ The base amount that may be used, in conjunction with the Invoice line allowance
 							},
 							charges: {
 								type: "object[]",
+								required: false,
 								shape: {
 									/**
 									 * Invoice line charge base amount
@@ -1021,6 +1086,7 @@ The base amount that may be used, in conjunction with the Invoice line allowance
 									 * The base amount that may be used, in conjunction with the Invoice line charge percentage, to calculate the Invoice line charge amount.
 									 */
 									basisAmount: {
+										key: "BT-142",
 										type: "string | number",
 										description: `**Invoice line charge base amount**
 
@@ -1035,6 +1101,7 @@ The base amount that may be used, in conjunction with the Invoice line charge pe
 							 * Object identifier at the invoice item level
 							 */
 							objectIdentifier: {
+								key: "BT-128-00",
 								type: "object",
 								description: "Object identifier at the invoice item level",
 								required: false,
@@ -1091,6 +1158,7 @@ If it may be not clear for the receiver what scheme is used for the identifier, 
 							 * Detailed information on the accounting reference
 							 */
 							buyerAccountant: {
+								key: "BT-133-00",
 								type: "object",
 								description: "Detailed information on the accounting reference",
 								required: false,
@@ -1103,6 +1171,7 @@ If it may be not clear for the receiver what scheme is used for the identifier, 
 									 * If required, this reference shall be provided by the Buyer to the Seller prior to the issuing of the Invoice.
 									 */
 									reference: {
+										key: "BT-133",
 										type: "string",
 										description: `**Invoice line Buyer accounting reference**
 

@@ -39,7 +39,7 @@ const tabs: Tab[] = [
 	
 const inv = await invoicer.create(data);
 
-const xml = inv.toXML();
+const xml = await inv.toXML();
 const pdfa = await inv.embedInPdf(pdf);`,
 		highlight: [5, 8],
 	},

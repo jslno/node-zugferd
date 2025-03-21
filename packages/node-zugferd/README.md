@@ -84,7 +84,7 @@ If you encounter invalid or missing fields, feel free to open a new [Issue](http
     <summary>as XML</summary>
 
     ```ts
-    const xml = invoice.toXML()
+    const xml = await invoice.toXML()
     ```
     </details>
 
