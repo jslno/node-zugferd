@@ -100,6 +100,10 @@ export const contents: Content[] = [
 		Icon: ScrollIcon,
 		list: [
 			{
+				title: "ISO 639-2",
+				href: "/docs/codelists/iso-639-2",
+			},
+			{
 				title: "ISO 3166",
 				href: "/docs/codelists/iso-3166",
 			},
