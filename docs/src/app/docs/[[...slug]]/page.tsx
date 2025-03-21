@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence } from "motion/react";
 import { Features } from "@/components/blocks/features";
 import { ProfileTree } from "@/components/blocks/profile-tree";
+import { NeedHelp } from "@/components/blocks/need-help";
 import { GithubInfo } from "@/components/github-info";
 
 const { AutoTypeTable } = createTypeTable();
@@ -152,6 +153,7 @@ export default async function Page(props: {
 						),
 						Features,
 						ProfileTree,
+						NeedHelp,
 						GithubInfo,
 					}}
 				/>
