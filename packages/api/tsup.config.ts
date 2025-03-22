@@ -5,6 +5,7 @@ export default defineConfig((env) => {
 		entry: {
 			index: "./src/index.ts",
 			"react/renderer": "./src/renderer/react.tsx",
+			"vue/renderer": "./src/renderer/vue.ts",
 			"solid/renderer": "./src/renderer/solid.tsx",
 		},
 		format: ["cjs", "esm"],

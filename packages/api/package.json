@@ -63,6 +63,16 @@
 				"default": "./dist/react/renderer.cjs"
 			}
 		},
+		"./vue/renderer": {
+			"import": {
+				"types": "./dist/vue/renderer.d.ts",
+				"default": "./dist/vue/renderer.js"
+			},
+			"require": {
+				"types": "./dist/vue/renderer.d.cts",
+				"default": "./dist/vue/renderer.cjs"
+			}
+		},
 		"./solid/renderer": {
 			"import": {
 				"types": "./dist/solid/renderer.d.ts",
