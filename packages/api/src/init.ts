@@ -7,7 +7,7 @@ export const init = async (
 ) => {
 	const ctx: ZugferdApiContext = {
 		options,
-		context
+		context,
 	};
 
 	return ctx;
