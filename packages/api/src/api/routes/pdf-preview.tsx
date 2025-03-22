@@ -1,18 +1,26 @@
-// biome-ignore lint/correctness/noUnusedImports: <explanation>
-import React from "react";
-import { renderToString } from "react-dom/server";
 import { createApiEndpoint } from "../call";
+import { z } from "zod";
 
 export const pdfPreview = createApiEndpoint(
 	"/pdf-preview",
 	{
-		method: "GET",
+		method: "POST",
+		body: z.object({
+			// TODO: Infer profile schema
+			data: z.record(z.string(), z.any()),
+		}),
 	},
 	async (ctx) => {
-		return new Response(renderToString(<ctx.context.options.template />), {
-			headers: new Headers({
-				"Content-Type": "text/html",
+		return new Response(
+			ctx.context.options.renderer({
+				data: ctx.body.data,
+				...ctx.context,
 			}),
-		});
+			{
+				headers: new Headers({
+					"Content-Type": "text/html",
+				}),
+			},
+		);
 	},
 );

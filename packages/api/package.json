@@ -29,7 +29,8 @@
 	},
 	"dependencies": {
 		"better-call": "^1.0.5",
-		"node-zugferd": "workspace:*"
+		"node-zugferd": "workspace:*",
+		"zod": "^3.24.1"
 	},
 	"peerDependencies": {
 		"react": "^19.0.0",
@@ -46,6 +47,16 @@
 			"require": {
 				"types": "./dist/index.d.cts",
 				"default": "./dist/index.cjs"
+			}
+		},
+		"./react/renderer": {
+			"import": {
+				"types": "./dist/renderer/react.d.ts",
+				"default": "./dist/renderer/react.js"
+			},
+			"require": {
+				"types": "./dist/renderer/react.d.cts",
+				"default": "./dist/renderer/react.cjs"
 			}
 		}
 	}
