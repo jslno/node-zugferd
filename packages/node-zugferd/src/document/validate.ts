@@ -1,8 +1,8 @@
-import type { ZugferdContext } from "../init";
+import type { BaseZugferdContext } from "../init";
 import type { ProfileValidateHandler } from "../types";
 
 export const validateDocumentFactory =
-	(ctx: ZugferdContext): ProfileValidateHandler =>
+	(ctx: BaseZugferdContext): ProfileValidateHandler =>
 	async (data) => {
 		if (ctx.options.strict === false) {
 			return true;

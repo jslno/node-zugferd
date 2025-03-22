@@ -8,25 +8,16 @@ import type { ZugferdPlugin } from "./types/plugins";
 export const zugferd = <O extends ZugferdOptions>(options: O) => {
 	const context = init(options);
 
-	const baseHandlers = {
-		document: {
-			create: createDocumentFactory(context, options),
-			validate: validateDocumentFactory(context),
-		},
-	};
-
-	const handlers = getPluginHandlers(
-		{
-			...context,
-			...baseHandlers,
-		},
-		options as O,
-	);
+	const handlers = getPluginHandlers(context, options as O);
 
 	const ctx = {
 		context,
-		...baseHandlers.document,
+		create: context.document.create as ReturnType<
+			typeof createDocumentFactory<O>
+		>,
+		validate: context.document.validate,
 	};
+
 	return {
 		...ctx,
 		...(handlers ?? {}),

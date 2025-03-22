@@ -1,5 +1,5 @@
 import { type InferSchema, type Schema } from "./schema";
-import { type ZugferdContext } from "../init";
+import { type BaseZugferdContext } from "../init";
 import { type LiteralString } from "./helper";
 
 export type Profile = {
@@ -19,12 +19,12 @@ export type Profile = {
 };
 
 export type ProfileParseHandlerContext<P extends Profile = Profile> = {
-	context: ZugferdContext;
+	context: BaseZugferdContext;
 	data: InferSchema<P>;
 };
 
 export type ProfileParseHandler<P extends Profile = Profile> = (ctx: {
-	context: ZugferdContext;
+	context: BaseZugferdContext;
 	data: InferSchema<P>;
 }) => any;
 

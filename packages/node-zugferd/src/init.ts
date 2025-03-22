@@ -13,19 +13,36 @@ import {
 	getPdfAttachments,
 } from "./formatter/pdf";
 import { type ZugferdOptions } from "./types/options";
+import { createDocumentFactory } from "./document/create";
+import { validateDocumentFactory } from "./document/validate";
 
 export const init = (options: ZugferdOptions) => {
-	const ctx: ZugferdContext = {
+	const ctx: BaseZugferdContext = {
 		options,
 		...getInternalTools(options),
 	};
 
-	return ctx;
+	const context: ZugferdContext = {
+		...ctx,
+		document: {
+			create: createDocumentFactory(ctx, options),
+			validate: validateDocumentFactory(ctx),
+		},
+	};
+
+	return context;
 };
 
-export type ZugferdContext = {
+export type BaseZugferdContext = {
 	options: ZugferdOptions;
 } & InternalTools;
+
+export type ZugferdContext = BaseZugferdContext & {
+	document: {
+		create: ReturnType<typeof createDocumentFactory<ZugferdOptions>>;
+		validate: ReturnType<typeof validateDocumentFactory>;
+	};
+};
 
 type InternalTools = ReturnType<typeof getInternalTools>;
 
