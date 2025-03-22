@@ -4,7 +4,8 @@ export default defineConfig((env) => {
 	return {
 		entry: {
 			index: "./src/index.ts",
-			"renderer/react": "./src/renderer/react.tsx",
+			"react/renderer": "./src/renderer/react.tsx",
+			"solid/renderer": "./src/renderer/solid.tsx",
 		},
 		format: ["cjs", "esm"],
 		bundle: true,

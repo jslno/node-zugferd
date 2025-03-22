@@ -23,6 +23,7 @@
 		"@types/react-dom": "^19.0.3",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
+		"solid-js": "^1.9.5",
 		"tsup": "^8.3.5",
 		"typescript": "^5.7.3",
 		"vitest": "^3.0.4",
@@ -36,6 +37,7 @@
 	"peerDependencies": {
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
+		"solid-js": "^1.9.5",
 		"vue": "^3.5.13"
 	},
 	"main": "./dist/index.js",
@@ -53,12 +55,22 @@
 		},
 		"./react/renderer": {
 			"import": {
-				"types": "./dist/renderer/react.d.ts",
-				"default": "./dist/renderer/react.js"
+				"types": "./dist/react/renderer.d.ts",
+				"default": "./dist/react/renderer.js"
 			},
 			"require": {
-				"types": "./dist/renderer/react.d.cts",
-				"default": "./dist/renderer/react.cjs"
+				"types": "./dist/react/renderer.d.cts",
+				"default": "./dist/react/renderer.cjs"
+			}
+		},
+		"./solid/renderer": {
+			"import": {
+				"types": "./dist/solid/renderer.d.ts",
+				"default": "./dist/solid/renderer.js"
+			},
+			"require": {
+				"types": "./dist/solid/renderer.d.cts",
+				"default": "./dist/solid/renderer.cjs"
 			}
 		}
 	}
