@@ -12,7 +12,7 @@ export const pdfPreview = createApiEndpoint(
 	},
 	async (ctx) => {
 		return new Response(
-			ctx.context.options.renderer({
+			await ctx.context.renderer.render({
 				data: ctx.body.data,
 				...ctx.context,
 			}),

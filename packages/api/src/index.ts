@@ -2,10 +2,14 @@ import type { ZugferdPlugin } from "node-zugferd/types";
 import type { ZugferdApiOptions } from "./types/options";
 import { init, type ZugferdApiContext } from "./init";
 import { getEndpoints, router } from "./api";
+import type { Renderer } from "./types/renderer";
 
-export const api = <O extends ZugferdApiOptions>(options: O) => {
+export const api = <R extends Renderer, O extends ZugferdApiOptions<R>>(
+	renderer: R,
+	options: O,
+) => {
 	return ((ctx) => {
-		const context = init(options, ctx);
+		const context = init(renderer, options, ctx);
 
 		const api = getEndpoints(context, options);
 
