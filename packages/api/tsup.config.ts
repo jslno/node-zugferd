@@ -7,6 +7,7 @@ export default defineConfig((env) => {
 			"react/renderer": "./src/renderer/react.tsx",
 			"vue/renderer": "./src/renderer/vue.ts",
 			"solid/renderer": "./src/renderer/solid.tsx",
+			"svelte/renderer": "./src/renderer/svelte.ts",
 		},
 		format: ["cjs", "esm"],
 		bundle: true,
