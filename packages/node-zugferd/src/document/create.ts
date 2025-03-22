@@ -1,11 +1,11 @@
 import { AFRelationship, PDFDocument, type AttachmentOptions } from "pdf-lib";
-import type { ZugferdContext } from "../init";
+import type { BaseZugferdContext } from "../init";
 import type { InferSchema, ZugferdOptions } from "../types";
 import type { PDFAMetadata } from "../formatter/pdf";
 import { validateDocumentFactory } from "./validate";
 
 export const createDocumentFactory =
-	<O extends ZugferdOptions>(ctx: ZugferdContext, options: O) =>
+	<O extends ZugferdOptions>(ctx: BaseZugferdContext, options: O) =>
 	async (data: InferSchema<O["profile"]>) => {
 		const toObj = () =>
 			options.profile.parse({
