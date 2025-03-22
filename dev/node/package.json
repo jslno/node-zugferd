@@ -1,5 +1,5 @@
 {
-  "name": "dev",
+  "name": "@dev/node",
   "module": "index.ts",
   "type": "module",
   "scripts": {
