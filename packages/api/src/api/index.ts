@@ -37,6 +37,7 @@ export const router = <
 
 	return createRouter(endpoints, {
 		routerContext: ctx,
+		basePath: new URL(ctx.baseURL).pathname,
 		openapi: {
 			disabled: true,
 		},

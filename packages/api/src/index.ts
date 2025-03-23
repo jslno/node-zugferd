@@ -3,6 +3,7 @@ import type { ZugferdApiOptions } from "./types/options";
 import { init, type ZugferdApiContext } from "./init";
 import { getEndpoints, router } from "./api";
 import type { Renderer } from "./types/renderer";
+import { getBaseURL, getOrigin } from "./utils/url";
 
 export const api =
 	<P extends Profile>(profile?: P) =>
@@ -19,6 +20,19 @@ export const api =
 			return {
 				apiHandler: async (request: Request) => {
 					const ctx = await context;
+					const basePath = ctx.options.basePath || "/api/zugferd";
+					if (!ctx.options.baseURL) {
+						const baseURL = getBaseURL(undefined, basePath, request);
+						if (baseURL) {
+							ctx.baseURL = baseURL;
+							ctx.options.baseURL = getOrigin(ctx.baseURL) || undefined;
+						} else {
+							// TODO: Custom error
+							throw new Error(
+								"Unable to retrieve the origin from the request.",
+							);
+						}
+					}
 					const { handler } = router(ctx, options);
 					return handler(request);
 				},
