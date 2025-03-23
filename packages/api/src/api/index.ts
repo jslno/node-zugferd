@@ -2,17 +2,20 @@ import { createRouter } from "better-call";
 import type { ZugferdApiContext } from "../init";
 import type { ZugferdApiOptions } from "../types/options";
 import { ok } from "./routes/ok";
-import { pdfPreview } from "./routes/pdf-preview";
+import { preview } from "./routes/preview";
+import type { Profile } from "node-zugferd/types";
 
 export const getEndpoints = <
+	P extends Profile,
 	C extends ZugferdApiContext,
 	O extends ZugferdApiOptions,
 >(
+	profile: P,
 	ctx: Promise<C> | C,
 	options: O,
 ) => {
 	const baseEndpoints = {
-		pdfPreview,
+		preview: preview<P>(),
 	};
 
 	const endpoints = {
@@ -30,7 +33,7 @@ export const router = <
 	ctx: C,
 	options: O,
 ) => {
-	const endpoints = getEndpoints(ctx, options);
+	const endpoints = getEndpoints(ctx.context.options.profile, ctx, options);
 
 	return createRouter(endpoints, {
 		routerContext: ctx,

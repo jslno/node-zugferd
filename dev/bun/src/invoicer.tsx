@@ -6,7 +6,7 @@ import { BASIC, type ProfileBasic } from "node-zugferd/profile";
 export const invoicer = zugferd({
 	profile: BASIC,
 	plugins: [
-		api(renderer, {
+		api(BASIC)(renderer, {
 			template: (data: ProfileBasic) => {
 				return (
 					<html>
