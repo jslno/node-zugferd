@@ -33,6 +33,7 @@
 	"dependencies": {
 		"better-call": "^1.0.5",
 		"node-zugferd": "workspace:*",
+		"puppeteer": "^24.4.0",
 		"zod": "^3.24.1"
 	},
 	"peerDependencies": {
