@@ -53,7 +53,7 @@ export type InferValueType<T extends FieldType> = T extends "string"
 			: T extends "boolean"
 				? boolean
 				: T extends "date"
-					? Date
+					? Date | string
 					: T extends "string[]"
 						? string[]
 						: T extends "number[]"
