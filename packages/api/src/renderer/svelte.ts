@@ -8,7 +8,18 @@ export const renderer = {
 			props: ctx.data,
 		});
 
-		return `<!DOCTYPE html><html><head>${res.head}</head><body>${res.body}</body></html>`;
+		return `<!DOCTYPE html>
+<html>
+	<head>
+		<meta charSet="UTF-8 />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		${res.head}
+	</head>
+	<body>
+		${res.body}
+	</body>
+</html>`;
 	},
 	$Infer: {
 		Template: {} as Component,
