@@ -51,7 +51,8 @@ export const create = <P extends Profile>() =>
 
 			return new Response(pdfA, {
 				headers: new Headers({
-					"Content-Type": "application/pdf",
+					"Content-Type": "application/pdf; charset=binary",
+					"Content-Disposition": "inline; filename=document.pdf",
 				}),
 			});
 		},
