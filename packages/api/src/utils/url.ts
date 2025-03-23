@@ -49,3 +49,19 @@ export const getOrigin = (url: string) => {
 		return null;
 	}
 };
+
+export const getProtocol = (url: string) => {
+	try {
+		return new URL(url).protocol;
+	} catch (err) {
+		return null;
+	}
+};
+
+export const getHost = (url: string) => {
+	try {
+		return new URL(url).host;
+	} catch (err) {
+		return null;
+	}
+};

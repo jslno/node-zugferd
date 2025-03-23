@@ -7,4 +7,10 @@ export type ZugferdApiOptions<R extends Renderer = Renderer> = {
 	 */
 	basePath?: string;
 	template: R["$Infer"]["Template"];
+	trustedOrigins?:
+		| string[]
+		| ((request: Request) => string[] | Promise<string[]>);
+	advanced?: {
+		disableCSRFCheck?: boolean;
+	};
 };

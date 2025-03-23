@@ -33,13 +33,19 @@ export const api =
 							);
 						}
 					}
+					ctx.trustedOrigins = [
+						...(options.trustedOrigins
+							? Array.isArray(options.trustedOrigins)
+								? options.trustedOrigins
+								: await options.trustedOrigins(request)
+							: []),
+						ctx.options.baseURL!,
+					];
 					const { handler } = router(ctx, options);
 					return handler(request);
 				},
 				apiContext: context,
-				api: {
-					...api,
-				},
+				api,
 			};
 		}) satisfies ZugferdPlugin;
 	};

@@ -15,6 +15,7 @@ export const init = async (
 		options,
 		context,
 		baseURL,
+		trustedOrigins: getTrustedOrigins(options),
 	};
 
 	return ctx;
@@ -25,4 +26,18 @@ export type ZugferdApiContext = {
 	options: ZugferdApiOptions;
 	context: ZugferdContext;
 	baseURL: string;
+	trustedOrigins: string[];
+};
+
+const getTrustedOrigins = (options: ZugferdApiOptions) => {
+	const baseURL = getBaseURL(options.baseURL, options.basePath);
+	if (!baseURL) {
+		return [];
+	}
+	const trustedOrigins = [new URL(baseURL).origin];
+	if (options.trustedOrigins && Array.isArray(options.trustedOrigins)) {
+		trustedOrigins.push(...options.trustedOrigins);
+	}
+
+	return trustedOrigins;
 };

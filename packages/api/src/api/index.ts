@@ -5,6 +5,7 @@ import { ok } from "./routes/ok";
 import { preview } from "./routes/preview";
 import type { Profile } from "node-zugferd/types";
 import { create } from "./routes/create";
+import { originCheckMiddleware } from "./middlewares";
 
 export const getEndpoints = <
 	P extends Profile,
@@ -43,5 +44,11 @@ export const router = <
 		openapi: {
 			disabled: true,
 		},
+		routerMiddleware: [
+			{
+				path: "/**",
+				middleware: originCheckMiddleware,
+			},
+		],
 	});
 };
