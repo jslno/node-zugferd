@@ -1,6 +1,5 @@
 import { verifyToken } from "../../utils/token";
 import { createApiMiddleware } from "../call";
-import jwt from "jsonwebtoken";
 
 export const sessionMiddleware = createApiMiddleware(async (ctx) => {
 	const bearer = ctx.getHeader("Authorization");

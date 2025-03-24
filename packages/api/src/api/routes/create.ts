@@ -2,7 +2,6 @@ import type { InferSchema, Profile } from "node-zugferd/types";
 import { createApiEndpoint } from "../call";
 import { z } from "zod";
 import puppeteer from "puppeteer";
-import jwt from "jsonwebtoken";
 import { signToken } from "../../utils/token";
 
 export const create = <P extends Profile>() =>
@@ -26,7 +25,9 @@ export const create = <P extends Profile>() =>
 				throw ctx.error("UNAUTHORIZED");
 			}
 
-			const browser = await puppeteer.launch();
+			const browser = await puppeteer.launch({
+				args: process.env.NODE_ENV === "test" ? ["--no-sandbox"] : [],
+			});
 			const page = await browser.newPage();
 
 			const targetURL = `${ctx.context.baseURL}/preview`;
