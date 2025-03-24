@@ -5,7 +5,6 @@ import {
 import type { Router } from "../api";
 import { getBaseURL } from "../utils/url";
 import type { Profile } from "node-zugferd/types";
-import type { BASIC } from "node-zugferd/profile";
 import type { Endpoint } from "better-call";
 
 type WithoutServerOnly<T extends Record<string, Endpoint>> = {
@@ -24,6 +23,10 @@ type WithoutNonActions<T extends Record<string, Endpoint>> = {
 		: T[K];
 };
 
+type FilterEndpoints<T extends Record<string, Endpoint>> = WithoutNonActions<
+	WithoutServerOnly<T>
+>;
+
 export const createClient = <P extends Profile>(
 	options?: Omit<ClientOptions, "baseURL"> & {
 		baseURL?: string;
@@ -31,13 +34,8 @@ export const createClient = <P extends Profile>(
 	},
 ) => {
 	const baseURL = getBaseURL(options?.baseURL, options?.basePath) || "";
-	return createRpcClient<
-		WithoutNonActions<WithoutServerOnly<Router<P>["endpoints"]>>
-	>({
+	return createRpcClient<FilterEndpoints<Router<P>["endpoints"]>>({
 		...options,
 		baseURL,
 	});
 };
-
-const c = createClient<typeof BASIC>();
-

@@ -31,6 +31,7 @@
 		"vue": "^3.5.13"
 	},
 	"dependencies": {
+		"@better-fetch/fetch": "^1.1.17",
 		"better-call": "^1.0.5",
 		"node-zugferd": "workspace:*",
 		"puppeteer": "^24.4.0",
@@ -94,6 +95,16 @@
 			"require": {
 				"types": "./dist/svelte/renderer.d.cts",
 				"default": "./dist/svelte/renderer.cjs"
+			}
+		},
+		"./client": {
+			"import": {
+				"types": "./dist/client.d.ts",
+				"default": "./dist/client.js"
+			},
+			"require": {
+				"types": "./dist/client.d.cts",
+				"default": "./dist/client.cjs"
 			}
 		}
 	}
