@@ -1,7 +1,7 @@
 import type { Profile, ZugferdPlugin } from "node-zugferd/types";
 import type { ZugferdApiOptions } from "./types/options";
 import { init, type ZugferdApiContext } from "./init";
-import { getEndpoints, router } from "./api";
+import { getEndpoints, router, type Router } from "./api";
 import type { Renderer } from "./types/renderer";
 import { getBaseURL, getOrigin } from "./utils/url";
 
@@ -41,7 +41,7 @@ export const api =
 							: []),
 						ctx.options.baseURL!,
 					];
-					const { handler } = router(ctx, options);
+					const { handler } = router(ctx.context.options.profile)(ctx, options);
 					return handler(request);
 				},
 				apiContext: context,
@@ -53,5 +53,5 @@ export const api =
 export type ZugferdApi = {
 	apiHandler: (request: Request) => Promise<Response>;
 	apiContext: Promise<ZugferdApiContext>;
-	api: ReturnType<typeof router>["endpoints"];
+	api: Router["endpoints"];
 };

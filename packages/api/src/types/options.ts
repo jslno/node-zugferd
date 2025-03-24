@@ -1,3 +1,4 @@
+import type { GenericEndpointContext } from "./context";
 import type { Renderer } from "./renderer";
 
 export type ZugferdApiOptions<R extends Renderer = Renderer> = {
@@ -13,4 +14,5 @@ export type ZugferdApiOptions<R extends Renderer = Renderer> = {
 	advanced?: {
 		disableCSRFCheck?: boolean;
 	};
+	authorize?: (ctx: GenericEndpointContext) => Promise<boolean> | boolean;
 };

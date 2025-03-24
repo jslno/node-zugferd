@@ -1,6 +1,7 @@
 import type { InferSchema, Profile } from "node-zugferd/types";
 import { createApiEndpoint } from "../call";
-import { z, ZodType } from "zod";
+import { z } from "zod";
+import { HIDE_METADATA } from "../../utils/hide-metadata";
 
 export const preview = <P extends Profile>() =>
 	createApiEndpoint(
@@ -8,8 +9,14 @@ export const preview = <P extends Profile>() =>
 		{
 			method: "POST",
 			body: z.object({
-				data: z.record(z.string(), z.any()) as any as ZodType<InferSchema<P>>,
+				data: z.record(z.string(), z.any()),
 			}),
+			metadata: {
+				...HIDE_METADATA,
+				$Infer: {
+					body: {} as { data: InferSchema<P> },
+				},
+			},
 		},
 		async (ctx) => {
 			const data = ctx.body.data as InferSchema<P>;

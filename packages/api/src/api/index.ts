@@ -29,26 +29,29 @@ export const getEndpoints = <
 	return endpoints;
 };
 
-export const router = <
-	C extends ZugferdApiContext,
-	O extends ZugferdApiOptions,
->(
-	ctx: C,
-	options: O,
-) => {
-	const endpoints = getEndpoints(ctx.context.options.profile, ctx, options);
+export type Router<P extends Profile = Profile> = ReturnType<
+	ReturnType<typeof router<P>>
+>;
 
-	return createRouter(endpoints, {
-		routerContext: ctx,
-		basePath: new URL(ctx.baseURL).pathname,
-		openapi: {
-			disabled: true,
-		},
-		routerMiddleware: [
-			{
-				path: "/**",
-				middleware: originCheckMiddleware,
+export const router =
+	<P extends Profile>(profile: P) =>
+	<C extends ZugferdApiContext, O extends ZugferdApiOptions>(
+		ctx: C,
+		options: O,
+	) => {
+		const endpoints = getEndpoints(profile, ctx, options);
+
+		return createRouter(endpoints, {
+			routerContext: ctx,
+			basePath: new URL(ctx.baseURL).pathname,
+			openapi: {
+				disabled: true,
 			},
-		],
-	});
-};
+			routerMiddleware: [
+				{
+					path: "/**",
+					middleware: originCheckMiddleware,
+				},
+			],
+		});
+	};

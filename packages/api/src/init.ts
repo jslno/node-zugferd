@@ -2,6 +2,7 @@ import type { ZugferdApiOptions } from "./types/options";
 import type { ZugferdContext } from "node-zugferd/types";
 import type { Renderer } from "./types/renderer";
 import { getBaseURL } from "./utils/url";
+import type { GenericEndpointContext } from "./types/context";
 
 export const init = async (
 	renderer: Renderer,
@@ -16,6 +17,7 @@ export const init = async (
 		context,
 		baseURL,
 		trustedOrigins: getTrustedOrigins(options),
+		authorize: options.authorize || (() => true),
 	};
 
 	return ctx;
@@ -27,6 +29,7 @@ export type ZugferdApiContext = {
 	context: ZugferdContext;
 	baseURL: string;
 	trustedOrigins: string[];
+	authorize: (ctx: GenericEndpointContext) => Promise<boolean> | boolean;
 };
 
 const getTrustedOrigins = (options: ZugferdApiOptions) => {

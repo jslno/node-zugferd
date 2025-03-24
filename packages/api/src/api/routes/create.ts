@@ -1,6 +1,6 @@
 import type { InferSchema, Profile } from "node-zugferd/types";
 import { createApiEndpoint } from "../call";
-import { z, ZodType } from "zod";
+import { z } from "zod";
 import puppeteer from "puppeteer";
 
 export const create = <P extends Profile>() =>
@@ -9,10 +9,21 @@ export const create = <P extends Profile>() =>
 		{
 			method: "POST",
 			body: z.object({
-				data: z.record(z.string(), z.any()) as any as ZodType<InferSchema<P>>,
+				data: z.record(z.string(), z.any()),
 			}),
+			metadata: {
+				$Infer: {
+					body: {} as { data: InferSchema<P> },
+				},
+			},
 		},
 		async (ctx) => {
+			const canCreateDocument = await ctx.context.authorize(ctx);
+
+			if (!canCreateDocument) {
+				throw new Error("Unauthorized");
+			}
+
 			const browser = await puppeteer.launch();
 			const page = await browser.newPage();
 
@@ -46,7 +57,6 @@ export const create = <P extends Profile>() =>
 			const zugferdCtx = ctx.context.context;
 
 			const invoice = await zugferdCtx.document.create(ctx.body.data || {});
-
 			const pdfA = await invoice.embedInPdf(pdf);
 
 			return new Response(pdfA, {
