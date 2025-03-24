@@ -37,6 +37,13 @@ export const getTestInstance = async <
 				</Document>
 			);
 		},
+		advanced: {
+			puppeteer: {
+				launch: {
+					args: ["--no-sandbox"],
+				},
+			},
+		},
 	} satisfies ZugferdApiOptions;
 
 	const profile = config.zugferdOptions?.profile || BASIC;

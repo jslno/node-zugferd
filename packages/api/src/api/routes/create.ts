@@ -25,9 +25,9 @@ export const create = <P extends Profile>() =>
 				throw ctx.error("UNAUTHORIZED");
 			}
 
-			const browser = await puppeteer.launch({
-				args: process.env.NODE_ENV === "test" ? ["--no-sandbox"] : [],
-			});
+			const browser = await puppeteer.launch(
+				ctx.context.options.advanced?.puppeteer?.launch,
+			);
 			const page = await browser.newPage();
 
 			const targetURL = `${ctx.context.baseURL}/preview`;
