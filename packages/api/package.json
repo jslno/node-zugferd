@@ -6,7 +6,7 @@
 		"build": "tsup --clean --dts",
 		"dev": "tsup --watch --sourcemap",
 		"dev:dts": "tsup --watch --dts",
-		"test": "vitest",
+		"test": "puppeteer browsers install chrome && vitest",
 		"typecheck": "tsc --noEmit"
 	},
 	"author": "Joél de Oliveira Solano da Silva",
