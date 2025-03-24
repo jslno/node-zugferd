@@ -7,6 +7,7 @@ export const invoicer = zugferd({
 	profile: BASIC,
 	plugins: [
 		api(BASIC)(renderer, {
+			secret: "SECRET",
 			template: (data: ProfileBasic) => {
 				return (
 					<Document>

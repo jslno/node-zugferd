@@ -2,6 +2,7 @@ import type { InferSchema, Profile } from "node-zugferd/types";
 import { createApiEndpoint } from "../call";
 import { z } from "zod";
 import puppeteer from "puppeteer";
+import jwt from "jsonwebtoken";
 
 export const create = <P extends Profile>() =>
 	createApiEndpoint(
@@ -21,7 +22,7 @@ export const create = <P extends Profile>() =>
 			const canCreateDocument = await ctx.context.authorize(ctx);
 
 			if (!canCreateDocument) {
-				throw new Error("Unauthorized");
+				throw ctx.error("UNAUTHORIZED");
 			}
 
 			const browser = await puppeteer.launch();
@@ -31,6 +32,10 @@ export const create = <P extends Profile>() =>
 
 			await page.setRequestInterception(true);
 
+			const token = jwt.sign({}, ctx.context.options.secret, {
+				expiresIn: 60, // 1 minute
+			});
+
 			page.on("request", (request) => {
 				if (request.url() === targetURL && request.method() === "GET") {
 					request.continue({
@@ -38,6 +43,7 @@ export const create = <P extends Profile>() =>
 						postData: JSON.stringify(ctx.body),
 						headers: {
 							...request.headers(),
+							Authorization: `Bearer ${token}`,
 							"Content-Type": "application/json",
 						},
 					});
