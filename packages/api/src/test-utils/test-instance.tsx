@@ -40,7 +40,8 @@ export const getTestInstance = async <
 		advanced: {
 			puppeteer: {
 				launch: {
-					args: ["--no-sandbox"],
+					headless: true,
+					args: ["--no-sandbox", "--disable-setuid-sandbox"],
 				},
 			},
 		},
