@@ -13,6 +13,7 @@ export default defineConfig((env) => {
 			"solid-start/renderer": "./src/renderer/solid.tsx",
 			"svelte-kit": "./src/integrations/svelte-kit.ts",
 			"svelte-kit/renderer": "./src/renderer/svelte.ts",
+			api: "./src/api/index.ts",
 		},
 		format: ["cjs", "esm"],
 		bundle: true,

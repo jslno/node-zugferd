@@ -4,6 +4,7 @@ import { init, type ZugferdApiContext } from "./init";
 import { getEndpoints, router, type Router } from "./api";
 import type { Renderer } from "./types/renderer";
 import { getBaseURL, getOrigin } from "./utils/url";
+import { ZugferdError } from "node-zugferd";
 
 export const api =
 	<P extends Profile>(profile?: P) =>
@@ -27,9 +28,9 @@ export const api =
 							ctx.baseURL = baseURL;
 							ctx.options.baseURL = getOrigin(ctx.baseURL) || undefined;
 						} else {
-							// TODO: Custom error
-							throw new Error(
-								"Unable to retrieve the origin from the request.",
+							throw new ZugferdError(
+								"",
+								"Unable to retrieve the baseURL from the request.",
 							);
 						}
 					}
@@ -55,3 +56,5 @@ export type ZugferdApi = {
 	apiContext: Promise<ZugferdApiContext>;
 	api: Router["endpoints"];
 };
+
+export { ZugferdError };

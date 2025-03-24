@@ -1,9 +1,10 @@
+import { ZugferdError } from "node-zugferd";
+
 export const hasPath = (url: string): boolean => {
 	try {
 		return new URL(url).pathname !== "/";
 	} catch (err) {
-		// TODO: Custom error
-		throw new Error(`Invalid base url: ${url}`);
+		throw new ZugferdError("INVALID_URL", `Invalid base url: ${url}`);
 	}
 };
 
@@ -29,8 +30,10 @@ export const getBaseURL = (url?: string, path?: string, request?: Request) => {
 	if (request) {
 		const url = getOrigin(request.url);
 		if (!url) {
-			// TODO: Custom error
-			throw new Error("Unable to retrieve the origin from the request.");
+			throw new ZugferdError(
+				"",
+				"Unable to retrieve the origin from the request.",
+			);
 		}
 		return withPath(url, path);
 	}
