@@ -63,6 +63,36 @@
 				"default": "./dist/index.cjs"
 			}
 		},
+		"./client": {
+			"import": {
+				"types": "./dist/client.d.ts",
+				"default": "./dist/client.js"
+			},
+			"require": {
+				"types": "./dist/client.d.cts",
+				"default": "./dist/client.cjs"
+			}
+		},
+		"./node": {
+			"import": {
+				"types": "./dist/node.d.ts",
+				"default": "./dist/node.js"
+			},
+			"require": {
+				"types": "./dist/node.d.cts",
+				"default": "./dist/node.cjs"
+			}
+		},
+		"./next-js": {
+			"import": {
+				"types": "./dist/next-js.d.ts",
+				"default": "./dist/next-js.js"
+			},
+			"require": {
+				"types": "./dist/next-js.d.cts",
+				"default": "./dist/next-js.cjs"
+			}
+		},
 		"./react/renderer": {
 			"import": {
 				"types": "./dist/react/renderer.d.ts",
@@ -83,34 +113,44 @@
 				"default": "./dist/vue/renderer.cjs"
 			}
 		},
-		"./solid/renderer": {
+		"./solid-start": {
 			"import": {
-				"types": "./dist/solid/renderer.d.ts",
-				"default": "./dist/solid/renderer.js"
+				"types": "./dist/solid-start.d.ts",
+				"default": "./dist/solid-start.js"
 			},
 			"require": {
-				"types": "./dist/solid/renderer.d.cts",
-				"default": "./dist/solid/renderer.cjs"
+				"types": "./dist/solid-start.d.cts",
+				"default": "./dist/solid-start.cjs"
 			}
 		},
-		"./svelte/renderer": {
+		"./solid-start/renderer": {
 			"import": {
-				"types": "./dist/svelte/renderer.d.ts",
-				"default": "./dist/svelte/renderer.js"
+				"types": "./dist/solid-start/renderer.d.ts",
+				"default": "./dist/solid-start/renderer.js"
 			},
 			"require": {
-				"types": "./dist/svelte/renderer.d.cts",
-				"default": "./dist/svelte/renderer.cjs"
+				"types": "./dist/solid-start/renderer.d.cts",
+				"default": "./dist/solid-start/renderer.cjs"
 			}
 		},
-		"./client": {
+		"./svelte-kit": {
 			"import": {
-				"types": "./dist/client.d.ts",
-				"default": "./dist/client.js"
+				"types": "./dist/svelte-kit.d.ts",
+				"default": "./dist/svelte-kit.js"
 			},
 			"require": {
-				"types": "./dist/client.d.cts",
-				"default": "./dist/client.cjs"
+				"types": "./dist/svelte-kit.d.cts",
+				"default": "./dist/svelte-kit.cjs"
+			}
+		},
+		"./svelte-kit/renderer": {
+			"import": {
+				"types": "./dist/svelte-kit/renderer.d.ts",
+				"default": "./dist/svelte-kit/renderer.js"
+			},
+			"require": {
+				"types": "./dist/svelte-kit/renderer.d.cts",
+				"default": "./dist/svelte-kit/renderer.cjs"
 			}
 		}
 	}
