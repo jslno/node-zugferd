@@ -1,6 +1,6 @@
 import {
 	createClient as createRpcClient,
-	type ClientOptions,
+	type ClientOptions as RpcClientOptions,
 } from "better-call/client";
 import type { Router } from "../api";
 import { getBaseURL } from "../utils/url";
@@ -27,12 +27,12 @@ type FilterEndpoints<T extends Record<string, Endpoint>> = WithoutNonActions<
 	WithoutServerOnly<T>
 >;
 
-export const createClient = <P extends Profile>(
-	options?: Omit<ClientOptions, "baseURL"> & {
-		baseURL?: string;
-		basePath?: string;
-	},
-) => {
+export type ClientOptions = Omit<RpcClientOptions, "baseURL"> & {
+	baseURL?: string;
+	basePath?: string;
+};
+
+export const createClient = <P extends Profile>(options?: ClientOptions) => {
 	const baseURL = getBaseURL(options?.baseURL, options?.basePath) || "";
 	return createRpcClient<FilterEndpoints<Router<P>["endpoints"]>>({
 		...options,

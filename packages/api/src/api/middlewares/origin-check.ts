@@ -6,6 +6,7 @@ import { getHost, getOrigin, getProtocol } from "../../utils/url";
 import { createApiMiddleware } from "../call";
 import { wildcardMatch } from "../../utils/wildcard-match";
 import type { GenericEndpointContext } from "../../types/context";
+import { APIError } from "better-call";
 
 /**
  * A middleware to validate origin against
@@ -52,11 +53,12 @@ export const originCheckMiddleware = createApiMiddleware(async (ctx) => {
 		if (!isTrustedOrigin) {
 			console.error(`Invalid ${label}: ${url}`);
 			console.info(
-				`If it's a valid URL, please add ${url} to trustedOrigins in your auth config\n`,
+				`If it's a valid URL, please add ${url} to trustedOrigins in your api config\n`,
 				`Current list of trustedOrigins: ${trustedOrigins}`,
 			);
-			// TODO: Custom error
-			throw new Error(`FORBIDDEN: Invalid ${label}`);
+			throw new APIError("FORBIDDEN", {
+				message: `Invalid ${label}`,
+			});
 		}
 	};
 	if (!ctx.context.options.advanced?.disableCSRFCheck) {
@@ -106,11 +108,12 @@ export const originCheck = (
 			if (!isTrustedOrigin) {
 				console.error(`Invalid ${label}: ${url}`);
 				console.info(
-					`If it's a valid URL, please add ${url} to trustedOrigins in your auth config\n`,
+					`If it's a valid URL, please add ${url} to trustedOrigins in your api config\n`,
 					`Current list of trustedOrigins: ${trustedOrigins}`,
 				);
-				// TODO: Custom error
-				throw new Error(`FORBIDDEN: Invalid ${label}`);
+				throw new APIError("FORBIDDEN", {
+					message: `Invalid ${label}`,
+				});
 			}
 		};
 		const callbacks = Array.isArray(callbackURL) ? callbackURL : [callbackURL];

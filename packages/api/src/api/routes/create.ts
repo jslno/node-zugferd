@@ -3,6 +3,7 @@ import { createApiEndpoint } from "../call";
 import { z } from "zod";
 import puppeteer from "puppeteer";
 import jwt from "jsonwebtoken";
+import { signToken } from "../../utils/token";
 
 export const create = <P extends Profile>() =>
 	createApiEndpoint(
@@ -32,9 +33,7 @@ export const create = <P extends Profile>() =>
 
 			await page.setRequestInterception(true);
 
-			const token = jwt.sign({}, ctx.context.options.secret, {
-				expiresIn: 60, // 1 minute
-			});
+			const token = signToken(ctx.context);
 
 			page.on("request", (request) => {
 				if (request.url() === targetURL && request.method() === "GET") {
@@ -70,6 +69,6 @@ export const create = <P extends Profile>() =>
 					"Content-Type": "application/pdf; charset=binary",
 					"Content-Disposition": "inline; filename=document.pdf",
 				}),
-			});
+			}) as any as Blob;
 		},
 	);
