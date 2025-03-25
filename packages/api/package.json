@@ -9,6 +9,9 @@
 		"test": "puppeteer browsers install chrome && vitest",
 		"typecheck": "tsc --noEmit"
 	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"author": "Joél de Oliveira Solano da Silva",
 	"repository": {
 		"type": "git",
