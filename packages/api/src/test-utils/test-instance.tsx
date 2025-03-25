@@ -29,11 +29,11 @@ export const getTestInstance = async <
 	config ||= {};
 	const opts = {
 		secret: "node-zugferd.secret",
-		template: (data: ProfileBasic) => {
+		template: (props: { data: ProfileBasic }) => {
 			return (
 				<Document>
 					<h1>Test Invoice</h1>
-					<p>{data.number}</p>
+					<p>{props.data.number}</p>
 				</Document>
 			);
 		},
