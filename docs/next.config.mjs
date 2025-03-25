@@ -12,6 +12,11 @@ const config = {
 				destination: "/docs/introduction",
 				permanent: true,
 			},
+			{
+				source: "/docs/plugins/api",
+				destination: "/docs/plugins/api/installation",
+				permanent: true,
+			},
 		];
 	},
 	serverExternalPackages: [
