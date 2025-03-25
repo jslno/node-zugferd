@@ -1,0 +1,658 @@
+---
+title: API
+---
+
+## Installation
+
+<Steps>
+
+<Step>
+
+### Install the package
+
+Let's start by adding the API Plugin to your project.
+
+```package-install
+@node-zugferd/api
+```
+
+<Callout>
+  If you're using a separate client and server setup, make sure to install the
+  plugin in both parts of your project.
+</Callout>
+
+</Step>
+
+<Step>
+
+### Setup the plugin
+
+To use the API plugin, add it to your zugferd config.
+
+The following steps will use the [BASIC](/docs/profiles/basic) profile as example.
+
+```ts title="invoicer.ts"
+import { zugferd } from "node-zugferd";
+import { BASIC } from "node-zugferd/profile/basic";
+import { api } from "@node-zugferd/api"; // [!code highlight]
+
+export const invoicer = zugferd({
+  profile: BASIC,
+  plugins: [
+    api<typeof BASIC>()(), // [!code highlight]
+    // or `api(BASIC)()`
+  ],
+});
+```
+
+This will throw an type error, as you still need to set the options and template renderer.
+
+</Step>
+
+<Step>
+
+#### Choose a renderer
+
+Select a renderer to generate the pdf from the template. The plugin comes with a renderer for all the popular web frameworks, including vanilla html.
+
+<Tabs items={["react", "vue", "svelte-kit", "solid-start", "vanilla"]} defaultValue="react">
+
+<Tab value="react">
+```ts title="invoicer.ts"
+import { renderer } from "@node-zugferd/api/react/renderer";
+
+api<typeof BASIC>()(renderer);
+
+````
+</Tab>
+
+<Tab value="vue">
+```ts title="invoicer.ts"
+import { renderer } from "@node-zugferd/api/vue/renderer";
+
+api<typeof BASIC>()(renderer);
+````
+
+</Tab>
+
+<Tab value="svelte-kit">
+```ts title="invoicer.ts"
+import { renderer } from "@node-zugferd/api/svelte-kit/renderer";
+
+api<typeof BASIC>()(renderer);
+
+````
+</Tab>
+
+<Tab value="solid-start">
+```ts title="invoicer.ts"
+import { renderer } from "@node-zugferd/api/solid-start/renderer";
+
+api<typeof BASIC>()(renderer);
+````
+
+</Tab>
+
+<Tab value="vanilla">
+```ts title="invoicer.ts"
+import { renderer } from "@node-zugferd/api/vanilla/renderer";
+
+api<typeof BASIC>()(renderer);
+
+````
+</Tab>
+
+</Tabs>
+
+</Step>
+
+<Step>
+
+#### Define a secret
+
+The API Plugin exposes an endpoint to preview the pdf in html.
+To make that endpoint secure it requires an access token.
+This token is generated using [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) with a 1 minute lifespan.
+To sign the token you need to define a secret key.
+
+1. Create a `.env` file in the root of your project and add the following environment variable:
+
+```txt title=".env"
+ZUGFERD_API_SECRET=
+````
+
+<GenerateSecret />
+
+2. Pass the secret to the plugin config
+
+```ts title="invoicer.ts"
+api<typeof BASIC>()(renderer, {
+  secret: process.env.ZUGFERD_API_SECRET!,
+});
+```
+
+</Step>
+
+<Step>
+
+#### Create a template
+
+Now you have to create a template for the generated pdf/a files.
+
+<Callout type="warn">
+  Templates are rendered server-side only and do not support streaming or
+  waiting for data.
+</Callout>
+
+<Tabs items={["react", "vue", "svelte-kit", "solid-start", "vanilla"]} defaultValue="react">
+
+<Tab value="react">
+1. Create a file called `template.tsx` somewhere in your project
+
+```tsx title="template.tsx"
+import { Document } from "@node-zugferd/api/react/renderer";
+import type { ProfileBasic } from "node-zugferd/profile/basic";
+
+export const Template = (props: { data: ProfileBasic }) => {
+  return (
+    <Document>
+      <h1>Invoice {props.data.number}</h1>
+    </Document>
+  );
+};
+```
+
+2. Add the component to the config
+
+```ts title="invoicer.ts"
+import { renderer } from "@node-zugferd/api/react/renderer";
+import { Template } from "./your/path/template.tsx";
+
+api<typeof BASIC>()(renderer, {
+  template: Template,
+  // ...
+});
+```
+
+</Tab>
+
+<Tab value="vue">
+1. Create a file called `template.vue` somewhere in your project
+
+```vue title="template.vue"
+<template>
+  <Document>
+    <h1>Invoice {{ number }}</h1>
+  </Document>
+</template>
+
+<script setup lang="ts">
+import { Document } from "@node-zugferd/api/vue/renderer";
+import type { ProfileBasic } from "node-zugferd/profile/basic";
+
+defineProps<{ data: ProfileBasic }>();
+</script>
+```
+
+2. Add the component to the config
+
+```ts title="invoicer.ts"
+import { renderer } from "@node-zugferd/api/vue/renderer";
+import Template from "./your/path/template.vue";
+
+api<typeof BASIC>()(renderer, {
+  template: Template,
+  // ...
+});
+```
+
+</Tab>
+
+<Tab value="svelte-kit">
+1. Create a file called `template.svelte` somewhere in your project
+
+```svelte title="template.svelte"
+<script>
+import type { ProfileBasic } from "node-zugferd/profile/basic";
+
+export let data: ProfileBasic;
+</script>
+
+<h1>Invoice {data.number}</h1>
+```
+
+2. Add the component to the config
+
+```ts title="invoicer.ts"
+import { renderer } from "@node-zugferd/api/svelte-kit/renderer";
+import Template from "./your/path/template.svelte";
+
+api<typeof BASIC>()(renderer, {
+  template: Template,
+  // ...
+});
+```
+
+</Tab>
+
+<Tab value="solid-start">
+1. Create a file called `template.tsx` somewhere in your project
+
+```tsx title="template.tsx"
+import { Document } from "@node-zugferd/api/solid-start/renderer";
+import type { ProfileBasic } from "node-zugferd/profile/basic";
+
+export const Template = (props: { data: ProfileBasic }) => {
+  return (
+    <Document>
+      <h1>Invoice {props.data.number}</h1>
+    </Document>
+  );
+};
+```
+
+2. Add the component to the config
+
+```ts title="invoicer.ts"
+import { renderer } from "@node-zugferd/api/solid-start/renderer";
+import { Template } from "./your/path/template.tsx";
+
+api<typeof BASIC>()(renderer, {
+  template: Template,
+  // ...
+});
+```
+
+</Tab>
+
+<Tab value="vanilla">
+1. Create a file called `template.ts` somewhere in your project
+
+```ts title="template.ts"
+import { Document } from "@node-zugferd/api/vanilla/renderer";
+
+export const Template = (props: { data: ProfileBasic }) => {
+  return Document()`<h1>Invoice ${props.data.number}</h1>`;
+};
+```
+
+2. Add the component to the config
+
+```ts title="invoicer.ts"
+import { renderer } from "@node-zugferd/api/vanilla/renderer";
+import { Template } from "./your/path/template.ts";
+
+api<typeof BASIC>()(renderer, {
+  template: Template,
+  // ...
+});
+```
+
+</Tab>
+
+</Tabs>
+
+</Step>
+
+<Step>
+### Mount Handler
+
+To handle api requests, you need to set up a route handler on your server.
+
+Create a new file or route in your framework's designated catch-all route handler. This route should handle requests for the path `/api/zugferd/*` (unless you've configured a different base path).
+
+<Callout>
+  node-zugferd supports any backend framework with standard Request and Response
+  objects and offers helper functions for popular frameworks.
+</Callout>
+
+<Tabs items={["next-js", "nuxt", "svelte-kit", "remix", "solid-start", "hono", "express", "elysia", "tanstack-start"]} defaultValue="next-js">
+
+<Tab value="next-js">
+```ts title="/app/api/zugferd/[...all]/route.ts"
+import { invoicer } from "@/lib/invoicer"; // path to your invoicer file
+import { toNextJsHandler } from "@node-zugferd/api/next-js";
+
+export const { POST, GET } = toNextJsHandler(invoicer);
+```
+</Tab>
+
+<Tab value="nuxt">
+```ts title="/server/api/zugferd/[...all].ts"
+import { invoicer } from "~/utils/invoicer"; // path to your invoicer file
+
+export default defineEventHandler((event) => {
+    return invoicer.apiHandler(toWebRequest(event));
+});
+```
+</Tab>
+
+<Tab value="svelte-kit">
+```ts title="hooks.server.ts"
+import { invoicer } from "$lib/invoicer"; // path to your invoicer file
+import { svelteKitHandler } from "node-zugferd/svelte-kit";
+
+export async function handle({ event, resolve }) {
+    return svelteKitHandler({ event, resolve, invoicer })
+}
+```
+</Tab>
+
+<Tab value="remix">
+```ts title="/app/routes/api.zugferd.$.ts"
+import { invoicer } from "~/lib/invoicer.server"; // path to your invoicer file
+import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
+
+export async function loader({ request }: LoaderFunctionArgs) {
+    return invoicer.apiHandler(request);
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+    return invoicer.apiHandler(request);
+}
+```
+</Tab>
+
+<Tab value="solid-start">
+```ts title="/routes/api/zugferd/*.all.ts"
+import { invoicer } from "~/lib/invoicer"; // path to your invoicer file
+import { toSolidStartHandler } from "@node-zugferd/api/solid-start";
+
+export const { GET, POST } = toSolidStartHandler(invoicer);
+```
+</Tab>
+
+<Tab value="hono">
+```ts title="src/index.ts"
+import { Hono } from "hono";
+import { invoicer } from "./invoicer"; // path to your invoicer file
+import { serve } from "@hono/node-server";
+import { cors } from "hono/cors";
+
+const app = new Hono();
+
+app.on(["GET", "POST"], "/api/zugferd/\*\*", (c) => invoicer.apiHandler(c.req.raw));
+
+serve(app);
+
+````
+</Tab>
+
+<Tab value="express">
+```ts title="server.ts"
+import express from "express";
+import { toNodeHandler } from "@node-zugferd/api/node";
+import { invoicer } from "./invoicer"; // path to your invoicer file
+
+const app = express();
+const port = 8000;
+
+app.all("/api/zugferd/*", toNodeHandler(invoicer)); // For ExpressJS v4
+// app.all("/api/zugferd/*splat", toNodeHandler(invoicer)); For ExpressJS v5
+
+// Mount express json middleware after node-zugferd handler
+// or only apply it to routes that don't interact with node-zugferd
+app.use(express.json());
+
+app.listen(port, () => {
+    console.log(`node-zugferd app listening on port ${port}`);
+});
+````
+
+This also works for any other node server framework like express, fastify, hapi, etc.
+
+</Tab>
+
+<Tab value="elysia">
+```ts title="server.ts"
+import { Elysia, type Context } from "elysia";
+import { invoicer } from "./invoicer"; // path to your invoicer file
+
+const nodeZugferdView = (ctx: Context) => {
+const NODE_ZUGFERD_ACCEPT_METHODS = ["GET", "POST"];
+// validate request method
+if (NODE_ZUGFERD_ACCEPT_METHODS.includes(ctx.request.method)) {
+return invoicer.apiHandler(ctx.request);
+} else {
+ctx.error(405);
+}
+}
+
+const app = new Elysia().all("/api/zugferd/\*", nodeZugferdView).listen(3000);
+
+console.log(
+`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
+);
+
+````
+</Tab>
+
+<Tab value="tanstack-start">
+```ts title="/routes/api/zugferd/$.ts"
+import { invoicer } from "~/lib/server/invoicer"; // path to your invoicer file
+import { createAPIFileRoute } from "@tanstack/react-start/api";
+
+export const APIRoute = createAPIFileRoute("/api/zugferd/$")({
+    GET: ({ request }) => {
+        return invoicer.apiHandler(request);
+    },
+    POST: ({ request }) => {
+        return invoicer.apiHandler(request);
+    },
+});
+````
+
+</Tab>
+
+</Tabs>
+
+</Step>
+
+<Step>
+### Create Client Instance
+
+The client-side library helps you interact with the zugferd api server.
+
+```ts title="lib/zugferd-client.ts"
+import { createClient } from "@node-zugferd/api/client";
+import type { BASIC } from "node-zugferd/profile/basic"; // Import as type
+
+export const zugferdClient = createClient<typeof BASIC>({
+  /** the base url of the server (optional if you're using the same domain) */ // [!code highlight]
+  baseURL: "http://localhost:3000", // [!code highlight]
+});
+```
+
+</Step>
+
+<Step>
+
+### &#x1F389; That's it! [#thats-it]
+
+That's it! You're now ready to use `@node-zugferd/api` in your application.
+
+Continue to [basic usage](#basic-usage) to learn how to use the API Plugin to generate invoices.
+
+</Step>
+</Steps>
+
+## Basic Usage
+
+The API Plugin provides endpoints for:
+
+- Previewing an invoice as html
+- Generating PDF/A-3b compliant invoices
+
+### Creating an invoice
+
+To create an invoice we first need to define the data.
+The following example uses the [BASIC](/docs/profiles/basic) profile as example.
+
+```ts
+import type { ProfileBasic } from "node-zugferd/profile/basic";
+
+const data: ProfileBasic = {
+  // ...
+};
+```
+
+Then we need to call the endpoint with the data as body.
+This can be done client or server-side.
+
+#### Server Side
+
+```ts
+import { invoicer } from "./invoicer"; // path to your invoicer file
+
+const result: Blob = await invoicer.api.create({
+  body: {
+    data, // pass the data defined previously
+  },
+});
+```
+
+#### Client Side
+
+```ts
+import { zugferdClient } from "./lib/zugferd-client"; // path to your zugferd client
+
+const { data, error } = await zugferdClient("@post/create", {
+  body: {
+    data, // pass the data defined previously
+  },
+});
+```
+
+You can also use it with client-side data-fetching libraries like [TanStack Query](https://tanstack.com/query/latest).
+
+### Previewing an invoice
+
+To preview an invoice we first need to define the data.
+The following example uses the [BASIC](/docs/profiles/basic) profile as example.
+
+```ts
+import type { ProfileBasic } from "node-zugferd/profile/basic";
+
+const data: ProfileBasic = {
+  // ...
+};
+```
+
+The preview endpoint always requires authentication so we need to create an access token next.
+The token will have a lifespan of 1 minute.
+
+```ts
+import { invoicer } from "./invoicer"; // path to your invoicer
+import { signToken } from "@node-zugferd/api/utils";
+
+const token = signToken(await invoicer.apiContext);
+```
+
+Now we can finally call the endpoint. Make sure to pass the token to the headers.
+
+```ts
+// Returns the generated html
+const result: string = await invoicer.api.preview({
+  body: {
+    data, // pass the data defined previously
+  },
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
+```
+
+## Options
+
+### `secret`
+
+The secret key used for signing.
+
+```ts
+api<typeof BASIC>()({
+  secret: process.env.ZUGFERD_API_SECRET!,
+});
+```
+
+### `baseURL?`
+
+Base URL for the node-zugferd api. This is typically the root URL where your application is hosted.
+
+```ts
+api<typeof BASIC>()({
+  baseURL: "https://example.com",
+});
+```
+
+### `basePath?`
+
+Base path for the node-zugferd api. This is typically the path where the node-zugferd api routes are mounted
+
+```ts
+api<typeof BASIC>()({
+  basePath: "/api/zugferd",
+});
+```
+
+Default: `/api/zugferd`
+
+### `template`
+
+The template used to generate the invoice.
+
+```ts
+import { Template } from "./template";
+
+api<typeof BASIC>()({
+  template: Template,
+});
+```
+
+### `trustedOrigins?`
+
+List of trusted origins.
+
+```ts
+api<typeof BASIC>()({
+  trustedOrigins: ["https://example.com", "*.trusted.com"],
+});
+```
+
+The [baseURL](#baseurl) is always included.
+
+### `advanced?`
+
+Advanced configuration options.
+
+```ts
+api<typeof BASIC>()({
+  disableCSRFCheck: false,
+  puppeteer: {
+    lauch: {
+      headless: true,
+      args: ["--no-sandbox"]
+    }
+  }
+})
+```
+
+- `disableCSRFCheck?`: Disable trusted origins check (&#9888; security risk)
+- `puppeteer.launch?`: Launch options for puppeteer, See [`LaunchOptions`](https://pptr.dev/api/puppeteer.launchoptions)
+
+### `authorize?`
+
+Restrict access to public endpoints (e.g `/create`).
+
+```ts
+api<typeof BASIC>()({
+  authorize: async (ctx) => {
+    const user = await getUser(ctx.request);
+
+    if (user.role === "admin") {
+      return true;
+    }
+
+    return false;
+  }
+})
+```

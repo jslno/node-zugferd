@@ -1,26 +1,15 @@
+import { Content } from "@/types/content";
 import {
+	BlocksIcon,
 	BookOpenIcon,
 	ChartColumn,
 	CirclePlayIcon,
 	LayoutGridIcon,
 	LibraryIcon,
-	LucideIcon,
 	PencilRulerIcon,
 	ScrollIcon,
 } from "lucide-react";
-import { ReactNode, SVGProps } from "react";
-
-type Content = {
-	title: string;
-	href?: string;
-	Icon?: ((props: SVGProps<any>) => ReactNode) | LucideIcon;
-	list: {
-		title: string;
-		href: string;
-		Icon?: ((props: SVGProps<any>) => ReactNode) | LucideIcon;
-		group?: boolean;
-	}[];
-};
+import { SVGProps } from "react";
 
 export const contents: Content[] = [
 	{
@@ -178,6 +167,36 @@ export const contents: Content[] = [
 			{
 				title: "UN/ECE Recommendation N°21",
 				href: "/docs/codelists/rec21",
+			},
+		],
+	},
+	{
+		title: "Plugins",
+		Icon: BlocksIcon,
+		list: [
+			{
+				title: "API",
+				href: "/docs/plugins/api",
+				Icon: () => (
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="1.2rem"
+						height="1.2rem"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						strokeWidth="2"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						className=""
+					>
+						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						<path d="M12 15h-6.5a2.5 2.5 0 1 1 0 -5h.5" />
+						<path d="M15 12v6.5a2.5 2.5 0 1 1 -5 0v-.5" />
+						<path d="M12 9h6.5a2.5 2.5 0 1 1 0 5h-.5" />
+						<path d="M9 12v-6.5a2.5 2.5 0 0 1 5 0v.5" />
+					</svg>
+				),
 			},
 		],
 	},

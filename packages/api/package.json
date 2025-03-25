@@ -1,0 +1,187 @@
+{
+	"name": "@node-zugferd/api",
+	"version": "0.0.5",
+	"type": "module",
+	"scripts": {
+		"build": "tsup --clean --dts",
+		"dev": "tsup --watch --sourcemap",
+		"dev:dts": "tsup --watch --dts",
+		"test": "puppeteer browsers install chrome && vitest",
+		"typecheck": "tsc --noEmit"
+	},
+	"author": "Joél de Oliveira Solano da Silva",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jslno/node-zugferd.git",
+		"directory": "packages/api"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/express": "^5.0.1",
+		"@types/jsonwebtoken": "^9.0.9",
+		"@types/node": "^22.10.7",
+		"@types/react": "^19.0.9",
+		"@types/react-dom": "^19.0.3",
+		"@vitejs/plugin-react": "^4.3.4",
+		"express": "^4.21.2",
+		"pdf-lib": "^1.17.1",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"solid-js": "^1.9.5",
+		"svelte": "^5.25.2",
+		"tsup": "^8.3.5",
+		"typescript": "^5.7.3",
+		"vitest": "^3.0.4",
+		"vue": "^3.5.13"
+	},
+	"dependencies": {
+		"@better-fetch/fetch": "^1.1.17",
+		"better-call": "^1.0.5",
+		"jsonwebtoken": "^9.0.2",
+		"node-zugferd": "workspace:*",
+		"puppeteer": "^24.4.0",
+		"zod": "^3.24.1"
+	},
+	"peerDependencies": {
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"solid-js": "^1.9.5",
+		"svelte": "^5.25.2",
+		"vue": "^3.5.13"
+	},
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			},
+			"require": {
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
+			}
+		},
+		"./client": {
+			"import": {
+				"types": "./dist/client.d.ts",
+				"default": "./dist/client.js"
+			},
+			"require": {
+				"types": "./dist/client.d.cts",
+				"default": "./dist/client.cjs"
+			}
+		},
+		"./node": {
+			"import": {
+				"types": "./dist/node.d.ts",
+				"default": "./dist/node.js"
+			},
+			"require": {
+				"types": "./dist/node.d.cts",
+				"default": "./dist/node.cjs"
+			}
+		},
+		"./next-js": {
+			"import": {
+				"types": "./dist/next-js.d.ts",
+				"default": "./dist/next-js.js"
+			},
+			"require": {
+				"types": "./dist/next-js.d.cts",
+				"default": "./dist/next-js.cjs"
+			}
+		},
+		"./react/renderer": {
+			"import": {
+				"types": "./dist/react/renderer.d.ts",
+				"default": "./dist/react/renderer.js"
+			},
+			"require": {
+				"types": "./dist/react/renderer.d.cts",
+				"default": "./dist/react/renderer.cjs"
+			}
+		},
+		"./vue/renderer": {
+			"import": {
+				"types": "./dist/vue/renderer.d.ts",
+				"default": "./dist/vue/renderer.js"
+			},
+			"require": {
+				"types": "./dist/vue/renderer.d.cts",
+				"default": "./dist/vue/renderer.cjs"
+			}
+		},
+		"./solid-start": {
+			"import": {
+				"types": "./dist/solid-start.d.ts",
+				"default": "./dist/solid-start.js"
+			},
+			"require": {
+				"types": "./dist/solid-start.d.cts",
+				"default": "./dist/solid-start.cjs"
+			}
+		},
+		"./solid-start/renderer": {
+			"import": {
+				"types": "./dist/solid-start/renderer.d.ts",
+				"default": "./dist/solid-start/renderer.js"
+			},
+			"require": {
+				"types": "./dist/solid-start/renderer.d.cts",
+				"default": "./dist/solid-start/renderer.cjs"
+			}
+		},
+		"./svelte-kit": {
+			"import": {
+				"types": "./dist/svelte-kit.d.ts",
+				"default": "./dist/svelte-kit.js"
+			},
+			"require": {
+				"types": "./dist/svelte-kit.d.cts",
+				"default": "./dist/svelte-kit.cjs"
+			}
+		},
+		"./svelte-kit/renderer": {
+			"import": {
+				"types": "./dist/svelte-kit/renderer.d.ts",
+				"default": "./dist/svelte-kit/renderer.js"
+			},
+			"require": {
+				"types": "./dist/svelte-kit/renderer.d.cts",
+				"default": "./dist/svelte-kit/renderer.cjs"
+			}
+		},
+		"./vanilla/renderer": {
+			"import": {
+				"types": "./dist/vanilla/renderer.d.ts",
+				"default": "./dist/vanilla/renderer.js"
+			},
+			"require": {
+				"types": "./dist/vanilla/renderer.d.cts",
+				"default": "./dist/vanilla/renderer.cjs"
+			}
+		},
+		"./api": {
+			"import": {
+				"types": "./dist/api.d.ts",
+				"default": "./dist/api.js"
+			},
+			"require": {
+				"types": "./dist/api.d.cts",
+				"default": "./dist/api.cjs"
+			}
+		},
+		"./utils": {
+			"import": {
+				"types": "./dist/utils.d.ts",
+				"default": "./dist/utils.js"
+			},
+			"require": {
+				"types": "./dist/utils.d.cts",
+				"default": "./dist/utils.cjs"
+			}
+		}
+	}
+}

@@ -8,7 +8,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "./ui/select";
-import { useSearchContext } from "fumadocs-ui/provider";
 import { Badge } from "./ui/badge";
 import { usePathname, useRouter } from "next/navigation";
 import { contents } from "@/data/sidebar-items";
@@ -18,7 +17,6 @@ import { SideBarLink } from "./side-bar-link";
 import { cn } from "@/lib/utils";
 
 export const SideBar = () => {
-	const { setOpenSearch } = useSearchContext();
 	const [currentOpen, setCurrentOpen] = useState(0);
 	const router = useRouter();
 	const pathname = usePathname();
@@ -33,7 +31,11 @@ export const SideBar = () => {
 	};
 
 	useEffect(() => {
-		const grp = pathname.includes("examples") ? "examples" : "docs";
+		const grp = pathname.includes("examples")
+			? "examples"
+			: pathname.includes("plugins/api/")
+				? "api"
+				: "docs";
 
 		setGroup(grp);
 		setCurrentOpen(getDefaultValue());
@@ -47,7 +49,17 @@ export const SideBar = () => {
 			<aside className="border-r md:flex hidden w-(--fd-sidebar-width) overflow-y-auto absolute top-[58px] h-[92dvh] flex-col justify-between">
 				<div>
 					<div className="py-2 bg-muted/20">
-						<Select defaultValue="docs">
+						<Select
+							value={group}
+							onValueChange={(val) => {
+								setGroup(val);
+								if (val === "examples") {
+									router.push("/docs/examples");
+								} else {
+									router.push("/docs");
+								}
+							}}
+						>
 							<SelectTrigger className="h-14 bg-background cursor-pointer border-0 border-y !ring-0">
 								<SelectValue className="py-16" />
 							</SelectTrigger>
@@ -146,7 +158,9 @@ export const SideBar = () => {
 																	className="break-words w-[--fd-sidebar-width]"
 																>
 																	{!!listItem.Icon && (
-																		<listItem.Icon className="size-4" />
+																		<div className="w-4 flex items-center justify-center">
+																			<listItem.Icon className="size-4" />
+																		</div>
 																	)}
 																	{listItem.title}
 																</SideBarLink>
