@@ -5,9 +5,11 @@ import type { JSX as SolidJSX } from "solid-js";
 import { renderToString } from "solid-js/web";
 
 export const renderer = {
-	render: (ctx) => renderToString(() => <ctx.options.template {...ctx.data} />),
+	render: (ctx) =>
+		"<!DOCTYPE html>" +
+		renderToString(() => <ctx.options.template data={ctx.data} />),
 	$Infer: {
-		Template: {} as (data: any) => SolidJSX.Element,
+		Template: {} as (props: { data: any }) => SolidJSX.Element,
 	},
 } satisfies Renderer;
 

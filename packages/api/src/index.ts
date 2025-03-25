@@ -9,7 +9,7 @@ import { ZugferdError } from "node-zugferd";
 export const api =
 	<P extends Profile>(profile?: P) =>
 	<R extends Renderer, O extends ZugferdApiOptions<R>>(
-		renderer: R,
+		renderer: Renderer,
 		options: O,
 	) => {
 		return ((ctx) => {

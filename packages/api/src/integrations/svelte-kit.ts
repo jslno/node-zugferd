@@ -2,23 +2,24 @@
  * @see https://github.com/better-auth/better-auth/blob/main/packages/better-auth/src/integrations/svelte-kit.ts
  */
 
+import type { ZugferdApiContext } from "../init";
 import type { ZugferdApiOptions } from "../types/options";
 
-export const toSvelteKitHandler = (api: {
-	handler: (request: Request) => any;
-	options: ZugferdApiOptions;
+export const toSvelteKitHandler = (invoicer: {
+	apiHandler: (request: Request) => any;
+	apiContext: ZugferdApiContext;
 }) => {
-	return (event: { request: Request }) => api.handler(event.request);
+	return (event: { request: Request }) => invoicer.apiHandler(event.request);
 };
 
 export const svelteKitHandler = async ({
-	api,
+	invoicer,
 	event,
 	resolve,
 }: {
-	api: {
-		handler: (request: Request) => any;
-		options: ZugferdApiOptions;
+	invoicer: {
+		apiHandler: (request: Request) => any;
+		apiContext: ZugferdApiContext;
 	};
 	event: { request: Request; url: URL };
 	resolve: (event: any) => any;
@@ -31,8 +32,8 @@ export const svelteKitHandler = async ({
 		return resolve(event);
 	}
 	const { request, url } = event;
-	if (isApiPath(url.toString(), api.options)) {
-		return api.handler(request);
+	if (isApiPath(url.toString(), invoicer.apiContext.options)) {
+		return invoicer.apiHandler(request);
 	}
 	return resolve(event);
 };

@@ -3,9 +3,11 @@ import { renderToString } from "react-dom/server";
 import type { Renderer } from "../types/renderer";
 
 export const renderer = {
-	render: (ctx) => renderToString(<ctx.options.template {...ctx.data} />),
+	render: (ctx) =>
+		"<!DOCTYPE html>" +
+		renderToString(<ctx.options.template data={ctx.data} />),
 	$Infer: {
-		Template: {} as (data: any) => JSX.Element,
+		Template: {} as (props: { data: any }) => JSX.Element,
 	},
 } satisfies Renderer;
 

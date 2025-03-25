@@ -153,6 +153,16 @@
 				"default": "./dist/svelte-kit/renderer.cjs"
 			}
 		},
+		"./vanilla/renderer": {
+			"import": {
+				"types": "./dist/vanilla/renderer.d.ts",
+				"default": "./dist/vanilla/renderer.js"
+			},
+			"require": {
+				"types": "./dist/vanilla/renderer.d.cts",
+				"default": "./dist/vanilla/renderer.cjs"
+			}
+		},
 		"./api": {
 			"import": {
 				"types": "./dist/api.d.ts",

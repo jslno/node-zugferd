@@ -1,18 +1,24 @@
-import { createSSRApp, defineComponent, h, type PropType } from "vue";
+import {
+	createSSRApp,
+	defineComponent,
+	h,
+	type DefineComponent,
+	type PropType,
+} from "vue";
 import { renderToString } from "vue/server-renderer";
 import type { Renderer } from "../types/renderer";
 
 export const renderer = {
 	render: (ctx) => {
 		const app = createSSRApp({
-			data: ctx.data,
+			data: () => ({ data: ctx.data }),
 			template: ctx.options.template,
 		});
 
 		return renderToString(app);
 	},
 	$Infer: {
-		Template: {} as string,
+		Template: {} as string | DefineComponent,
 	},
 } satisfies Renderer;
 
@@ -45,9 +51,9 @@ export const Document = defineComponent({
 	},
 	setup: (props: DocumentProps) => {
 		return () => {
-			return h("html", props.html, [
+			return "<!DOCTYPE html>" + h("html", props.html, [
 				h("head", null, [
-					h("meta", { charSet: "UTF-8" }),
+					h("meta", { charset: "UTF-8" }),
 					h("meta", {
 						name: "viewport",
 						content: "width=device-width, initial-scale=1",
