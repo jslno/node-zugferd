@@ -15,7 +15,6 @@ export const createRandomString = (
 	len: number,
 	charSet: string = alphabet + alphabet.toUpperCase() + "-_",
 ) => {
-	console.log(charSet)
 	if (len <= 0) {
 		throw new Error("Length must be a positive integer");
 	}
