@@ -1,13 +1,14 @@
 ---
-title: Installation
-description: Learn how to configure the API plugin in your project.
+title: API
 ---
+
+## Installation
 
 <Steps>
 
 <Step>
 
-## Install the package
+### Install the package
 
 Let's start by adding the API Plugin to your project.
 
@@ -24,7 +25,7 @@ Let's start by adding the API Plugin to your project.
 
 <Step>
 
-## Setup the plugin
+### Setup the plugin
 
 To use the API plugin, add it to your zugferd config.
 
@@ -50,7 +51,7 @@ This will throw an type error, as you still need to set the options and template
 
 <Step>
 
-### Choose a renderer
+#### Choose a renderer
 
 Select a renderer to generate the pdf from the template. The plugin comes with a renderer for all the popular web frameworks, including vanilla html.
 
@@ -107,7 +108,7 @@ api<typeof BASIC>()(renderer);
 
 <Step>
 
-### Define a secret
+#### Define a secret
 
 The API Plugin exposes an endpoint to preview the pdf in html.
 To make that endpoint secure it requires an access token.
@@ -134,7 +135,7 @@ api<typeof BASIC>()(renderer, {
 
 <Step>
 
-### Create a template
+#### Create a template
 
 Now you have to create a template for the generated pdf/a files.
 
@@ -294,7 +295,7 @@ api<typeof BASIC>()(renderer, {
 </Step>
 
 <Step>
-## Mount Handler
+### Mount Handler
 
 To handle api requests, you need to set up a route handler on your server.
 
@@ -370,10 +371,11 @@ import { cors } from "hono/cors";
 
 const app = new Hono();
 
-app.on(["GET", "POST"], "/api/zugferd/**", (c) => invoicer.apiHandler(c.req.raw));
+app.on(["GET", "POST"], "/api/zugferd/\*\*", (c) => invoicer.apiHandler(c.req.raw));
 
 serve(app);
-```
+
+````
 </Tab>
 
 <Tab value="express">
@@ -395,9 +397,10 @@ app.use(express.json());
 app.listen(port, () => {
     console.log(`node-zugferd app listening on port ${port}`);
 });
-```
+````
 
 This also works for any other node server framework like express, fastify, hapi, etc.
+
 </Tab>
 
 <Tab value="elysia">
@@ -406,21 +409,22 @@ import { Elysia, type Context } from "elysia";
 import { invoicer } from "./invoicer"; // path to your invoicer file
 
 const nodeZugferdView = (ctx: Context) => {
-    const NODE_ZUGFERD_ACCEPT_METHODS = ["GET", "POST"];
-    // validate request method
-    if (NODE_ZUGFERD_ACCEPT_METHODS.includes(ctx.request.method)) {
-        return invoicer.apiHandler(ctx.request);
-    } else {
-        ctx.error(405);
-    }
+const NODE_ZUGFERD_ACCEPT_METHODS = ["GET", "POST"];
+// validate request method
+if (NODE_ZUGFERD_ACCEPT_METHODS.includes(ctx.request.method)) {
+return invoicer.apiHandler(ctx.request);
+} else {
+ctx.error(405);
+}
 }
 
-const app = new Elysia().all("/api/zugferd/*", nodeZugferdView).listen(3000);
+const app = new Elysia().all("/api/zugferd/\*", nodeZugferdView).listen(3000);
 
 console.log(
-    `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
+`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
 );
-```
+
+````
 </Tab>
 
 <Tab value="tanstack-start">
@@ -436,7 +440,8 @@ export const APIRoute = createAPIFileRoute("/api/zugferd/$")({
         return invoicer.apiHandler(request);
     },
 });
-```
+````
+
 </Tab>
 
 </Tabs>
@@ -444,7 +449,7 @@ export const APIRoute = createAPIFileRoute("/api/zugferd/$")({
 </Step>
 
 <Step>
-## Create Client Instance
+### Create Client Instance
 
 The client-side library helps you interact with the zugferd api server.
 
@@ -453,19 +458,201 @@ import { createClient } from "@node-zugferd/api/client";
 import type { BASIC } from "node-zugferd/profile/basic"; // Import as type
 
 export const zugferdClient = createClient<typeof BASIC>({
-    /** the base url of the server (optional if you're using the same domain) */ // [!code highlight]
-    baseURL: "http://localhost:3000", // [!code highlight]
+  /** the base url of the server (optional if you're using the same domain) */ // [!code highlight]
+  baseURL: "http://localhost:3000", // [!code highlight]
 });
 ```
+
 </Step>
 
 <Step>
 
-## &#x1F389; That's it! [#thats-it]
+### &#x1F389; That's it! [#thats-it]
 
 That's it! You're now ready to use `@node-zugferd/api` in your application.
 
-Continue to [basic usage](/docs/plugins/api/basic-usage) to learn how to use the API Plugin to generate invoices.
+Continue to [basic usage](#basic-usage) to learn how to use the API Plugin to generate invoices.
 
 </Step>
 </Steps>
+
+## Basic Usage
+
+The API Plugin provides endpoints for:
+
+- Previewing an invoice as html
+- Generating PDF/A-3b compliant invoices
+
+### Creating an invoice
+
+To create an invoice we first need to define the data.
+The following example uses the [BASIC](/docs/profiles/basic) profile as example.
+
+```ts
+import type { ProfileBasic } from "node-zugferd/profile/basic";
+
+const data: ProfileBasic = {
+  // ...
+};
+```
+
+Then we need to call the endpoint with the data as body.
+This can be done client or server-side.
+
+#### Server Side
+
+```ts
+import { invoicer } from "./invoicer"; // path to your invoicer file
+
+const result: Blob = await invoicer.api.create({
+  body: {
+    data, // pass the data defined previously
+  },
+});
+```
+
+#### Client Side
+
+```ts
+import { zugferdClient } from "./lib/zugferd-client"; // path to your zugferd client
+
+const { data, error } = await zugferdClient("@post/create", {
+  body: {
+    data, // pass the data defined previously
+  },
+});
+```
+
+You can also use it with client-side data-fetching libraries like [TanStack Query](https://tanstack.com/query/latest).
+
+### Previewing an invoice
+
+To preview an invoice we first need to define the data.
+The following example uses the [BASIC](/docs/profiles/basic) profile as example.
+
+```ts
+import type { ProfileBasic } from "node-zugferd/profile/basic";
+
+const data: ProfileBasic = {
+  // ...
+};
+```
+
+The preview endpoint always requires authentication so we need to create an access token next.
+The token will have a lifespan of 1 minute.
+
+```ts
+import { invoicer } from "./invoicer"; // path to your invoicer
+import { signToken } from "@node-zugferd/api/utils";
+
+const token = signToken(await invoicer.apiContext);
+```
+
+Now we can finally call the endpoint. Make sure to pass the token to the headers.
+
+```ts
+// Returns the generated html
+const result: string = await invoicer.api.preview({
+  body: {
+    data, // pass the data defined previously
+  },
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
+```
+
+## Options
+
+### `secret`
+
+The secret key used for signing.
+
+```ts
+api<typeof BASIC>()({
+  secret: process.env.ZUGFERD_API_SECRET!,
+});
+```
+
+### `baseURL?`
+
+Base URL for the node-zugferd api. This is typically the root URL where your application is hosted.
+
+```ts
+api<typeof BASIC>()({
+  baseURL: "https://example.com",
+});
+```
+
+### `basePath?`
+
+Base path for the node-zugferd api. This is typically the path where the node-zugferd api routes are mounted
+
+```ts
+api<typeof BASIC>()({
+  basePath: "/api/zugferd",
+});
+```
+
+Default: `/api/zugferd`
+
+### `template`
+
+The template used to generate the invoice.
+
+```ts
+import { Template } from "./template";
+
+api<typeof BASIC>()({
+  template: Template,
+});
+```
+
+### `trustedOrigins?`
+
+List of trusted origins.
+
+```ts
+api<typeof BASIC>()({
+  trustedOrigins: ["https://example.com", "*.trusted.com"],
+});
+```
+
+The [baseURL](#baseurl) is always included.
+
+### `advanced?`
+
+Advanced configuration options.
+
+```ts
+api<typeof BASIC>()({
+  disableCSRFCheck: false,
+  puppeteer: {
+    lauch: {
+      headless: true,
+      args: ["--no-sandbox"]
+    }
+  }
+})
+```
+
+- `disableCSRFCheck?`: Disable trusted origins check (&#9888; security risk)
+- `puppeteer.launch?`: Launch options for puppeteer, See [`LaunchOptions`](https://pptr.dev/api/puppeteer.launchoptions)
+
+### `authorize?`
+
+Restrict access to public endpoints (e.g `/create`).
+
+```ts
+api<typeof BASIC>()({
+  authorize: async (ctx) => {
+    const user = await getUser(ctx.request);
+
+    if (user.role === "admin") {
+      return true;
+    }
+
+    return false;
+  }
+})
+```

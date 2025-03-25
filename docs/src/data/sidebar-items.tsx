@@ -176,7 +176,7 @@ export const contents: Content[] = [
 		list: [
 			{
 				title: "API",
-				href: "/docs/plugins/api-plugin",
+				href: "/docs/plugins/api",
 				Icon: () => (
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

@@ -15,7 +15,6 @@ import { Suspense, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { SideBarLink } from "./side-bar-link";
 import { cn } from "@/lib/utils";
-import { api } from "@/data/api-sidebar-items";
 
 export const SideBar = () => {
 	const [currentOpen, setCurrentOpen] = useState(0);
@@ -43,7 +42,7 @@ export const SideBar = () => {
 	}, [pathname]);
 
 	// TODO: Add contents for examples
-	const cts = group === "docs" ? contents : group === "api" ? api : [];
+	const cts = group === "docs" ? contents : [];
 
 	return (
 		<div className="fixed top-0">
@@ -56,8 +55,6 @@ export const SideBar = () => {
 								setGroup(val);
 								if (val === "examples") {
 									router.push("/docs/examples");
-								} else if (val === "api") {
-									router.push("/docs/plugins/api/installation");
 								} else {
 									router.push("/docs");
 								}
@@ -78,34 +75,6 @@ export const SideBar = () => {
 										</div>
 										<p className="text-xs text-muted-foreground">
 											get started, profiles and more
-										</p>
-									</div>
-								</SelectItem>
-								<SelectItem value="api" className="h-14">
-									<div>
-										<div className="flex items-center gap-1">
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="1rem"
-												height="1rem"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												strokeWidth="2"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												className=""
-											>
-												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-												<path d="M12 15h-6.5a2.5 2.5 0 1 1 0 -5h.5" />
-												<path d="M15 12v6.5a2.5 2.5 0 1 1 -5 0v-.5" />
-												<path d="M12 9h6.5a2.5 2.5 0 1 1 0 5h-.5" />
-												<path d="M9 12v-6.5a2.5 2.5 0 0 1 5 0v.5" />
-											</svg>
-											API Plugin
-										</div>
-										<p className="text-xs text-muted-foreground">
-											framework agnostic invoice/pdf generation
 										</p>
 									</div>
 								</SelectItem>
