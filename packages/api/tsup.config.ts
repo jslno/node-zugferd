@@ -15,6 +15,7 @@ export default defineConfig((env) => {
 			"svelte-kit/renderer": "./src/renderer/svelte.ts",
 			"vanilla/renderer": "./src/renderer/vanilla.ts",
 			api: "./src/api/index.ts",
+			utils: "./src/utils/index.ts",
 		},
 		format: ["cjs", "esm"],
 		bundle: true,

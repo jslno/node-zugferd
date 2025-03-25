@@ -172,6 +172,16 @@
 				"types": "./dist/api.d.cts",
 				"default": "./dist/api.cjs"
 			}
+		},
+		"./utils": {
+			"import": {
+				"types": "./dist/utils.d.ts",
+				"default": "./dist/utils.js"
+			},
+			"require": {
+				"types": "./dist/utils.d.cts",
+				"default": "./dist/utils.cjs"
+			}
 		}
 	}
 }
