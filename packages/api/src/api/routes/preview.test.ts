@@ -23,7 +23,7 @@ describe("preview", async () => {
 		});
 
 		expect(res.data).toEqual(
-			"<!DOCTYPE html>" + renderToString(ctx.options.template(data)),
+			"<!DOCTYPE html>" + renderToString(ctx.options.template({ data })),
 		);
 	});
 
