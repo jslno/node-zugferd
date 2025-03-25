@@ -1,12 +1,10 @@
 import { Content } from "@/types/content";
 import {
-	BookOpenTextIcon,
+	ChartColumn,
 	CirclePlayIcon,
 	DownloadIcon,
-	GripIcon,
 	LayoutGridIcon,
 	LibraryIcon,
-	ServerIcon,
 } from "lucide-react";
 import { SVGProps } from "react";
 
@@ -20,21 +18,10 @@ export const api: Content[] = [
 				href: "/docs/plugins/api/installation",
 				Icon: DownloadIcon,
 			},
-		],
-	},
-	{
-		title: "Concepts",
-		Icon: BookOpenTextIcon,
-		list: [
 			{
-				title: "API",
-				href: "/docs/plugins/api/concepts/api",
-				Icon: ServerIcon,
-			},
-			{
-				title: "Client",
-				href: "/docs/plugins/api/concepts/api",
-				Icon: GripIcon,
+				title: "Basic Usage",
+				href: "/docs/plugins/api/basic-usage",
+				Icon: ChartColumn,
 			},
 		],
 	},
