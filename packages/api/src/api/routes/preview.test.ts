@@ -22,7 +22,9 @@ describe("preview", async () => {
 			},
 		});
 
-		expect(res.data).toEqual("<!DOCTYPE html>" + renderToString(ctx.options.template(data)));
+		expect(res.data).toEqual(
+			"<!DOCTYPE html>" + renderToString(ctx.options.template(data)),
+		);
 	});
 
 	it("should not generate preview without authorization", async () => {
