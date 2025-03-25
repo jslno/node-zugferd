@@ -51,17 +51,20 @@ export const Document = defineComponent({
 	},
 	setup: (props: DocumentProps) => {
 		return () => {
-			return "<!DOCTYPE html>" + h("html", props.html, [
-				h("head", null, [
-					h("meta", { charset: "UTF-8" }),
-					h("meta", {
-						name: "viewport",
-						content: "width=device-width, initial-scale=1",
-					}),
-					props.head,
-				]),
-				h("body", props.body, props.children),
-			]);
+			return (
+				"<!DOCTYPE html>" +
+				h("html", props.html, [
+					h("head", null, [
+						h("meta", { charset: "UTF-8" }),
+						h("meta", {
+							name: "viewport",
+							content: "width=device-width, initial-scale=1",
+						}),
+						props.head,
+					]),
+					h("body", props.body, props.children),
+				])
+			);
 		};
 	},
 });
