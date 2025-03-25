@@ -29,7 +29,7 @@ This can be done client or server-side.
 ```ts
 import { invoicer } from "./invoicer"; // path to your invoicer file
 
-await invoicer.api.create({
+const result: Blob = await invoicer.api.create({
     body: {
         data, // pass the data defined previously
     },
@@ -41,7 +41,7 @@ await invoicer.api.create({
 ```ts
 import { zugferdClient } from "./lib/zugferd-client"; // path to your zugferd client
 
-await zugferdClient("@post/create", {
+const { data, error } = await zugferdClient("@post/create", {
     body: {
         data, // pass the data defined previously
     },
@@ -76,7 +76,8 @@ const token = signToken(await invoicer.apiContext);
 Now we can finally call the endpoint. Make sure to pass the token to the headers.
 
 ```ts
-await invoicer.api.preview({
+// Returns the generated html
+const result: string = await invoicer.api.preview({
     body: {
         data, // pass the data defined previously
     },
