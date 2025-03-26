@@ -15,10 +15,7 @@ import { create } from "./routes/create";
 import { originCheckMiddleware } from "./middlewares";
 import type { ApiEndpoint } from "./call";
 
-export const getEndpoints = <
-	P extends Profile,
-	C extends ZugferdApiContext,
->(
+export const getEndpoints = <P extends Profile, C extends ZugferdApiContext>(
 	profile: P,
 	ctx: Promise<C> | C,
 ) => {
@@ -108,9 +105,7 @@ export type Router<P extends Profile = Profile> = ReturnType<
 
 export const router =
 	<P extends Profile>(profile: P) =>
-	<C extends ZugferdApiContext, O extends ZugferdApiOptions>(
-		ctx: C
-	) => {
+	<C extends ZugferdApiContext, O extends ZugferdApiOptions>(ctx: C) => {
 		const endpoints = getEndpoints(profile, ctx);
 
 		return createRouter(endpoints, {
