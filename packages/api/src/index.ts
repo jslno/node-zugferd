@@ -16,7 +16,7 @@ export const api =
 			profile = ctx.options.profile as any as P;
 			const context = init(renderer, options, ctx);
 
-			const api = getEndpoints(profile, context, options);
+			const api = getEndpoints(profile, context);
 
 			return {
 				apiHandler: async (request: Request) => {
@@ -42,7 +42,7 @@ export const api =
 							: []),
 						ctx.options.baseURL!,
 					];
-					const { handler } = router(ctx.context.options.profile)(ctx, options);
+					const { handler } = router(ctx.context.options.profile)(ctx);
 					return handler(request);
 				},
 				apiContext: context,

@@ -1,4 +1,11 @@
-import { createRouter } from "better-call";
+import {
+	createRouter,
+	type InputContext,
+	type EndpointContext,
+	type EndpointOptions,
+	APIError,
+	toResponse,
+} from "better-call";
 import type { ZugferdApiContext } from "../init";
 import type { ZugferdApiOptions } from "../types/options";
 import { ok } from "./routes/ok";
@@ -6,15 +13,14 @@ import { preview } from "./routes/preview";
 import type { Profile } from "node-zugferd/types";
 import { create } from "./routes/create";
 import { originCheckMiddleware } from "./middlewares";
+import type { ApiEndpoint } from "./call";
 
 export const getEndpoints = <
 	P extends Profile,
 	C extends ZugferdApiContext,
-	O extends ZugferdApiOptions,
 >(
 	profile: P,
 	ctx: Promise<C> | C,
-	options: O,
 ) => {
 	const baseEndpoints = {
 		preview: preview<P>(),
@@ -26,7 +32,74 @@ export const getEndpoints = <
 		ok,
 	};
 
-	return endpoints;
+	return toApiEndpoints(endpoints, ctx) as typeof endpoints;
+};
+
+type InternalContext = InputContext<string, any> &
+	EndpointContext<string, any> & {
+		context: ZugferdApiContext & {
+			returned?: unknown;
+			responseHeaders?: Headers;
+		};
+	};
+
+export const toApiEndpoints = <E extends Record<string, ApiEndpoint>>(
+	endpoints: E,
+	ctx: ZugferdApiContext | Promise<ZugferdApiContext>,
+) => {
+	const api: Record<
+		string,
+		((
+			context: EndpointContext<string, any> & InputContext<string, any>,
+		) => Promise<any>) & {
+			path?: string;
+			options?: EndpointOptions;
+		}
+	> = {};
+
+	for (const [key, endpoint] of Object.entries(endpoints)) {
+		api[key] = async (context) => {
+			const apiContext = await ctx;
+			const internalContext: InternalContext = {
+				...context,
+				context: {
+					...apiContext,
+					returned: undefined,
+					responseHeaders: undefined,
+				},
+				path: endpoint.path,
+				headers: context?.headers ? new Headers(context.headers) : undefined,
+			};
+
+			internalContext.asResponse = false;
+			internalContext.returnHeaders = true;
+			const result = (await endpoint(internalContext as any)) as any as {
+				headers: Headers;
+				response: any;
+			};
+			internalContext.context.returned = result.response;
+			internalContext.context.responseHeaders = result.headers;
+
+			if (result.response instanceof APIError && !context?.asResponse) {
+				throw result.response;
+			}
+
+			return context?.asResponse
+				? toResponse(result.response, {
+						headers: result.headers,
+					})
+				: context.returnHeaders
+					? {
+							headers: result.headers,
+							response: result.response,
+						}
+					: result.response;
+		};
+		api[key].path = endpoint.path;
+		api[key].options = endpoint.options;
+	}
+
+	return api as E;
 };
 
 export type Router<P extends Profile = Profile> = ReturnType<
@@ -36,10 +109,9 @@ export type Router<P extends Profile = Profile> = ReturnType<
 export const router =
 	<P extends Profile>(profile: P) =>
 	<C extends ZugferdApiContext, O extends ZugferdApiOptions>(
-		ctx: C,
-		options: O,
+		ctx: C
 	) => {
-		const endpoints = getEndpoints(profile, ctx, options);
+		const endpoints = getEndpoints(profile, ctx);
 
 		return createRouter(endpoints, {
 			routerContext: ctx,

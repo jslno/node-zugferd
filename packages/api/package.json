@@ -186,5 +186,6 @@
 				"default": "./dist/utils.cjs"
 			}
 		}
-	}
+	},
+	"files": ["dist"]
 }

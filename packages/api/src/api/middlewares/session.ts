@@ -2,7 +2,8 @@ import { verifyToken } from "../../utils/token";
 import { createApiMiddleware } from "../call";
 
 export const sessionMiddleware = createApiMiddleware(async (ctx) => {
-	const bearer = ctx.getHeader("Authorization");
+	const bearer =
+		ctx.getHeader("Authorization") || ctx.getHeader("authorization");
 	if (
 		!bearer ||
 		(!bearer.startsWith("Bearer ") && !bearer.startsWith("bearer "))
