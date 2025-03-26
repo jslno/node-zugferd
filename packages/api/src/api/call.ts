@@ -6,7 +6,15 @@ export const optionsMiddleware = createMiddleware(async () => {
 });
 
 export const createApiMiddleware = createMiddleware.create({
-	use: [optionsMiddleware],
+	use: [
+		optionsMiddleware,
+		createMiddleware(async () => {
+			return {} as {
+				returned?: unknown;
+				responseHeaders?: Headers;
+			};
+		}),
+	],
 });
 
 export const createApiEndpoint = createEndpoint.create({
