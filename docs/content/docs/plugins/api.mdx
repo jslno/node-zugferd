@@ -409,13 +409,13 @@ import { Elysia, type Context } from "elysia";
 import { invoicer } from "./invoicer"; // path to your invoicer file
 
 const nodeZugferdView = (ctx: Context) => {
-const NODE_ZUGFERD_ACCEPT_METHODS = ["GET", "POST"];
-// validate request method
-if (NODE_ZUGFERD_ACCEPT_METHODS.includes(ctx.request.method)) {
-return invoicer.apiHandler(ctx.request);
-} else {
-ctx.error(405);
-}
+  const NODE_ZUGFERD_ACCEPT_METHODS = ["GET", "POST"];
+  // validate request method
+  if (NODE_ZUGFERD_ACCEPT_METHODS.includes(ctx.request.method)) {
+    return invoicer.apiHandler(ctx.request);
+  } else {
+    ctx.error(405);
+  }
 }
 
 const app = new Elysia().all("/api/zugferd/\*", nodeZugferdView).listen(3000);
@@ -538,26 +538,13 @@ const data: ProfileBasic = {
 };
 ```
 
-The preview endpoint always requires authentication so we need to create an access token next.
-The token will have a lifespan of 1 minute.
-
-```ts
-import { invoicer } from "./invoicer"; // path to your invoicer
-import { signToken } from "@node-zugferd/api/utils";
-
-const token = signToken(await invoicer.apiContext);
-```
-
-Now we can finally call the endpoint. Make sure to pass the token to the headers.
+Now we can finally call the endpoint.
 
 ```ts
 // Returns the generated html
 const result: string = await invoicer.api.preview({
   body: {
     data, // pass the data defined previously
-  },
-  headers: {
-    Authorization: `Bearer ${token}`,
   },
 });
 ```

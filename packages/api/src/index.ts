@@ -5,6 +5,7 @@ import { getEndpoints, router, type Router } from "./api";
 import type { Renderer } from "./types/renderer";
 import { getBaseURL, getOrigin } from "./utils/url";
 import { ZugferdError } from "node-zugferd";
+import { signToken } from "./utils";
 
 export const api =
 	<P extends Profile>(profile?: P) =>
@@ -46,7 +47,24 @@ export const api =
 					return handler(request);
 				},
 				apiContext: context,
-				api,
+				api: {
+					...api,
+					create: async (inputCtx: Parameters<typeof api.create>[0]) => {
+						return (await api.create(inputCtx)) as any as Response;
+					},
+					preview: async (inputCtx: Parameters<typeof api.preview>[0]) => {
+						const token = signToken(await context);
+
+						const headers = new Headers(inputCtx.headers);
+
+						headers.set("Authorization", `Bearer ${token}`);
+
+						return (await api.preview({
+							...inputCtx,
+							headers,
+						})) as any as Response;
+					},
+				},
 			};
 		}) satisfies ZugferdPlugin;
 	};
