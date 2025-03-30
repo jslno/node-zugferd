@@ -19,6 +19,10 @@ export const createProfile = <P extends Profile>(options: P) => {
 			return xmlObj;
 		},
 		validate: async (data: string | Buffer | { file: string }) => {
+			if (!options.xsdPath) {
+				return true;
+			}
+
 			try {
 				let xsdValidator: any;
 				try {
