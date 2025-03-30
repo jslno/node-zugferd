@@ -7,7 +7,7 @@ export type Profile = {
 	extends?: Profile[];
 	schema: Schema;
 	contextParameter: LiteralString;
-	xsdPath: string;
+	xsdPath?: string;
 	conformanceLevel: string;
 	documentFileName: string;
 	mask?: Record<string, any>;
