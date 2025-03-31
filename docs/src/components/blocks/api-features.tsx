@@ -26,7 +26,8 @@ const features: Feature[] = [
 	},
 	{
 		title: "Generate invoices",
-		description: "Convert invoice previews into PDF/A-3b-compliant documents using puppeteer.",
+		description:
+			"Convert invoice previews into PDF/A-3b-compliant documents using puppeteer.",
 	},
 	{
 		title: "Authorization",
