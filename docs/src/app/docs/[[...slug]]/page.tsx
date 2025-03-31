@@ -24,6 +24,7 @@ import { Features } from "@/components/blocks/features";
 import { ProfileTree } from "@/components/blocks/profile-tree";
 import { GithubInfo } from "@/components/github-info";
 import { GenerateSecret } from "@/components/generate-secret";
+import { APIFeatures } from "@/components/blocks/api-features";
 
 const { AutoTypeTable } = createTypeTable();
 
@@ -152,6 +153,7 @@ export default async function Page(props: {
 							<iframe {...props} className="w-full h-[500px]" />
 						),
 						Features,
+						APIFeatures,
 						ProfileTree,
 						GithubInfo,
 						GenerateSecret,
