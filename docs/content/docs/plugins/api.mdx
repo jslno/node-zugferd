@@ -1,6 +1,11 @@
 ---
 title: API
+description: Generate invoices using your preferred framework.
 ---
+
+## Features
+
+<APIFeatures />
 
 ## Installation
 
@@ -617,10 +622,10 @@ api<typeof BASIC>()({
   puppeteer: {
     lauch: {
       headless: true,
-      args: ["--no-sandbox"]
-    }
-  }
-})
+      args: ["--no-sandbox"],
+    },
+  },
+});
 ```
 
 - `disableCSRFCheck?`: Disable trusted origins check (&#9888; security risk)
@@ -640,6 +645,6 @@ api<typeof BASIC>()({
     }
 
     return false;
-  }
-})
+  },
+});
 ```
