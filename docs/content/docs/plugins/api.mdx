@@ -417,13 +417,13 @@ import { Elysia, type Context } from "elysia";
 import { invoicer } from "./invoicer"; // path to your invoicer file
 
 const nodeZugferdView = (ctx: Context) => {
-const NODE_ZUGFERD_ACCEPT_METHODS = ["GET", "POST"];
-// validate request method
-if (NODE_ZUGFERD_ACCEPT_METHODS.includes(ctx.request.method)) {
-return invoicer.apiHandler(ctx.request);
-} else {
-ctx.error(405);
-}
+  const NODE_ZUGFERD_ACCEPT_METHODS = ["GET", "POST"];
+  // validate request method
+  if (NODE_ZUGFERD_ACCEPT_METHODS.includes(ctx.request.method)) {
+    return invoicer.apiHandler(ctx.request);
+  } else {
+    ctx.error(405);
+  }
 }
 
 const app = new Elysia().all("/api/zugferd/\*", nodeZugferdView).listen(3000);
