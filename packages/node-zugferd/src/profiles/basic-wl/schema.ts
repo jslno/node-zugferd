@@ -33,6 +33,7 @@ A group of business terms providing textual notes that are relevant for the invo
 			 * Such as the reason for any correction or assignment note in case the invoice has been factored.
 			 */
 			content: {
+				key: "BT-22",
 				type: "string",
 				description: `**Invoice note**
 
@@ -58,6 +59,7 @@ Such as the reason for any correction or assignment note in case the invoice has
 			 * - CUS: Customs Information
 			 */
 			subjectCode: {
+				key: "BT-21",
 				type: UNTDID_4451.map(({ code }) => code),
 				description: `**Invoice note subject code**
 

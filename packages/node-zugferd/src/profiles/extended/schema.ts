@@ -99,6 +99,7 @@ Valid languages are registered with the ISO 639-2 "Codes for the representation 
 			 * The code is bilaterally agreed on and must have the same meaning as BT-22.
 			 */
 			contentCode: {
+				key: "BT-21",
 				type: "string",
 				description: `**Free text on header level (qualifying the content)**
 
