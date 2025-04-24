@@ -11,6 +11,11 @@ import { ISO_6523 } from "../../codelists/iso/6523.gen";
 import { ISO_3166 } from "../../codelists/iso/3166";
 
 export const basicWlSchema = {
+	specificationIdentifier: {
+		type: "string",
+		required: false,
+		defaultValue: "urn:factur-x.eu:1p0:basicwl",
+	},
 	/**
 	 * Invoice Note
 	 *

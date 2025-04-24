@@ -9,6 +9,11 @@ import { REC21 } from "../../codelists/rec21.gen";
 import { ISO_6523 } from "../../codelists/iso/6523.gen";
 
 export const basicSchema = {
+	specificationIdentifier: {
+		type: "string",
+		required: false,
+		defaultValue: "urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic",
+	},
 	transaction: {
 		type: "object",
 		required: false,

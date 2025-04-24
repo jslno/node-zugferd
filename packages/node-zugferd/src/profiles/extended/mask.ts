@@ -1,6 +1,7 @@
 export const extendedMask = {
 	testIndicator: "BT-X-1-00",
 	businessProcessType: "BT-23",
+	specificationIdentifier: "BT-24",
 	number: "BT-1",
 	name: "BT-X-2",
 	typeCode: "BT-3",

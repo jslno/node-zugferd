@@ -1,5 +1,6 @@
 export const basicWlMask = {
 	businessProcessType: "BT-23",
+	specificationIdentifier: "BT-24",
 	number: "BT-1",
 	typeCode: "BT-3",
 	issueDate: "BT-2",

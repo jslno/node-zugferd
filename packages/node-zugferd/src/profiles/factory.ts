@@ -9,9 +9,7 @@ export const createProfile = <P extends Profile>(options: P) => {
 			const xmlObj = ctx.context.parseSchema(
 				ctx.data as InferSchema<P>,
 				ctx.context.mergeSchemas(options),
-				{
-					contextParameter: options.contextParameter,
-				},
+				{},
 				{},
 				ctx.data,
 			);
