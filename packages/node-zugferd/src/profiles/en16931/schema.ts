@@ -9,8 +9,7 @@ export const en16931Schema = {
 	specificationIdentifier: {
 		type: "string",
 		required: false,
-		defaultValue:
-			"urn:cen.eu:en16931:2017",
+		defaultValue: "urn:cen.eu:en16931:2017",
 	},
 	transaction: {
 		type: "object",
