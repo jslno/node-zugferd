@@ -33,20 +33,20 @@ CHORUSPRO: this data makes it possible to inform the "cadre de facturation" (bil
 		xpath:
 			"/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID",
 	},
-  /**
-   * Specification Identifier
-   *
-   * A specification identifier containing the entire set of rules regarding semantic content, cardinalities, and business rules to which the data contained in the invoice conforms.
-   *
-   * Note: This declares conformity to the respective document. 
-   *
-   * For the reference to the EU standard, "urn:cen.eu:en16931:2017" must be specified. 
-   *
-   * Invoices that are compliant with CIUS XRechnung should specify "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0" here. 
-   *
-   * Invoices that comply with the XRechnung extension should specify "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0#conformant#urn:xeinkauf.de:kosit:extension:xrechnung_3.0" here. No schema is required.
-   */
-  specificationIdentifier: {
+	/**
+	 * Specification Identifier
+	 *
+	 * A specification identifier containing the entire set of rules regarding semantic content, cardinalities, and business rules to which the data contained in the invoice conforms.
+	 *
+	 * Note: This declares conformity to the respective document.
+	 *
+	 * For the reference to the EU standard, "urn:cen.eu:en16931:2017" must be specified.
+	 *
+	 * Invoices that are compliant with CIUS XRechnung should specify "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0" here.
+	 *
+	 * Invoices that comply with the XRechnung extension should specify "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0#conformant#urn:xeinkauf.de:kosit:extension:xrechnung_3.0" here. No schema is required.
+	 */
+	specificationIdentifier: {
 		key: "BT-24",
 		type: "string",
 		required: false,
