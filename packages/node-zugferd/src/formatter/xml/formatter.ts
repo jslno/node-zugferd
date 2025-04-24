@@ -46,15 +46,46 @@ const applyMask = (
 	return res;
 };
 
+const updateDefaultValues = (base: Schema, override: Schema): Schema => {
+	const result: Schema = {};
+
+	for (const key in base) {
+		const baseField = base[key];
+		const overrideField = override[key];
+
+		if (baseField && overrideField) {
+			if (baseField.shape && overrideField.shape) {
+				result[key] = {
+					...baseField,
+					shape: updateDefaultValues(baseField.shape, overrideField.shape),
+				};
+			} else {
+				result[key] = {
+					...baseField,
+					defaultValue: overrideField.defaultValue ?? baseField.defaultValue,
+				};
+			}
+		} else {
+			result[key] = baseField;
+		}
+	}
+
+	return result;
+};
 export const mergeSchemas = (profile: Profile): Schema => {
 	if (!profile.extends) {
 		return profile.mask
 			? applyMask(profile.schema, profile.mask)
 			: profile.schema;
 	}
-	const mergedSchema = defu(
+
+	const mergedExtensions = defu(
 		{},
-		...profile.extends?.map((profile) => profile.schema),
+		...(profile.extends?.map((p) => p.schema) || []),
+	);
+
+	const mergedSchema = updateDefaultValues(
+		defu({}, mergedExtensions, profile.schema),
 		profile.schema,
 	);
 
