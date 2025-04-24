@@ -50,6 +50,7 @@ CHORUSPRO: this data makes it possible to inform the "cadre de facturation" (bil
 		key: "BT-24",
 		type: "string",
 		required: false,
+		defaultValue: "urn:factur-x.eu:1p0:minimum",
 		description: `**Specification Identifier**
 A specification identifier containing the entire set of rules regarding semantic content, cardinalities, and business rules to which the data contained in the invoice conforms.
 

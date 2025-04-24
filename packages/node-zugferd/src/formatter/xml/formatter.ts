@@ -62,7 +62,6 @@ export const mergeSchemas = (profile: Profile): Schema => {
 };
 
 export type ParseSchemaOptions = {
-	contextParameter: string;
 	groupIndices?: GroupIndices;
 };
 
@@ -89,13 +88,6 @@ export const parseSchema = <S extends Schema>(
 			"@xmlns:xs": "http://www.w3.org/2001/XMLSchema",
 			"@xmlns:udt":
 				"urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100",
-			"rsm:ExchangedDocumentContext": {
-				"ram:GuidelineSpecifiedDocumentContextParameter": {
-					"ram:ID": {
-						"#": options.contextParameter,
-					},
-				},
-			},
 		},
 	};
 	const localGroupIndices: GroupIndices = { ...parentGroupIndices };

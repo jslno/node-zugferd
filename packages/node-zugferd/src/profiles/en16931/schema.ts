@@ -6,6 +6,12 @@ import { UNTDID_7143 } from "../../codelists/untdid/7143.gen";
 import { ISO_3166 } from "../../codelists/iso/3166";
 
 export const en16931Schema = {
+	specificationIdentifier: {
+		type: "string",
+		required: false,
+		defaultValue:
+			"urn:cen.eu:en16931:2017",
+	},
 	transaction: {
 		type: "object",
 		shape: {
