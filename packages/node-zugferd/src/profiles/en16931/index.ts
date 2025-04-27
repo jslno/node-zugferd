@@ -11,7 +11,7 @@ export const EN16931 = createProfile({
 	extends: [...BASIC.extends, BASIC],
 	schema: en16931Schema,
 	mask: en16931Mask,
-	xsdPath: getAsset("Factur-X_1.07.2_EN16931.xsd"),
+	xsdPath: () => getAsset("Factur-X_1.07.2_EN16931.xsd"),
 	conformanceLevel: "EN 16931",
 	documentFileName: "factur-x.xml",
 	documentType: "INVOICE",

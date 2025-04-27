@@ -12,7 +12,7 @@ export const BASIC = createProfile({
 	extends: [...BASIC_WL.extends, BASIC_WL],
 	schema: basicSchema,
 	mask: basicMask,
-	xsdPath: getAsset("Factur-X_1.07.2_BASIC.xsd"),
+	xsdPath: () => getAsset("Factur-X_1.07.2_BASIC.xsd"),
 	conformanceLevel: "BASIC",
 	documentFileName: "factur-x.xml",
 	documentType: "INVOICE",
