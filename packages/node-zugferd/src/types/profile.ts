@@ -6,7 +6,7 @@ export type Profile = {
 	id: LiteralString;
 	extends?: Profile[];
 	schema: Schema;
-	xsdPath?: string;
+	xsdPath?: string | (() => Promise<string> | string);
 	conformanceLevel: string;
 	documentFileName: string;
 	mask?: Record<string, any>;
