@@ -129,7 +129,7 @@ export const basicMask = {
 								"seller-tax-registration",
 								{
 									vatIdentifier: "BT-31",
-									localIdentifier: "BT-32-00",
+									localIdentifier: "BT-32",
 								},
 							],
 						},
