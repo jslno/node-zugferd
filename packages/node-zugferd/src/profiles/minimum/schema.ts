@@ -34,6 +34,37 @@ CHORUSPRO: this data makes it possible to inform the "cadre de facturation" (bil
 			"/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID",
 	},
 	/**
+	 * Specification Identifier
+	 *
+	 * A specification identifier containing the entire set of rules regarding semantic content, cardinalities, and business rules to which the data contained in the invoice conforms.
+	 *
+	 * Note: This declares conformity to the respective document.
+	 *
+	 * For the reference to the EU standard, "urn:cen.eu:en16931:2017" must be specified.
+	 *
+	 * Invoices that are compliant with CIUS XRechnung should specify "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0" here.
+	 *
+	 * Invoices that comply with the XRechnung extension should specify "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0#conformant#urn:xeinkauf.de:kosit:extension:xrechnung_3.0" here. No schema is required.
+	 */
+	specificationIdentifier: {
+		key: "BT-24",
+		type: "string",
+		required: false,
+		defaultValue: "urn:factur-x.eu:1p0:minimum",
+		description: `**Specification Identifier**
+A specification identifier containing the entire set of rules regarding semantic content, cardinalities, and business rules to which the data contained in the invoice conforms.
+
+Note: This declares conformity to the respective document. 
+
+For the reference to the EU standard, "urn:cen.eu:en16931:2017" must be specified. 
+
+Invoices that are compliant with CIUS XRechnung should specify "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0" here. 
+
+Invoices that comply with the XRechnung extension should specify "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0#conformant#urn:xeinkauf.de:kosit:extension:xrechnung_3.0" here. No schema is required.`,
+		xpath:
+			"/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID",
+	},
+	/**
 	 * Invoice number
 	 *
 	 * A unique identification of the Invoice.
@@ -322,7 +353,7 @@ If no tax representative is specified, this is the country where VAT is liable. 
 									 * VAT number prefixed by a country code. A VAT registered Supplier shall include his VAT ID, except when he uses a tax representative.
 									 */
 									vatIdentifier: {
-										key: "BT-31-00",
+										key: "BT-31",
 										type: "string",
 										description: `**Seller VAT identifier**
 
@@ -345,7 +376,7 @@ VAT number prefixed by a country code. A VAT registered Supplier shall include h
 									 * This information may affect how the Buyer settles the payment (such as for social security fees). E.g. in some countries, if the Seller is not registered as a tax paying entity then the Buyer is required to withhold the amount of the tax and pay it on behalf of the Seller.
 									 */
 									localIdentifier: {
-										key: "BT-32-00",
+										key: "BT-32",
 										type: "string",
 										required: false,
 										description: `**Seller tax registration identifier**

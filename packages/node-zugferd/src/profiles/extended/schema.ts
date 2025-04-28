@@ -17,6 +17,12 @@ import { ISO_3166 } from "../../codelists/iso/3166";
 import { ISO_639_2 } from "../../codelists/iso/639-2";
 
 export const extendedSchema = {
+	specificationIdentifier: {
+		type: "string",
+		required: false,
+		defaultValue:
+			"urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended",
+	},
 	/**
 	 * Test Indicator
 	 *
@@ -99,6 +105,7 @@ Valid languages are registered with the ISO 639-2 "Codes for the representation 
 			 * The code is bilaterally agreed on and must have the same meaning as BT-22.
 			 */
 			contentCode: {
+				key: "BT-21",
 				type: "string",
 				description: `**Free text on header level (qualifying the content)**
 

@@ -1,5 +1,6 @@
 export const minimumMask = {
 	businessProcessType: "BT-23",
+	specificationIdentifier: "BT-24",
 	number: "BT-1",
 	typeCode: "BT-3",
 	issueDate: "BT-2",
@@ -29,8 +30,8 @@ export const minimumMask = {
 							taxRegistration: [
 								"seller-tax-registration",
 								{
-									vatIdentifier: "BT-31-00",
-									localIdentifier: "BT-32-00",
+									vatIdentifier: "BT-31",
+									localIdentifier: "BT-32",
 								},
 							],
 						},

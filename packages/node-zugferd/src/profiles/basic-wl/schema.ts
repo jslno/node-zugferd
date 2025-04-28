@@ -11,6 +11,11 @@ import { ISO_6523 } from "../../codelists/iso/6523.gen";
 import { ISO_3166 } from "../../codelists/iso/3166";
 
 export const basicWlSchema = {
+	specificationIdentifier: {
+		type: "string",
+		required: false,
+		defaultValue: "urn:factur-x.eu:1p0:basicwl",
+	},
 	/**
 	 * Invoice Note
 	 *
@@ -33,6 +38,7 @@ A group of business terms providing textual notes that are relevant for the invo
 			 * Such as the reason for any correction or assignment note in case the invoice has been factored.
 			 */
 			content: {
+				key: "BT-22",
 				type: "string",
 				description: `**Invoice note**
 
@@ -58,6 +64,7 @@ Such as the reason for any correction or assignment note in case the invoice has
 			 * - CUS: Customs Information
 			 */
 			subjectCode: {
+				key: "BT-21",
 				type: UNTDID_4451.map(({ code }) => code),
 				description: `**Invoice note subject code**
 
@@ -365,7 +372,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
-										key: "BT-34-00",
+										key: "BT-34",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -827,7 +834,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
-										key: "BT-49-00",
+										key: "BT-49",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -1155,7 +1162,7 @@ Such as a region, a county, a state, a province, etc.`,
 					 * Detailed information about the actual Delivery
 					 */
 					information: {
-						key: "BT-72-000",
+						key: "BT-72-00",
 						type: "object",
 						description: "Detailed information about the actual Delivery",
 						required: false,
@@ -1168,7 +1175,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * In Germany, the date of delivery and performance is a mandatory information on invoices. This can also be indicated at item level, but must in any case be indicated here.
 							 */
 							deliveryDate: {
-								key: "BT-72-00",
+								key: "BT-72",
 								type: "date",
 								description: `**Actual delivery date**
 
