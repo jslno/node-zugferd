@@ -35,14 +35,14 @@ export const basicWlMask = {
 									city: "BT-37",
 									countryCode: "BT-40",
 									countrySubdivision: "BT-39",
-									electronicAddress: "BT-34-00",
+									electronicAddress: "BT-34",
 								},
 							],
 							taxRegistration: [
 								"seller-tax-registration",
 								{
-									vatIdentifier: "BT-31-00",
-									localIdentifier: "BT-32-00",
+									vatIdentifier: "BT-31",
+									localIdentifier: "BT-32",
 								},
 							],
 						},
@@ -70,7 +70,7 @@ export const basicWlMask = {
 									city: "BT-52",
 									countryCode: "BT-55",
 									countrySubdivision: "BT-54",
-									electronicAddress: "BT-49-00",
+									electronicAddress: "BT-49",
 								},
 							],
 							taxRegistration: [
@@ -137,9 +137,9 @@ export const basicWlMask = {
 						},
 					],
 					information: [
-						"BT-72-000",
+						"BT-72-00",
 						{
-							deliveryDate: "BT-72-00",
+							deliveryDate: "BT-72",
 						},
 					],
 					despatchAdvice: [
