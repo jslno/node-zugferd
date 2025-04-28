@@ -353,7 +353,7 @@ If no tax representative is specified, this is the country where VAT is liable. 
 									 * VAT number prefixed by a country code. A VAT registered Supplier shall include his VAT ID, except when he uses a tax representative.
 									 */
 									vatIdentifier: {
-										key: "BT-31-00",
+										key: "BT-31",
 										type: "string",
 										description: `**Seller VAT identifier**
 

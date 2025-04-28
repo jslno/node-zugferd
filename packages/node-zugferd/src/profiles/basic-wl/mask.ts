@@ -41,7 +41,7 @@ export const basicWlMask = {
 							taxRegistration: [
 								"seller-tax-registration",
 								{
-									vatIdentifier: "BT-31-00",
+									vatIdentifier: "BT-31",
 									localIdentifier: "BT-32-00",
 								},
 							],
