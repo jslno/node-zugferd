@@ -844,9 +844,9 @@ export const extendedMask = {
 						},
 					],
 					information: [
-						"BT-72-000",
+						"BT-72-00",
 						{
-							deliveryDate: "BT-72-00",
+							deliveryDate: "BT-72",
 						},
 					],
 					despatchAdvice: [

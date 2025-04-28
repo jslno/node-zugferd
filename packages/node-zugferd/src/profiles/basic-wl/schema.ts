@@ -1162,7 +1162,7 @@ Such as a region, a county, a state, a province, etc.`,
 					 * Detailed information about the actual Delivery
 					 */
 					information: {
-						key: "BT-72-000",
+						key: "BT-72-00",
 						type: "object",
 						description: "Detailed information about the actual Delivery",
 						required: false,
@@ -1175,7 +1175,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * In Germany, the date of delivery and performance is a mandatory information on invoices. This can also be indicated at item level, but must in any case be indicated here.
 							 */
 							deliveryDate: {
-								key: "BT-72-00",
+								key: "BT-72",
 								type: "date",
 								description: `**Actual delivery date**
 
