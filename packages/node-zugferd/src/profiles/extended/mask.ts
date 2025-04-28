@@ -226,7 +226,7 @@ export const extendedMask = {
 									city: "BT-37",
 									countryCode: "BT-40",
 									countrySubdivision: "BT-39",
-									electronicAddress: "BT-34-00",
+									electronicAddress: "BT-34",
 								},
 							],
 							taxRegistration: [
