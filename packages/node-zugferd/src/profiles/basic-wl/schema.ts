@@ -834,7 +834,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
-										key: "BT-49-00",
+										key: "BT-49",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,

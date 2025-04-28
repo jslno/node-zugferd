@@ -70,7 +70,7 @@ export const basicWlMask = {
 									city: "BT-52",
 									countryCode: "BT-55",
 									countrySubdivision: "BT-54",
-									electronicAddress: "BT-49-00",
+									electronicAddress: "BT-49",
 								},
 							],
 							taxRegistration: [
