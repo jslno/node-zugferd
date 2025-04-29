@@ -77,6 +77,7 @@ export const en16931Mask = {
 						"BT-129-00",
 						{
 							billedQuantity: "BT-129",
+							unitMeasureCode: "BT-130",
 						},
 					],
 					tradeSettlement: [
