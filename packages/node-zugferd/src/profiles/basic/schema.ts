@@ -504,6 +504,7 @@ BR-22: Each  Invoice  line  (BG-25)  shall  have  an  Invoiced  quantity (BT-129
 									 * BR-23: An Invoice line (BG-25) shall have an Invoiced quantity unit of measure code (BT-130).
 									 */
 									unitMeasureCode: {
+										key: "BT-130",
 										type: [
 											...REC20.map(({ code }) => code),
 											...REC21.map(({ code }) => code),
