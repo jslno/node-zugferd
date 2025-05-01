@@ -6,7 +6,7 @@ import { validateDocumentFactory } from "./validate";
 
 export const createDocumentFactory =
 	<O extends ZugferdOptions>(ctx: BaseZugferdContext, options: O) =>
-	async (data: InferSchema<O["profile"]>) => {
+	(data: InferSchema<O["profile"]>) => {
 		const toObj = () =>
 			options.profile.parse({
 				context: ctx,
