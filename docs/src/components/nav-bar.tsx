@@ -104,7 +104,7 @@ export const NavBar = () => {
 												className: "ml-auto font-mono text-muted-foreground",
 											})}
 										>
-											{isMacOs ? <CommandIcon className="size-4" /> : "Strg"} K
+											{isMacOs ? <CommandIcon className="size-4" /> : "Ctrl"} K
 										</kbd>
 									)}
 								</div>

@@ -618,11 +618,13 @@ Advanced configuration options.
 
 ```ts
 api<typeof BASIC>()({
-  disableCSRFCheck: false,
-  puppeteer: {
-    lauch: {
-      headless: true,
-      args: ["--no-sandbox"],
+  advanced: {
+    disableCSRFCheck: false,
+    puppeteer: {
+      lauch: {
+        headless: true,
+        args: ["--no-sandbox"],
+      },
     },
   },
 });
