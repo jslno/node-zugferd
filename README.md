@@ -77,7 +77,7 @@ If you encounter invalid or missing fields, feel free to open a new [Issue](http
         //... your data
     }
 
-    const invoice = await invoicer.create(data)
+    const invoice = invoicer.create(data)
     ```
 3. Save the document
     <details>
