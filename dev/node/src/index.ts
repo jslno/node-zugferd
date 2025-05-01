@@ -123,7 +123,7 @@ Trennblätter A4`,
 		},
 	};
 
-	const invoice = await invoicer.create(data);
+	const invoice = invoicer.create(data);
 
 	console.log(await invoice.toXML());
 };

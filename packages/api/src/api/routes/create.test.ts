@@ -55,7 +55,7 @@ describe("create", async () => {
 
 		const facturX = new TextDecoder("utf-8").decode(facturXFile?.data);
 
-		const invoice = await invoicer.create(data);
+		const invoice = invoicer.create(data);
 
 		expect(facturX).toEqual(await invoice.toXML());
 	});

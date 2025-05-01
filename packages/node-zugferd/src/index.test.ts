@@ -11,7 +11,7 @@ describe("Application Tests", async () => {
 		for (const profile of [MINIMUM, BASIC_WL, BASIC, EN16931, EXTENDED]) {
 			const { invoicer, data } = await getTestInstance({ profile });
 			suite(profile.id, async () => {
-				const invoice = await invoicer.create(data);
+				const invoice = invoicer.create(data);
 
 				expect(invoice).toBeDefined();
 
