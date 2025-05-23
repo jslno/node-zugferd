@@ -227,9 +227,9 @@ export const extendedMask = {
 									city: "BT-37",
 									countryCode: "BT-40",
 									countrySubdivision: "BT-39",
-									electronicAddress: "BT-34",
 								},
 							],
+							electronicAddress: "BT-34",
 							taxRegistration: [
 								"seller-tax-registration",
 								{
@@ -287,9 +287,9 @@ export const extendedMask = {
 									city: "BT-52",
 									countryCode: "BT-55",
 									countrySubdivision: "BT-54",
-									electronicAddress: "BT-49",
 								},
 							],
+							electronicAddress: "BT-49",
 							taxRegistration: [
 								"buyer-tax-registration",
 								{
@@ -345,9 +345,9 @@ export const extendedMask = {
 									city: "BT-X-352",
 									countryCode: "BT-X-353",
 									countrySubdivision: "BT-X-354",
-									electronicAddress: "BT-X-341-00",
 								},
 							],
+							electronicAddress: "BT-X-341-00",
 							taxRegistration: [
 								"BT-X-340-00",
 								{
@@ -403,9 +403,9 @@ export const extendedMask = {
 									city: "BT-X-379",
 									countryCode: "BT-X-380",
 									countrySubdivision: "BT-X-381",
-									electronicAddress: "BT-X-368",
 								},
 							],
+							electronicAddress: "BT-X-368",
 							taxRegistration: [
 								"BT-X-367-00",
 								{
@@ -461,9 +461,9 @@ export const extendedMask = {
 									city: "BT-66",
 									countryCode: "BT-69",
 									countrySubdivision: "BT-68",
-									electronicAddress: "BT-X-125",
 								},
 							],
+							electronicAddress: "BT-X-125",
 						},
 					],
 					productEndUser: [
@@ -513,9 +513,9 @@ export const extendedMask = {
 									city: "BT-X-140",
 									countryCode: "BT-X-141",
 									countrySubdivision: "BT-X-142",
-									electronicAddress: "BT-X-143",
 								},
 							],
+							electronicAddress: "BT-X-143",
 							taxRegistration: [
 								"BT-X-144-00",
 								{
@@ -633,9 +633,9 @@ export const extendedMask = {
 									city: "BT-X-423",
 									countryCode: "BT-X-424",
 									countrySubdivision: "BT-X-425",
-									electronicAddress: "BT-X-412",
 								},
 							],
+							electronicAddress: "BT-X-412",
 							taxRegistration: [
 								"BT-X-411-00",
 								{
@@ -717,9 +717,9 @@ export const extendedMask = {
 									city: "BT-77",
 									countryCode: "BT-80",
 									countrySubdivision: "BT-79",
-									electronicAddress: "BT-X-160",
 								},
 							],
+							electronicAddress: "BT-X-160",
 							taxRegistration: [
 								"BT-X-161-00",
 								{
@@ -775,9 +775,9 @@ export const extendedMask = {
 									city: "BT-X-176",
 									countryCode: "BT-X-177",
 									countrySubdivision: "BT-X-178",
-									electronicAddress: "BT-X-179",
 								},
 							],
+							electronicAddress: "BT-X-179",
 							taxRegistration: [
 								"BT-X-180-00",
 								{
@@ -833,9 +833,9 @@ export const extendedMask = {
 									city: "BT-X-195",
 									countryCode: "BT-X-196",
 									countrySubdivision: "BT-X-197",
-									electronicAddress: "BT-X-198",
 								},
 							],
+							electronicAddress: "BT-X-198",
 							taxRegistration: [
 								"BT-X-199-00",
 								{
@@ -928,9 +928,9 @@ export const extendedMask = {
 									city: "BT-X-219",
 									countryCode: "BT-X-220",
 									countrySubdivision: "BT-X-221",
-									electronicAddress: "BT-X-222",
 								},
 							],
+							electronicAddress: "BT-X-222",
 							taxRegistration: [
 								"BT-X-223-00",
 								{
@@ -986,9 +986,9 @@ export const extendedMask = {
 									city: "BT-X-238",
 									countryCode: "BT-X-239",
 									countrySubdivision: "BT-X-240",
-									electronicAddress: "BT-X-241",
 								},
 							],
+							electronicAddress: "BT-X-241",
 							taxRegistration: [
 								"BT-X-242-00",
 								{
@@ -1044,9 +1044,9 @@ export const extendedMask = {
 									city: "BT-X-253",
 									countryCode: "BT-X-254",
 									countrySubdivision: "BT-X-255",
-									electronicAddress: "BT-X-256",
 								},
 							],
+							electronicAddress: "BT-X-256",
 							taxRegistration: [
 								"BT-X-257-00",
 								{
@@ -1102,9 +1102,9 @@ export const extendedMask = {
 									city: "BT-X-494",
 									countryCode: "BT-X-495",
 									countrySubdivision: "BT-X-496",
-									electronicAddress: "BT-X-482",
 								},
 							],
+							electronicAddress: "BT-X-482",
 							taxRegistration: [
 								"BT-X-481-00",
 								{
@@ -1302,9 +1302,9 @@ export const extendedMask = {
 											city: "BT-X-522",
 											countryCode: "BT-X-523",
 											countrySubdivision: "BT-X-524",
-											electronicAddress: "BT-X-510",
 										},
 									],
+									electronicAddress: "BT-X-510",
 									taxRegistration: [
 										"BT-X-509-00",
 										{
