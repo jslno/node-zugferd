@@ -25,6 +25,7 @@ import { existsSync } from "fs";
 import { handlePackageInstallation } from "../utils/handle-package-installation";
 import { generateSecretHash } from "./api-secret";
 import { parse } from "dotenv";
+import { possiblePaths } from "../utils/get-config";
 
 export const supportedTemplateRenderers = [
 	{
@@ -585,29 +586,6 @@ export const initAction = async (opts: any) => {
 	});
 
 	// ===== config path =====
-
-	let possiblePaths = [
-		"invoicer.ts",
-		"invoicer.tsx",
-		"invoicer.js",
-		"invoicer.jsx",
-		"invoicer.server.js",
-		"invoicer.server.ts",
-	];
-
-	possiblePaths = [
-		...possiblePaths,
-		...possiblePaths.map((it) => `lib/server/${it}`),
-		...possiblePaths.map((it) => `server/${it}`),
-		...possiblePaths.map((it) => `lib/${it}`),
-		...possiblePaths.map((it) => `utils/${it}`),
-	];
-	possiblePaths = [
-		...possiblePaths,
-		...possiblePaths.map((it) => `src/${it}`),
-		...possiblePaths.map((it) => `app/${it}`),
-	];
-
 	if (options.config) {
 		configPath = path.join(cwd, options.config);
 	} else {
