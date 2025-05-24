@@ -1,4 +1,9 @@
-import { format as prettierFormat } from "prettier";
+/**
+ * Inspired by
+ * @see {@link https://github.com/better-auth/better-auth/blob/main/packages/cli/src/commands/init.ts}
+ */
+
+import { format as prettierFormat, type PrettierOptions } from "prettier";
 import { Command } from "commander";
 import { z } from "zod";
 import path from "path";
@@ -8,37 +13,391 @@ import {
 	intro,
 	isCancel,
 	log,
+	multiselect,
 	outro,
 	select,
-	spinner,
 } from "@clack/prompts";
 import chalk from "chalk";
 import fs from "fs/promises";
 import { getPackageInfo } from "../utils/get-package-info";
 import { getTsconfigInfo } from "../utils/get-tsconfig-info";
-import { checkPackageManagers } from "../utils/check-package-managers";
-import semver from "semver";
 import { existsSync } from "fs";
-import { installDependencies } from "../utils/install-dependencies";
-import { formatMilliseconds } from "../utils/format-ms";
+import { handlePackageInstallation } from "../utils/handle-package-installation";
+import { generateSecretHash } from "./api-secret";
+import { parse } from "dotenv";
+
+export const supportedTemplateRenderers = [
+	{
+		id: "react",
+		displayName: "React",
+		name: "renderer",
+		path: `@node-zugferd/api/react/renderer`,
+	},
+	{
+		id: "vue",
+		displayName: "Vue",
+		name: "renderer",
+		path: `@node-zugferd/api/vue/renderer`,
+	},
+	{
+		id: "svelte-kit",
+		displayName: "Svelte Kit",
+		name: "renderer",
+		path: `@node-zugferd/api/svelte-kit/renderer`,
+	},
+	{
+		id: "solid-start",
+		displayName: "Solid Start",
+		name: "renderer",
+		path: `@node-zugferd/api/solid-start/renderer`,
+	},
+	{
+		id: "vanilla",
+		displayName: "Vanilla",
+		name: "renderer",
+		path: `@node-zugferd/api/vanilla/renderer`,
+	},
+] as const;
+
+export type SupportedTemplateRenderer =
+	(typeof supportedTemplateRenderers)[number];
+
+type Import = {
+	path: string;
+	name?: string;
+	variables: {
+		name: string;
+		as?: string;
+		asType?: boolean;
+	}[];
+};
+
+type SupportedPluginDef = {
+	id: string;
+	displayName: string;
+	path: string;
+	init: (ctx: {
+		profile: SupportedProfile;
+		cwd: string;
+		packageInfo: Record<string, any>;
+		packageManagerPreference: "bun" | "pnpm" | "yarn" | "npm" | undefined;
+	}) => Promise<{
+		imports?: Import[];
+		code: string;
+	}>;
+};
+
+export const supportedPlugins = [
+	{
+		id: "api",
+		displayName: "API",
+		path: "@node-zugferd/api",
+		init: async (ctx) => {
+			const envFiles = await getEnvFiles(ctx.cwd);
+			if (!envFiles.length) {
+				outro("❌ No .env files found. Please create an env file first.");
+				process.exit(0);
+			}
+			let targetEnvFile: string;
+			if (envFiles.includes(".env")) {
+				targetEnvFile = ".env";
+			} else if (envFiles.includes(".env.local")) {
+				targetEnvFile = ".env.local";
+			} else if (envFiles.includes(".env.development")) {
+				targetEnvFile = ".env.development";
+			} else if (envFiles.length === 1) {
+				targetEnvFile = envFiles[0]!;
+			} else {
+				targetEnvFile = "none";
+			}
+
+			if (targetEnvFile !== "none") {
+				try {
+					const fileContents = await fs.readFile(
+						path.join(ctx.cwd, targetEnvFile),
+						"utf-8",
+					);
+					const parsed = parse(fileContents);
+					let isMissingSecret = parsed.ZUGFERD_API_SECRET === undefined;
+
+					if (isMissingSecret) {
+						let txt = chalk.bold("ZUGFERD_API_SECRET");
+
+						log.warn(`Missing ${txt} in ${targetEnvFile}`);
+
+						const shouldAdd = await select({
+							message: `Do you want to add ${txt} to ${targetEnvFile}?`,
+							options: [
+								{ label: "Yes", value: "yes" },
+								{ label: "No", value: "no" },
+								{ label: "Choose other file(s)", value: "other" },
+							],
+						});
+						if (isCancel(shouldAdd)) {
+							cancel(`✋ Operation cancelled.`);
+							process.exit(0);
+						}
+						let envs: string[] = [];
+						if (isMissingSecret) {
+							envs.push("ZUGFERD_API_SECRET");
+						}
+						if (shouldAdd === "yes") {
+							try {
+								await updateEnvs({
+									files: [path.join(ctx.cwd, targetEnvFile)],
+									envs,
+									isCommented: false,
+								});
+							} catch (err) {
+								log.error(`❌ Failed to add ENV variables to ${targetEnvFile}`);
+								log.error(JSON.stringify(err, null, 2));
+								process.exit(1);
+							}
+							log.success(`🚀 ENV variables successfully added!`);
+						} else if (shouldAdd === "no") {
+							log.info("Skipping ENV step.");
+						} else if (shouldAdd === "other") {
+							if (!envFiles.length) {
+								cancel("No env files found. Please create an env file first.");
+								process.exit(0);
+							}
+							const envFilesToUpdate = await multiselect({
+								message: "Select the .env files you want to update",
+								options: envFiles.map((x) => ({
+									value: path.join(ctx.cwd, x),
+									label: x,
+								})),
+								required: false,
+							});
+							if (isCancel(envFilesToUpdate)) {
+								cancel("✋ Operation cancelled.");
+								process.exit(0);
+							}
+							if (envFilesToUpdate.length === 0) {
+								log.info("No .env files to update. Skipping...");
+							} else {
+								try {
+									await updateEnvs({
+										files: envFilesToUpdate,
+										envs: envs,
+										isCommented: false,
+									});
+								} catch (error) {
+									log.error(`❌ Failed to update .env files:`);
+									log.error(JSON.stringify(error, null, 2));
+									process.exit(1);
+								}
+								log.success(`🚀 ENV files successfully updated!`);
+							}
+						}
+					}
+				} catch {}
+			}
+
+			await handlePackageInstallation({
+				packageName: "@node-zugferd/api",
+				cwd: ctx.cwd,
+				packageInfo: ctx.packageInfo,
+				packageManagerPreference: ctx.packageManagerPreference,
+			});
+
+			const renderer = await select({
+				message: "Select your template renderer",
+				options: supportedTemplateRenderers.map((x) => ({
+					label: x.displayName,
+					value: x.id,
+				})),
+			});
+
+			if (isCancel(renderer)) {
+				cancel("✋ Operation cancelled.");
+				process.exit(0);
+			}
+			let templateFileName: string;
+			let templateContent: string;
+			let templateImport: Import;
+			let templateFormatOptions: PrettierOptions = {};
+
+			switch (renderer) {
+				case "react": {
+					templateFileName = "invoicer.template.tsx";
+					templateImport = {
+						path: "./invoicer.template",
+						variables: [
+							{
+								name: "Template",
+							},
+						],
+					};
+					templateContent = [
+						"import { Document } from '@node-zugferd/api/react/renderer';",
+						`import type { ${ctx.profile.typeName} } from "${ctx.profile.path}";`,
+						"",
+						`export function Template(props: { data: ${ctx.profile.typeName}; }) {`,
+						"return (",
+						"<Document>",
+						"<h1>Invoice {props.data.number}</h1>",
+						"</Document>",
+						");",
+						"};",
+					].join("\n");
+					break;
+				}
+				case "vue": {
+					templateFileName = "invoicer.template.vue";
+					templateImport = {
+						path: "./invoicer.template.vue",
+						name: "Template",
+						variables: [],
+					};
+					templateContent = [
+						"<template>",
+						"<Document>",
+						"<h1>Invoice {{ number }}</h1>",
+						"</Document>",
+						"</template>",
+						"",
+						"<script setup lang='ts'>",
+						"import { Document } from '@node-zugferd/api/vue/renderer';",
+						`import type { ${ctx.profile.typeName} } from "${ctx.profile.path}";`,
+						"",
+						`defineProps<{ data: ${ctx.profile.typeName} }>();`,
+						"</script>",
+					].join("\n");
+					break;
+				}
+				case "svelte-kit": {
+					templateFileName = "invoicer.template.svelte";
+					templateImport = {
+						path: "./invoicer.template.svelte",
+						name: "Template",
+						variables: [],
+					};
+					templateFormatOptions = {
+						parser: "svelte",
+						plugins: ["prettier-plugin-svelte"],
+					};
+					templateContent = [
+						"<script>",
+						`import type { ${ctx.profile.typeName} } from "${ctx.profile.path}";`,
+						"",
+						`export let data: ${ctx.profile.typeName};`,
+						"</script>",
+						"",
+						"<h1>Invoice {data.number}</h1>",
+					].join("\n");
+					break;
+				}
+				case "solid-start": {
+					templateFileName = "invoicer.template.tsx";
+					templateImport = {
+						path: "./invoicer.template",
+						variables: [
+							{
+								name: "Template",
+							},
+						],
+					};
+					templateContent = [
+						"import { Document } from '@node-zugferd/api/solid-start/renderer';",
+						`import type { ${ctx.profile.typeName} } from "${ctx.profile.path}";`,
+						"",
+						`export function Template(props: { data: ${ctx.profile.typeName}; }) {`,
+						"return (",
+						"<Document>",
+						"<h1>Invoice {props.data.number}</h1>",
+						"</Document>",
+						");",
+						"};",
+					].join("\n");
+					break;
+				}
+				case "vanilla": {
+					templateFileName = "invoicer.template.ts";
+					templateImport = {
+						path: "./invoicer.template",
+						variables: [
+							{
+								name: "Template",
+							},
+						],
+					};
+					templateContent = [
+						"import { Document } from '@node-zugferd/api/vanilla/renderer';",
+						`import type { ${ctx.profile.typeName} } from "${ctx.profile.path}";`,
+						"",
+						`export function Template(props: { data: ${ctx.profile.typeName}; }) {`,
+						"return Document()`<h1>Invoice ${props.data.number}</h1>`;",
+						"};",
+					].join("\n");
+				}
+			}
+
+			const templatePath = path.join(ctx.cwd, templateFileName);
+
+			if (!existsSync(templatePath)) {
+				await fs.writeFile(
+					templatePath,
+					await prettierFormat(templateContent, {
+						filepath: templateFileName,
+						...defaultFormatOptions,
+						...templateFormatOptions,
+					}),
+				);
+				log.success(`🚀 Invoicer template file successfully created!`);
+			}
+
+			return {
+				imports: [
+					{
+						path: "@node-zugferd/api",
+						variables: [
+							{
+								name: "api",
+							},
+						],
+					},
+					{
+						path: `@node-zugferd/api/${renderer}/renderer`,
+						variables: [
+							{
+								name: "renderer",
+							},
+						],
+					},
+					templateImport,
+				],
+				code: `api<typeof ${ctx.profile.name}>()(renderer, { secret: process.env.ZUGFERD_API_SECRET!, template: Template, })`,
+			};
+		},
+	} satisfies SupportedPluginDef,
+] as const;
+
+export type SupportedPlugin = (typeof supportedPlugins)[number];
 
 export const supportedProfiles = [
 	{
 		id: "minimum",
 		displayName: "Minimum",
+		hint: "not recommended",
 		name: "MINIMUM",
+		typeName: "ProfileMinimum",
 		path: `node-zugferd/profile/minimum`,
 	},
 	{
 		id: "basic-wl",
 		displayName: "Basic WL",
+		hint: "not recommended",
 		name: "BASIC_WL",
+		typeName: "ProfileBasicWL",
 		path: `node-zugferd/profile/basic-wl`,
 	},
 	{
 		id: "basic",
 		displayName: "Basic",
+		hint: "not recommended",
 		name: "BASIC",
+		typeName: "ProfileBasic",
 		path: `node-zugferd/profile/basic`,
 	},
 	{
@@ -46,33 +405,77 @@ export const supportedProfiles = [
 		displayName: "EN16931 (Comfort)",
 		hint: "recommended",
 		name: "EN16931",
+		typeName: "ProfileEN16931",
 		path: `node-zugferd/profile/en16931`,
 	},
 	{
 		id: "extended",
 		displayName: "Extended",
 		name: "EXTENDED",
+		typeName: "ProfileExtended",
 		path: `node-zugferd/profile/extended`,
 	},
 ] as const;
 
 export type SupportedProfile = (typeof supportedProfiles)[number];
 
-const defaultFormatOptions = {
-	trailingComma: "all" as const,
+const defaultFormatOptions: PrettierOptions = {
+	trailingComma: "all",
 	useTabs: false,
 	tabWidth: 4,
 };
 
-const getDefaultInvoicerConfig = async (profile: SupportedProfile) =>
-	await prettierFormat(
+const getDefaultInvoicerConfig = async (
+	profile: SupportedProfile,
+	plugins: SupportedPlugin[] = [],
+	cwd: string,
+	packageInfo: Record<string, any>,
+	packageManagerPreference?: "bun" | "pnpm" | "yarn" | "npm",
+) => {
+	let imports: Import[] = [
+		{
+			path: "node-zugferd",
+			variables: [
+				{
+					name: "zugferd",
+				},
+			],
+		},
+		{
+			path: profile.path,
+			variables: [
+				{
+					name: profile.name,
+				},
+			],
+		},
+	];
+	const addedPlugins: string[] = [];
+
+	for await (const plugin of plugins) {
+		const { imports: pluginImports, code } = await plugin.init({
+			profile,
+			cwd,
+			packageInfo,
+			packageManagerPreference,
+		});
+
+		imports.push(...pluginImports);
+		addedPlugins.push(code);
+	}
+
+	return await prettierFormat(
 		[
-			"import { zugferd } from 'node-zugferd';",
-			`import { ${profile.name} } from '${profile.path}';`,
+			imports
+				.map(
+					(x) =>
+						`import ${x.name ?? ""}${x.variables.length > 0 ? `${!!x.name ? ", " : ""}{ ${x.variables.map((v) => `${v.asType ? "type " : ""}${v.name}${v.as ? ` as ${v.as}` : ""}`)} }` : ""} from "${x.path}";`,
+				)
+				.join("\n"),
 			"",
 			"export const invoicer = zugferd({",
 			`profile: ${profile.name},`,
-			"plugins: [],",
+			`plugins: [${addedPlugins.join(", ")}],`,
 			"});",
 		].join("\n"),
 		{
@@ -80,10 +483,12 @@ const getDefaultInvoicerConfig = async (profile: SupportedProfile) =>
 			...defaultFormatOptions,
 		},
 	);
+};
 
 const optionsSchema = z.object({
 	cwd: z.string(),
 	config: z.string().optional(),
+	"skip-plugins": z.boolean().optional(),
 	"package-manager": z.string().optional(),
 	tsconfig: z.string().optional(),
 });
@@ -99,12 +504,6 @@ export const initAction = async (opts: any) => {
 		undefined;
 
 	let configPath: string = "";
-
-	const format = async (code: string) =>
-		await prettierFormat(code, {
-			filepath: configPath,
-			...defaultFormatOptions,
-		});
 
 	// ===== package.json =====
 	let packageInfo: Record<string, any>;
@@ -178,100 +577,12 @@ export const initAction = async (opts: any) => {
 	}
 
 	// ===== install node-zugferd =====
-	const s = spinner({ indicator: "dots" });
-	s.start("Checking node-zugferd installation");
-
-	let latest_nodeZugferd_version: string;
-
-	try {
-		latest_nodeZugferd_version = await getLatestNpmVersion("node-zugferd");
-	} catch (err) {
-		log.error("❌ Couldn't get latest version of node-zugferd.");
-		log.error(JSON.stringify(err, null, 2));
-		process.exit(1);
-	}
-
-	if (
-		!packageInfo.dependencies ||
-		!Object.keys(packageInfo.dependencies).includes("node-zugferd")
-	) {
-		s.stop("Finished fetching latest version of node-zugferd.");
-
-		const s2 = spinner({ indicator: "dots" });
-		const shouldInstallNodeZugferdDep = await confirm({
-			message: "Would you like to install node-zugferd?",
-		});
-		if (isCancel(shouldInstallNodeZugferdDep)) {
-			cancel("✋ Operation cancelled.");
-			process.exit(0);
-		}
-		if (packageManagerPreference === undefined) {
-			packageManagerPreference = await getPackageManager();
-		}
-		if (shouldInstallNodeZugferdDep) {
-			s2.start(
-				`Installing node-zugferd using ${chalk.bold(packageManagerPreference)}`,
-			);
-			try {
-				const start = Date.now();
-				await installDependencies({
-					dependencies: ["node-zugferd@latest"],
-					packageManager: packageManagerPreference,
-					cwd,
-				});
-				s2.stop(
-					`node-zugferd installed ${chalk.greenBright("successfully")}! ${chalk.gray(`(${formatMilliseconds(Date.now() - start)})`)}`,
-				);
-			} catch (err: any) {
-				s2.stop("Failed to install node-zugferd:");
-				log.error(JSON.stringify(err, null, 2));
-				process.exit(1);
-			}
-		}
-	} else if (
-		packageInfo.dependencies["node-zugferd"] !== "workspace:*" &&
-		semver.lt(
-			semver.coerce(packageInfo.dependencies["node-zugferd"])?.toString()!,
-			semver.clean(latest_nodeZugferd_version)!,
-		)
-	) {
-		s.stop("Finished fetching latest version of node-zugferd.");
-		const shouldInstallNodeZugferdDep = await confirm({
-			message: `Your current node-zugferd dependency is out-of-date. Would you like to update it? (${chalk.bold(packageInfo.dependencies["node-zugferd"])} → ${chalk.bold(`v${latest_nodeZugferd_version}`)})`,
-		});
-		if (isCancel(shouldInstallNodeZugferdDep)) {
-			cancel("✋ Operation cancelled.");
-			process.exit(0);
-		}
-		if (shouldInstallNodeZugferdDep) {
-			if (packageManagerPreference === undefined) {
-				packageManagerPreference = await getPackageManager();
-			}
-			const s = spinner({ indicator: "dots" });
-			s.start(
-				`Updating node-zugferd using ${chalk.bold(packageManagerPreference)}`,
-			);
-			try {
-				const start = Date.now();
-				await installDependencies({
-					dependencies: ["node-zugferd@latest"],
-					packageManager: packageManagerPreference,
-					cwd: cwd,
-				});
-				s.stop(
-					`node-zugferd updated ${chalk.greenBright(
-						`successfully`,
-					)}! ${chalk.gray(`(${formatMilliseconds(Date.now() - start)})`)}`,
-				);
-			} catch (error: any) {
-				s.stop(`Failed to update node-zugferd:`);
-				log.error(error.message);
-				process.exit(1);
-			}
-		}
-	} else {
-		s.stop(`node-zugferd dependencies are ${chalk.green("up-to-date")}!`);
-	}
+	await handlePackageInstallation({
+		packageName: "node-zugferd",
+		packageInfo,
+		cwd,
+		packageManagerPreference,
+	});
 
 	// ===== config path =====
 
@@ -312,6 +623,7 @@ export const initAction = async (opts: any) => {
 
 	// ===== create invoicer config =====
 	let currentUserConfig = "";
+	let add_plugins: SupportedPlugin[] = [];
 
 	if (!configPath) {
 		const shouldCreateInvoicerConfig = await select({
@@ -334,6 +646,7 @@ export const initAction = async (opts: any) => {
 		if (shouldCreateInvoicerConfig === "yes") {
 			const prompted_profiles = await select({
 				message: "Select your Profile",
+				initialValue: "en16931",
 				options: supportedProfiles.map((x) => ({
 					value: x.id,
 					label: x.displayName,
@@ -353,11 +666,44 @@ export const initAction = async (opts: any) => {
 				process.exit(1);
 			}
 
+			if (options["skip-plugins"] !== false) {
+				const shouldSetupPlugins = await confirm({
+					message: `Would you like to set-up ${chalk.bold("plugins")}?`,
+				});
+				if (isCancel(shouldSetupPlugins)) {
+					cancel(`✋ Operating cancelled.`);
+					process.exit(0);
+				}
+				if (shouldSetupPlugins) {
+					const prompted_plugins = await multiselect({
+						message: "Select your new plugins",
+						options: supportedPlugins.map((x) => ({
+							label: x.displayName,
+							value: x.id,
+						})),
+						required: false,
+					});
+					if (isCancel(prompted_plugins)) {
+						cancel(`✋ Operating cancelled.`);
+						process.exit(0);
+					}
+					add_plugins = prompted_plugins.map(
+						(x) => supportedPlugins.find((y) => y.id === x)!,
+					);
+				}
+			}
+
 			const filePath = path.join(cwd, "invoicer.ts");
 			configPath = filePath;
 			log.info(`Creating invoicer config file: ${filePath}`);
 			try {
-				currentUserConfig = await getDefaultInvoicerConfig(profile);
+				currentUserConfig = await getDefaultInvoicerConfig(
+					profile,
+					add_plugins,
+					cwd,
+					packageInfo,
+					packageManagerPreference,
+				);
 
 				await fs.writeFile(filePath, currentUserConfig);
 				configPath = filePath;
@@ -386,66 +732,54 @@ export const init = new Command("init")
 		"The path to the invoicer configuration file. defaults to the first `invoicer.ts` file found.",
 	)
 	.option("--tsconfig <tsconfig>", "The path to the tsconfig file.")
+	.option("--skip-plugins", "Skip the plugins setup.")
 	.option(
 		"--package-manager <package-manager>",
 		"The package manager you want to use.",
 	)
 	.action(initAction);
 
-const getLatestNpmVersion = async (packageName: string): Promise<string> => {
-	try {
-		const response = await fetch(`https://registry.npmjs.org/${packageName}`);
-
-		if (!response.ok) {
-			throw new Error(`Package not found: ${response.statusText}`);
-		}
-
-		const data = await response.json();
-		return data["dist-tags"].latest; // Get the latest version from dist-tags
-	} catch (err: any) {
-		throw err?.message;
-	}
+const getEnvFiles = async (cwd: string) => {
+	const files = await fs.readdir(cwd);
+	return files.filter((x) => x.startsWith(".env"));
 };
 
-const getPackageManager = async () => {
-	const { hasBun, hasPnpm } = await checkPackageManagers();
+const updateEnvs = async ({
+	envs,
+	files,
+	isCommented,
+}: {
+	/**
+	 * The ENVs to append to the file
+	 */
+	envs: string[];
+	/**
+	 * Full file paths
+	 */
+	files: string[];
+	/**
+	 * Whether to comment all of the envs or not
+	 */
+	isCommented: boolean;
+}) => {
+	let previouslyGeneratedSecret: string | null = null;
 
-	if (!hasBun && !hasPnpm) {
-		return "npm";
+	for (const file of files) {
+		const content = await fs.readFile(file, "utf-8");
+		const lines = content.split("\n");
+		const newLines = envs.map(
+			(x) =>
+				`${isCommented ? "# " : ""}${x}=${getEnvDescription(x) ?? "some_value"}`,
+		);
+		newLines.push("", ...lines);
+		await fs.writeFile(file, newLines.join("\n"), "utf-8");
 	}
 
-	const packageManagerOptions: {
-		value: "bun" | "pnpm" | "yarn" | "npm";
-		label?: string;
-		hint?: string;
-	}[] = [];
-
-	if (hasPnpm) {
-		packageManagerOptions.push({
-			value: "pnpm",
-			label: "pnpm",
-			hint: "recommended",
-		});
+	function getEnvDescription(env: string) {
+		if (env === "ZUGFERD_API_SECRET") {
+			previouslyGeneratedSecret =
+				previouslyGeneratedSecret ?? generateSecretHash();
+			return `"${previouslyGeneratedSecret}"`;
+		}
 	}
-	if (hasBun) {
-		packageManagerOptions.push({
-			value: "bun",
-			label: "bun",
-		});
-	}
-	packageManagerOptions.push({
-		value: "npm",
-		hint: "not recommended",
-	});
-
-	let packageManager = await select({
-		message: "Choose a package manager",
-		options: packageManagerOptions,
-	});
-	if (isCancel(packageManager)) {
-		cancel("✋ Operation cancelled.");
-		process.exit(0);
-	}
-
-	return packageManager;
 };

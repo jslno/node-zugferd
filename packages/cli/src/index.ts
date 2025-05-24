@@ -4,6 +4,7 @@ import { Command } from "commander";
 import "dotenv/config";
 import { getPackageInfo } from "./utils/get-package-info";
 import { init } from "./commands/init";
+import { generateSecret } from "./commands/api-secret";
 
 // handle exit
 process.on("SIGINT", () => process.exit(0));
@@ -19,6 +20,7 @@ const main = async () => {
 	} catch {}
 
 	program
+		.addCommand(generateSecret)
 		.addCommand(init)
 		.version(packageInfo.version || "0.0.10-beta.1")
 		.description("node-zugferd CLI");

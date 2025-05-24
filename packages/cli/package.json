@@ -35,10 +35,11 @@
         "commander": "^14.0.0",
         "dotenv": "^16.5.0",
         "fs-extra": "^11.3.0",
+        "node-zugferd": "workspace:*",
         "prettier": "^3.5.3",
+        "prettier-plugin-svelte": "^3.4.0",
         "semver": "^7.7.2",
-        "zod": "^3.24.1",
-        "node-zugferd": "workspace:*"
+        "zod": "^3.24.1"
     },
     "files": [
         "dist"
