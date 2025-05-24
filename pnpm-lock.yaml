@@ -206,6 +206,9 @@ importers:
       puppeteer:
         specifier: ^24.4.0
         version: 24.4.0(typescript@5.7.3)
+      stripe:
+        specifier: ^18.1.1
+        version: 18.1.1(@types/node@22.13.4)
       zod:
         specifier: ^3.24.1
         version: 3.24.2
@@ -3992,6 +3995,15 @@ packages:
   strip-bom-string@1.0.0:
     resolution: {integrity: sha512-uCC2VHvQRYu+lMh4My/sFNmF2klFymLX1wHJeXnbEJERpV/ZsVuonzerjfrGpIGF7LBVa1O7i9kjiWvJiFck8g==}
     engines: {node: '>=0.10.0'}
+
+  stripe@18.1.1:
+    resolution: {integrity: sha512-hlF0ripc2nJrihpsJZQDl3xirS7tpdpS7DlmSNLEDRW8j7Qr215y5DHOI3+aEY/lq6PG8y4GR1RZPtEoIoAs/g==}
+    engines: {node: '>=12.*'}
+    peerDependencies:
+      '@types/node': '>=12.x.x'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
 
   strnum@1.0.5:
     resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
@@ -8518,6 +8530,12 @@ snapshots:
       ansi-regex: 6.1.0
 
   strip-bom-string@1.0.0: {}
+
+  stripe@18.1.1(@types/node@22.13.4):
+    dependencies:
+      qs: 6.13.0
+    optionalDependencies:
+      '@types/node': 22.13.4
 
   strnum@1.0.5: {}
 
