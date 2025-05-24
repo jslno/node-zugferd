@@ -206,9 +206,6 @@ importers:
       puppeteer:
         specifier: ^24.4.0
         version: 24.4.0(typescript@5.7.3)
-      stripe:
-        specifier: ^18.1.1
-        version: 18.1.1(@types/node@22.13.4)
       zod:
         specifier: ^3.24.1
         version: 3.24.2
@@ -249,6 +246,9 @@ importers:
       solid-js:
         specifier: ^1.9.5
         version: 1.9.5
+      stripe:
+        specifier: ^18.1.1
+        version: 18.1.1(@types/node@22.13.4)
       svelte:
         specifier: ^5.25.2
         version: 5.25.2
@@ -2164,7 +2164,6 @@ packages:
 
   bun@1.2.14:
     resolution: {integrity: sha512-xCd8eiUn5jju0+Noaz7aTWZFvrC8NbMjvcLDnk3gsa1UEaE3Gk4jMStZDsSzW97ynkb4d2ZYvwunstQxJhpZaA==}
-    cpu: [arm64, x64, aarch64]
     os: [darwin, linux, win32]
     hasBin: true
 
