@@ -1,6 +1,7 @@
 import type { LaunchOptions } from "puppeteer";
 import type { GenericEndpointContext } from "./context";
 import type { Renderer } from "./renderer";
+import type { ZugferdApiPlugin } from "./plugins";
 
 export type ZugferdApiOptions<R extends Renderer = Renderer> = {
 	secret: string;
@@ -13,6 +14,7 @@ export type ZugferdApiOptions<R extends Renderer = Renderer> = {
 	trustedOrigins?:
 		| string[]
 		| ((request: Request) => string[] | Promise<string[]>);
+	plugins?: ZugferdApiPlugin[];
 	advanced?: {
 		disableCSRFCheck?: boolean;
 		puppeteer?: {
