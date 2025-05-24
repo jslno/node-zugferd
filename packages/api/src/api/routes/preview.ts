@@ -31,6 +31,6 @@ export const preview = <P extends Profile>() =>
 				headers: new Headers({
 					"Content-Type": "text/html",
 				}),
-			}) as any as string;
+			});
 		},
 	);
