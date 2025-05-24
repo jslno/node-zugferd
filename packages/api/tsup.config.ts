@@ -14,6 +14,8 @@ export default defineConfig((env) => {
 			"svelte-kit": "./src/integrations/svelte-kit.ts",
 			"svelte-kit/renderer": "./src/renderer/svelte.ts",
 			"vanilla/renderer": "./src/renderer/vanilla.ts",
+			plugins: "./src/plugins/index.ts",
+			"plugins/stripe": "./src/plugins/stripe/index.ts",
 			api: "./src/api/index.ts",
 			utils: "./src/utils/index.ts",
 		},
