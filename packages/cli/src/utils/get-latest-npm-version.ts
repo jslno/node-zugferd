@@ -1,4 +1,6 @@
-export const getLatestNpmVersion = async (packageName: string): Promise<string> => {
+export const getLatestNpmVersion = async (
+	packageName: string,
+): Promise<string> => {
 	try {
 		const response = await fetch(`https://registry.npmjs.org/${packageName}`);
 

@@ -161,7 +161,9 @@ export const getConfig = async ({
 					const hasConfig = Object.keys(config).length > 0;
 					if (hasConfig) {
 						configFile =
-							config.invoicer?.context.options || config.default?.context.options || null;
+							config.invoicer?.context.options ||
+							config.default?.context.options ||
+							null;
 						if (!configFile) {
 							if (shouldThrowOnError) {
 								throw new Error(
