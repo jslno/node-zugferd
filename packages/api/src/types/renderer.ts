@@ -5,7 +5,7 @@ export type Renderer = {
 		ctx: {
 			data: any;
 		} & ZugferdApiContext,
-		component: any
+		component: any,
 	) => Promise<string> | string;
 	$Infer: {
 		Template: any;

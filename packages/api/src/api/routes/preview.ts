@@ -19,7 +19,7 @@ export const preview = <P extends Profile, O extends ZugferdApiOptions>() =>
 			metadata: {
 				...HIDE_METADATA,
 				$Infer: {
-					body: {} as { 
+					body: {} as {
 						template: Exclude<keyof O["template"], number>;
 						data: InferSchema<P>;
 					},
@@ -29,7 +29,9 @@ export const preview = <P extends Profile, O extends ZugferdApiOptions>() =>
 		async (ctx) => {
 			const data = ctx.body.data as InferSchema<P>;
 
-			const templateEntry = Object.entries(ctx.context.options.template).find(([key]) => key === ctx.body.template)
+			const templateEntry = Object.entries(ctx.context.options.template).find(
+				([key]) => key === ctx.body.template,
+			);
 
 			if (!templateEntry) {
 				throw new ZugferdApiError("BAD_REQUEST", {
@@ -39,10 +41,13 @@ export const preview = <P extends Profile, O extends ZugferdApiOptions>() =>
 
 			const [_, template] = templateEntry;
 
-			const body = await ctx.context.renderer.render({
-				data,
-				...ctx.context,
-			}, template.component);
+			const body = await ctx.context.renderer.render(
+				{
+					data,
+					...ctx.context,
+				},
+				template.component,
+			);
 
 			return new Response(body, {
 				headers: new Headers({

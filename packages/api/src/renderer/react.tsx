@@ -4,8 +4,7 @@ import type { Renderer } from "../types/renderer";
 
 export const renderer = {
 	render: (ctx, Component) =>
-		"<!DOCTYPE html>" +
-		renderToString(<Component data={ctx.data} />),
+		"<!DOCTYPE html>" + renderToString(<Component data={ctx.data} />),
 	$Infer: {
 		Template: {} as (props: { data: any }) => JSX.Element,
 	},

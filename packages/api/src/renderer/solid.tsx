@@ -6,8 +6,7 @@ import { renderToString } from "solid-js/web";
 
 export const renderer = {
 	render: (ctx, Component) =>
-		"<!DOCTYPE html>" +
-		renderToString(() => <Component data={ctx.data} />),
+		"<!DOCTYPE html>" + renderToString(() => <Component data={ctx.data} />),
 	$Infer: {
 		Template: {} as (props: { data: any }) => SolidJSX.Element,
 	},

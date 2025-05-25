@@ -16,10 +16,13 @@ describe("preview", async () => {
 		expect(r.headers.get("Content-Type")).toEqual("text/html");
 		const ctx = await invoicer.apiContext;
 		expect(await r.text()).toEqual(
-			renderer.render({
-				data,
-				...ctx,
-			}, ctx.options.template.default.component),
+			renderer.render(
+				{
+					data,
+					...ctx,
+				},
+				ctx.options.template.default.component,
+			),
 		);
 	});
 

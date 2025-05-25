@@ -2,7 +2,6 @@ import type { LaunchOptions } from "puppeteer";
 import type { GenericEndpointContext } from "./context";
 import type { Renderer } from "./renderer";
 import type { Iso639_2Code } from "node-zugferd/codelist/iso.639-2";
-import type { Untdid1001Code } from "node-zugferd/codelist/untdid.1001";
 
 export type ZugferdApiOptions<R extends Renderer = Renderer> = {
 	secret: string;
@@ -15,7 +14,7 @@ export type ZugferdApiOptions<R extends Renderer = Renderer> = {
 		[key: string]: {
 			language: Iso639_2Code;
 			component: R["$Infer"]["Template"];
-		}
+		};
 	};
 	trustedOrigins?:
 		| string[]
