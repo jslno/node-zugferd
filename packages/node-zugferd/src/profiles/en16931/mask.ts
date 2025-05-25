@@ -170,9 +170,9 @@ export const en16931Mask = {
 									city: "BT-37",
 									countryCode: "BT-40",
 									countrySubdivision: "BT-39",
-									electronicAddress: "BT-34",
 								},
 							],
+							electronicAddress: "BT-34",
 							taxRegistration: [
 								"seller-tax-registration",
 								{
@@ -214,9 +214,9 @@ export const en16931Mask = {
 									city: "BT-52",
 									countryCode: "BT-55",
 									countrySubdivision: "BT-54",
-									electronicAddress: "BT-49",
 								},
 							],
+							electronicAddress: "BT-49",
 							taxRegistration: [
 								"buyer-tax-registration",
 								{

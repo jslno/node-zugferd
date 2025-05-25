@@ -367,48 +367,47 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
-
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-34",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Seller electronic address
+									 *
+									 * Identifies the Seller's electronic address to which a business document may be delivered.
 									 */
-									electronicAddress: {
-										key: "BT-34",
-										type: "object",
-										description: "Details about the electronic address",
-										required: false,
-										shape: {
-											/**
-											 * Seller electronic address
-											 *
-											 * Identifies the Seller's electronic address to which a business document may be delivered.
-											 */
-											value: {
-												type: "string",
-												description: `**Seller electronic address**
+									value: {
+										type: "string",
+										description: `**Seller electronic address**
 
 Identifies the Seller's electronic address to which a business document may be delivered.`,
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 *
-											 * The identification scheme identifier of the Seller electronic address
-											 *
-											 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: `**Scheme identifier**
+										required: false,
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 *
+									 * The identification scheme identifier of the Seller electronic address
+									 *
+									 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: `**Scheme identifier**
 
 The identification scheme identifier of the Seller electronic address
 
 The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.`,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -830,47 +829,47 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-49",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Buyer electronic address
+									 *
+									 * Identifies the Buyer's electronic address to which a business document should be delivered.
 									 */
-									electronicAddress: {
-										key: "BT-49",
-										type: "object",
-										description: "Details about the electronic address",
-										required: false,
-										shape: {
-											/**
-											 * Buyer electronic address
-											 *
-											 * Identifies the Buyer's electronic address to which a business document should be delivered.
-											 */
-											value: {
-												type: "string",
-												description: `**Buyer electronic address**
+									value: {
+										type: "string",
+										description: `**Buyer electronic address**
 
 Identifies the Buyer's electronic address to which a business document should be delivered.`,
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 *
-											 * The identification scheme identifier of the Buyer electronic address.
-											 *
-											 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: `**Scheme identifier**
+										required: false,
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 *
+									 * The identification scheme identifier of the Buyer electronic address.
+									 *
+									 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer electronic address.
 
 The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.`,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
