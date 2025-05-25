@@ -8,7 +8,9 @@ export const renderer = {
 	render: (ctx, Component) =>
 		"<!DOCTYPE html>" + renderToString(() => <Component data={ctx.data} />),
 	$Infer: {
-		Template: {} as (props: { data: any }) => SolidJSX.Element,
+		Template: {} as (props: { data: any }) =>
+			| SolidJSX.Element
+			| Promise<SolidJSX.Element>,
 	},
 } satisfies Renderer;
 

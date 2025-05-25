@@ -6,7 +6,9 @@ export const renderer = {
 	render: (ctx, Component) =>
 		"<!DOCTYPE html>" + renderToString(<Component data={ctx.data} />),
 	$Infer: {
-		Template: {} as (props: { data: any }) => JSX.Element,
+		Template: {} as (props: { data: any }) =>
+			| JSX.Element
+			| Promise<JSX.Element>,
 	},
 } satisfies Renderer;
 
