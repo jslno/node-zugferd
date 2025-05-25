@@ -1120,35 +1120,35 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-X-341-00",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Electronic address
 									 */
-									electronicAddress: {
-										key: "BT-X-341-00",
-										type: "object",
-										description: "Details about the electronic address",
+									value: {
+										type: "string",
+										description: "Electronic address",
 										required: false,
-										shape: {
-											/**
-											 * Electronic address
-											 */
-											value: {
-												type: "string",
-												description: "Electronic address",
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: "Scheme identifier",
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: "Scheme identifier",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -1715,35 +1715,35 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-X-368",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Electronic address
 									 */
-									electronicAddress: {
-										key: "BT-X-368",
-										type: "object",
-										description: "Details about the electronic address",
+									value: {
+										type: "string",
+										description: "Electronic address",
 										required: false,
-										shape: {
-											/**
-											 * Electronic address
-											 */
-											value: {
-												type: "string",
-												description: "Electronic address",
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: "Scheme identifier",
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: "Scheme identifier",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -2158,38 +2158,33 @@ An e-mail address for the contact point.`,
 									},
 								},
 							},
-							postalAddress: {
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-X-125",
 								type: "object",
+								description: "Details about the electronic address",
+								required: false,
 								shape: {
 									/**
-									 * Details about the electronic address
+									 * Electronic address
 									 */
-									electronicAddress: {
-										key: "BT-X-125",
-										type: "object",
-										description: "Details about the electronic address",
+									value: {
+										type: "string",
+										description: "Electronic address",
 										required: false,
-										shape: {
-											/**
-											 * Electronic address
-											 */
-											value: {
-												type: "string",
-												description: "Electronic address",
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: "Scheme identifier",
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: "Scheme identifier",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -2723,35 +2718,35 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-X-143",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Electronic address
 									 */
-									electronicAddress: {
-										key: "BT-X-143",
-										type: "object",
-										description: "Details about the electronic address",
+									value: {
+										type: "string",
+										description: "Electronic address",
 										required: false,
-										shape: {
-											/**
-											 * Electronic address
-											 */
-											value: {
-												type: "string",
-												description: "Electronic address",
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: "Scheme identifier",
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: "Scheme identifier",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -3553,35 +3548,35 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-X-412",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Electronic address
 									 */
-									electronicAddress: {
-										key: "BT-X-412",
-										type: "object",
-										description: "Details about the electronic address",
+									value: {
+										type: "string",
+										description: "Electronic address",
 										required: false,
-										shape: {
-											/**
-											 * Electronic address
-											 */
-											value: {
-												type: "string",
-												description: "Electronic address",
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: "Scheme identifier",
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: "Scheme identifier",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -4032,38 +4027,33 @@ An e-mail address for the contact point.`,
 									},
 								},
 							},
-							postalAddress: {
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-X-160",
 								type: "object",
+								description: "Details about the electronic address",
+								required: false,
 								shape: {
 									/**
-									 * Details about the electronic address
+									 * Electronic address
 									 */
-									electronicAddress: {
-										key: "BT-X-160",
-										type: "object",
-										description: "Details about the electronic address",
+									value: {
+										type: "string",
+										description: "Electronic address",
 										required: false,
-										shape: {
-											/**
-											 * Electronic address
-											 */
-											value: {
-												type: "string",
-												description: "Electronic address",
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: "Scheme identifier",
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: "Scheme identifier",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -4625,35 +4615,35 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-X-179",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Electronic address
 									 */
-									electronicAddress: {
-										key: "BT-X-179",
-										type: "object",
-										description: "Details about the electronic address",
+									value: {
+										type: "string",
+										description: "Electronic address",
 										required: false,
-										shape: {
-											/**
-											 * Electronic address
-											 */
-											value: {
-												type: "string",
-												description: "Electronic address",
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: "Scheme identifier",
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: "Scheme identifier",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -5214,35 +5204,35 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-X-198",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Electronic address
 									 */
-									electronicAddress: {
-										key: "BT-X-198",
-										type: "object",
-										description: "Details about the electronic address",
+									value: {
+										type: "string",
+										description: "Electronic address",
 										required: false,
-										shape: {
-											/**
-											 * Electronic address
-											 */
-											value: {
-												type: "string",
-												description: "Electronic address",
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: "Scheme identifier",
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: "Scheme identifier",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -5910,35 +5900,35 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-X-222",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Electronic address
 									 */
-									electronicAddress: {
-										key: "BT-X-222",
-										type: "object",
-										description: "Details about the electronic address",
+									value: {
+										type: "string",
+										description: "Electronic address",
 										required: false,
-										shape: {
-											/**
-											 * Electronic address
-											 */
-											value: {
-												type: "string",
-												description: "Electronic address",
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: "Scheme identifier",
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: "Scheme identifier",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -6499,35 +6489,35 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-X-241",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Electronic address
 									 */
-									electronicAddress: {
-										key: "BT-X-241",
-										type: "object",
-										description: "Details about the electronic address",
+									value: {
+										type: "string",
+										description: "Electronic address",
 										required: false,
-										shape: {
-											/**
-											 * Electronic address
-											 */
-											value: {
-												type: "string",
-												description: "Electronic address",
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: "Scheme identifier",
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: "Scheme identifier",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -6963,35 +6953,35 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-X-256",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Electronic address
 									 */
-									electronicAddress: {
-										key: "BT-X-256",
-										type: "object",
-										description: "Details about the electronic address",
+									value: {
+										type: "string",
+										description: "Electronic address",
 										required: false,
-										shape: {
-											/**
-											 * Electronic address
-											 */
-											value: {
-												type: "string",
-												description: "Electronic address",
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: "Scheme identifier",
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: "Scheme identifier",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -7559,35 +7549,35 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-X-482",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Payer Electronic address
 									 */
-									electronicAddress: {
-										key: "BT-X-482",
-										type: "object",
-										description: "Details about the electronic address",
+									value: {
+										type: "string",
+										description: "Payer Electronic address",
 										required: false,
-										shape: {
-											/**
-											 * Payer Electronic address
-											 */
-											value: {
-												type: "string",
-												description: "Payer Electronic address",
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 */
-											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
-												description: "Scheme identifier",
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: "Scheme identifier",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -8654,35 +8644,35 @@ Such as a region, a county, a state, a province, etc.`,
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 											},
+										},
+									},
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										key: "BT-X-510",
+										type: "object",
+										description: "Details about the electronic address",
+										required: false,
+										shape: {
 											/**
-											 * Details about the electronic address
+											 * Electronic address
 											 */
-											electronicAddress: {
-												key: "BT-X-510",
-												type: "object",
-												description: "Details about the electronic address",
+											value: {
+												type: "string",
+												description: "Electronic address",
 												required: false,
-												shape: {
-													/**
-													 * Electronic address
-													 */
-													value: {
-														type: "string",
-														description: "Electronic address",
-														required: false,
-														xpath:
-															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID",
-													},
-													/**
-													 * Scheme identifier
-													 */
-													schemeIdentifier: {
-														type: EAS.map(({ code }) => code),
-														description: "Scheme identifier",
-														xpath:
-															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-													},
-												},
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID",
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: EAS.map(({ code }) => code),
+												description: "Scheme identifier",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 											},
 										},
 									},
@@ -10517,34 +10507,34 @@ Such as a region, a county, a state, a province, etc.`,
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 											},
+										},
+									},
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: "object",
+										description: "Details about the electronic address",
+										required: false,
+										shape: {
 											/**
-											 * Details about the electronic address
+											 * Electronic address
 											 */
-											electronicAddress: {
-												type: "object",
-												description: "Details about the electronic address",
+											value: {
+												type: "string",
+												description: "Electronic address",
 												required: false,
-												shape: {
-													/**
-													 * Electronic address
-													 */
-													value: {
-														type: "string",
-														description: "Electronic address",
-														required: false,
-														xpath:
-															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID",
-													},
-													/**
-													 * Scheme identifier
-													 */
-													schemeIdentifier: {
-														type: EAS.map(({ code }) => code),
-														description: "Scheme identifier",
-														xpath:
-															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-													},
-												},
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID",
+											},
+											/**
+											 * Scheme identifier
+											 */
+											schemeIdentifier: {
+												type: EAS.map(({ code }) => code),
+												description: "Scheme identifier",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 											},
 										},
 									},
@@ -10941,58 +10931,58 @@ Such as a region, a county, a state, a province, etc.`,
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 											},
+										},
+									},
+									/**
+									 * Details about the electronic address
+									 */
+									electronicAddress: {
+										type: "object",
+										description: "Details about the electronic address",
+										required: false,
+										shape: {
 											/**
-											 * Details about the electronic address
+											 * Electronic address
 											 */
-											electronicAddress: {
-												type: "object",
-												description: "Details about the electronic address",
+											value: {
+												type: "string",
+												description: "Electronic address",
 												required: false,
-												shape: {
-													/**
-													 * Electronic address
-													 */
-													value: {
-														type: "string",
-														description: "Electronic address",
-														required: false,
-														xpath:
-															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID",
-													},
-													/**
-													 * Scheme identifier
-													 */
-													schemeIdentifier: {
-														type: EAS.map(({ code }) => code),
-														description: "Scheme identifier",
-														xpath:
-															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-													},
-												},
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID",
 											},
 											/**
-											 * Detailed information on tax information of the final goods recipient
+											 * Scheme identifier
 											 */
-											taxRegistration: {
-												type: "object",
-												description:
-													"Detailed information on tax information of the final goods recipient",
+											schemeIdentifier: {
+												type: EAS.map(({ code }) => code),
+												description: "Scheme identifier",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
+											},
+										},
+									},
+									/**
+									 * Detailed information on tax information of the final goods recipient
+									 */
+									taxRegistration: {
+										type: "object",
+										description:
+											"Detailed information on tax information of the final goods recipient",
+										required: false,
+										shape: {
+											/**
+											 * VAT ID
+											 */
+											identifier: {
+												type: "string",
+												description: "VAT ID",
 												required: false,
-												shape: {
-													/**
-													 * VAT ID
-													 */
-													identifier: {
-														type: "string",
-														description: "VAT ID",
-														required: false,
-														xpath:
-															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
-														additionalXml: {
-															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-																"VA",
-														},
-													},
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
+												additionalXml: {
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
+														"VA",
 												},
 											},
 										},
