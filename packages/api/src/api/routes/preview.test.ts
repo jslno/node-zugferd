@@ -16,7 +16,7 @@ describe("preview", async () => {
 		expect(r.headers.get("Content-Type")).toEqual("text/html");
 		const ctx = await invoicer.apiContext;
 		expect(await r.text()).toEqual(
-			renderer.render(
+			await renderer.render(
 				{
 					data,
 					...ctx,

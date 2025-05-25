@@ -32,7 +32,7 @@ export const getTestInstance = async <
 		template: {
 			default: {
 				language: "eng",
-				component: (props: { data: ProfileBasic }) => {
+				component: async (props: { data: ProfileBasic }) => {
 					return (
 						<Document>
 							<h1>Test Invoice</h1>
