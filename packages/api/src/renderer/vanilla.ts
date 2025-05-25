@@ -1,7 +1,7 @@
 import type { Renderer } from "../types";
 
 export const renderer = {
-	render: (ctx) => ctx.options.template({ data: ctx.data }),
+	render: (ctx, component) => component({ data: ctx.data }),
 	$Infer: {
 		Template: {} as (props: { data: any }) => string,
 	},

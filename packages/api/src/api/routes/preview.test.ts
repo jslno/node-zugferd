@@ -8,22 +8,25 @@ describe("preview", async () => {
 	it("should generate preview from template", async () => {
 		const r = await invoicer.api.preview({
 			body: {
+				template: "default",
 				data,
 			},
 		});
 
 		expect(r.headers.get("Content-Type")).toEqual("text/html");
+		const ctx = await invoicer.apiContext;
 		expect(await r.text()).toEqual(
 			renderer.render({
 				data,
-				...(await invoicer.apiContext),
-			}),
+				...ctx,
+			}, ctx.options.template.default.component),
 		);
 	});
 
 	it("should not generate preview without authorization", async () => {
 		const res = await client("@post/preview", {
 			body: {
+				template: "default",
 				data,
 			},
 		});

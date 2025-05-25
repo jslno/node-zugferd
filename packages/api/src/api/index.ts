@@ -15,12 +15,12 @@ import { create } from "./routes/create";
 import { originCheckMiddleware } from "./middlewares";
 import type { ApiEndpoint } from "./call";
 
-export const getEndpoints = <P extends Profile, C extends ZugferdApiContext>(
+export const getEndpoints = <P extends Profile, O extends ZugferdApiOptions, C extends ZugferdApiContext>(
 	profile: P,
 	ctx: Promise<C> | C,
 ) => {
 	const baseEndpoints = {
-		preview: preview<P>(),
+		preview: preview<P, O>(),
 		create: create<P>(),
 	};
 
