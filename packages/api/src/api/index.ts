@@ -5,15 +5,17 @@ import {
 	type EndpointOptions,
 	APIError,
 	toResponse,
+	type Middleware,
 } from "better-call";
 import type { ZugferdApiContext } from "../init";
 import type { ZugferdApiOptions } from "../types/options";
 import { ok } from "./routes/ok";
 import { preview } from "./routes/preview";
-import type { Profile } from "node-zugferd/types";
+import type { Profile, UnionToIntersection } from "node-zugferd/types";
 import { create } from "./routes/create";
 import { originCheckMiddleware } from "./middlewares";
 import type { ApiEndpoint } from "./call";
+import type { ZugferdApiPlugin } from "../types/plugins";
 
 export const getEndpoints = <
 	P extends Profile,
@@ -22,7 +24,53 @@ export const getEndpoints = <
 >(
 	profile: P,
 	ctx: Promise<C> | C,
+	options: O,
 ) => {
+	const pluginEndpoints = options.plugins?.reduce(
+		(acc, plugin) => {
+			return {
+				...acc,
+				...plugin.endpoints,
+			};
+		},
+		{} as Record<string, any>,
+	);
+
+	type PluginEndpoint = UnionToIntersection<
+		O["plugins"] extends Array<infer T>
+			? T extends ZugferdApiPlugin
+				? T extends {
+						endpoints: infer E;
+					}
+					? E
+					: {}
+				: {}
+			: {}
+	>;
+
+	const middlewares =
+		options.plugins
+			?.map((plugin) =>
+				plugin.middlewares?.map((m) => {
+					const middleware = (async (context: any) => {
+						return m.middleware({
+							...context,
+							context: {
+								...ctx,
+								...context.context,
+							},
+						});
+					}) as Middleware;
+					middleware.options = m.middleware.options;
+					return {
+						path: m.path,
+						middleware,
+					};
+				}),
+			)
+			.filter((plugin) => plugin !== undefined)
+			.flat() || [];
+
 	const baseEndpoints = {
 		preview: preview<P, O>(),
 		create: create<P, O>(),
@@ -30,10 +78,14 @@ export const getEndpoints = <
 
 	const endpoints = {
 		...baseEndpoints,
+		...pluginEndpoints,
 		ok,
 	};
 
-	return toApiEndpoints(endpoints, ctx) as typeof endpoints;
+	return {
+		api: toApiEndpoints(endpoints, ctx) as typeof endpoints & PluginEndpoint,
+		middlewares,
+	};
 };
 
 type InternalContext = InputContext<string, any> &
@@ -110,11 +162,12 @@ export type Router<P extends Profile = Profile> = ReturnType<
 export const router =
 	<P extends Profile>(profile: P) =>
 	<C extends ZugferdApiContext, O extends ZugferdApiOptions>(ctx: C) => {
-		const endpoints = getEndpoints(profile, ctx);
+		const { api, middlewares } = getEndpoints(profile, ctx, ctx.options as O);
+		const basePath = new URL(ctx.baseURL).pathname;
 
-		return createRouter(endpoints, {
+		return createRouter(api, {
 			routerContext: ctx,
-			basePath: new URL(ctx.baseURL).pathname,
+			basePath,
 			openapi: {
 				disabled: true,
 			},
@@ -123,7 +176,31 @@ export const router =
 					path: "/**",
 					middleware: originCheckMiddleware,
 				},
+				...middlewares,
 			],
+			onRequest: async (req) => {
+				for (const plugin of ctx.options.plugins || []) {
+					if (plugin.onRequest) {
+						const response = await plugin.onRequest(req, ctx);
+						if (response && "response" in response) {
+							return response.response;
+						}
+					}
+				}
+
+				return req;
+			},
+			onResponse: async (res) => {
+				for (const plugin of ctx.options.plugins || []) {
+					if (plugin.onResponse) {
+						const response = await plugin.onResponse(res, ctx);
+						if (response) {
+							return response.response;
+						}
+					}
+				}
+				return res;
+			},
 		});
 	};
 
