@@ -19,12 +19,12 @@ import type { ZugferdApiPlugin } from "../types/plugins";
 
 export const getEndpoints = <
 	P extends Profile,
+	O extends ZugferdApiOptions,
 	C extends ZugferdApiContext,
-	Option extends ZugferdApiOptions,
 >(
 	profile: P,
 	ctx: Promise<C> | C,
-	options: Option,
+	options: O,
 ) => {
 	const pluginEndpoints = options.plugins?.reduce(
 		(acc, plugin) => {
@@ -37,7 +37,7 @@ export const getEndpoints = <
 	);
 
 	type PluginEndpoint = UnionToIntersection<
-		Option["plugins"] extends Array<infer T>
+		O["plugins"] extends Array<infer T>
 			? T extends ZugferdApiPlugin
 				? T extends {
 						endpoints: infer E;
@@ -72,8 +72,8 @@ export const getEndpoints = <
 			.flat() || [];
 
 	const baseEndpoints = {
-		preview: preview<P>(),
-		create: create<P>(),
+		preview: preview<P, O>(),
+		create: create<P, O>(),
 	};
 
 	const endpoints = {
@@ -161,11 +161,8 @@ export type Router<P extends Profile = Profile> = ReturnType<
 
 export const router =
 	<P extends Profile>(profile: P) =>
-	<C extends ZugferdApiContext, O extends ZugferdApiOptions>(
-		ctx: C,
-		options: O,
-	) => {
-		const { api, middlewares } = getEndpoints(profile, ctx, options);
+	<C extends ZugferdApiContext, O extends ZugferdApiOptions>(ctx: C) => {
+		const { api, middlewares } = getEndpoints(profile, ctx, ctx.options as O);
 		const basePath = new URL(ctx.baseURL).pathname;
 
 		return createRouter(api, {

@@ -8,12 +8,17 @@ export const invoicer = zugferd({
 	plugins: [
 		api(BASIC)(renderer, {
 			secret: "SECRET",
-			template: (data: ProfileBasic) => {
-				return (
-					<Document>
-						<h1>Test Invoice {data.number}</h1>
-					</Document>
-				);
+			template: {
+				default: {
+					language: "eng",
+					component: (props: { data: ProfileBasic }) => {
+						return (
+							<Document>
+								<h1>Test Invoice {props.data.number}</h1>
+							</Document>
+						);
+					},
+				},
 			},
 		}),
 	],
