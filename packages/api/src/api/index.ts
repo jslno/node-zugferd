@@ -25,7 +25,7 @@ export const getEndpoints = <
 ) => {
 	const baseEndpoints = {
 		preview: preview<P, O>(),
-		create: create<P>(),
+		create: create<P, O>(),
 	};
 
 	const endpoints = {

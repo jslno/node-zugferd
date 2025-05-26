@@ -1,35 +1,14 @@
 import React, { type JSX } from "react";
-import { renderToPipeableStream } from "react-dom/server";
+import { renderToStaticMarkup } from "react-dom/server";
 import type { Renderer } from "../types/renderer";
-import { PassThrough } from "stream";
 
 export const renderer = {
 	render: async (ctx, Component) => {
-		const stream = new PassThrough();
 		const element = await Component({
 			data: ctx.data,
 		});
 
-		return await new Promise<string>((resolve, reject) => {
-			let html = "";
-
-			const { pipe } = renderToPipeableStream(element, {
-				onAllReady() {
-					pipe(stream);
-				},
-				onError(err) {
-					reject(err);
-				},
-			});
-
-			stream.on("data", (chunk) => {
-				html += chunk.toString();
-			});
-
-			stream.on("end", () => {
-				resolve("<!DOCTYPE html>" + html);
-			});
-		});
+		return await renderToStaticMarkup(element);
 	},
 	$Infer: {
 		Template: {} as (props: { data: any }) =>

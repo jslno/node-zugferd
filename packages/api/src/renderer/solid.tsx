@@ -2,7 +2,7 @@
 
 import type { Renderer } from "../types/renderer";
 import type { JSX as SolidJSX } from "solid-js";
-import { renderToString } from "solid-js/web";
+import { renderToStringAsync } from "solid-js/web";
 
 export const renderer = {
 	render: async (ctx, Component) => {
@@ -10,7 +10,7 @@ export const renderer = {
 			data: ctx.data,
 		});
 
-		return "<!DOCTYPE html>" + renderToString(() => element);
+		return "<!DOCTYPE html>" + (await renderToStringAsync(() => element));
 	},
 	$Infer: {
 		Template: {} as (props: { data: any }) =>
