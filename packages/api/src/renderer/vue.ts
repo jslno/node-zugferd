@@ -9,10 +9,10 @@ import { renderToString } from "vue/server-renderer";
 import type { Renderer } from "../types/renderer";
 
 export const renderer = {
-	render: (ctx) => {
+	render: (ctx, component) => {
 		const app = createSSRApp({
 			data: () => ({ data: ctx.data }),
-			template: ctx.options.template,
+			template: component,
 		});
 
 		return renderToString(app);

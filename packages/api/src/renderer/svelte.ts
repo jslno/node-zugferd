@@ -3,8 +3,8 @@ import type { Component } from "svelte";
 import { render } from "svelte/server";
 
 export const renderer = {
-	render: (ctx) => {
-		const res = render(ctx.options.template, {
+	render: (ctx, component) => {
+		const res = render(component, {
 			props: { data: ctx.data },
 		});
 

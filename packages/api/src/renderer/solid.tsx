@@ -2,14 +2,20 @@
 
 import type { Renderer } from "../types/renderer";
 import type { JSX as SolidJSX } from "solid-js";
-import { renderToString } from "solid-js/web";
+import { renderToStringAsync } from "solid-js/web";
 
 export const renderer = {
-	render: (ctx) =>
-		"<!DOCTYPE html>" +
-		renderToString(() => <ctx.options.template data={ctx.data} />),
+	render: async (ctx, Component) => {
+		const element = await Component({
+			data: ctx.data,
+		});
+
+		return "<!DOCTYPE html>" + (await renderToStringAsync(() => element));
+	},
 	$Infer: {
-		Template: {} as (props: { data: any }) => SolidJSX.Element,
+		Template: {} as (props: { data: any }) =>
+			| SolidJSX.Element
+			| Promise<SolidJSX.Element>,
 	},
 } satisfies Renderer;
 

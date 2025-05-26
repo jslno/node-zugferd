@@ -19,6 +19,7 @@ describe("create", async () => {
 	it("should generate valid pdf/a3-b invoice", async () => {
 		const res = await client("@post/create", {
 			body: {
+				template: "default",
 				data,
 			},
 			headers: {
@@ -63,6 +64,7 @@ describe("create", async () => {
 	it("should not generate invoice when unauthorized", async () => {
 		const res = await client("@post/create", {
 			body: {
+				template: "default",
 				data,
 			},
 			headers: {

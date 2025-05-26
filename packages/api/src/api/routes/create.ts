@@ -3,18 +3,23 @@ import { createApiEndpoint } from "../call";
 import { z } from "zod";
 import puppeteer from "puppeteer";
 import { signToken } from "../../utils/token";
+import type { ZugferdApiOptions } from "../../types";
 
-export const create = <P extends Profile>() =>
+export const create = <P extends Profile, O extends ZugferdApiOptions>() =>
 	createApiEndpoint(
 		"/create",
 		{
 			method: "POST",
 			body: z.object({
+				template: z.string(),
 				data: z.record(z.string(), z.any()),
 			}),
 			metadata: {
 				$Infer: {
-					body: {} as { data: InferSchema<P> },
+					body: {} as {
+						template: Exclude<keyof O["template"], number>;
+						data: InferSchema<P>;
+					},
 				},
 			},
 		},
