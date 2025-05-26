@@ -17,7 +17,11 @@ export const api =
 			profile = ctx.options.profile as any as P;
 			const context = init(renderer, options, ctx);
 
-			const { api } = getEndpoints<P, O, Awaited<typeof context>>(profile, context, options);
+			const { api } = getEndpoints<P, O, Awaited<typeof context>>(
+				profile,
+				context,
+				options,
+			);
 
 			return {
 				apiHandler: async (request: Request) => {

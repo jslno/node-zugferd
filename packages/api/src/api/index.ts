@@ -161,9 +161,7 @@ export type Router<P extends Profile = Profile> = ReturnType<
 
 export const router =
 	<P extends Profile>(profile: P) =>
-	<C extends ZugferdApiContext, O extends ZugferdApiOptions>(
-		ctx: C,
-	) => {
+	<C extends ZugferdApiContext, O extends ZugferdApiOptions>(ctx: C) => {
 		const { api, middlewares } = getEndpoints(profile, ctx, ctx.options as O);
 		const basePath = new URL(ctx.baseURL).pathname;
 
