@@ -1,13 +1,19 @@
 import React, { type JSX } from "react";
-import { renderToString } from "react-dom/server";
+import { renderToStaticMarkup } from "react-dom/server";
 import type { Renderer } from "../types/renderer";
 
 export const renderer = {
-	render: (ctx) =>
-		"<!DOCTYPE html>" +
-		renderToString(<ctx.options.template data={ctx.data} />),
+	render: async (ctx, Component) => {
+		const element = await Component({
+			data: ctx.data,
+		});
+
+		return await renderToStaticMarkup(element);
+	},
 	$Infer: {
-		Template: {} as (props: { data: any }) => JSX.Element,
+		Template: {} as (props: { data: any }) =>
+			| JSX.Element
+			| Promise<JSX.Element>,
 	},
 } satisfies Renderer;
 

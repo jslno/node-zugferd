@@ -29,13 +29,18 @@ export const getTestInstance = async <
 	config ||= {};
 	const opts = {
 		secret: "node-zugferd.secret",
-		template: (props: { data: ProfileBasic }) => {
-			return (
-				<Document>
-					<h1>Test Invoice</h1>
-					<p>{props.data.number}</p>
-				</Document>
-			);
+		template: {
+			default: {
+				language: "eng",
+				component: async (props: { data: ProfileBasic }) => {
+					return (
+						<Document>
+							<h1>Test Invoice</h1>
+							<p>{props.data.number}</p>
+						</Document>
+					);
+				},
+			},
 		},
 		advanced: {
 			puppeteer: {

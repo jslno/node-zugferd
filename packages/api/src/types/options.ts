@@ -2,6 +2,7 @@ import type { LaunchOptions } from "puppeteer";
 import type { GenericEndpointContext } from "./context";
 import type { Renderer } from "./renderer";
 import type { ZugferdApiPlugin } from "./plugins";
+import type { Iso639_2Code } from "node-zugferd/codelist/iso.639-2";
 
 export type ZugferdApiOptions<R extends Renderer = Renderer> = {
 	secret: string;
@@ -10,7 +11,12 @@ export type ZugferdApiOptions<R extends Renderer = Renderer> = {
 	 * @default "/api/zugferd"
 	 */
 	basePath?: string;
-	template: R["$Infer"]["Template"];
+	template: {
+		[key: string]: {
+			language: Iso639_2Code;
+			component: R["$Infer"]["Template"];
+		};
+	};
 	trustedOrigins?:
 		| string[]
 		| ((request: Request) => string[] | Promise<string[]>);
