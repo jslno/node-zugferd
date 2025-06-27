@@ -1,0 +1,50 @@
+{
+    "name": "@node-zugferd/cli",
+    "version": "0.0.10-beta.1",
+    "description": "The CLI for node-zugferd",
+    "module": "dist/index.mjs",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jslno/node-zugferd",
+        "directory": "packages/cli"
+    },
+    "main": "./dist/index.mjs",
+    "scripts": {
+        "dev": "tsup --watch --sourcemap",
+        "start": "node ./dist/index.mjs",
+        "test": "vitest",
+        "build": "tsup --clean"
+    },
+    "publishConfig": {
+        "executableFiles": [
+            "./dist/index.mjs"
+        ]
+    },
+    "exports": "./dist/index.mjs",
+    "bin": "./dist/index.mjs",
+    "devDependencies": {
+        "@types/fs-extra": "^11.0.4",
+        "@types/semver": "^7.7.0",
+        "tsup": "^8.3.5",
+        "typescript": "^5.7.3",
+        "vitest": "^3.0.4"
+    },
+    "dependencies": {
+        "@babel/preset-react": "^7.27.1",
+        "@babel/preset-typescript": "^7.27.1",
+        "@clack/prompts": "^0.11.0",
+        "c12": "^3.0.4",
+        "chalk": "^5.4.1",
+        "commander": "^14.0.0",
+        "dotenv": "^16.5.0",
+        "fs-extra": "^11.3.0",
+        "node-zugferd": "workspace:*",
+        "prettier": "^3.5.3",
+        "prettier-plugin-svelte": "^3.4.0",
+        "semver": "^7.7.2",
+        "zod": "^3.24.1"
+    },
+    "files": [
+        "dist"
+    ]
+}
