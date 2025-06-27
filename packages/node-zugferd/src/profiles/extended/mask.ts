@@ -1146,7 +1146,7 @@ export const extendedMask = {
 							sellerBankInformation: [
 								"BT-86-00",
 								{
-									serviceProdiverIdentifier: "BT-86",
+									serviceProviderIdentifier: "BT-86",
 								},
 							],
 						},
