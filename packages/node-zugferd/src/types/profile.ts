@@ -1,14 +1,15 @@
 import { type InferSchema, type Schema } from "./schema";
-import { type ZugferdContext } from "../init";
+import { type BaseZugferdContext } from "../init";
 import { type LiteralString } from "./helper";
 
 export type Profile = {
+	id: LiteralString;
 	extends?: Profile[];
 	schema: Schema;
-	contextParameter: LiteralString;
-	xsdPath: string;
+	xsdPath?: string | (() => Promise<string> | string);
 	conformanceLevel: string;
 	documentFileName: string;
+	mask?: Record<string, any>;
 	/**
 	 * @default 'INVOICE'
 	 */
@@ -17,12 +18,12 @@ export type Profile = {
 };
 
 export type ProfileParseHandlerContext<P extends Profile = Profile> = {
-	context: ZugferdContext;
+	context: BaseZugferdContext;
 	data: InferSchema<P>;
 };
 
 export type ProfileParseHandler<P extends Profile = Profile> = (ctx: {
-	context: ZugferdContext;
+	context: BaseZugferdContext;
 	data: InferSchema<P>;
 }) => any;
 

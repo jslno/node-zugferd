@@ -4,18 +4,95 @@ import type { Profile } from "../../types/profile";
 import { XMLBuilder, type XmlBuilderOptions } from "fast-xml-parser";
 import { ZugferdError } from "../../error";
 
+const findFieldByKey = (obj: any, key: string): any | undefined => {
+	if (typeof obj !== "object" || obj === null) return undefined;
+
+	if (obj.key === key) return obj;
+
+	for (const value of Object.values(obj)) {
+		if (typeof value === "object" && value !== null) {
+			const found = findFieldByKey(value, key);
+			if (found !== undefined) return found;
+		}
+	}
+
+	return undefined;
+};
+
+const applyMask = (
+	schema: Schema,
+	mask: Record<string, any>,
+): Record<string, any> => {
+	const res = Object.entries(mask).reduce(
+		(acc, [key, value]) => {
+			if (Array.isArray(value) && value.length) {
+				const nestedSchema = findFieldByKey(schema, value[0]);
+				if (nestedSchema) {
+					acc[key] = {
+						...nestedSchema,
+						shape: applyMask(nestedSchema, value[1]),
+					};
+				}
+			} else {
+				const nestedSchema = findFieldByKey(schema, value);
+				if (nestedSchema !== undefined) {
+					acc[key] = nestedSchema;
+				}
+			}
+			return acc;
+		},
+		{} as Record<string, any>,
+	);
+	return res;
+};
+
+const updateDefaultValues = (base: Schema, override: Schema): Schema => {
+	const result: Schema = {};
+
+	for (const key in base) {
+		const baseField = base[key];
+		const overrideField = override[key];
+
+		if (baseField && overrideField) {
+			if (baseField.shape && overrideField.shape) {
+				result[key] = {
+					...baseField,
+					shape: updateDefaultValues(baseField.shape, overrideField.shape),
+				};
+			} else {
+				result[key] = {
+					...baseField,
+					defaultValue: overrideField.defaultValue ?? baseField.defaultValue,
+				};
+			}
+		} else {
+			result[key] = baseField;
+		}
+	}
+
+	return result;
+};
 export const mergeSchemas = (profile: Profile): Schema => {
 	if (!profile.extends) {
-		return profile.schema;
+		return profile.mask
+			? applyMask(profile.schema, profile.mask)
+			: profile.schema;
 	}
-	return defu(
-		profile.schema,
-		...profile.extends?.map((profile) => profile.schema),
+
+	const mergedExtensions = defu(
+		{},
+		...(profile.extends?.map((p) => p.schema) || []),
 	);
+
+	const mergedSchema = updateDefaultValues(
+		defu({}, mergedExtensions, profile.schema),
+		profile.schema,
+	);
+
+	return profile.mask ? applyMask(mergedSchema, profile.mask) : mergedSchema;
 };
 
 export type ParseSchemaOptions = {
-	contextParameter: string;
 	groupIndices?: GroupIndices;
 };
 
@@ -42,13 +119,6 @@ export const parseSchema = <S extends Schema>(
 			"@xmlns:xs": "http://www.w3.org/2001/XMLSchema",
 			"@xmlns:udt":
 				"urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100",
-			"rsm:ExchangedDocumentContext": {
-				"ram:GuidelineSpecifiedDocumentContextParameter": {
-					"ram:ID": {
-						"#": options.contextParameter,
-					},
-				},
-			},
 		},
 	};
 	const localGroupIndices: GroupIndices = { ...parentGroupIndices };
@@ -195,9 +265,18 @@ export const parseSchema = <S extends Schema>(
 
 			rawValue = data;
 		}
+		const _value =
+			field.type !== "object"
+				? (rawValue ?? field.defaultValue)
+				: typeof rawValue === "object"
+					? Object.keys(rawValue).length <= 0
+						? field.defaultValue
+						: rawValue
+					: rawValue;
+
 		const value = field.transform?.input
-			? field.transform.input(rawValue ?? field.defaultValue)
-			: (rawValue ?? field.defaultValue);
+			? field.transform.input(_value)
+			: _value;
 
 		processField(field, value, key);
 	}

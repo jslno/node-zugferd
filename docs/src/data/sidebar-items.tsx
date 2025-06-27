@@ -1,27 +1,16 @@
+import { Content } from "@/types/content";
 import {
+	BlocksIcon,
 	BookOpenIcon,
 	ChartColumn,
 	CirclePlayIcon,
 	GitPullRequestCreateArrowIcon,
 	LayoutGridIcon,
 	LibraryIcon,
-	LucideIcon,
 	PencilRulerIcon,
 	ScrollIcon,
 } from "lucide-react";
-import { ReactNode, SVGProps } from "react";
-
-type Content = {
-	title: string;
-	href?: string;
-	Icon?: ((props: SVGProps<any>) => ReactNode) | LucideIcon;
-	list: {
-		title: string;
-		href: string;
-		Icon?: ((props: SVGProps<any>) => ReactNode) | LucideIcon;
-		group?: boolean;
-	}[];
-};
+import { SVGProps } from "react";
 
 export const contents: Content[] = [
 	{
@@ -101,6 +90,18 @@ export const contents: Content[] = [
 		Icon: ScrollIcon,
 		list: [
 			{
+				title: "ISO 639-2",
+				href: "/docs/codelists/iso-639-2",
+			},
+			{
+				title: "ISO 3166",
+				href: "/docs/codelists/iso-3166",
+			},
+			{
+				title: "ISO 6523",
+				href: "/docs/codelists/iso-6523",
+			},
+			{
 				title: "UNTDID 1001",
 				href: "/docs/codelists/untdid-1001",
 			},
@@ -109,8 +110,20 @@ export const contents: Content[] = [
 				href: "/docs/codelists/untdid-1153",
 			},
 			{
-				title: "UNTDID 2005",
-				href: "/docs/codelists/untdid-2005",
+				title: "UNTDID 1229",
+				href: "/docs/codelists/untdid-1229",
+			},
+			{
+				title: "UNTDID 2475",
+				href: "/docs/codelists/untdid-2475",
+			},
+			{
+				title: "UNTDID 3035",
+				href: "/docs/codelists/untdid-3035",
+			},
+			{
+				title: "UNTDID 3139",
+				href: "/docs/codelists/untdid-3139",
 			},
 			{
 				title: "UNTDID 4451",
@@ -135,6 +148,56 @@ export const contents: Content[] = [
 			{
 				title: "UNTDID 7161",
 				href: "/docs/codelists/untdid-7161",
+			},
+			{
+				title: "VATEX",
+				href: "/docs/codelists/vatex",
+			},
+			{
+				title: "EAS",
+				href: "/docs/codelists/eas",
+			},
+			{
+				title: "Currency Codes",
+				href: "/docs/codelists/currency-codes",
+			},
+			{
+				title: "UN/ECE Recommendation N°20",
+				href: "/docs/codelists/rec20",
+			},
+			{
+				title: "UN/ECE Recommendation N°21",
+				href: "/docs/codelists/rec21",
+			},
+		],
+	},
+	{
+		title: "Plugins",
+		Icon: BlocksIcon,
+		list: [
+			{
+				title: "API",
+				href: "/docs/plugins/api",
+				Icon: () => (
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="1.2rem"
+						height="1.2rem"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						strokeWidth="2"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						className=""
+					>
+						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						<path d="M12 15h-6.5a2.5 2.5 0 1 1 0 -5h.5" />
+						<path d="M15 12v6.5a2.5 2.5 0 1 1 -5 0v-.5" />
+						<path d="M12 9h6.5a2.5 2.5 0 1 1 0 5h-.5" />
+						<path d="M9 12v-6.5a2.5 2.5 0 0 1 5 0v.5" />
+					</svg>
+				),
 			},
 		],
 	},

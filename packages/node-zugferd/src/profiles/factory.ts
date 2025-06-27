@@ -9,9 +9,7 @@ export const createProfile = <P extends Profile>(options: P) => {
 			const xmlObj = ctx.context.parseSchema(
 				ctx.data as InferSchema<P>,
 				ctx.context.mergeSchemas(options),
-				{
-					contextParameter: options.contextParameter,
-				},
+				{},
 				{},
 				ctx.data,
 			);
@@ -19,6 +17,11 @@ export const createProfile = <P extends Profile>(options: P) => {
 			return xmlObj;
 		},
 		validate: async (data: string | Buffer | { file: string }) => {
+			const xsdPath = await getXsdPath(options);
+			if (!xsdPath) {
+				return true;
+			}
+
 			try {
 				let xsdValidator: any;
 				try {
@@ -27,7 +30,7 @@ export const createProfile = <P extends Profile>(options: P) => {
 					throw new Error("Missing dependency xsd-schema-validator");
 				}
 
-				const res = await xsdValidator.validateXML(data, options.xsdPath);
+				const res = await xsdValidator.validateXML(data, xsdPath);
 
 				return res.valid === true;
 			} catch (err: any) {
@@ -37,4 +40,18 @@ export const createProfile = <P extends Profile>(options: P) => {
 	} satisfies ProfileContext;
 
 	return ctx;
+};
+
+export const getXsdPath = (
+	profile:
+		| Profile
+		| {
+				xsdPath?: Profile["xsdPath"];
+		  },
+) => {
+	if (typeof profile.xsdPath === "function") {
+		return profile.xsdPath();
+	}
+
+	return profile.xsdPath;
 };

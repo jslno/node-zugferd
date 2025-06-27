@@ -2,6 +2,9 @@ const isDate = (value: unknown): value is Date =>
 	value instanceof Date && !isNaN(value.getTime());
 
 export const dateTimeStringFormatter = (date: unknown) => {
+	if (typeof date === "string") {
+		date = new Date(date);
+	}
 	if (!isDate(date)) return;
 
 	const year = date.getFullYear();

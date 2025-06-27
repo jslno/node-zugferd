@@ -21,7 +21,7 @@
     "bump": "bumpp",
     "test": "turbo --filter \"./packages/*\" test",
     "typecheck": "turbo --filter \"./packages/*\" typecheck",
-    "untdid:update": "node ./scripts/untdid/update.js"
+    "codelists:update": "node ./scripts/update.js"
   },
   "dependencies": {
     "@biomejs/biome": "1.9.4",

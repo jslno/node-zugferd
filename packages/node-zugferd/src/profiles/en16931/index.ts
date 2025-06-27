@@ -2,12 +2,16 @@ import { createProfile } from "../factory";
 import { type InferSchema } from "../../types/schema";
 import { BASIC } from "../basic";
 import { en16931Schema } from "./schema";
+import { getAsset } from "../../utils/asset";
+import { en16931Mask } from "./mask";
 
 export const EN16931 = createProfile({
+	id: "en16931",
 	contextParameter: "urn:cen.eu:en16931:2017",
 	extends: [...BASIC.extends, BASIC],
 	schema: en16931Schema,
-	xsdPath: "Factur-X_1.07.2_EN16931.xsd",
+	mask: en16931Mask,
+	xsdPath: () => getAsset("Factur-X_1.07.2_EN16931.xsd"),
 	conformanceLevel: "EN 16931",
 	documentFileName: "factur-x.xml",
 	documentType: "INVOICE",

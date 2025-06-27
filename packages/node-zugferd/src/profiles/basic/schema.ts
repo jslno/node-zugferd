@@ -1,11 +1,19 @@
 import z from "zod";
 import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
-import { UNTDID_5305 } from "../../codelists/untdid/5305";
-import { UNTDID_5189 } from "../../codelists/untdid/5189";
-import { UNTDID_7161 } from "../../codelists/untdid/7161";
+import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
+import { UNTDID_5189 } from "../../codelists/untdid/5189.gen";
+import { UNTDID_7161 } from "../../codelists/untdid/7161.gen";
+import { REC20 } from "../../codelists/rec20.gen";
+import { REC21 } from "../../codelists/rec21.gen";
+import { ISO_6523 } from "../../codelists/iso/6523.gen";
 
 export const basicSchema = {
+	specificationIdentifier: {
+		type: "string",
+		required: false,
+		defaultValue: "urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic",
+	},
 	transaction: {
 		type: "object",
 		required: false,
@@ -16,6 +24,7 @@ export const basicSchema = {
 			 * A group of business terms providing information on individual Invoice lines.
 			 */
 			line: {
+				key: "BG-25",
 				type: "object[]",
 				description: `**Invoice Line**
 
@@ -27,6 +36,7 @@ A group of business terms providing information on individual Invoice lines.`,
 					 * Grouping of general position information
 					 */
 					identifier: {
+						key: "BT-126",
 						type: "string",
 						description: "Grouping of general position information",
 						required: false,
@@ -39,6 +49,7 @@ A group of business terms providing information on individual Invoice lines.`,
 					 * A textual note that gives unstructured information that is relevant to the Invoice line.
 					 */
 					note: {
+						key: "BT-127",
 						type: "string",
 						description: `**Invoice line note**
 
@@ -53,6 +64,7 @@ A textual note that gives unstructured information that is relevant to the Invoi
 					 * A group of business terms providing information about the goods and services invoiced.
 					 */
 					tradeProduct: {
+						key: "BG-31",
 						type: "object",
 						description: `**Item information**
 
@@ -68,7 +80,9 @@ A group of business terms providing information about the goods and services inv
 							 * BR-64: The Item standard identifier (BT-157) shall have a Scheme identifier
 							 */
 							globalIdentifier: {
+								key: "BT-157",
 								type: "object",
+								required: false,
 								description: `**Item standard identifier**
 
 An item identifier based on a registered scheme.
@@ -107,7 +121,7 @@ BR-64: The Item standard identifier (BT-157) shall have a Scheme identifier`,
 									 * The identification scheme shall be identified from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Item standard identifier
@@ -124,6 +138,7 @@ The identification scheme shall be identified from the entries of the list publi
 							 * A name for an item.
 							 */
 							name: {
+								key: "BT-153",
 								type: "string",
 								description: `**Item name**
 
@@ -139,6 +154,7 @@ A name for an item.`,
 					 * A group of business terms providing information about the price applied for the goods and services invoiced on the Invoice line.
 					 */
 					tradeAgreement: {
+						key: "BG-29",
 						type: "object",
 						description: `**Price details**
 
@@ -148,6 +164,7 @@ A group of business terms providing information about the price applied for the 
 							 * Detailed information on the gross price of the item
 							 */
 							grossTradePrice: {
+								key: "BT-148-00",
 								type: "object",
 								description:
 									"Detailed information on the gross price of the item",
@@ -163,6 +180,7 @@ A group of business terms providing information about the price applied for the 
 									 * BR-28: The Item gross price (BT-148) shall NOT be negative.
 									 */
 									chargeAmount: {
+										key: "BT-148",
 										type: "string | number",
 										description: `**Item gross price**
 
@@ -183,6 +201,7 @@ BR-28: The Item gross price (BT-148) shall NOT be negative.`,
 									 * Optional, if filled and if BT-148 is present (EN16931 and EXTENDED profiles), then it should be the same value than BT-149-1
 									 */
 									basisQuantity: {
+										key: "BT-149-1",
 										type: "object",
 										description: `**Item price base quantity**
 
@@ -227,7 +246,10 @@ Optional, if filled and if BT-148 is present (EN16931 and EXTENDED profiles), th
 											 * BT-130, BT-150 and BT-150-1 must be equal if stated.
 											 */
 											unitMeasureCode: {
-												type: ["LTR", "MTQ", "KGM", "MTR", "C62", "TNE"],
+												type: [
+													...REC20.map(({ code }) => code),
+													...REC21.map(({ code }) => code),
+												],
 												description: `**Item price base quantity unit of measure code**
 
 The unit of measure that applies to the Item price base quantity.
@@ -255,6 +277,7 @@ BT-130, BT-150 and BT-150-1 must be equal if stated.`,
 									 * Detailed information on discounts and charges
 									 */
 									discounts: {
+										key: "BT-147-00",
 										type: "object",
 										description: `**Price-related discounts**
 
@@ -269,6 +292,7 @@ Detailed information on discounts and charges`,
 											 * Only applies if the discount is provided per unit and if it is not included in the Item gross price.
 											 */
 											actualAmount: {
+												key: "BT-147",
 												type: "string | number",
 												description: `**Item price discount**
 
@@ -293,6 +317,7 @@ Only applies if the discount is provided per unit and if it is not included in t
 							 * The net price includes all surchages and discounts, except for VAT.
 							 */
 							netTradePrice: {
+								key: "BT-146-00",
 								type: "object",
 								description: `**Detailed information on the net price of the item**
 
@@ -313,6 +338,7 @@ The net price includes all surchages and discounts, except for VAT.`,
 									 * BR-27: The Item net price (BT-146) shall NOT be negative.
 									 */
 									chargeAmount: {
+										key: "BT-146",
 										type: "string | number",
 										description: `**Item net price**
 
@@ -336,6 +362,7 @@ BR-27: The Item net price (BT-146) shall NOT be negative.`,
 									 * Optional, if filled and if BT-148 is present (EN16931 and EXTENDED profiles), then it should be the same value than BT-149-1
 									 */
 									basisQuantity: {
+										key: "BT-149",
 										type: "object",
 										description: `**Item price base quantity**
 
@@ -380,7 +407,10 @@ Optional, if filled and if BT-148 is present (EN16931 and EXTENDED profiles), th
 											 * BT-130, BT-150 and BT-150-1 must be equal if stated.
 											 */
 											unitMeasureCode: {
-												type: ["LTR", "MTQ", "KGM", "MTR", "C62", "TNE"],
+												type: [
+													...REC20.map(({ code }) => code),
+													...REC21.map(({ code }) => code),
+												],
 												description: `**Item price base quantity unit of measure code**
 
 The unit of measure that applies to the Item price base quantity.
@@ -410,6 +440,7 @@ BT-130, BT-150 and BT-150-1 must be equal if stated.`,
 					 * Grouping of delivery details on line level
 					 */
 					tradeDelivery: {
+						key: "BT-129-00",
 						type: "object",
 						description: "Grouping of delivery details on line level",
 						required: false,
@@ -424,6 +455,7 @@ BT-130, BT-150 and BT-150-1 must be equal if stated.`,
 							 * BR-22: Each  Invoice  line  (BG-25)  shall  have  an  Invoiced  quantity (BT-129).
 							 */
 							billedQuantity: {
+								key: "BT-129",
 								type: "object",
 								description: `**Invoiced quantity**
 
@@ -472,7 +504,11 @@ BR-22: Each  Invoice  line  (BG-25)  shall  have  an  Invoiced  quantity (BT-129
 									 * BR-23: An Invoice line (BG-25) shall have an Invoiced quantity unit of measure code (BT-130).
 									 */
 									unitMeasureCode: {
-										type: ["LTR", "MTQ", "KGM", "MTR", "C62", "TNE"],
+										key: "BT-130",
+										type: [
+											...REC20.map(({ code }) => code),
+											...REC21.map(({ code }) => code),
+										],
 										description: `**Invoiced quantity unit of measure**
 
 The unit of measure that applies to the invoiced quantity.
@@ -500,6 +536,7 @@ BR-23: An Invoice line (BG-25) shall have an Invoiced quantity unit of measure c
 					 * Grouping of billing information at line level
 					 */
 					tradeSettlement: {
+						key: "BG-30-00",
 						type: "object",
 						description: "Grouping of billing information at line level",
 						required: false,
@@ -510,6 +547,7 @@ BR-23: An Invoice line (BG-25) shall have an Invoiced quantity unit of measure c
 							 * A group of business terms providing information about the VAT applicable for the goods and services invoiced on the Invoice line.
 							 */
 							tradeTax: {
+								key: "BG-30",
 								type: "object",
 								description: `**Line VAT Information**
 
@@ -523,6 +561,7 @@ A group of business terms providing information about the VAT applicable for the
 									 * For more information on the recommended codes, please refer to subclause 6.3.3.2 - Specification of VAT category codes.
 									 */
 									typeCode: {
+										key: "BT-151-0",
 										type: "string",
 										description: `**Invoiced item VAT category code, Content**
 
@@ -562,6 +601,7 @@ For more information on the recommended codes, please refer to subclause 6.3.3.2
 									 * BR-CO-4: Each Invoice line  (BG-25) shall be categorized with an Invoiced item VAT category code (BT-151).
 									 */
 									categoryCode: {
+										key: "BT-151",
 										type: UNTDID_5305.map(({ code }) => code),
 										description: `**Invoiced item VAT category code**
 
@@ -601,6 +641,7 @@ BR-CO-4: Each Invoice line  (BG-25) shall be categorized with an Invoiced item V
 									 * The value to enter is the percentage. For example, for 20%, it must be given as 20 (and not 0.2)
 									 */
 									rateApplicablePercent: {
+										key: "BT-152",
 										type: "string | number",
 										description: `**Invoiced item VAT rate**
 
@@ -621,6 +662,7 @@ The value to enter is the percentage. For example, for 20%, it must be given as 
 							 * Is also called Invoice line delivery period.
 							 */
 							linePeriod: {
+								key: "BG-26",
 								type: "object",
 								description: `**Invoice Line Period**
 
@@ -641,6 +683,7 @@ Is also called Invoice line delivery period.`,
 									 * BR-CO-20: If  Invoice  line  period  (BG-26)  is  used,  the  Invoice  line period start date (BT-134) or the Invoice line period end date (BT-135) shall be filled, or both.
 									 */
 									startDate: {
+										key: "BT-134",
 										type: "date",
 										description: `**Start of the invoice line billing period**
 
@@ -678,6 +721,7 @@ BR-CO-20: If  Invoice  line  period  (BG-26)  is  used,  the  Invoice  line peri
 									 * BR-CO-20: If  Invoice  line  period  (BG-26)  is  used,  the  Invoice  line period start date (BT-134) or the Invoice line period end date (BT-135) shall be filled, or both.
 									 */
 									endDate: {
+										key: "BT-135",
 										type: "date",
 										description: `**End of the invoice line billing period**
 
@@ -713,13 +757,14 @@ BR-CO-20: If  Invoice  line  period  (BG-26)  is  used,  the  Invoice  line peri
 							 * Invoice line allowancess are subject to the same VAT rate as the line they relate to. If invoice line allowances are subject to a different VAT rate, they must be treated as standalone (negative) invoice lines
 							 */
 							allowances: {
+								key: "BG-27",
 								type: "object[]",
+								required: false,
 								description: `**Invoice Line Allowances**
 
 A group of business terms providing information about allowances applicable to the individual Invoice line.
 
 Invoice line allowancess are subject to the same VAT rate as the line they relate to. If invoice line allowances are subject to a different VAT rate, they must be treated as standalone (negative) invoice lines`,
-								required: false,
 								group: "line-allowances",
 								shape: {
 									/**
@@ -728,6 +773,7 @@ Invoice line allowancess are subject to the same VAT rate as the line they relat
 									 * The amount of an allowance, without VAT.
 									 */
 									actualAmount: {
+										key: "BT-136",
 										type: "string | number",
 										description: `**Invoice line allowance amount**
 
@@ -756,6 +802,7 @@ The amount of an allowance, without VAT.`,
 									 * - LA = Labeling
 									 */
 									reasonCode: {
+										key: "BT-140",
 										type: UNTDID_5189.map(({ code }) => code),
 										description: `**Invoice line allowance reason code**
 
@@ -781,6 +828,7 @@ In particular, the following codes and reasons can be used:
 									 * The reason for the Invoice line allowance, expressed as text.
 									 */
 									reason: {
+										key: "BT-139",
 										type: "string",
 										description: `**Invoice line allowance reason**
 
@@ -801,7 +849,9 @@ The reason for the Invoice line allowance, expressed as text.`,
 							 * Invoice line charges are subject to the same VAT rate as that of the line to which they relate. If invoice line charges are subject to a different VAT rate, they must be treated as stand-alone invoice lines.
 							 */
 							charges: {
+								key: "BG-28",
 								type: "object[]",
+								required: false,
 								description: `**Invoice Line Charges**
 
 A group of business terms providing information about charges and taxes other than VAT applicable to the individual Invoice line.
@@ -809,7 +859,6 @@ A group of business terms providing information about charges and taxes other th
 All charges and taxes are assumed to be liable to the same VAT rate as the Invoice line.
 
 Invoice line charges are subject to the same VAT rate as that of the line to which they relate. If invoice line charges are subject to a different VAT rate, they must be treated as stand-alone invoice lines.`,
-								required: false,
 								group: "line-charges",
 								sibling: (data, { line }) =>
 									data.transaction.line[line]?.tradeSettlement?.allowances,
@@ -820,6 +869,7 @@ Invoice line charges are subject to the same VAT rate as that of the line to whi
 									 * The amount of a charge, without VAT.
 									 */
 									actualAmount: {
+										key: "BT-141",
 										type: "string | number",
 										description: `**Invoice line charge amount**
 
@@ -854,6 +904,7 @@ The amount of a charge, without VAT.`,
 									 * BR-CO-24: Each Invoice line charge (BG-28) shall contain an Invoice line  charge  reason  (BT-144)  or  an  Invoice  line  charge reason code (BT-145), or both.
 									 */
 									reasonCode: {
+										key: "BT-145",
 										type: UNTDID_7161.map(({ code }) => code),
 										description: `**Invoice line charge reason code**
 
@@ -885,6 +936,7 @@ BR-CO-24: Each Invoice line charge (BG-28) shall contain an Invoice line  charge
 									 * The reason for the Invoice line charge, expressed as text.
 									 */
 									reason: {
+										key: "BT-144",
 										type: "string",
 										description: `**Invoice line charge reason**
 
@@ -899,6 +951,7 @@ The reason for the Invoice line charge, expressed as text.`,
 							 * Detailed information about item totals
 							 */
 							monetarySummation: {
+								key: "BT-131-00",
 								type: "object",
 								description: "Detailed information about item totals",
 								required: false,
@@ -911,6 +964,7 @@ The reason for the Invoice line charge, expressed as text.`,
 									 * The amount is “net” without VAT, i.e. inclusive of line level allowances and charges as well as other relevant taxes.
 									 */
 									lineTotalAmount: {
+										key: "BT-131",
 										type: "string | number",
 										description: `**Invoice line net amount**
 

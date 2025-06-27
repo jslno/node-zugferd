@@ -1,9 +1,13 @@
 import z from "zod";
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
-import { UNTDID_1001 } from "../../codelists/untdid/1001";
-import { UNTDID_5305 } from "../../codelists/untdid/5305";
-import { UNTDID_2005 } from "../../codelists/untdid/2005";
+import { UNTDID_1001 } from "../../codelists/untdid/1001.gen";
+import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
+import { VATEX } from "../../codelists/vatex.gen";
+import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
+import { ISO_6523 } from "../../codelists/iso/6523.gen";
+import { ISO_3166 } from "../../codelists/iso/3166";
+import { UNTDID_2475 } from "../../codelists/untdid/2475";
 
 export const minimumSchema = {
 	/**
@@ -16,6 +20,7 @@ export const minimumSchema = {
 	 * CHORUSPRO: this data makes it possible to inform the "cadre de facturation" (billing framework, which could be invoice from agent, co-contractor, subcontractor, invoicing part of a public works contract, etc.). The codes to be used are defined in the CHORUSPRO specifications: A1 (invoice deposit), A2 (prepaid invoice deposit), ... By default (in the absence of this field), the case A1 is applied.
 	 */
 	businessProcessType: {
+		key: "BT-23",
 		type: "string",
 		required: false,
 		description: `**Business process type**
@@ -29,6 +34,37 @@ CHORUSPRO: this data makes it possible to inform the "cadre de facturation" (bil
 			"/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID",
 	},
 	/**
+	 * Specification Identifier
+	 *
+	 * A specification identifier containing the entire set of rules regarding semantic content, cardinalities, and business rules to which the data contained in the invoice conforms.
+	 *
+	 * Note: This declares conformity to the respective document.
+	 *
+	 * For the reference to the EU standard, "urn:cen.eu:en16931:2017" must be specified.
+	 *
+	 * Invoices that are compliant with CIUS XRechnung should specify "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0" here.
+	 *
+	 * Invoices that comply with the XRechnung extension should specify "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0#conformant#urn:xeinkauf.de:kosit:extension:xrechnung_3.0" here. No schema is required.
+	 */
+	specificationIdentifier: {
+		key: "BT-24",
+		type: "string",
+		required: false,
+		defaultValue: "urn:factur-x.eu:1p0:minimum",
+		description: `**Specification Identifier**
+A specification identifier containing the entire set of rules regarding semantic content, cardinalities, and business rules to which the data contained in the invoice conforms.
+
+Note: This declares conformity to the respective document. 
+
+For the reference to the EU standard, "urn:cen.eu:en16931:2017" must be specified. 
+
+Invoices that are compliant with CIUS XRechnung should specify "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0" here. 
+
+Invoices that comply with the XRechnung extension should specify "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0#conformant#urn:xeinkauf.de:kosit:extension:xrechnung_3.0" here. No schema is required.`,
+		xpath:
+			"/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID",
+	},
+	/**
 	 * Invoice number
 	 *
 	 * A unique identification of the Invoice.
@@ -40,6 +76,7 @@ CHORUSPRO: this data makes it possible to inform the "cadre de facturation" (bil
 	 * BR-2: An Invoice shall have an Invoice number (BT-1).
 	 */
 	number: {
+		key: "BT-1",
 		type: "string",
 		description: `**Invoice number**
 
@@ -71,6 +108,7 @@ BR-2: An Invoice shall have an Invoice number (BT-1).`,
 	 * BR-4: An Invoice shall have an Invoice type code (BT-3).
 	 */
 	typeCode: {
+		key: "BT-3",
 		type: UNTDID_1001.map(({ code }) => code),
 		description: `**Invoice type code**
 
@@ -98,6 +136,7 @@ BR-4: An Invoice shall have an Invoice type code (BT-3).`,
 	 * CHORUSPRO: the issue date must be before or equal to the deposit date.
 	 */
 	issueDate: {
+		key: "BT-2",
 		type: "date",
 		description: `**Invoice issue date**
 
@@ -119,6 +158,7 @@ CHORUSPRO: the issue date must be before or equal to the deposit date.`,
 	 * Grouping of information about the business transaction
 	 */
 	transaction: {
+		key: "BG-25-00",
 		type: "object",
 		description: "Grouping of information about the business transaction",
 		required: false,
@@ -127,6 +167,7 @@ CHORUSPRO: the issue date must be before or equal to the deposit date.`,
 			 * Grouping of contract information
 			 */
 			tradeAgreement: {
+				key: "BT-10-00",
 				type: "object",
 				description: "Grouping of contract information",
 				required: false,
@@ -141,6 +182,7 @@ CHORUSPRO: the issue date must be before or equal to the deposit date.`,
 					 * CHORUS PRO: for the public sector, it is the "Service Exécutant". It is mandatory for some buyers. It must belong to the Chorus Pro repository. It is limited to 100 characters.
 					 */
 					buyerReference: {
+						key: "BT-10",
 						type: "string",
 						description: `**Buyer reference**
 
@@ -154,37 +196,10 @@ CHORUS PRO: for the public sector, it is the "Service Exécutant". It is mandato
 							"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference",
 					},
 					/**
-					 * Details of the associated order
-					 */
-					associatedOrder: {
-						type: "object",
-						description: "Details of the associated order",
-						required: false,
-						shape: {
-							/**
-							 * Purchase order reference
-							 *
-							 * An identifier of a referenced purchase order, issued by the Buyer.
-							 *
-							 * CHORUS PRO: for the public sector, this is the "Engagement Juridique" (Legal Commitment). It is mandatory for some buyers. You should refer to the ChorusPro Directory to identify these public entity buyers that make it mandatory.
-							 */
-							purchaseOrderReference: {
-								type: "string",
-								description: `**Purchase order reference**
-
-An identifier of a referenced purchase order, issued by the Buyer.
-
-CHORUS PRO: for the public sector, this is the "Engagement Juridique" (Legal Commitment). It is mandatory for some buyers. You should refer to the ChorusPro Directory to identify these public entity buyers that make it mandatory.`,
-								required: false,
-								xpath:
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID",
-							},
-						},
-					},
-					/**
 					 * A group of business terms providing information about the Seller.
 					 */
 					seller: {
+						key: "BG-4",
 						type: "object",
 						description:
 							"A group of business terms providing information about the Seller.",
@@ -195,6 +210,7 @@ CHORUS PRO: for the public sector, this is the "Engagement Juridique" (Legal Com
 							 * The full formal name by which the Seller is registered in the national registry of legal entities or as a Taxable person or otherwise trades as a person or persons.
 							 */
 							name: {
+								key: "BT-27",
 								type: "string",
 								description: `**Seller name**
 
@@ -207,6 +223,7 @@ The full formal name by which the Seller is registered in the national registry 
 							 * Details about the organization
 							 */
 							organization: {
+								key: "BT-30-00",
 								type: "object",
 								description: "Details about the organization",
 								required: false,
@@ -219,6 +236,7 @@ The full formal name by which the Seller is registered in the national registry 
 									 * If no identification scheme is specified, it must be known by Buyer and Seller.
 									 */
 									registrationIdentifier: {
+										key: "BT-30",
 										type: "object",
 										description: `**Seller legal registration identifier**
 
@@ -255,7 +273,7 @@ If no identification scheme is specified, it must be known by Buyer and Seller.`
 											 * For a SIREN or a SIRET, the value of this field is "0002"
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Seller legal registration identifier.
@@ -284,6 +302,7 @@ For a SIREN or a SIRET, the value of this field is "0002"`,
 							 * BR-8: An Invoice shall contain the Seller postal address (BG-5).
 							 */
 							postalAddress: {
+								key: "BG-5",
 								type: "object",
 								description: `**Seller Address**
 
@@ -303,7 +322,8 @@ BR-8: An Invoice shall contain the Seller postal address (BG-5).`,
 									 * If no tax representative is specified, this is the country where VAT is liable. The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										key: "BT-40",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Seller country code**
 
 A code that identifies the country.
@@ -319,6 +339,7 @@ If no tax representative is specified, this is the country where VAT is liable. 
 							 * Detailed information on tax information of the seller
 							 */
 							taxRegistration: {
+								key: "seller-tax-registration",
 								type: "object",
 								description:
 									"Detailed information on tax information of the seller",
@@ -332,6 +353,7 @@ If no tax representative is specified, this is the country where VAT is liable. 
 									 * VAT number prefixed by a country code. A VAT registered Supplier shall include his VAT ID, except when he uses a tax representative.
 									 */
 									vatIdentifier: {
+										key: "BT-31",
 										type: "string",
 										description: `**Seller VAT identifier**
 
@@ -354,6 +376,7 @@ VAT number prefixed by a country code. A VAT registered Supplier shall include h
 									 * This information may affect how the Buyer settles the payment (such as for social security fees). E.g. in some countries, if the Seller is not registered as a tax paying entity then the Buyer is required to withhold the amount of the tax and pay it on behalf of the Seller.
 									 */
 									localIdentifier: {
+										key: "BT-32",
 										type: "string",
 										required: false,
 										description: `**Seller tax registration identifier**
@@ -372,11 +395,11 @@ This information may affect how the Buyer settles the payment (such as for socia
 							},
 						},
 					},
-
 					/**
 					 * A group of business terms providing information about the Buyer.
 					 */
 					buyer: {
+						key: "BG-7",
 						type: "object",
 						description:
 							"A group of business terms providing information about the Buyer.",
@@ -391,6 +414,7 @@ This information may affect how the Buyer settles the payment (such as for socia
 							 * BR-7: An Invoice shall contain the Buyer name (BT-44).
 							 */
 							name: {
+								key: "BT-44",
 								type: "string",
 								description: `**Buyer name**
 
@@ -463,7 +487,7 @@ CHORUSPRO: the identifier of the buyer (public entity) is mandatory and is alway
 											 * For a SIREN or a SIRET, the value of this field is "0002"
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -481,12 +505,43 @@ For a SIREN or a SIRET, the value of this field is "0002"`,
 							},
 						},
 					},
+					/**
+					 * Details of the associated order
+					 */
+					associatedOrder: {
+						key: "BT-13-00",
+						type: "object",
+						description: "Details of the associated order",
+						required: false,
+						shape: {
+							/**
+							 * Purchase order reference
+							 *
+							 * An identifier of a referenced purchase order, issued by the Buyer.
+							 *
+							 * CHORUS PRO: for the public sector, this is the "Engagement Juridique" (Legal Commitment). It is mandatory for some buyers. You should refer to the ChorusPro Directory to identify these public entity buyers that make it mandatory.
+							 */
+							purchaseOrderReference: {
+								key: "BT-13",
+								type: "string",
+								description: `**Purchase order reference**
+
+An identifier of a referenced purchase order, issued by the Buyer.
+
+CHORUS PRO: for the public sector, this is the "Engagement Juridique" (Legal Commitment). It is mandatory for some buyers. You should refer to the ChorusPro Directory to identify these public entity buyers that make it mandatory.`,
+								required: false,
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID",
+							},
+						},
+					},
 				},
 			},
 			/**
 			 * Grouping of delivery details
 			 */
 			tradeDelivery: {
+				key: "BG-13-00",
 				type: "object",
 				description: "Grouping of delivery details",
 				xpath:
@@ -505,6 +560,7 @@ For a SIREN or a SIRET, the value of this field is "0002"`,
 			 * CHORUS PRO : not used
 			 */
 			tradeSettlement: {
+				key: "BG-19",
 				type: "object",
 				description: `**Direct Debit**
 
@@ -527,7 +583,8 @@ CHORUS PRO : not used`,
 					 * BR-5: An Invoice shall have an Invoice currency code (BT-5).
 					 */
 					currencyCode: {
-						type: "string",
+						key: "BT-5",
+						type: CURRENCY_CODES.map(({ code }) => code),
 						description: `**Invoice currency code**
 
 The currency in which all Invoice amounts are given, except for the Total VAT amount in accounting currency.
@@ -551,6 +608,7 @@ BR-5: An Invoice shall have an Invoice currency code (BT-5).`,
 					 * They can not have more than two decimals. The separator is ". "
 					 */
 					monetarySummation: {
+						key: "BG-22",
 						type: "object",
 						description: `**Document Totals**
 
@@ -569,6 +627,7 @@ They can not have more than two decimals. The separator is ". "`,
 							 * For EXTENDED profile only, BR-CO-13 is replaced by BR-FXEXT-CO-13, which add a tolerance of 0,01 euro per line, document level charge and allowance in calculation.
 							 */
 							taxBasisTotalAmount: {
+								key: "BT-109",
 								type: "string | number",
 								description: `**Invoice total amount without VAT**
 
@@ -588,6 +647,7 @@ For EXTENDED profile only, BR-CO-13 is replaced by BR-FXEXT-CO-13, which add a t
 							 * The Invoice total VAT amount is the sum of all VAT category tax amounts.
 							 */
 							taxTotal: {
+								key: "BT-110",
 								type: "object",
 								description: `**Invoice total VAT amount**
 
@@ -617,7 +677,7 @@ The Invoice total VAT amount is the sum of all VAT category tax amounts.`,
 									 * Invoice currency code
 									 */
 									currencyCode: {
-										type: "string",
+										type: CURRENCY_CODES.map(({ code }) => code),
 										description: "Invoice currency code",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[0]/@currencyID",
@@ -632,6 +692,7 @@ The Invoice total VAT amount is the sum of all VAT category tax amounts.`,
 							 * The Invoice total amount with VAT is the Invoice total amount without VAT plus the Invoice total VAT amount.
 							 */
 							grandTotalAmount: {
+								key: "BT-112",
 								type: "string | number",
 								description: `**Invoice total amount with VAT**
 
@@ -649,6 +710,7 @@ The Invoice total amount with VAT is the Invoice total amount without VAT plus t
 							 * This amount is the Invoice total amount with VAT minus the paid amount that has been paid in advance. The amount is zero in case of a fully paid Invoice. The amount may be negative; in that case the Seller owes the amount to the Buyer.
 							 */
 							duePayableAmount: {
+								key: "BT-115",
 								type: "string | number",
 								description: `**Amount due for payment**
 
@@ -666,6 +728,7 @@ This amount is the Invoice total amount with VAT minus the paid amount that has 
 					 * A group of business terms providing information about VAT breakdown by different categories, rates and exemption reasons
 					 */
 					vatBreakdown: {
+						key: "BG-23",
 						type: "object[]",
 						group: "vat-breakdown",
 						description: `**VAT Breakdown**
@@ -684,6 +747,7 @@ A group of business terms providing information about VAT breakdown by different
 							 * For EXTENDED profile only, BR-CO-17 is not applied.
 							 */
 							calculatedAmount: {
+								key: "BT-117",
 								type: "string | number",
 								description: `**VAT category tax amount**
 
@@ -703,6 +767,7 @@ For EXTENDED profile only, BR-CO-17 is not applied.`,
 							 * The VAT category code and the VAT category rate shall be consistent. For more information on the recommended codes, please refer to subclause 6.3.3.2 - Specification of VAT category codes.
 							 */
 							typeCode: {
+								key: "BT-118-0",
 								type: "string",
 								description: `**Type of tax (code)**
 
@@ -722,6 +787,7 @@ The VAT category code and the VAT category rate shall be consistent. For more in
 							 * CHORUS PRO: this field is limited to 1024 characters
 							 */
 							exemptionReasonText: {
+								key: "BT-120",
 								type: "string",
 								description: `**VAT exemption reason text**
 
@@ -742,6 +808,7 @@ CHORUS PRO: this field is limited to 1024 characters`,
 							 * The sum of Invoice line net amount minus allowances plus charges on document level which are subject to a specific VAT category code and VAT category rate (if the VAT category rate is applicable).
 							 */
 							basisAmount: {
+								key: "BT-116",
 								type: "string | number",
 								description: `**VAT category taxable amount**
 
@@ -783,6 +850,7 @@ The sum of Invoice line net amount minus allowances plus charges on document lev
 							 * For EXTENDED profile only, BR-O-11, BR-O-12, BR-O-13 and BR-O-14 are not applied.
 							 */
 							categoryCode: {
+								key: "BT-118",
 								type: UNTDID_5305.map(({ code }) => code),
 								description: `**VAT category code**
 
@@ -824,7 +892,8 @@ For EXTENDED profile only, BR-O-11, BR-O-12, BR-O-13 and BR-O-14 are not applied
 							 * Code list issued and maintained by the Connecting Europe Facility.
 							 */
 							exemptionReasonCode: {
-								type: "string",
+								key: "BT-121",
+								type: VATEX.map(({ code }) => code),
 								description: `**VAT exemption reason code**
 
 A coded statement of the reason for why the amount is exempted from VAT.
@@ -853,7 +922,8 @@ Code list issued and maintained by the Connecting Europe Facility.`,
 							 * BR-CO-3: Value added tax point date (BT-7) and Value added tax point date code (BT-8) are mutually exclusive.
 							 */
 							dueDateTypeCode: {
-								type: UNTDID_2005.map(({ code }) => code),
+								key: "BT-8",
+								type: UNTDID_2475.map(({ code }) => code),
 								description: `**Value added tax point date code**
 
 The code of the date when the VAT becomes accountable for the Seller and for the Buyer.
@@ -886,6 +956,7 @@ BR-CO-3: Value added tax point date (BT-7) and Value added tax point date code (
 							 * BR-48: Each  VAT  breakdown  (BG-23)  shall  have  a  VAT  category rate (BT-119), except if the Invoice is not subject to VAT.
 							 */
 							rateApplicablePercent: {
+								key: "BT-119",
 								type: "string | number",
 								description: `**VAT category rate**
 
@@ -910,6 +981,7 @@ BR-48: Each  VAT  breakdown  (BG-23)  shall  have  a  VAT  category rate (BT-119
 					 * Used to indicate when the period covered by the invoice starts and when it ends. Also called delivery period.
 					 */
 					invoicingPeriod: {
+						key: "BG-14",
 						type: "object",
 						description: `**Invoicing period**
 
@@ -930,6 +1002,7 @@ Used to indicate when the period covered by the invoice starts and when it ends.
 							 * BR-CO-19: If Invoicing period (BG-14) is used, the Invoicing period start date (BT-73) or the Invoicing period end date (BT-74) shall be filled, or both.
 							 */
 							startDate: {
+								key: "BT-73",
 								type: "date",
 								description: `**Invoicing period start date**
 
@@ -961,6 +1034,7 @@ BR-CO-19: If Invoicing period (BG-14) is used, the Invoicing period start date (
 							 * BR-CO-19: If Invoicing period (BG-14) is used, the Invoicing period start date (BT-73) or the Invoicing period end date (BT-74) shall be filled, or both.
 							 */
 							endDate: {
+								key: "BT-74",
 								type: "date",
 								description: `**Invoicing period end date**
 

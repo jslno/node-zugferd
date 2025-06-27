@@ -18,6 +18,7 @@ export type FieldType =
 type Primitive = string | number | Date | null | undefined | object;
 
 export type SchemaFieldConfig<T extends FieldType = FieldType> = {
+	key?: string;
 	defaultValue?: Primitive | (() => Primitive);
 	validator?: ZodSchema;
 	xpath?: string;
@@ -52,7 +53,7 @@ export type InferValueType<T extends FieldType> = T extends "string"
 			: T extends "boolean"
 				? boolean
 				: T extends "date"
-					? Date
+					? Date | string
 					: T extends "string[]"
 						? string[]
 						: T extends "number[]"

@@ -1,20 +1,23 @@
 import { AFRelationship, PDFDocument, type AttachmentOptions } from "pdf-lib";
-import type { ZugferdContext } from "../init";
+import type { BaseZugferdContext } from "../init";
 import type { InferSchema, ZugferdOptions } from "../types";
 import type { PDFAMetadata } from "../formatter/pdf";
+import { validateDocumentFactory } from "./validate";
 
 export const createDocumentFactory =
-	<O extends ZugferdOptions>(ctx: ZugferdContext, options: O) =>
-	async (data: InferSchema<O["profile"]>) => {
-		//await validate(xml)
-
+	<O extends ZugferdOptions>(ctx: BaseZugferdContext, options: O) =>
+	(data: InferSchema<O["profile"]>) => {
 		const toObj = () =>
 			options.profile.parse({
 				context: ctx,
 				data,
 			});
 
-		const toXML = () => ctx.xml.format(toObj());
+		const toXML = async () => {
+			const xml = ctx.xml.format(toObj());
+			await validateDocumentFactory(ctx)(xml);
+			return xml;
+		};
 
 		return {
 			toObj,
@@ -32,7 +35,7 @@ export const createDocumentFactory =
 					>;
 				} = {},
 			) => {
-				const xml = toXML();
+				const xml = await toXML();
 				let { metadata } = opts;
 				const { profile } = options;
 

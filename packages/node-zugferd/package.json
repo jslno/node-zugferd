@@ -1,7 +1,7 @@
 {
 	"name": "node-zugferd",
 	"description": "A Node.js library for creating ZUGFeRD/Factur-X compliant documents. Generating XML and embedding it into PDF/A files, enabling seamless e-invoicing and digital document compliance.",
-	"version": "0.0.5-beta.9",
+	"version": "0.0.10-beta.1",
 	"type": "module",
 	"scripts": {
 		"build": "tsup --clean --dts",
@@ -145,6 +145,36 @@
 				"default": "./dist/types.cjs"
 			}
 		},
+		"./codelist/iso.639-2": {
+			"import": {
+				"types": "./dist/codelist/iso.639-2.d.ts",
+				"default": "./dist/codelist/iso.639-2.js"
+			},
+			"require": {
+				"types": "./dist/codelist/iso.639-2.d.cts",
+				"default": "./dist/codelist/iso.639-2.cjs"
+			}
+		},
+		"./codelist/iso.3166": {
+			"import": {
+				"types": "./dist/codelist/iso.3166.d.ts",
+				"default": "./dist/codelist/iso.3166.js"
+			},
+			"require": {
+				"types": "./dist/codelist/iso.3166.d.cts",
+				"default": "./dist/codelist/iso.3166.cjs"
+			}
+		},
+		"./codelist/iso.6523": {
+			"import": {
+				"types": "./dist/codelist/iso.6523.d.ts",
+				"default": "./dist/codelist/iso.6523.js"
+			},
+			"require": {
+				"types": "./dist/codelist/iso.6523.d.cts",
+				"default": "./dist/codelist/iso.6523.cjs"
+			}
+		},
 		"./codelist/untdid.1001": {
 			"import": {
 				"types": "./dist/codelist/untdid.1001.d.ts",
@@ -165,14 +195,44 @@
 				"default": "./dist/codelist/untdid.1153.cjs"
 			}
 		},
-		"./codelist/untdid.2005": {
+		"./codelist/untdid.1229": {
 			"import": {
-				"types": "./dist/codelist/untdid.2005.d.ts",
-				"default": "./dist/codelist/untdid.2005.js"
+				"types": "./dist/codelist/untdid.1229.d.ts",
+				"default": "./dist/codelist/untdid.1229.js"
 			},
 			"require": {
-				"types": "./dist/codelist/untdid.2005.d.cts",
-				"default": "./dist/codelist/untdid.2005.cjs"
+				"types": "./dist/codelist/untdid.1229.d.cts",
+				"default": "./dist/codelist/untdid.1229.cjs"
+			}
+		},
+		"./codelist/untdid.2475": {
+			"import": {
+				"types": "./dist/codelist/untdid.2475.d.ts",
+				"default": "./dist/codelist/untdid.2475.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.2475.d.cts",
+				"default": "./dist/codelist/untdid.2475.cjs"
+			}
+		},
+		"./codelist/untdid.3035": {
+			"import": {
+				"types": "./dist/codelist/untdid.3035.d.ts",
+				"default": "./dist/codelist/untdid.3035.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.3035.d.cts",
+				"default": "./dist/codelist/untdid.3035.cjs"
+			}
+		},
+		"./codelist/untdid.3139": {
+			"import": {
+				"types": "./dist/codelist/untdid.3139.d.ts",
+				"default": "./dist/codelist/untdid.3139.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid.3139.d.cts",
+				"default": "./dist/codelist/untdid.3139.cjs"
 			}
 		},
 		"./codelist/untdid.4451": {
@@ -233,6 +293,56 @@
 			"require": {
 				"types": "./dist/codelist/untdid.7161.d.cts",
 				"default": "./dist/codelist/untdid.7161.cjs"
+			}
+		},
+		"./codelist/vatex": {
+			"import": {
+				"types": "./dist/codelist/vatex.d.ts",
+				"default": "./dist/codelist/vatex.js"
+			},
+			"require": {
+				"types": "./dist/codelist/vatex.d.cts",
+				"default": "./dist/codelist/vatex.cjs"
+			}
+		},
+		"./codelist/eas": {
+			"import": {
+				"types": "./dist/codelist/eas.d.ts",
+				"default": "./dist/codelist/eas.js"
+			},
+			"require": {
+				"types": "./dist/codelist/eas.d.cts",
+				"default": "./dist/codelist/eas.cjs"
+			}
+		},
+		"./codelist/currency-codes": {
+			"import": {
+				"types": "./dist/codelist/currency-codes.d.ts",
+				"default": "./dist/codelist/currency-codes.js"
+			},
+			"require": {
+				"types": "./dist/codelist/currency-codes.d.cts",
+				"default": "./dist/codelist/currency-codes.cjs"
+			}
+		},
+		"./codelist/rec20": {
+			"import": {
+				"types": "./dist/codelist/rec20.d.ts",
+				"default": "./dist/codelist/rec20.js"
+			},
+			"require": {
+				"types": "./dist/codelist/rec20.d.cts",
+				"default": "./dist/codelist/rec20.cjs"
+			}
+		},
+		"./codelist/rec21": {
+			"import": {
+				"types": "./dist/codelist/rec21.d.ts",
+				"default": "./dist/codelist/rec21.js"
+			},
+			"require": {
+				"types": "./dist/codelist/rec21.d.cts",
+				"default": "./dist/codelist/rec21.cjs"
 			}
 		}
 	},

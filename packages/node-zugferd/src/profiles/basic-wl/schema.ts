@@ -1,18 +1,28 @@
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
-import { UNTDID_5305 } from "../../codelists/untdid/5305";
-import { UNTDID_5189 } from "../../codelists/untdid/5189";
-import { UNTDID_4461 } from "../../codelists/untdid/4461";
-import { UNTDID_7161 } from "../../codelists/untdid/7161";
-import { UNTDID_4451 } from "../../codelists/untdid/4451";
+import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
+import { UNTDID_5189 } from "../../codelists/untdid/5189.gen";
+import { UNTDID_4461 } from "../../codelists/untdid/4461.gen";
+import { UNTDID_7161 } from "../../codelists/untdid/7161.gen";
+import { UNTDID_4451 } from "../../codelists/untdid/4451.gen";
+import { EAS } from "../../codelists/eas";
+import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
+import { ISO_6523 } from "../../codelists/iso/6523.gen";
+import { ISO_3166 } from "../../codelists/iso/3166";
 
 export const basicWlSchema = {
+	specificationIdentifier: {
+		type: "string",
+		required: false,
+		defaultValue: "urn:factur-x.eu:1p0:basicwl",
+	},
 	/**
 	 * Invoice Note
 	 *
 	 * A group of business terms providing textual notes that are relevant for the invoice, together with an indication of the note subject.
 	 */
 	includedNote: {
+		key: "BG-1",
 		type: "object[]",
 		description: `**Invoice Note**
 
@@ -28,6 +38,7 @@ A group of business terms providing textual notes that are relevant for the invo
 			 * Such as the reason for any correction or assignment note in case the invoice has been factored.
 			 */
 			content: {
+				key: "BT-22",
 				type: "string",
 				description: `**Invoice note**
 
@@ -53,6 +64,7 @@ Such as the reason for any correction or assignment note in case the invoice has
 			 * - CUS: Customs Information
 			 */
 			subjectCode: {
+				key: "BT-21",
 				type: UNTDID_4451.map(({ code }) => code),
 				description: `**Invoice note subject code**
 
@@ -75,15 +87,18 @@ Among the list, the following codes can be used:
 	},
 
 	transaction: {
+		key: "transaction",
 		type: "object",
 		shape: {
 			tradeAgreement: {
+				key: "trade-agreement",
 				type: "object",
 				shape: {
 					/**
 					 * Details of the associated contract
 					 */
 					associatedContract: {
+						key: "BT-12-00",
 						type: "object",
 						description: "Details of the associated contract",
 						required: false,
@@ -98,6 +113,7 @@ Among the list, the following codes can be used:
 							 * CHORUSPRO : This is the "numéro de Marché" (contract number)
 							 */
 							reference: {
+								key: "BT-12",
 								type: "string",
 								description: `**Contract reference**
 
@@ -126,6 +142,7 @@ CHORUSPRO : This is the "numéro de Marché" (contract number)`,
 							 * BR-CO-26: In   order   for   the   buyer   to   automatically   identify   a supplier,  the  Seller  identifier  (BT-29),  the  Seller  legal registration  identifier  (BT-30)  and/or  the  Seller  VAT identifier (BT-31) shall be present.
 							 */
 							identifier: {
+								key: "BT-29",
 								type: "string[]",
 								description: `**Seller identifier**
 
@@ -149,7 +166,8 @@ BR-CO-26: In   order   for   the   buyer   to   automatically   identify   a sup
 							 *
 							 * If the seller has a GlobalID, he can qualify it with this attribute. Otherwise, he uses the ID.
 							 */
-							gloablIdentifier: {
+							globalIdentifier: {
+								key: "BT-29-0",
 								type: "object",
 								description: `**Seller global identifier**
 
@@ -228,6 +246,7 @@ In particular, the following codes can be used:
 									 * CHORUS PRO: this field is limied to 99 characters.
 									 */
 									tradingName: {
+										key: "BT-28",
 										type: "string",
 										description: `**Seller trading name**
 
@@ -254,6 +273,7 @@ CHORUS PRO: this field is limied to 99 characters.`,
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-38",
 										type: "string | number",
 										description: `**Seller post code**
 
@@ -272,6 +292,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
+										key: "BT-35",
 										type: "string",
 										description: `**Seller address line 1**
 
@@ -288,6 +309,7 @@ Usually the street name and number or post office box.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-36",
 										type: "string",
 										description: `**Seller address line 2**
 
@@ -302,6 +324,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-162",
 										type: "string",
 										description: `**Seller address line 3**
 
@@ -316,6 +339,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village, where the Seller address is located.
 									 */
 									city: {
+										key: "BT-37",
 										type: "string",
 										description: `**Seller city**
 
@@ -332,6 +356,7 @@ The common name of the city, town or village, where the Seller address is locate
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-39",
 										type: "string",
 										description: `**Seller country subdivision**
 
@@ -342,47 +367,47 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
-
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-34",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Seller electronic address
+									 *
+									 * Identifies the Seller's electronic address to which a business document may be delivered.
 									 */
-									electronicAddress: {
-										type: "object",
-										description: "Details about the electronic address",
-										required: false,
-										shape: {
-											/**
-											 * Seller electronic address
-											 *
-											 * Identifies the Seller's electronic address to which a business document may be delivered.
-											 */
-											value: {
-												type: "string",
-												description: `**Seller electronic address**
+									value: {
+										type: "string",
+										description: `**Seller electronic address**
 
 Identifies the Seller's electronic address to which a business document may be delivered.`,
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 *
-											 * The identification scheme identifier of the Seller electronic address
-											 *
-											 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
-											 */
-											schemeIdentifier: {
-												type: "string",
-												description: `**Scheme identifier**
+										required: false,
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 *
+									 * The identification scheme identifier of the Seller electronic address
+									 *
+									 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: `**Scheme identifier**
 
 The identification scheme identifier of the Seller electronic address
 
 The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.`,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -396,6 +421,7 @@ The scheme identifier shall be chosen from a list to be maintained by the Connec
 					 * The "Seller Tax Representative party" block must be filled in if the seller has a tax representative.
 					 */
 					sellerTaxRepresentative: {
+						key: "BG-11",
 						type: "object",
 						description: `**Seller Tax Representative Party**
 
@@ -410,6 +436,7 @@ The "Seller Tax Representative party" block must be filled in if the seller has 
 							 * The full name of the Seller's tax representative party.
 							 */
 							name: {
+								key: "BT-62",
 								type: "string",
 								description: `**Seller tax representative name**
 
@@ -429,6 +456,7 @@ The full name of the Seller's tax representative party.`,
 							 * BR-19: The  Seller  tax  representative  postal  address  (BG-12)  shall be provided in the Invoice, if the Seller (BG-4) has a Seller tax representative party (BG-11).
 							 */
 							postalAddress: {
+								key: "BG-12",
 								type: "object",
 								description: `**Seller Tax Representative Postal Address**
 
@@ -448,6 +476,7 @@ BR-19: The  Seller  tax  representative  postal  address  (BG-12)  shall be prov
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-67",
 										type: "string",
 										description: `**Tax representative post code**
 
@@ -466,6 +495,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number or the post office box.
 									 */
 									line1: {
+										key: "BT-64",
 										type: "string",
 										description: `**Tax representative address line 1**
 
@@ -482,6 +512,7 @@ Usually the street name and number or the post office box.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-65",
 										type: "string",
 										description: `**Tax representative address line 2**
 
@@ -496,6 +527,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-164",
 										type: "string",
 										description: `**Tax representative address line 3**
 
@@ -510,6 +542,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village, where the tax representative address is located.
 									 */
 									city: {
+										key: "BT-66",
 										type: "string",
 										description: `**Tax representative city**
 
@@ -526,7 +559,8 @@ The common name of the city, town or village, where the tax representative addre
 									 * Country where VAT is liable. The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										key: "BT-69",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Tax representative country code**
 
 A code that identifies the country.
@@ -543,6 +577,7 @@ Country where VAT is liable. The lists of valid countries are registered with th
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-68",
 										type: "string",
 										description: `**Tax representative country subdivision**
 
@@ -599,6 +634,7 @@ VAT number prefixed by a country code based on EN ISO 3166-1 "Codes for the repr
 							 * If no scheme is specified, it must be known by Buyer and Seller.
 							 */
 							identifier: {
+								key: "BT-46",
 								type: "string",
 								description: `**Buyer identifier**
 
@@ -617,7 +653,8 @@ If no scheme is specified, it must be known by Buyer and Seller.`,
 							 * GloablID, if global identifier exists and can be stated in @schemeID, ID else
 							 * The global identifier of a buyer is the specific identification given to him by a global registry organization.
 							 */
-							gloablIdentifier: {
+							globalIdentifier: {
+								key: "BT-46-00",
 								type: "object",
 								description: `**Buyer global identifier**
 
@@ -655,7 +692,7 @@ The global identifier of a buyer is the specific identification given to him by 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer identifier.
@@ -669,6 +706,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							},
 
 							postalAddress: {
+								key: "BG-8",
 								type: "object",
 								shape: {
 									/**
@@ -679,6 +717,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-53",
 										type: "string | number",
 										description: `**Buyer post code**
 
@@ -697,6 +736,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number or post office box.
 									 */
 									line1: {
+										key: "BT-50",
 										type: "string",
 										description: `**Buyer address line 1**
 
@@ -713,6 +753,7 @@ Usually the street name and number or post office box.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-51",
 										type: "string",
 										description: `**Buyer address line 2**
 
@@ -727,6 +768,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-163",
 										type: "string",
 										description: `**Buyer address line 3**
 
@@ -741,6 +783,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village, where the Buyer's address is located.
 									 */
 									city: {
+										key: "BT-52",
 										type: "string",
 										description: `**Buyer city**
 
@@ -757,7 +800,8 @@ The common name of the city, town or village, where the Buyer's address is locat
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										key: "BT-55",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Buyer country code**
 
 A code that identifies the country.
@@ -774,6 +818,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-54",
 										type: "string",
 										description: `**Buyer country subdivision**
 
@@ -784,46 +829,47 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
 									},
+								},
+							},
+							/**
+							 * Details about the electronic address
+							 */
+							electronicAddress: {
+								key: "BT-49",
+								type: "object",
+								description: "Details about the electronic address",
+								required: false,
+								shape: {
 									/**
-									 * Details about the electronic address
+									 * Buyer electronic address
+									 *
+									 * Identifies the Buyer's electronic address to which a business document should be delivered.
 									 */
-									electronicAddress: {
-										type: "object",
-										description: "Details about the electronic address",
-										required: false,
-										shape: {
-											/**
-											 * Buyer electronic address
-											 *
-											 * Identifies the Buyer's electronic address to which a business document should be delivered.
-											 */
-											value: {
-												type: "string",
-												description: `**Buyer electronic address**
+									value: {
+										type: "string",
+										description: `**Buyer electronic address**
 
 Identifies the Buyer's electronic address to which a business document should be delivered.`,
-												required: false,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID",
-											},
-											/**
-											 * Scheme identifier
-											 *
-											 * The identification scheme identifier of the Buyer electronic address.
-											 *
-											 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
-											 */
-											schemeIdentifier: {
-												type: "string",
-												description: `**Scheme identifier**
+										required: false,
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID",
+									},
+									/**
+									 * Scheme identifier
+									 *
+									 * The identification scheme identifier of the Buyer electronic address.
+									 *
+									 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
+									 */
+									schemeIdentifier: {
+										type: EAS.map(({ code }) => code),
+										description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer electronic address.
 
 The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.`,
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
-											},
-										},
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
 									},
 								},
 							},
@@ -831,6 +877,7 @@ The scheme identifier shall be chosen from a list to be maintained by the Connec
 							 * Detailed information on buyer tax information
 							 */
 							taxRegistration: {
+								key: "buyer-tax-registration",
 								type: "object",
 								description: "Detailed information on buyer tax information",
 								required: false,
@@ -847,6 +894,7 @@ The scheme identifier shall be chosen from a list to be maintained by the Connec
 									 * BR-CO-9: The Seller VAT identifier (BT-31), the Seller tax representative VAT identifier (BT-63) and the Buyer VAT identifier (BT-48) shall have a prefix in accordance with ISO code ISO 3166-1 alpha-2 by which the country of issue may be identified. Nevertheless, Greece may use the prefix ‘EL’.
 									 */
 									vatIdentifier: {
+										key: "BT-48",
 										type: "string",
 										description: `**Buyer VAT identifier**
 
@@ -872,6 +920,7 @@ BR-CO-9: The Seller VAT identifier (BT-31), the Seller tax representative VAT id
 				},
 			},
 			tradeDelivery: {
+				key: "trade-delivery",
 				type: "object",
 				shape: {
 					/**
@@ -894,6 +943,7 @@ A group of business terms providing information about where and when the goods a
 							 * If no scheme is specified, it should be known by Buyer and Seller, e.g. a previously exchanged Buyer or Seller assigned identifier.
 							 */
 							identifier: {
+								key: "BT-71",
 								type: "string",
 								description: `**Deliver to location identifier**
 
@@ -908,6 +958,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. a previo
 							 * Deliver to location global identifier
 							 */
 							globalIdentifier: {
+								key: "BT-71-00",
 								type: "object",
 								description: "Deliver to location global identifier",
 								required: false,
@@ -930,7 +981,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. a previo
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Deliver to location identifier.
@@ -950,6 +1001,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * Shall be used if the Deliver to party is different from the Buyer.
 							 */
 							name: {
+								key: "BT-70",
 								type: "string",
 								description: `**Deliver to party name**
 
@@ -970,6 +1022,7 @@ Shall be used if the Deliver to party is different from the Buyer.`,
 							 * Like any address, the fields necessary to define the address must appear. The country code is mandatory.
 							 */
 							postalAddress: {
+								key: "BG-15",
 								type: "object",
 								description: `**Deliver to address**
 
@@ -988,6 +1041,7 @@ Like any address, the fields necessary to define the address must appear. The co
 									 * Such as a ZIP code or a post code.
 									 */
 									postCode: {
+										key: "BT-78",
 										type: "string | number",
 										description: `**Deliver to post code**
 
@@ -1006,6 +1060,7 @@ Such as a ZIP code or a post code.`,
 									 * Usually the street name and number.
 									 */
 									line1: {
+										key: "BT-75",
 										type: "string",
 										description: `**Deliver to address line 1**
 
@@ -1022,6 +1077,7 @@ Usually the street name and number.`,
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line2: {
+										key: "BT-76",
 										type: "string",
 										description: `**Deliver to address line 2**
 
@@ -1036,6 +1092,7 @@ An additional address line in an address that can be used to give further detail
 									 * An additional address line in an address that can be used to give further details supplementing the main line.
 									 */
 									line3: {
+										key: "BT-165",
 										type: "string",
 										description: `**Deliver to address line 3**
 
@@ -1050,6 +1107,7 @@ An additional address line in an address that can be used to give further detail
 									 * The common name of the city, town or village, where the deliver to address is located.
 									 */
 									city: {
+										key: "BT-77",
 										type: "string",
 										description: `**Deliver to city**
 
@@ -1066,7 +1124,8 @@ The common name of the city, town or village, where the deliver to address is lo
 									 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 									 */
 									countryCode: {
-										type: "string",
+										key: "BT-80",
+										type: ISO_3166.map(({ code }) => code.alpha2),
 										description: `**Deliver to country code**
 
 A code that identifies the country.
@@ -1083,6 +1142,7 @@ The lists of valid countries are registered with the ISO 3166-1 Maintenance agen
 									 * Such as a region, a county, a state, a province, etc.
 									 */
 									countrySubdivision: {
+										key: "BT-79",
 										type: "string",
 										description: `**Deliver to country subdivision**
 
@@ -1101,6 +1161,7 @@ Such as a region, a county, a state, a province, etc.`,
 					 * Detailed information about the actual Delivery
 					 */
 					information: {
+						key: "BT-72-00",
 						type: "object",
 						description: "Detailed information about the actual Delivery",
 						required: false,
@@ -1113,6 +1174,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * In Germany, the date of delivery and performance is a mandatory information on invoices. This can also be indicated at item level, but must in any case be indicated here.
 							 */
 							deliveryDate: {
+								key: "BT-72",
 								type: "date",
 								description: `**Actual delivery date**
 
@@ -1163,6 +1225,7 @@ CHORUS PRO : not used`,
 				},
 			},
 			tradeSettlement: {
+				key: "trade-settlement",
 				type: "object",
 				shape: {
 					/**
@@ -1175,6 +1238,7 @@ CHORUS PRO : not used`,
 					 * This is the ICS for SEPA direct debits
 					 */
 					creditorIdentifier: {
+						key: "BT-90",
 						type: "string",
 						description: `**Bank assigned creditor identifier**
 
@@ -1202,6 +1266,7 @@ This is the ICS for SEPA direct debits`,
 					 * If remittance information is to be mapped to the End To End Identification field or to the Structured Remittance Information Creditor Reference field in SEPA payments messages, then in addition to the Latin character set restriction, the content shall not start or end with a '/' and the content shall not contain '//'s. See reference [15].
 					 */
 					remittanceInformation: {
+						key: "BT-83",
 						type: "string",
 						description: `**Remittance information**
 
@@ -1228,7 +1293,8 @@ If remittance information is to be mapped to the End To End Identification field
 					 * The lists of valid currencies are registered with the ISO 4217 Maintenance Agency ""Codes for the representation of currencies and funds"". Please refer to Article 230 of the Council Directive 2006/112/EC [2] for more information.
 					 */
 					vatAccountingCurrencyCode: {
-						type: "string",
+						key: "BT-6",
+						type: CURRENCY_CODES.map(({ code }) => code),
 						description: `**VAT accounting currency code**
 
 The currency used for VAT accounting and reporting purposes as accepted or required in the country of the Seller.
@@ -1252,6 +1318,7 @@ The lists of valid currencies are registered with the ISO 4217 Maintenance Agenc
 					 * In this case, the bank identifier oresent in the invoice is the factor one.
 					 */
 					payee: {
+						key: "BG-10",
 						type: "object",
 						description: `**Payee**
 
@@ -1270,6 +1337,7 @@ In this case, the bank identifier oresent in the invoice is the factor one.`,
 							 * If no scheme is specified, it should be known by Buyer and Seller, e.g. a previously exchanged Buyer or Seller assigned identifier.
 							 */
 							identifier: {
+								key: "BT-60",
 								type: "string",
 								description: `**Payee identifier**
 
@@ -1282,6 +1350,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. a previo
 							 * Payee global identifier
 							 */
 							globalIdentifier: {
+								key: "BT-60-0",
 								type: "object",
 								description: "Payee global identifier",
 								required: false,
@@ -1304,7 +1373,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. a previo
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: "string",
+										type: ISO_6523.map(({ code }) => code),
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Payee identifier.
@@ -1328,6 +1397,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 * BR-17: The Payee name (BT-59) shall be provided in the Invoice, if the Payee (BG-10) is different from the Seller (BG-4).
 							 */
 							name: {
+								key: "BT-59",
 								type: "string",
 								description: `**Payee name**
 
@@ -1358,6 +1428,7 @@ BR-17: The Payee name (BT-59) shall be provided in the Invoice, if the Payee (BG
 									 * If no scheme is specified, it should be known by Buyer and Seller, e.g. the identifier that is exclusively used in the applicable legal environment.
 									 */
 									registrationIdentifier: {
+										key: "BT-61",
 										type: "object",
 										description: `**Payee legal registration identifier**
 
@@ -1394,7 +1465,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. the iden
 											 * For a SIREN or a SIRET, the value of this field is "0002"
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: ISO_6523.map(({ code }) => code),
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Payee legal registration identifier.
@@ -1418,6 +1489,7 @@ For a SIREN or a SIRET, the value of this field is "0002"`,
 					 * A group of business terms providing information about the payment.
 					 */
 					paymentInstruction: {
+						key: "BG-16",
 						type: "object",
 						description: `**Payment instructions**
 
@@ -1448,6 +1520,7 @@ A group of business terms providing information about the payment.`,
 							 * BR-49: A  Payment  instruction  (BG-16)  shall  specify  the  Payment means type code (BT-81).
 							 */
 							typeCode: {
+								key: "BT-81",
 								type: UNTDID_4461.map(({ code }) => code),
 								description: `**Payment means type code**
 
@@ -1480,6 +1553,7 @@ BR-49: A  Payment  instruction  (BG-16)  shall  specify  the  Payment means type
 							 * The account to be debited by the direct debit.
 							 */
 							debitedAccountIdentifier: {
+								key: "BT-91",
 								type: "string",
 								description: `**Debited account identifier**
 
@@ -1495,7 +1569,9 @@ The account to be debited by the direct debit.`,
 							 * A group of business terms to specify credit transfer payments.
 							 */
 							transfers: {
+								key: "BG-17",
 								type: "object[]",
+								required: false,
 								description: `**Credit transfer**
 
 A group of business terms to specify credit transfer payments.`,
@@ -1509,7 +1585,9 @@ A group of business terms to specify credit transfer payments.`,
 									 * Such as IBAN (in case of SEPA payment) or a national account number.
 									 */
 									paymentAccountIdentifier: {
+										key: "BT-84",
 										type: "string",
+										required: false,
 										description: `**Payment account identifier**
 
 A unique identifier of the financial payment account, at a payment service provider, to which payment should be made.
@@ -1524,6 +1602,7 @@ Such as IBAN (in case of SEPA payment) or a national account number.`,
 									 * Use IBANID when appropriate, otherwise use ProprietaryID
 									 */
 									nationalAccountNumber: {
+										key: "BT-84-0",
 										type: "string",
 										description: `**National account number (not SEPA)**
 
@@ -1544,6 +1623,7 @@ Use IBANID when appropriate, otherwise use ProprietaryID`,
 					 * Deductions, such as withheld tax may also be specified in this group.
 					 */
 					allowances: {
+						key: "BG-20",
 						type: "object[]",
 						description: `**Document Level Allowances**
 
@@ -1559,6 +1639,7 @@ Deductions, such as withheld tax may also be specified in this group.`,
 							 * The percentage that may be used, in conjunction with the document level allowance base amount, to calculate the document level allowance amount.
 							 */
 							calculationPercent: {
+								key: "BT-94",
 								type: "string | number",
 								description: `**Document level allowance percentage**
 
@@ -1573,6 +1654,7 @@ The percentage that may be used, in conjunction with the document level allowanc
 							 * The base amount that may be used, in conjunction with the document level allowance percentage, to calculate the document level allowance amount.
 							 */
 							basisAmount: {
+								key: "BT-93",
 								type: "string | number",
 								description: `**Document level allowance base amount**
 
@@ -1587,6 +1669,7 @@ The base amount that may be used, in conjunction with the document level allowan
 							 * The amount of an allowance, without VAT.
 							 */
 							actualAmount: {
+								key: "BT-92",
 								type: "string | number",
 								description: `**Document level allowance amount**
 
@@ -1612,6 +1695,7 @@ The amount of an allowance, without VAT.`,
 							 * BR-CO-21: Each Document level allowance (BG-20) shall contain a Document level allowance reason (BT-97) or a Document level allowance reason code (BT-98), or both.
 							 */
 							reasonCode: {
+								key: "BT-98",
 								type: UNTDID_5189.map(({ code }) => code),
 								description: `**Document level allowance reason code**
 
@@ -1642,6 +1726,7 @@ BR-CO-21: Each Document level allowance (BG-20) shall contain a Document level a
 							 * BR-CO-21: Each Document level allowance (BG-20) shall contain a Document level allowance reason (BT-97) or a Document level allowance reason code (BT-98), or both.
 							 */
 							reason: {
+								key: "BT-97",
 								type: "string",
 								description: `**Document level allowance reason**
 
@@ -1662,6 +1747,7 @@ BR-CO-21: Each Document level allowance (BG-20) shall contain a Document level a
 							 * VAT type code for document level allowances
 							 */
 							categoryTradeTax: {
+								key: "BT-95-00",
 								type: "object",
 								description: "VAT type code for document level allowances",
 								required: false,
@@ -1696,6 +1782,7 @@ BR-CO-21: Each Document level allowance (BG-20) shall contain a Document level a
 									 * BR-32: Each Document level allowance (BG-20) shall have a Document level allowance VAT category code (BT-95).
 									 */
 									categoryCode: {
+										key: "BT-95",
 										type: UNTDID_5305.map(({ code }) => code),
 										description: `**Document level allowance VAT category code**
 
@@ -1735,6 +1822,7 @@ BR-32: Each Document level allowance (BG-20) shall have a Document level allowan
 									 * The value to enter is the percentage. For example, for 20%, it must be given as 20 (and not 0.2)
 									 */
 									vatRate: {
+										key: "BT-96",
 										type: "string | number",
 										description: `**Document level allowance VAT rate**
 
@@ -1759,6 +1847,7 @@ The value to enter is the percentage. For example, for 20%, it must be given as 
 					 * A group of business terms providing information about charges and taxes other than VAT, applicable to the Invoice as a whole.
 					 */
 					charges: {
+						key: "BG-21",
 						type: "object[]",
 						description: `**Document Level Charges**
 
@@ -1774,6 +1863,7 @@ A group of business terms providing information about charges and taxes other th
 							 * The percentage that may be used, in conjunction with the document level charge base amount, to calculate the document level charge amount.
 							 */
 							calculationPercent: {
+								key: "BT-101",
 								type: "string | number",
 								description: `**Document level charge percentage**
 
@@ -1788,6 +1878,7 @@ The percentage that may be used, in conjunction with the document level charge b
 							 * The base amount that may be used, in conjunction with the document level charge percentage, to calculate the document level charge amount.
 							 */
 							basisAmount: {
+								key: "BT-100",
 								type: "string | number",
 								description: `**Document level charge base amount**
 
@@ -1802,6 +1893,7 @@ The base amount that may be used, in conjunction with the document level charge 
 							 * The amount of a charge, without VAT.
 							 */
 							actualAmount: {
+								key: "BT-99",
 								type: "string | number",
 								description: `**Document level charge amount**
 
@@ -1836,6 +1928,7 @@ The amount of a charge, without VAT.`,
 							 * BR-CO-22: Each Document level charge (BG-21) shall contain a Document level charge reason (BT-104) or a Document level charge reason code (BT-105), or both.
 							 */
 							reasonCode: {
+								key: "BT-105",
 								type: UNTDID_7161.map(({ code }) => code),
 								description: `**Document level charge reason code**
 
@@ -1875,6 +1968,7 @@ BR-CO-22: Each Document level charge (BG-21) shall contain a Document level char
 							 * BR-CO-22: Each  Document  level  charge  (BG-21)  shall  contain  a Document level charge reason (BT-104) or a Document level charge reason code (BT-105), or both.
 							 */
 							reason: {
+								key: "BT-104",
 								type: "string",
 								description: `**Document level charge reason**
 
@@ -1897,6 +1991,7 @@ BR-CO-22: Each  Document  level  charge  (BG-21)  shall  contain  a Document lev
 							 * A finite sequence of characters.
 							 */
 							categoryTradeTax: {
+								key: "BT-102-00",
 								type: "object",
 								description: `**Detailed information on tax information**
 
@@ -1933,6 +2028,7 @@ A finite sequence of characters.`,
 									 * BR-37: Each Document level charge (BG-21) shall have a Document level charge VAT category code (BT-102).
 									 */
 									categoryCode: {
+										key: "BT-102",
 										type: UNTDID_5305.map(({ code }) => code),
 										description: `**Document level charge VAT category code**
 
@@ -1972,6 +2068,7 @@ BR-37: Each Document level charge (BG-21) shall have a Document level charge VAT
 									 * The value to enter is the percentage. For example, for 20%, it must be given as 20 (and not 0.2)
 									 */
 									vatRate: {
+										key: "BT-103",
 										type: "string | number",
 										description: `**Document level charge VAT rate**
 
@@ -1994,6 +2091,7 @@ The value to enter is the percentage. For example, for 20%, it must be given as 
 					 * Detailed information about payment terms
 					 */
 					paymentTerms: {
+						key: "BT-20-00",
 						type: "object",
 						description: "Detailed information about payment terms",
 						required: false,
@@ -2006,6 +2104,7 @@ The value to enter is the percentage. For example, for 20%, it must be given as 
 							 * This element may contain multiple lines and multiple terms.
 							 */
 							description: {
+								key: "BT-20",
 								type: "string",
 								description: `**Payment terms**
 
@@ -2024,6 +2123,7 @@ This element may contain multiple lines and multiple terms.`,
 							 * The payment due date reflects the due date of the net payment. For partial payments it states the first net due date. The corresponding description of more complex payment terms can be stated in BT-20 Payment terms.
 							 */
 							dueDate: {
+								key: "BT-9",
 								type: "date",
 								description: `**Payment due date**
 
@@ -2051,6 +2151,7 @@ The payment due date reflects the due date of the net payment. For partial payme
 							 * This is the RUM (Unique Mandate Reference) for SEPA direct debits
 							 */
 							mandateReferenceIdentifier: {
+								key: "BT-89",
 								type: "string",
 								description: `**Mandate reference identifier**
 
@@ -2076,6 +2177,7 @@ This is the RUM (Unique Mandate Reference) for SEPA direct debits`,
 							 * For EXTENDED profile only, BR-CO-10 is replaced by BR-FXEXT-CO-10, which add a tolerance of 0,01 euro per line, document level charge and allowance in calculation.
 							 */
 							lineTotalAmount: {
+								key: "BT-106",
 								type: "string | number",
 								description: `**Sum of Invoice line net amount**
 
@@ -2095,6 +2197,7 @@ For EXTENDED profile only, BR-CO-10 is replaced by BR-FXEXT-CO-10, which add a t
 							 * For EXTENDED profile only, BR-CO-12 is replaced by BR-FXEXT-CO-12, which add a tolerance of 0,01 euro per line, document level charge and allowance in calculation.
 							 */
 							chargeTotalAmount: {
+								key: "BT-108",
 								type: "string | number",
 								description: `**Sum of charges on document level**
 
@@ -2117,6 +2220,7 @@ For EXTENDED profile only, BR-CO-12 is replaced by BR-FXEXT-CO-12, which add a t
 							 * For EXTENDED profile only, BR-CO-11 is replaced by BR-FXEXT-CO-11, which add a tolerance of 0,01 euro per line, document level charge and allowance in calculation.
 							 */
 							allowanceTotalAmount: {
+								key: "BT-107",
 								type: "string | number",
 								description: `**Sum of allowances on document level**
 
@@ -2137,6 +2241,7 @@ For EXTENDED profile only, BR-CO-11 is replaced by BR-FXEXT-CO-11, which add a t
 							 * This amount is subtracted from the invoice total amount with VAT to calculate the amount due for payment.
 							 */
 							paidAmount: {
+								key: "BT-113",
 								type: "string | number",
 								description: `**Paid amount**
 
@@ -2162,6 +2267,7 @@ This amount is subtracted from the invoice total amount with VAT to calculate th
 					 * This business group is mandatory in case of a Credit Note in order to reference the invoices it credits, unless the Credit Note refers to a period which must then be present in group BG-14.
 					 */
 					precendingInvoices: {
+						key: "BG-3",
 						type: "object[]",
 						description: `**Precending Invoice Reference**
 
@@ -2182,6 +2288,7 @@ This business group is mandatory in case of a Credit Note in order to reference 
 							 * The identification of an Invoice that was previously sent by the Seller.
 							 */
 							reference: {
+								key: "BT-25",
 								type: "string",
 								description: `**Preceding Invoice reference**
 
@@ -2197,6 +2304,7 @@ The identification of an Invoice that was previously sent by the Seller.`,
 							 * The Preceding Invoice issue date shall be provided in case the Preceding Invoice identifier is not unique.
 							 */
 							issueDate: {
+								key: "BT-26",
 								type: "date",
 								description: `**Preceding Invoice issue date**
 
@@ -2224,10 +2332,12 @@ The Preceding Invoice issue date shall be provided in case the Preceding Invoice
 					 * CHORUS PRO: not used
 					 */
 					buyerAccountant: {
+						key: "BT-19-00",
 						type: "object",
 						required: false,
 						shape: {
 							reference: {
+								key: "BT-19",
 								type: "string",
 								description: `**Buyer accounting reference**
 

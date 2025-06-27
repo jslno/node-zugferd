@@ -1,4 +1,5 @@
-import { CheckIcon, XIcon } from "lucide-react";
+import { CheckIcon, LinkIcon, XIcon } from "lucide-react";
+import Link from "next/link";
 import type { Schema, SchemaField } from "node-zugferd/types";
 import Markdown from "react-markdown";
 
@@ -18,16 +19,32 @@ export const ProfileTree = ({
 	);
 };
 
-const TreeItem = ({ data }: { data: [string, SchemaField] }) => {
+const TreeItem = ({
+	data,
+	prefix = "",
+}: { data: [string, SchemaField]; prefix?: string }) => {
 	const [name, def] = data;
 
 	const children = def.shape ? Object.entries(def.shape) : undefined;
 
+	if (prefix !== "" && !prefix.endsWith(".")) {
+		prefix += ".";
+	}
+	const id = def.key || prefix + name;
+
 	return (
-		<div className="flex">
+		<div className="flex" id={id}>
 			<div className="pl-5 border-l w-full">
 				<div className="relative">
-					<code>{name}</code>
+					<div className="flex items-center gap-2">
+						<Link
+							href={`#${id}`}
+							className="peer cursor-pointer no-underline font-normal"
+						>
+							<code>{name}</code>
+						</Link>
+						<LinkIcon className="size-3.5 text-fd-muted-foreground shrink-0 opacity-0 transition-opacity peer-hover:opacity-100" />
+					</div>
 					<div className="w-3 h-[1.5px] -left-5 bg-muted absolute top-1/2 -translate-y-1/2"></div>
 				</div>
 
@@ -57,7 +74,9 @@ const TreeItem = ({ data }: { data: [string, SchemaField] }) => {
 				</div>
 
 				{!!children &&
-					children.map((entry, i) => <TreeItem data={entry} key={i} />)}
+					children.map((entry, i) => (
+						<TreeItem data={entry} prefix={id} key={i} />
+					))}
 			</div>
 		</div>
 	);

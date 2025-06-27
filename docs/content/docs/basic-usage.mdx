@@ -98,7 +98,7 @@ const data: ProfileBasic = {
   //...
 };
 
-const invoice = await invoicer.create(data); // [!code highlight]
+const invoice = invoicer.create(data); // [!code highlight]
 ```
 
 </Step>
@@ -142,7 +142,7 @@ Alternatively, you can generate the invoice as an XML file. However, it's import
 </Callout>
 
 ```ts
-const xml = invoice.toXML();
+const xml = await invoice.toXML();
 ```
 
 </Tab>
