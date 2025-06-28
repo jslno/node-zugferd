@@ -41,7 +41,7 @@ export const svelteKitHandler = async ({
 export function isApiPath(url: string, options: ZugferdApiOptions) {
 	const _url = new URL(url);
 	const baseURL = new URL(
-		`${options.baseURL || _url.origin}${options.basePath || "/api/auth"}`,
+		`${options.baseURL || _url.origin}${options.basePath || "/api/zugferd"}`,
 	);
 	if (_url.origin !== baseURL.origin) return false;
 	if (
