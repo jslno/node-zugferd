@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence } from "motion/react";
 import { Features } from "@/components/blocks/features";
 import { ProfileTree } from "@/components/blocks/profile-tree";
+import { NeedHelp } from "@/components/blocks/need-help";
 import { GithubInfo } from "@/components/github-info";
 import { GenerateSecret } from "@/components/generate-secret";
 import { APIFeatures } from "@/components/blocks/api-features";
@@ -66,7 +67,6 @@ export default async function Page(props: {
 								<Card
 									href={prevPage.url}
 									className="flex-1 [&>p]:ml-1 [&>p]:truncate [&>p]:w-full bg-transparent hover:bg-transparent"
-									// @ts-expect-error
 									title={
 										<div className="flex items-center gap-1">
 											<ChevronLeft className="size-4" />
@@ -81,7 +81,6 @@ export default async function Page(props: {
 								<Card
 									href={nextPage.url}
 									className="[&>p]:ml-1 [&>p]:truncate [&>p]:w-full bg-transparent hover:bg-transparent"
-									// @ts-expect-error
 									title={
 										<div className="flex items-center gap-1">
 											{nextPage.data.title}
@@ -155,6 +154,7 @@ export default async function Page(props: {
 						Features,
 						APIFeatures,
 						ProfileTree,
+						NeedHelp,
 						GithubInfo,
 						GenerateSecret,
 					}}
@@ -174,7 +174,7 @@ export async function generateMetadata(props: {
 	const params = await props.params;
 	const page = source.getPage(params.slug);
 	if (page == null) notFound();
-	const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+	const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 	const url = new URL(`${baseUrl}/api/og`);
 	const { title, description } = page.data;
 	const pageSlug = page.file.path;

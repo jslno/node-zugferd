@@ -25,5 +25,8 @@
 	},
 	"[mdx]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "biomejs.biome"
 	}
 }

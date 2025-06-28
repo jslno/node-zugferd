@@ -1,0 +1,164 @@
+---
+title: Contributing to node-zugferd
+description: A short guide to contributing to node-zugferd
+---
+
+Thank you for considering contributing to node-zugferd! Your potential involvement is greatly appreciated.
+
+## Getting Started
+
+Before diving in, take a look at existing:
+
+- <Link href="https://github.com/jslno/node-zugferd/issues">Issues</Link>
+- <Link href="https://github.com/jslno/node-zugferd/pulls">Pull Requests</Link>
+
+## Development Setup
+
+<Callout type="warn">
+  Make sure you have <Link href="https://nodejs.org/en/download">Node.js</Link>{" "}
+  installed, preferably on LTS.
+</Callout>
+
+<Steps>
+
+    <Step>
+
+        ### 1. Fork the repository
+
+        Visit https://github.com/jslno/node-zugferd
+
+        Click the "Fork" button in the top right.
+
+    </Step>
+
+    <Step>
+
+        ### 2. Clone your fork
+
+        ```bash
+        # Replace YOUR-USERNAME with your GitHub username
+        git clone https://github.com/YOUR-USERNAME/node-zugferd.git
+        cd node-zugferd
+        ```
+
+    </Step>
+
+    <Step>
+
+        ### 3. Install dependencies
+
+        Make sure you have <Link href="https://pnpm.io/installation">pnpm</Link> installed!
+
+        ```bash
+        pnpm install
+        ```
+
+    </Step>
+
+    <Step>
+
+        ### 4. Prepare ENV files
+
+        Copy the example env file to create your new `.env` file.
+
+        ```bash
+        cp -n ./docs/.env.example ./docs/.env
+        ```
+
+    </Step>
+
+</Steps>
+
+## Making changes
+
+Once you have an idea on what you want to contribute, you can start making changes. Here are some steps to get started:
+
+<Steps>
+
+    <Step>
+
+        ### 1. Create a new branch
+
+        ```bash
+        # Make sure you're on main
+        git checkout main
+
+        # Pull latest changes
+        git pull upstream main
+
+        # Create and switch to a new branch
+        git checkout -b feat/your-feature-name
+        ```
+
+    </Step>
+
+    <Step>
+
+        ### 2. Start development server
+
+        Start the development server:
+
+        ```bash
+        pnpm dev
+        ```
+
+        To start the docs server:
+
+        ```bash
+        pnpm -F docs dev
+        ```
+
+    </Step>
+
+    <Step>
+
+        ### 3. Make your changes
+
+        * Make your changes to the codebase.
+
+        * Write tests if needed.
+
+        * Update documentation.
+
+    </Step>
+
+</Steps>
+
+### Issues and Bug Fixes
+
+- Check our [GitHub issues](https://github.com/jslno/node-zugferd/issues) for tasks labeled `good first issue`
+- When reporting bugs, include steps to reproduce and expected behavior
+- Comment on issues you'd like to work on to avoid duplicate efforts
+
+### Documentation
+
+- Fix typos and errors
+- Add examples and clarify existing content
+- Ensure documentation is up-to-date with code changes
+
+## Testing
+
+We use Vitest for testing. Place test files next to the source files they test:
+
+```ts
+import { describe, it, expect } from "vitest";
+
+describe("Feature", () => {
+  it("should work as expected", async () => {
+    // Test code here
+    expect(result).toBeDefined();
+  });
+});
+```
+
+## Best Practices
+
+- Write clear commit messages
+- Update documentation to reflect your changes
+- Add tests for new features
+- Follow our coding standards
+- Keep pull requests focused on a single change
+
+Thank you for contributing to node-zugferd!
+
+<NeedHelp />
