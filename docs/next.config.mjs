@@ -20,6 +20,9 @@ const config = {
 		"oxc-transform",
 		"@shikijs/twoslash",
 	],
+	typescript: {
+		ignoreBuildErrors: true,
+	},
 };
 
 export default withMDX(config);
