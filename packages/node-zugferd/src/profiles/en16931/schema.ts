@@ -709,7 +709,7 @@ The name of the payment account, at a payment service provider, to which payment
 									 *
 									 * Use for credit transfer
 									 */
-									serviceProdiverIdentifier: {
+									serviceProviderIdentifier: {
 										key: "BT-86",
 										type: "string",
 										description: `**Payment service provider identifier**
