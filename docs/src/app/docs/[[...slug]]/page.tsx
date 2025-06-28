@@ -19,7 +19,6 @@ import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { createTypeTable } from "fumadocs-typescript/ui";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { AnimatePresence } from "motion/react";
 import { Features } from "@/components/blocks/features";
 import { ProfileTree } from "@/components/blocks/profile-tree";
 import { NeedHelp } from "@/components/blocks/need-help";
@@ -67,6 +66,7 @@ export default async function Page(props: {
 								<Card
 									href={prevPage.url}
 									className="flex-1 [&>p]:ml-1 [&>p]:truncate [&>p]:w-full bg-transparent hover:bg-transparent"
+									// @ts-ignore
 									title={
 										<div className="flex items-center gap-1">
 											<ChevronLeft className="size-4" />
@@ -81,6 +81,7 @@ export default async function Page(props: {
 								<Card
 									href={nextPage.url}
 									className="[&>p]:ml-1 [&>p]:truncate [&>p]:w-full bg-transparent hover:bg-transparent"
+									// @ts-ignore
 									title={
 										<div className="flex items-center gap-1">
 											{nextPage.data.title}
@@ -122,7 +123,6 @@ export default async function Page(props: {
 						Tab,
 						Tabs,
 						AutoTypeTable,
-						AnimatePresence,
 						TypeTable,
 						Accordion,
 						Accordions,
