@@ -41,6 +41,7 @@
 	"dependencies": {
 		"@better-fetch/fetch": "^1.1.17",
 		"better-call": "^1.0.5",
+		"defu": "^6.1.4",
 		"jsonwebtoken": "^9.0.2",
 		"node-zugferd": "workspace:*",
 		"puppeteer": "^24.4.0",
@@ -187,5 +188,7 @@
 			}
 		}
 	},
-	"files": ["dist"]
+	"files": [
+		"dist"
+	]
 }

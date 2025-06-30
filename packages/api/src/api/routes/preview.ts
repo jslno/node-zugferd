@@ -53,6 +53,6 @@ export const preview = <P extends Profile, O extends ZugferdApiOptions>() =>
 				headers: new Headers({
 					"Content-Type": "text/html",
 				}),
-			}) as any as string;
+			});
 		},
 	);
