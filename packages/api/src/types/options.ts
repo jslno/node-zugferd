@@ -1,6 +1,7 @@
 import type { LaunchOptions } from "puppeteer";
 import type { GenericEndpointContext } from "./context";
 import type { Renderer } from "./renderer";
+import type { ZugferdApiPlugin } from "./plugins";
 import type { Iso639_2Code } from "node-zugferd/codelist/iso.639-2";
 
 export type ZugferdApiOptions<R extends Renderer = Renderer> = {
@@ -19,6 +20,7 @@ export type ZugferdApiOptions<R extends Renderer = Renderer> = {
 	trustedOrigins?:
 		| string[]
 		| ((request: Request) => string[] | Promise<string[]>);
+	plugins?: ZugferdApiPlugin[];
 	advanced?: {
 		disableCSRFCheck?: boolean;
 		puppeteer?: {
