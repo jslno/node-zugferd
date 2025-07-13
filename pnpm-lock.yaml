@@ -29,6 +29,16 @@ importers:
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
+      vitest:
+        specifier: ^3.0.4
+        version: 3.0.6(@types/debug@4.1.12)(@types/node@22.13.4)(jiti@2.4.2)(lightningcss@1.29.1)(tsx@4.19.2)
+      xml2js:
+        specifier: ^0.6.2
+        version: 0.6.2
+    devDependencies:
+      '@types/xml2js':
+        specifier: ^0.4.14
+        version: 0.4.14
 
   dev/bun:
     dependencies:
@@ -47,13 +57,13 @@ importers:
     devDependencies:
       '@types/bun':
         specifier: latest
-        version: 1.2.17
+        version: 1.2.18(@types/react@19.0.10)
       '@types/react':
         specifier: ^19.0.9
         version: 19.0.10
       bun:
         specifier: latest
-        version: 1.2.17
+        version: 1.2.18
 
   dev/node:
     dependencies:
@@ -135,7 +145,7 @@ importers:
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       node-zugferd:
         specifier: latest
-        version: 0.0.10-beta.1
+        version: 0.0.10-beta.3
       prism-react-renderer:
         specifier: ^2.4.1
         version: 2.4.1(react@19.0.0)
@@ -1134,58 +1144,58 @@ packages:
     resolution: {integrity: sha512-UXQYvN0DYl5EMOXX3O0Rwke+0R0Pd7PW/hOVwgpPd6KKJPb3RP74m3PEbEFjdTzZVLUW81o7herYXD2h4PVcGQ==}
     engines: {node: '>= 20.0.0'}
 
-  '@oven/bun-darwin-aarch64@1.2.17':
-    resolution: {integrity: sha512-66Xjz3NZXUUWKZJPvWKuwEkaqMZpir1Gm4SbhbB2iiRSSTW8jqwdkSb9RhgTCDt5OnSPd3+Cq0WsP/T5ExJbhA==}
+  '@oven/bun-darwin-aarch64@1.2.18':
+    resolution: {integrity: sha512-GNxVh9VUOQ6S0aDp4Qe80MGadGbh8BS6p3jEHXIboRoTrb/80oR0csMjGUpdwGa2hX1zTvpPBwOFXvVP9UaB0Q==}
     cpu: [arm64]
     os: [darwin]
 
-  '@oven/bun-darwin-x64-baseline@1.2.17':
-    resolution: {integrity: sha512-VSIctl90tV8yg1LRMvPg/8LgUzl55Q7Jcxe+u6PfuvLQIJOTIPbNn7HtRpJg7MGc3+qyztB5KDd70xC7qI2yEg==}
+  '@oven/bun-darwin-x64-baseline@1.2.18':
+    resolution: {integrity: sha512-LT/MF4DySLjskZf4mUgVXhpDBCuGXI7+uHJTiAjinddglh7ENbrSRuM01cjlJ/dxivvekq5+w6k9gdYpHUibuw==}
     cpu: [x64]
     os: [darwin]
 
-  '@oven/bun-darwin-x64@1.2.17':
-    resolution: {integrity: sha512-OMJMHpcpBlWcVnWfSQ6x+8fF7HpkQLqBfoIvzxgUjIZZvj2d8K46XX4N/h62RglDEinRC9VDGxt24vwvlk5tTw==}
+  '@oven/bun-darwin-x64@1.2.18':
+    resolution: {integrity: sha512-/oxsG7eIkvw3rxt3V9gqY23i0ajk8m1cG/FedRj8b15GW2TgA+F9F6FQNLqxc/59SBkcrbTLoqk5EtAQwuwi/w==}
     cpu: [x64]
     os: [darwin]
 
-  '@oven/bun-linux-aarch64-musl@1.2.17':
-    resolution: {integrity: sha512-PH+hUV+I6DGD1VRHdAIAKEAOed+GSdvn6S1b3qqX27/VuHBU781V+hzt+6DBlcWBHYLw8PIg9sfIdNp485gQmw==}
+  '@oven/bun-linux-aarch64-musl@1.2.18':
+    resolution: {integrity: sha512-hk58uY6LSvDn2WDB8o/WAVCOZERYZPShUujI8rCwcDXkQRI4pbm5B5RJP5wEF0fClRI+WXxyyoBFsTKb7lbgyQ==}
     cpu: [aarch64]
     os: [linux]
 
-  '@oven/bun-linux-aarch64@1.2.17':
-    resolution: {integrity: sha512-KPoMqaibCXcSv+VZ3uMqKUNZqMxE6Hho1be6+laolYGOIJxJTMnZPfmKfIlQmnnW3vLlm3g2Rm8pPPC7doSHWg==}
+  '@oven/bun-linux-aarch64@1.2.18':
+    resolution: {integrity: sha512-0uTiUZJFS69LbYPCw963BAdP4wvUXEozbNf7vrB/3rT82x+fPZKF3C+4nfFScm+6UYusjH468vG7/g9x38jBIg==}
     cpu: [arm64]
     os: [linux]
 
-  '@oven/bun-linux-x64-baseline@1.2.17':
-    resolution: {integrity: sha512-IrnFMUwYWxoKICQgK8ZlJ6rI/HU2gITFNEW0MIOPIcuT0s3j0/33631M9EzYDoL4NuLQPks6569JDvSHEVqdeA==}
+  '@oven/bun-linux-x64-baseline@1.2.18':
+    resolution: {integrity: sha512-ERnR7gZz/YYpo/ZhRKXvY9qtsJNQnTrp5HayExfvD1achoHcYEvf3TarajRLVC7gDi7BxlaOPZyJjgdo5g0tUg==}
     cpu: [x64]
     os: [linux]
 
-  '@oven/bun-linux-x64-musl-baseline@1.2.17':
-    resolution: {integrity: sha512-YE5wQ/YA79BykMLhuwgdoF8Yjj5dRipD8dwmXs8n7gzR+/L9tL7Q69NQgskW2KkAalmWPoGAv3TV0IwbU+1dFw==}
+  '@oven/bun-linux-x64-musl-baseline@1.2.18':
+    resolution: {integrity: sha512-u4sqExX5gdcMRdwzL16qP/xJlnxVR+fF43GGQJNopOTXDrsK33BXw3aUObHRtVkqRiK3cyubJUgTtz2ykQ4Dng==}
     cpu: [x64]
     os: [linux]
 
-  '@oven/bun-linux-x64-musl@1.2.17':
-    resolution: {integrity: sha512-fW9qn/WqO131/qSIkIPW8zN+thQnYUWa/k98EWubLG87htKSPh1v023E5ikKb7WlUv4Yb6UlE/z4NmMYKffmAg==}
+  '@oven/bun-linux-x64-musl@1.2.18':
+    resolution: {integrity: sha512-Oqj8yDkObDWMlxzbhOefb+B75tgKEP4uGEFcBHXjVxSEL0lB7B7LYTvTpeDm8QPldhLs1xAN4FtzZlPUn6qI+Q==}
     cpu: [x64]
     os: [linux]
 
-  '@oven/bun-linux-x64@1.2.17':
-    resolution: {integrity: sha512-BfySnrTxp7D9hVUi9JEpviJl8ndsuESiRiQKTzgmdTLrMjUxP4SwrwMtYt6R9X20n9rREG6a47C0IyQMhbwG/g==}
+  '@oven/bun-linux-x64@1.2.18':
+    resolution: {integrity: sha512-okHdy9+Yov5BvI19FynnvsmQUP477SNJRv33TIHxs9cpj/ClgaYXMihS+yH0LCzYDFIeojfABiIHdBVUFmxqtQ==}
     cpu: [x64]
     os: [linux]
 
-  '@oven/bun-windows-x64-baseline@1.2.17':
-    resolution: {integrity: sha512-aVkq4l1yZ9VKfBOtZ2HEj0OCU5kUe3Fx6LbAG6oY6OglWVYj051i3RGaE2OdR4L4F2jDyxzfGYRTM/qs8nU5qA==}
+  '@oven/bun-windows-x64-baseline@1.2.18':
+    resolution: {integrity: sha512-n5XF3N0Kr53z4NnVWfTqS72U2rSHJlFafO70SOSzgiu26ylKTGOC9BBsvEQhKld4nKAsbp8YjpOViomrtC6bCQ==}
     cpu: [x64]
     os: [win32]
 
-  '@oven/bun-windows-x64@1.2.17':
-    resolution: {integrity: sha512-GJUg1oA59DWH6eyV8uccpgfTEVxjmgfTWQCOl2ySMXR3IfRoFwS4aQfpjcVzNmEZrv8eYt+yMuw1K7aNcWTTIg==}
+  '@oven/bun-windows-x64@1.2.18':
+    resolution: {integrity: sha512-jklsKWT9zfh8wXewKPfO7Uq8vo72esaQoGzCTTt0NKY+juXvyKaiMHEfT7v4o7cmrql3QPeVtsbp9uNAiuotgw==}
     cpu: [x64]
     os: [win32]
 
@@ -1939,8 +1949,8 @@ packages:
   '@types/body-parser@1.19.5':
     resolution: {integrity: sha512-fB3Zu92ucau0iQ0JMCFQE7b/dv8Ot07NI3KaZIkIUNXq82k4eBAqUaneXfleGY9JWskeS9y+u0nXMyspcuQrCg==}
 
-  '@types/bun@1.2.17':
-    resolution: {integrity: sha512-l/BYs/JYt+cXA/0+wUhulYJB6a6p//GTPiJ7nV+QHa8iiId4HZmnu/3J/SowP5g0rTiERY2kfGKXEK5Ehltx4Q==}
+  '@types/bun@1.2.18':
+    resolution: {integrity: sha512-Xf6RaWVheyemaThV0kUfaAUvCNokFr+bH8Jxp+tTZfx7dAPA8z9ePnP9S9+Vspzuxxx9JRAXhnyccRj3GyCMdQ==}
 
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
@@ -2012,6 +2022,9 @@ packages:
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
+
+  '@types/xml2js@0.4.14':
+    resolution: {integrity: sha512-4YnrRemBShWRO2QjvUin8ESA41rH+9nQGLUGZV/1IDhi3SL9OhdpNC/MrulTWuptXKwhx/aDxE7toV0f/ypIXQ==}
 
   '@types/yauzl@2.10.3':
     resolution: {integrity: sha512-oJoftv0LSuaDZE3Le4DbKX+KS9G36NzOeSap90UIK0yMA/NhKJhqlSGtNDORNRaIbQfzjXDrQa0ytJ6mNRGz/Q==}
@@ -2235,11 +2248,13 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  bun-types@1.2.17:
-    resolution: {integrity: sha512-ElC7ItwT3SCQwYZDYoAH+q6KT4Fxjl8DtZ6qDulUFBmXA8YB4xo+l54J9ZJN+k2pphfn9vk7kfubeSd5QfTVJQ==}
+  bun-types@1.2.18:
+    resolution: {integrity: sha512-04+Eha5NP7Z0A9YgDAzMk5PHR16ZuLVa83b26kH5+cp1qZW4F6FmAURngE7INf4tKOvCE69vYvDEwoNl1tGiWw==}
+    peerDependencies:
+      '@types/react': ^19
 
-  bun@1.2.17:
-    resolution: {integrity: sha512-lrUZTWS24eVy6v+Eph8VTwqFPcG7/XQ0rLBQEMNoQs2Vd7ctVdMGAzJKKGZRUQH+rgkD8rBeHGIVoWxX4vJLCA==}
+  bun@1.2.18:
+    resolution: {integrity: sha512-OR+EpNckoJN4tHMVZPaTPxDj2RgpJgJwLruTIFYbO3bQMguLd0YrmkWKYqsiihcLgm2ehIjF/H1RLfZiRa7+qQ==}
     cpu: [arm64, x64, aarch64]
     os: [darwin, linux, win32]
     hasBin: true
@@ -3517,8 +3532,8 @@ packages:
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
-  node-zugferd@0.0.10-beta.1:
-    resolution: {integrity: sha512-4DBucg/RfyEzSHfcDdb0QSeZ+qKGTv87Cs33BAaQyRuI9Z0525Jx4466SJWJv3wXlL74MWJF8Ssnw7Yo5rd0oA==}
+  node-zugferd@0.0.10-beta.3:
+    resolution: {integrity: sha512-6tq8ApQ7A+a8XCH95dVlC7DWQ28uk7KdRyDmmcn/yNEH76AFEH4KhyxRtvzpx1GGIEvJs2J1aL1T85gDhfZB5w==}
 
   npm-to-yarn@3.0.1:
     resolution: {integrity: sha512-tt6PvKu4WyzPwWUzy/hvPFqn+uwXO0K1ZHka8az3NnrhWJDmSqI8ncWq0fkL0k/lmmi5tAC11FXwXuh0rFbt1A==}
@@ -3901,6 +3916,9 @@ packages:
   satori@0.12.1:
     resolution: {integrity: sha512-0SbjchvDrDbeXeQgxWVtSWxww7qcFgk3DtSE2/blHOSlLsSHwIqO2fCrtVa/EudJ7Eqno8A33QNx56rUyGbLuw==}
     engines: {node: '>=16'}
+
+  sax@1.4.1:
+    resolution: {integrity: sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==}
 
   scheduler@0.25.0:
     resolution: {integrity: sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA==}
@@ -4483,6 +4501,14 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+
+  xml2js@0.6.2:
+    resolution: {integrity: sha512-T4rieHaC1EXcES0Kxxj4JWgaUQHDk+qwHcYOCFHfiwKz7tOVPLq7Hjq9dM1WCMhylqMEfP7hMcOIChvotiZegA==}
+    engines: {node: '>=4.0.0'}
+
+  xmlbuilder@11.0.1:
+    resolution: {integrity: sha512-fDlsI/kFEx7gLvbecc0/ohLG50fugQp8ryHzMTuW9vSa1GJ0XYWKnhsUx7oie3G98+r56aTQIUB4kht42R3JvA==}
+    engines: {node: '>=4.0'}
 
   xsd-schema-validator@0.10.0:
     resolution: {integrity: sha512-G1GtYp9Smww5D9U3QJy/uMeoaDlEYg5BR4qZYSBZWa/5TG5az2j3Np27uLKaRcg6ajwe3Ew6SJrAo3B/QFrgdg==}
@@ -5122,37 +5148,37 @@ snapshots:
 
   '@orama/orama@3.1.9': {}
 
-  '@oven/bun-darwin-aarch64@1.2.17':
+  '@oven/bun-darwin-aarch64@1.2.18':
     optional: true
 
-  '@oven/bun-darwin-x64-baseline@1.2.17':
+  '@oven/bun-darwin-x64-baseline@1.2.18':
     optional: true
 
-  '@oven/bun-darwin-x64@1.2.17':
+  '@oven/bun-darwin-x64@1.2.18':
     optional: true
 
-  '@oven/bun-linux-aarch64-musl@1.2.17':
+  '@oven/bun-linux-aarch64-musl@1.2.18':
     optional: true
 
-  '@oven/bun-linux-aarch64@1.2.17':
+  '@oven/bun-linux-aarch64@1.2.18':
     optional: true
 
-  '@oven/bun-linux-x64-baseline@1.2.17':
+  '@oven/bun-linux-x64-baseline@1.2.18':
     optional: true
 
-  '@oven/bun-linux-x64-musl-baseline@1.2.17':
+  '@oven/bun-linux-x64-musl-baseline@1.2.18':
     optional: true
 
-  '@oven/bun-linux-x64-musl@1.2.17':
+  '@oven/bun-linux-x64-musl@1.2.18':
     optional: true
 
-  '@oven/bun-linux-x64@1.2.17':
+  '@oven/bun-linux-x64@1.2.18':
     optional: true
 
-  '@oven/bun-windows-x64-baseline@1.2.17':
+  '@oven/bun-windows-x64-baseline@1.2.18':
     optional: true
 
-  '@oven/bun-windows-x64@1.2.17':
+  '@oven/bun-windows-x64@1.2.18':
     optional: true
 
   '@oxc-transform/binding-darwin-arm64@0.72.3':
@@ -5881,9 +5907,11 @@ snapshots:
       '@types/connect': 3.4.38
       '@types/node': 22.13.4
 
-  '@types/bun@1.2.17':
+  '@types/bun@1.2.18(@types/react@19.0.10)':
     dependencies:
-      bun-types: 1.2.17
+      bun-types: 1.2.18(@types/react@19.0.10)
+    transitivePeerDependencies:
+      - '@types/react'
 
   '@types/connect@3.4.38':
     dependencies:
@@ -5965,6 +5993,10 @@ snapshots:
   '@types/unist@2.0.11': {}
 
   '@types/unist@3.0.3': {}
+
+  '@types/xml2js@0.4.14':
+    dependencies:
+      '@types/node': 22.13.4
 
   '@types/yauzl@2.10.3':
     dependencies:
@@ -6233,23 +6265,24 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  bun-types@1.2.17:
+  bun-types@1.2.18(@types/react@19.0.10):
     dependencies:
       '@types/node': 22.13.4
+      '@types/react': 19.0.10
 
-  bun@1.2.17:
+  bun@1.2.18:
     optionalDependencies:
-      '@oven/bun-darwin-aarch64': 1.2.17
-      '@oven/bun-darwin-x64': 1.2.17
-      '@oven/bun-darwin-x64-baseline': 1.2.17
-      '@oven/bun-linux-aarch64': 1.2.17
-      '@oven/bun-linux-aarch64-musl': 1.2.17
-      '@oven/bun-linux-x64': 1.2.17
-      '@oven/bun-linux-x64-baseline': 1.2.17
-      '@oven/bun-linux-x64-musl': 1.2.17
-      '@oven/bun-linux-x64-musl-baseline': 1.2.17
-      '@oven/bun-windows-x64': 1.2.17
-      '@oven/bun-windows-x64-baseline': 1.2.17
+      '@oven/bun-darwin-aarch64': 1.2.18
+      '@oven/bun-darwin-x64': 1.2.18
+      '@oven/bun-darwin-x64-baseline': 1.2.18
+      '@oven/bun-linux-aarch64': 1.2.18
+      '@oven/bun-linux-aarch64-musl': 1.2.18
+      '@oven/bun-linux-x64': 1.2.18
+      '@oven/bun-linux-x64-baseline': 1.2.18
+      '@oven/bun-linux-x64-musl': 1.2.18
+      '@oven/bun-linux-x64-musl-baseline': 1.2.18
+      '@oven/bun-windows-x64': 1.2.18
+      '@oven/bun-windows-x64-baseline': 1.2.18
 
   bundle-require@5.1.0(esbuild@0.24.2):
     dependencies:
@@ -7909,7 +7942,7 @@ snapshots:
 
   node-releases@2.0.19: {}
 
-  node-zugferd@0.0.10-beta.1:
+  node-zugferd@0.0.10-beta.3:
     dependencies:
       defu: 6.1.4
       fast-xml-parser: 4.5.2
@@ -8420,6 +8453,8 @@ snapshots:
       parse-css-color: 0.2.1
       postcss-value-parser: 4.2.0
       yoga-wasm-web: 0.3.3
+
+  sax@1.4.1: {}
 
   scheduler@0.25.0: {}
 
@@ -9066,6 +9101,13 @@ snapshots:
   wrappy@1.0.2: {}
 
   ws@8.18.1: {}
+
+  xml2js@0.6.2:
+    dependencies:
+      sax: 1.4.1
+      xmlbuilder: 11.0.1
+
+  xmlbuilder@11.0.1: {}
 
   xsd-schema-validator@0.10.0:
     dependencies:
