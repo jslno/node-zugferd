@@ -339,8 +339,8 @@ export const basicMask = {
 						"BG-22",
 						{
 							lineTotalAmount: "BT-106",
-							chargeTotalAmount: "",
-							allowanceTotalAmount: "",
+							chargeTotalAmount: "BT-108",
+							allowanceTotalAmount: "BT-107",
 							taxBasisTotalAmount: "BT-109",
 							taxTotal: "BT-110",
 							grandTotalAmount: "BT-112",
