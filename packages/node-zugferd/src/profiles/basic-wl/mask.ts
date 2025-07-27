@@ -225,6 +225,7 @@ export const basicWlMask = {
 					charges: [
 						"BG-21",
 						{
+							chargeIndicator: "TEST",
 							calculationPercent: "BT-101",
 							basisAmount: "BT-100",
 							actualAmount: "BT-99",

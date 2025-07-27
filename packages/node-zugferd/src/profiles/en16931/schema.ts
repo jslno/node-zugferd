@@ -287,8 +287,13 @@ An identifier of the supporting document.`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[supporting-documents]/ram:IssuerAssignedID",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[supporting-documents]/ram:TypeCode":
-										"916",
+									typeCode: {
+										key: "BT-122-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[supporting-documents]/ram:TypeCode",
+										defaultValue: "916",
+									},
 								},
 							},
 							/**
@@ -448,8 +453,13 @@ In some countries a reference to the call for tender that has led to the contrac
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[tender-lot-reference]/ram:IssuerAssignedID",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[tender-lot-reference]/ram:TypeCode":
-										"50",
+									typeCode: {
+										key: "BT-17-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[tender-lot-reference]/ram:TypeCode",
+										defaultValue: "50",
+									},
 								},
 							},
 						},
@@ -487,8 +497,13 @@ It may be a subscription number, telephone number, meter point, vehicle, person 
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[object-identifier]/ram:IssuerAssignedID",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[object-identifier]/ram:TypeCode":
-										"130",
+									typeCode: {
+										key: "BT-18-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[object-identifier]/ram:TypeCode",
+										defaultValue: "130",
+									},
 								},
 							},
 							/**
@@ -510,8 +525,13 @@ If it may be not clear for the receiver what scheme is used for the identifier, 
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[object-identifier]/ram:ReferenceTypeCode",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[object-identifier]/ram:TypeCode":
-										"130",
+									typeCode: {
+										key: "BT-18-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[object-identifier]/ram:TypeCode",
+										defaultValue: "130",
+									},
 								},
 							},
 						},
@@ -772,8 +792,13 @@ BR-CO-3: Value added tax point date (BT-7) and Value added tax point date code (
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:TaxPointDate/udt:DateString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:TaxPointDate/udt:DateString/@format":
-										"102",
+									format: {
+										key: "BT-7-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:TaxPointDate/udt:DateString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 						},
@@ -1119,6 +1144,7 @@ The base amount that may be used, in conjunction with the Invoice line charge pe
 									 * It may be a subscription number, telephone number, meter point etc., as applicable.
 									 */
 									issuerAssignedID: {
+										key: "BT-128",
 										type: "string",
 										description: `**Invoice line object identifier**
 
@@ -1128,10 +1154,6 @@ It may be a subscription number, telephone number, meter point etc., as applicab
 										required: false,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:AdditionalReferencedDocument/ram:IssuerAssignedID",
-										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:AdditionalReferencedDocument/ram:TypeCode":
-												"130",
-										},
 									},
 									/**
 									 * Scheme identifier
@@ -1152,10 +1174,15 @@ If it may be not clear for the receiver what scheme is used for the identifier, 
 										required: false,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:AdditionalReferencedDocument/ram:ReferenceTypeCode",
-										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:AdditionalReferencedDocument/ram:TypeCode":
-												"130",
-										},
+									},
+								},
+								additionalXml: {
+									typeCode: {
+										key: "BT-128-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:AdditionalReferencedDocument/ram:TypeCode",
+										defaultValue: "130",
 									},
 								},
 							},

@@ -1,12 +1,12 @@
 import z from "zod";
 import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
-import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
 import { UNTDID_5189 } from "../../codelists/untdid/5189.gen";
 import { UNTDID_7161 } from "../../codelists/untdid/7161.gen";
 import { REC20 } from "../../codelists/rec20.gen";
 import { REC21 } from "../../codelists/rec21.gen";
 import { ISO_6523 } from "../../codelists/iso/6523.gen";
+import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
 
 export const basicSchema = {
 	specificationIdentifier: {
@@ -305,8 +305,13 @@ Only applies if the discount is provided per unit and if it is not included in t
 											},
 										},
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator":
-												"false",
+											chargeIndicator: {
+												key: "BT-147-01",
+												type: "boolean",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator",
+												defaultValue: false,
+											},
 										},
 									},
 								},
@@ -701,8 +706,13 @@ BR-CO-20: If  Invoice  line  period  (BG-26)  is  used,  the  Invoice  line peri
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString/@format":
-												"102",
+											format: {
+												key: "BT-134-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 									/**
@@ -743,8 +753,13 @@ BR-CO-20: If  Invoice  line  period  (BG-26)  is  used,  the  Invoice  line peri
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString/@format":
-												"102",
+											format: {
+												key: "BT-135-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 								},
@@ -781,8 +796,11 @@ The amount of an allowance, without VAT.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-allowances]/ram:ActualAmount",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-allowances]/ram:ChargeIndicator/udt:Indicator":
-												"false",
+											chargeIndicator: {
+												key: "BG-27-0",
+												type: "boolean",
+												defaultValue: false,
+											},
 										},
 									},
 									/**
@@ -877,8 +895,11 @@ The amount of a charge, without VAT.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-charges]/ram:ActualAmount",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-charges]/ram:ChargeIndicator/udt:Indicator":
-												"true",
+											chargeIndicator: {
+												key: "BG-28-0",
+												type: "boolean",
+												defaultValue: true,
+											},
 										},
 									},
 									/**

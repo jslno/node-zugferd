@@ -1,3 +1,4 @@
+import z from "zod";
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
 import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
@@ -9,6 +10,8 @@ import { EAS } from "../../codelists/eas";
 import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
 import { ISO_6523 } from "../../codelists/iso/6523.gen";
 import { ISO_3166 } from "../../codelists/iso/3166";
+import { UNTDID_2475 } from "../../codelists/untdid/2475";
+import { VATEX } from "../../codelists/vatex.gen";
 
 export const basicWlSchema = {
 	specificationIdentifier: {
@@ -594,6 +597,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 * Detailed information on tax information
 							 */
 							taxRegistration: {
+								key: "BT-63-00",
 								type: "object",
 								description: "Detailed information on tax information",
 								required: false,
@@ -606,6 +610,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * VAT number prefixed by a country code based on EN ISO 3166-1 "Codes for the representation of names of countries and their subdivisions".
 									 */
 									vatIdentifier: {
+										key: "BT-63",
 										type: "string",
 										description: `**Seller tax representative VAT identifier**
 
@@ -615,8 +620,13 @@ VAT number prefixed by a country code based on EN ISO 3166-1 "Codes for the repr
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID/@schemeID":
-												"VA",
+											schemeID: {
+												key: "BT-63-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID/@schemeID",
+												defaultValue: "VA",
+											},
 										},
 									},
 								},
@@ -909,8 +919,13 @@ BR-CO-9: The Seller VAT identifier (BT-31), the Seller tax representative VAT id
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID/@schemeID":
-												"VA",
+											schemeID: {
+												key: "BT-48-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration[0]/ram:ID/@schemeID",
+												defaultValue: "VA",
+											},
 										},
 									},
 								},
@@ -1187,8 +1202,13 @@ In Germany, the date of delivery and performance is a mandatory information on i
 									input: dateTimeStringFormatter,
 								},
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString/@format":
-										"102",
+									format: {
+										key: "BT-72-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 						},
@@ -1484,6 +1504,350 @@ For a SIREN or a SIRET, the value of this field is "0002"`,
 						},
 					},
 					/**
+					 * VAT Breakdown
+					 *
+					 * A group of business terms providing information about VAT breakdown by different categories, rates and exemption reasons
+					 */
+					vatBreakdown: {
+						key: "BG-23",
+						type: "object[]",
+						group: "vat-breakdown",
+						description: `**VAT Breakdown**
+
+A group of business terms providing information about VAT breakdown by different categories, rates and exemption reasons`,
+						required: false,
+						validator: z.array(z.any()).min(1).optional(),
+						shape: {
+							/**
+							 * VAT category tax amount
+							 *
+							 * The total VAT amount for a given VAT category.
+							 *
+							 * Calculated by multiplying the VAT category taxable amount with the VAT category rate for the relevant VAT category.
+							 *
+							 * For EXTENDED profile only, BR-CO-17 is not applied.
+							 */
+							calculatedAmount: {
+								key: "BT-117",
+								type: "string | number",
+								description: `**VAT category tax amount**
+
+The total VAT amount for a given VAT category.
+
+Calculated by multiplying the VAT category taxable amount with the VAT category rate for the relevant VAT category.
+
+For EXTENDED profile only, BR-CO-17 is not applied.`,
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:CalculatedAmount",
+							},
+							/**
+							 * Type of tax (code)
+							 *
+							 * Coded identification of a VAT category.
+							 *
+							 * The VAT category code and the VAT category rate shall be consistent. For more information on the recommended codes, please refer to subclause 6.3.3.2 - Specification of VAT category codes.
+							 */
+							typeCode: {
+								key: "BT-118-0",
+								type: "string",
+								description: `**Type of tax (code)**
+
+Coded identification of a VAT category.
+
+The VAT category code and the VAT category rate shall be consistent. For more information on the recommended codes, please refer to subclause 6.3.3.2 - Specification of VAT category codes.`,
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:TypeCode",
+							},
+							/**
+							 * VAT exemption reason text
+							 *
+							 * A textual statement of the reason why the amount is exempted from VAT or why no VAT is being charged
+							 *
+							 * Articles 226 items 11 to 15 Directive 2006/112/EC [2].
+							 *
+							 * CHORUS PRO: this field is limited to 1024 characters
+							 */
+							exemptionReasonText: {
+								key: "BT-120",
+								type: "string",
+								description: `**VAT exemption reason text**
+
+A textual statement of the reason why the amount is exempted from VAT or why no VAT is being charged
+
+Articles 226 items 11 to 15 Directive 2006/112/EC [2].
+
+CHORUS PRO: this field is limited to 1024 characters`,
+								required: false,
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:ExemptionReason",
+							},
+							/**
+							 * VAT category taxable amount
+							 *
+							 * Sum of all taxable amounts subject to a specific VAT category code and VAT category rate (if the VAT category rate is applicable).
+							 *
+							 * The sum of Invoice line net amount minus allowances plus charges on document level which are subject to a specific VAT category code and VAT category rate (if the VAT category rate is applicable).
+							 */
+							basisAmount: {
+								key: "BT-116",
+								type: "string | number",
+								description: `**VAT category taxable amount**
+
+Sum of all taxable amounts subject to a specific VAT category code and VAT category rate (if the VAT category rate is applicable).
+
+The sum of Invoice line net amount minus allowances plus charges on document level which are subject to a specific VAT category code and VAT category rate (if the VAT category rate is applicable).`,
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:BasisAmount",
+							},
+							/**
+							 * VAT category code
+							 *
+							 * Coded identification of a VAT category.
+							 *
+							 * The following entries of UNTDID 5305 [6] are used (further clarification between brackets):
+							 * - Standard rate (Liable for VAT in a standard way)
+							 * - Zero rated goods (Liable for VAT with a percentage rate of zero)
+							 * - Exempt from tax (VAT/IGIC/IPSI)
+							 * - VAT Reverse Charge (Reverse charge VAT/IGIC/IPSI rules apply)
+							 * - VAT exempt for intra community supply of goods (VAT/IGIC/IPSI not levied due to Intra-community supply rules)
+							 * - Free export item, tax not charged (VAT/IGIC/IPSI not levied due to export outside of the EU)
+							 * - Services outside scope of tax (Sale is not subject to VAT/IGIC/IPSI)
+							 * - Canary Islands General Indirect Tax (Liable for IGIC tax)
+							 * - Liable for IPSI (Ceuta/Melilla tax)
+							 *
+							 * The VAT category codes are as follows:
+							 * - S = Standard VAT rate
+							 * - Z = Zero rated goods
+							 * - E = VAT exempt
+							 * - AE = Reverse charge
+							 * - K = Intra-Community supply (specific reverse charge)
+							 * - G = Exempt VAT for Export outside EU
+							 * - O = Outside VAT scope
+							 * - L = Canary Islands
+							 * - M = Ceuta and Mellila
+							 *
+							 * BR-47: Each  VAT  breakdown  (BG-23)  shall  be  defined  through  a VAT category code (BT-118).
+							 *
+							 * For EXTENDED profile only, BR-O-11, BR-O-12, BR-O-13 and BR-O-14 are not applied.
+							 */
+							categoryCode: {
+								key: "BT-118",
+								type: UNTDID_5305.map(({ code }) => code),
+								description: `**VAT category code**
+
+Coded identification of a VAT category.
+
+The following entries of UNTDID 5305 [6] are used (further clarification between brackets):
+- Standard rate (Liable for VAT in a standard way)
+- Zero rated goods (Liable for VAT with a percentage rate of zero)
+- Exempt from tax (VAT/IGIC/IPSI)
+- VAT Reverse Charge (Reverse charge VAT/IGIC/IPSI rules apply)
+- VAT exempt for intra community supply of goods (VAT/IGIC/IPSI not levied due to Intra-community supply rules)
+- Free export item, tax not charged (VAT/IGIC/IPSI not levied due to export outside of the EU)
+- Services outside scope of tax (Sale is not subject to VAT/IGIC/IPSI)
+- Canary Islands General Indirect Tax (Liable for IGIC tax)
+- Liable for IPSI (Ceuta/Melilla tax)
+
+The VAT category codes are as follows:
+- S = Standard VAT rate
+- Z = Zero rated goods
+- E = VAT exempt
+- AE = Reverse charge
+- K = Intra-Community supply (specific reverse charge)
+- G = Exempt VAT for Export outside EU
+- O = Outside VAT scope
+- L = Canary Islands
+- M = Ceuta and Mellila
+
+BR-47: Each  VAT  breakdown  (BG-23)  shall  be  defined  through  a VAT category code (BT-118).
+
+For EXTENDED profile only, BR-O-11, BR-O-12, BR-O-13 and BR-O-14 are not applied.`,
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:CategoryCode",
+							},
+							/**
+							 * VAT exemption reason code
+							 *
+							 * A coded statement of the reason for why the amount is exempted from VAT.
+							 *
+							 * Code list issued and maintained by the Connecting Europe Facility.
+							 */
+							exemptionReasonCode: {
+								key: "BT-121",
+								type: VATEX.map(({ code }) => code),
+								description: `**VAT exemption reason code**
+
+A coded statement of the reason for why the amount is exempted from VAT.
+
+Code list issued and maintained by the Connecting Europe Facility.`,
+								required: false,
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:ExemptionReasonCode",
+							},
+							/**
+							 * Value added tax point date code
+							 *
+							 * The code of the date when the VAT becomes accountable for the Seller and for the Buyer.
+							 *
+							 * The code shall distinguish between the following entries of UNTDID 2005 [6]:
+							 * - Invoice docment issue date
+							 * - Delivery date, actual
+							 * - Payment date. The Value added tax point date code is used if the Value added tax point date is not known when the invoice is issued. The use of BT-8 and BT-7 is mutually exclusive.
+							 *
+							 * This code can not be present if the Value added tax point date is provided directly in the ""Value added tax point date"" (BT-7).
+							 * This code should be selected from the following values from UNTDID 2475 (instead of UNTDID 2005 [6]):
+							 * - 5: Date of the invoice (VAT on DEBITS)
+							 * - 29: Delivery date (VAT on DEBITS)
+							 * - 72: Payment date (VAT on RECEIPTS)
+							 *
+							 * BR-CO-3: Value added tax point date (BT-7) and Value added tax point date code (BT-8) are mutually exclusive.
+							 */
+							dueDateTypeCode: {
+								key: "BT-8",
+								type: UNTDID_2475.map(({ code }) => code),
+								description: `**Value added tax point date code**
+
+The code of the date when the VAT becomes accountable for the Seller and for the Buyer.
+
+The code shall distinguish between the following entries of UNTDID 2005 [6]:
+- Invoice docment issue date
+- Delivery date, actual
+- Payment date. The Value added tax point date code is used if the Value added tax point date is not known when the invoice is issued. The use of BT-8 and BT-7 is mutually exclusive.
+
+This code can not be present if the Value added tax point date is provided directly in the ""Value added tax point date"" (BT-7).
+This code should be selected from the following values from UNTDID 2475 (instead of UNTDID 2005 [6]):
+- 5: Date of the invoice (VAT on DEBITS)
+- 29: Delivery date (VAT on DEBITS)
+- 72: Payment date (VAT on RECEIPTS)
+
+BR-CO-3: Value added tax point date (BT-7) and Value added tax point date code (BT-8) are mutually exclusive.`,
+								required: false,
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:DueDateTypeCode",
+							},
+							/**
+							 * VAT category rate
+							 *
+							 * The VAT rate, represented as percentage that applies for the relevant VAT category.
+							 *
+							 * The VAT category code and the VAT category rate shall be consistent.
+							 *
+							 * The value to enter is the percentage. For example, for 20%, it must be given as 20 (and not 0.2)
+							 *
+							 * BR-48: Each  VAT  breakdown  (BG-23)  shall  have  a  VAT  category rate (BT-119), except if the Invoice is not subject to VAT.
+							 */
+							rateApplicablePercent: {
+								key: "BT-119",
+								type: "string | number",
+								description: `**VAT category rate**
+
+The VAT rate, represented as percentage that applies for the relevant VAT category.
+
+The VAT category code and the VAT category rate shall be consistent.
+
+The value to enter is the percentage. For example, for 20%, it must be given as 20 (and not 0.2)
+
+BR-48: Each  VAT  breakdown  (BG-23)  shall  have  a  VAT  category rate (BT-119), except if the Invoice is not subject to VAT.`,
+								required: false,
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax[vat-breakdown]/ram:RateApplicablePercent",
+							},
+						},
+					},
+					/**
+					 * Invoicing period
+					 *
+					 * A group of business terms providing information on the invoice period.
+					 *
+					 * Used to indicate when the period covered by the invoice starts and when it ends. Also called delivery period.
+					 */
+					invoicingPeriod: {
+						key: "BG-14",
+						type: "object",
+						description: `**Invoicing period**
+
+A group of business terms providing information on the invoice period.
+
+Used to indicate when the period covered by the invoice starts and when it ends. Also called delivery period.`,
+						required: false,
+						shape: {
+							/**
+							 * Invoicing period start date
+							 *
+							 * The date when the Invoice period starts.
+							 *
+							 * The initial date of delivery of goods or services.
+							 *
+							 * This date must be less than or equal to the period end date (BT-74), if it exists
+							 *
+							 * BR-CO-19: If Invoicing period (BG-14) is used, the Invoicing period start date (BT-73) or the Invoicing period end date (BT-74) shall be filled, or both.
+							 */
+							startDate: {
+								key: "BT-73",
+								type: "date",
+								description: `**Invoicing period start date**
+
+The date when the Invoice period starts.
+
+The initial date of delivery of goods or services.
+
+This date must be less than or equal to the period end date (BT-74), if it exists
+
+BR-CO-19: If Invoicing period (BG-14) is used, the Invoicing period start date (BT-73) or the Invoicing period end date (BT-74) shall be filled, or both.`,
+								required: false,
+								transform: {
+									input: dateTimeStringFormatter,
+								},
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString",
+								additionalXml: {
+									format: {
+										key: "BT-73-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString/@format",
+										defaultValue: "102",
+									},
+								},
+							},
+							/**
+							 * Invoicing period end date
+							 *
+							 * This date must be greater than or equal to the period start date (BT-73), if it exists
+							 *
+							 * BR-29: If  both  Invoicing  period  start  date  (BT-73)  and  Invoicing period end date (BT-74) are given then the Invoicing period end  date  (BT-74)  shall  be  later  or  equal  to  the  Invoicing period start date (BT-73).
+							 *
+							 * BR-CO-19: If Invoicing period (BG-14) is used, the Invoicing period start date (BT-73) or the Invoicing period end date (BT-74) shall be filled, or both.
+							 */
+							endDate: {
+								key: "BT-74",
+								type: "date",
+								description: `**Invoicing period end date**
+
+This date must be greater than or equal to the period start date (BT-73), if it exists
+
+BR-29: If  both  Invoicing  period  start  date  (BT-73)  and  Invoicing period end date (BT-74) are given then the Invoicing period end  date  (BT-74)  shall  be  later  or  equal  to  the  Invoicing period start date (BT-73).
+
+BR-CO-19: If Invoicing period (BG-14) is used, the Invoicing period start date (BT-73) or the Invoicing period end date (BT-74) shall be filled, or both.`,
+								required: false,
+								transform: {
+									input: dateTimeStringFormatter,
+								},
+								xpath:
+									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString",
+								additionalXml: {
+									format: {
+										key: "BT-74-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString/@format",
+										defaultValue: "102",
+									},
+								},
+							},
+						},
+					},
+					/**
 					 * Payment instructions
 					 *
 					 * A group of business terms providing information about the payment.
@@ -1677,8 +2041,13 @@ The amount of an allowance, without VAT.`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:ActualAmount",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:ChargeIndicator/udt:Indicator":
-										"false",
+									chargeIndicator: {
+										key: "BG-20-0",
+										type: "boolean",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:ChargeIndicator/udt:Indicator",
+										defaultValue: false,
+									},
 								},
 							},
 							/**
@@ -1835,8 +2204,13 @@ The value to enter is the percentage. For example, for 20%, it must be given as 
 									},
 								},
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:CategoryTradeTax/ram:TypeCode":
-										"VAT",
+									typeCode: {
+										key: "BT-95-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:CategoryTradeTax/ram:TypeCode",
+										defaultValue: "VAT",
+									},
 								},
 							},
 						},
@@ -1901,8 +2275,13 @@ The amount of a charge, without VAT.`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:ActualAmount",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:ChargeIndicator/udt:Indicator":
-										"true",
+									chargeIndicator: {
+										type: "boolean",
+										defaultValue: true,
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:ChargeIndicator/udt:Indicator",
+										key: "BG-21-0",
+									},
 								},
 							},
 							/**
@@ -2081,8 +2460,13 @@ The value to enter is the percentage. For example, for 20%, it must be given as 
 									},
 								},
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:CategoryTradeTax/ram:TypeCode":
-										"VAT",
+									typeCode: {
+										key: "BT-102-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:CategoryTradeTax/ram:TypeCode",
+										defaultValue: "VAT",
+									},
 								},
 							},
 						},
@@ -2137,8 +2521,13 @@ The payment due date reflects the due date of the net payment. For partial payme
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:DueDateDateTime/udt:DateTimeString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:DueDateDateTime/udt:DateTimeString/@format":
-										"102",
+									format: {
+										key: "BT-9-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:DueDateDateTime/udt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 							/**
@@ -2318,8 +2707,13 @@ The Preceding Invoice issue date shall be provided in case the Preceding Invoice
 									input: dateTimeStringFormatter,
 								},
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument[precending-invoices]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										"102",
+									format: {
+										key: "BT-26-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument[precending-invoices]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 						},

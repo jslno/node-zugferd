@@ -141,7 +141,7 @@ Information only required if the contractual due date differs from due date of t
 		},
 		additionalXml: {
 			"/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:EffectiveSpecifiedPeriod/ram:CompleteDateTime/udt:DateTimeString/@format":
-				"102",
+				{ value: "102" },
 		},
 	},
 	transaction: {
@@ -1173,7 +1173,7 @@ Such as a region, a county, a state, a province, etc.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												"VA",
+												{ value: "VA" },
 										},
 									},
 								},
@@ -1768,7 +1768,7 @@ Such as a region, a county, a state, a province, etc.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												"VA",
+												{ value: "VA" },
 										},
 									},
 								},
@@ -2771,7 +2771,7 @@ Such as a region, a county, a state, a province, etc.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												"VA",
+												{ value: "VA" },
 										},
 									},
 								},
@@ -2826,7 +2826,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										"102",
+										{ value: "102" },
 								},
 							},
 						},
@@ -2850,7 +2850,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										"102",
+										{ value: "102" },
 								},
 							},
 						},
@@ -2890,7 +2890,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:QuotationReferencedDocument[quotation-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:QuotationReferencedDocument[quotation-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										"102",
+										{ value: "102" },
 								},
 							},
 						},
@@ -2933,7 +2933,7 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										"102",
+										{ value: "102" },
 								},
 							},
 						},
@@ -2957,7 +2957,7 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[supporting-documents]/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[supporting-documents]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										"102",
+										{ value: "102" },
 								},
 							},
 						},
@@ -2981,7 +2981,7 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[tender-lot-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[tender-lot-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										"102",
+										{ value: "102" },
 								},
 							},
 						},
@@ -3005,7 +3005,7 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[object-identifier]/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[object-identifier]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										"102",
+										{ value: "102" },
 								},
 							},
 						},
@@ -3601,7 +3601,7 @@ Such as a region, a county, a state, a province, etc.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												"VA",
+												{ value: "VA" },
 										},
 									},
 								},
@@ -3644,7 +3644,7 @@ Such as a region, a county, a state, a province, etc.`,
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										"102",
+										{ value: "102" },
 								},
 							},
 						},
@@ -4079,7 +4079,7 @@ An e-mail address for the contact point.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												"VA",
+												{ value: "VA" },
 										},
 									},
 								},
@@ -4668,7 +4668,7 @@ Such as a region, a county, a state, a province, etc.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												"VA",
+												{ value: "VA" },
 										},
 									},
 								},
@@ -5257,7 +5257,7 @@ Such as a region, a county, a state, a province, etc.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												"VA",
+												{ value: "VA" },
 										},
 									},
 								},
@@ -5283,7 +5283,7 @@ Such as a region, a county, a state, a province, etc.`,
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										"102",
+										{ value: "102" },
 								},
 							},
 						},
@@ -5307,7 +5307,7 @@ Such as a region, a county, a state, a province, etc.`,
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										"102",
+										{ value: "102" },
 								},
 							},
 							/**
@@ -5346,7 +5346,7 @@ Such as a region, a county, a state, a province, etc.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 								},
@@ -5953,7 +5953,7 @@ Such as a region, a county, a state, a province, etc.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												"VA",
+												{ value: "VA" },
 										},
 									},
 								},
@@ -6542,7 +6542,7 @@ Such as a region, a county, a state, a province, etc.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												"VA",
+												{ value: "VA" },
 										},
 									},
 								},
@@ -7006,7 +7006,7 @@ Such as a region, a county, a state, a province, etc.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												"VA",
+												{ value: "VA" },
 										},
 									},
 								},
@@ -7602,7 +7602,7 @@ Such as a region, a county, a state, a province, etc.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												"VA",
+												{ value: "VA" },
 										},
 									},
 								},
@@ -7664,7 +7664,7 @@ Such as a region, a county, a state, a province, etc.`,
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:ConversionRateDateTime/udt:DateTimeString",
 								additionalXml: {
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:ConversionRateDateTime/udt:DateTimeString/@format":
-										"102",
+										{ value: "102" },
 								},
 							},
 						},
@@ -7924,7 +7924,7 @@ Coded identification of a VAT category.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentPenaltyTerms[penalty-terms]/ram:BasisDateTime/udt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentPenaltyTerms[penalty-terms]/ram:BasisDateTime/udt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 									/**
@@ -8025,7 +8025,7 @@ The period for the due date, e.g. as a number of days (15 days)`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentDiscountTerms[discount-terms]/ram:BasisDateTime/udt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentDiscountTerms[discount-terms]/ram:BasisDateTime/udt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 									/**
@@ -8697,7 +8697,7 @@ Such as a region, a county, a state, a province, etc.`,
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 												additionalXml: {
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-														"VA",
+														{ value: "VA" },
 												},
 											},
 										},
@@ -8779,7 +8779,7 @@ The same rules apply as for BT-3`,
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:FormattedReceivedDateTime/qdt:DateTimeString",
 								additionalXml: {
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:FormattedReceivedDateTime/qdt:DateTimeString/@format":
-										"102",
+										{ value: "102" },
 								},
 							},
 							/**
@@ -8803,7 +8803,7 @@ The same rules apply as for BT-3`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:IncludedTradeTax[advance-payment-trade-tax]/ram:CalculatedAmount",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:IncludedTradeTax[advance-payment-trade-tax]/ram:TypeCode":
-												"VAT",
+												{ value: "VAT" },
 										},
 									},
 									/**
@@ -8969,7 +8969,7 @@ The Preceding Invoice issue date shall be provided in case the Preceding Invoice
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:InvoiceSpecifiedReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:InvoiceSpecifiedReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 								},
@@ -9487,7 +9487,7 @@ The Item description allows for describing the item and its features in more det
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:SellerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:SellerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 								},
@@ -9520,7 +9520,7 @@ The Item description allows for describing the item and its features in more det
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 								},
@@ -9566,7 +9566,7 @@ The Item description allows for describing the item and its features in more det
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:QuotationReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:QuotationReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 								},
@@ -9613,7 +9613,7 @@ The Item description allows for describing the item and its features in more det
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 								},
@@ -9809,7 +9809,7 @@ Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance r
 										},
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator":
-												"false",
+												{ value: "false" },
 										},
 									},
 									/**
@@ -9834,7 +9834,7 @@ Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance r
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:CalculationPercent",
 												additionalXml: {
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator":
-														"true",
+														{ value: "true" },
 												},
 											},
 											/**
@@ -9848,7 +9848,7 @@ Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance r
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:BasisAmount",
 												additionalXml: {
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator":
-														"true",
+														{ value: "true" },
 												},
 											},
 											/**
@@ -9870,7 +9870,7 @@ Only applies if the surcharge is given per unit and is not included in the gross
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ActualAmount",
 												additionalXml: {
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator":
-														"true",
+														{ value: "true" },
 												},
 											},
 											/**
@@ -9888,7 +9888,7 @@ Use entries of the UNTDID 7161 code list [6]. The Invoice line charge reason cod
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ReasonCode",
 												additionalXml: {
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator":
-														"true",
+														{ value: "true" },
 												},
 											},
 											/**
@@ -9902,7 +9902,7 @@ Use entries of the UNTDID 7161 code list [6]. The Invoice line charge reason cod
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:Reason",
 												additionalXml: {
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator":
-														"true",
+														{ value: "true" },
 												},
 											},
 										},
@@ -10017,7 +10017,7 @@ The VAT category code and the VAT category rate shall be consistent.`,
 										},
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:IncludedTradeTax/ram:TypeCode":
-												"VAT",
+												{ value: "VAT" },
 										},
 									},
 								},
@@ -10064,7 +10064,7 @@ The VAT category code and the VAT category rate shall be consistent.`,
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:UltimateCustomerOrderReferencedDocument[line-item-customer-order-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:UltimateCustomerOrderReferencedDocument[line-item-customer-order-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 								},
@@ -10558,7 +10558,7 @@ Such as a region, a county, a state, a province, etc.`,
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 												additionalXml: {
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-														"VA",
+														{ value: "VA" },
 												},
 											},
 										},
@@ -10982,7 +10982,7 @@ Such as a region, a county, a state, a province, etc.`,
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 												additionalXml: {
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-														"VA",
+														{ value: "VA" },
 												},
 											},
 										},
@@ -11015,7 +11015,7 @@ The VAT relevant date of delivery and achievement must be specified on the level
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 								},
@@ -11062,7 +11062,7 @@ The VAT relevant date of delivery and achievement must be specified on the level
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 								},
@@ -11109,7 +11109,7 @@ The VAT relevant date of delivery and achievement must be specified on the level
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 								},
@@ -11156,7 +11156,7 @@ The VAT relevant date of delivery and achievement must be specified on the level
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 								},
@@ -11356,7 +11356,7 @@ The Preceding Invoice issue date shall be provided in case the Preceding Invoice
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument[line-item-precending-invoice]/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument[line-item-precending-invoice]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												"102",
+												{ value: "102" },
 										},
 									},
 								},

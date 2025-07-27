@@ -15,7 +15,7 @@ export type FieldType =
 	| "(string | number)[]"
 	| Array<LiteralString>;
 
-type Primitive = string | number | Date | null | undefined | object;
+type Primitive = string | boolean | number | Date | null | undefined | object;
 
 export type SchemaFieldConfig<T extends FieldType = FieldType> = {
 	key?: string;
@@ -29,7 +29,14 @@ export type SchemaFieldConfig<T extends FieldType = FieldType> = {
 		? (data: any, groupIndicies: { [key: string]: number }) => any
 		: never;
 	shape?: T extends "object" | "object[]" ? Schema : never;
-	additionalXml?: Record<string, string>;
+	additionalXml?: {
+		[key: string]: {
+			type: FieldType;
+			key?: string;
+			xpath?: string;
+			defaultValue?: Primitive | (() => Primitive);
+		};
+	};
 	transform?: {
 		input?: (val: any) => any;
 		output?: (val: any) => any;

@@ -156,34 +156,17 @@ export const parseSchema = <S extends Schema>(
 			});
 		};
 
-		const processAdditionalXml = (value: any) => {
-			if (field.additionalXml && !!value) {
-				for (const [aKey, aValue] of Object.entries(field.additionalXml)) {
-					const resolvedXPath = resolveXPath(aKey, localGroupIndices);
-					if (Array.isArray(value)) {
-						value.forEach((_, index) => {
-							const itemXPath = resolvedXPath.replace(
-								/\[i\]/,
-								`[${index + siblingOffset}]`,
-							);
-							const xmlPart = buildXmlStructure(
-								itemXPath,
-								aValue,
-								localGroupIndices,
-							);
-							xml = mergeXml(xml, xmlPart);
-						});
-					} else {
-						const xmlPart = buildXmlStructure(
-							resolvedXPath,
-							aValue,
-							localGroupIndices,
-						);
-						xml = mergeXml(xml, xmlPart);
-					}
-				}
-			}
-		};
+		// Process additionalXml fields first (in their own order)
+		if (field.additionalXml && !!value) {
+			const additionalXml = parseSchema(
+				data, // Use the same data context
+				field.additionalXml,
+				options,
+				localGroupIndices,
+				fullData,
+			);
+			xml = mergeXml(xml, additionalXml);
+		}
 
 		if (field?.xpath) {
 			const resolvedXPath = resolveXPath(field.xpath, localGroupIndices);
@@ -211,8 +194,6 @@ export const parseSchema = <S extends Schema>(
 				xml = mergeXml(xml, xmlPart);
 			}
 		}
-
-		processAdditionalXml(value);
 
 		if (field?.type === "object" && field?.shape) {
 			const childXml = parseSchema(
@@ -243,14 +224,11 @@ export const parseSchema = <S extends Schema>(
 					fullData,
 				);
 				xml = mergeXml(xml, childXml);
-
-				if (field.additionalXml) {
-					processAdditionalXml(value);
-				}
 			});
 		}
 	};
 
+	// Process fields in the exact order they appear in the definition (mask order)
 	for (const [key, field] of Object.entries(def)) {
 		let rawValue = (data as any)[key];
 		if (field.validator) {
