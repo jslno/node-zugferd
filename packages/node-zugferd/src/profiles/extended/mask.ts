@@ -101,6 +101,7 @@ export const extendedMask = {
 									discounts: [
 										"BT-147-00",
 										{
+											chargeIndicator: "BT-147-01",
 											actualAmount: "BT-147",
 										},
 									],
@@ -143,6 +144,7 @@ export const extendedMask = {
 							allowances: [
 								"BG-27",
 								{
+									chargeIndicator: "BG-27-0",
 									basisAmount: "BT-137",
 									actualAmount: "BT-136",
 									reasonCode: "BT-140",
@@ -152,6 +154,7 @@ export const extendedMask = {
 							charges: [
 								"BG-28",
 								{
+									chargeIndicator: "BG-28-0",
 									basisAmount: "BT-142",
 									actualAmount: "BT-141",
 									reasonCode: "BT-145",
@@ -1178,6 +1181,7 @@ export const extendedMask = {
 					allowances: [
 						"BG-20",
 						{
+							chargeIndicator: "BG-20-0",
 							calculationSequence: "BT-X-265",
 							calculationPercent: "BT-94",
 							basisAmount: "BT-93",
@@ -1197,6 +1201,7 @@ export const extendedMask = {
 					charges: [
 						"BG-21",
 						{
+							chargeIndicator: "BG-21-0",
 							calculationSequence: "BT-X-268",
 							calculationPercent: "BT-101",
 							basisAmount: "BT-100",

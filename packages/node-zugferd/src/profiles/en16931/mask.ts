@@ -59,6 +59,7 @@ export const en16931Mask = {
 									discounts: [
 										"BT-147-00",
 										{
+											chargeIndicator: "BT-147-01",
 											actualAmount: "BT-147",
 										},
 									],
@@ -101,6 +102,7 @@ export const en16931Mask = {
 							allowances: [
 								"BG-27",
 								{
+									chargeIndicator: "BG-27-0",
 									basisAmount: "BT-137",
 									actualAmount: "BT-136",
 									reasonCode: "BT-140",
@@ -110,6 +112,7 @@ export const en16931Mask = {
 							charges: [
 								"BG-28",
 								{
+									chargeIndicator: "BG-28-0",
 									basisAmount: "BT-142",
 									actualAmount: "BT-141",
 									reasonCode: "BT-145",
@@ -411,6 +414,7 @@ export const en16931Mask = {
 					allowances: [
 						"BG-20",
 						{
+							chargeIndicator: "BG-20-0",
 							calculationPercent: "BT-94",
 							basisAmount: "BT-93",
 							actualAmount: "BT-92",
@@ -428,6 +432,7 @@ export const en16931Mask = {
 					charges: [
 						"BG-21",
 						{
+							chargeIndicator: "BG-21-0",
 							calculationPercent: "BT-101",
 							basisAmount: "BT-100",
 							actualAmount: "BT-99",
