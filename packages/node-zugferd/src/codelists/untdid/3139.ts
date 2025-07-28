@@ -2,6 +2,8 @@
  * @see https://service.unece.org/trade/untdid/d17a/tred/tred3139.htm
  */
 
+import { createEnum } from "..";
+
 export type Untdid3139Definition = {
 	key: string;
 	code: string;
@@ -682,3 +684,8 @@ export const UNTDID_3139 = [
 			"A code assigned within a code list to be used on an interim basis and as defined among trading partners until a precise code can be assigned to the code list.",
 	},
 ] as const satisfies Untdid3139Definition[];
+
+export const Untdid3139 = createEnum(UNTDID_3139, {
+	keyProp: "key",
+	valueProp: "code",
+});

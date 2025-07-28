@@ -47,6 +47,8 @@ from ${entry.source}
  * @see ${entry.see}
  */
 
+import { createEnum } from "..";
+
 export type Untdid${entry.id}Definition = {
   key: string;
   code: string;
@@ -62,6 +64,11 @@ export const UNTDID_${entry.id}_VERSION = "${version}" as const;
 export const UNTDID_${entry.id} = [${mappedData.join("")}${
       mappedData.length > 0 ? "\n" : ""
     }] as const satisfies Untdid${entry.id}Definition[];
+
+export const Untdid${entry.id} = createEnum(UNTDID_${entry.id}, {
+  keyProp: "key",
+  valueProp: "code",
+});
 `;
 
     const filename = `${entry.id}.gen.ts`;

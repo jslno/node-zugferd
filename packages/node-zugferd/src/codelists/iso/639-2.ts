@@ -2,6 +2,8 @@
  * @see https://www.loc.gov/standards/iso639-2/php/code_list.php
  */
 
+import { createEnum } from "..";
+
 export type Iso639_2Definition = {
 	key: string;
 	code: string;
@@ -2449,3 +2451,8 @@ export const ISO_639_2 = [
 		code: "zza",
 	},
 ] as const satisfies Iso639_2Definition[];
+
+export const Iso639_2 = createEnum(ISO_639_2, {
+	keyProp: "key",
+	valueProp: "code",
+});

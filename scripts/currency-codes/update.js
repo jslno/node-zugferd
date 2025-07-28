@@ -41,6 +41,8 @@ from ${source}
  * @see https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:currency-codes
  */
 
+import { createEnum } from ".";
+
 export type CurrencyCodesDefinition = {
   key: string;
   code: string;
@@ -55,6 +57,11 @@ export const CURRENCY_CODES_VERSION = "${version}" as const;
 export const CURRENCY_CODES = [${mappedData.join("")}${
     mappedData.length > 0 ? "\n" : ""
   }] as const satisfies CurrencyCodesDefinition[];
+
+export const CurrencyCodes = createEnum(CURRENCY_CODES, {
+  keyProp: "key",
+  valueProp: "code",
+});
 `;
 
   const filename = "currency-codes.gen.ts"

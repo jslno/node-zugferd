@@ -50,6 +50,8 @@ from ${source}
  * @see https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:vatex_1
  */
 
+import { createEnum } from ".";
+
 export type VatExDefinition = {
   key: string;
   code: string;
@@ -66,6 +68,11 @@ export const VATEX_VERSION = "${version}" as const;
 export const VATEX = [${mappedData.join("")}${
     mappedData.length > 0 ? "\n" : ""
   }] as const satisfies VatExDefinition[];
+
+export const VatEx = createEnum(VATEX, {
+  keyProp: "key",
+  valueProp: "code",
+});
 `;
 
   const filename = "vatex.gen.ts";

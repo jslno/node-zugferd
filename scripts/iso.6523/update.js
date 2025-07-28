@@ -43,6 +43,8 @@ from ${source}
  * @see https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:icd_5
  */
 
+import { createEnum } from "..";
+
 export type Iso6523Definition = {
   key: string;
   code: string;
@@ -58,6 +60,11 @@ export const ISO_6523_VERSION = "${version}" as const;
 export const ISO_6523 = [${mappedData.join("")}${
     mappedData.length > 0 ? "\n" : ""
   }] as const satisfies Iso6523Definition[];
+
+export const Iso6523 = createEnum(ISO_6523, {
+  keyProp: "key",
+  valueProp: "code",
+});
 `;
 
   const filename = "6523.gen.ts";

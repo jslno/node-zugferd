@@ -41,6 +41,8 @@ from ${source}
  * @see https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:rec20
  */
 
+import { createEnum } from ".";
+
 export type Rec20Definition = {
   key: string;
   code: string;
@@ -55,6 +57,11 @@ export const REC20_VERSION = "${version}" as const;
 export const REC20 = [${mappedData.join("")}${
     mappedData.length > 0 ? "\n" : ""
   }] as const satisfies Rec20Definition[];
+
+export const Rec20 = createEnum(REC20, {
+  keyProp: "key",
+  valueProp: "code",
+});
 `;
 
   const filename = "rec20.gen.ts"

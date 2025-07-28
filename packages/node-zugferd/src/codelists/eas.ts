@@ -2,6 +2,8 @@
  * @see https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-CEN/TC434EN16931
  */
 
+import { createEnum } from ".";
+
 export type EASDefinition = {
 	key: string;
 	code: string;
@@ -553,3 +555,8 @@ export const EAS = [
 		remark: "SMTP email",
 	},
 ] as const satisfies EASDefinition[];
+
+export const Eas = createEnum(EAS, {
+	keyProp: "key",
+	valueProp: "code",
+});

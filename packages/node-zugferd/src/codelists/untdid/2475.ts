@@ -1,3 +1,5 @@
+import { createEnum } from "..";
+
 /**
  * @see https://unece.org/fileadmin/DAM/trade/untdid/d18a/tred/tred2475.htm
  */
@@ -436,4 +438,9 @@ export const UNTDID_2475 = [
 		description:
 			"A code assigned within a code list to be used on an interim basis and as defined among trading partners until a precise code can be assigned to the code list.",
 	},
-] satisfies Untdid2475Definition[];
+] as const satisfies Untdid2475Definition[];
+
+export const Untdid2475 = createEnum(UNTDID_2475, {
+	keyProp: "key",
+	valueProp: "code",
+});

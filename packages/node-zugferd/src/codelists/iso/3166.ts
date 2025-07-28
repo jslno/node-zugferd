@@ -2,6 +2,8 @@
  * @see https://www.iso.org/obp/ui/#search
  */
 
+import { createEnum } from "..";
+
 export type Iso3166Definition = {
 	key: string;
 	name: string;
@@ -2259,3 +2261,8 @@ export const ISO_3166 = [
 		},
 	},
 ] as const satisfies Iso3166Definition[];
+
+export const Iso3166 = createEnum(ISO_3166, {
+	keyProp: "key",
+	valueProp: "code.alpha2",
+});

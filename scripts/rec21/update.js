@@ -43,6 +43,8 @@ from ${source}
  * @see https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:rec21
  */
 
+import { createEnum } from ".";
+
 export type Rec21Definition = {
   key: string;
   code: string;
@@ -58,6 +60,11 @@ export const REC21_VERSION = "${version}" as const;
 export const REC21 = [${mappedData.join("")}${
     mappedData.length > 0 ? "\n" : ""
   }] as const satisfies Rec21Definition[];
+
+export const Rec21 = createEnum(REC21, {
+  keyProp: "key",
+  valueProp: "code",
+});
 `;
 
   const filename = "rec21.gen.ts";

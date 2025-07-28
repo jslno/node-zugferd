@@ -2,6 +2,8 @@
  * @see https://service.unece.org/trade/untdid/d99b/tred/tred1229.htm
  */
 
+import { createEnum } from "..";
+
 export type Untdid1229Definition = {
 	key: string;
 	code: string;
@@ -643,3 +645,8 @@ export const UNTDID_1229 = [
 		description: "Advice that the transaction is not impacted.",
 	},
 ] as const satisfies Untdid1229Definition[];
+
+export const Untdid1229 = createEnum(UNTDID_1229, {
+	keyProp: "key",
+	valueProp: "code",
+});

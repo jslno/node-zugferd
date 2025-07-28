@@ -2,6 +2,8 @@
  * @see https://service.unece.org/trade/untdid/d00a/tred/tred3035.htm
  */
 
+import { createEnum } from "..";
+
 export type Untdid3035Definition = {
 	key: string;
 	code: string;
@@ -3180,3 +3182,8 @@ export const UNTDID_3035 = [
 			"Party specification mutually agreed between interchanging parties.",
 	},
 ] as const satisfies Untdid3035Definition[];
+
+export const Untdid3035 = createEnum(UNTDID_3035, {
+	keyProp: "key",
+	valueProp: "code",
+});
