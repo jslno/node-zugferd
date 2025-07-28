@@ -1358,6 +1358,7 @@ export const extendedMask = {
 								"BG-X-46",
 								{
 									calculatedAmount: "BT-X-293",
+									typeCode: "BT-X-294",
 									exemptionReason: "BT-X-295",
 									categoryCode: "BT-X-296",
 									exemptionReasonCode: "BT-X-297",

@@ -30,7 +30,7 @@ const applyMask = (
 				if (nestedSchema) {
 					acc[key] = {
 						...nestedSchema,
-						shape: applyMask(nestedSchema, value[1]),
+						shape: applyMask(nestedSchema.shape || nestedSchema, value[1]),
 					};
 				}
 			} else {
@@ -72,6 +72,7 @@ const updateDefaultValues = (base: Schema, override: Schema): Schema => {
 
 	return result;
 };
+
 export const mergeSchemas = (profile: Profile): Schema => {
 	if (!profile.extends) {
 		return profile.mask
@@ -94,6 +95,69 @@ export const mergeSchemas = (profile: Profile): Schema => {
 
 export type ParseSchemaOptions = {
 	groupIndices?: GroupIndices;
+};
+
+const collectAdditionalXmlFields = (
+	def: Schema,
+	data: any,
+	localGroupIndices: GroupIndices,
+	fullData: any,
+): Array<{
+	position: string;
+	field: SchemaField;
+	value: any;
+	rawValue: any;
+}> => {
+	const additionalFields: Array<{
+		position: string;
+		field: SchemaField;
+		value: any;
+		rawValue: any;
+	}> = [];
+
+	for (const [key, field] of Object.entries(def)) {
+		const rawValue = (data as any)[key];
+
+		const _value =
+			field.type !== "object"
+				? (rawValue ?? field.defaultValue)
+				: typeof rawValue === "object" && rawValue !== null
+					? Object.keys(rawValue).length <= 0
+						? field.defaultValue
+						: rawValue
+					: (rawValue ?? field.defaultValue);
+
+		const value = field.transform?.input
+			? field.transform.input(_value)
+			: _value;
+
+		const hasValue = (val: any, fieldType: string | string[]) => {
+			if (val === undefined || val === null) return false;
+			const typeToCheck = Array.isArray(fieldType) ? fieldType[0] : fieldType;
+			if (typeToCheck === "string" && val === "") return false;
+			if (typeToCheck === "object") {
+				if (Array.isArray(val)) return true;
+				if (typeof val === "object" && Object.keys(val).length === 0)
+					return false;
+			}
+			return true;
+		};
+
+		if (
+			field.additionalXml &&
+			rawValue !== undefined &&
+			hasValue(value, field.type)
+		) {
+			additionalFields.push({
+				position: key,
+				field: field,
+				value: value,
+				rawValue: rawValue,
+			});
+		}
+	}
+
+	return additionalFields;
 };
 
 export const parseSchema = <S extends Schema>(
@@ -123,7 +187,26 @@ export const parseSchema = <S extends Schema>(
 	};
 	const localGroupIndices: GroupIndices = { ...parentGroupIndices };
 
-	const processField = (field: SchemaField, value: any, key: string) => {
+	const hasValue = (val: any, fieldType: string | string[]) => {
+		if (val === undefined || val === null) return false;
+
+		const typeToCheck = Array.isArray(fieldType) ? fieldType[0] : fieldType;
+
+		if (typeToCheck === "string" && val === "") return false;
+		if (typeToCheck === "object") {
+			if (Array.isArray(val)) return true;
+			if (typeof val === "object" && Object.keys(val).length === 0)
+				return false;
+		}
+		return true;
+	};
+
+	const processField = (
+		field: SchemaField,
+		value: any,
+		key: string,
+		rawValue?: any,
+	) => {
 		if (field.group) {
 			localGroupIndices[field.group] = localGroupIndices[field.group] || 0;
 		}
@@ -155,18 +238,6 @@ export const parseSchema = <S extends Schema>(
 				xml = mergeXml(xml, xmlPart);
 			});
 		};
-
-		// Process additionalXml fields first (in their own order)
-		if (field.additionalXml && !!value) {
-			const additionalXml = parseSchema(
-				data, // Use the same data context
-				field.additionalXml,
-				options,
-				localGroupIndices,
-				fullData,
-			);
-			xml = mergeXml(xml, additionalXml);
-		}
 
 		if (field?.xpath) {
 			const resolvedXPath = resolveXPath(field.xpath, localGroupIndices);
@@ -228,7 +299,13 @@ export const parseSchema = <S extends Schema>(
 		}
 	};
 
-	// Process fields in the exact order they appear in the definition (mask order)
+	const additionalXmlFields = collectAdditionalXmlFields(
+		def,
+		data,
+		localGroupIndices,
+		fullData,
+	);
+
 	for (const [key, field] of Object.entries(def)) {
 		let rawValue = (data as any)[key];
 		if (field.validator) {
@@ -246,17 +323,33 @@ export const parseSchema = <S extends Schema>(
 		const _value =
 			field.type !== "object"
 				? (rawValue ?? field.defaultValue)
-				: typeof rawValue === "object"
+				: typeof rawValue === "object" && rawValue !== null
 					? Object.keys(rawValue).length <= 0
 						? field.defaultValue
 						: rawValue
-					: rawValue;
+					: (rawValue ?? field.defaultValue);
 
 		const value = field.transform?.input
 			? field.transform.input(_value)
 			: _value;
 
-		processField(field, value, key);
+		if (!hasValue(value, field.type)) {
+			continue;
+		}
+
+		processField(field, value, key, rawValue);
+
+		const additionalField = additionalXmlFields.find((f) => f.position === key);
+		if (additionalField && additionalField.field.additionalXml) {
+			const additionalXml = parseSchema(
+				data,
+				additionalField.field.additionalXml,
+				options,
+				localGroupIndices,
+				fullData,
+			);
+			xml = mergeXml(xml, additionalXml);
+		}
 	}
 
 	return xml;

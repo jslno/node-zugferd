@@ -302,15 +302,15 @@ Only applies if the discount is provided per unit and if it is not included in t
 												required: false,
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ActualAmount",
-											},
-										},
-										additionalXml: {
-											chargeIndicator: {
-												key: "BT-147-01",
-												type: "boolean",
-												xpath:
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator",
-												defaultValue: false,
+												additionalXml: {
+													chargeIndicator: {
+														key: "BT-147-01",
+														type: "boolean",
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator",
+														defaultValue: false,
+													},
+												},
 											},
 										},
 									},

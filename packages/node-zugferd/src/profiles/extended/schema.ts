@@ -140,8 +140,13 @@ Information only required if the contractual due date differs from due date of t
 			input: dateTimeStringFormatter,
 		},
 		additionalXml: {
-			"/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:EffectiveSpecifiedPeriod/ram:CompleteDateTime/udt:DateTimeString/@format":
-				{ value: "102" },
+			format: {
+				key: "BT-X-6-0",
+				type: "string",
+				xpath:
+					"/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:EffectiveSpecifiedPeriod/ram:CompleteDateTime/udt:DateTimeString/@format",
+				defaultValue: "102",
+			},
 		},
 	},
 	transaction: {
@@ -1172,8 +1177,13 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												{ value: "VA" },
+											schemeID: {
+												key: "BT-X-340-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+												defaultValue: "VA",
+											},
 										},
 									},
 								},
@@ -1767,8 +1777,13 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												{ value: "VA" },
+											schemeID: {
+												key: "BT-X-367-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+												defaultValue: "VA",
+											},
 										},
 									},
 								},
@@ -2770,8 +2785,13 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												{ value: "VA" },
+											schemeID: {
+												key: "BT-X-144-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+												defaultValue: "VA",
+											},
 										},
 									},
 								},
@@ -2825,8 +2845,13 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										{ value: "102" },
+									format: {
+										key: "BT-X-146-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 						},
@@ -2849,8 +2874,13 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										{ value: "102" },
+									format: {
+										key: "BT-X-147-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 						},
@@ -2889,8 +2919,13 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:QuotationReferencedDocument[quotation-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:QuotationReferencedDocument[quotation-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										{ value: "102" },
+									format: {
+										key: "BT-X-404-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:QuotationReferencedDocument[quotation-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 						},
@@ -2932,8 +2967,13 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										{ value: "102" },
+									format: {
+										key: "BT-X-148-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 						},
@@ -2956,8 +2996,13 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[supporting-documents]/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[supporting-documents]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										{ value: "102" },
+									format: {
+										key: "BT-X-149-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[supporting-documents]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 						},
@@ -2980,8 +3025,13 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[tender-lot-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[tender-lot-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										{ value: "102" },
+									format: {
+										key: "BT-X-556-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[tender-lot-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 						},
@@ -3004,8 +3054,13 @@ CHORUSPRO: To qualify a contract (CT) or a procurement contract "Marché" (BC)`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[object-identifier]/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[object-identifier]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										{ value: "102" },
+									format: {
+										key: "BT-X-557-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[object-identifier]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 						},
@@ -3600,8 +3655,13 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												{ value: "VA" },
+											schemeID: {
+												key: "BT-X-411-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+												defaultValue: "VA",
+											},
 										},
 									},
 								},
@@ -3643,8 +3703,13 @@ Such as a region, a county, a state, a province, etc.`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										{ value: "102" },
+									format: {
+										key: "BT-X-151-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 						},
@@ -4078,8 +4143,13 @@ An e-mail address for the contact point.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												{ value: "VA" },
+											schemeID: {
+												key: "BT-X-161-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+												defaultValue: "VA",
+											},
 										},
 									},
 								},
@@ -4667,8 +4737,13 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												{ value: "VA" },
+											schemeID: {
+												key: "BT-X-180-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+												defaultValue: "VA",
+											},
 										},
 									},
 								},
@@ -5256,8 +5331,13 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												{ value: "VA" },
+											schemeID: {
+												key: "BT-X-199-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+												defaultValue: "VA",
+											},
 										},
 									},
 								},
@@ -5282,8 +5362,13 @@ Such as a region, a county, a state, a province, etc.`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										{ value: "102" },
+									format: {
+										key: "BT-X-200-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 						},
@@ -5306,8 +5391,13 @@ Such as a region, a county, a state, a province, etc.`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-										{ value: "102" },
+									format: {
+										key: "BT-X-201-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 							/**
@@ -5345,8 +5435,13 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-203-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 								},
@@ -5952,8 +6047,13 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												{ value: "VA" },
+											schemeID: {
+												key: "BT-X-223-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+												defaultValue: "VA",
+											},
 										},
 									},
 								},
@@ -6541,8 +6641,13 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												{ value: "VA" },
+											schemeID: {
+												key: "BT-X-242-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+												defaultValue: "VA",
+											},
 										},
 									},
 								},
@@ -7005,8 +7110,13 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												{ value: "VA" },
+											schemeID: {
+												key: "BT-X-257-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+												defaultValue: "VA",
+											},
 										},
 									},
 								},
@@ -7601,8 +7711,13 @@ Such as a region, a county, a state, a province, etc.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-												{ value: "VA" },
+											schemeID: {
+												key: "BT-X-481-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+												defaultValue: "VA",
+											},
 										},
 									},
 								},
@@ -7663,8 +7778,13 @@ Such as a region, a county, a state, a province, etc.`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:ConversionRateDateTime/udt:DateTimeString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:ConversionRateDateTime/udt:DateTimeString/@format":
-										{ value: "102" },
+									format: {
+										key: "BT-X-261-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:ConversionRateDateTime/udt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 						},
@@ -7923,8 +8043,13 @@ Coded identification of a VAT category.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentPenaltyTerms[penalty-terms]/ram:BasisDateTime/udt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentPenaltyTerms[penalty-terms]/ram:BasisDateTime/udt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-276-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentPenaltyTerms[penalty-terms]/ram:BasisDateTime/udt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 									/**
@@ -8024,8 +8149,13 @@ The period for the due date, e.g. as a number of days (15 days)`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentDiscountTerms[discount-terms]/ram:BasisDateTime/udt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentDiscountTerms[discount-terms]/ram:BasisDateTime/udt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-282-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:ApplicableTradePaymentDiscountTerms[discount-terms]/ram:BasisDateTime/udt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 									/**
@@ -8696,8 +8826,13 @@ Such as a region, a county, a state, a province, etc.`,
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 												additionalXml: {
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-														{ value: "VA" },
+													schemeID: {
+														key: "BT-X-509-0",
+														type: "string",
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+														defaultValue: "VA",
+													},
 												},
 											},
 										},
@@ -8778,8 +8913,13 @@ The same rules apply as for BT-3`,
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:FormattedReceivedDateTime/qdt:DateTimeString",
 								additionalXml: {
-									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:FormattedReceivedDateTime/qdt:DateTimeString/@format":
-										{ value: "102" },
+									format: {
+										key: "BT-X-292-0",
+										type: "string",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:FormattedReceivedDateTime/qdt:DateTimeString/@format",
+										defaultValue: "102",
+									},
 								},
 							},
 							/**
@@ -8802,8 +8942,13 @@ The same rules apply as for BT-3`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:IncludedTradeTax[advance-payment-trade-tax]/ram:CalculatedAmount",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:IncludedTradeTax[advance-payment-trade-tax]/ram:TypeCode":
-												{ value: "VAT" },
+											typeCode: {
+												key: "BT-X-294",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:IncludedTradeTax[advance-payment-trade-tax]/ram:TypeCode",
+												defaultValue: "VAT",
+											},
 										},
 									},
 									/**
@@ -8968,8 +9113,13 @@ The Preceding Invoice issue date shall be provided in case the Preceding Invoice
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:InvoiceSpecifiedReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:InvoiceSpecifiedReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-560-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment[advance-payment]/ram:InvoiceSpecifiedReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 								},
@@ -9450,6 +9600,7 @@ The Item description allows for describing the item and its features in more det
 							 * Details of an seller order document reference
 							 */
 							sellerOrderReference: {
+								key: "BG-X-81",
 								type: "object",
 								description: "Details of an seller order document reference",
 								required: false,
@@ -9458,6 +9609,7 @@ The Item description allows for describing the item and its features in more det
 									 * Document number
 									 */
 									issuerAssignedID: {
+										key: "BT-X-537",
 										type: "string | number",
 										description: "Document number",
 										xpath:
@@ -9467,6 +9619,7 @@ The Item description allows for describing the item and its features in more det
 									 * Referenced position
 									 */
 									lineID: {
+										key: "BT-X-538",
 										type: "string | number",
 										description: "Referenced position",
 										required: false,
@@ -9477,6 +9630,7 @@ The Item description allows for describing the item and its features in more det
 									 * Document date
 									 */
 									date: {
+										key: "BT-X-539",
 										type: "date",
 										description: "Document date",
 										required: false,
@@ -9486,8 +9640,13 @@ The Item description allows for describing the item and its features in more det
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:SellerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:SellerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-539-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:SellerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 								},
@@ -9500,6 +9659,7 @@ The Item description allows for describing the item and its features in more det
 									 * Order Id
 									 */
 									issuerAssignedID: {
+										key: "BT-X-21",
 										type: "string",
 										description: "Order Id",
 										required: false,
@@ -9510,6 +9670,7 @@ The Item description allows for describing the item and its features in more det
 									 * Order date
 									 */
 									date: {
+										key: "BT-X-22",
 										type: "date",
 										description: "Order date",
 										required: false,
@@ -9519,8 +9680,13 @@ The Item description allows for describing the item and its features in more det
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-22-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 								},
@@ -9529,6 +9695,7 @@ The Item description allows for describing the item and its features in more det
 							 * Details of an quotation document reference
 							 */
 							quotationReference: {
+								key: "BG-X-47",
 								type: "object",
 								required: false,
 								description: "Details of an quotation document reference",
@@ -9537,6 +9704,7 @@ The Item description allows for describing the item and its features in more det
 									 * Document number
 									 */
 									issuerAssignedID: {
+										key: "BT-X-310",
 										type: "string",
 										description: "Document number",
 										xpath:
@@ -9546,6 +9714,7 @@ The Item description allows for describing the item and its features in more det
 									 * Referenced position
 									 */
 									lineID: {
+										key: "BT-X-311",
 										type: "string | number",
 										description: "Referenced position",
 										required: false,
@@ -9556,6 +9725,7 @@ The Item description allows for describing the item and its features in more det
 									 * Document date
 									 */
 									date: {
+										key: "BT-X-312",
 										type: "date",
 										description: "Document date",
 										required: false,
@@ -9565,8 +9735,13 @@ The Item description allows for describing the item and its features in more det
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:QuotationReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:QuotationReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-312-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:QuotationReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 								},
@@ -9575,6 +9750,7 @@ The Item description allows for describing the item and its features in more det
 							 * Detailed information on the associated contract
 							 */
 							contractReference: {
+								key: "BG-X-2",
 								type: "object",
 								description: "Detailed information on the associated contract",
 								required: false,
@@ -9583,6 +9759,7 @@ The Item description allows for describing the item and its features in more det
 									 * Contract number
 									 */
 									issuerAssignedID: {
+										key: "BT-X-24",
 										type: "string",
 										description: "Contract number",
 										required: false,
@@ -9593,6 +9770,7 @@ The Item description allows for describing the item and its features in more det
 									 * Contract position
 									 */
 									lineID: {
+										key: "BT-X-25",
 										type: "string | number",
 										description: "Contract position",
 										required: false,
@@ -9603,6 +9781,7 @@ The Item description allows for describing the item and its features in more det
 									 * Contract Date
 									 */
 									date: {
+										key: "BT-X-26",
 										type: "date",
 										description: "Contract Date",
 										required: false,
@@ -9612,8 +9791,13 @@ The Item description allows for describing the item and its features in more det
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-26",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 								},
@@ -9771,6 +9955,15 @@ The file name of the attached document`,
 												required: false,
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:CalculationPercent",
+												// additionalXml: {
+												// 	chargeIndicator: {
+												// 		key: "BT-147-01",
+												// 		type: "boolean",
+												// 		xpath:
+												// 			"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator",
+												// 		defaultValue: false,
+												// 	},
+												// },
 											},
 											/**
 											 * Discount base amount
@@ -9781,6 +9974,15 @@ The file name of the attached document`,
 												required: false,
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:BasisAmount",
+												// additionalXml: {
+												// 	chargeIndicator: {
+												// 		key: "BT-147-01",
+												// 		type: "boolean",
+												// 		xpath:
+												// 			"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator",
+												// 		defaultValue: false,
+												// 	},
+												// },
 											},
 											/**
 											 * Reason for the discount (code)
@@ -9795,6 +9997,15 @@ Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance r
 												required: false,
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ReasonCode",
+												additionalXml: {
+													chargeIndicator: {
+														key: "BT-147-01",
+														type: "boolean",
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator",
+														defaultValue: false,
+													},
+												},
 											},
 											/**
 											 * Reason for the discount (free text)
@@ -9805,11 +10016,16 @@ Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance r
 												required: false,
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:Reason",
+												additionalXml: {
+													chargeIndicator: {
+														key: "BT-147-01",
+														type: "boolean",
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator",
+														defaultValue: false,
+													},
+												},
 											},
-										},
-										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator":
-												{ value: "false" },
 										},
 									},
 									/**
@@ -9833,8 +10049,13 @@ Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance r
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:CalculationPercent",
 												additionalXml: {
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator":
-														{ value: "true" },
+													chargeIndicator: {
+														key: "BT-X-302-02",
+														type: "boolean",
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator",
+														defaultValue: true,
+													},
 												},
 											},
 											/**
@@ -9847,8 +10068,13 @@ Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance r
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:BasisAmount",
 												additionalXml: {
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator":
-														{ value: "true" },
+													chargeIndicator: {
+														key: "BT-X-302-02",
+														type: "boolean",
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator",
+														defaultValue: true,
+													},
 												},
 											},
 											/**
@@ -9869,8 +10095,13 @@ Only applies if the surcharge is given per unit and is not included in the gross
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ActualAmount",
 												additionalXml: {
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator":
-														{ value: "true" },
+													chargeIndicator: {
+														key: "BT-X-302-02",
+														type: "boolean",
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator",
+														defaultValue: true,
+													},
 												},
 											},
 											/**
@@ -9887,8 +10118,13 @@ Use entries of the UNTDID 7161 code list [6]. The Invoice line charge reason cod
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ReasonCode",
 												additionalXml: {
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator":
-														{ value: "true" },
+													chargeIndicator: {
+														key: "BT-X-302-02",
+														type: "boolean",
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator",
+														defaultValue: true,
+													},
 												},
 											},
 											/**
@@ -9901,8 +10137,13 @@ Use entries of the UNTDID 7161 code list [6]. The Invoice line charge reason cod
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:Reason",
 												additionalXml: {
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator":
-														{ value: "true" },
+													chargeIndicator: {
+														key: "BT-X-302-02",
+														type: "boolean",
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge[line-item-surcharges]/ram:ChargeIndicator/udt:Indicator",
+														defaultValue: true,
+													},
 												},
 											},
 										},
@@ -10016,8 +10257,13 @@ The VAT category code and the VAT category rate shall be consistent.`,
 											},
 										},
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:IncludedTradeTax/ram:TypeCode":
-												{ value: "VAT" },
+											typeCode: {
+												key: "BT-X-38",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:IncludedTradeTax/ram:TypeCode",
+												defaultValue: "VAT",
+											},
 										},
 									},
 								},
@@ -10054,6 +10300,7 @@ The VAT category code and the VAT category rate shall be consistent.`,
 									 * Document date
 									 */
 									date: {
+										key: "BT-X-45",
 										type: "date",
 										description: "Document date",
 										required: false,
@@ -10063,8 +10310,13 @@ The VAT category code and the VAT category rate shall be consistent.`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:UltimateCustomerOrderReferencedDocument[line-item-customer-order-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:UltimateCustomerOrderReferencedDocument[line-item-customer-order-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-45-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:UltimateCustomerOrderReferencedDocument[line-item-customer-order-reference]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 								},
@@ -10551,14 +10803,20 @@ Such as a region, a county, a state, a province, etc.`,
 											 * VAT ID
 											 */
 											identifier: {
+												key: "BT-X-66",
 												type: "string",
 												description: "VAT ID",
 												required: false,
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 												additionalXml: {
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-														{ value: "VA" },
+													schemeID: {
+														key: "BT-X-66-0",
+														type: "string",
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+														defaultValue: "VA",
+													},
 												},
 											},
 										},
@@ -10975,14 +11233,20 @@ Such as a region, a county, a state, a province, etc.`,
 											 * VAT ID
 											 */
 											identifier: {
+												key: "BT-X-84",
 												type: "string",
 												description: "VAT ID",
 												required: false,
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID",
 												additionalXml: {
-													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID":
-														{ value: "VA" },
+													schemeID: {
+														key: "BT-X-84-0",
+														type: "string",
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID/@schemeID",
+														defaultValue: "VA",
+													},
 												},
 											},
 										},
@@ -11003,6 +11267,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * The VAT relevant date of delivery and achievement must be specified on the level of document.
 									 */
 									deliveryDate: {
+										key: "BT-X-85",
 										type: "date",
 										description: `**Actual delivery date for this line**
 
@@ -11014,8 +11279,13 @@ The VAT relevant date of delivery and achievement must be specified on the level
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-85-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 								},
@@ -11052,6 +11322,7 @@ The VAT relevant date of delivery and achievement must be specified on the level
 									 * Document date
 									 */
 									date: {
+										key: "BT-X-88",
 										type: "date",
 										description: "Document date",
 										transform: {
@@ -11061,8 +11332,13 @@ The VAT relevant date of delivery and achievement must be specified on the level
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-88-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 								},
@@ -11099,6 +11375,7 @@ The VAT relevant date of delivery and achievement must be specified on the level
 									 * Document date
 									 */
 									date: {
+										key: "BT-X-91",
 										type: "date",
 										description: "Document date",
 										transform: {
@@ -11108,8 +11385,13 @@ The VAT relevant date of delivery and achievement must be specified on the level
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-91-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ReceivingAdviceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 								},
@@ -11118,6 +11400,7 @@ The VAT relevant date of delivery and achievement must be specified on the level
 							 * Detailed information about the corresponding delivery note
 							 */
 							deliveryNote: {
+								key: "BG-X-83",
 								type: "object",
 								description:
 									"Detailed information about the corresponding delivery note",
@@ -11127,6 +11410,7 @@ The VAT relevant date of delivery and achievement must be specified on the level
 									 * Delivery note number
 									 */
 									issuerAssignedID: {
+										key: "BT-X-92",
 										type: "string",
 										description: "Delivery note number",
 										xpath:
@@ -11136,6 +11420,7 @@ The VAT relevant date of delivery and achievement must be specified on the level
 									 * Delivery note item
 									 */
 									lineID: {
+										key: "BT-X-93",
 										type: "string | number",
 										description: "Delivery note item",
 										required: false,
@@ -11146,6 +11431,7 @@ The VAT relevant date of delivery and achievement must be specified on the level
 									 * Document date
 									 */
 									date: {
+										key: "BT-X-94",
 										type: "date",
 										description: "Document date",
 										required: false,
@@ -11155,8 +11441,13 @@ The VAT relevant date of delivery and achievement must be specified on the level
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-94-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:DeliveryNoteReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 								},
@@ -11283,6 +11574,7 @@ Code list issued and maintained by the Connecting Europe Facility.`,
 							 * - preceding pre-payment invoices are refered to from a final invoice
 							 */
 							precendingInvoices: {
+								key: "BG-X-48",
 								type: "object[]",
 								description: `**Precending invoice reference**
 
@@ -11301,6 +11593,7 @@ To be used in case:
 									 * The identification of an Invoice that was previously sent by the Seller.
 									 */
 									issuerAssignedID: {
+										key: "BT-X-331",
 										type: "string",
 										description: `**Preceding Invoice reference**
 
@@ -11312,6 +11605,7 @@ The identification of an Invoice that was previously sent by the Seller.`,
 									 * Referenced position
 									 */
 									lineID: {
+										key: "BT-X-540",
 										type: "string | number",
 										description: "Referenced position",
 										required: false,
@@ -11325,6 +11619,7 @@ The identification of an Invoice that was previously sent by the Seller.`,
 									 * Codelist UNCL 1001 restricted like BT-3.
 									 */
 									typeCode: {
+										key: "BT-X-332",
 										type: "string",
 										description: `**Preceding incoive type code**
 
@@ -11342,6 +11637,7 @@ Codelist UNCL 1001 restricted like BT-3.`,
 									 * The Preceding Invoice issue date shall be provided in case the Preceding Invoice identifier is not unique.
 									 */
 									date: {
+										key: "BT-X-333",
 										type: "date",
 										description: `**Preceding Invoice issue date**
 
@@ -11355,8 +11651,13 @@ The Preceding Invoice issue date shall be provided in case the Preceding Invoice
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument[line-item-precending-invoice]/ram:FormattedIssueDateTime/qdt:DateTimeString",
 										additionalXml: {
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument[line-item-precending-invoice]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format":
-												{ value: "102" },
+											format: {
+												key: "BT-X-333-0",
+												type: "string",
+												xpath:
+													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument[line-item-precending-invoice]/ram:FormattedIssueDateTime/qdt:DateTimeString/@format",
+												defaultValue: "102",
+											},
 										},
 									},
 								},
