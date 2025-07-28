@@ -21,8 +21,14 @@ export const zugferd = <O extends ZugferdOptions>(options: O) => {
 	return {
 		...ctx,
 		...(handlers ?? {}),
-	} as typeof ctx & typeof handlers;
+	} as typeof ctx & typeof handlers satisfies Zugferd;
 };
+
+export type Zugferd = {
+	context: ZugferdContext;
+	create: (data: any) => ReturnType<ZugferdContext["document"]["create"]>;
+	validate: ZugferdContext["document"]["validate"];
+} & Record<string, any>;
 
 const getPluginHandlers = <
 	C extends ZugferdContext & {
