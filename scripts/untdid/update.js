@@ -1,6 +1,7 @@
 const fs = require("fs/promises");
 const path = require("path");
 const { Biome } = require("@biomejs/js-api/nodejs");
+const { toScreamingSnakeCase } = require("../utils");
 
 const main = async () => {
   const registryData = await fs.readFile(
@@ -37,7 +38,7 @@ from ${entry.source}
         ? JSON.stringify(description)
         : "undefined";
 
-      return `{ code:${formattedCode}, name:${formattedName}, description:${formattedDescription}, },`;
+      return `{ key:${JSON.stringify(toScreamingSnakeCase(name))}, code:${formattedCode}, name:${formattedName}, description:${formattedDescription}, },`;
     });
 
     const content = `/**
@@ -47,6 +48,7 @@ from ${entry.source}
  */
 
 export type Untdid${entry.id}Definition = {
+  key: string;
   code: string;
   name?: string;
   description?: string;

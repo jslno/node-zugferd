@@ -3,6 +3,7 @@
  */
 
 export type Iso3166Definition = {
+	key: string;
 	name: string;
 	code: {
 		alpha2: string;
@@ -17,6 +18,7 @@ export const ISO_3166_IDENTIFIER = "iso.3166";
 
 export const ISO_3166 = [
 	{
+		key: "AFGHANISTAN",
 		name: "Afghanistan",
 		code: {
 			alpha2: "AF",
@@ -25,6 +27,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ALBANIA",
 		name: "Albania",
 		code: {
 			alpha2: "AL",
@@ -33,6 +36,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ALGERIA",
 		name: "Algeria",
 		code: {
 			alpha2: "DZ",
@@ -41,6 +45,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "AMERICAN_SAMOA",
 		name: "American Samoa",
 		code: {
 			alpha2: "AS",
@@ -49,6 +54,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ANDORRA",
 		name: "Andorra",
 		code: {
 			alpha2: "AD",
@@ -57,6 +63,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ANGOLA",
 		name: "Angola",
 		code: {
 			alpha2: "AO",
@@ -65,6 +72,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ANGUILLA",
 		name: "Anguilla",
 		code: {
 			alpha2: "AI",
@@ -73,6 +81,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ANTARCTICA",
 		name: "Antarctica",
 		code: {
 			alpha2: "AQ",
@@ -81,6 +90,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ANTIGUA_AND_BARBUDA",
 		name: "Antigua and Barbuda",
 		code: {
 			alpha2: "AG",
@@ -89,6 +99,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ARGENTINA",
 		name: "Argentina",
 		code: {
 			alpha2: "AR",
@@ -97,6 +108,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ARMENIA",
 		name: "Armenia",
 		code: {
 			alpha2: "AM",
@@ -105,6 +117,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ARUBA",
 		name: "Aruba",
 		code: {
 			alpha2: "AW",
@@ -113,6 +126,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "AUSTRALIA",
 		name: "Australia",
 		code: {
 			alpha2: "AU",
@@ -121,6 +135,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "AUSTRIA",
 		name: "Austria",
 		code: {
 			alpha2: "AT",
@@ -129,6 +144,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "AZERBAIJAN",
 		name: "Azerbaijan",
 		code: {
 			alpha2: "AZ",
@@ -137,6 +153,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BAHAMAS_THE",
 		name: "Bahamas (the)",
 		code: {
 			alpha2: "BS",
@@ -145,6 +162,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BAHRAIN",
 		name: "Bahrain",
 		code: {
 			alpha2: "BH",
@@ -153,6 +171,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BANGLADESH",
 		name: "Bangladesh",
 		code: {
 			alpha2: "BD",
@@ -161,6 +180,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BARBADOS",
 		name: "Barbados",
 		code: {
 			alpha2: "BB",
@@ -169,6 +189,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BELARUS",
 		name: "Belarus",
 		code: {
 			alpha2: "BY",
@@ -177,6 +198,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BELGIUM",
 		name: "Belgium",
 		code: {
 			alpha2: "BE",
@@ -185,6 +207,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BELIZE",
 		name: "Belize",
 		code: {
 			alpha2: "BZ",
@@ -193,6 +216,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BENIN",
 		name: "Benin",
 		code: {
 			alpha2: "BJ",
@@ -201,6 +225,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BERMUDA",
 		name: "Bermuda",
 		code: {
 			alpha2: "BM",
@@ -209,6 +234,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ALAND_ISLANDS",
 		name: "Åland Islands",
 		code: {
 			alpha2: "AX",
@@ -217,6 +243,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BHUTAN",
 		name: "Bhutan",
 		code: {
 			alpha2: "BT",
@@ -225,6 +252,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BOLIVIA_PLURINATIONAL_STATE_OF",
 		name: "Bolivia (Plurinational State of)",
 		code: {
 			alpha2: "BO",
@@ -233,6 +261,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BONAIRE_SINT_EUSTATIUS_AND_SABA",
 		name: "Bonaire, Sint Eustatius and Saba",
 		code: {
 			alpha2: "BQ",
@@ -241,6 +270,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BOSNIA_AND_HERZEGOVINA",
 		name: "Bosnia and Herzegovina",
 		code: {
 			alpha2: "BA",
@@ -249,6 +279,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BOTSWANA",
 		name: "Botswana",
 		code: {
 			alpha2: "BW",
@@ -257,6 +288,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BOUVET_ISLAND",
 		name: "Bouvet Island",
 		code: {
 			alpha2: "BV",
@@ -265,6 +297,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BRAZIL",
 		name: "Brazil",
 		code: {
 			alpha2: "BR",
@@ -273,6 +306,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BRITISH_INDIAN_OCEAN_TERRITORY_THE",
 		name: "British Indian Ocean Territory (the)",
 		code: {
 			alpha2: "IO",
@@ -281,6 +315,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BRUNEI_DARUSSALAM",
 		name: "Brunei Darussalam",
 		code: {
 			alpha2: "BN",
@@ -289,6 +324,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BULGARIA",
 		name: "Bulgaria",
 		code: {
 			alpha2: "BG",
@@ -297,6 +333,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BURKINA_FASO",
 		name: "Burkina Faso",
 		code: {
 			alpha2: "BF",
@@ -305,6 +342,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "BURUNDI",
 		name: "Burundi",
 		code: {
 			alpha2: "BI",
@@ -313,6 +351,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CABO_VERDE",
 		name: "Cabo Verde",
 		code: {
 			alpha2: "CV",
@@ -321,6 +360,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CAMBODIA",
 		name: "Cambodia",
 		code: {
 			alpha2: "KH",
@@ -329,6 +369,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CAMEROON",
 		name: "Cameroon",
 		code: {
 			alpha2: "CM",
@@ -337,6 +378,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CANADA",
 		name: "Canada",
 		code: {
 			alpha2: "CA",
@@ -345,6 +387,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CAYMAN_ISLANDS_THE",
 		name: "Cayman Islands (the)",
 		code: {
 			alpha2: "KY",
@@ -353,6 +396,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CENTRAL_AFRICAN_REPUBLIC_THE",
 		name: "Central African Republic (the)",
 		code: {
 			alpha2: "CF",
@@ -361,6 +405,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CHAD",
 		name: "Chad",
 		code: {
 			alpha2: "TD",
@@ -369,6 +414,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CHILE",
 		name: "Chile",
 		code: {
 			alpha2: "CL",
@@ -377,6 +423,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CHINA",
 		name: "China",
 		code: {
 			alpha2: "CN",
@@ -385,6 +432,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CHRISTMAS_ISLAND",
 		name: "Christmas Island",
 		code: {
 			alpha2: "CX",
@@ -393,6 +441,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "COCOS_KEELING_ISLANDS_THE",
 		name: "Cocos (Keeling) Islands (the)",
 		code: {
 			alpha2: "CC",
@@ -401,6 +450,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "COLOMBIA",
 		name: "Colombia",
 		code: {
 			alpha2: "CO",
@@ -409,6 +459,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "COMOROS_THE",
 		name: "Comoros (the)",
 		code: {
 			alpha2: "KM",
@@ -417,6 +468,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CONGO_THE_DEMOCRATIC_REPUBLIC_OF_THE",
 		name: "Congo (the Democratic Republic of the)",
 		code: {
 			alpha2: "CD",
@@ -425,6 +477,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CONGO_THE",
 		name: "Congo (the)",
 		code: {
 			alpha2: "CG",
@@ -433,6 +486,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "COOK_ISLANDS_THE",
 		name: "Cook Islands (the)",
 		code: {
 			alpha2: "CK",
@@ -441,6 +495,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "COSTA_RICA",
 		name: "Costa Rica",
 		code: {
 			alpha2: "CR",
@@ -449,6 +504,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CROATIA",
 		name: "Croatia",
 		code: {
 			alpha2: "HR",
@@ -457,6 +513,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CUBA",
 		name: "Cuba",
 		code: {
 			alpha2: "CU",
@@ -465,6 +522,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CURACAO",
 		name: "Curaçao",
 		code: {
 			alpha2: "CW",
@@ -473,6 +531,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CYPRUS",
 		name: "Cyprus",
 		code: {
 			alpha2: "CY",
@@ -481,6 +540,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "CZECHIA",
 		name: "Czechia",
 		code: {
 			alpha2: "CZ",
@@ -489,6 +549,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "COTE_DIVOIRE",
 		name: "Côte d'Ivoire",
 		code: {
 			alpha2: "CI",
@@ -497,6 +558,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "DENMARK",
 		name: "Denmark",
 		code: {
 			alpha2: "DK",
@@ -505,6 +567,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "DJIBOUTI",
 		name: "Djibouti",
 		code: {
 			alpha2: "DJ",
@@ -513,6 +576,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "DOMINICA",
 		name: "Dominica",
 		code: {
 			alpha2: "DM",
@@ -521,6 +585,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "DOMINICAN_REPUBLIC_THE",
 		name: "Dominican Republic (the)",
 		code: {
 			alpha2: "DO",
@@ -529,6 +594,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ECUADOR",
 		name: "Ecuador",
 		code: {
 			alpha2: "EC",
@@ -537,6 +603,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "EGYPT",
 		name: "Egypt",
 		code: {
 			alpha2: "EG",
@@ -545,6 +612,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "EL_SALVADOR",
 		name: "El Salvador",
 		code: {
 			alpha2: "SV",
@@ -553,6 +621,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "EQUATORIAL_GUINEA",
 		name: "Equatorial Guinea",
 		code: {
 			alpha2: "GQ",
@@ -561,6 +630,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ERITREA",
 		name: "Eritrea",
 		code: {
 			alpha2: "ER",
@@ -569,6 +639,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ESTONIA",
 		name: "Estonia",
 		code: {
 			alpha2: "EE",
@@ -577,6 +648,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ESWATINI",
 		name: "Eswatini",
 		code: {
 			alpha2: "SZ",
@@ -585,6 +657,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ETHIOPIA",
 		name: "Ethiopia",
 		code: {
 			alpha2: "ET",
@@ -593,6 +666,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "FALKLAND_ISLANDS_THE_MALVINAS",
 		name: "Falkland Islands (the) [Malvinas]",
 		code: {
 			alpha2: "FK",
@@ -601,6 +675,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "FAROE_ISLANDS_THE",
 		name: "Faroe Islands (the)",
 		code: {
 			alpha2: "FO",
@@ -609,6 +684,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "FIJI",
 		name: "Fiji",
 		code: {
 			alpha2: "FJ",
@@ -617,6 +693,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "FINLAND",
 		name: "Finland",
 		code: {
 			alpha2: "FI",
@@ -625,6 +702,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "FRANCE",
 		name: "France",
 		code: {
 			alpha2: "FR",
@@ -633,6 +711,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "FRENCH_GUIANA",
 		name: "French Guiana",
 		code: {
 			alpha2: "GF",
@@ -641,6 +720,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "FRENCH_POLYNESIA",
 		name: "French Polynesia",
 		code: {
 			alpha2: "PF",
@@ -649,6 +729,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "FRENCH_SOUTHERN_TERRITORIES_THE",
 		name: "French Southern Territories (the)",
 		code: {
 			alpha2: "TF",
@@ -657,6 +738,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GABON",
 		name: "Gabon",
 		code: {
 			alpha2: "GA",
@@ -665,6 +747,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GAMBIA_THE",
 		name: "Gambia (the)",
 		code: {
 			alpha2: "GM",
@@ -673,6 +756,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GEORGIA",
 		name: "Georgia",
 		code: {
 			alpha2: "GE",
@@ -681,6 +765,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GERMANY",
 		name: "Germany",
 		code: {
 			alpha2: "DE",
@@ -689,6 +774,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GHANA",
 		name: "Ghana",
 		code: {
 			alpha2: "GH",
@@ -697,6 +783,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GIBRALTAR",
 		name: "Gibraltar",
 		code: {
 			alpha2: "GI",
@@ -705,6 +792,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GREECE",
 		name: "Greece",
 		code: {
 			alpha2: "GR",
@@ -713,6 +801,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GREENLAND",
 		name: "Greenland",
 		code: {
 			alpha2: "GL",
@@ -721,6 +810,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GRENADA",
 		name: "Grenada",
 		code: {
 			alpha2: "GD",
@@ -729,6 +819,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GUADELOUPE",
 		name: "Guadeloupe",
 		code: {
 			alpha2: "GP",
@@ -737,6 +828,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GUAM",
 		name: "Guam",
 		code: {
 			alpha2: "GU",
@@ -745,6 +837,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GUATEMALA",
 		name: "Guatemala",
 		code: {
 			alpha2: "GT",
@@ -753,6 +846,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GUERNSEY",
 		name: "Guernsey",
 		code: {
 			alpha2: "GG",
@@ -761,6 +855,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GUINEA",
 		name: "Guinea",
 		code: {
 			alpha2: "GN",
@@ -769,6 +864,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GUINEA_BISSAU",
 		name: "Guinea-Bissau",
 		code: {
 			alpha2: "GW",
@@ -777,6 +873,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "GUYANA",
 		name: "Guyana",
 		code: {
 			alpha2: "GY",
@@ -785,6 +882,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "HAITI",
 		name: "Haiti",
 		code: {
 			alpha2: "HT",
@@ -793,6 +891,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "HEARD_ISLAND_AND_MC_DONALD_ISLANDS",
 		name: "Heard Island and McDonald Islands",
 		code: {
 			alpha2: "HM",
@@ -801,6 +900,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "HOLY_SEE_THE",
 		name: "Holy See (the)",
 		code: {
 			alpha2: "VA",
@@ -809,6 +909,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "HONDURAS",
 		name: "Honduras",
 		code: {
 			alpha2: "HN",
@@ -817,6 +918,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "HONG_KONG",
 		name: "Hong Kong",
 		code: {
 			alpha2: "HK",
@@ -825,6 +927,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "HUNGARY",
 		name: "Hungary",
 		code: {
 			alpha2: "HU",
@@ -833,6 +936,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ICELAND",
 		name: "Iceland",
 		code: {
 			alpha2: "IS",
@@ -841,6 +945,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "INDIA",
 		name: "India",
 		code: {
 			alpha2: "IN",
@@ -849,6 +954,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "INDONESIA",
 		name: "Indonesia",
 		code: {
 			alpha2: "ID",
@@ -857,6 +963,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "IRAN_ISLAMIC_REPUBLIC_OF",
 		name: "Iran (Islamic Republic of)",
 		code: {
 			alpha2: "IR",
@@ -865,6 +972,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "IRAQ",
 		name: "Iraq",
 		code: {
 			alpha2: "IQ",
@@ -873,6 +981,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "IRELAND",
 		name: "Ireland",
 		code: {
 			alpha2: "IE",
@@ -881,6 +990,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ISLE_OF_MAN",
 		name: "Isle of Man",
 		code: {
 			alpha2: "IM",
@@ -889,6 +999,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ISRAEL",
 		name: "Israel",
 		code: {
 			alpha2: "IL",
@@ -897,6 +1008,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ITALY",
 		name: "Italy",
 		code: {
 			alpha2: "IT",
@@ -905,6 +1017,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "JAMAICA",
 		name: "Jamaica",
 		code: {
 			alpha2: "JM",
@@ -913,6 +1026,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "JAPAN",
 		name: "Japan",
 		code: {
 			alpha2: "JP",
@@ -921,6 +1035,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "JERSEY",
 		name: "Jersey",
 		code: {
 			alpha2: "JE",
@@ -929,6 +1044,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "JORDAN",
 		name: "Jordan",
 		code: {
 			alpha2: "JO",
@@ -937,6 +1053,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "KAZAKHSTAN",
 		name: "Kazakhstan",
 		code: {
 			alpha2: "KZ",
@@ -945,6 +1062,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "KENYA",
 		name: "Kenya",
 		code: {
 			alpha2: "KE",
@@ -953,6 +1071,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "KIRIBATI",
 		name: "Kiribati",
 		code: {
 			alpha2: "KI",
@@ -961,6 +1080,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "KOREA_THE_DEMOCRATIC_PEOPLES_REPUBLIC_OF",
 		name: "Korea (the Democratic People's Republic of)",
 		code: {
 			alpha2: "KP",
@@ -969,6 +1089,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "KOREA_THE_REPUBLIC_OF",
 		name: "Korea (the Republic of)",
 		code: {
 			alpha2: "KR",
@@ -977,6 +1098,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "KUWAIT",
 		name: "Kuwait",
 		code: {
 			alpha2: "KW",
@@ -985,6 +1107,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "KYRGYZSTAN",
 		name: "Kyrgyzstan",
 		code: {
 			alpha2: "KG",
@@ -993,6 +1116,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "LAO_PEOPLES_DEMOCRATIC_REPUBLIC_THE",
 		name: "Lao People's Democratic Republic (the)",
 		code: {
 			alpha2: "LA",
@@ -1001,6 +1125,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "LATVIA",
 		name: "Latvia",
 		code: {
 			alpha2: "LV",
@@ -1009,6 +1134,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "LEBANON",
 		name: "Lebanon",
 		code: {
 			alpha2: "LB",
@@ -1017,6 +1143,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "LESOTHO",
 		name: "Lesotho",
 		code: {
 			alpha2: "LS",
@@ -1025,6 +1152,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "LIBERIA",
 		name: "Liberia",
 		code: {
 			alpha2: "LR",
@@ -1033,6 +1161,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "LIBYA",
 		name: "Libya",
 		code: {
 			alpha2: "LY",
@@ -1041,6 +1170,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "LIECHTENSTEIN",
 		name: "Liechtenstein",
 		code: {
 			alpha2: "LI",
@@ -1049,6 +1179,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "LITHUANIA",
 		name: "Lithuania",
 		code: {
 			alpha2: "LT",
@@ -1057,6 +1188,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "LUXEMBOURG",
 		name: "Luxembourg",
 		code: {
 			alpha2: "LU",
@@ -1065,6 +1197,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MACAO",
 		name: "Macao",
 		code: {
 			alpha2: "MO",
@@ -1073,6 +1206,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MADAGASCAR",
 		name: "Madagascar",
 		code: {
 			alpha2: "MG",
@@ -1081,6 +1215,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MALAWI",
 		name: "Malawi",
 		code: {
 			alpha2: "MW",
@@ -1089,6 +1224,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MALAYSIA",
 		name: "Malaysia",
 		code: {
 			alpha2: "MY",
@@ -1097,6 +1233,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MALDIVES",
 		name: "Maldives",
 		code: {
 			alpha2: "MV",
@@ -1105,6 +1242,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MALI",
 		name: "Mali",
 		code: {
 			alpha2: "ML",
@@ -1113,6 +1251,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MALTA",
 		name: "Malta",
 		code: {
 			alpha2: "MT",
@@ -1121,6 +1260,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MARSHALL_ISLANDS_THE",
 		name: "Marshall Islands (the)",
 		code: {
 			alpha2: "MH",
@@ -1129,6 +1269,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MARTINIQUE",
 		name: "Martinique",
 		code: {
 			alpha2: "MQ",
@@ -1137,6 +1278,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MAURITANIA",
 		name: "Mauritania",
 		code: {
 			alpha2: "MR",
@@ -1145,6 +1287,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MAURITIUS",
 		name: "Mauritius",
 		code: {
 			alpha2: "MU",
@@ -1153,6 +1296,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MAYOTTE",
 		name: "Mayotte",
 		code: {
 			alpha2: "YT",
@@ -1161,6 +1305,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MEXICO",
 		name: "Mexico",
 		code: {
 			alpha2: "MX",
@@ -1169,6 +1314,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MICRONESIA_FEDERATED_STATES_OF",
 		name: "Micronesia (Federated States of)",
 		code: {
 			alpha2: "FM",
@@ -1177,6 +1323,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MOLDOVA_THE_REPUBLIC_OF",
 		name: "Moldova (the Republic of)",
 		code: {
 			alpha2: "MD",
@@ -1185,6 +1332,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MONACO",
 		name: "Monaco",
 		code: {
 			alpha2: "MC",
@@ -1193,6 +1341,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MONGOLIA",
 		name: "Mongolia",
 		code: {
 			alpha2: "MN",
@@ -1201,6 +1350,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MONTENEGRO",
 		name: "Montenegro",
 		code: {
 			alpha2: "ME",
@@ -1209,6 +1359,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MONTSERRAT",
 		name: "Montserrat",
 		code: {
 			alpha2: "MS",
@@ -1217,6 +1368,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MOROCCO",
 		name: "Morocco",
 		code: {
 			alpha2: "MA",
@@ -1225,6 +1377,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MOZAMBIQUE",
 		name: "Mozambique",
 		code: {
 			alpha2: "MZ",
@@ -1233,6 +1386,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "MYANMAR",
 		name: "Myanmar",
 		code: {
 			alpha2: "MM",
@@ -1241,6 +1395,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NAMIBIA",
 		name: "Namibia",
 		code: {
 			alpha2: "NA",
@@ -1249,6 +1404,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NAURU",
 		name: "Nauru",
 		code: {
 			alpha2: "NR",
@@ -1257,6 +1413,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NEPAL",
 		name: "Nepal",
 		code: {
 			alpha2: "NP",
@@ -1265,6 +1422,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NETHERLANDS_KINGDOM_OF_THE",
 		name: "Netherlands (Kingdom of the)",
 		code: {
 			alpha2: "NL",
@@ -1273,6 +1431,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NEW_CALEDONIA",
 		name: "New Caledonia",
 		code: {
 			alpha2: "NC",
@@ -1281,6 +1440,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NEW_ZEALAND",
 		name: "New Zealand",
 		code: {
 			alpha2: "NZ",
@@ -1289,6 +1449,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NICARAGUA",
 		name: "Nicaragua",
 		code: {
 			alpha2: "NI",
@@ -1297,6 +1458,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NIGER_THE",
 		name: "Niger (the)",
 		code: {
 			alpha2: "NE",
@@ -1305,6 +1467,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NIGERIA",
 		name: "Nigeria",
 		code: {
 			alpha2: "NG",
@@ -1313,6 +1476,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NIUE",
 		name: "Niue",
 		code: {
 			alpha2: "NU",
@@ -1321,6 +1485,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NORFOLK_ISLAND",
 		name: "Norfolk Island",
 		code: {
 			alpha2: "NF",
@@ -1329,6 +1494,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NORTH_MACEDONIA",
 		name: "North Macedonia",
 		code: {
 			alpha2: "MK",
@@ -1337,6 +1503,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NORTHERN_MARIANA_ISLANDS_THE",
 		name: "Northern Mariana Islands (the)",
 		code: {
 			alpha2: "MP",
@@ -1345,6 +1512,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "NORWAY",
 		name: "Norway",
 		code: {
 			alpha2: "NO",
@@ -1353,6 +1521,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "OMAN",
 		name: "Oman",
 		code: {
 			alpha2: "OM",
@@ -1361,6 +1530,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "PAKISTAN",
 		name: "Pakistan",
 		code: {
 			alpha2: "PK",
@@ -1369,6 +1539,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "PALAU",
 		name: "Palau",
 		code: {
 			alpha2: "PW",
@@ -1377,6 +1548,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "PALESTINE_STATE_OF",
 		name: "Palestine, State of",
 		code: {
 			alpha2: "PS",
@@ -1385,6 +1557,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "PANAMA",
 		name: "Panama",
 		code: {
 			alpha2: "PA",
@@ -1393,6 +1566,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "PAPUA_NEW_GUINEA",
 		name: "Papua New Guinea",
 		code: {
 			alpha2: "PG",
@@ -1401,6 +1575,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "PARAGUAY",
 		name: "Paraguay",
 		code: {
 			alpha2: "PY",
@@ -1409,6 +1584,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "PERU",
 		name: "Peru",
 		code: {
 			alpha2: "PE",
@@ -1417,6 +1593,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "PHILIPPINES_THE",
 		name: "Philippines (the)",
 		code: {
 			alpha2: "PH",
@@ -1425,6 +1602,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "PITCAIRN",
 		name: "Pitcairn",
 		code: {
 			alpha2: "PN",
@@ -1433,6 +1611,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "POLAND",
 		name: "Poland",
 		code: {
 			alpha2: "PL",
@@ -1441,6 +1620,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "PORTUGAL",
 		name: "Portugal",
 		code: {
 			alpha2: "PT",
@@ -1449,6 +1629,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "PUERTO_RICO",
 		name: "Puerto Rico",
 		code: {
 			alpha2: "PR",
@@ -1457,6 +1638,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "QATAR",
 		name: "Qatar",
 		code: {
 			alpha2: "QA",
@@ -1465,6 +1647,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ROMANIA",
 		name: "Romania",
 		code: {
 			alpha2: "RO",
@@ -1473,6 +1656,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "RUSSIAN_FEDERATION_THE",
 		name: "Russian Federation (the)",
 		code: {
 			alpha2: "RU",
@@ -1481,6 +1665,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "RWANDA",
 		name: "Rwanda",
 		code: {
 			alpha2: "RW",
@@ -1489,6 +1674,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "REUNION",
 		name: "Réunion",
 		code: {
 			alpha2: "RE",
@@ -1497,6 +1683,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SAINT_BARTHELEMY",
 		name: "Saint Barthélemy",
 		code: {
 			alpha2: "BL",
@@ -1505,6 +1692,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SAINT_HELENA_ASCENSION_AND_TRISTAN_DA_CUNHA",
 		name: "Saint Helena, Ascension and Tristan da Cunha",
 		code: {
 			alpha2: "SH",
@@ -1513,6 +1701,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SAINT_KITTS_AND_NEVIS",
 		name: "Saint Kitts and Nevis",
 		code: {
 			alpha2: "KN",
@@ -1521,6 +1710,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SAINT_LUCIA",
 		name: "Saint Lucia",
 		code: {
 			alpha2: "LC",
@@ -1529,6 +1719,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SAINT_MARTIN_FRENCH_PART",
 		name: "Saint Martin (French part)",
 		code: {
 			alpha2: "MF",
@@ -1537,6 +1728,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SAINT_PIERRE_AND_MIQUELON",
 		name: "Saint Pierre and Miquelon",
 		code: {
 			alpha2: "PM",
@@ -1545,6 +1737,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SAINT_VINCENT_AND_THE_GRENADINES",
 		name: "Saint Vincent and the Grenadines",
 		code: {
 			alpha2: "VC",
@@ -1553,6 +1746,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SAMOA",
 		name: "Samoa",
 		code: {
 			alpha2: "WS",
@@ -1561,6 +1755,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SAN_MARINO",
 		name: "San Marino",
 		code: {
 			alpha2: "SM",
@@ -1569,6 +1764,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SAO_TOME_AND_PRINCIPE",
 		name: "Sao Tome and Principe",
 		code: {
 			alpha2: "ST",
@@ -1577,6 +1773,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SAUDI_ARABIA",
 		name: "Saudi Arabia",
 		code: {
 			alpha2: "SA",
@@ -1585,6 +1782,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SENEGAL",
 		name: "Senegal",
 		code: {
 			alpha2: "SN",
@@ -1593,6 +1791,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SERBIA",
 		name: "Serbia",
 		code: {
 			alpha2: "RS",
@@ -1601,6 +1800,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SEYCHELLES",
 		name: "Seychelles",
 		code: {
 			alpha2: "SC",
@@ -1609,6 +1809,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SIERRA_LEONE",
 		name: "Sierra Leone",
 		code: {
 			alpha2: "SL",
@@ -1617,6 +1818,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SINGAPORE",
 		name: "Singapore",
 		code: {
 			alpha2: "SG",
@@ -1625,6 +1827,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SINT_MAARTEN_DUTCH_PART",
 		name: "Sint Maarten (Dutch part)",
 		code: {
 			alpha2: "SX",
@@ -1633,6 +1836,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SLOVAKIA",
 		name: "Slovakia",
 		code: {
 			alpha2: "SK",
@@ -1641,6 +1845,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SLOVENIA",
 		name: "Slovenia",
 		code: {
 			alpha2: "SI",
@@ -1649,6 +1854,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SOLOMON_ISLANDS",
 		name: "Solomon Islands",
 		code: {
 			alpha2: "SB",
@@ -1657,6 +1863,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SOMALIA",
 		name: "Somalia",
 		code: {
 			alpha2: "SO",
@@ -1665,6 +1872,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SOUTH_AFRICA",
 		name: "South Africa",
 		code: {
 			alpha2: "ZA",
@@ -1673,6 +1881,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS",
 		name: "South Georgia and the South Sandwich Islands",
 		code: {
 			alpha2: "GS",
@@ -1681,6 +1890,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SOUTH_SUDAN",
 		name: "South Sudan",
 		code: {
 			alpha2: "SS",
@@ -1689,6 +1899,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SPAIN",
 		name: "Spain",
 		code: {
 			alpha2: "ES",
@@ -1697,6 +1908,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SRI_LANKA",
 		name: "Sri Lanka",
 		code: {
 			alpha2: "LK",
@@ -1705,6 +1917,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SUDAN_THE",
 		name: "Sudan (the)",
 		code: {
 			alpha2: "SD",
@@ -1713,6 +1926,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SURINAME",
 		name: "Suriname",
 		code: {
 			alpha2: "SR",
@@ -1721,6 +1935,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SVALBARD_AND_JAN_MAYEN",
 		name: "Svalbard and Jan Mayen",
 		code: {
 			alpha2: "SJ",
@@ -1729,6 +1944,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SWEDEN",
 		name: "Sweden",
 		code: {
 			alpha2: "SE",
@@ -1737,6 +1953,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SWITZERLAND",
 		name: "Switzerland",
 		code: {
 			alpha2: "CH",
@@ -1745,6 +1962,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "SYRIAN_ARAB_REPUBLIC_THE",
 		name: "Syrian Arab Republic (the)",
 		code: {
 			alpha2: "SY",
@@ -1753,6 +1971,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "TAIWAN_PROVINCE_OF_CHINA",
 		name: "Taiwan (Province of China)",
 		code: {
 			alpha2: "TW",
@@ -1761,6 +1980,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "TAJIKISTAN",
 		name: "Tajikistan",
 		code: {
 			alpha2: "TJ",
@@ -1769,6 +1989,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "TANZANIA_THE_UNITED_REPUBLIC_OF",
 		name: "Tanzania, the United Republic of",
 		code: {
 			alpha2: "TZ",
@@ -1777,6 +1998,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "THAILAND",
 		name: "Thailand",
 		code: {
 			alpha2: "TH",
@@ -1785,6 +2007,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "TIMOR_LESTE",
 		name: "Timor-Leste",
 		code: {
 			alpha2: "TL",
@@ -1793,6 +2016,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "TOGO",
 		name: "Togo",
 		code: {
 			alpha2: "TG",
@@ -1801,6 +2025,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "TOKELAU",
 		name: "Tokelau",
 		code: {
 			alpha2: "TK",
@@ -1809,6 +2034,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "TONGA",
 		name: "Tonga",
 		code: {
 			alpha2: "TO",
@@ -1817,6 +2043,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "TRINIDAD_AND_TOBAGO",
 		name: "Trinidad and Tobago",
 		code: {
 			alpha2: "TT",
@@ -1825,6 +2052,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "TUNISIA",
 		name: "Tunisia",
 		code: {
 			alpha2: "TN",
@@ -1833,6 +2061,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "TURKMENISTAN",
 		name: "Turkmenistan",
 		code: {
 			alpha2: "TM",
@@ -1841,6 +2070,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "TURKS_AND_CAICOS_ISLANDS_THE",
 		name: "Turks and Caicos Islands (the)",
 		code: {
 			alpha2: "TC",
@@ -1849,6 +2079,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "TUVALU",
 		name: "Tuvalu",
 		code: {
 			alpha2: "TV",
@@ -1857,6 +2088,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "TURKIYE",
 		name: "Türkiye",
 		code: {
 			alpha2: "TR",
@@ -1865,6 +2097,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "UGANDA",
 		name: "Uganda",
 		code: {
 			alpha2: "UG",
@@ -1873,6 +2106,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "UKRAINE",
 		name: "Ukraine",
 		code: {
 			alpha2: "UA",
@@ -1881,6 +2115,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "UNITED_ARAB_EMIRATES_THE",
 		name: "United Arab Emirates (the)",
 		code: {
 			alpha2: "AE",
@@ -1889,6 +2124,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND_THE",
 		name: "United Kingdom of Great Britain and Northern Ireland (the)",
 		code: {
 			alpha2: "GB",
@@ -1897,6 +2133,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "UNITED_STATES_MINOR_OUTLYING_ISLANDS_THE",
 		name: "United States Minor Outlying Islands (the)",
 		code: {
 			alpha2: "UM",
@@ -1905,6 +2142,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "UNITED_STATES_OF_AMERICA_THE",
 		name: "United States of America (the)",
 		code: {
 			alpha2: "US",
@@ -1913,6 +2151,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "URUGUAY",
 		name: "Uruguay",
 		code: {
 			alpha2: "UY",
@@ -1921,6 +2160,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "UZBEKISTAN",
 		name: "Uzbekistan",
 		code: {
 			alpha2: "UZ",
@@ -1929,6 +2169,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "VANUATU",
 		name: "Vanuatu",
 		code: {
 			alpha2: "VU",
@@ -1937,6 +2178,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "VENEZUELA_BOLIVARIAN_REPUBLIC_OF",
 		name: "Venezuela (Bolivarian Republic of)",
 		code: {
 			alpha2: "VE",
@@ -1945,6 +2187,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "VIET_NAM",
 		name: "Viet Nam",
 		code: {
 			alpha2: "VN",
@@ -1953,6 +2196,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "VIRGIN_ISLANDS_BRITISH",
 		name: "Virgin Islands (British)",
 		code: {
 			alpha2: "VG",
@@ -1961,6 +2205,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "VIRGIN_ISLANDS_US",
 		name: "Virgin Islands (U.S.)",
 		code: {
 			alpha2: "VI",
@@ -1969,6 +2214,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "WALLIS_AND_FUTUNA",
 		name: "Wallis and Futuna",
 		code: {
 			alpha2: "WF",
@@ -1977,6 +2223,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "WESTERN_SAHARA",
 		name: "Western Sahara*",
 		code: {
 			alpha2: "EH",
@@ -1985,6 +2232,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "YEMEN",
 		name: "Yemen",
 		code: {
 			alpha2: "YE",
@@ -1993,6 +2241,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ZAMBIA",
 		name: "Zambia",
 		code: {
 			alpha2: "ZM",
@@ -2001,6 +2250,7 @@ export const ISO_3166 = [
 		},
 	},
 	{
+		key: "ZIMBABWE",
 		name: "Zimbabwe",
 		code: {
 			alpha2: "ZW",

@@ -1,5 +1,6 @@
 const fs = require("fs/promises");
 const { Biome } = require("@biomejs/js-api/nodejs");
+const { toScreamingSnakeCase } = require("../utils");
 
 const source =
   "https://www.xrepository.de/api/xrepository/urn:xoev-de:kosit:codeliste:currency-codes_3/download/Currency_Codes_3.json";
@@ -28,7 +29,7 @@ from ${source}
     const formattedCode = JSON.stringify(code);
     const formattedCurrency = currency !== null ? JSON.stringify(currency) : "undefined";
 
-    return `{ code: ${formattedCode}, currency:${formattedCurrency}, },`;
+    return `{ key: ${JSON.stringify(toScreamingSnakeCase(currency))}, code: ${formattedCode}, currency:${formattedCurrency}, },`;
   });
 
   const biome = new Biome();
@@ -41,6 +42,7 @@ from ${source}
  */
 
 export type CurrencyCodesDefinition = {
+  key: string;
   code: string;
   currency: string;
 };

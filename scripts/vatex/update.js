@@ -1,5 +1,6 @@
 const fs = require("fs/promises");
 const { Biome } = require("@biomejs/js-api/nodejs");
+const { toScreamingSnakeCase } = require("../utils");
 
 const source =
   "https://www.xrepository.de/api/xrepository/urn:xoev-de:kosit:codeliste:vatex_1/download/VATEX_1.json";
@@ -33,6 +34,7 @@ from ${source}
       remark !== null ? JSON.stringify(remark) : "undefined";
 
     return `{
+  key:${JSON.stringify(toScreamingSnakeCase(name))},
   code:${formattedCode},
   name:${formattedName},
   description:${formattedDescription},
@@ -49,6 +51,7 @@ from ${source}
  */
 
 export type VatExDefinition = {
+  key: string;
   code: string;
   name?: string;
   description?: string;

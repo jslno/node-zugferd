@@ -1,5 +1,6 @@
 const fs = require("fs/promises");
 const { Biome } = require("@biomejs/js-api/nodejs");
+const { toScreamingSnakeCase } = require("../utils");
 
 const source =
   "https://www.xrepository.de/api/xrepository/urn:xoev-de:kosit:codeliste:rec20_3/download/UN_ECE_Recommendation_N_20_3.json";
@@ -28,7 +29,7 @@ from ${source}
     const formattedCode = JSON.stringify(code);
     const formattedName = name !== null ? JSON.stringify(name) : "undefined";
 
-    return `{ code: ${formattedCode}, name:${formattedName}, },`;
+    return `{ key:${JSON.stringify(toScreamingSnakeCase(name))}, code: ${formattedCode}, name:${formattedName}, },`;
   });
 
   const biome = new Biome();
@@ -41,6 +42,7 @@ from ${source}
  */
 
 export type Rec20Definition = {
+  key: string;
   code: string;
   name: string;
 };
