@@ -9,10 +9,32 @@ This profile contains the minimum of data which must be present in the
 structured data file, some of which may depend on the data being actually available, like the
 supplier's intra-community VAT identifier number which is mandatory if the supplier has one.
 
+```ts
+import { MINIMUM, type ProfileMinimum } from "node-zugferd/profile/minimum";
+```
+
+<Callout type="warn">
+  Documents containing only information of the first two profiles (MINIMUM and
+  BASIC WL) are not considered to be invoices according to German fiscal law
+  ([&#8594;
+  GoBD](https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Weitere_Steuerthemen/Abgabenordnung/2019-11-28-GoBD.html));
+  they may therefore not be used as electronic invoices in Germany. They will
+  not be considered as invoices in France anymore once the einvoicing B2B
+  mandate CTC reform has been fully deployed (2028). **It is then highly
+  recommended to target the [BASIC](/docs/profiles/basic) profile at minimum.**
+</Callout>
+
+## Basic Usage
+
+<Steps>
+
+<Step>
 ### Setup the Profile
 
+First configure the zugferd instance (`invoicer`) to use the Minimum profile.
+This defines the standard and complexity level of the invoice.
+
 ```ts title="invoicer.ts"
-//...
 import { MINIMUM } from "node-zugferd/profile/minimum"; // [!code highlight]
 
 export const invoicer = zugferd({
@@ -20,6 +42,58 @@ export const invoicer = zugferd({
 });
 ```
 
-### Schema
+</Step>
+
+<Step>
+### Define Invoice Data
+
+Now define the actual invoice content, including all required fields of the
+profile, using the `ProfileMinimum` type for type safety.
+
+```ts
+import { ProfileMinimum } from "node-zugferd/profile/minimum";
+
+const data: ProfileMinimum = {
+  number: "INV-001",
+  // ...
+};
+```
+
+</Step>
+
+<Step>
+### Create Invoice
+
+Use the previously created instance (`invoicer`) to generate the invoice from your data. You can either:
+
+- Generate standalone XML
+- Embed the XML inside a PDF/A-3b compliant file.
+
+```ts
+import fs from "fs";
+import { invoicer } from "./invoicer";
+
+const invoice = invoicer.create(data);
+
+// Only generate xml
+const xml = await invoice.toXML();
+
+// Or embed xml in a PDF-A/3b
+const pdf = fs.readFileSync("./your/invoice.pdf");
+const pdfA = await invoicer.embedInPdf(pdf); // [!code highlight]
+```
+
+</Step>
+
+<Step>
+### 🎉 That's it [#thats-it]
+
+Your invoice is now ready! You've successfully created a ZUGFeRD invoice using the Minimum profile.
+
+</Step>
+
+</Steps>
+
+## Schema
 
 <ProfileTree schema={MINIMUM.schema} />

@@ -10,10 +10,21 @@ of EN 16931, which contains all mandatory fields including those on which busine
 EN 16931 may apply. It is a compliant CIUS (Core Invoice Usage Specification), which means that all
 business rules of the EN 16931 apply.
 
+```ts
+import { BASIC, type ProfileBasic } from "node-zugferd/profile/basic";
+```
+
+## Basic Usage
+
+<Steps>
+
+<Step>
 ### Setup the Profile
 
+First configure the zugferd instance (`invoicer`) to use the Basic profile.
+This defines the standard and complexity level of the invoice.
+
 ```ts title="invoicer.ts"
-//...
 import { BASIC } from "node-zugferd/profile/basic"; // [!code highlight]
 
 export const invoicer = zugferd({
@@ -21,7 +32,59 @@ export const invoicer = zugferd({
 });
 ```
 
-### Schema
+</Step>
+
+<Step>
+### Define Invoice Data
+
+Now define the actual invoice content, including all required fields of the
+profile, using the `ProfileBasic` type for type safety.
+
+```ts
+import { ProfileBasic } from "node-zugferd/profile/basic";
+
+const data: ProfileBasic = {
+  number: "INV-001",
+  // ...
+};
+```
+
+</Step>
+
+<Step>
+### Create Invoice
+
+Use the previously created instance (`invoicer`) to generate the invoice from your data. You can either:
+
+- Generate standalone XML
+- Embed the XML inside a PDF/A-3b compliant file.
+
+```ts
+import fs from "fs";
+import { invoicer } from "./invoicer";
+
+const invoice = invoicer.create(data);
+
+// Only generate xml
+const xml = await invoice.toXML();
+
+// Or embed xml in a PDF-A/3b
+const pdf = fs.readFileSync("./your/invoice.pdf");
+const pdfA = await invoicer.embedInPdf(pdf); // [!code highlight]
+```
+
+</Step>
+
+<Step>
+### 🎉 That's it [#thats-it]
+
+Your invoice is now ready! You've successfully created a ZUGFeRD invoice using the Basic profile.
+
+</Step>
+
+</Steps>
+
+## Schema
 
 Extends [BASIC WL](/docs/profiles/basic-wl)
 
