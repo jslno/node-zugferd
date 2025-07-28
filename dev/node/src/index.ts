@@ -119,6 +119,25 @@ Trennblätter A4`,
 					grandTotalAmount: "235.62",
 					duePayableAmount: "235.62",
 				},
+				allowances: [
+					{
+						actualAmount: "7.00",
+						reasonCode: "95",
+						reason: "Discount",
+						categoryTradeTax: {
+							categoryCode: "S",
+							rateApplicablePercent: "19.00",
+						},
+					},
+					{
+						actualAmount: "3.00",
+						reasonCode: "95",
+						reason: "Coupon",
+						categoryTradeTax: {
+							categoryCode: "S",
+						},
+					},
+				],
 			},
 		},
 	};

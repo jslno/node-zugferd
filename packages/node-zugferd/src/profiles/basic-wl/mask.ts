@@ -208,6 +208,7 @@ export const basicWlMask = {
 					allowances: [
 						"BG-20",
 						{
+							chargeIndicator: "BG-20-0",
 							calculationPercent: "BT-94",
 							basisAmount: "BT-93",
 							actualAmount: "BT-92",
@@ -225,6 +226,7 @@ export const basicWlMask = {
 					charges: [
 						"BG-21",
 						{
+							chargeIndicator: "BG-21-0",
 							calculationPercent: "BT-101",
 							basisAmount: "BT-100",
 							actualAmount: "BT-99",
