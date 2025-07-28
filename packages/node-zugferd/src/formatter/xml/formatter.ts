@@ -19,6 +19,17 @@ const findFieldByKey = (obj: any, key: string): any | undefined => {
 	return undefined;
 };
 
+const hasValue = (val: any, fieldType: string | string[]) => {
+	if (val === undefined || val === null) return false;
+	const typeToCheck = Array.isArray(fieldType) ? fieldType[0] : fieldType;
+	if (typeToCheck === "string" && val === "") return false;
+	if (typeToCheck === "object") {
+		if (Array.isArray(val)) return true;
+		if (typeof val === "object" && Object.keys(val).length === 0) return false;
+	}
+	return true;
+};
+
 const applyMask = (
 	schema: Schema,
 	mask: Record<string, any>,
@@ -131,18 +142,6 @@ const collectAdditionalXmlFields = (
 			? field.transform.input(_value)
 			: _value;
 
-		const hasValue = (val: any, fieldType: string | string[]) => {
-			if (val === undefined || val === null) return false;
-			const typeToCheck = Array.isArray(fieldType) ? fieldType[0] : fieldType;
-			if (typeToCheck === "string" && val === "") return false;
-			if (typeToCheck === "object") {
-				if (Array.isArray(val)) return true;
-				if (typeof val === "object" && Object.keys(val).length === 0)
-					return false;
-			}
-			return true;
-		};
-
 		if (
 			field.additionalXml &&
 			rawValue !== undefined &&
@@ -186,20 +185,6 @@ export const parseSchema = <S extends Schema>(
 		},
 	};
 	const localGroupIndices: GroupIndices = { ...parentGroupIndices };
-
-	const hasValue = (val: any, fieldType: string | string[]) => {
-		if (val === undefined || val === null) return false;
-
-		const typeToCheck = Array.isArray(fieldType) ? fieldType[0] : fieldType;
-
-		if (typeToCheck === "string" && val === "") return false;
-		if (typeToCheck === "object") {
-			if (Array.isArray(val)) return true;
-			if (typeof val === "object" && Object.keys(val).length === 0)
-				return false;
-		}
-		return true;
-	};
 
 	const processField = (
 		field: SchemaField,
