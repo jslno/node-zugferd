@@ -11,6 +11,12 @@ importers:
       '@biomejs/biome':
         specifier: 1.9.4
         version: 1.9.4
+      '@biomejs/js-api':
+        specifier: ^2.0.3
+        version: 2.0.3(@biomejs/wasm-nodejs@2.1.2)
+      '@biomejs/wasm-nodejs':
+        specifier: ^2.1.2
+        version: 2.1.2
       '@types/node':
         specifier: ^22.10.7
         version: 22.13.4
@@ -47,13 +53,13 @@ importers:
     devDependencies:
       '@types/bun':
         specifier: latest
-        version: 1.2.17
+        version: 1.2.19(@types/react@19.0.10)
       '@types/react':
         specifier: ^19.0.9
         version: 19.0.10
       bun:
         specifier: latest
-        version: 1.2.17
+        version: 1.2.19
 
   dev/node:
     dependencies:
@@ -135,7 +141,7 @@ importers:
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       node-zugferd:
         specifier: latest
-        version: 0.0.10-beta.1
+        version: 0.0.10-beta.3
       prism-react-renderer:
         specifier: ^2.4.1
         version: 2.4.1(react@19.0.0)
@@ -459,6 +465,23 @@ packages:
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
+
+  '@biomejs/js-api@2.0.3':
+    resolution: {integrity: sha512-fg4hGhg1LtohDqLdG9uggROlVsydcuFwZhPoUOTi9+bkvGMULDKL9dEP5iN6++CIA/AN0T20U82rLYuaxc+VDQ==}
+    peerDependencies:
+      '@biomejs/wasm-bundler': ^2.1.1
+      '@biomejs/wasm-nodejs': ^2.1.1
+      '@biomejs/wasm-web': ^2.1.1
+    peerDependenciesMeta:
+      '@biomejs/wasm-bundler':
+        optional: true
+      '@biomejs/wasm-nodejs':
+        optional: true
+      '@biomejs/wasm-web':
+        optional: true
+
+  '@biomejs/wasm-nodejs@2.1.2':
+    resolution: {integrity: sha512-roOdQL+A6Advze3nvYfJhbDaRVketXZVAHQs11WblD8iL5jZ6dvxTknqOSwonSc/Je5PxFcfsIEHB3PQoztxnQ==}
 
   '@emnapi/core@1.4.3':
     resolution: {integrity: sha512-4m62DuCE07lw01soJwPiBGC0nAww0Q+RY70VZ+n49yDIO13yyinhbWCeNnaob0lakDtWQzSdtNWzJeOJt2ma+g==}
@@ -1134,58 +1157,58 @@ packages:
     resolution: {integrity: sha512-UXQYvN0DYl5EMOXX3O0Rwke+0R0Pd7PW/hOVwgpPd6KKJPb3RP74m3PEbEFjdTzZVLUW81o7herYXD2h4PVcGQ==}
     engines: {node: '>= 20.0.0'}
 
-  '@oven/bun-darwin-aarch64@1.2.17':
-    resolution: {integrity: sha512-66Xjz3NZXUUWKZJPvWKuwEkaqMZpir1Gm4SbhbB2iiRSSTW8jqwdkSb9RhgTCDt5OnSPd3+Cq0WsP/T5ExJbhA==}
+  '@oven/bun-darwin-aarch64@1.2.19':
+    resolution: {integrity: sha512-pJBuez9gwR03Wjtk4hSSBA6QgNdhvPLbrxU4DDzVY8Ee+Q67xNkU0CMK6rFdQF8Qetj2R+Vf8AJDlwAc1QdG1w==}
     cpu: [arm64]
     os: [darwin]
 
-  '@oven/bun-darwin-x64-baseline@1.2.17':
-    resolution: {integrity: sha512-VSIctl90tV8yg1LRMvPg/8LgUzl55Q7Jcxe+u6PfuvLQIJOTIPbNn7HtRpJg7MGc3+qyztB5KDd70xC7qI2yEg==}
+  '@oven/bun-darwin-x64-baseline@1.2.19':
+    resolution: {integrity: sha512-fOqbLeP3MoSbeosykTp1+BYSKDJxdjWKyxbPqHTJK2Mnt78+LPTE2yQbCzUL5LBLSRVkIxbTyIcEZxVg3eJmYg==}
     cpu: [x64]
     os: [darwin]
 
-  '@oven/bun-darwin-x64@1.2.17':
-    resolution: {integrity: sha512-OMJMHpcpBlWcVnWfSQ6x+8fF7HpkQLqBfoIvzxgUjIZZvj2d8K46XX4N/h62RglDEinRC9VDGxt24vwvlk5tTw==}
+  '@oven/bun-darwin-x64@1.2.19':
+    resolution: {integrity: sha512-dsgmgDOG++JsQ3wXEyTiUzhT/4wqcnAxfCQOPho6LgosVUPs6etn01uA1yCySjSk8DrugQIivXB2TaqoOrhKJg==}
     cpu: [x64]
     os: [darwin]
 
-  '@oven/bun-linux-aarch64-musl@1.2.17':
-    resolution: {integrity: sha512-PH+hUV+I6DGD1VRHdAIAKEAOed+GSdvn6S1b3qqX27/VuHBU781V+hzt+6DBlcWBHYLw8PIg9sfIdNp485gQmw==}
+  '@oven/bun-linux-aarch64-musl@1.2.19':
+    resolution: {integrity: sha512-awB1ZEh7AbxXGemT/d33F6F4bwClWSFjhcatrweG5o5gh16c4pBKTldg/TUY9EEFrQJVyYQklgl/D919GDLTFA==}
     cpu: [aarch64]
     os: [linux]
 
-  '@oven/bun-linux-aarch64@1.2.17':
-    resolution: {integrity: sha512-KPoMqaibCXcSv+VZ3uMqKUNZqMxE6Hho1be6+laolYGOIJxJTMnZPfmKfIlQmnnW3vLlm3g2Rm8pPPC7doSHWg==}
+  '@oven/bun-linux-aarch64@1.2.19':
+    resolution: {integrity: sha512-G4WYbvpfrR5dLBZQoNmYzt8DBguMpPeCz6feU3Qv9E6NmA3xiqyItyDAVgDJrllPk6hvbMi9dYNxXn0NVTjMfw==}
     cpu: [arm64]
     os: [linux]
 
-  '@oven/bun-linux-x64-baseline@1.2.17':
-    resolution: {integrity: sha512-IrnFMUwYWxoKICQgK8ZlJ6rI/HU2gITFNEW0MIOPIcuT0s3j0/33631M9EzYDoL4NuLQPks6569JDvSHEVqdeA==}
+  '@oven/bun-linux-x64-baseline@1.2.19':
+    resolution: {integrity: sha512-gMp1J9fZ1eOrCM0jQblCWRMiU9t3a+wyyHtb0DdHVZpgSdGJ5UpWATfTYFUbmckgVfCJ6Qo8YSMcmtxRtPYgww==}
     cpu: [x64]
     os: [linux]
 
-  '@oven/bun-linux-x64-musl-baseline@1.2.17':
-    resolution: {integrity: sha512-YE5wQ/YA79BykMLhuwgdoF8Yjj5dRipD8dwmXs8n7gzR+/L9tL7Q69NQgskW2KkAalmWPoGAv3TV0IwbU+1dFw==}
+  '@oven/bun-linux-x64-musl-baseline@1.2.19':
+    resolution: {integrity: sha512-9NkUMndXwSyDiDOwCtYoxdXIqg+f30dVm0FwZOUJp8SSuhx8Vaadc5gzzC+A8cGie/IwVchWzJw+mWLStAM8HQ==}
     cpu: [x64]
     os: [linux]
 
-  '@oven/bun-linux-x64-musl@1.2.17':
-    resolution: {integrity: sha512-fW9qn/WqO131/qSIkIPW8zN+thQnYUWa/k98EWubLG87htKSPh1v023E5ikKb7WlUv4Yb6UlE/z4NmMYKffmAg==}
+  '@oven/bun-linux-x64-musl@1.2.19':
+    resolution: {integrity: sha512-nUBP55pR8hpAZ9omKxkX1SmyEPcTL/ZMgnirC3BdFAec99uqijq8XEWWfSDAmpI8D428vjIhbafArmbutRR1VQ==}
     cpu: [x64]
     os: [linux]
 
-  '@oven/bun-linux-x64@1.2.17':
-    resolution: {integrity: sha512-BfySnrTxp7D9hVUi9JEpviJl8ndsuESiRiQKTzgmdTLrMjUxP4SwrwMtYt6R9X20n9rREG6a47C0IyQMhbwG/g==}
+  '@oven/bun-linux-x64@1.2.19':
+    resolution: {integrity: sha512-vGhkEtcaPQjizoVAo+1hsVTixarOWxVgwbYZHgoi/pGGIdWWBGNlWnIUQirOv8JVtCMnzkYqrPMHR3EqSvQoFg==}
     cpu: [x64]
     os: [linux]
 
-  '@oven/bun-windows-x64-baseline@1.2.17':
-    resolution: {integrity: sha512-aVkq4l1yZ9VKfBOtZ2HEj0OCU5kUe3Fx6LbAG6oY6OglWVYj051i3RGaE2OdR4L4F2jDyxzfGYRTM/qs8nU5qA==}
+  '@oven/bun-windows-x64-baseline@1.2.19':
+    resolution: {integrity: sha512-OiD1xoVQuj8JHbrDqCQE3sU5r8VIaB9cCDym7BTnnMQLYzZxYEWWvBub8fc/yK7ctuoAS6V+p74Qda6RhDRHpg==}
     cpu: [x64]
     os: [win32]
 
-  '@oven/bun-windows-x64@1.2.17':
-    resolution: {integrity: sha512-GJUg1oA59DWH6eyV8uccpgfTEVxjmgfTWQCOl2ySMXR3IfRoFwS4aQfpjcVzNmEZrv8eYt+yMuw1K7aNcWTTIg==}
+  '@oven/bun-windows-x64@1.2.19':
+    resolution: {integrity: sha512-5OIPUl8fKT/tpxX6pOJUfoAR32k9YdmXbte0zwahIVhyjCyFh0HKQHbfSeJZYV2AzVWbnELszDLRRLnzVbzYSQ==}
     cpu: [x64]
     os: [win32]
 
@@ -1939,8 +1962,8 @@ packages:
   '@types/body-parser@1.19.5':
     resolution: {integrity: sha512-fB3Zu92ucau0iQ0JMCFQE7b/dv8Ot07NI3KaZIkIUNXq82k4eBAqUaneXfleGY9JWskeS9y+u0nXMyspcuQrCg==}
 
-  '@types/bun@1.2.17':
-    resolution: {integrity: sha512-l/BYs/JYt+cXA/0+wUhulYJB6a6p//GTPiJ7nV+QHa8iiId4HZmnu/3J/SowP5g0rTiERY2kfGKXEK5Ehltx4Q==}
+  '@types/bun@1.2.19':
+    resolution: {integrity: sha512-d9ZCmrH3CJ2uYKXQIUuZ/pUnTqIvLDS0SK7pFmbx8ma+ziH/FRMoAq5bYpRG7y+w1gl+HgyNZbtqgMq4W4e2Lg==}
 
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
@@ -2235,12 +2258,13 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  bun-types@1.2.17:
-    resolution: {integrity: sha512-ElC7ItwT3SCQwYZDYoAH+q6KT4Fxjl8DtZ6qDulUFBmXA8YB4xo+l54J9ZJN+k2pphfn9vk7kfubeSd5QfTVJQ==}
+  bun-types@1.2.19:
+    resolution: {integrity: sha512-uAOTaZSPuYsWIXRpj7o56Let0g/wjihKCkeRqUBhlLVM/Bt+Fj9xTo+LhC1OV1XDaGkz4hNC80et5xgy+9KTHQ==}
+    peerDependencies:
+      '@types/react': ^19
 
-  bun@1.2.17:
-    resolution: {integrity: sha512-lrUZTWS24eVy6v+Eph8VTwqFPcG7/XQ0rLBQEMNoQs2Vd7ctVdMGAzJKKGZRUQH+rgkD8rBeHGIVoWxX4vJLCA==}
-    cpu: [arm64, x64, aarch64]
+  bun@1.2.19:
+    resolution: {integrity: sha512-P70KUfH9cvgcl8Hjvamr98NinEatV23yX6qaY7z1+3rBPdds0oVX0u6FfrYnWc8F3ayFQ4do6/6xBLWY4itJkQ==}
     os: [darwin, linux, win32]
     hasBin: true
 
@@ -3517,8 +3541,8 @@ packages:
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
-  node-zugferd@0.0.10-beta.1:
-    resolution: {integrity: sha512-4DBucg/RfyEzSHfcDdb0QSeZ+qKGTv87Cs33BAaQyRuI9Z0525Jx4466SJWJv3wXlL74MWJF8Ssnw7Yo5rd0oA==}
+  node-zugferd@0.0.10-beta.3:
+    resolution: {integrity: sha512-6tq8ApQ7A+a8XCH95dVlC7DWQ28uk7KdRyDmmcn/yNEH76AFEH4KhyxRtvzpx1GGIEvJs2J1aL1T85gDhfZB5w==}
 
   npm-to-yarn@3.0.1:
     resolution: {integrity: sha512-tt6PvKu4WyzPwWUzy/hvPFqn+uwXO0K1ZHka8az3NnrhWJDmSqI8ncWq0fkL0k/lmmi5tAC11FXwXuh0rFbt1A==}
@@ -4680,6 +4704,12 @@ snapshots:
   '@biomejs/cli-win32-x64@1.9.4':
     optional: true
 
+  '@biomejs/js-api@2.0.3(@biomejs/wasm-nodejs@2.1.2)':
+    optionalDependencies:
+      '@biomejs/wasm-nodejs': 2.1.2
+
+  '@biomejs/wasm-nodejs@2.1.2': {}
+
   '@emnapi/core@1.4.3':
     dependencies:
       '@emnapi/wasi-threads': 1.0.2
@@ -5122,37 +5152,37 @@ snapshots:
 
   '@orama/orama@3.1.9': {}
 
-  '@oven/bun-darwin-aarch64@1.2.17':
+  '@oven/bun-darwin-aarch64@1.2.19':
     optional: true
 
-  '@oven/bun-darwin-x64-baseline@1.2.17':
+  '@oven/bun-darwin-x64-baseline@1.2.19':
     optional: true
 
-  '@oven/bun-darwin-x64@1.2.17':
+  '@oven/bun-darwin-x64@1.2.19':
     optional: true
 
-  '@oven/bun-linux-aarch64-musl@1.2.17':
+  '@oven/bun-linux-aarch64-musl@1.2.19':
     optional: true
 
-  '@oven/bun-linux-aarch64@1.2.17':
+  '@oven/bun-linux-aarch64@1.2.19':
     optional: true
 
-  '@oven/bun-linux-x64-baseline@1.2.17':
+  '@oven/bun-linux-x64-baseline@1.2.19':
     optional: true
 
-  '@oven/bun-linux-x64-musl-baseline@1.2.17':
+  '@oven/bun-linux-x64-musl-baseline@1.2.19':
     optional: true
 
-  '@oven/bun-linux-x64-musl@1.2.17':
+  '@oven/bun-linux-x64-musl@1.2.19':
     optional: true
 
-  '@oven/bun-linux-x64@1.2.17':
+  '@oven/bun-linux-x64@1.2.19':
     optional: true
 
-  '@oven/bun-windows-x64-baseline@1.2.17':
+  '@oven/bun-windows-x64-baseline@1.2.19':
     optional: true
 
-  '@oven/bun-windows-x64@1.2.17':
+  '@oven/bun-windows-x64@1.2.19':
     optional: true
 
   '@oxc-transform/binding-darwin-arm64@0.72.3':
@@ -5881,9 +5911,11 @@ snapshots:
       '@types/connect': 3.4.38
       '@types/node': 22.13.4
 
-  '@types/bun@1.2.17':
+  '@types/bun@1.2.19(@types/react@19.0.10)':
     dependencies:
-      bun-types: 1.2.17
+      bun-types: 1.2.19(@types/react@19.0.10)
+    transitivePeerDependencies:
+      - '@types/react'
 
   '@types/connect@3.4.38':
     dependencies:
@@ -6233,23 +6265,24 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  bun-types@1.2.17:
+  bun-types@1.2.19(@types/react@19.0.10):
     dependencies:
       '@types/node': 22.13.4
+      '@types/react': 19.0.10
 
-  bun@1.2.17:
+  bun@1.2.19:
     optionalDependencies:
-      '@oven/bun-darwin-aarch64': 1.2.17
-      '@oven/bun-darwin-x64': 1.2.17
-      '@oven/bun-darwin-x64-baseline': 1.2.17
-      '@oven/bun-linux-aarch64': 1.2.17
-      '@oven/bun-linux-aarch64-musl': 1.2.17
-      '@oven/bun-linux-x64': 1.2.17
-      '@oven/bun-linux-x64-baseline': 1.2.17
-      '@oven/bun-linux-x64-musl': 1.2.17
-      '@oven/bun-linux-x64-musl-baseline': 1.2.17
-      '@oven/bun-windows-x64': 1.2.17
-      '@oven/bun-windows-x64-baseline': 1.2.17
+      '@oven/bun-darwin-aarch64': 1.2.19
+      '@oven/bun-darwin-x64': 1.2.19
+      '@oven/bun-darwin-x64-baseline': 1.2.19
+      '@oven/bun-linux-aarch64': 1.2.19
+      '@oven/bun-linux-aarch64-musl': 1.2.19
+      '@oven/bun-linux-x64': 1.2.19
+      '@oven/bun-linux-x64-baseline': 1.2.19
+      '@oven/bun-linux-x64-musl': 1.2.19
+      '@oven/bun-linux-x64-musl-baseline': 1.2.19
+      '@oven/bun-windows-x64': 1.2.19
+      '@oven/bun-windows-x64-baseline': 1.2.19
 
   bundle-require@5.1.0(esbuild@0.24.2):
     dependencies:
@@ -7909,7 +7942,7 @@ snapshots:
 
   node-releases@2.0.19: {}
 
-  node-zugferd@0.0.10-beta.1:
+  node-zugferd@0.0.10-beta.3:
     dependencies:
       defu: 6.1.4
       fast-xml-parser: 4.5.2

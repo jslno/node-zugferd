@@ -25,6 +25,8 @@
   },
   "dependencies": {
     "@biomejs/biome": "1.9.4",
+    "@biomejs/js-api": "^2.0.3",
+		"@biomejs/wasm-nodejs": "^2.1.2",
     "@types/node": "^22.10.7",
     "bumpp": "^10.0.3",
     "cross-env": "^7.0.3",
