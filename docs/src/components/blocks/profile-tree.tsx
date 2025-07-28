@@ -62,7 +62,7 @@ const TreeItem = ({
 						)}
 					</div>
 					{!!def.description && (
-						<div className="px-4 text-muted-foreground bg-gradient-to-tr w-full from-muted/10 via-muted/25 to-muted/10 border rounded-lg">
+						<div className="px-4 text-muted-foreground bg-gradient-to-tr w-full text-pretty break-words from-muted/10 via-muted/25 to-muted/10 border rounded-lg">
 							<Markdown>{def.description}</Markdown>
 						</div>
 					)}

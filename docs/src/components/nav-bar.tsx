@@ -71,9 +71,15 @@ export const NavLink = ({
 
 export const NavBar = () => {
 	const { setOpenSearch } = useSearchContext();
+	const pathname = usePathname();
 
 	return (
-		<div className="flex flex-col sticky top-0 bg-background z-30">
+		<div
+			className={cn(
+				"flex flex-col inset-x-0 top-0 bg-background supports-backdrop-filter:backdrop-blur-lg supports-backdrop-filter:bg-background/65 z-30",
+				pathname === "/" ? "fixed" : "sticky",
+			)}
+		>
 			<nav className="md:h-[58px] md:border-b top-0 flex items-center max-w-dvw">
 				<Link
 					href="/"

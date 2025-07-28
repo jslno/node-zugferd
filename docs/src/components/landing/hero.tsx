@@ -314,6 +314,7 @@ export const Hero = () => {
 									href="https://www.npmjs.com/package/node-zugferd"
 									target="_blank"
 									className="hover:scale-110 transition-transform"
+									aria-label="Visit node-zugferd on npm"
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -335,6 +336,7 @@ export const Hero = () => {
 									href="https://github.com/jslno/node-zugferd"
 									target="_blank"
 									className="hover:scale-110 transition-transform"
+									aria-label="Visit node-zugferd on GitHub"
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -360,7 +362,7 @@ export const Hero = () => {
 						</div>
 					</div>
 					<div className="relative hidden md:block lg:static xl:pl-10">
-						<div className="relative w-full">
+						<div className="relative w-full bg-background">
 							<CodePreview />
 						</div>
 					</div>

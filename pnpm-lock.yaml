@@ -141,7 +141,10 @@ importers:
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       node-zugferd:
         specifier: latest
-        version: 0.0.10-beta.3
+        version: 0.0.10
+      ogl:
+        specifier: ^1.0.11
+        version: 1.0.11
       prism-react-renderer:
         specifier: ^2.4.1
         version: 2.4.1(react@19.0.0)
@@ -3542,8 +3545,8 @@ packages:
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
-  node-zugferd@0.0.10-beta.3:
-    resolution: {integrity: sha512-6tq8ApQ7A+a8XCH95dVlC7DWQ28uk7KdRyDmmcn/yNEH76AFEH4KhyxRtvzpx1GGIEvJs2J1aL1T85gDhfZB5w==}
+  node-zugferd@0.0.10:
+    resolution: {integrity: sha512-rbo2ExnlyZGKt0mFqINgh6t4V62It/J+7fOM9fARGjjp/YY38WvybLbUiAx4/JrJy3Vw5y9yTdiX5oafvh22Zw==}
 
   npm-to-yarn@3.0.1:
     resolution: {integrity: sha512-tt6PvKu4WyzPwWUzy/hvPFqn+uwXO0K1ZHka8az3NnrhWJDmSqI8ncWq0fkL0k/lmmi5tAC11FXwXuh0rFbt1A==}
@@ -3561,6 +3564,9 @@ packages:
   object-inspect@1.13.4:
     resolution: {integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==}
     engines: {node: '>= 0.4'}
+
+  ogl@1.0.11:
+    resolution: {integrity: sha512-kUpC154AFfxi16pmZUK4jk3J+8zxwTWGPo03EoYA8QPbzikHoaC82n6pNTbd+oEaJonaE8aPWBlX7ad9zrqLsA==}
 
   ohash@1.1.4:
     resolution: {integrity: sha512-FlDryZAahJmEF3VR3w1KogSEdWX3WhA5GPakFx4J81kEAiHyLMpdLLElS8n8dfNadMgAne/MywcvmogzscVt4g==}
@@ -7943,7 +7949,7 @@ snapshots:
 
   node-releases@2.0.19: {}
 
-  node-zugferd@0.0.10-beta.3:
+  node-zugferd@0.0.10:
     dependencies:
       defu: 6.1.4
       fast-xml-parser: 4.5.2
@@ -7966,6 +7972,8 @@ snapshots:
   object-assign@4.1.1: {}
 
   object-inspect@1.13.4: {}
+
+  ogl@1.0.11: {}
 
   ohash@1.1.4: {}
 
