@@ -1,10 +1,15 @@
 const fs = require("fs/promises");
 const path = require("path");
+const { Biome } = require("@biomejs/js-api/nodejs");
+const { toScreamingSnakeCase } = require("../utils");
 
 const main = async () => {
   const registryData = await fs.readFile(
     path.resolve(__dirname, "./registry.json")
   );
+
+  const biome = new Biome();
+  const { projectKey } = biome.openProject(".");
 
   for (const entry of JSON.parse(registryData.toString("utf-8"))) {
     console.info(
@@ -33,24 +38,7 @@ from ${entry.source}
         ? JSON.stringify(description)
         : "undefined";
 
-      return `
-\t{
-\t\tcode:${
-        formattedCode.length >= 80 - 8
-          ? `\n\t\t\t${formattedCode}`
-          : ` ${formattedCode}`
-      },
-\t\tname:${
-        formattedName.length >= 80 - 8
-          ? `\n\t\t\t${formattedName}`
-          : ` ${formattedName}`
-      },
-\t\tdescription:${
-        formattedDescription.length >= 80 - 15
-          ? `\n\t\t\t${formattedDescription}`
-          : ` ${formattedDescription}`
-      },
-\t},`;
+      return `{ key:${JSON.stringify(toScreamingSnakeCase(name))}, code:${formattedCode}, name:${formattedName}, description:${formattedDescription}, },`;
     });
 
     const content = `/**
@@ -59,10 +47,13 @@ from ${entry.source}
  * @see ${entry.see}
  */
 
+import { createEnum } from "..";
+
 export type Untdid${entry.id}Definition = {
-\tcode: string;
-\tname?: string;
-\tdescription?: string;
+  key: string;
+  code: string;
+  name?: string;
+  description?: string;
 };
 
 export type Untdid${entry.id}Code = (typeof UNTDID_${entry.id})[number]["code"];
@@ -73,11 +64,18 @@ export const UNTDID_${entry.id}_VERSION = "${version}" as const;
 export const UNTDID_${entry.id} = [${mappedData.join("")}${
       mappedData.length > 0 ? "\n" : ""
     }] as const satisfies Untdid${entry.id}Definition[];
+
+export const Untdid${entry.id} = createEnum(UNTDID_${entry.id}, {
+  keyProp: "key",
+  valueProp: "code",
+});
 `;
 
+    const filename = `${entry.id}.gen.ts`;
+
     await fs.writeFile(
-      `./packages/node-zugferd/src/codelists/untdid/${entry.id}.gen.ts`,
-      content
+      `./packages/node-zugferd/src/codelists/untdid/${filename}`,
+      biome.formatContent(projectKey, content, { filePath: filename }).content
     );
 
     console.log(`Finished Updating UNTDID ${entry.id}`);

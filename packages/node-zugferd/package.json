@@ -346,5 +346,7 @@
 			}
 		}
 	},
-	"files": ["dist"]
+	"files": [
+		"dist"
+	]
 }
