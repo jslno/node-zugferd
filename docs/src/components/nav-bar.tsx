@@ -1,9 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, fadeIn } from "@/lib/utils";
 import { useSearchContext } from "fumadocs-ui/provider";
 import { CommandIcon, SearchIcon, SparkleIcon } from "lucide-react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { badgeVariants } from "./ui/badge";
@@ -76,7 +76,7 @@ export const NavBar = () => {
 	return (
 		<div
 			className={cn(
-				"flex flex-col inset-x-0 top-0 bg-background supports-backdrop-filter:backdrop-blur-lg supports-backdrop-filter:bg-background/65 z-30",
+				"flex flex-col inset-x-0 top-0 bg-background supports-backdrop-filter:backdrop-blur-lg supports-backdrop-filter:bg-background/70 z-30",
 				pathname === "/" ? "fixed" : "sticky",
 			)}
 		>
@@ -89,34 +89,41 @@ export const NavBar = () => {
 					<span>node-zugferd</span>
 				</Link>
 				<div className="w-full flex items-center justify-end relative gap-4 px-4">
-					<Device>
-						{({ isMobile, isMacOs }) => (
-							<>
-								<div
-									className={cn(
-										"relative gap-4 max-w-72 overflow-hidden flex items-center py-2 border border-input/60 hover:bg-muted cursor-pointer h-9 rounded-lg",
-										!isMobile ? "pl-4 pr-2" : "px-4",
-									)}
-									onClick={() => {
-										setOpenSearch(true);
-									}}
-								>
-									<SearchIcon className="size-4 shrink-0" />
-									<span className="sr-only">Search documentation</span>
-									{!isMobile && (
-										<kbd
-											className={badgeVariants({
-												variant: "outline",
-												className: "ml-auto font-mono text-muted-foreground",
-											})}
-										>
-											{isMacOs ? <CommandIcon className="size-4" /> : "Ctrl"} K
-										</kbd>
-									)}
-								</div>
-							</>
-						)}
-					</Device>
+					<AnimatePresence>
+						<Device>
+							{({ isMobile, isMacOs }) => (
+								<>
+									<motion.div
+										variants={fadeIn}
+										initial="hidden"
+										animate="visible"
+										exit="hidden"
+										className={cn(
+											"relative gap-4 max-w-72 overflow-hidden flex items-center py-2 border border-input/60 bg-background transition-colors hover:bg-muted focus-visible:bg-muted cursor-pointer h-9 rounded-lg",
+											!isMobile ? "pl-4 pr-2" : "px-4",
+										)}
+										onClick={() => {
+											setOpenSearch(true);
+										}}
+									>
+										<SearchIcon className="size-4 shrink-0" />
+										<span className="sr-only">Search documentation</span>
+										{!isMobile && (
+											<kbd
+												className={badgeVariants({
+													variant: "outline",
+													className: "ml-auto font-mono text-muted-foreground",
+												})}
+											>
+												{isMacOs ? <CommandIcon className="size-4" /> : "Ctrl"}{" "}
+												K
+											</kbd>
+										)}
+									</motion.div>
+								</>
+							)}
+						</Device>
+					</AnimatePresence>
 					<ul className="md:flex items-center w-max hidden shrink-0 gap-2.5">
 						{navMenu.map((menu) => (
 							<NavLink

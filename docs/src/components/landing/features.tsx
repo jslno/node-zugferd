@@ -1,4 +1,4 @@
-import { cn, kFormatter } from "@/lib/utils";
+import { cn, kFormatter, slideInUp } from "@/lib/utils";
 import {
 	ArrowRight,
 	ArrowRightIcon,
@@ -14,6 +14,8 @@ import {
 import Link from "next/link";
 import { Button, buttonVariants } from "../ui/button";
 import { Badge } from "../ui/badge";
+import { InView } from "../ui/in-view";
+import { motion } from "motion/react";
 
 type Feature = {
 	Icon?: LucideIcon | (() => React.ReactNode);
@@ -73,73 +75,109 @@ const features: Feature[] = [
 export const Features = ({ stars }: { stars: string }) => {
 	return (
 		<div className="md:w-10/12 px-8 font-geist mt-10 mx-auto relative space-y-8">
-			<div className="space-y-2 md:text-center">
-				<h1 className="text-3xl">
-					Everything you need for electronic paperwork
-				</h1>
-				<p className="text-muted-foreground text-lg">
-					Generate and process ZUGFeRD documents with ease.
-				</p>
-			</div>
+			<InView
+				viewOptions={{ once: true, margin: "0px 0px -20% 0px" }}
+				variants={{
+					hidden: {},
+					visible: {
+						transition: {
+							staggerChildren: 0.15,
+						},
+					},
+				}}
+				className="space-y-8"
+			>
+				<motion.div variants={slideInUp} className="space-y-2 md:text-center">
+					<h1 className="text-3xl">
+						Everything you need for electronic paperwork
+					</h1>
+					<p className="text-muted-foreground text-lg">
+						Generate and process ZUGFeRD documents with ease.
+					</p>
+				</motion.div>
 
-			<div className="grid md:grid-cols-3 border-b border-r bg-gradient-to-tr from-muted/10 via-muted/25 to-muted/10 drop-shadow-lg backdrop-blur-lg">
-				{features.map(({ title, label, description, Icon, meta }, i) => (
-					<div
-						key={i}
-						className={cn(
-							"p-4 border-l border-t",
-							i >= 3 && "md:border-t",
-							meta?.className,
-						)}
-					>
+				<motion.div
+					variants={slideInUp}
+					className="grid md:grid-cols-3 border-b border-r bg-gradient-to-tr from-muted/10 via-muted/25 to-muted/10 drop-shadow-lg backdrop-blur-lg"
+				>
+					{features.map(({ title, label, description, Icon, meta }, i) => (
 						<div
+							key={i}
 							className={cn(
-								"space-y-4",
-								!!meta?.COMING_SOON && "opacity-50 pointer-events-none",
+								"p-4 border-l border-t",
+								i >= 3 && "md:border-t",
+								meta?.className,
 							)}
 						>
-							<div className="space-y-1.5">
-								<div className="flex items-center flex-wrap-reverse gap-1.5">
-									<div className="flex items-center gap-1.5">
-										{!!Icon && <Icon className="size-4" />}
-										<p className="text-muted-foreground text-sm">{label}</p>
+							<div
+								className={cn(
+									"space-y-4",
+									!!meta?.COMING_SOON && "opacity-50 pointer-events-none",
+								)}
+							>
+								<div className="space-y-1.5">
+									<div className="flex items-center flex-wrap-reverse gap-1.5">
+										<div className="flex items-center gap-1.5">
+											{!!Icon && <Icon className="size-4" />}
+											<p className="text-muted-foreground text-sm">{label}</p>
+										</div>
+										{!!meta?.COMING_SOON && (
+											<Badge variant="outline">Coming Soon</Badge>
+										)}
 									</div>
-									{!!meta?.COMING_SOON && (
-										<Badge variant="outline">Coming Soon</Badge>
-									)}
+									<p
+										className="max-w-lg text-xl font-normal tracking-tighter"
+										dangerouslySetInnerHTML={{
+											__html: title,
+										}}
+									/>
 								</div>
-								<p
-									className="max-w-lg text-xl font-normal tracking-tighter"
-									dangerouslySetInnerHTML={{
-										__html: title,
-									}}
-								/>
+								<p className="text-muted-foreground text-sm">
+									{description}
+									<Link
+										href="/docs"
+										className="group ml-2 underline underline-offset-2 inline-flex items-center"
+									>
+										<span>Learn more</span>
+										<ArrowRight className="ml-1 delay-75 size-4 -translate-x-4 opacity-0 scale-95 group-hover:translate-x-0 group-hover:opacity-100 group-hover:scale-100 transition-all" />
+									</Link>
+								</p>
 							</div>
-							<p className="text-muted-foreground text-sm">
-								{description}
-								<Link
-									href="/docs"
-									className="group ml-2 underline underline-offset-2 inline-flex items-center"
-								>
-									<span>Learn more</span>
-									<ArrowRight className="ml-1 delay-75 size-4 -translate-x-4 opacity-0 scale-95 group-hover:translate-x-0 group-hover:opacity-100 group-hover:scale-100 transition-all" />
-								</Link>
-							</p>
 						</div>
-					</div>
-				))}
-			</div>
-			<div className="min-h-[70dvh] flex">
+					))}
+				</motion.div>
+			</InView>
+			<InView
+				viewOptions={{
+					once: true,
+					margin: "0px 0px -50% 0px",
+				}}
+				variants={{
+					hidden: {},
+					visible: {
+						transition: {
+							staggerChildren: 0.0625,
+						},
+					},
+				}}
+				className="min-h-[70dvh] flex"
+			>
 				<div className="grow flex flex-col md:items-center justify-center gap-6">
 					<div className="relative flex flex-col gap-6">
-						<h1 className="relative text-3xl max-w-fit md:self-center">
+						<motion.h1
+							variants={slideInUp}
+							className="relative text-3xl max-w-fit md:self-center"
+						>
 							Get Started now
 							<div
 								className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[calc(50%-30px)] -z-10 size-32 bg-accent-foreground/40 dark:bg-accent-foreground/25 animate-pulse duration-[3200] repeat-infinite blur-3xl rounded-full"
 								aria-hidden="true"
 							/>
-						</h1>
-						<p className="md:max-w-3xl text-muted-foreground">
+						</motion.h1>
+						<motion.p
+							variants={slideInUp}
+							className="md:max-w-3xl text-muted-foreground"
+						>
 							Power up your invoicing with{" "}
 							<span className="text-foreground font-medium">node-zugferd</span>.
 							Generate fully compliant Factur-X invoices, seamlessly embed XML
@@ -148,9 +186,10 @@ export const Features = ({ stars }: { stars: string }) => {
 							<span className="text-foreground font-medium">
 								a fast, reliable way to handle electronic invoices.
 							</span>
-						</p>
+						</motion.p>
 					</div>
-					<div
+					<motion.div
+						variants={slideInUp}
 						data-before="Get Started in a minute"
 						className="flex flex-wrap items-center gap-4 lg:before:absolute lg:before:-translate-x-[calc(100%+1rem)] lg:before:max-w-fit lg:before:content-[attr(data-before)]"
 					>
@@ -181,9 +220,9 @@ export const Features = ({ stars }: { stars: string }) => {
 								<GitHubStars stars={stars} />
 							</span>
 						</Link>
-					</div>
+					</motion.div>
 				</div>
-			</div>
+			</InView>
 		</div>
 	);
 };

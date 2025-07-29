@@ -17,6 +17,7 @@ import { LiteralString } from "@/types/helper";
 import { useEffect, useRef, useState } from "react";
 import { Highlight, themes } from "prism-react-renderer";
 import { useTheme } from "next-themes";
+import { InView } from "../ui/in-view";
 
 type Tab = {
 	name: LiteralString;
@@ -221,7 +222,11 @@ export const Hero = () => {
 	};
 
 	return (
-		<section className="max-h-[70dvh] w-full flex items-center justify-center antialiased relative overflow-hidden px-8 min-h-[70dvh]">
+		<InView
+			once
+			as="section"
+			className="max-h-[70dvh] w-full flex items-center justify-center antialiased relative overflow-hidden px-8 min-h-[70dvh]"
+		>
 			<div className="overflow-hidden bg-transparent md:px-10 dark:-mb-32 dark:mt-[-4.75rem] dark:pb-32 dark:pt-[4.75rem]">
 				<div className="lg:max-w-8xl mx-auto grid max-w-full grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-2 lg:grid-cols-2 lg:px-8 lg:py-4 xl:gap-x-16 xl:px-12">
 					<div className="relative z-10 md:text-center lg:text-left">
@@ -362,12 +367,12 @@ export const Hero = () => {
 						</div>
 					</div>
 					<div className="relative hidden md:block lg:static xl:pl-10">
-						<div className="relative w-full bg-background">
+						<div className="relative w-full bg-background/80">
 							<CodePreview />
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
+		</InView>
 	);
 };

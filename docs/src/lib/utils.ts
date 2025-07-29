@@ -1,6 +1,7 @@
 import { getRandomValues } from "uncrypto";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { InViewVariant } from "@/components/ui/in-view";
 
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
@@ -30,4 +31,14 @@ export const createRandomString = (
 	}
 
 	return result;
+};
+
+export const slideInUp: InViewVariant = {
+	hidden: { opacity: 0, y: 10 },
+	visible: { opacity: 1, y: 0 },
+};
+
+export const fadeIn: InViewVariant = {
+	hidden: { opacity: 0 },
+	visible: { opacity: 1 },
 };

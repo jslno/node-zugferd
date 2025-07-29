@@ -124,6 +124,9 @@ importers:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
+      lenis:
+        specifier: ^1.3.8
+        version: 1.3.8(react@19.0.0)(vue@3.5.13(typescript@5.7.3))
       lucide-react:
         specifier: ^0.475.0
         version: 0.475.0(react@19.0.0)
@@ -142,9 +145,6 @@ importers:
       node-zugferd:
         specifier: latest
         version: 0.0.10
-      ogl:
-        specifier: ^1.0.11
-        version: 1.0.11
       prism-react-renderer:
         specifier: ^2.4.1
         version: 2.4.1(react@19.0.0)
@@ -3098,6 +3098,20 @@ packages:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
 
+  lenis@1.3.8:
+    resolution: {integrity: sha512-LVeoMs6jZE1eu3gPsexndm+vk01pLFeq7P00vjIpI17saD52IYu8nPA4gX43elz8tp/TTCXcX6Em1MEjDl9NTw==}
+    peerDependencies:
+      '@nuxt/kit': '>=3.0.0'
+      react: '>=17.0.0'
+      vue: '>=3.0.0'
+    peerDependenciesMeta:
+      '@nuxt/kit':
+        optional: true
+      react:
+        optional: true
+      vue:
+        optional: true
+
   lightningcss-darwin-arm64@1.29.1:
     resolution: {integrity: sha512-HtR5XJ5A0lvCqYAoSv2QdZZyoHNttBpa5EP9aNuzBQeKGfbyH5+UipLWvVzpP4Uml5ej4BYs5I9Lco9u1fECqw==}
     engines: {node: '>= 12.0.0'}
@@ -3564,9 +3578,6 @@ packages:
   object-inspect@1.13.4:
     resolution: {integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==}
     engines: {node: '>= 0.4'}
-
-  ogl@1.0.11:
-    resolution: {integrity: sha512-kUpC154AFfxi16pmZUK4jk3J+8zxwTWGPo03EoYA8QPbzikHoaC82n6pNTbd+oEaJonaE8aPWBlX7ad9zrqLsA==}
 
   ohash@1.1.4:
     resolution: {integrity: sha512-FlDryZAahJmEF3VR3w1KogSEdWX3WhA5GPakFx4J81kEAiHyLMpdLLElS8n8dfNadMgAne/MywcvmogzscVt4g==}
@@ -7297,6 +7308,11 @@ snapshots:
 
   kleur@3.0.3: {}
 
+  lenis@1.3.8(react@19.0.0)(vue@3.5.13(typescript@5.7.3)):
+    optionalDependencies:
+      react: 19.0.0
+      vue: 3.5.13(typescript@5.7.3)
+
   lightningcss-darwin-arm64@1.29.1:
     optional: true
 
@@ -7972,8 +7988,6 @@ snapshots:
   object-assign@4.1.1: {}
 
   object-inspect@1.13.4: {}
-
-  ogl@1.0.11: {}
 
   ohash@1.1.4: {}
 
