@@ -15,10 +15,20 @@ import {
 import { type ZugferdOptions } from "./types/options";
 import { createDocumentFactory } from "./document/create";
 import { validateDocumentFactory } from "./document/validate";
+import { createLogger } from "./utils/logger";
 
 export const init = (options: ZugferdOptions) => {
+	const logger = createLogger(options?.logger);
+
+	if (options.strict === false) {
+		logger.warn(
+			"Validation disabled (strict: false). The generated XML will not be checked against the XSD schema and may be non-compliant.",
+		);
+	}
+
 	const ctx: BaseZugferdContext = {
 		options,
+		logger,
 		...getInternalTools(options),
 	};
 
@@ -35,6 +45,7 @@ export const init = (options: ZugferdOptions) => {
 
 export type BaseZugferdContext = {
 	options: ZugferdOptions;
+	logger: ReturnType<typeof createLogger>;
 } & InternalTools;
 
 export type ZugferdContext = BaseZugferdContext & {

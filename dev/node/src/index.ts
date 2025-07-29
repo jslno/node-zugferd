@@ -126,7 +126,6 @@ Trennblätter A4`,
 						reason: "Discount",
 						categoryTradeTax: {
 							categoryCode: "S",
-							rateApplicablePercent: "19.00",
 						},
 					},
 					{
