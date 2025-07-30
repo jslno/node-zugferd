@@ -5,6 +5,9 @@ const main = async () => {
 	const invoicer = zugferd({
 		profile: BASIC,
 		strict: false,
+		logger: {
+			level: "debug",
+		},
 	});
 
 	const data: ProfileBasic = {

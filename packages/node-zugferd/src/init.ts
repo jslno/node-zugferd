@@ -26,10 +26,13 @@ export const init = (options: ZugferdOptions) => {
 		);
 	}
 
-	const ctx: BaseZugferdContext = {
+	const ctx = {
 		options,
 		logger,
-		...getInternalTools(options),
+		...getInternalTools({
+			options,
+			logger,
+		}),
 	};
 
 	const context: ZugferdContext = {
@@ -57,19 +60,24 @@ export type ZugferdContext = BaseZugferdContext & {
 
 type InternalTools = ReturnType<typeof getInternalTools>;
 
-const getInternalTools = (_options: ZugferdOptions) => ({
-	parseSchema,
+export type InternalContext = {
+	options: ZugferdOptions;
+	logger: ReturnType<typeof createLogger>;
+};
+
+const getInternalTools = (ctx: InternalContext) => ({
+	parseSchema: parseSchema.bind(null, ctx),
 	mergeSchemas,
 	xml: {
-		format: formatXml,
+		format: formatXml.bind(null, ctx),
 	},
 	pdf: {
-		addMetadata: addPdfMetadata,
-		addTrailerInfoId: addPdfTrailerInfoId,
-		fixLinkAnnotations: fixPdfLinkAnnotations,
-		addStructTreeRoot: addPdfStructTreeRoot,
-		addMarkInfo: addPdfMarkInfo,
-		addICC: addPdfICC,
-		getAttachments: getPdfAttachments,
+		addMetadata: addPdfMetadata.bind(null, ctx),
+		addTrailerInfoId: addPdfTrailerInfoId.bind(null, ctx),
+		fixLinkAnnotations: fixPdfLinkAnnotations.bind(null, ctx),
+		addStructTreeRoot: addPdfStructTreeRoot.bind(null, ctx),
+		addMarkInfo: addPdfMarkInfo.bind(null, ctx),
+		addICC: addPdfICC.bind(null, ctx),
+		getAttachments: getPdfAttachments.bind(null, ctx),
 	},
 });

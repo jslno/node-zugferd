@@ -3,6 +3,8 @@ import type { InferRawSchema, Schema, SchemaField } from "../../types/schema";
 import type { Profile } from "../../types/profile";
 import { XMLBuilder, type XmlBuilderOptions } from "fast-xml-parser";
 import { ZugferdError } from "../../error";
+import type { InternalContext } from "../../init";
+import { colors } from "../../utils/logger";
 
 const findFieldByKey = (obj: any, key: string): any | undefined => {
 	if (typeof obj !== "object" || obj === null) return undefined;
@@ -160,6 +162,7 @@ const collectAdditionalXmlFields = (
 };
 
 export const parseSchema = <S extends Schema>(
+	ctx: InternalContext,
 	data: InferRawSchema<S>,
 	def: S,
 	options: ParseSchemaOptions,
@@ -192,6 +195,10 @@ export const parseSchema = <S extends Schema>(
 		key: string,
 		rawValue?: any,
 	) => {
+		ctx.logger.debug(
+			`[${parseSchema.name}] Processing field ${colors.bright}${key}${colors.reset}${field.key ? ` (${field.key})` : ""} ${Array.isArray(field.type) || (field.type !== "object" && !field.type.endsWith("[]")) ? `${colors.fg.yellow}${value}${colors.reset}` : ""}`,
+		);
+
 		if (field.group) {
 			localGroupIndices[field.group] = localGroupIndices[field.group] || 0;
 		}
@@ -208,6 +215,9 @@ export const parseSchema = <S extends Schema>(
 
 		const handleArrayField = (arrayValue: any[], fieldXPath: string) => {
 			arrayValue.forEach((item, arrayIndex) => {
+				ctx.logger.debug(
+					`[${parseSchema.name}] Array item ${arrayIndex} for field: ${colors.bright}${key}${colors.reset}${field.key ? ` (${field.key})` : ""}`,
+				);
 				const transformedItem = field.transform?.input
 					? field.transform.input(item)
 					: item;
@@ -234,6 +244,7 @@ export const parseSchema = <S extends Schema>(
 				handleArrayField(value, resolvedXPath);
 			} else if (typeof value === "object" && !Array.isArray(value)) {
 				const childXml = parseSchema(
+					ctx,
 					value,
 					field.shape || {},
 					options,
@@ -253,6 +264,7 @@ export const parseSchema = <S extends Schema>(
 
 		if (field?.type === "object" && field?.shape) {
 			const childXml = parseSchema(
+				ctx,
 				value || {},
 				field.shape,
 				options,
@@ -273,6 +285,7 @@ export const parseSchema = <S extends Schema>(
 					? field.transform.input(item)
 					: item;
 				const childXml = parseSchema(
+					ctx,
 					transformedItem,
 					field.shape || {},
 					options,
@@ -297,6 +310,9 @@ export const parseSchema = <S extends Schema>(
 			const { data, success, error } = field.validator.safeParse(rawValue);
 
 			if (!success) {
+				ctx.logger.debug(
+					`[${parseSchema.name}] Validation failed for ${colors.bright}${key}${colors.reset}${field.key ? ` (${field.key})` : ""}: ${error.errors[0].message}`,
+				);
 				throw new ZugferdError(
 					"INVALID_FIELD",
 					`${key} - ${error.errors[0].message}`,
@@ -319,6 +335,9 @@ export const parseSchema = <S extends Schema>(
 			: _value;
 
 		if (!hasValue(value, field.type)) {
+			ctx.logger.debug(
+				`[${parseSchema.name}] Skipping field without value: ${colors.bright}${key}${colors.reset}${field.key ? ` (${field.key})` : ""}`,
+			);
 			continue;
 		}
 
@@ -326,7 +345,11 @@ export const parseSchema = <S extends Schema>(
 
 		const additionalField = additionalXmlFields.find((f) => f.position === key);
 		if (additionalField && additionalField.field.additionalXml) {
+			ctx.logger.debug(
+				`[${parseSchema.name}] Processing additionalXml for field: ${colors.bright}${key}${colors.reset}${additionalField.field.key ? ` (${additionalField.field.key})` : ""}`,
+			);
 			const additionalXml = parseSchema(
+				ctx,
 				data,
 				additionalField.field.additionalXml,
 				options,
@@ -447,12 +470,15 @@ const buildXmlStructure = (
 };
 
 export const formatXml = (
+	ctx: InternalContext,
 	doc: any,
 	options?: Omit<
 		XmlBuilderOptions,
 		"attributeNamePrefix" | "attributesGroupName" | "textNodeName"
 	>,
 ) => {
+	ctx.logger.debug(`[${formatXml.name}] Formatting XML started`);
+
 	const parser = new XMLBuilder(
 		defu(
 			{
@@ -467,5 +493,9 @@ export const formatXml = (
 		),
 	);
 
-	return parser.build(doc) as string;
+	const result = parser.build(doc) as string;
+
+	ctx.logger.debug(`[${formatXml.name}] Formatting XML finished`);
+
+	return result;
 };

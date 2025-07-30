@@ -6,6 +6,5 @@ export type ZugferdOptions = {
 	profile: ProfileContext;
 	strict?: boolean;
 	plugins?: ZugferdPlugin[];
-	debugLogs?: boolean;
 	logger?: Logger;
 };

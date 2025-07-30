@@ -26,7 +26,7 @@ export type LogHandlerParams = Parameters<NonNullable<Logger["log"]>> extends [
 	? Rest
 	: never;
 
-const colors = {
+export const colors = {
 	reset: "\x1b[0m",
 	bright: "\x1b[1m",
 	dim: "\x1b[2m",
