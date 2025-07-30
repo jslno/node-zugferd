@@ -15,11 +15,24 @@ import {
 import { type ZugferdOptions } from "./types/options";
 import { createDocumentFactory } from "./document/create";
 import { validateDocumentFactory } from "./document/validate";
+import { createLogger } from "./utils/logger";
 
 export const init = (options: ZugferdOptions) => {
-	const ctx: BaseZugferdContext = {
+	const logger = createLogger(options?.logger);
+
+	if (options.strict === false) {
+		logger.warn(
+			"Validation disabled (strict: false). The generated XML will not be checked against the XSD schema and may be non-compliant.",
+		);
+	}
+
+	const ctx = {
 		options,
-		...getInternalTools(options),
+		logger,
+		...getInternalTools({
+			options,
+			logger,
+		}),
 	};
 
 	const context: ZugferdContext = {
@@ -35,6 +48,7 @@ export const init = (options: ZugferdOptions) => {
 
 export type BaseZugferdContext = {
 	options: ZugferdOptions;
+	logger: ReturnType<typeof createLogger>;
 } & InternalTools;
 
 export type ZugferdContext = BaseZugferdContext & {
@@ -46,19 +60,24 @@ export type ZugferdContext = BaseZugferdContext & {
 
 type InternalTools = ReturnType<typeof getInternalTools>;
 
-const getInternalTools = (_options: ZugferdOptions) => ({
-	parseSchema,
+export type InternalContext = {
+	options: ZugferdOptions;
+	logger: ReturnType<typeof createLogger>;
+};
+
+const getInternalTools = (ctx: InternalContext) => ({
+	parseSchema: parseSchema.bind(null, ctx),
 	mergeSchemas,
 	xml: {
-		format: formatXml,
+		format: formatXml.bind(null, ctx),
 	},
 	pdf: {
-		addMetadata: addPdfMetadata,
-		addTrailerInfoId: addPdfTrailerInfoId,
-		fixLinkAnnotations: fixPdfLinkAnnotations,
-		addStructTreeRoot: addPdfStructTreeRoot,
-		addMarkInfo: addPdfMarkInfo,
-		addICC: addPdfICC,
-		getAttachments: getPdfAttachments,
+		addMetadata: addPdfMetadata.bind(null, ctx),
+		addTrailerInfoId: addPdfTrailerInfoId.bind(null, ctx),
+		fixLinkAnnotations: fixPdfLinkAnnotations.bind(null, ctx),
+		addStructTreeRoot: addPdfStructTreeRoot.bind(null, ctx),
+		addMarkInfo: addPdfMarkInfo.bind(null, ctx),
+		addICC: addPdfICC.bind(null, ctx),
+		getAttachments: getPdfAttachments.bind(null, ctx),
 	},
 });

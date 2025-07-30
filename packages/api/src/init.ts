@@ -9,6 +9,8 @@ export const init = async (
 	options: ZugferdApiOptions,
 	context: ZugferdContext,
 ) => {
+	context.logger.debug(`[api:${init.name}] Initializing API Plugin`);
+
 	const baseURL = getBaseURL(options.baseURL, options.basePath) || "";
 
 	const ctx: ZugferdApiContext = {

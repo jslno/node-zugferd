@@ -24,28 +24,47 @@ export const create = <P extends Profile, O extends ZugferdApiOptions>() =>
 			},
 		},
 		async (ctx) => {
-			const canCreateDocument = await ctx.context.authorize(ctx);
+			const { context, body } = ctx;
+
+			const canCreateDocument = await context.authorize(ctx);
+			context.context.logger.debug(
+				`[api:${create.name}] Authorization result: ${canCreateDocument}`,
+			);
 
 			if (!canCreateDocument) {
+				context.context.logger.error(`[${create.name}] Unauthorized request`);
 				throw ctx.error("UNAUTHORIZED");
 			}
 
+			context.context.logger.debug(
+				`[api:${create.name}] Launching Puppeteer with options:`,
+				context.options.advanced?.puppeteer,
+			);
 			const browser = await puppeteer.launch(
-				ctx.context.options.advanced?.puppeteer?.launch,
+				context.options.advanced?.puppeteer?.launch,
 			);
 			const page = await browser.newPage();
 
-			const targetURL = `${ctx.context.baseURL}/preview`;
+			const targetURL = `${context.baseURL}/preview`;
+			context.context.logger.debug(
+				`[api:${create.name}] Target preview URL: ${targetURL}`,
+			);
 
 			await page.setRequestInterception(true);
 
-			const token = signToken(ctx.context);
+			const token = signToken(context);
+			context.context.logger.debug(
+				`[api:${create.name}] Signed token for preview request`,
+			);
 
 			page.on("request", (request) => {
 				if (request.url() === targetURL && request.method() === "GET") {
+					context.context.logger.debug(
+						`[api:${create.name}] Intercepting preview request - converting to POST`,
+					);
 					request.continue({
 						method: "POST",
-						postData: JSON.stringify(ctx.body),
+						postData: JSON.stringify(body),
 						headers: {
 							...request.headers(),
 							Authorization: `Bearer ${token}`,
@@ -57,18 +76,35 @@ export const create = <P extends Profile, O extends ZugferdApiOptions>() =>
 				}
 			});
 
+			context.context.logger.debug(
+				`[api:${create.name}] Navigating to preview page...`,
+			);
 			await page.goto(targetURL, { waitUntil: "networkidle0" });
 
+			context.context.logger.debug(`[${create.name}] Generating PDF...`);
 			const pdf = await page.pdf({
 				format: "A4",
 			});
+			context.context.logger.debug(
+				`[api:${create.name}] Generated PDF size: ${pdf.length}`,
+			);
 
 			await browser.close();
+			context.context.logger.debug(`[${create.name}] Browser closed`);
 
 			const zugferdCtx = ctx.context.context;
 
-			const invoice = await zugferdCtx.document.create(ctx.body.data || {});
+			context.context.logger.debug(
+				`[api:${create.name}] Interpolate document with provided data`,
+			);
+			const invoice = zugferdCtx.document.create(body.data || {});
+			context.context.logger.debug(
+				`[api:${create.name}] Generating document and embedding in PDF`,
+			);
 			const pdfA = await invoice.embedInPdf(pdf);
+			context.context.logger.debug(
+				`[api:${create.name}] Generated PDF/A-3b size: ${pdfA.length}`,
+			);
 
 			return new Response(pdfA, {
 				headers: new Headers({

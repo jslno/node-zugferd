@@ -4,10 +4,7 @@ import { createApiMiddleware } from "../call";
 export const sessionMiddleware = createApiMiddleware(async (ctx) => {
 	const bearer =
 		ctx.getHeader("Authorization") || ctx.getHeader("authorization");
-	if (
-		!bearer ||
-		(!bearer.startsWith("Bearer ") && !bearer.startsWith("bearer "))
-	) {
+	if (!bearer || !bearer.toUpperCase().startsWith("BEARER ")) {
 		throw ctx.error("UNAUTHORIZED");
 	}
 

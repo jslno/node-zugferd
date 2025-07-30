@@ -5,6 +5,9 @@ const main = async () => {
 	const invoicer = zugferd({
 		profile: BASIC,
 		strict: false,
+		logger: {
+			level: "debug",
+		},
 	});
 
 	const data: ProfileBasic = {
@@ -126,7 +129,6 @@ Trennblätter A4`,
 						reason: "Discount",
 						categoryTradeTax: {
 							categoryCode: "S",
-							rateApplicablePercent: "19.00",
 						},
 					},
 					{

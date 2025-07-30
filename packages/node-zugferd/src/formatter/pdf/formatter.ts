@@ -15,6 +15,8 @@ import crypto from "crypto";
 import { COLOR_PROFILE } from "../../utils/color-profile";
 import { type PickRequired } from "../../types/helper";
 import { base64ToUint8Array } from "../../utils/helper";
+import { colors } from "../../utils/logger";
+import type { InternalContext } from "../../init";
 
 export type PDFAMetadata = {
 	author?: string;
@@ -35,12 +37,17 @@ export type PDFAMetadata = {
 };
 
 export const addPdfMetadata = (
+	ctx: InternalContext,
 	pdfDoc: PDFDocument,
 	metadata: PickRequired<PDFAMetadata, "createDate" | "modifyDate"> & {
 		now: Date;
 	},
 ) => {
-	let xmp = formatXml({
+	ctx.logger.debug(
+		`[${addPdfMetadata.name}] Starting with metadata:`,
+		metadata,
+	);
+	let xmp = formatXml(ctx, {
 		"x:xmpmeta": {
 			"@xmlns:x": "adobe:ns:meta/",
 			"rdf:RDF": {
@@ -152,6 +159,10 @@ export const addPdfMetadata = (
 	});
 	xmp = `<?xpacket begin="\uFEFF" id="W5M0MpCehiHzreSzNTczkc9d"?>${xmp}<?xpacket end="w"?>`;
 
+	ctx.logger.debug(
+		`[${addPdfMetadata.name}] Generated XMP length: ${colors.bright}${xmp.length}${colors.reset}`,
+	);
+
 	const metadataStream = pdfDoc.context.stream(xmp, {
 		Type: "Metadata",
 		Subtype: "XML",
@@ -162,19 +173,29 @@ export const addPdfMetadata = (
 
 	pdfDoc.catalog.set(PDFName.of("Metadata"), metadataStreamRef);
 
+	ctx.logger.debug(`[${addPdfMetadata.name}] Metadata stream registered`);
+
 	return pdfDoc;
 };
 
 export const addPdfTrailerInfoId = (
+	ctx: InternalContext,
 	pdfDoc: PDFDocument,
 	trailerInfoId: string,
 ) => {
-	const hash = crypto
-		.createHash("SHA256")
-		.update(trailerInfoId + new Date().toISOString())
-		.digest();
+	trailerInfoId = trailerInfoId + new Date().toISOString();
+	ctx.logger.debug(
+		`[${addPdfTrailerInfoId.name}] Creating trailer info ID for: ${colors.bright}${trailerInfoId}${colors.reset}`,
+	);
+
+	const hash = crypto.createHash("SHA256").update(trailerInfoId).digest();
 	const hashArr = Array.from(new Uint8Array(hash));
 	const hashHex = hashArr.map((b) => b.toString(16).padStart(2, "0")).join("");
+
+	ctx.logger.debug(
+		`[${addPdfTrailerInfoId.name}] Generated SHA256 hex: ${colors.bright}${hashHex}${colors.reset}`,
+	);
+
 	const permanentDocId = PDFHexString.of(hashHex);
 	const changingDocId = permanentDocId;
 
@@ -183,12 +204,22 @@ export const addPdfTrailerInfoId = (
 		changingDocId,
 	]);
 
+	ctx.logger.debug(`[${addPdfTrailerInfoId.name}] Trailer info ID set`);
+
 	return pdfDoc;
 };
 
-export const fixPdfLinkAnnotations = (pdfDoc: PDFDocument) => {
+export const fixPdfLinkAnnotations = (
+	ctx: InternalContext,
+	pdfDoc: PDFDocument,
+) => {
+	ctx.logger.debug(`[${fixPdfLinkAnnotations.name}] Fixing link annotations`);
+
 	const pages = pdfDoc.getPages();
-	for (const page of pages) {
+	ctx.logger.debug(
+		`[${fixPdfLinkAnnotations.name}] Page count: ${colors.bright}${pages.length}${colors.reset}`,
+	);
+	for (const [pageIndex, page] of pages.entries()) {
 		const annotations = page.node.get(PDFName.of("Annots"));
 
 		if (annotations instanceof PDFArray) {
@@ -198,6 +229,9 @@ export const fixPdfLinkAnnotations = (pdfDoc: PDFDocument) => {
 
 				const subtype = annotation.get(PDFName.of("Subtype"));
 				if (subtype === PDFName.of("Link")) {
+					ctx.logger.debug(
+						`[${fixPdfLinkAnnotations.name}] Found link annotation on page ${colors.bright}${pageIndex + 1}${colors.reset}`,
+					);
 					const flagsObj = annotation.get(PDFName.of("F"));
 					const flags = flagsObj instanceof PDFNumber ? flagsObj.asNumber() : 0;
 
@@ -210,14 +244,19 @@ export const fixPdfLinkAnnotations = (pdfDoc: PDFDocument) => {
 	return pdfDoc;
 };
 
-export const addPdfMarkInfo = (pdfDoc: PDFDocument) => {
+export const addPdfMarkInfo = (ctx: InternalContext, pdfDoc: PDFDocument) => {
+	ctx.logger.debug(`[${addPdfMarkInfo.name}] Adding MarkInfo`);
 	const rootRef = pdfDoc.context.obj({ Marked: true });
 	pdfDoc.catalog.set(PDFName.of("MarkInfo"), rootRef);
 
 	return pdfDoc;
 };
 
-export const addPdfStructTreeRoot = (pdfDoc: PDFDocument) => {
+export const addPdfStructTreeRoot = (
+	ctx: InternalContext,
+	pdfDoc: PDFDocument,
+) => {
+	ctx.logger.debug(`[${addPdfStructTreeRoot.name}] Adding StructTreeRoot`);
 	const structTreeRoot = pdfDoc.context.obj({
 		Type: PDFName.of("StructTreeRoot"),
 	});
@@ -227,7 +266,8 @@ export const addPdfStructTreeRoot = (pdfDoc: PDFDocument) => {
 	return pdfDoc;
 };
 
-export const addPdfICC = (pdfDoc: PDFDocument) => {
+export const addPdfICC = (ctx: InternalContext, pdfDoc: PDFDocument) => {
+	ctx.logger.debug(`[${addPdfICC.name}] Adding ICC profile`);
 	const profile = base64ToUint8Array(COLOR_PROFILE);
 	const profileStream = pdfDoc.context.stream(profile, {
 		Length: profile.length,
@@ -246,22 +286,30 @@ export const addPdfICC = (pdfDoc: PDFDocument) => {
 		pdfDoc.context.obj([outputIntentRef]),
 	);
 
+	ctx.logger.debug(`[${addPdfICC.name}] ICC profile registered`);
+
 	return pdfDoc;
 };
 
 // https://github.com/cantoo-scribe/pdf-lib/pull/80/files#top
-const getRawAttachments = (pdfDoc: PDFDocument) => {
+const getRawAttachments = (ctx: InternalContext, pdfDoc: PDFDocument) => {
+	ctx.logger.debug(`[${getRawAttachments.name}] Extracting raw attachments`);
 	if (!pdfDoc.catalog.has(PDFName.of("Names"))) {
+		ctx.logger.debug(`[${getRawAttachments.name}] No Names dictionary found`);
 		return [];
 	}
 	const Names = pdfDoc.catalog.lookup(PDFName.of("Names"), PDFDict);
 
 	if (!Names.has(PDFName.of("EmbeddedFiles"))) {
+		ctx.logger.debug(`[${getRawAttachments.name}] No EmbeddedFiles found`);
 		return [];
 	}
 	const EmbeddedFiles = Names.lookup(PDFName.of("EmbeddedFiles"), PDFDict);
 
 	if (!EmbeddedFiles.has(PDFName.of("Names"))) {
+		ctx.logger.debug(
+			`[${getRawAttachments.name}] No Names array found for EmbeddedFiles`,
+		);
 		return [];
 	}
 	const EFNames = EmbeddedFiles.lookup(PDFName.of("Names"), PDFArray);
@@ -277,17 +325,28 @@ const getRawAttachments = (pdfDoc: PDFDocument) => {
 			fileName,
 			fileSpec,
 		});
+		ctx.logger.debug(
+			`[${getRawAttachments.name}] Found attachment: ${colors.bright}${fileName.decodeText()}${colors.reset}`,
+		);
 	}
 
 	return rawAttachments;
 };
 
-export const getPdfAttachments = (pdfDoc: PDFDocument) => {
-	const rawAttachments = getRawAttachments(pdfDoc);
+export const getPdfAttachments = (
+	ctx: InternalContext,
+	pdfDoc: PDFDocument,
+) => {
+	ctx.logger.debug(`[${getPdfAttachments.name}] Getting PDF attachments`);
+	const rawAttachments = getRawAttachments(ctx, pdfDoc);
 	return rawAttachments.map(({ fileName, fileSpec }) => {
 		const stream = fileSpec
 			.lookup(PDFName.of("EF"), PDFDict)
 			.lookup(PDFName.of("F"), PDFStream) as PDFRawStream;
+
+		ctx.logger.debug(
+			`[${getPdfAttachments.name}] Decoding attachment: ${colors.bright}${fileName.decodeText()}${colors.reset}`,
+		);
 
 		return {
 			name: fileName.decodeText(),
