@@ -45,8 +45,8 @@ export const SideBar = () => {
 	const cts = group === "docs" ? contents : [];
 
 	return (
-		<div className="fixed top-0">
-			<aside className="border-r md:flex hidden w-(--fd-sidebar-width) overflow-y-auto absolute top-[58px] h-[92dvh] flex-col justify-between">
+		<div className="fixed left-0 top-0">
+			<aside className="border-r md:flex hidden w-(--fd-sidebar-width) overflow-y-auto absolute top-(--nav-height) h-[calc(100dvh-var(--nav-height))] flex-col justify-between">
 				<div>
 					<div className="py-2 bg-muted/20">
 						<Select

@@ -9,14 +9,13 @@ import { notFound } from "next/navigation";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import { buttonVariants } from "@/components/ui/button";
 import { contents } from "@/data/sidebar-items";
-import { Card, Cards } from "fumadocs-ui/components/card";
-import { ChevronLeft, ChevronRight, Lightbulb } from "lucide-react";
+import { ChevronLeft, ChevronRight, EditIcon } from "lucide-react";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 import { File, Folder, Files } from "fumadocs-ui/components/files";
 import { TypeTable } from "fumadocs-ui/components/type-table";
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
-import { createTypeTable } from "fumadocs-typescript/ui";
+import { AutoTypeTable } from "fumadocs-typescript/ui";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Features } from "@/components/blocks/features";
@@ -25,8 +24,8 @@ import { NeedHelp } from "@/components/blocks/need-help";
 import { GithubInfo } from "@/components/github-info";
 import { GenerateSecret } from "@/components/generate-secret";
 import { APIFeatures } from "@/components/blocks/api-features";
-
-const { AutoTypeTable } = createTypeTable();
+import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
+import React from "react";
 
 export default async function Page(props: {
 	params: Promise<{ slug?: string[] }>;
@@ -43,56 +42,70 @@ export default async function Page(props: {
 		<DocsPage
 			toc={page.data.toc}
 			full={page.data.full}
-			editOnGithub={{
-				owner: "jslno",
-				repo: "node-zugferd",
-				sha: "main",
-				path: `/docs/content/docs/${page.file.path}`,
-				className: buttonVariants({
-					variant: "outline",
-					size: "sm",
-				}),
-			}}
 			tableOfContent={{
 				style: "clerk",
 				enabled: true,
 				header: <div className="w-10 h-4"></div>,
 			}}
+			tableOfContentPopover={{
+				enabled: true,
+				style: "clerk",
+			}}
 			footer={{
 				component: (
-					<div className="mb-10">
-						<Cards className="mt-auto grid grid-cols-2">
+					<div className="mb-10 space-y-6">
+						<Link
+							href={`https://github.com/jslno/node-zugferd/blob/main/docs/content/docs/${page.path}`}
+							className={buttonVariants({
+								size: "sm",
+								variant: "ghost",
+							})}
+						>
+							<EditIcon />
+							<span>Edit on GitHub</span>
+						</Link>
+						<div className="mt-auto gap-4 @container grid grid-cols-2">
 							{prevPage ? (
-								<Card
+								<Link
 									href={prevPage.url}
-									className="flex-1 [&>p]:ml-1 [&>p]:truncate [&>p]:w-full bg-transparent hover:bg-transparent"
-									// @ts-ignore
-									title={
-										<div className="flex items-center gap-1">
-											<ChevronLeft className="size-4" />
-											{prevPage.data.title}
+									className="flex-1 hover:bg-muted focus-visible:bg-muted outline-0 border rounded transition-colors @max-lg:col-span-full"
+								>
+									<div className="w-full p-4 flex items-start gap-2.5">
+										<ChevronLeft className="shrink-0 size-4 mt-1" />
+										<div className="w-full truncate space-y-1">
+											<h3 className="font-medium leading-relaxed text-pretty">
+												{prevPage.data.title}
+											</h3>
+											<p className="text-sm truncate text-muted-foreground">
+												{prevPage.data.description}
+											</p>
 										</div>
-									}
-								/>
+									</div>
+								</Link>
 							) : (
 								<div />
 							)}
 							{nextPage ? (
-								<Card
+								<Link
 									href={nextPage.url}
-									className="[&>p]:ml-1 [&>p]:truncate [&>p]:w-full bg-transparent hover:bg-transparent"
-									// @ts-ignore
-									title={
-										<div className="flex items-center gap-1">
-											{nextPage.data.title}
-											<ChevronRight className="size-4" />
+									className="flex-1 hover:bg-muted focus-visible:bg-muted outline-0 border rounded transition-colors @max-lg:col-span-full"
+								>
+									<div className="w-full p-4 flex items-start gap-2.5">
+										<div className="w-full truncate space-y-1">
+											<h3 className="font-medium leading-relaxed text-pretty">
+												{nextPage.data.title}
+											</h3>
+											<p className="text-sm truncate text-muted-foreground">
+												{nextPage.data.description}
+											</p>
 										</div>
-									}
-								/>
+										<ChevronRight className="shrink-0 size-4 mt-1" />
+									</div>
+								</Link>
 							) : (
 								<div />
 							)}
-						</Cards>
+						</div>
 					</div>
 				),
 			}}
@@ -103,6 +116,19 @@ export default async function Page(props: {
 				<MDX
 					components={{
 						...defaultMdxComponents,
+						CodeBlockTab: ({
+							className,
+							...props
+						}: React.ComponentProps<
+							typeof defaultMdxComponents.CodeBlockTab
+						>) => {
+							return (
+								<defaultMdxComponents.CodeBlockTab
+									{...props}
+									className={cn(className, "bg-muted/20")}
+								/>
+							);
+						},
 						Link: ({
 							className,
 							...props
@@ -120,33 +146,33 @@ export default async function Page(props: {
 						File,
 						Folder,
 						Files,
-						Tab,
-						Tabs,
-						AutoTypeTable,
 						TypeTable,
+						AutoTypeTable,
+						Tab,
+						Tabs: ({
+							className,
+							...props
+						}: React.ComponentProps<typeof Tabs>) => {
+							return (
+								<Tabs {...props} className={cn(className, "bg-muted/20")} />
+							);
+						},
 						Accordion,
 						Accordions,
-						Callout: ({ children, ...props }) => (
-							<defaultMdxComponents.Callout
+						Callout: ({ children, type, ...props }) => (
+							<div
 								{...props}
 								className={cn(
 									props,
-									"bg-none rounded-none border-dashed border-border",
-									props.type === "info" && "border-l-blue-500/50",
-									props.type === "tip" && "border-l-emerald-500/50",
-									props.type === "warn" && "border-l-amber-500/50",
-									props.type === "error" && "border-l-red-500/50",
+									"text-muted-foreground text-base p-4 my-4 bg-muted/20 rounded-none border border-dashed border-border",
+									type === "info" && "border-l-blue-500/50",
+									type === "tip" && "border-l-emerald-500/50",
+									type === "warn" && "border-l-amber-500/50",
+									type === "error" && "border-l-red-500/50",
 								)}
 							>
-								{props.type === "tip" ? (
-									<div className="inline-flex items-center align-middle not-prose gap-2">
-										<Lightbulb className="size-5 text-emerald-500" />
-										{children}
-									</div>
-								) : (
-									children
-								)}
-							</defaultMdxComponents.Callout>
+								{children}
+							</div>
 						),
 						iframe: (props) => (
 							<iframe {...props} className="w-full h-[500px]" />
@@ -157,6 +183,16 @@ export default async function Page(props: {
 						NeedHelp,
 						GithubInfo,
 						GenerateSecret,
+						pre: ({ ref: _ref, ...props }) => (
+							<CodeBlock
+								viewportProps={{
+									className: "bg-muted/20",
+								}}
+								{...props}
+							>
+								<Pre>{props.children}</Pre>
+							</CodeBlock>
+						),
 					}}
 				/>
 			</DocsBody>

@@ -5,7 +5,13 @@ import { Menu } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { createContext, Fragment, useContext, useState } from "react";
+import {
+	createContext,
+	Fragment,
+	useContext,
+	useState,
+	useEffect,
+} from "react";
 import {
 	Accordion,
 	AccordionContent,
@@ -62,7 +68,7 @@ export const NavMobileButton: React.FC = () => {
 		<div className="flex items-center">
 			<button
 				onClick={toggleNavbar}
-				className="text-muted-foreground overflow-hidden px-2 5 block md:hidden cursor-pointer"
+				className="text-muted-foreground overflow-hidden px-2.5 block md:hidden cursor-pointer"
 			>
 				<Menu />
 				<span className="sr-only">Toggle menu</span>
@@ -76,7 +82,7 @@ export const NavMobile = () => {
 	const shouldReduceMotion = useReducedMotion();
 
 	return (
-		<div className="fixed top-[52px] left-0 px-4 mx-auto w-full h-auto md:hidden transform-gpu z-[100] bg-background [border:1px_solid_rgba(255,255,255,.1)]">
+		<div className="fixed top-(--nav-height) left-0 px-4 mx-auto w-full h-auto md:hidden transform-gpu z-[100] bg-background [border:1px_solid_rgba(255,255,255,.1)]">
 			<AnimatePresence>
 				{isOpen && (
 					<motion.div
@@ -97,6 +103,7 @@ export const NavMobile = () => {
 								y: 0,
 							},
 						}}
+						className="z-50"
 					>
 						{navMenu.map((menu) => (
 							<Fragment key={menu.name}>
@@ -176,6 +183,20 @@ export const DocsNavBarMobile = () => {
 	const shouldReduceMotion = useReducedMotion();
 	const content = pathname.startsWith("/docs/examples") ? [] : contents;
 
+	useEffect(() => {
+		const body = document.body || document.documentElement;
+		const prev = body.style.overflow;
+		if (isOpen) {
+			body.style.overflow = "hidden";
+		} else {
+			body.style.overflow = prev;
+		}
+
+		return () => {
+			body.style.overflow = prev;
+		};
+	}, [isOpen]);
+
 	return (
 		<AnimatePresence>
 			{isOpen && (
@@ -197,11 +218,11 @@ export const DocsNavBarMobile = () => {
 							y: 0,
 						},
 					}}
-					className="absolute top-[100px] left-0 bg-background h-[calc(100%-57px-27px)] w-full z-[1000] p-5 divide-y overflow-y-auto"
+					className="fixed inset-x-0 top-[calc(var(--fd-nav-height)+1px)] bg-background supports-backdrop-filter:backdrop-blur-lg supports-backdrop-filter:bg-background/80 h-[calc(100dvh-var(--fd-nav-height)-1px)] w-full z-[1000] p-5 divide-y overflow-y-auto"
 				>
-					{content.map((menu, i) => (
-						<Accordion type="single" collapsible key={menu.title}>
-							<AccordionItem value={menu.title}>
+					<Accordion type="single" collapsible>
+						{content.map((menu, i) => (
+							<AccordionItem key={menu.title} value={menu.title}>
 								<AccordionTrigger className="font-normal text-foreground">
 									<div className="flex items-center gap-2">
 										{!!menu.Icon && <menu.Icon className="size-5" />}
@@ -229,8 +250,8 @@ export const DocsNavBarMobile = () => {
 									))}
 								</AccordionContent>
 							</AccordionItem>
-						</Accordion>
-					))}
+						))}
+					</Accordion>
 				</motion.div>
 			)}
 		</AnimatePresence>

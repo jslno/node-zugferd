@@ -21,10 +21,8 @@ Let's start by adding the API Plugin to your project.
 @node-zugferd/api
 ```
 
-<Callout>
-  If you're using a separate client and server setup, make sure to install the
-  plugin in both parts of your project.
-</Callout>
+<Callout>If you're using a separate client and server setup, make
+sure to install the plugin in both parts of your project.</Callout>
 
 </Step>
 
@@ -144,10 +142,8 @@ api<typeof BASIC>()(renderer, {
 
 Now you have to create a template for the generated pdf/a files.
 
-<Callout type="warn">
-  Templates are rendered server-side only and do not support streaming or
-  waiting for data.
-</Callout>
+<Callout type="warn">Templates are rendered server-side only and
+do not support streaming or waiting for data.</Callout>
 
 <Tabs items={["react", "vue", "svelte-kit", "solid-start", "vanilla"]} defaultValue="react">
 
@@ -331,10 +327,8 @@ To handle api requests, you need to set up a route handler on your server.
 
 Create a new file or route in your framework's designated catch-all route handler. This route should handle requests for the path `/api/zugferd/*` (unless you've configured a different base path).
 
-<Callout>
-  node-zugferd supports any backend framework with standard Request and Response
-  objects and offers helper functions for popular frameworks.
-</Callout>
+<Callout>node-zugferd supports any backend framework with standard Request and
+Response objects and offers helper functions for popular frameworks.</Callout>
 
 <Tabs items={["next-js", "nuxt", "svelte-kit", "remix", "solid-start", "hono", "express", "elysia", "tanstack-start"]} defaultValue="next-js">
 

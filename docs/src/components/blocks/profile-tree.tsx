@@ -48,28 +48,30 @@ const TreeItem = ({
 					<div className="w-3 h-[1.5px] -left-5 bg-muted absolute top-1/2 -translate-y-1/2"></div>
 				</div>
 
-				<div className="text-sm leading-none space-y-4 py-4">
-					<div className="flex items-center gap-2">
-						<span>Type:</span>
-						<code>{Array.isArray(def.type) ? "string" : def.type}</code>
-					</div>
-					<div className="flex gap-2 items-center">
-						<span>Required:</span>
-						{def.required === false ? (
-							<XIcon className="size-4 text-muted-foreground" />
-						) : (
-							<CheckIcon className="size-4 text-emerald-500" />
+				<div className="text-sm bg-background mt-2 mb-6 leading-none p-1 rounded-xl border">
+					<div className="space-y-4 p-2">
+						<div className="flex items-center gap-2">
+							<span>Type:</span>
+							<code>{Array.isArray(def.type) ? "string" : def.type}</code>
+						</div>
+						<div className="flex gap-2 items-center">
+							<span>Required:</span>
+							{def.required === false ? (
+								<XIcon className="size-4 text-muted-foreground" />
+							) : (
+								<CheckIcon className="size-4 text-emerald-500" />
+							)}
+						</div>
+						{!!def.xpath && (
+							<div className="text-muted-foreground text-xs">
+								{def.xpath.split("/").pop()}
+							</div>
 						)}
 					</div>
 					{!!def.description && (
 						<div className="px-4 text-muted-foreground bg-gradient-to-tr w-full text-pretty break-words from-muted/10 via-muted/25 to-muted/10 border rounded-lg">
 							<Markdown>{def.description}</Markdown>
 						</div>
-					)}
-					{!!def.xpath && (
-						<span className="text-muted-foreground text-xs">
-							{def.xpath.split("/").pop()}
-						</span>
 					)}
 				</div>
 

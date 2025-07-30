@@ -71,16 +71,14 @@ export const NavLink = ({
 
 export const NavBar = () => {
 	const { setOpenSearch } = useSearchContext();
-	const pathname = usePathname();
 
 	return (
 		<div
-			className={cn(
-				"flex flex-col inset-x-0 top-0 bg-background supports-backdrop-filter:backdrop-blur-lg supports-backdrop-filter:bg-background/70 z-30",
-				pathname === "/" ? "fixed" : "sticky",
-			)}
+			className={
+				"fixed flex flex-col inset-x-0 top-0 bg-background supports-backdrop-filter:backdrop-blur-lg supports-backdrop-filter:bg-background/80 z-30"
+			}
 		>
-			<nav className="md:h-[58px] md:border-b top-0 flex items-center max-w-dvw">
+			<nav className="h-[58px] md:border-b top-0 flex items-center max-w-dvw">
 				<Link
 					href="/"
 					className="flex text-nowrap items-center leading-none align-middle md:border-r md:px-5 px-2.5 py-4 text-foreground md:col-span-2 shrink-0 transition-colors w-(--fd-sidebar-width)"

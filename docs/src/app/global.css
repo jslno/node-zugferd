@@ -5,7 +5,7 @@
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
-@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/shadcn.css";
 @import "fumadocs-ui/css/preset.css";
 
 @source '../../node_modules/fumadocs-ui/dist/**/*.js';
@@ -15,12 +15,23 @@
 		background: none !important;
 	}
 
+	--nav-height: 58px;
+	--mobile-nav-height: 50px;
+	--fd-nav-height: calc(var(--nav-height) + var(--mobile-nav-height));
+
 	@media (width >= 64rem) {
 		--fd-sidebar-width: 286px !important;
 	}
 
 	@media (width >= 48rem) {
+		--fd-nav-height: var(--nav-height);
 		--fd-sidebar-width: 268px;
+	}
+
+	@media (width < 48rem) {
+		#nd-tocnav {
+			@apply border-t;
+		}
 	}
 
 	--background: hsl(0 0% 100%);
@@ -246,5 +257,9 @@
 	}
 	body {
 		@apply bg-background text-foreground;
+	}
+
+	table thead th {
+		@apply bg-muted/20!;
 	}
 }

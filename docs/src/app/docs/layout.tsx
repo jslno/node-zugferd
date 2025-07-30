@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 				}}
 				nav={{
 					component: (
-						<div className="flex items-center justify-between py-4 px-2.5 md:hidden">
+						<div className="fixed top-(--nav-height) inset-x-0 flex items-center justify-between z-10 bg-background supports-backdrop-filter:backdrop-blur-lg supports-backdrop-filter:bg-background/80 py-4 px-2.5 md:hidden">
 							<DocsNavBarMobileTitle />
 							<DocsNavMobileButton />
 						</div>
