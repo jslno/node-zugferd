@@ -34,3 +34,52 @@ export const invoicer = zugferd({
 ```
 
 If set to false `xsd-schema-validator` will not be used.
+
+## `plugins?`
+
+List of node-zugferd plugins.
+
+```ts
+import { zugferd } from "node-zugferd";
+
+export const invoicer = zugferd({
+  profile: BASIC,
+  plugins: [
+    api<typeof BASIC>()(),
+    // or `api(BASIC)()`
+  ],
+});
+```
+
+## `logger?`
+
+Logger configuration for node-zugferd.
+
+```ts
+import { zugferd } from "node-zugferd";
+
+export const invoicer = zugferd({
+  logger: {
+    disabled: false,
+    level: "error",
+    log: (level, message, ...args) => {
+      // Custom logging implementation
+      console.log(`[${level}] ${message}`, ...args);
+    },
+  },
+});
+```
+
+The logger configuration allows you to customize how node-zugferd handles logging.
+It supports the following options:
+
+- `disabled`: Disable all logging when set to `true` (default: `false`)
+- `level`: Set the minimum log level to display. Available levels are:
+  - `"info"`: Show all logs
+  - `"warn"`: Show warnings and errors
+  - `"error"`: Show only errors
+  - `"debug"`: Show all logs including debug information
+- `log`: Custom logging function that receives:
+  - `level`: The log level (`"info"`, `"warn"`, `"error"`, or `"debug"`)
+  - `message`: The log message
+  - `...args`: Additional arguments passed to the logger
