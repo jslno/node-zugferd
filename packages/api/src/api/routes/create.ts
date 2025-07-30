@@ -28,7 +28,7 @@ export const create = <P extends Profile, O extends ZugferdApiOptions>() =>
 
 			const canCreateDocument = await context.authorize(ctx);
 			context.context.logger.debug(
-				`[${create.name}] Authorization result: ${canCreateDocument}`,
+				`[api:${create.name}] Authorization result: ${canCreateDocument}`,
 			);
 
 			if (!canCreateDocument) {
@@ -37,7 +37,7 @@ export const create = <P extends Profile, O extends ZugferdApiOptions>() =>
 			}
 
 			context.context.logger.debug(
-				`[${create.name}] Launching Puppeteer with options:`,
+				`[api:${create.name}] Launching Puppeteer with options:`,
 				context.options.advanced?.puppeteer,
 			);
 			const browser = await puppeteer.launch(
@@ -47,20 +47,20 @@ export const create = <P extends Profile, O extends ZugferdApiOptions>() =>
 
 			const targetURL = `${context.baseURL}/preview`;
 			context.context.logger.debug(
-				`[${create.name}] Target preview URL: ${targetURL}`,
+				`[api:${create.name}] Target preview URL: ${targetURL}`,
 			);
 
 			await page.setRequestInterception(true);
 
 			const token = signToken(context);
 			context.context.logger.debug(
-				`[${create.name}] Signed token for preview request`,
+				`[api:${create.name}] Signed token for preview request`,
 			);
 
 			page.on("request", (request) => {
 				if (request.url() === targetURL && request.method() === "GET") {
 					context.context.logger.debug(
-						`[${create.name}] Intercepting preview request - converting to POST`,
+						`[api:${create.name}] Intercepting preview request - converting to POST`,
 					);
 					request.continue({
 						method: "POST",
@@ -77,7 +77,7 @@ export const create = <P extends Profile, O extends ZugferdApiOptions>() =>
 			});
 
 			context.context.logger.debug(
-				`[${create.name}] Navigating to preview page...`,
+				`[api:${create.name}] Navigating to preview page...`,
 			);
 			await page.goto(targetURL, { waitUntil: "networkidle0" });
 
@@ -86,7 +86,7 @@ export const create = <P extends Profile, O extends ZugferdApiOptions>() =>
 				format: "A4",
 			});
 			context.context.logger.debug(
-				`[${create.name}] Generated PDF size: ${pdf.length}`,
+				`[api:${create.name}] Generated PDF size: ${pdf.length}`,
 			);
 
 			await browser.close();
@@ -95,15 +95,15 @@ export const create = <P extends Profile, O extends ZugferdApiOptions>() =>
 			const zugferdCtx = ctx.context.context;
 
 			context.context.logger.debug(
-				`[${create.name}] Interpolate document with provided data`,
+				`[api:${create.name}] Interpolate document with provided data`,
 			);
 			const invoice = zugferdCtx.document.create(body.data || {});
 			context.context.logger.debug(
-				`[${create.name}] Generating document and embedding in PDF`,
+				`[api:${create.name}] Generating document and embedding in PDF`,
 			);
 			const pdfA = await invoice.embedInPdf(pdf);
 			context.context.logger.debug(
-				`[${create.name}] Generated PDF/A-3b size: ${pdfA.length}`,
+				`[api:${create.name}] Generated PDF/A-3b size: ${pdfA.length}`,
 			);
 
 			return new Response(pdfA, {

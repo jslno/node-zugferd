@@ -35,13 +35,13 @@ export const preview = <P extends Profile, O extends ZugferdApiOptions>() =>
 			);
 
 			context.context.logger.debug(
-				`[${preview.name}] Available templates:`,
+				`[api:${preview.name}] Available templates:`,
 				Object.keys(context.options.template),
 			);
 
 			if (!templateEntry) {
 				context.context.logger.error(
-					`[${preview.name}] Template "${ctx.body.template.toString()}" not found`,
+					`[api:${preview.name}] Template "${ctx.body.template.toString()}" not found`,
 				);
 				throw new ZugferdApiError("BAD_REQUEST", {
 					message: "Template not found",
@@ -51,10 +51,10 @@ export const preview = <P extends Profile, O extends ZugferdApiOptions>() =>
 			const [templateKey, template] = templateEntry;
 
 			context.context.logger.debug(
-				`[${preview.name}] Using template "${templateKey}"`,
+				`[api:${preview.name}] Using template "${templateKey}"`,
 			);
 
-			context.context.logger.debug(`[${preview.name}] Rendering HTML...`);
+			context.context.logger.debug(`[api:${preview.name}] Rendering HTML...`);
 			const body = await context.renderer.render(
 				{
 					data,
@@ -63,7 +63,7 @@ export const preview = <P extends Profile, O extends ZugferdApiOptions>() =>
 				template.component,
 			);
 			context.context.logger.debug(
-				`[${preview.name}] Rendered HTML length: ${body.length}`,
+				`[api:${preview.name}] Rendered HTML length: ${body.length}`,
 			);
 
 			return new Response(body, {
