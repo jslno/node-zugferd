@@ -27,26 +27,43 @@ export const preview = <P extends Profile, O extends ZugferdApiOptions>() =>
 			},
 		},
 		async (ctx) => {
+			const { context } = ctx;
 			const data = ctx.body.data as InferSchema<P>;
 
 			const templateEntry = Object.entries(ctx.context.options.template).find(
 				([key]) => key === ctx.body.template,
 			);
 
+			context.context.logger.debug(
+				`[${preview.name}] Available templates:`,
+				Object.keys(context.options.template),
+			);
+
 			if (!templateEntry) {
+				context.context.logger.error(
+					`[${preview.name}] Template "${ctx.body.template.toString()}" not found`,
+				);
 				throw new ZugferdApiError("BAD_REQUEST", {
 					message: "Template not found",
 				});
 			}
 
-			const [_, template] = templateEntry;
+			const [templateKey, template] = templateEntry;
 
-			const body = await ctx.context.renderer.render(
+			context.context.logger.debug(
+				`[${preview.name}] Using template "${templateKey}"`,
+			);
+
+			context.context.logger.debug(`[${preview.name}] Rendering HTML...`);
+			const body = await context.renderer.render(
 				{
 					data,
-					...ctx.context,
+					...context,
 				},
 				template.component,
+			);
+			context.context.logger.debug(
+				`[${preview.name}] Rendered HTML length: ${body.length}`,
 			);
 
 			return new Response(body, {

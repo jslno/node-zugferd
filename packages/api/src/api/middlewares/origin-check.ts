@@ -51,8 +51,8 @@ export const originCheckMiddleware = createApiMiddleware(async (ctx) => {
 					/^\/(?!\/|\\|%2f|%5c)[\w\-.\+/]*(?:\?[\w\-.\+/=&%]*)?$/.test(url)),
 		);
 		if (!isTrustedOrigin) {
-			console.error(`Invalid ${label}: ${url}`);
-			console.info(
+			context.context.logger.error(`Invalid ${label}: ${url}`);
+			context.context.logger.info(
 				`If it's a valid URL, please add ${url} to trustedOrigins in your api config\n`,
 				`Current list of trustedOrigins: ${trustedOrigins}`,
 			);
@@ -106,8 +106,8 @@ export const originCheck = (
 						/^\/(?!\/|\\|%2f|%5c)[\w\-.\+/]*(?:\?[\w\-.\+/=&%]*)?$/.test(url)),
 			);
 			if (!isTrustedOrigin) {
-				console.error(`Invalid ${label}: ${url}`);
-				console.info(
+				context.context.logger.error(`Invalid ${label}: ${url}`);
+				context.context.logger.info(
 					`If it's a valid URL, please add ${url} to trustedOrigins in your api config\n`,
 					`Current list of trustedOrigins: ${trustedOrigins}`,
 				);

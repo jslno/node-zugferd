@@ -5,6 +5,9 @@ import { BASIC, type ProfileBasic } from "node-zugferd/profile";
 
 export const invoicer = zugferd({
 	profile: BASIC,
+	logger: {
+		level: "debug",
+	},
 	plugins: [
 		api(BASIC)(renderer, {
 			secret: "SECRET",
