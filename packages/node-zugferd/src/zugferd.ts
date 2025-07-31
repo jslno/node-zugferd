@@ -12,6 +12,7 @@ export const zugferd = <O extends ZugferdOptions>(options: O) => {
 
 	const ctx = {
 		context,
+		options: options as O,
 		create: context.document.create as ReturnType<
 			typeof createDocumentFactory<O>
 		>,
@@ -26,6 +27,7 @@ export const zugferd = <O extends ZugferdOptions>(options: O) => {
 
 export type Zugferd = {
 	context: ZugferdContext;
+	options: ZugferdOptions;
 	create: (data: any) => ReturnType<ZugferdContext["document"]["create"]>;
 	validate: ZugferdContext["document"]["validate"];
 } & Record<string, any>;
