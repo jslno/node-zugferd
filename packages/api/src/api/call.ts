@@ -1,19 +1,20 @@
 import { createEndpoint, createMiddleware } from "better-call";
 import type { ZugferdApiContext } from "../init";
 
-export const optionsMiddleware = createMiddleware(async () => {
-	return {} as ZugferdApiContext;
-});
+export const optionsMiddleware = createMiddleware(
+	async () => ({}) as ZugferdApiContext,
+);
 
 export const createApiMiddleware = createMiddleware.create({
 	use: [
 		optionsMiddleware,
-		createMiddleware(async () => {
-			return {} as {
-				returned?: unknown;
-				responseHeaders?: Headers;
-			};
-		}),
+		createMiddleware(
+			async () =>
+				({}) as {
+					returned?: unknown;
+					responseHeaders?: Headers;
+				},
+		),
 	],
 });
 

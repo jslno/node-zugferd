@@ -21,7 +21,10 @@ describe("Origin Check", async (it) => {
 		},
 	);
 
+	type Path = Parameters<typeof client>[0];
+
 	it("should allow trusted origins", async () => {
+		// @ts-ignore
 		const res = await client("/ok", {
 			customFetchImpl,
 			headers: {
@@ -33,6 +36,7 @@ describe("Origin Check", async (it) => {
 	});
 
 	it("should not allow untrusted origins", async () => {
+		// @ts-ignore
 		const res = await client("/ok", {
 			customFetchImpl,
 			headers: {

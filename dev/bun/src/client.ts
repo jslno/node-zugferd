@@ -1,4 +1,4 @@
 import { createClient } from "@node-zugferd/api/client";
-import type { BASIC } from "node-zugferd/profile";
+import type { zugferdApi } from "./invoicer";
 
-export const client = createClient<typeof BASIC>();
+export const client = createClient<typeof zugferdApi>();

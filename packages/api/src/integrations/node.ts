@@ -4,9 +4,9 @@ import { toNodeHandler as toNode } from "better-call/node";
 export const toNodeHandler = (
 	api:
 		| {
-				apiHandler: ZugferdApi["apiHandler"];
+				handler: ZugferdApi["handler"];
 		  }
-		| ZugferdApi["apiHandler"],
+		| ZugferdApi["handler"],
 ) => {
-	return "apiHandler" in api ? toNode(api.apiHandler) : toNode(api);
+	return "handler" in api ? toNode(api.handler) : toNode(api);
 };

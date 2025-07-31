@@ -1,23 +1,21 @@
-import { createClient, type ClientOptions } from "better-call/client";
-import { BASIC, type ProfileBasic } from "node-zugferd/profile";
+import { type ClientOptions } from "better-call/client";
+import { BASIC } from "node-zugferd/profile";
 import { zugferd } from "node-zugferd";
 import type { ZugferdApiOptions } from "../types/options";
-import { Document, renderer } from "../renderer/react";
+import { reactRenderer } from "../renderer/react";
 import type {
 	InferSchema,
 	ProfileContext,
 	ZugferdOptions,
 } from "node-zugferd/types";
-import { api } from "..";
+import { api as zugferdApi } from "..";
 import { getBaseURL } from "../utils/url";
-import type { Router } from "../api";
-import express from "express";
-import { toNodeHandler } from "../integrations/node";
+import { createClient } from "../client";
 
 export const getTestInstance = async <
 	O extends Partial<ZugferdApiOptions>,
 	C extends ClientOptions,
-	Z extends Partial<Omit<ZugferdOptions, "plugins">>,
+	Z extends Partial<ZugferdOptions>,
 >(
 	options?: O,
 	config?: {
@@ -27,19 +25,28 @@ export const getTestInstance = async <
 	},
 ) => {
 	config ||= {};
-	const opts = {
+
+	const profile = config.zugferdOptions?.profile || BASIC;
+
+	const invoicer = zugferd({
+		...config.zugferdOptions,
+		profile,
+	});
+
+	const api = zugferdApi({
+		invoicer,
+		renderer: reactRenderer(),
 		secret: "node-zugferd.secret",
-		template: {
-			default: {
-				language: "eng",
-				component: async (props: { data: ProfileBasic }) => {
-					return (
-						<Document>
+		templates: {
+			default: (data: any) => {
+				return {
+					body: (
+						<div>
 							<h1>Test Invoice</h1>
-							<p>{props.data.number}</p>
-						</Document>
-					);
-				},
+							<p>{data.number}</p>
+						</div>
+					),
+				};
 			},
 		},
 		advanced: {
@@ -50,19 +57,7 @@ export const getTestInstance = async <
 				},
 			},
 		},
-	} satisfies ZugferdApiOptions;
-
-	const profile = config.zugferdOptions?.profile || BASIC;
-
-	const invoicer = zugferd({
-		...config.zugferdOptions,
-		profile,
-		plugins: [
-			api(profile)(renderer, {
-				...opts,
-				...options,
-			}),
-		],
+		...((options as unknown) ?? {}),
 	});
 
 	type Profile = Z["profile"] extends ProfileContext
@@ -77,12 +72,12 @@ export const getTestInstance = async <
 		url: string | URL | Request,
 		init?: RequestInit,
 	) => {
-		return invoicer.apiHandler(new Request(url, init));
+		return api.handler(new Request(url, init));
 	};
 
 	const port = config.port || 3000;
 
-	const client = createClient<Router<Profile>>({
+	const client = createClient<typeof api>({
 		...(config?.clientOptions as C extends undefined ? {} : C),
 		baseURL: getBaseURL(
 			options?.basePath || "http://localhost:" + port,
@@ -91,19 +86,11 @@ export const getTestInstance = async <
 		customFetchImpl,
 	});
 
-	const createTestServer = () => {
-		const app = express();
-		app.all("/api/zugferd/*", toNodeHandler(invoicer));
-
-		const server = app.listen(port);
-		return server;
-	};
-
 	return {
 		invoicer,
+		api,
 		data,
 		client,
 		customFetchImpl,
-		createTestServer,
 	};
 };

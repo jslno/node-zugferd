@@ -1,7 +1,7 @@
-import { invoicer } from "./invoicer";
+import { zugferdApi } from "./invoicer";
 
 Bun.serve({
-	fetch: invoicer.apiHandler,
+	fetch: zugferdApi.handler,
 	port: 4000,
 });
 

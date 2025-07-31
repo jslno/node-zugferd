@@ -1,31 +1,31 @@
 import {
+	APIError,
 	createRouter,
-	type InputContext,
+	toResponse,
 	type EndpointContext,
 	type EndpointOptions,
-	APIError,
-	toResponse,
+	type InputContext,
 } from "better-call";
 import type { ZugferdApiContext } from "../init";
-import type { ZugferdApiOptions } from "../types/options";
-import { ok } from "./routes/ok";
-import { preview } from "./routes/preview";
-import type { Profile } from "node-zugferd/types";
-import { create } from "./routes/create";
-import { originCheckMiddleware } from "./middlewares";
+import type { Promisable } from "../types/helper";
 import type { ApiEndpoint } from "./call";
+import { originCheckMiddleware } from "./middlewares";
+import { create, ok, preview } from "./routes";
+import type { Zugferd } from "node-zugferd";
+import type { Renderer, Templates, ZugferdApiOptions } from "../types";
 
 export const getEndpoints = <
-	P extends Profile,
-	O extends ZugferdApiOptions,
 	C extends ZugferdApiContext,
+	O extends ZugferdApiOptions,
+	R extends Renderer,
+	I extends Zugferd,
+	T extends Templates<R["$Infer"]["Component"], I>,
 >(
-	profile: P,
-	ctx: Promise<C> | C,
+	ctx: Promisable<C>,
 ) => {
 	const baseEndpoints = {
-		preview: preview<P, O>(),
-		create: create<P, O>(),
+		create: create<I, T>(),
+		preview: preview<I, T>(),
 	};
 
 	const endpoints = {
@@ -33,7 +33,11 @@ export const getEndpoints = <
 		ok,
 	};
 
-	return toApiEndpoints(endpoints, ctx) as typeof endpoints;
+	const api = toApiEndpoints(endpoints, ctx);
+
+	return {
+		api: api as typeof endpoints,
+	};
 };
 
 type InternalContext = InputContext<string, any> &
@@ -103,31 +107,41 @@ export const toApiEndpoints = <E extends Record<string, ApiEndpoint>>(
 	return api as E;
 };
 
-export type Router<P extends Profile = Profile> = ReturnType<
-	ReturnType<typeof router<P>>
->;
+export type Router<
+	C extends ZugferdApiContext,
+	O extends ZugferdApiOptions,
+	R extends Renderer,
+	I extends Zugferd,
+	T extends Templates<R["$Infer"]["Component"], I>,
+> = ReturnType<typeof router<C, O, R, I, T>>;
 
-export const router =
-	<P extends Profile>(profile: P) =>
-	<C extends ZugferdApiContext, O extends ZugferdApiOptions>(ctx: C) => {
-		const endpoints = getEndpoints(profile, ctx);
+export const router = <
+	C extends ZugferdApiContext,
+	O extends ZugferdApiOptions,
+	R extends Renderer,
+	I extends Zugferd,
+	T extends Templates<R["$Infer"]["Component"], I>,
+>(
+	ctx: C,
+) => {
+	const { api } = getEndpoints<C, O, R, I, T>(ctx);
 
-		return createRouter(endpoints, {
-			routerContext: ctx,
-			basePath: new URL(ctx.baseURL).pathname,
-			openapi: {
-				disabled: true,
+	return createRouter(api, {
+		routerContext: ctx,
+		basePath: new URL(ctx.baseURL).pathname,
+		openapi: {
+			disabled: true,
+		},
+		routerMiddleware: [
+			{
+				path: "/**",
+				middleware: originCheckMiddleware,
 			},
-			routerMiddleware: [
-				{
-					path: "/**",
-					middleware: originCheckMiddleware,
-				},
-			],
-		});
-	};
+		],
+	});
+};
 
-export * from "./routes";
 export * from "./middlewares";
 export * from "./call";
+
 export { APIError as ZugferdApiError } from "better-call";

@@ -1,4 +1,4 @@
-import { afterAll, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { getTestInstance } from "../../test-utils/test-instance";
 import { PDFDocument } from "pdf-lib";
 
@@ -8,17 +8,12 @@ describe(
 		timeout: 10_000,
 	},
 	async () => {
-		const { invoicer, client, data, createTestServer } = await getTestInstance({
+		const { invoicer, client, data } = await getTestInstance({
 			authorize: async (ctx) => {
 				const user = ctx.getHeader("X-User");
 
 				return user === "1";
 			},
-		});
-		const server = createTestServer();
-
-		afterAll(() => {
-			server.close();
 		});
 
 		it("should generate valid pdf/a3-b invoice", async () => {
@@ -37,8 +32,11 @@ describe(
 				},
 			});
 
-			const pdfA = await res.data!.arrayBuffer();
+			const pdfA = await res.data?.arrayBuffer();
 			expect(pdfA).toBeDefined();
+			if (!pdfA) {
+				return;
+			}
 
 			const isPdfA3b = (input: ArrayBuffer) => {
 				const text = new TextDecoder("utf-8").decode(input);
