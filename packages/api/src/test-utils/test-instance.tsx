@@ -36,7 +36,6 @@ export const getTestInstance = async <
 	const api = zugferdApi({
 		invoicer,
 		renderer: reactRenderer(),
-		secret: "node-zugferd.secret",
 		templates: {
 			default: (data: any) => {
 				return {

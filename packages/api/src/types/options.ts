@@ -7,7 +7,6 @@ import type { Renderer, Templates } from "./renderer";
 export type ZugferdApiOptions = {
 	renderer: Renderer;
 	invoicer: Zugferd;
-	secret: string;
 	baseURL?: string;
 	/**
 	 * @default "/api/zugferd"

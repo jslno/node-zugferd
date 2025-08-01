@@ -13,7 +13,6 @@ export const invoicer = zugferd({
 export const zugferdApi = api({
 	invoicer,
 	renderer: reactRenderer(),
-	secret: "",
 	templates: {
 		default: (data) => {
 			return {
