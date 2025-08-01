@@ -2,7 +2,7 @@ import { init, type ZugferdContext } from "./init";
 import { type ZugferdOptions } from "./types/options";
 import { createDocumentFactory } from "./document/create";
 import { validateDocumentFactory } from "./document/validate";
-import type { UnionToIntersection } from "./types";
+import type { InferSchema, UnionToIntersection } from "./types";
 import type { ZugferdPlugin } from "./types/plugins";
 
 export const zugferd = <O extends ZugferdOptions>(options: O) => {
@@ -16,6 +16,9 @@ export const zugferd = <O extends ZugferdOptions>(options: O) => {
 			typeof createDocumentFactory<O>
 		>,
 		validate: context.document.validate,
+		$Infer: {
+			Schema: {} as InferSchema<O["profile"]>,
+		},
 	};
 
 	return {
