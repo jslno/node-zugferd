@@ -11,10 +11,12 @@ export const solidRenderer = (options?: {
 }) =>
 	({
 		render: async (Component, props) => {
-			const element =
-				typeof Component === "function" ? await Component(props) : Component;
 			return {
-				body: await renderToStringAsync(() => element, options),
+				body: await renderToStringAsync(
+					() =>
+						typeof Component === "function" ? Component(props) : Component,
+					options,
+				),
 			};
 		},
 		$Infer: {

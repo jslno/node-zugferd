@@ -5,10 +5,7 @@ import type { Renderer } from "../types/renderer";
 export const vueRenderer = (context?: SSRContext) =>
 	({
 		render: async ({ component, props }) => {
-			const app = createSSRApp({
-				data: () => props,
-				template: component,
-			});
+			const app = createSSRApp(component, props);
 
 			return {
 				body: await renderToString(app, context),

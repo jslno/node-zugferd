@@ -27,11 +27,11 @@ describe("preview", async () => {
 			"application/pdf; charset=binary",
 		);
 
-		await expect(async () => {
+		await expect(
 			PDFDocument.load(await response.arrayBuffer(), {
 				throwOnInvalidObject: true,
-			});
-		}).not.toThrow();
+			}),
+		).resolves.toBeDefined();
 	});
 
 	it("should not generate a pdf when unauthorized", async () => {
