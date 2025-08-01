@@ -21,4 +21,5 @@ export type ZugferdApiOptions = {
 		};
 	};
 	authorize?: (ctx: GenericEndpointContext) => Promisable<boolean>;
+	disabledPaths?: string[];
 };
