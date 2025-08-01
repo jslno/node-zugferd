@@ -22,12 +22,8 @@
 				},
 				"url": {
 					"raw": "{{baseURL}}{{basePath}}/preview",
-					"host": [
-						"{{baseURL}}{{basePath}}"
-					],
-					"path": [
-						"preview"
-					]
+					"host": ["{{baseURL}}{{basePath}}"],
+					"path": ["preview"]
 				}
 			},
 			"response": []
@@ -48,12 +44,8 @@
 				},
 				"url": {
 					"raw": "{{baseURL}}{{basePath}}/create",
-					"host": [
-						"{{baseURL}}{{basePath}}"
-					],
-					"path": [
-						"create"
-					]
+					"host": ["{{baseURL}}{{basePath}}"],
+					"path": ["create"]
 				}
 			},
 			"response": []
@@ -65,12 +57,8 @@
 				"header": [],
 				"url": {
 					"raw": "{{baseURL}}{{basePath}}/ok",
-					"host": [
-						"{{baseURL}}{{basePath}}"
-					],
-					"path": [
-						"ok"
-					]
+					"host": ["{{baseURL}}{{basePath}}"],
+					"path": ["ok"]
 				}
 			},
 			"response": []
@@ -82,9 +70,7 @@
 			"script": {
 				"type": "text/javascript",
 				"packages": {},
-				"exec": [
-					""
-				]
+				"exec": [""]
 			}
 		},
 		{
@@ -92,9 +78,7 @@
 			"script": {
 				"type": "text/javascript",
 				"packages": {},
-				"exec": [
-					""
-				]
+				"exec": [""]
 			}
 		}
 	],
