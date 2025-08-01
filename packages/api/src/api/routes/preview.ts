@@ -10,7 +10,7 @@ export const preview = <I extends Zugferd, T extends Record<string, any>>() =>
 		{
 			method: "POST",
 			body: z.object({
-				template: z.string().optional(),
+				template: z.string(),
 				data: z.record(z.string(), z.any()),
 			}),
 			metadata: {
