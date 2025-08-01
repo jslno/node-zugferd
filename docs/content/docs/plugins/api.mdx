@@ -220,68 +220,68 @@ Response objects and offers helper functions for popular frameworks.</Callout>
 
 <Tab value="next-js">
 ```ts title="/app/api/zugferd/[...all]/route.ts"
-import { invoicer } from "@/lib/invoicer"; // path to your invoicer file
+import { zugferdApi } from "./your/path/invoicer"; // path to your api instance
 import { toNextJsHandler } from "@node-zugferd/api/next-js";
 
-export const { POST, GET } = toNextJsHandler(invoicer);
+export const { POST, GET } = toNextJsHandler(zugferdApi);
 ```
 </Tab>
 
 <Tab value="nuxt">
 ```ts title="/server/api/zugferd/[...all].ts"
-import { invoicer } from "~/utils/invoicer"; // path to your invoicer file
+import { zugferdApi } from "./your/path/invoicer"; // path to your api instance
 
 export default defineEventHandler((event) => {
-    return invoicer.apiHandler(toWebRequest(event));
+    return zugferdApi.handler(toWebRequest(event));
 });
 ```
 </Tab>
 
 <Tab value="svelte-kit">
 ```ts title="hooks.server.ts"
-import { invoicer } from "$lib/invoicer"; // path to your invoicer file
+import { zugferdApi } from "./your/path/invoicer"; // path to your api instance
 import { svelteKitHandler } from "node-zugferd/svelte-kit";
 
 export async function handle({ event, resolve }) {
-    return svelteKitHandler({ event, resolve, invoicer })
+    return svelteKitHandler({ event, resolve, api: zugferdApi });
 }
 ```
 </Tab>
 
 <Tab value="remix">
 ```ts title="/app/routes/api.zugferd.$.ts"
-import { invoicer } from "~/lib/invoicer.server"; // path to your invoicer file
+import { zugferdApi } from "./your/path/invoicer"; // path to your api instance
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-    return invoicer.apiHandler(request);
+    return zugferdApi.handler(request);
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-    return invoicer.apiHandler(request);
+    return zugferdApi.handler(request);
 }
 ```
 </Tab>
 
 <Tab value="solid-start">
 ```ts title="/routes/api/zugferd/*.all.ts"
-import { invoicer } from "~/lib/invoicer"; // path to your invoicer file
+import { zugferdApi } from "./your/path/invoicer"; // path to your api instance
 import { toSolidStartHandler } from "@node-zugferd/api/solid-start";
 
-export const { GET, POST } = toSolidStartHandler(invoicer);
+export const { GET, POST } = toSolidStartHandler(zugferdApi);
 ```
 </Tab>
 
 <Tab value="hono">
 ```ts title="src/index.ts"
 import { Hono } from "hono";
-import { invoicer } from "./invoicer"; // path to your invoicer file
+import { zugferdApi } from "./your/path/invoicer"; // path to your api instance
 import { serve } from "@hono/node-server";
 import { cors } from "hono/cors";
 
 const app = new Hono();
 
-app.on(["GET", "POST"], "/api/zugferd/\*\*", (c) => invoicer.apiHandler(c.req.raw));
+app.on(["GET", "POST"], "/api/zugferd/\*\*", (c) => zugferdApi.handler(c.req.raw));
 
 serve(app);
 
@@ -292,13 +292,13 @@ serve(app);
 ```ts title="server.ts"
 import express from "express";
 import { toNodeHandler } from "@node-zugferd/api/node";
-import { invoicer } from "./invoicer"; // path to your invoicer file
+import { zugferdApi } from "./your/path/invoicer"; // path to your api instance
 
 const app = express();
 const port = 8000;
 
-app.all("/api/zugferd/*", toNodeHandler(invoicer)); // For ExpressJS v4
-// app.all("/api/zugferd/*splat", toNodeHandler(invoicer)); For ExpressJS v5
+app.all("/api/zugferd/*", toNodeHandler(zugferdApi)); // For ExpressJS v4
+// app.all("/api/zugferd/*splat", toNodeHandler(zugferdApi)); For ExpressJS v5
 
 // Mount express json middleware after node-zugferd handler
 // or only apply it to routes that don't interact with node-zugferd
@@ -316,13 +316,13 @@ This also works for any other node server framework like express, fastify, hapi,
 <Tab value="elysia">
 ```ts title="server.ts"
 import { Elysia, type Context } from "elysia";
-import { invoicer } from "./invoicer"; // path to your invoicer file
+import { zugferdApi } from "./your/path/invoicer"; // path to your api instance
 
 const nodeZugferdView = (ctx: Context) => {
   const NODE_ZUGFERD_ACCEPT_METHODS = ["GET", "POST"];
   // validate request method
   if (NODE_ZUGFERD_ACCEPT_METHODS.includes(ctx.request.method)) {
-    return invoicer.apiHandler(ctx.request);
+    return zugferdApi.handler(ctx.request);
   } else {
     ctx.error(405);
   }
@@ -339,15 +339,15 @@ console.log(
 
 <Tab value="tanstack-start">
 ```ts title="/routes/api/zugferd/$.ts"
-import { invoicer } from "~/lib/server/invoicer"; // path to your invoicer file
+import { zugferdApi } from "./your/path/invoicer"; // path to your api instance
 import { createAPIFileRoute } from "@tanstack/react-start/api";
 
 export const APIRoute = createAPIFileRoute("/api/zugferd/$")({
     GET: ({ request }) => {
-        return invoicer.apiHandler(request);
+        return zugferdApi.handler(request);
     },
     POST: ({ request }) => {
-        return invoicer.apiHandler(request);
+        return zugferdApi.handler(request);
     },
 });
 ```
