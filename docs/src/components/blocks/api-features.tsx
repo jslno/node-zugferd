@@ -31,7 +31,8 @@ const features: Feature[] = [
 	},
 	{
 		title: "Authorization",
-		description: "Control access to API endpoints with customizable request-based authorization.",
+		description:
+			"Control access to API endpoints with customizable request-based authorization.",
 	},
 	{
 		title: "And more...",
