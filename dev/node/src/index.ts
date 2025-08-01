@@ -1,5 +1,5 @@
 import { zugferd } from "node-zugferd";
-import { BASIC, type ProfileBasic } from "node-zugferd/profile/basic";
+import { BASIC } from "node-zugferd/profile/basic";
 
 const main = async () => {
 	const invoicer = zugferd({
@@ -10,7 +10,7 @@ const main = async () => {
 		},
 	});
 
-	const data: ProfileBasic = {
+	const data: typeof invoicer.$Infer.Schema = {
 		businessProcessType: "A1",
 		number: "471102",
 		issueDate: new Date("2024-11-15"),

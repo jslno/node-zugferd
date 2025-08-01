@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "02f45cb9-785a-4aa8-8474-cfdb67cb827a",
+		"name": "@node-zugferd/api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17678013"
+	},
+	"item": [
+		{
+			"name": "/preview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"template\": \"default\",\r\n    \"data\": {\r\n        \"number\": \"471102\",\r\n        \"typeCode\": \"380\",\r\n        \"issueDate\": \"2024-11-15T00:00:00.000Z\",\r\n        \"includedNote\": [\r\n            {\r\n                \"content\": \"Rechnung gemäß Bestellung vom 01.11.2024.\"\r\n            },\r\n            {\r\n                \"content\": \"Lieferant GmbH\\t\\t\\t\\t\\nLieferantenstraße 20\\t\\t\\t\\t\\n80333 München\\t\\t\\t\\t\\nDeutschland\\t\\t\\t\\t\\nGeschäftsführer: Hans Muster\\nHandelsregisternummer: H A 123\"\r\n            },\r\n            {\r\n                \"content\": \"Unsere GLN: 4000001123452\\nIhre GLN: 4000001987658\\nIhre Kundennummer: GE2020211\\n\\n\\nZahlbar innerhalb 30 Tagen netto bis 25.12.2024, 3% Skonto innerhalb 10 Tagen bis 25.11.2024.\"\r\n            }\r\n        ],\r\n        \"transaction\": {\r\n            \"line\": [\r\n                {\r\n                    \"identifier\": \"1\",\r\n                    \"tradeProduct\": {\r\n                        \"globalIdentifier\": {\r\n                            \"schemeIdentifier\": \"0160\",\r\n                            \"value\": \"4012345001235\"\r\n                        },\r\n                        \"name\": \"GTIN: 4012345001235\\nUnsere Art.-Nr.: TB100A4\\nTrennblätter A4\"\r\n                    },\r\n                    \"tradeAgreement\": {\r\n                        \"netTradePrice\": {\r\n                            \"chargeAmount\": \"9.90\"\r\n                        }\r\n                    },\r\n                    \"tradeDelivery\": {\r\n                        \"billedQuantity\": {\r\n                            \"unitMeasureCode\": \"H87\",\r\n                            \"amount\": \"20.0000\"\r\n                        }\r\n                    },\r\n                    \"tradeSettlement\": {\r\n                        \"tradeTax\": {\r\n                            \"typeCode\": \"VAT\",\r\n                            \"categoryCode\": \"S\",\r\n                            \"rateApplicablePercent\": \"19\"\r\n                        },\r\n                        \"monetarySummation\": {\r\n                            \"lineTotalAmount\": \"198.00\"\r\n                        }\r\n                    }\r\n                }\r\n            ],\r\n            \"tradeAgreement\": {\r\n                \"seller\": {\r\n                    \"name\": \"Lieferant GmbH\",\r\n                    \"postalAddress\": {\r\n                        \"postCode\": \"80333\",\r\n                        \"line1\": \"Lieferantenstraße 20\",\r\n                        \"city\": \"München\",\r\n                        \"countryCode\": \"DE\"\r\n                    },\r\n                    \"taxRegistration\": {\r\n                        \"localIdentifier\": \"201/113/40209\",\r\n                        \"vatIdentifier\": \"DE123456789\"\r\n                    }\r\n                },\r\n                \"buyer\": {\r\n                    \"name\": \"Kunden AG Mitte\",\r\n                    \"postalAddress\": {\r\n                        \"postCode\": \"69876\",\r\n                        \"line1\": \"Hans Muster\",\r\n                        \"line2\": \"Kundenstraße 15\",\r\n                        \"city\": \"Frankfurt\",\r\n                        \"countryCode\": \"DE\"\r\n                    }\r\n                }\r\n            },\r\n            \"tradeDelivery\": {\r\n                \"information\": {\r\n                    \"deliveryDate\": \"2024-11-14T00:00:00.000Z\"\r\n                }\r\n            },\r\n            \"tradeSettlement\": {\r\n                \"currencyCode\": \"EUR\",\r\n                \"vatBreakdown\": [\r\n                    {\r\n                        \"calculatedAmount\": \"37.62\",\r\n                        \"typeCode\": \"VAT\",\r\n                        \"basisAmount\": \"198.00\",\r\n                        \"categoryCode\": \"S\",\r\n                        \"rateApplicablePercent\": \"19.00\"\r\n                    }\r\n                ],\r\n                \"paymentTerms\": {\r\n                    \"dueDate\": \"2024-12-15T00:00:00.000Z\"\r\n                },\r\n                \"monetarySummation\": {\r\n                    \"lineTotalAmount\": \"198.00\",\r\n                    \"chargeTotalAmount\": \"0.00\",\r\n                    \"allowanceTotalAmount\": \"0.00\",\r\n                    \"taxBasisTotalAmount\": \"198.00\",\r\n                    \"taxTotal\": {\r\n                        \"amount\": \"37.62\",\r\n                        \"currencyCode\": \"EUR\"\r\n                    },\r\n                    \"grandTotalAmount\": \"235.62\",\r\n                    \"duePayableAmount\": \"235.62\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}{{basePath}}/preview",
+					"host": [
+						"{{baseURL}}{{basePath}}"
+					],
+					"path": [
+						"preview"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"template\": \"default\",\r\n    \"data\": {\r\n        \"number\": \"471102\",\r\n        \"typeCode\": \"380\",\r\n        \"issueDate\": \"2024-11-15T00:00:00.000Z\",\r\n        \"includedNote\": [\r\n            {\r\n                \"content\": \"Rechnung gemäß Bestellung vom 01.11.2024.\"\r\n            },\r\n            {\r\n                \"content\": \"Lieferant GmbH\\t\\t\\t\\t\\nLieferantenstraße 20\\t\\t\\t\\t\\n80333 München\\t\\t\\t\\t\\nDeutschland\\t\\t\\t\\t\\nGeschäftsführer: Hans Muster\\nHandelsregisternummer: H A 123\"\r\n            },\r\n            {\r\n                \"content\": \"Unsere GLN: 4000001123452\\nIhre GLN: 4000001987658\\nIhre Kundennummer: GE2020211\\n\\n\\nZahlbar innerhalb 30 Tagen netto bis 25.12.2024, 3% Skonto innerhalb 10 Tagen bis 25.11.2024.\"\r\n            }\r\n        ],\r\n        \"transaction\": {\r\n            \"line\": [\r\n                {\r\n                    \"identifier\": \"1\",\r\n                    \"tradeProduct\": {\r\n                        \"globalIdentifier\": {\r\n                            \"schemeIdentifier\": \"0160\",\r\n                            \"value\": \"4012345001235\"\r\n                        },\r\n                        \"name\": \"GTIN: 4012345001235\\nUnsere Art.-Nr.: TB100A4\\nTrennblätter A4\"\r\n                    },\r\n                    \"tradeAgreement\": {\r\n                        \"netTradePrice\": {\r\n                            \"chargeAmount\": \"9.90\"\r\n                        }\r\n                    },\r\n                    \"tradeDelivery\": {\r\n                        \"billedQuantity\": {\r\n                            \"unitMeasureCode\": \"H87\",\r\n                            \"amount\": \"20.0000\"\r\n                        }\r\n                    },\r\n                    \"tradeSettlement\": {\r\n                        \"tradeTax\": {\r\n                            \"typeCode\": \"VAT\",\r\n                            \"categoryCode\": \"S\",\r\n                            \"rateApplicablePercent\": \"19\"\r\n                        },\r\n                        \"monetarySummation\": {\r\n                            \"lineTotalAmount\": \"198.00\"\r\n                        }\r\n                    }\r\n                }\r\n            ],\r\n            \"tradeAgreement\": {\r\n                \"seller\": {\r\n                    \"name\": \"Lieferant GmbH\",\r\n                    \"postalAddress\": {\r\n                        \"postCode\": \"80333\",\r\n                        \"line1\": \"Lieferantenstraße 20\",\r\n                        \"city\": \"München\",\r\n                        \"countryCode\": \"DE\"\r\n                    },\r\n                    \"taxRegistration\": {\r\n                        \"localIdentifier\": \"201/113/40209\",\r\n                        \"vatIdentifier\": \"DE123456789\"\r\n                    }\r\n                },\r\n                \"buyer\": {\r\n                    \"name\": \"Kunden AG Mitte\",\r\n                    \"postalAddress\": {\r\n                        \"postCode\": \"69876\",\r\n                        \"line1\": \"Hans Muster\",\r\n                        \"line2\": \"Kundenstraße 15\",\r\n                        \"city\": \"Frankfurt\",\r\n                        \"countryCode\": \"DE\"\r\n                    }\r\n                }\r\n            },\r\n            \"tradeDelivery\": {\r\n                \"information\": {\r\n                    \"deliveryDate\": \"2024-11-14T00:00:00.000Z\"\r\n                }\r\n            },\r\n            \"tradeSettlement\": {\r\n                \"currencyCode\": \"EUR\",\r\n                \"vatBreakdown\": [\r\n                    {\r\n                        \"calculatedAmount\": \"37.62\",\r\n                        \"typeCode\": \"VAT\",\r\n                        \"basisAmount\": \"198.00\",\r\n                        \"categoryCode\": \"S\",\r\n                        \"rateApplicablePercent\": \"19.00\"\r\n                    }\r\n                ],\r\n                \"paymentTerms\": {\r\n                    \"dueDate\": \"2024-12-15T00:00:00.000Z\"\r\n                },\r\n                \"monetarySummation\": {\r\n                    \"lineTotalAmount\": \"198.00\",\r\n                    \"chargeTotalAmount\": \"0.00\",\r\n                    \"allowanceTotalAmount\": \"0.00\",\r\n                    \"taxBasisTotalAmount\": \"198.00\",\r\n                    \"taxTotal\": {\r\n                        \"amount\": \"37.62\",\r\n                        \"currencyCode\": \"EUR\"\r\n                    },\r\n                    \"grandTotalAmount\": \"235.62\",\r\n                    \"duePayableAmount\": \"235.62\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}{{basePath}}/create",
+					"host": [
+						"{{baseURL}}{{basePath}}"
+					],
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/ok",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}{{basePath}}/ok",
+					"host": [
+						"{{baseURL}}{{basePath}}"
+					],
+					"path": [
+						"ok"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:4000",
+			"type": "default"
+		},
+		{
+			"key": "basePath",
+			"value": "/api/zugferd",
+			"type": "string"
+		}
+	]
+}
