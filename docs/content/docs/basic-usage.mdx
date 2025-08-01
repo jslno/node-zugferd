@@ -86,10 +86,9 @@ Once the necessary setup is complete, it's time to create your first invoice. Th
 Invoices contain essential details like transaction information, participant details, and line items. This data will be structured in a way that allows it to be processed electronically and integrated seamlessly into business workflows.
 
 ```ts
-import type { ProfileBasic } from "node-zugferd/profile/basic";
-import { invoicer } from "./your/path";
+import { invoicer } from "./your/path/invoicer";
 
-const data: ProfileBasic = {
+const data: typeof invoicer.$infer.Schema = {
   //...
 };
 

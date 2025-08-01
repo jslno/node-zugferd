@@ -9,7 +9,7 @@ import { notFound } from "next/navigation";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import { buttonVariants } from "@/components/ui/button";
 import { contents } from "@/data/sidebar-items";
-import { ChevronLeft, ChevronRight, EditIcon } from "lucide-react";
+import { BookOpenIcon, ChevronLeft, ChevronRight, EditIcon } from "lucide-react";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 import { File, Folder, Files } from "fumadocs-ui/components/files";
 import { TypeTable } from "fumadocs-ui/components/type-table";
@@ -54,16 +54,28 @@ export default async function Page(props: {
 			footer={{
 				component: (
 					<div className="mb-10 space-y-6">
-						<Link
-							href={`https://github.com/jslno/node-zugferd/blob/main/docs/content/docs/${page.path}`}
-							className={buttonVariants({
-								size: "sm",
-								variant: "ghost",
-							})}
-						>
-							<EditIcon />
-							<span>Edit on GitHub</span>
-						</Link>
+						<div className="flex items-center gap-4">
+							<Link
+								href={`https://github.com/jslno/node-zugferd/blob/main/docs/content/docs/${page.path}`}
+								className={buttonVariants({
+									size: "sm",
+									variant: "ghost",
+								})}
+							>
+								<EditIcon />
+								<span>Edit on GitHub</span>
+							</Link>
+							<Link
+								href="/llms.txt"
+								className={buttonVariants({
+									size: "sm",
+									variant: "ghost",
+								})}
+							>
+								<BookOpenIcon />
+								<span>llms.txt</span>
+							</Link>
+						</div>
 						<div className="mt-auto gap-4 @container grid grid-cols-2">
 							{prevPage ? (
 								<Link

@@ -59,32 +59,31 @@ If you encounter invalid or missing fields, feel free to open a new [Issue](http
 1. Create a new instance:
 
     ```ts
-    import { zugferd } from 'node-zugferd'
-    import { BASIC } from 'node-zugferd/profile/basic'
+    import { zugferd } from "node-zugferd";
+    import { BASIC } from "node-zugferd/profile/basic";
 
     export const invoicer = zugferd({
-        profile: BASIC
-    })
+        profile: BASIC,
+    });
     ```
 
 2. Define the documents data
 
     ```ts
-    import type { ProfileBasic } from 'node-zugferd/profile/basic'
-    import { invoicer } from './your/path'
+    import { invoicer } from "./your/path/invoicer";
 
-    const data: ProfileBasic = {
+    const data: typeof invoicer.$Infer.Schema = {
         //... your data
-    }
+    };
 
-    const invoice = invoicer.create(data)
+    const invoice = invoicer.create(data);
     ```
 3. Save the document
     <details>
     <summary>as XML</summary>
 
     ```ts
-    const xml = await invoice.toXML()
+    const xml = await invoice.toXML();
     ```
     </details>
 
@@ -93,23 +92,15 @@ If you encounter invalid or missing fields, feel free to open a new [Issue](http
 
     ```ts
     // The data in your pdf must exactly match the provided data!
-    const pdf = fs.readFileSync('./your/invoice.pdf')
+    const pdf = fs.readFileSync("./your/invoice.pdf");
 
     const pdfA = await invoice.embedInPdf(pdf, {
         metadata: {
-            title: 'New Invoice'
-        }
-    })
+            title: "New Invoice",
+        },
+    });
     ```
     </details>
-
-
-<h2>Roadmap</h2>
-
-* [X] Allow attaching additional files to pdf
-* [ ] Add Schematron for validation
-* [ ] Native support for XRechnung
-* [ ] Parse ZUGFeRD/Factur-X documents
 
 <h2>Dependencies</h2>
 
