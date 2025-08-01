@@ -22,16 +22,16 @@ const features: Feature[] = [
 	{
 		title: "Preview invoices",
 		description:
-			"Render invoices as HTML using customizable templates in your preferred framework.",
+			"Generate PDF previews of invoices using your configured templates.",
 	},
 	{
 		title: "Generate invoices",
 		description:
-			"Convert invoice previews into PDF/A-3b-compliant documents using puppeteer.",
+			"Produce PDF/A-3b compliant invoices from your templates using Puppeteer.",
 	},
 	{
 		title: "Authorization",
-		description: "Restrict access to API endpoints based on the request.",
+		description: "Control access to API endpoints with customizable request-based authorization.",
 	},
 	{
 		title: "And more...",
