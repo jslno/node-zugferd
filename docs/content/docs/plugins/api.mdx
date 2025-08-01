@@ -448,8 +448,10 @@ const data: typeof invoicer.$Infer.Schema = {
 Now we can finally call the endpoint.
 
 ```ts
+import { zugferdApi } from "./your/path/invoicer"; // path to your api instance
+
 // Returns the generated html
-const result = await invoicer.api.preview({
+const result = await zugferdApi.api.preview({
   body: {
     template: "myTemplate",
     data, // pass the data defined previously
