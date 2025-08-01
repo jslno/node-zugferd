@@ -27,7 +27,6 @@ import { Features } from "@/components/blocks/features";
 import { ProfileTree } from "@/components/blocks/profile-tree";
 import { NeedHelp } from "@/components/blocks/need-help";
 import { GithubInfo } from "@/components/github-info";
-import { GenerateSecret } from "@/components/generate-secret";
 import { APIFeatures } from "@/components/blocks/api-features";
 import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
 import React from "react";
@@ -199,7 +198,6 @@ export default async function Page(props: {
 						ProfileTree,
 						NeedHelp,
 						GithubInfo,
-						GenerateSecret,
 						pre: ({ ref: _ref, ...props }) => (
 							<CodeBlock
 								viewportProps={{
