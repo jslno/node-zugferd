@@ -6,20 +6,20 @@ import type { ZugferdApiContext } from "../init";
 import type { ZugferdApiOptions } from "../types/options";
 
 export const toSvelteKitHandler = (invoicer: {
-	apiHandler: (request: Request) => any;
-	apiContext: ZugferdApiContext;
+	handler: (request: Request) => any;
+	context: ZugferdApiContext;
 }) => {
-	return (event: { request: Request }) => invoicer.apiHandler(event.request);
+	return (event: { request: Request }) => invoicer.handler(event.request);
 };
 
 export const svelteKitHandler = async ({
-	invoicer,
+	api,
 	event,
 	resolve,
 }: {
-	invoicer: {
-		apiHandler: (request: Request) => any;
-		apiContext: ZugferdApiContext;
+	api: {
+		handler: (request: Request) => any;
+		context: ZugferdApiContext;
 	};
 	event: { request: Request; url: URL };
 	resolve: (event: any) => any;
@@ -32,8 +32,8 @@ export const svelteKitHandler = async ({
 		return resolve(event);
 	}
 	const { request, url } = event;
-	if (isApiPath(url.toString(), invoicer.apiContext.options)) {
-		return invoicer.apiHandler(request);
+	if (isApiPath(url.toString(), api.context.options)) {
+		return api.handler(request);
 	}
 	return resolve(event);
 };

@@ -1,12 +1,10 @@
-import type { InferSchema, Profile } from "node-zugferd/types";
+import type { Zugferd } from "node-zugferd";
 import { createApiEndpoint } from "../call";
-import { z } from "zod";
-import { HIDE_METADATA } from "../../utils/hide-metadata";
-import { sessionMiddleware } from "../middlewares/session";
-import { ZugferdApiError } from "..";
-import type { ZugferdApiOptions } from "../../types";
+import type { InferSchema } from "node-zugferd/types";
+import z from "zod";
+import { generatePdf } from "../generate-pdf";
 
-export const preview = <P extends Profile, O extends ZugferdApiOptions>() =>
+export const preview = <I extends Zugferd, T extends Record<string, any>>() =>
 	createApiEndpoint(
 		"/preview",
 		{
@@ -15,61 +13,37 @@ export const preview = <P extends Profile, O extends ZugferdApiOptions>() =>
 				template: z.string(),
 				data: z.record(z.string(), z.any()),
 			}),
-			use: [sessionMiddleware],
 			metadata: {
-				...HIDE_METADATA,
 				$Infer: {
 					body: {} as {
-						template: Exclude<keyof O["template"], number>;
-						data: InferSchema<P>;
+						template: Exclude<keyof T, number | symbol>;
+						data: InferSchema<I["options"]["profile"]>;
 					},
 				},
 			},
 		},
 		async (ctx) => {
 			const { context } = ctx;
-			const data = ctx.body.data as InferSchema<P>;
 
-			const templateEntry = Object.entries(ctx.context.options.template).find(
-				([key]) => key === ctx.body.template,
-			);
-
+			const canPreviewDocument = await ctx.context.authorize(ctx);
 			context.context.logger.debug(
-				`[api:${preview.name}] Available templates:`,
-				Object.keys(context.options.template),
+				`[api:${preview.name}] Authorization result: ${canPreviewDocument}`,
 			);
 
-			if (!templateEntry) {
+			if (!canPreviewDocument) {
 				context.context.logger.error(
-					`[api:${preview.name}] Template "${ctx.body.template.toString()}" not found`,
+					`[api:${preview.name}] Unauthorized request`,
 				);
-				throw new ZugferdApiError("BAD_REQUEST", {
-					message: "Template not found",
-				});
+				throw ctx.error("UNAUTHORIZED");
 			}
 
-			const [templateKey, template] = templateEntry;
+			const pdf = await generatePdf(ctx);
 
-			context.context.logger.debug(
-				`[api:${preview.name}] Using template "${templateKey}"`,
-			);
-
-			context.context.logger.debug(`[api:${preview.name}] Rendering HTML...`);
-			const body = await context.renderer.render(
-				{
-					data,
-					...context,
-				},
-				template.component,
-			);
-			context.context.logger.debug(
-				`[api:${preview.name}] Rendered HTML length: ${body.length}`,
-			);
-
-			return new Response(body, {
+			return new Response(pdf, {
 				headers: new Headers({
-					"Content-Type": "text/html",
+					"Content-Type": "application/pdf; charset=binary",
+					"Content-Disposition": "inline; filename=document.pdf",
 				}),
-			}) as any as string;
+			});
 		},
 	);

@@ -22,12 +22,10 @@
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
 		"@types/express": "^5.0.1",
-		"@types/jsonwebtoken": "^9.0.9",
 		"@types/node": "^22.10.7",
 		"@types/react": "^19.0.9",
 		"@types/react-dom": "^19.0.3",
 		"@vitejs/plugin-react": "^4.3.4",
-		"express": "^4.21.2",
 		"pdf-lib": "^1.17.1",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
@@ -40,8 +38,7 @@
 	},
 	"dependencies": {
 		"@better-fetch/fetch": "^1.1.17",
-		"better-call": "^1.0.5",
-		"jsonwebtoken": "^9.0.2",
+		"better-call": "^1.0.12",
 		"node-zugferd": "workspace:*",
 		"puppeteer": "^24.4.0",
 		"zod": "^3.24.1"
@@ -187,5 +184,7 @@
 			}
 		}
 	},
-	"files": ["dist"]
+	"files": [
+		"dist"
+	]
 }

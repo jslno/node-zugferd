@@ -4,16 +4,9 @@ import {
 } from "better-call/client";
 import type { Router } from "../api";
 import { getBaseURL } from "../utils/url";
-import type { Profile } from "node-zugferd/types";
 import type { Endpoint } from "better-call";
-
-type WithoutServerOnly<T extends Record<string, Endpoint>> = {
-	[K in keyof T]: T[K] extends Endpoint<any, infer O>
-		? O extends { metadata: { SERVER_ONLY: true } }
-			? never
-			: T[K]
-		: T[K];
-};
+import type { ZugferdApiContext } from "../init";
+import type { Zugferd } from "node-zugferd";
 
 type WithoutNonActions<T extends Record<string, Endpoint>> = {
 	[K in keyof T]: T[K] extends Endpoint<any, infer O>
@@ -23,18 +16,34 @@ type WithoutNonActions<T extends Record<string, Endpoint>> = {
 		: T[K];
 };
 
-type FilterEndpoints<T extends Record<string, Endpoint>> = WithoutNonActions<
-	WithoutServerOnly<T>
->;
-
 export type ClientOptions = Omit<RpcClientOptions, "baseURL"> & {
 	baseURL?: string;
 	basePath?: string;
 };
 
-export const createClient = <P extends Profile>(options?: ClientOptions) => {
+export const createClient = <
+	API extends {
+		context: Promise<ZugferdApiContext>;
+		invoicer: Zugferd;
+		templates: Record<string, any>;
+	},
+>(
+	options?: ClientOptions,
+) => {
 	const baseURL = getBaseURL(options?.baseURL, options?.basePath) || "";
-	return createRpcClient<FilterEndpoints<Router<P>["endpoints"]>>({
+	type Context = Awaited<API["context"]>;
+
+	return createRpcClient<
+		WithoutNonActions<
+			Router<
+				Context,
+				Context["options"],
+				Context["options"]["renderer"],
+				API["invoicer"],
+				API["templates"]
+			>["endpoints"]
+		>
+	>({
 		...options,
 		baseURL,
 	});

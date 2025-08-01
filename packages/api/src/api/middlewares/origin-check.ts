@@ -31,6 +31,9 @@ export const originCheckMiddleware = createApiMiddleware(async (ctx) => {
 			return false;
 		}
 		if (pattern.includes("*")) {
+			if (pattern.includes("://")) {
+				return wildcardMatch(pattern)(getOrigin(url) || url);
+			}
 			return wildcardMatch(pattern)(getHost(url));
 		}
 
@@ -89,6 +92,9 @@ export const originCheck = (
 				return false;
 			}
 			if (pattern.includes("*")) {
+				if (pattern.includes("://")) {
+					return wildcardMatch(pattern)(getOrigin(url) || url);
+				}
 				return wildcardMatch(pattern)(getHost(url));
 			}
 			return url.startsWith(pattern);

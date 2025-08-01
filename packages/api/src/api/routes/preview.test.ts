@@ -1,39 +1,58 @@
+import { PDFDocument } from "pdf-lib";
 import { getTestInstance } from "../../test-utils/test-instance";
 import { describe, expect, it } from "vitest";
-import { renderer } from "../../renderer/react";
+import { APIError } from "better-call";
 
 describe("preview", async () => {
-	const { client, invoicer, data } = await getTestInstance();
+	const { api, data } = await getTestInstance({
+		authorize: async (ctx) => {
+			const user = ctx.getHeader("X-User");
 
-	it("should generate preview from template", async () => {
-		const r = await invoicer.api.preview({
-			body: {
-				template: "default",
-				data,
-			},
-		});
-
-		expect(r.headers.get("Content-Type")).toEqual("text/html");
-		const ctx = await invoicer.apiContext;
-		expect(await r.text()).toEqual(
-			await renderer.render(
-				{
-					data,
-					...ctx,
-				},
-				ctx.options.template.default.component,
-			),
-		);
+			return user === "1";
+		},
 	});
 
-	it("should not generate preview without authorization", async () => {
-		const res = await client("@post/preview", {
+	it("should generate a pdf from a template", async () => {
+		const response = await api.api.preview({
 			body: {
 				template: "default",
 				data,
 			},
+			headers: {
+				"X-User": "1",
+			},
 		});
 
-		expect(res.error?.status).toEqual(401);
+		expect(response.headers.get("Content-Type")).toEqual(
+			"application/pdf; charset=binary",
+		);
+
+		await expect(
+			PDFDocument.load(await response.arrayBuffer(), {
+				throwOnInvalidObject: true,
+			}),
+		).resolves.toBeDefined();
+	});
+
+	it("should not generate a pdf when unauthorized", async () => {
+		let error: Error | null = null;
+		try {
+			await api.api.preview({
+				body: {
+					template: "default",
+					data,
+				},
+				headers: {
+					"X-User": "2",
+				},
+			});
+		} catch (err) {
+			if (err instanceof Error) {
+				error = err;
+			}
+		}
+
+		expect(error).toBeInstanceOf(APIError);
+		expect((error as APIError).statusCode).toEqual(401);
 	});
 });

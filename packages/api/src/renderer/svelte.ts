@@ -1,16 +1,27 @@
 import type { Renderer } from "../types/renderer";
-import type { Component } from "svelte";
+import type { Component, SvelteComponent } from "svelte";
 import { render } from "svelte/server";
 
-export const renderer = {
-	render: (ctx, component) => {
-		const res = render(component, {
-			props: { data: ctx.data },
-		});
+export const svelteRenderer = (options?: {
+	context?: Map<any, any>;
+	idPrefix?: string;
+}) =>
+	({
+		render: ({ component, props }) => {
+			const res = render(component, {
+				props,
+				...options,
+			});
 
-		return `<!DOCTYPE html><html><head><meta charset="UTF-8 /><meta name="viewport" content="width=device-width, initial-scale=1" />${res.head}</head><body>${res.body}</body></html>`;
-	},
-	$Infer: {
-		Template: {} as Component,
-	},
-} satisfies Renderer;
+			return {
+				head: res.head,
+				body: res.body,
+			};
+		},
+		$Infer: {
+			Component: {} as {
+				component: Component<any> | SvelteComponent<any>;
+				props: any;
+			},
+		},
+	}) satisfies Renderer;
