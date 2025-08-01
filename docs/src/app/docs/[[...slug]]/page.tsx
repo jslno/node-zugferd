@@ -9,7 +9,12 @@ import { notFound } from "next/navigation";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import { buttonVariants } from "@/components/ui/button";
 import { contents } from "@/data/sidebar-items";
-import { BookOpenIcon, ChevronLeft, ChevronRight, EditIcon } from "lucide-react";
+import {
+	BookOpenIcon,
+	ChevronLeft,
+	ChevronRight,
+	EditIcon,
+} from "lucide-react";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 import { File, Folder, Files } from "fumadocs-ui/components/files";
 import { TypeTable } from "fumadocs-ui/components/type-table";
