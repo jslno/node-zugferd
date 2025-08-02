@@ -30,6 +30,8 @@ import { GithubInfo } from "@/components/github-info";
 import { APIFeatures } from "@/components/blocks/api-features";
 import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
 import React from "react";
+import { LLMCopyButton } from "@/components/llm-copy-button";
+import { ViewOptions } from "@/components/view-options";
 
 export default async function Page(props: {
 	params: Promise<{ slug?: string[] }>;
@@ -41,6 +43,7 @@ export default async function Page(props: {
 	const MDX = page.data.body;
 
 	const { nextPage, prevPage } = getPageLinks(page.url);
+	const githubUrl = `https://github.com/jslno/node-zugferd/blob/main/docs/content/docs/${page.path}`;
 
 	return (
 		<DocsPage
@@ -60,7 +63,7 @@ export default async function Page(props: {
 					<div className="mb-10 space-y-6">
 						<div className="flex items-center gap-4">
 							<Link
-								href={`https://github.com/jslno/node-zugferd/blob/main/docs/content/docs/${page.path}`}
+								href={githubUrl}
 								className={buttonVariants({
 									size: "sm",
 									variant: "ghost",
@@ -128,6 +131,10 @@ export default async function Page(props: {
 		>
 			<DocsTitle>{page.data.title}</DocsTitle>
 			<DocsDescription>{page.data.description}</DocsDescription>
+			<div className="flex flex-row gap-2 items-center border-b pb-6">
+				<LLMCopyButton />
+				<ViewOptions markdownUrl={`${page.url}.mdx`} githubUrl={githubUrl} />
+			</div>
 			<DocsBody>
 				<MDX
 					components={{
