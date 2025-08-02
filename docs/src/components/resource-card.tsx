@@ -1,9 +1,12 @@
 import { ArrowUpRightIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Resource } from "./resource";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 export const ResourceCard = ({
 	title,
+	badge,
+	badgeTooltip,
 	description,
 	href,
 	tags,
@@ -27,8 +30,17 @@ export const ResourceCard = ({
 			<div>
 				<ArrowUpRightIcon className="absolute top-3 right-3 size-4 scale-100 group-hover:scale-115 origin-bottom-left group-hover:opacity-100 opacity-80 text-muted-foreground transition-all group-hover:text-foreground" />
 				<div className="px-4 flex flex-col">
-					<h3 className="font-semibold text-md tracking-tight leading-tight underline decoration-transparent group-hover:decoration-foreground group-focus-visible:decoration-foreground transition-colors duration-200">
+					<h3 className="flex items-center gap-2 font-semibold text-md tracking-tight leading-tight underline decoration-transparent group-hover:decoration-foreground group-focus-visible:decoration-foreground transition-colors duration-200">
 						{title}
+						{badge &&
+							(badgeTooltip ? (
+								<Tooltip>
+									<TooltipTrigger className="shrink-0">{badge}</TooltipTrigger>
+									<TooltipContent>{badgeTooltip}</TooltipContent>
+								</Tooltip>
+							) : (
+								<div className="shrink-0">{badge}</div>
+							))}
 					</h3>
 					<p className="-mt-1 no-underline! text-muted-foreground leading-tight text-xs">
 						{host}
