@@ -9,7 +9,7 @@ export const init = async (options: ZugferdApiOptions) => {
 		...options,
 		onAPIError: {
 			throw: true,
-			...options.onAPIError,
+			...(options.onAPIError ?? {}),
 		},
 	};
 	const context = options.invoicer.context;
