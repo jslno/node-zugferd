@@ -79,6 +79,9 @@ importers:
       '@radix-ui/react-dialog':
         specifier: ^1.1.6
         version: 1.1.14(@types/react-dom@19.1.7(@types/react@19.1.9))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@radix-ui/react-popover':
+        specifier: ^1.1.14
+        version: 1.1.14(@types/react-dom@19.1.7(@types/react@19.1.9))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@radix-ui/react-select':
         specifier: ^2.1.6
         version: 2.2.5(@types/react-dom@19.1.7(@types/react@19.1.9))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -144,7 +147,7 @@ importers:
         version: 0.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       node-zugferd:
         specifier: latest
-        version: 0.0.11-beta.1
+        version: 0.0.11-beta.2
       prism-react-renderer:
         specifier: ^2.4.1
         version: 2.4.1(react@19.1.1)
@@ -3241,8 +3244,8 @@ packages:
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
-  node-zugferd@0.0.11-beta.1:
-    resolution: {integrity: sha512-Cbn0CUOozFwucBas6bDqSd2mo7a2P4A2YCgJd6s0PTIQPqEJ3Tn8+uu17NaWxgj7TLBE1Xj9MQIqNWzBUmdkyQ==}
+  node-zugferd@0.0.11-beta.2:
+    resolution: {integrity: sha512-fEfoxfB3KEp6/oPa7SLP+0DOuxDy2Md2SLpI3YQC1jHVH7f2ktftwnt/DOHcLQ6GOqe9b3wGil9ayEdJxBnpGg==}
 
   npm-to-yarn@3.0.1:
     resolution: {integrity: sha512-tt6PvKu4WyzPwWUzy/hvPFqn+uwXO0K1ZHka8az3NnrhWJDmSqI8ncWq0fkL0k/lmmi5tAC11FXwXuh0rFbt1A==}
@@ -7186,7 +7189,7 @@ snapshots:
 
   node-releases@2.0.19: {}
 
-  node-zugferd@0.0.11-beta.1:
+  node-zugferd@0.0.11-beta.2:
     dependencies:
       defu: 6.1.4
       fast-xml-parser: 4.5.3
