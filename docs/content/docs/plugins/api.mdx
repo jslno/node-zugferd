@@ -573,3 +573,13 @@ api({
 
 - `throw`: Throw an error on API error (default: `true`)
 - `onError`: Custom error handler
+
+### `disabledPaths?`
+
+Disable specific api paths.
+
+```ts
+api({
+  disabledPaths: ["/preview"],
+});
+```

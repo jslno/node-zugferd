@@ -125,10 +125,11 @@ export const router = <
 	ctx: C,
 ) => {
 	const { api } = getEndpoints<C, O, R, I, T>(ctx);
+	const basePath = new URL(ctx.baseURL).pathname;
 
 	return createRouter(api, {
 		routerContext: ctx,
-		basePath: new URL(ctx.baseURL).pathname,
+		basePath,
 		openapi: {
 			disabled: true,
 		},
@@ -148,6 +149,13 @@ export const router = <
 			if (ctx.options.onAPIError?.onError) {
 				ctx.options.onAPIError.onError(e, ctx);
 				return;
+      }
+    },
+		onRequest: async (req) => {
+			const disabledPaths = ctx.options.disabledPaths || [];
+			const path = new URL(req.url).pathname.replace(basePath, "");
+			if (disabledPaths.includes(path)) {
+				return new Response("Not Found", { status: 404 });
 			}
 		},
 	});

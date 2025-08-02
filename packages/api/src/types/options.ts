@@ -37,4 +37,5 @@ export type ZugferdApiOptions = {
 		 */
 		onError?: (error: unknown, ctx: ZugferdApiContext) => Promisable<void>;
 	};
+	disabledPaths?: string[];
 };

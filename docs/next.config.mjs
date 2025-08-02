@@ -14,6 +14,14 @@ const config = {
 			},
 		];
 	},
+	rewrites: async () => {
+		return [
+			{
+				source: "/docs/:path*.mdx",
+				destination: "/llms.txt/:path*",
+			},
+		];
+	},
 	serverExternalPackages: [
 		"@ts-morph",
 		"typescript",
