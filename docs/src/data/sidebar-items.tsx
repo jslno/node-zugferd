@@ -265,7 +265,7 @@ export const contents: Content[] = [
 			{
 				Icon: BookIcon,
 				title: "Resources",
-				href: "/docs/reference/resources"
+				href: "/docs/reference/resources",
 			},
 			{
 				Icon: GitPullRequestCreateArrowIcon,
