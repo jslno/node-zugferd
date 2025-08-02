@@ -138,6 +138,18 @@ export const router = <
 				middleware: originCheckMiddleware,
 			},
 		],
+		onError: (e) => {
+			if (e instanceof APIError && e.status === "FOUND") {
+				return;
+			}
+			if (ctx.options.onAPIError?.throw) {
+				throw e;
+			}
+			if (ctx.options.onAPIError?.onError) {
+				ctx.options.onAPIError.onError(e, ctx);
+				return;
+			}
+		},
 	});
 };
 

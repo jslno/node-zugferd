@@ -5,6 +5,13 @@ import type { GenericEndpointContext } from "./types/context";
 import type { Promisable } from "./types/helper";
 
 export const init = async (options: ZugferdApiOptions) => {
+	options = {
+		...options,
+		onAPIError: {
+			throw: true,
+			...options.onAPIError,
+		},
+	};
 	const context = options.invoicer.context;
 	context.logger.debug(`[api:${init.name}] Initializing API Plugin`);
 
