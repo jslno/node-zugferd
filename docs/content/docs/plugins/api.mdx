@@ -556,3 +556,12 @@ api({
 - `disableCSRFCheck?`: Disable trusted origins check (&#9888; security risk)
 - `puppeteer.launch?`: Launch options for puppeteer, See [`LaunchOptions`](https://pptr.dev/api/puppeteer.launchoptions)
 
+### `disabledPaths?`
+
+Disable specific api paths.
+
+```ts
+api({
+  disabledPaths: ["/preview"],
+});
+```
