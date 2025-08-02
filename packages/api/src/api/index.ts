@@ -149,8 +149,8 @@ export const router = <
 			if (ctx.options.onAPIError?.onError) {
 				ctx.options.onAPIError.onError(e, ctx);
 				return;
-      }
-    },
+			}
+		},
 		onRequest: async (req) => {
 			const disabledPaths = ctx.options.disabledPaths || [];
 			const path = new URL(req.url).pathname.replace(basePath, "");
