@@ -1,0 +1,58 @@
+---
+title: Resources
+description: A curated collection of resources related to e-invoicing.
+---
+
+import { Resource } from "@/components/resource";
+import { BadgeCheckIcon } from "lucide-react";
+
+# Collection [toc]
+
+<Resource
+  resources={[
+    {
+      title: "ZUGFeRD/Factur-X",
+      description:
+        "ZUGFeRD is a cross-industry data format for electronic invoice data exchange that was developed by the Forum for Electronic Invoicing Germany (FeRD) - with support from the Federal Ministry of Economics and Energy.",
+      href: "https://www.ferd-net.de/en/standards/zugferd/factur-x",
+      badge: <BadgeCheckIcon className="size-4 text-foreground/60" />,
+      badgeTooltip: "Official",
+      tags: ["standard"],
+    },
+    {
+      title: "ZF/FX Validation",
+      description:
+        "Web-based tool by the ZUGFeRD community with OXSEED, Mustang, and XML.Valitool. Validates ZUGFeRD/Factur-X invoices against schema and profile rules for e-invoicing compliance in Germany.",
+      href: "https://www.zugferd-community.net/en/open_community/validation",
+      tags: ["validation"],
+    },
+    {
+      title: "Quba-Viewer",
+      description:
+        "Open-source desktop app and Mustangproject sister project for viewing Factur-X/ZUGFeRD and XRechnung invoices. Displays embedded PDFs with invoice data for easy inspection.",
+      href: "https://quba-viewer.org/",
+      tags: ["visualization", "open source"],
+    },
+    {
+      title: "Mustangproject",
+      description:
+        "Open-source Java library, validator, and tool for Factur-X/ZUGFeRD and UN/CEFACT CII (XRechnung). Creates, reads, and validates e-invoices against official standards for compliant electronic invoicing.",
+      href: "https://www.mustangproject.org",
+      tags: ["validation", "generation", "parsing", "open source"],
+    },
+    {
+      title: "OpenXRechnungToolbox",
+      description:
+        "Graphical user interface for the visualization and validation of XRechnung (and other EN16931-compliant e-invoices), as well as a tool for calculating and checking routing IDs (Leitweg-IDs).",
+      href: "https://github.com/jcthiele/OpenXRechnungToolbox",
+      tags: ["visualization", "validation", "open source"],
+    },
+    {
+      title: "Ultramarin eRechnung Viewer",
+      description:
+        "Offline desktop application for visualizing electronic invoices, including CEN invoices and XRechnung 3.0. Uses KOSIT visualization to display invoice data clearly and support compliance checks.",
+      href: "https://www.ultramarinviewer.de",
+      tags: ["visualization"],
+    },
+  ]}
+/>
