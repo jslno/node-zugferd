@@ -8,8 +8,8 @@ export type Resource = {
 	title: string;
 	description: string;
 	href: string;
-    badge?: React.ReactNode,
-    badgeTooltip?: string;
+	badge?: React.ReactNode;
+	badgeTooltip?: string;
 	tags?: string[];
 	className?: string;
 };
