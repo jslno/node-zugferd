@@ -1,6 +1,7 @@
 import { Content } from "@/types/content";
 import {
 	BlocksIcon,
+	BookIcon,
 	BookOpenIcon,
 	ChartColumn,
 	CirclePlayIcon,
@@ -260,6 +261,11 @@ export const contents: Content[] = [
 				),
 				title: "Options",
 				href: "/docs/reference/options",
+			},
+			{
+				Icon: BookIcon,
+				title: "Resources",
+				href: "/docs/reference/resources"
 			},
 			{
 				Icon: GitPullRequestCreateArrowIcon,
