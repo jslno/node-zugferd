@@ -17,6 +17,10 @@ import { type PickRequired } from "../../types/helper";
 import { base64ToUint8Array } from "../../utils/helper";
 import { colors } from "../../utils/logger";
 import type { InternalContext } from "../../init";
+import type { HybridDocumentCode } from "../../codelists/hybrid-document.gen";
+import type { FilenameCode } from "../../codelists/filename.gen";
+import type { HybridVersionCode } from "../../codelists/hybrid-version.gen";
+import type { HybridConformanceCode } from "../../codelists/hybrid-conformance.gen";
 
 export type PDFAMetadata = {
 	author?: string;
@@ -29,10 +33,10 @@ export type PDFAMetadata = {
 	title?: string;
 	keywords?: string[];
 	facturX: {
-		documentType: "INVOICE" | "ORDER";
-		documentFileName: string;
-		version: string;
-		conformanceLevel: string;
+		documentType: HybridDocumentCode;
+		documentFileName: FilenameCode;
+		version: HybridVersionCode;
+		conformanceLevel: HybridConformanceCode;
 	};
 };
 
