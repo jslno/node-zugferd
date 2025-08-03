@@ -1,0 +1,1607 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<entry>
+		<value>AAA</value>
+		<name>Goods item description</name>
+	</entry>
+	<entry>
+		<value>AAB</value>
+		<name>Payment term</name>
+	</entry>
+	<entry>
+		<value>AAC</value>
+		<name>Dangerous goods additional information</name>
+	</entry>
+	<entry>
+		<value>AAD</value>
+		<name>Dangerous goods technical name</name>
+	</entry>
+	<entry>
+		<value>AAE</value>
+		<name>Acknowledgement description</name>
+	</entry>
+	<entry>
+		<value>AAF</value>
+		<name>Rate additional information</name>
+	</entry>
+	<entry>
+		<value>AAG</value>
+		<name>Party instructions</name>
+	</entry>
+	<entry>
+		<value>AAI</value>
+		<name>General information</name>
+	</entry>
+	<entry>
+		<value>AAJ</value>
+		<name>Additional conditions of sale/purchase</name>
+	</entry>
+	<entry>
+		<value>AAK</value>
+		<name>Price conditions</name>
+	</entry>
+	<entry>
+		<value>AAL</value>
+		<name>Goods dimensions in characters</name>
+	</entry>
+	<entry>
+		<value>AAM</value>
+		<name>Equipment re-usage restrictions</name>
+	</entry>
+	<entry>
+		<value>AAN</value>
+		<name>Handling restriction</name>
+	</entry>
+	<entry>
+		<value>AAO</value>
+		<name>Error description (free text)</name>
+	</entry>
+	<entry>
+		<value>AAP</value>
+		<name>Response (free text)</name>
+	</entry>
+	<entry>
+		<value>AAQ</value>
+		<name>Package content's description</name>
+	</entry>
+	<entry>
+		<value>AAR</value>
+		<name>Terms of delivery</name>
+	</entry>
+	<entry>
+		<value>AAS</value>
+		<name>Bill of lading remarks</name>
+	</entry>
+	<entry>
+		<value>AAT</value>
+		<name>Mode of settlement information</name>
+	</entry>
+	<entry>
+		<value>AAU</value>
+		<name>Consignment invoice information</name>
+	</entry>
+	<entry>
+		<value>AAV</value>
+		<name>Clearance invoice information</name>
+	</entry>
+	<entry>
+		<value>AAW</value>
+		<name>Letter of credit information</name>
+	</entry>
+	<entry>
+		<value>AAX</value>
+		<name>License information</name>
+	</entry>
+	<entry>
+		<value>AAY</value>
+		<name>Certification statements</name>
+	</entry>
+	<entry>
+		<value>AAZ</value>
+		<name>Additional export information</name>
+	</entry>
+	<entry>
+		<value>ABA</value>
+		<name>Tariff statements</name>
+	</entry>
+	<entry>
+		<value>ABB</value>
+		<name>Medical history</name>
+	</entry>
+	<entry>
+		<value>ABC</value>
+		<name>Conditions of sale or purchase</name>
+	</entry>
+	<entry>
+		<value>ABD</value>
+		<name>Contract document type</name>
+	</entry>
+	<entry>
+		<value>ABE</value>
+		<name>Additional terms and/or conditions (documentary credit)</name>
+	</entry>
+	<entry>
+		<value>ABF</value>
+		<name>Instructions or information about standby documentary</name>
+	</entry>
+	<entry>
+		<value>ABG</value>
+		<name>Instructions or information about partial shipment(s)</name>
+	</entry>
+	<entry>
+		<value>ABH</value>
+		<name>Instructions or information about transhipment(s)</name>
+	</entry>
+	<entry>
+		<value>ABI</value>
+		<name>Additional handling instructions documentary credit</name>
+	</entry>
+	<entry>
+		<value>ABJ</value>
+		<name>Domestic routing information</name>
+	</entry>
+	<entry>
+		<value>ABK</value>
+		<name>Chargeable category of equipment</name>
+	</entry>
+	<entry>
+		<value>ABL</value>
+		<name>Government information</name>
+	</entry>
+	<entry>
+		<value>ABM</value>
+		<name>Onward routing information</name>
+	</entry>
+	<entry>
+		<value>ABN</value>
+		<name>Accounting information</name>
+	</entry>
+	<entry>
+		<value>ABO</value>
+		<name>Discrepancy information</name>
+	</entry>
+	<entry>
+		<value>ABP</value>
+		<name>Confirmation instructions</name>
+	</entry>
+	<entry>
+		<value>ABQ</value>
+		<name>Method of issuance</name>
+	</entry>
+	<entry>
+		<value>ABR</value>
+		<name>Documents delivery instructions</name>
+	</entry>
+	<entry>
+		<value>ABS</value>
+		<name>Additional conditions</name>
+	</entry>
+	<entry>
+		<value>ABT</value>
+		<name>Information/instructions about additional amounts covered</name>
+	</entry>
+	<entry>
+		<value>ABU</value>
+		<name>Deferred payment termed additional</name>
+	</entry>
+	<entry>
+		<value>ABV</value>
+		<name>Acceptance terms additional</name>
+	</entry>
+	<entry>
+		<value>ABW</value>
+		<name>Negotiation terms additional</name>
+	</entry>
+	<entry>
+		<value>ABX</value>
+		<name>Document name and documentary requirements</name>
+	</entry>
+	<entry>
+		<value>ABZ</value>
+		<name>Instructions/information about revolving documentary credit</name>
+	</entry>
+	<entry>
+		<value>ACA</value>
+		<name>Documentary requirements</name>
+	</entry>
+	<entry>
+		<value>ACB</value>
+		<name>Additional information</name>
+	</entry>
+	<entry>
+		<value>ACC</value>
+		<name>Factor assignment clause</name>
+	</entry>
+	<entry>
+		<value>ACD</value>
+		<name>Reason</name>
+	</entry>
+	<entry>
+		<value>ACE</value>
+		<name>Dispute</name>
+	</entry>
+	<entry>
+		<value>ACF</value>
+		<name>Additional attribute information</name>
+	</entry>
+	<entry>
+		<value>ACG</value>
+		<name>Absence declaration</name>
+	</entry>
+	<entry>
+		<value>ACH</value>
+		<name>Aggregation statement</name>
+	</entry>
+	<entry>
+		<value>ACI</value>
+		<name>Compilation statement</name>
+	</entry>
+	<entry>
+		<value>ACJ</value>
+		<name>Definitional exception</name>
+	</entry>
+	<entry>
+		<value>ACK</value>
+		<name>Privacy statement</name>
+	</entry>
+	<entry>
+		<value>ACL</value>
+		<name>Quality statement</name>
+	</entry>
+	<entry>
+		<value>ACM</value>
+		<name>Statistical description</name>
+	</entry>
+	<entry>
+		<value>ACN</value>
+		<name>Statistical definition</name>
+	</entry>
+	<entry>
+		<value>ACO</value>
+		<name>Statistical name</name>
+	</entry>
+	<entry>
+		<value>ACP</value>
+		<name>Statistical title</name>
+	</entry>
+	<entry>
+		<value>ACQ</value>
+		<name>Off-dimension information</name>
+	</entry>
+	<entry>
+		<value>ACR</value>
+		<name>Unexpected stops information</name>
+	</entry>
+	<entry>
+		<value>ACS</value>
+		<name>Principles</name>
+	</entry>
+	<entry>
+		<value>ACT</value>
+		<name>Terms and definition</name>
+	</entry>
+	<entry>
+		<value>ACU</value>
+		<name>Segment name</name>
+	</entry>
+	<entry>
+		<value>ACV</value>
+		<name>Simple data element name</name>
+	</entry>
+	<entry>
+		<value>ACW</value>
+		<name>Scope</name>
+	</entry>
+	<entry>
+		<value>ACX</value>
+		<name>Message type name</name>
+	</entry>
+	<entry>
+		<value>ACY</value>
+		<name>Introduction</name>
+	</entry>
+	<entry>
+		<value>ACZ</value>
+		<name>Glossary</name>
+	</entry>
+	<entry>
+		<value>ADA</value>
+		<name>Functional definition</name>
+	</entry>
+	<entry>
+		<value>ADB</value>
+		<name>Examples</name>
+	</entry>
+	<entry>
+		<value>ADC</value>
+		<name>Cover page</name>
+	</entry>
+	<entry>
+		<value>ADD</value>
+		<name>Dependency (syntax) notes</name>
+	</entry>
+	<entry>
+		<value>ADE</value>
+		<name>Code value name</name>
+	</entry>
+	<entry>
+		<value>ADF</value>
+		<name>Code list name</name>
+	</entry>
+	<entry>
+		<value>ADG</value>
+		<name>Clarification of usage</name>
+	</entry>
+	<entry>
+		<value>ADH</value>
+		<name>Composite data element name</name>
+	</entry>
+	<entry>
+		<value>ADI</value>
+		<name>Field of application</name>
+	</entry>
+	<entry>
+		<value>ADJ</value>
+		<name>Type of assets and liabilities</name>
+	</entry>
+	<entry>
+		<value>ADK</value>
+		<name>Promotion information</name>
+	</entry>
+	<entry>
+		<value>ADL</value>
+		<name>Meter condition</name>
+	</entry>
+	<entry>
+		<value>ADM</value>
+		<name>Meter reading information</name>
+	</entry>
+	<entry>
+		<value>ADN</value>
+		<name>Type of transaction reason</name>
+	</entry>
+	<entry>
+		<value>ADO</value>
+		<name>Type of survey question</name>
+	</entry>
+	<entry>
+		<value>ADP</value>
+		<name>Carrier's agent counter information</name>
+	</entry>
+	<entry>
+		<value>ADQ</value>
+		<name>Description of work item on equipment</name>
+	</entry>
+	<entry>
+		<value>ADR</value>
+		<name>Message definition</name>
+	</entry>
+	<entry>
+		<value>ADS</value>
+		<name>Booked item information</name>
+	</entry>
+	<entry>
+		<value>ADT</value>
+		<name>Source of document</name>
+	</entry>
+	<entry>
+		<value>ADU</value>
+		<name>Note</name>
+	</entry>
+	<entry>
+		<value>ADV</value>
+		<name>Fixed part of segment clarification text</name>
+	</entry>
+	<entry>
+		<value>ADW</value>
+		<name>Characteristics of goods</name>
+	</entry>
+	<entry>
+		<value>ADX</value>
+		<name>Additional discharge instructions</name>
+	</entry>
+	<entry>
+		<value>ADY</value>
+		<name>Container stripping instructions</name>
+	</entry>
+	<entry>
+		<value>ADZ</value>
+		<name>CSC (Container Safety Convention) plate information</name>
+	</entry>
+	<entry>
+		<value>AEA</value>
+		<name>Cargo remarks</name>
+	</entry>
+	<entry>
+		<value>AEB</value>
+		<name>Temperature control instructions</name>
+	</entry>
+	<entry>
+		<value>AEC</value>
+		<name>Text refers to expected data</name>
+	</entry>
+	<entry>
+		<value>AED</value>
+		<name>Text refers to received data</name>
+	</entry>
+	<entry>
+		<value>AEE</value>
+		<name>Section clarification text</name>
+	</entry>
+	<entry>
+		<value>AEF</value>
+		<name>Information to the beneficiary</name>
+	</entry>
+	<entry>
+		<value>AEG</value>
+		<name>Information to the applicant</name>
+	</entry>
+	<entry>
+		<value>AEH</value>
+		<name>Instructions to the beneficiary</name>
+	</entry>
+	<entry>
+		<value>AEI</value>
+		<name>Instructions to the applicant</name>
+	</entry>
+	<entry>
+		<value>AEJ</value>
+		<name>Controlled atmosphere</name>
+	</entry>
+	<entry>
+		<value>AEK</value>
+		<name>Take off annotation</name>
+	</entry>
+	<entry>
+		<value>AEL</value>
+		<name>Price variation narrative</name>
+	</entry>
+	<entry>
+		<value>AEM</value>
+		<name>Documentary credit amendment instructions</name>
+	</entry>
+	<entry>
+		<value>AEN</value>
+		<name>Standard method narrative</name>
+	</entry>
+	<entry>
+		<value>AEO</value>
+		<name>Project narrative</name>
+	</entry>
+	<entry>
+		<value>AEP</value>
+		<name>Radioactive goods, additional information</name>
+	</entry>
+	<entry>
+		<value>AEQ</value>
+		<name>Bank-to-bank information</name>
+	</entry>
+	<entry>
+		<value>AER</value>
+		<name>Reimbursement instructions</name>
+	</entry>
+	<entry>
+		<value>AES</value>
+		<name>Reason for amending a message</name>
+	</entry>
+	<entry>
+		<value>AET</value>
+		<name>Instructions to the paying and/or accepting and/or</name>
+	</entry>
+	<entry>
+		<value>AEU</value>
+		<name>Interest instructions</name>
+	</entry>
+	<entry>
+		<value>AEV</value>
+		<name>Agent commission</name>
+	</entry>
+	<entry>
+		<value>AEW</value>
+		<name>Remitting bank instructions</name>
+	</entry>
+	<entry>
+		<value>AEX</value>
+		<name>Instructions to the collecting bank</name>
+	</entry>
+	<entry>
+		<value>AEY</value>
+		<name>Collection amount instructions</name>
+	</entry>
+	<entry>
+		<value>AEZ</value>
+		<name>Internal auditing information</name>
+	</entry>
+	<entry>
+		<value>AFA</value>
+		<name>Constraint</name>
+	</entry>
+	<entry>
+		<value>AFB</value>
+		<name>Comment</name>
+	</entry>
+	<entry>
+		<value>AFC</value>
+		<name>Semantic note</name>
+	</entry>
+	<entry>
+		<value>AFD</value>
+		<name>Help text</name>
+	</entry>
+	<entry>
+		<value>AFE</value>
+		<name>Legend</name>
+	</entry>
+	<entry>
+		<value>AFF</value>
+		<name>Batch code structure</name>
+	</entry>
+	<entry>
+		<value>AFG</value>
+		<name>Product application</name>
+	</entry>
+	<entry>
+		<value>AFH</value>
+		<name>Customer complaint</name>
+	</entry>
+	<entry>
+		<value>AFI</value>
+		<name>Probable cause of fault</name>
+	</entry>
+	<entry>
+		<value>AFJ</value>
+		<name>Defect description</name>
+	</entry>
+	<entry>
+		<value>AFK</value>
+		<name>Repair description</name>
+	</entry>
+	<entry>
+		<value>AFL</value>
+		<name>Review comments</name>
+	</entry>
+	<entry>
+		<value>AFM</value>
+		<name>Title</name>
+	</entry>
+	<entry>
+		<value>AFN</value>
+		<name>Description of amount</name>
+	</entry>
+	<entry>
+		<value>AFO</value>
+		<name>Responsibilities</name>
+	</entry>
+	<entry>
+		<value>AFP</value>
+		<name>Supplier</name>
+	</entry>
+	<entry>
+		<value>AFQ</value>
+		<name>Purchase region</name>
+	</entry>
+	<entry>
+		<value>AFR</value>
+		<name>Affiliation</name>
+	</entry>
+	<entry>
+		<value>AFS</value>
+		<name>Borrower</name>
+	</entry>
+	<entry>
+		<value>AFT</value>
+		<name>Line of business</name>
+	</entry>
+	<entry>
+		<value>AFU</value>
+		<name>Financial institution</name>
+	</entry>
+	<entry>
+		<value>AFV</value>
+		<name>Business founder</name>
+	</entry>
+	<entry>
+		<value>AFW</value>
+		<name>Business history</name>
+	</entry>
+	<entry>
+		<value>AFX</value>
+		<name>Banking arrangements</name>
+	</entry>
+	<entry>
+		<value>AFY</value>
+		<name>Business origin</name>
+	</entry>
+	<entry>
+		<value>AFZ</value>
+		<name>Brand names' description</name>
+	</entry>
+	<entry>
+		<value>AGA</value>
+		<name>Business financing details</name>
+	</entry>
+	<entry>
+		<value>AGB</value>
+		<name>Competition</name>
+	</entry>
+	<entry>
+		<value>AGC</value>
+		<name>Construction process details</name>
+	</entry>
+	<entry>
+		<value>AGD</value>
+		<name>Construction specialty</name>
+	</entry>
+	<entry>
+		<value>AGE</value>
+		<name>Contract information</name>
+	</entry>
+	<entry>
+		<value>AGF</value>
+		<name>Corporate filing</name>
+	</entry>
+	<entry>
+		<value>AGG</value>
+		<name>Customer information</name>
+	</entry>
+	<entry>
+		<value>AGH</value>
+		<name>Copyright notice</name>
+	</entry>
+	<entry>
+		<value>AGI</value>
+		<name>Contingent debt</name>
+	</entry>
+	<entry>
+		<value>AGJ</value>
+		<name>Conviction details</name>
+	</entry>
+	<entry>
+		<value>AGK</value>
+		<name>Equipment</name>
+	</entry>
+	<entry>
+		<value>AGL</value>
+		<name>Workforce description</name>
+	</entry>
+	<entry>
+		<value>AGM</value>
+		<name>Exemption</name>
+	</entry>
+	<entry>
+		<value>AGN</value>
+		<name>Future plans</name>
+	</entry>
+	<entry>
+		<value>AGO</value>
+		<name>Interviewee conversation information</name>
+	</entry>
+	<entry>
+		<value>AGP</value>
+		<name>Intangible asset</name>
+	</entry>
+	<entry>
+		<value>AGQ</value>
+		<name>Inventory</name>
+	</entry>
+	<entry>
+		<value>AGR</value>
+		<name>Investment</name>
+	</entry>
+	<entry>
+		<value>AGS</value>
+		<name>Intercompany relations information</name>
+	</entry>
+	<entry>
+		<value>AGT</value>
+		<name>Joint venture</name>
+	</entry>
+	<entry>
+		<value>AGU</value>
+		<name>Loan</name>
+	</entry>
+	<entry>
+		<value>AGV</value>
+		<name>Long term debt</name>
+	</entry>
+	<entry>
+		<value>AGW</value>
+		<name>Location</name>
+	</entry>
+	<entry>
+		<value>AGX</value>
+		<name>Current legal structure</name>
+	</entry>
+	<entry>
+		<value>AGY</value>
+		<name>Marital contract</name>
+	</entry>
+	<entry>
+		<value>AGZ</value>
+		<name>Marketing activities</name>
+	</entry>
+	<entry>
+		<value>AHA</value>
+		<name>Merger</name>
+	</entry>
+	<entry>
+		<value>AHB</value>
+		<name>Marketable securities</name>
+	</entry>
+	<entry>
+		<value>AHC</value>
+		<name>Business debt</name>
+	</entry>
+	<entry>
+		<value>AHD</value>
+		<name>Original legal structure</name>
+	</entry>
+	<entry>
+		<value>AHE</value>
+		<name>Employee sharing arrangements</name>
+	</entry>
+	<entry>
+		<value>AHF</value>
+		<name>Organization details</name>
+	</entry>
+	<entry>
+		<value>AHG</value>
+		<name>Public record details</name>
+	</entry>
+	<entry>
+		<value>AHH</value>
+		<name>Price range</name>
+	</entry>
+	<entry>
+		<value>AHI</value>
+		<name>Qualifications</name>
+	</entry>
+	<entry>
+		<value>AHJ</value>
+		<name>Registered activity</name>
+	</entry>
+	<entry>
+		<value>AHK</value>
+		<name>Criminal sentence</name>
+	</entry>
+	<entry>
+		<value>AHL</value>
+		<name>Sales method</name>
+	</entry>
+	<entry>
+		<value>AHM</value>
+		<name>Educational institution information</name>
+	</entry>
+	<entry>
+		<value>AHN</value>
+		<name>Status details</name>
+	</entry>
+	<entry>
+		<value>AHO</value>
+		<name>Sales</name>
+	</entry>
+	<entry>
+		<value>AHP</value>
+		<name>Spouse information</name>
+	</entry>
+	<entry>
+		<value>AHQ</value>
+		<name>Educational degree information</name>
+	</entry>
+	<entry>
+		<value>AHR</value>
+		<name>Shareholding information</name>
+	</entry>
+	<entry>
+		<value>AHS</value>
+		<name>Sales territory</name>
+	</entry>
+	<entry>
+		<value>AHT</value>
+		<name>Accountant's comments</name>
+	</entry>
+	<entry>
+		<value>AHU</value>
+		<name>Exemption law location</name>
+	</entry>
+	<entry>
+		<value>AHV</value>
+		<name>Share classifications</name>
+	</entry>
+	<entry>
+		<value>AHW</value>
+		<name>Forecast</name>
+	</entry>
+	<entry>
+		<value>AHX</value>
+		<name>Event location</name>
+	</entry>
+	<entry>
+		<value>AHY</value>
+		<name>Facility occupancy</name>
+	</entry>
+	<entry>
+		<value>AHZ</value>
+		<name>Import and export details</name>
+	</entry>
+	<entry>
+		<value>AIA</value>
+		<name>Additional facility information</name>
+	</entry>
+	<entry>
+		<value>AIB</value>
+		<name>Inventory value</name>
+	</entry>
+	<entry>
+		<value>AIC</value>
+		<name>Education</name>
+	</entry>
+	<entry>
+		<value>AID</value>
+		<name>Event</name>
+	</entry>
+	<entry>
+		<value>AIE</value>
+		<name>Agent</name>
+	</entry>
+	<entry>
+		<value>AIF</value>
+		<name>Domestically agreed financial statement details</name>
+	</entry>
+	<entry>
+		<value>AIG</value>
+		<name>Other current asset description</name>
+	</entry>
+	<entry>
+		<value>AIH</value>
+		<name>Other current liability description</name>
+	</entry>
+	<entry>
+		<value>AII</value>
+		<name>Former business activity</name>
+	</entry>
+	<entry>
+		<value>AIJ</value>
+		<name>Trade name use</name>
+	</entry>
+	<entry>
+		<value>AIK</value>
+		<name>Signing authority</name>
+	</entry>
+	<entry>
+		<value>AIL</value>
+		<name>Guarantee</name>
+	</entry>
+	<entry>
+		<value>AIM</value>
+		<name>Holding company operation</name>
+	</entry>
+	<entry>
+		<value>AIN</value>
+		<name>Consignment routing</name>
+	</entry>
+	<entry>
+		<value>AIO</value>
+		<name>Letter of protest</name>
+	</entry>
+	<entry>
+		<value>AIP</value>
+		<name>Question</name>
+	</entry>
+	<entry>
+		<value>AIQ</value>
+		<name>Party information</name>
+	</entry>
+	<entry>
+		<value>AIR</value>
+		<name>Area boundaries description</name>
+	</entry>
+	<entry>
+		<value>AIS</value>
+		<name>Advertisement information</name>
+	</entry>
+	<entry>
+		<value>AIT</value>
+		<name>Financial statement details</name>
+	</entry>
+	<entry>
+		<value>AIU</value>
+		<name>Access instructions</name>
+	</entry>
+	<entry>
+		<value>AIV</value>
+		<name>Liquidity</name>
+	</entry>
+	<entry>
+		<value>AIW</value>
+		<name>Credit line</name>
+	</entry>
+	<entry>
+		<value>AIX</value>
+		<name>Warranty terms</name>
+	</entry>
+	<entry>
+		<value>AIY</value>
+		<name>Division description</name>
+	</entry>
+	<entry>
+		<value>AIZ</value>
+		<name>Reporting instruction</name>
+	</entry>
+	<entry>
+		<value>AJA</value>
+		<name>Examination result</name>
+	</entry>
+	<entry>
+		<value>AJB</value>
+		<name>Laboratory result</name>
+	</entry>
+	<entry>
+		<value>ALC</value>
+		<name>Allowance/charge information</name>
+	</entry>
+	<entry>
+		<value>ALD</value>
+		<name>X-ray result</name>
+	</entry>
+	<entry>
+		<value>ALE</value>
+		<name>Pathology result</name>
+	</entry>
+	<entry>
+		<value>ALF</value>
+		<name>Intervention description</name>
+	</entry>
+	<entry>
+		<value>ALG</value>
+		<name>Summary of admittance</name>
+	</entry>
+	<entry>
+		<value>ALH</value>
+		<name>Medical treatment course detail</name>
+	</entry>
+	<entry>
+		<value>ALI</value>
+		<name>Prognosis</name>
+	</entry>
+	<entry>
+		<value>ALJ</value>
+		<name>Instruction to patient</name>
+	</entry>
+	<entry>
+		<value>ALK</value>
+		<name>Instruction to physician</name>
+	</entry>
+	<entry>
+		<value>ALL</value>
+		<name>All documents</name>
+	</entry>
+	<entry>
+		<value>ALM</value>
+		<name>Medicine treatment</name>
+	</entry>
+	<entry>
+		<value>ALN</value>
+		<name>Medicine dosage and administration</name>
+	</entry>
+	<entry>
+		<value>ALO</value>
+		<name>Availability of patient</name>
+	</entry>
+	<entry>
+		<value>ALP</value>
+		<name>Reason for service request</name>
+	</entry>
+	<entry>
+		<value>ALQ</value>
+		<name>Purpose of service</name>
+	</entry>
+	<entry>
+		<value>ARR</value>
+		<name>Arrival conditions</name>
+	</entry>
+	<entry>
+		<value>ARS</value>
+		<name>Service requester's comment</name>
+	</entry>
+	<entry>
+		<value>AUT</value>
+		<name>Authentication</name>
+	</entry>
+	<entry>
+		<value>AUU</value>
+		<name>Requested location description</name>
+	</entry>
+	<entry>
+		<value>AUV</value>
+		<name>Medicine administration condition</name>
+	</entry>
+	<entry>
+		<value>AUW</value>
+		<name>Patient information</name>
+	</entry>
+	<entry>
+		<value>AUX</value>
+		<name>Precautionary measure</name>
+	</entry>
+	<entry>
+		<value>AUY</value>
+		<name>Service characteristic</name>
+	</entry>
+	<entry>
+		<value>AUZ</value>
+		<name>Planned event comment</name>
+	</entry>
+	<entry>
+		<value>AVA</value>
+		<name>Expected delay comment</name>
+	</entry>
+	<entry>
+		<value>AVB</value>
+		<name>Transport requirements comment</name>
+	</entry>
+	<entry>
+		<value>AVC</value>
+		<name>Temporary approval condition</name>
+	</entry>
+	<entry>
+		<value>AVD</value>
+		<name>Customs Valuation Information</name>
+	</entry>
+	<entry>
+		<value>AVE</value>
+		<name>Value Added Tax (VAT) margin scheme</name>
+	</entry>
+	<entry>
+		<value>AVF</value>
+		<name>Maritime Declaration of Health</name>
+	</entry>
+	<entry>
+		<value>BAG</value>
+		<name>Passenger baggage information</name>
+	</entry>
+	<entry>
+		<value>BAH</value>
+		<name>Maritime Declaration of Health</name>
+	</entry>
+	<entry>
+		<value>BAI</value>
+		<name>Additional product information address</name>
+	</entry>
+	<entry>
+		<value>BAJ</value>
+		<name>Information to be printed on despatch advice</name>
+	</entry>
+	<entry>
+		<value>BAK</value>
+		<name>Missing goods remarks</name>
+	</entry>
+	<entry>
+		<value>BAL</value>
+		<name>Non-acceptance information</name>
+	</entry>
+	<entry>
+		<value>BAM</value>
+		<name>Returns information</name>
+	</entry>
+	<entry>
+		<value>BAN</value>
+		<name>Sub-line item information</name>
+	</entry>
+	<entry>
+		<value>BAO</value>
+		<name>Test information</name>
+	</entry>
+	<entry>
+		<value>BAP</value>
+		<name>External link</name>
+	</entry>
+	<entry>
+		<value>BAQ</value>
+		<name>VAT exemption reason</name>
+	</entry>
+	<entry>
+		<value>BAR</value>
+		<name>Processing Instructions</name>
+	</entry>
+	<entry>
+		<value>BAS</value>
+		<name>Relay Instructions</name>
+	</entry>
+	<entry>
+		<value>BAT</value>
+		<name>SIMA applicable</name>
+	</entry>
+	<entry>
+		<value>BAU</value>
+		<name>Appeals program code</name>
+	</entry>
+	<entry>
+		<value>BAV</value>
+		<name>SIMA subject</name>
+	</entry>
+	<entry>
+		<value>BAW</value>
+		<name>Surtax applicable</name>
+	</entry>
+	<entry>
+		<value>BAX</value>
+		<name>SIMA security bond</name>
+	</entry>
+	<entry>
+		<value>BAY</value>
+		<name>Surtax subject</name>
+	</entry>
+	<entry>
+		<value>BAZ</value>
+		<name>Safeguard applicable</name>
+	</entry>
+	<entry>
+		<value>BBA</value>
+		<name>Safeguard applicable</name>
+	</entry>
+	<entry>
+		<value>BBB</value>
+		<name>Safeguard subject</name>
+	</entry>
+	<entry>
+		<value>BLC</value>
+		<name>Transport contract document clause</name>
+	</entry>
+	<entry>
+		<value>BLD</value>
+		<name>Instruction to prepare the patient</name>
+	</entry>
+	<entry>
+		<value>BLE</value>
+		<name>Medicine treatment comment</name>
+	</entry>
+	<entry>
+		<value>BLF</value>
+		<name>Examination result comment</name>
+	</entry>
+	<entry>
+		<value>BLG</value>
+		<name>Service request comment</name>
+	</entry>
+	<entry>
+		<value>BLH</value>
+		<name>Prescription reason</name>
+	</entry>
+	<entry>
+		<value>BLI</value>
+		<name>Prescription comment</name>
+	</entry>
+	<entry>
+		<value>BLJ</value>
+		<name>Clinical investigation comment</name>
+	</entry>
+	<entry>
+		<value>BLK</value>
+		<name>Medicinal specification comment</name>
+	</entry>
+	<entry>
+		<value>BLL</value>
+		<name>Economic contribution comment</name>
+	</entry>
+	<entry>
+		<value>BLM</value>
+		<name>Status of a plan</name>
+	</entry>
+	<entry>
+		<value>BLN</value>
+		<name>Random sample test information</name>
+	</entry>
+	<entry>
+		<value>BLO</value>
+		<name>Period of time</name>
+	</entry>
+	<entry>
+		<value>BLP</value>
+		<name>Legislation</name>
+	</entry>
+	<entry>
+		<value>BLQ</value>
+		<name>Security measures requested</name>
+	</entry>
+	<entry>
+		<value>BLR</value>
+		<name>Transport contract document remark</name>
+	</entry>
+	<entry>
+		<value>BLS</value>
+		<name>Previous port of call security information</name>
+	</entry>
+	<entry>
+		<value>BLT</value>
+		<name>Security information</name>
+	</entry>
+	<entry>
+		<value>BLU</value>
+		<name>Waste information</name>
+	</entry>
+	<entry>
+		<value>BLV</value>
+		<name>B2C marketing information, short description</name>
+	</entry>
+	<entry>
+		<value>BLW</value>
+		<name>B2B marketing information, long description</name>
+	</entry>
+	<entry>
+		<value>BLX</value>
+		<name>B2C marketing information, long description</name>
+	</entry>
+	<entry>
+		<value>BLY</value>
+		<name>Product ingredients</name>
+	</entry>
+	<entry>
+		<value>BLZ</value>
+		<name>Location short name</name>
+	</entry>
+	<entry>
+		<value>BMA</value>
+		<name>Packaging material information</name>
+	</entry>
+	<entry>
+		<value>BMB</value>
+		<name>Filler material information</name>
+	</entry>
+	<entry>
+		<value>BMC</value>
+		<name>Ship-to-ship activity information</name>
+	</entry>
+	<entry>
+		<value>BMD</value>
+		<name>Package material description</name>
+	</entry>
+	<entry>
+		<value>BME</value>
+		<name>Consumer level package marking</name>
+	</entry>
+	<entry>
+		<value>BMF</value>
+		<name>SIMA measure in force</name>
+	</entry>
+	<entry>
+		<value>BMG</value>
+		<name>Pre-CARM</name>
+	</entry>
+	<entry>
+		<value>BMH</value>
+		<name>SIMA measure type</name>
+	</entry>
+	<entry>
+		<value>CCI</value>
+		<name>Customs clearance instructions</name>
+	</entry>
+	<entry>
+		<value>CCJ</value>
+		<name>Sub Type Code</name>
+	</entry>
+	<entry>
+		<value>CCK</value>
+		<name>SIMA information</name>
+	</entry>
+	<entry>
+		<value>CCL</value>
+		<name>Time limit end</name>
+	</entry>
+	<entry>
+		<value>CCM</value>
+		<name>Time limit start</name>
+	</entry>
+	<entry>
+		<value>CCN</value>
+		<name>Warehouse time limit</name>
+	</entry>
+	<entry>
+		<value>CCO</value>
+		<name>Value for duty information</name>
+	</entry>
+	<entry>
+		<value>CEX</value>
+		<name>Customs clearance instructions export</name>
+	</entry>
+	<entry>
+		<value>CHG</value>
+		<name>Change information</name>
+	</entry>
+	<entry>
+		<value>CIP</value>
+		<name>Customs clearance instruction import</name>
+	</entry>
+	<entry>
+		<value>CLP</value>
+		<name>Clearance place requested</name>
+	</entry>
+	<entry>
+		<value>CLR</value>
+		<name>Loading remarks</name>
+	</entry>
+	<entry>
+		<value>COI</value>
+		<name>Order information</name>
+	</entry>
+	<entry>
+		<value>CUR</value>
+		<name>Customer remarks</name>
+	</entry>
+	<entry>
+		<value>CUS</value>
+		<name>Customs declaration information</name>
+	</entry>
+	<entry>
+		<value>DAR</value>
+		<name>Damage remarks</name>
+	</entry>
+	<entry>
+		<value>DCL</value>
+		<name>Document issuer declaration</name>
+	</entry>
+	<entry>
+		<value>DEL</value>
+		<name>Delivery information</name>
+	</entry>
+	<entry>
+		<value>DIN</value>
+		<name>Delivery instructions</name>
+	</entry>
+	<entry>
+		<value>DOC</value>
+		<name>Documentation instructions</name>
+	</entry>
+	<entry>
+		<value>DUT</value>
+		<name>Duty declaration</name>
+	</entry>
+	<entry>
+		<value>EUR</value>
+		<name>Effective used routing</name>
+	</entry>
+	<entry>
+		<value>FBC</value>
+		<name>First block to be printed on the transport contract</name>
+	</entry>
+	<entry>
+		<value>GBL</value>
+		<name>Government bill of lading information</name>
+	</entry>
+	<entry>
+		<value>GEN</value>
+		<name>Entire transaction set</name>
+	</entry>
+	<entry>
+		<value>GS7</value>
+		<name>Further information concerning GGVS par. 7</name>
+	</entry>
+	<entry>
+		<value>HAN</value>
+		<name>Consignment handling instruction</name>
+	</entry>
+	<entry>
+		<value>HAZ</value>
+		<name>Hazard information</name>
+	</entry>
+	<entry>
+		<value>ICN</value>
+		<name>Consignment information for consignee</name>
+	</entry>
+	<entry>
+		<value>IIN</value>
+		<name>Insurance instructions</name>
+	</entry>
+	<entry>
+		<value>IMI</value>
+		<name>Invoice mailing instructions</name>
+	</entry>
+	<entry>
+		<value>IND</value>
+		<name>Commercial invoice item description</name>
+	</entry>
+	<entry>
+		<value>INS</value>
+		<name>Insurance information</name>
+	</entry>
+	<entry>
+		<value>INV</value>
+		<name>Invoice instruction</name>
+	</entry>
+	<entry>
+		<value>IRP</value>
+		<name>Information for railway purpose</name>
+	</entry>
+	<entry>
+		<value>ITR</value>
+		<name>Inland transport details</name>
+	</entry>
+	<entry>
+		<value>ITS</value>
+		<name>Testing instructions</name>
+	</entry>
+	<entry>
+		<value>LAN</value>
+		<name>Location Alias</name>
+	</entry>
+	<entry>
+		<value>LIN</value>
+		<name>Line item</name>
+	</entry>
+	<entry>
+		<value>LOI</value>
+		<name>Loading instruction</name>
+	</entry>
+	<entry>
+		<value>MCO</value>
+		<name>Miscellaneous charge order</name>
+	</entry>
+	<entry>
+		<value>MDH</value>
+		<name>Maritime Declaration of Health</name>
+	</entry>
+	<entry>
+		<value>MKS</value>
+		<name>Additional marks/numbers information</name>
+	</entry>
+	<entry>
+		<value>ORI</value>
+		<name>Order instruction</name>
+	</entry>
+	<entry>
+		<value>OSI</value>
+		<name>Other service information</name>
+	</entry>
+	<entry>
+		<value>PAC</value>
+		<name>Packing/marking information</name>
+	</entry>
+	<entry>
+		<value>PAI</value>
+		<name>Payment instructions information</name>
+	</entry>
+	<entry>
+		<value>PAY</value>
+		<name>Payables information</name>
+	</entry>
+	<entry>
+		<value>PKG</value>
+		<name>Packaging information</name>
+	</entry>
+	<entry>
+		<value>PKT</value>
+		<name>Packaging terms information</name>
+	</entry>
+	<entry>
+		<value>PMD</value>
+		<name>Payment detail/remittance information</name>
+	</entry>
+	<entry>
+		<value>PMT</value>
+		<name>Payment information</name>
+	</entry>
+	<entry>
+		<value>PRD</value>
+		<name>Product information</name>
+	</entry>
+	<entry>
+		<value>PRF</value>
+		<name>Price calculation formula</name>
+	</entry>
+	<entry>
+		<value>PRI</value>
+		<name>Priority information</name>
+	</entry>
+	<entry>
+		<value>PUR</value>
+		<name>Purchasing information</name>
+	</entry>
+	<entry>
+		<value>QIN</value>
+		<name>Quarantine instructions</name>
+	</entry>
+	<entry>
+		<value>QQD</value>
+		<name>Quality demands/requirements</name>
+	</entry>
+	<entry>
+		<value>QUT</value>
+		<name>Quotation instruction/information</name>
+	</entry>
+	<entry>
+		<value>RAH</value>
+		<name>Risk and handling information</name>
+	</entry>
+	<entry>
+		<value>REG</value>
+		<name>Regulatory information</name>
+	</entry>
+	<entry>
+		<value>RET</value>
+		<name>Return to origin information</name>
+	</entry>
+	<entry>
+		<value>REV</value>
+		<name>Receivables</name>
+	</entry>
+	<entry>
+		<value>RQR</value>
+		<name>Consignment route</name>
+	</entry>
+	<entry>
+		<value>SAF</value>
+		<name>Safety information</name>
+	</entry>
+	<entry>
+		<value>SIC</value>
+		<name>Consignment documentary instruction</name>
+	</entry>
+	<entry>
+		<value>SIN</value>
+		<name>Special instructions</name>
+	</entry>
+	<entry>
+		<value>SLR</value>
+		<name>Ship line requested</name>
+	</entry>
+	<entry>
+		<value>SPA</value>
+		<name>Special permission for transport, generally</name>
+	</entry>
+	<entry>
+		<value>SPG</value>
+		<name>Special permission concerning the goods to be transported</name>
+	</entry>
+	<entry>
+		<value>SPH</value>
+		<name>Special handling</name>
+	</entry>
+	<entry>
+		<value>SPP</value>
+		<name>Special permission concerning package</name>
+	</entry>
+	<entry>
+		<value>SPT</value>
+		<name>Special permission concerning transport means</name>
+	</entry>
+	<entry>
+		<value>SRN</value>
+		<name>Subsidiary risk number (IATA/DGR)</name>
+	</entry>
+	<entry>
+		<value>SSR</value>
+		<name>Special service request</name>
+	</entry>
+	<entry>
+		<value>SUR</value>
+		<name>Supplier remarks</name>
+	</entry>
+	<entry>
+		<value>TCA</value>
+		<name>Consignment tariff</name>
+	</entry>
+	<entry>
+		<value>TDT</value>
+		<name>Consignment transport</name>
+	</entry>
+	<entry>
+		<value>TRA</value>
+		<name>Transportation information</name>
+	</entry>
+	<entry>
+		<value>TRR</value>
+		<name>Requested tariff</name>
+	</entry>
+	<entry>
+		<value>TXD</value>
+		<name>Tax declaration</name>
+	</entry>
+	<entry>
+		<value>WHI</value>
+		<name>Warehouse instruction/information</name>
+	</entry>
+	<entry>
+		<value>ZZZ</value>
+		<name>Mutually defined</name>
+	</entry>
+</entries>

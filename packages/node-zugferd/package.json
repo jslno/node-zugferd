@@ -9,7 +9,8 @@
 		"dev:dts": "tsup --watch --dts",
 		"bump": "bumpp",
 		"test": "vitest",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"scripts:codelists": "bun ./scripts/codelists/generate.ts"
 	},
 	"keywords": [
 		"zugferd",
@@ -38,10 +39,16 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
+		"@biomejs/js-api": "^2.0.3",
+		"@biomejs/wasm-nodejs": "^2.1.2",
 		"@types/node": "^22.10.7",
+		"@types/serialize-javascript": "^5.0.4",
+		"cheerio": "^1.1.2",
+		"serialize-javascript": "^6.0.2",
 		"tsup": "^8.3.5",
 		"typescript": "^5.7.3",
-		"vitest": "^3.0.4"
+		"vitest": "^3.0.4",
+		"zod-to-ts": "^1.2.0"
 	},
 	"dependencies": {
 		"defu": "^6.1.4",

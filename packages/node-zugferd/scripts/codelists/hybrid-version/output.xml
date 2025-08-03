@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<entry>
+		<value>1.0</value>
+		<definition>The hybrid document is a Factur-X 1.0* compliant document</definition>
+		<usage>Default value for current specification</usage>
+	</entry>
+	<entry>
+		<value>1p0</value>
+		<definition>The hybrid document is a ZUGFeRD 1p0 compliant document</definition>
+		<usage>Legacy use only. A warning is given if used for a document in the validity period of the current specification </usage>
+	</entry>
+	<entry>
+		<value>2p0</value>
+		<definition>The hybrid document is a ZUGFeRD 2p0 compliant document</definition>
+		<usage>Legacy use only. A warning is given if used for a document in the validity period of the current specification </usage>
+	</entry>
+	<entry>
+		<value>2p1</value>
+		<definition>The hybrid document is a ZUGFeRD 2p1 compliant document</definition>
+		<usage>Legacy use only. A warning is given if used for a document in the validity period of the current specification </usage>
+	</entry>
+	<entry>
+		<value>2p2</value>
+		<definition>The hybrid document is a ZUGFeRD 2p2 compliant document</definition>
+		<usage>Legacy use only. A warning is given if used for a document in the validity period of the current specification </usage>
+	</entry>
+</entries>

@@ -1,15 +1,16 @@
 import z from "zod";
 import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
-import { UNTDID_5189 } from "../../codelists/untdid/5189.gen";
-import { UNTDID_7161 } from "../../codelists/untdid/7161.gen";
-import { REC20 } from "../../codelists/rec20.gen";
-import { REC21 } from "../../codelists/rec21.gen";
-import { ISO_6523 } from "../../codelists/iso/6523.gen";
-import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
+import { icdCode } from "../../codelists/icd.gen";
+import { vatCatCode } from "../../codelists/vat-cat.gen";
+import { untdid5305Code } from "../../codelists/untdid5305.gen";
+import { allowanceCode } from "../../codelists/allowance.gen";
+import { unitCode } from "../../codelists/unit.gen";
+import { chargeCode } from "../../codelists/charge.gen";
 
 export const basicSchema = {
 	specificationIdentifier: {
+		key: "BT-24",
 		type: "string",
 		required: false,
 		defaultValue: "urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic",
@@ -121,7 +122,7 @@ BR-64: The Item standard identifier (BT-157) shall have a Scheme identifier`,
 									 * The identification scheme shall be identified from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Item standard identifier
@@ -246,10 +247,7 @@ Optional, if filled and if BT-148 is present (EN16931 and EXTENDED profiles), th
 											 * BT-130, BT-150 and BT-150-1 must be equal if stated.
 											 */
 											unitMeasureCode: {
-												type: [
-													...REC20.map(({ code }) => code),
-													...REC21.map(({ code }) => code),
-												],
+												type: unitCode,
 												description: `**Item price base quantity unit of measure code**
 
 The unit of measure that applies to the Item price base quantity.
@@ -412,10 +410,7 @@ Optional, if filled and if BT-148 is present (EN16931 and EXTENDED profiles), th
 											 * BT-130, BT-150 and BT-150-1 must be equal if stated.
 											 */
 											unitMeasureCode: {
-												type: [
-													...REC20.map(({ code }) => code),
-													...REC21.map(({ code }) => code),
-												],
+												type: unitCode,
 												description: `**Item price base quantity unit of measure code**
 
 The unit of measure that applies to the Item price base quantity.
@@ -510,10 +505,7 @@ BR-22: Each  Invoice  line  (BG-25)  shall  have  an  Invoiced  quantity (BT-129
 									 */
 									unitMeasureCode: {
 										key: "BT-130",
-										type: [
-											...REC20.map(({ code }) => code),
-											...REC21.map(({ code }) => code),
-										],
+										type: unitCode,
 										description: `**Invoiced quantity unit of measure**
 
 The unit of measure that applies to the invoiced quantity.
@@ -607,7 +599,7 @@ For more information on the recommended codes, please refer to subclause 6.3.3.2
 									 */
 									categoryCode: {
 										key: "BT-151",
-										type: UNTDID_5305.map(({ code }) => code),
+										type: [...vatCatCode, ...untdid5305Code],
 										description: `**Invoiced item VAT category code**
 
 The VAT category code for the invoiced item.
@@ -809,33 +801,15 @@ The amount of an allowance, without VAT.`,
 									 * The reason for the Invoice line allowance, expressed as a code.
 									 *
 									 * Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance reason code and the Invoice line level allowance reason shall indicate the same allowance reason.
-									 *
-									 * In particular, the following codes and reasons can be used:
-									 * - AA = Advertising discount
-									 * - ABL = Packing supplement
-									 * - ADR = Other services
-									 * - ADT = Removal
-									 * - FC = transportation costs
-									 * - FI = Financial expenses
-									 * - LA = Labeling
 									 */
 									reasonCode: {
 										key: "BT-140",
-										type: UNTDID_5189.map(({ code }) => code),
+										type: allowanceCode,
 										description: `**Invoice line allowance reason code**
 
 The reason for the Invoice line allowance, expressed as a code.
 
-Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance reason code and the Invoice line level allowance reason shall indicate the same allowance reason.
-
-In particular, the following codes and reasons can be used:
-- AA = Advertising discount
-- ABL = Packing supplement
-- ADR = Other services
-- ADT = Removal
-- FC = transportation costs
-- FI = Financial expenses
-- LA = Labeling`,
+Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance reason code and the Invoice line level allowance reason shall indicate the same allowance reason.`,
 										required: false,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[line-allowances]/ram:ReasonCode",
@@ -926,7 +900,7 @@ The amount of a charge, without VAT.`,
 									 */
 									reasonCode: {
 										key: "BT-145",
-										type: UNTDID_7161.map(({ code }) => code),
+										type: chargeCode,
 										description: `**Invoice line charge reason code**
 
 The reason for the Invoice line charge, expressed as a code.
