@@ -1,5 +1,5 @@
 import type { Zugferd } from "node-zugferd";
-import type { Iso639_2Code } from "node-zugferd/codelist/iso.639-2";
+import type { LanguageCode } from "node-zugferd/codelist/language";
 import type { Promisable } from "./helper";
 import type { PaperFormat, PDFOptions } from "puppeteer";
 import type { ZugferdApiOptions } from "./options";
@@ -30,7 +30,7 @@ export type Template<Component = any, I extends Zugferd = Zugferd> = (
 	data: InferSchema<I["options"]["profile"]>,
 ) => Promisable<
 	Omit<PDFOptions, "format" | "footerTemplate" | "headerTemplate" | "path"> & {
-		language?: Iso639_2Code;
+		language?: LanguageCode;
 		/**
 		 * @remarks If set, this takes priority over the `width` and `height` options.
 		 *

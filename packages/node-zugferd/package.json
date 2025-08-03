@@ -152,164 +152,64 @@
 				"default": "./dist/types.cjs"
 			}
 		},
-		"./codelist/iso.639-2": {
+		"./codelist/allowance": {
 			"import": {
-				"types": "./dist/codelist/iso.639-2.d.ts",
-				"default": "./dist/codelist/iso.639-2.js"
+				"types": "./dist/codelist/allowance.d.ts",
+				"default": "./dist/codelist/allowance.js"
 			},
 			"require": {
-				"types": "./dist/codelist/iso.639-2.d.cts",
-				"default": "./dist/codelist/iso.639-2.cjs"
+				"types": "./dist/codelist/allowance.d.cts",
+				"default": "./dist/codelist/allowance.cjs"
 			}
 		},
-		"./codelist/iso.3166": {
+		"./codelist/characteristics": {
 			"import": {
-				"types": "./dist/codelist/iso.3166.d.ts",
-				"default": "./dist/codelist/iso.3166.js"
+				"types": "./dist/codelist/characteristics.d.ts",
+				"default": "./dist/codelist/characteristics.js"
 			},
 			"require": {
-				"types": "./dist/codelist/iso.3166.d.cts",
-				"default": "./dist/codelist/iso.3166.cjs"
+				"types": "./dist/codelist/characteristics.d.cts",
+				"default": "./dist/codelist/characteristics.cjs"
 			}
 		},
-		"./codelist/iso.6523": {
+		"./codelist/charge": {
 			"import": {
-				"types": "./dist/codelist/iso.6523.d.ts",
-				"default": "./dist/codelist/iso.6523.js"
+				"types": "./dist/codelist/charge.d.ts",
+				"default": "./dist/codelist/charge.js"
 			},
 			"require": {
-				"types": "./dist/codelist/iso.6523.d.cts",
-				"default": "./dist/codelist/iso.6523.cjs"
+				"types": "./dist/codelist/charge.d.cts",
+				"default": "./dist/codelist/charge.cjs"
 			}
 		},
-		"./codelist/untdid.1001": {
+		"./codelist/country": {
 			"import": {
-				"types": "./dist/codelist/untdid.1001.d.ts",
-				"default": "./dist/codelist/untdid.1001.js"
+				"types": "./dist/codelist/country.d.ts",
+				"default": "./dist/codelist/country.js"
 			},
 			"require": {
-				"types": "./dist/codelist/untdid.1001.d.cts",
-				"default": "./dist/codelist/untdid.1001.cjs"
+				"types": "./dist/codelist/country.d.cts",
+				"default": "./dist/codelist/country.cjs"
 			}
 		},
-		"./codelist/untdid.1153": {
+		"./codelist/currency": {
 			"import": {
-				"types": "./dist/codelist/untdid.1153.d.ts",
-				"default": "./dist/codelist/untdid.1153.js"
+				"types": "./dist/codelist/currency.d.ts",
+				"default": "./dist/codelist/currency.js"
 			},
 			"require": {
-				"types": "./dist/codelist/untdid.1153.d.cts",
-				"default": "./dist/codelist/untdid.1153.cjs"
+				"types": "./dist/codelist/currency.d.cts",
+				"default": "./dist/codelist/currency.cjs"
 			}
 		},
-		"./codelist/untdid.1229": {
+		"./codelist/date": {
 			"import": {
-				"types": "./dist/codelist/untdid.1229.d.ts",
-				"default": "./dist/codelist/untdid.1229.js"
+				"types": "./dist/codelist/date.d.ts",
+				"default": "./dist/codelist/date.js"
 			},
 			"require": {
-				"types": "./dist/codelist/untdid.1229.d.cts",
-				"default": "./dist/codelist/untdid.1229.cjs"
-			}
-		},
-		"./codelist/untdid.2475": {
-			"import": {
-				"types": "./dist/codelist/untdid.2475.d.ts",
-				"default": "./dist/codelist/untdid.2475.js"
-			},
-			"require": {
-				"types": "./dist/codelist/untdid.2475.d.cts",
-				"default": "./dist/codelist/untdid.2475.cjs"
-			}
-		},
-		"./codelist/untdid.3035": {
-			"import": {
-				"types": "./dist/codelist/untdid.3035.d.ts",
-				"default": "./dist/codelist/untdid.3035.js"
-			},
-			"require": {
-				"types": "./dist/codelist/untdid.3035.d.cts",
-				"default": "./dist/codelist/untdid.3035.cjs"
-			}
-		},
-		"./codelist/untdid.3139": {
-			"import": {
-				"types": "./dist/codelist/untdid.3139.d.ts",
-				"default": "./dist/codelist/untdid.3139.js"
-			},
-			"require": {
-				"types": "./dist/codelist/untdid.3139.d.cts",
-				"default": "./dist/codelist/untdid.3139.cjs"
-			}
-		},
-		"./codelist/untdid.4451": {
-			"import": {
-				"types": "./dist/codelist/untdid.4451.d.ts",
-				"default": "./dist/codelist/untdid.4451.js"
-			},
-			"require": {
-				"types": "./dist/codelist/untdid.4451.d.cts",
-				"default": "./dist/codelist/untdid.4451.cjs"
-			}
-		},
-		"./codelist/untdid.4461": {
-			"import": {
-				"types": "./dist/codelist/untdid.4461.d.ts",
-				"default": "./dist/codelist/untdid.4461.js"
-			},
-			"require": {
-				"types": "./dist/codelist/untdid.4461.d.cts",
-				"default": "./dist/codelist/untdid.4461.cjs"
-			}
-		},
-		"./codelist/untdid.5189": {
-			"import": {
-				"types": "./dist/codelist/untdid.5189.d.ts",
-				"default": "./dist/codelist/untdid.5189.js"
-			},
-			"require": {
-				"types": "./dist/codelist/untdid.5189.d.cts",
-				"default": "./dist/codelist/untdid.5189.cjs"
-			}
-		},
-		"./codelist/untdid.5305": {
-			"import": {
-				"types": "./dist/codelist/untdid.5305.d.ts",
-				"default": "./dist/codelist/untdid.5305.js"
-			},
-			"require": {
-				"types": "./dist/codelist/untdid.5305.d.cts",
-				"default": "./dist/codelist/untdid.5305.cjs"
-			}
-		},
-		"./codelist/untdid.7143": {
-			"import": {
-				"types": "./dist/codelist/untdid.7143.d.ts",
-				"default": "./dist/codelist/untdid.7143.js"
-			},
-			"require": {
-				"types": "./dist/codelist/untdid.7143.d.cts",
-				"default": "./dist/codelist/untdid.7143.cjs"
-			}
-		},
-		"./codelist/untdid.7161": {
-			"import": {
-				"types": "./dist/codelist/untdid.7161.d.ts",
-				"default": "./dist/codelist/untdid.7161.js"
-			},
-			"require": {
-				"types": "./dist/codelist/untdid.7161.d.cts",
-				"default": "./dist/codelist/untdid.7161.cjs"
-			}
-		},
-		"./codelist/vatex": {
-			"import": {
-				"types": "./dist/codelist/vatex.d.ts",
-				"default": "./dist/codelist/vatex.js"
-			},
-			"require": {
-				"types": "./dist/codelist/vatex.d.cts",
-				"default": "./dist/codelist/vatex.cjs"
+				"types": "./dist/codelist/date.d.cts",
+				"default": "./dist/codelist/date.cjs"
 			}
 		},
 		"./codelist/eas": {
@@ -322,34 +222,254 @@
 				"default": "./dist/codelist/eas.cjs"
 			}
 		},
-		"./codelist/currency-codes": {
+		"./codelist/filename": {
 			"import": {
-				"types": "./dist/codelist/currency-codes.d.ts",
-				"default": "./dist/codelist/currency-codes.js"
+				"types": "./dist/codelist/filename.d.ts",
+				"default": "./dist/codelist/filename.js"
 			},
 			"require": {
-				"types": "./dist/codelist/currency-codes.d.cts",
-				"default": "./dist/codelist/currency-codes.cjs"
+				"types": "./dist/codelist/filename.d.cts",
+				"default": "./dist/codelist/filename.cjs"
 			}
 		},
-		"./codelist/rec20": {
+		"./codelist/fiscal-id": {
 			"import": {
-				"types": "./dist/codelist/rec20.d.ts",
-				"default": "./dist/codelist/rec20.js"
+				"types": "./dist/codelist/fiscal-id.d.ts",
+				"default": "./dist/codelist/fiscal-id.js"
 			},
 			"require": {
-				"types": "./dist/codelist/rec20.d.cts",
-				"default": "./dist/codelist/rec20.cjs"
+				"types": "./dist/codelist/fiscal-id.d.cts",
+				"default": "./dist/codelist/fiscal-id.cjs"
 			}
 		},
-		"./codelist/rec21": {
+		"./codelist/hybrid-conformance": {
 			"import": {
-				"types": "./dist/codelist/rec21.d.ts",
-				"default": "./dist/codelist/rec21.js"
+				"types": "./dist/codelist/hybrid-conformance.d.ts",
+				"default": "./dist/codelist/hybrid-conformance.js"
 			},
 			"require": {
-				"types": "./dist/codelist/rec21.d.cts",
-				"default": "./dist/codelist/rec21.cjs"
+				"types": "./dist/codelist/hybrid-conformance.d.cts",
+				"default": "./dist/codelist/hybrid-conformance.cjs"
+			}
+		},
+		"./codelist/hybrid-document": {
+			"import": {
+				"types": "./dist/codelist/hybrid-document.d.ts",
+				"default": "./dist/codelist/hybrid-document.js"
+			},
+			"require": {
+				"types": "./dist/codelist/hybrid-document.d.cts",
+				"default": "./dist/codelist/hybrid-document.cjs"
+			}
+		},
+		"./codelist/hybrid-version": {
+			"import": {
+				"types": "./dist/codelist/hybrid-version.d.ts",
+				"default": "./dist/codelist/hybrid-version.js"
+			},
+			"require": {
+				"types": "./dist/codelist/hybrid-version.d.cts",
+				"default": "./dist/codelist/hybrid-version.cjs"
+			}
+		},
+		"./codelist/icd": {
+			"import": {
+				"types": "./dist/codelist/icd.d.ts",
+				"default": "./dist/codelist/icd.js"
+			},
+			"require": {
+				"types": "./dist/codelist/icd.d.cts",
+				"default": "./dist/codelist/icd.cjs"
+			}
+		},
+		"./codelist/incoterms": {
+			"import": {
+				"types": "./dist/codelist/incoterms.d.ts",
+				"default": "./dist/codelist/incoterms.js"
+			},
+			"require": {
+				"types": "./dist/codelist/incoterms.d.cts",
+				"default": "./dist/codelist/incoterms.cjs"
+			}
+		},
+		"./codelist/item": {
+			"import": {
+				"types": "./dist/codelist/item.d.ts",
+				"default": "./dist/codelist/item.js"
+			},
+			"require": {
+				"types": "./dist/codelist/item.d.cts",
+				"default": "./dist/codelist/item.cjs"
+			}
+		},
+		"./codelist/language": {
+			"import": {
+				"types": "./dist/codelist/language.d.ts",
+				"default": "./dist/codelist/language.js"
+			},
+			"require": {
+				"types": "./dist/codelist/language.d.cts",
+				"default": "./dist/codelist/language.cjs"
+			}
+		},
+		"./codelist/line-reason": {
+			"import": {
+				"types": "./dist/codelist/line-reason.d.ts",
+				"default": "./dist/codelist/line-reason.js"
+			},
+			"require": {
+				"types": "./dist/codelist/line-reason.d.cts",
+				"default": "./dist/codelist/line-reason.cjs"
+			}
+		},
+		"./codelist/line-status": {
+			"import": {
+				"types": "./dist/codelist/line-status.d.ts",
+				"default": "./dist/codelist/line-status.js"
+			},
+			"require": {
+				"types": "./dist/codelist/line-status.d.cts",
+				"default": "./dist/codelist/line-status.cjs"
+			}
+		},
+		"./codelist/mime": {
+			"import": {
+				"types": "./dist/codelist/mime.d.ts",
+				"default": "./dist/codelist/mime.js"
+			},
+			"require": {
+				"types": "./dist/codelist/mime.d.cts",
+				"default": "./dist/codelist/mime.cjs"
+			}
+		},
+		"./codelist/payment": {
+			"import": {
+				"types": "./dist/codelist/payment.d.ts",
+				"default": "./dist/codelist/payment.js"
+			},
+			"require": {
+				"types": "./dist/codelist/payment.d.cts",
+				"default": "./dist/codelist/payment.cjs"
+			}
+		},
+		"./codelist/text": {
+			"import": {
+				"types": "./dist/codelist/text.d.ts",
+				"default": "./dist/codelist/text.js"
+			},
+			"require": {
+				"types": "./dist/codelist/text.d.cts",
+				"default": "./dist/codelist/text.cjs"
+			}
+		},
+		"./codelist/time": {
+			"import": {
+				"types": "./dist/codelist/time.d.ts",
+				"default": "./dist/codelist/time.js"
+			},
+			"require": {
+				"types": "./dist/codelist/time.d.cts",
+				"default": "./dist/codelist/time.cjs"
+			}
+		},
+		"./codelist/transport": {
+			"import": {
+				"types": "./dist/codelist/transport.d.ts",
+				"default": "./dist/codelist/transport.js"
+			},
+			"require": {
+				"types": "./dist/codelist/transport.d.cts",
+				"default": "./dist/codelist/transport.cjs"
+			}
+		},
+		"./codelist/unit": {
+			"import": {
+				"types": "./dist/codelist/unit.d.ts",
+				"default": "./dist/codelist/unit.js"
+			},
+			"require": {
+				"types": "./dist/codelist/unit.d.cts",
+				"default": "./dist/codelist/unit.cjs"
+			}
+		},
+		"./codelist/untdid-1001": {
+			"import": {
+				"types": "./dist/codelist/untdid-1001.d.ts",
+				"default": "./dist/codelist/untdid-1001.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid-1001.d.cts",
+				"default": "./dist/codelist/untdid-1001.cjs"
+			}
+		},
+		"./codelist/untdid-1153": {
+			"import": {
+				"types": "./dist/codelist/untdid-1153.d.ts",
+				"default": "./dist/codelist/untdid-1153.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid-1153.d.cts",
+				"default": "./dist/codelist/untdid-1153.cjs"
+			}
+		},
+		"./codelist/untdid-3035": {
+			"import": {
+				"types": "./dist/codelist/untdid-3035.d.ts",
+				"default": "./dist/codelist/untdid-3035.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid-3035.d.cts",
+				"default": "./dist/codelist/untdid-3035.cjs"
+			}
+		},
+		"./codelist/untdid-3139": {
+			"import": {
+				"types": "./dist/codelist/untdid-3139.d.ts",
+				"default": "./dist/codelist/untdid-3139.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid-3139.d.cts",
+				"default": "./dist/codelist/untdid-3139.cjs"
+			}
+		},
+		"./codelist/untdid-5305": {
+			"import": {
+				"types": "./dist/codelist/untdid-5305.d.ts",
+				"default": "./dist/codelist/untdid-5305.js"
+			},
+			"require": {
+				"types": "./dist/codelist/untdid-5305.d.cts",
+				"default": "./dist/codelist/untdid-5305.cjs"
+			}
+		},
+		"./codelist/vat-cat": {
+			"import": {
+				"types": "./dist/codelist/vat-cat.d.ts",
+				"default": "./dist/codelist/vat-cat.js"
+			},
+			"require": {
+				"types": "./dist/codelist/vat-cat.d.cts",
+				"default": "./dist/codelist/vat-cat.cjs"
+			}
+		},
+		"./codelist/vat-id": {
+			"import": {
+				"types": "./dist/codelist/vat-id.d.ts",
+				"default": "./dist/codelist/vat-id.js"
+			},
+			"require": {
+				"types": "./dist/codelist/vat-id.d.cts",
+				"default": "./dist/codelist/vat-id.cjs"
+			}
+		},
+		"./codelist/vatex": {
+			"import": {
+				"types": "./dist/codelist/vatex.d.ts",
+				"default": "./dist/codelist/vatex.js"
+			},
+			"require": {
+				"types": "./dist/codelist/vatex.d.cts",
+				"default": "./dist/codelist/vatex.cjs"
 			}
 		}
 	},
