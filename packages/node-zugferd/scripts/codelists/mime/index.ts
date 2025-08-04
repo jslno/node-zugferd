@@ -34,8 +34,7 @@ export default createParser(async (ctx) => {
 			path: "/codelists/mime",
 			importPath: "/codelist/mime",
 			title: "Mime type codes — Mime codes + Factur-X",
-			description:
-				"Code specifying the media type of the content.",
+			description: "Code specifying the media type of the content.",
 			sidebar: {
 				title: "MIME",
 			},

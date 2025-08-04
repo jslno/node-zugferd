@@ -20,7 +20,7 @@ export default createParser(async (ctx) => {
 		constants: {
 			PUBLISHED: {
 				value: "Factur-X",
-                asConst: true,
+				asConst: true,
 				export: true,
 			},
 		},

@@ -40,8 +40,7 @@ export default createParser(async (ctx) => {
 			path: "/codelists/fiscal-id",
 			importPath: "/codelist/fiscal-id",
 			title: "Tax registration",
-			description:
-				"Code specifying the fiscal identification of a party.",
+			description: "Code specifying the fiscal identification of a party.",
 			sidebar: {
 				title: "FISCAL ID",
 			},

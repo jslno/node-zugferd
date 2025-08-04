@@ -47,8 +47,7 @@ export default createParser(async (ctx) => {
 			path: "/codelists/line-reason",
 			importPath: "/codelist/line-reason",
 			title: "Status Reason Code",
-			description:
-				"Code specifying the reason for the status.",
+			description: "Code specifying the reason for the status.",
 			sidebar: {
 				title: "Line Reason",
 			},

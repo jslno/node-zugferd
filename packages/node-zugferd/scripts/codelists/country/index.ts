@@ -46,8 +46,7 @@ export default createParser(async (ctx) => {
 			path: "/codelists/country",
 			importPath: "/codelist/country",
 			title: "ISO 3166-1 — Country Codes",
-			description:
-				"Code specifying the country.",
+			description: "Code specifying the country.",
 			sidebar: {
 				title: "Country",
 			},
@@ -56,7 +55,7 @@ export default createParser(async (ctx) => {
 					key: ctx.HIDE_COLUMN,
 					value: {
 						...ctx.CODE_COLUMN,
-						label: "Alpha-2 code"
+						label: "Alpha-2 code",
 					},
 					name: {
 						label: "English short name",

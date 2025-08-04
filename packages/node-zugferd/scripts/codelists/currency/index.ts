@@ -46,8 +46,7 @@ export default createParser(async (ctx) => {
 			path: "/codelists/currency",
 			importPath: "/codelist/currency",
 			title: "ISO 4217 — Currency codes",
-			description:
-				"Code specifying the currency.",
+			description: "Code specifying the currency.",
 			sidebar: {
 				title: "Currency",
 			},

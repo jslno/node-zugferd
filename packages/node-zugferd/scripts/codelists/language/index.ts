@@ -46,8 +46,7 @@ export default createParser(async (ctx) => {
 			path: "/codelists/language",
 			importPath: "/codelist/language",
 			title: "ISO 639-2 alpha-3 language Code",
-			description:
-				"Code representing a language.",
+			description: "Code representing a language.",
 			sidebar: {
 				title: "Language",
 			},

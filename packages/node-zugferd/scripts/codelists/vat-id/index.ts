@@ -40,8 +40,7 @@ export default createParser(async (ctx) => {
 			path: "/codelists/vat-id",
 			importPath: "/codelist/vat-id",
 			title: "VAT Identifier",
-			description:
-				"Code specifying the VAT identifier.",
+			description: "Code specifying the VAT identifier.",
 			sidebar: {
 				title: "VAT-ID",
 			},
