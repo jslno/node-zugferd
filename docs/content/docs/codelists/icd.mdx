@@ -1,0 +1,1925 @@
+---
+title: ISO/IEC 6523 — Identifier scheme code
+description: Code specifying the identification scheme for organizations.
+---
+
+import { ICD } from "node-zugferd/codelist/icd";
+
+### Codelist [toc]
+
+```ts
+import {
+	ICD,
+	Icd,
+	icdCode,
+	PUBLISHED,
+	type IcdDefinition,
+	type IcdCode,
+} from "node-zugferd/codelist/icd";
+
+```
+
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/icd/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Identifier scheme name
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>0002</code>
+</td>
+<td>
+System Information et Repertoire des Entreprise et des Etablissements: SIRENE
+</td>
+</tr>
+<tr>
+<td>
+<code>0003</code>
+</td>
+<td>
+Codification Numerique des Etablissments Financiers En Belgique
+</td>
+</tr>
+<tr>
+<td>
+<code>0004</code>
+</td>
+<td>
+NBS/OSI NETWORK
+</td>
+</tr>
+<tr>
+<td>
+<code>0005</code>
+</td>
+<td>
+USA FED GOV OSI NETWORK
+</td>
+</tr>
+<tr>
+<td>
+<code>0006</code>
+</td>
+<td>
+USA DOD OSI NETWORK
+</td>
+</tr>
+<tr>
+<td>
+<code>0007</code>
+</td>
+<td>
+Organisationsnummer
+</td>
+</tr>
+<tr>
+<td>
+<code>0008</code>
+</td>
+<td>
+LE NUMERO NATIONAL
+</td>
+</tr>
+<tr>
+<td>
+<code>0009</code>
+</td>
+<td>
+SIRET-CODE
+</td>
+</tr>
+<tr>
+<td>
+<code>0010</code>
+</td>
+<td>
+Organizational Identifiers for Structured Names under ISO 9541 Part 2
+</td>
+</tr>
+<tr>
+<td>
+<code>0011</code>
+</td>
+<td>
+International Code Designator for the Identification of OSI-based, Amateur Radio Organizations, Network Objects and Application Services.
+</td>
+</tr>
+<tr>
+<td>
+<code>0012</code>
+</td>
+<td>
+European Computer Manufacturers Association: ECMA
+</td>
+</tr>
+<tr>
+<td>
+<code>0013</code>
+</td>
+<td>
+VSA FTP CODE (FTP = File Transfer Protocol)
+</td>
+</tr>
+<tr>
+<td>
+<code>0014</code>
+</td>
+<td>
+NIST/OSI Implememts' Workshop
+</td>
+</tr>
+<tr>
+<td>
+<code>0015</code>
+</td>
+<td>
+Electronic Data Interchange: EDI
+</td>
+</tr>
+<tr>
+<td>
+<code>0016</code>
+</td>
+<td>
+EWOS Object Identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0017</code>
+</td>
+<td>
+COMMON LANGUAGE
+</td>
+</tr>
+<tr>
+<td>
+<code>0018</code>
+</td>
+<td>
+SNA/OSI Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0019</code>
+</td>
+<td>
+Air Transport Industry Services Communications Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0020</code>
+</td>
+<td>
+European Laboratory for Particle Physics: CERN
+</td>
+</tr>
+<tr>
+<td>
+<code>0021</code>
+</td>
+<td>
+SOCIETY FOR WORLDWIDE INTERBANK FINANCIAL, TELECOMMUNICATION S.W.I.F.T.
+</td>
+</tr>
+<tr>
+<td>
+<code>0022</code>
+</td>
+<td>
+OSF Distributed Computing Object Identification
+</td>
+</tr>
+<tr>
+<td>
+<code>0023</code>
+</td>
+<td>
+Nordic University and Research Network: NORDUnet
+</td>
+</tr>
+<tr>
+<td>
+<code>0024</code>
+</td>
+<td>
+Digital Equipment Corporation: DEC
+</td>
+</tr>
+<tr>
+<td>
+<code>0025</code>
+</td>
+<td>
+OSI ASIA-OCEANIA WORKSHOP
+</td>
+</tr>
+<tr>
+<td>
+<code>0026</code>
+</td>
+<td>
+NATO ISO 6523 ICDE coding scheme
+</td>
+</tr>
+<tr>
+<td>
+<code>0027</code>
+</td>
+<td>
+Aeronautical Telecommunications Network (ATN)
+</td>
+</tr>
+<tr>
+<td>
+<code>0028</code>
+</td>
+<td>
+International Standard ISO 6523
+</td>
+</tr>
+<tr>
+<td>
+<code>0029</code>
+</td>
+<td>
+The All-Union Classifier of Enterprises and Organisations
+</td>
+</tr>
+<tr>
+<td>
+<code>0030</code>
+</td>
+<td>
+AT&T/OSI Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0031</code>
+</td>
+<td>
+EDI Partner Identification Code
+</td>
+</tr>
+<tr>
+<td>
+<code>0032</code>
+</td>
+<td>
+Telecom Australia
+</td>
+</tr>
+<tr>
+<td>
+<code>0033</code>
+</td>
+<td>
+S G W OSI Internetwork
+</td>
+</tr>
+<tr>
+<td>
+<code>0034</code>
+</td>
+<td>
+Reuter Open Address Standard
+</td>
+</tr>
+<tr>
+<td>
+<code>0035</code>
+</td>
+<td>
+ISO 6523 - ICD
+</td>
+</tr>
+<tr>
+<td>
+<code>0036</code>
+</td>
+<td>
+TeleTrust Object Identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0037</code>
+</td>
+<td>
+LY-tunnus
+</td>
+</tr>
+<tr>
+<td>
+<code>0038</code>
+</td>
+<td>
+The Australian GOSIP Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0039</code>
+</td>
+<td>
+The OZ DOD OSI Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0040</code>
+</td>
+<td>
+Unilever Group Companies
+</td>
+</tr>
+<tr>
+<td>
+<code>0041</code>
+</td>
+<td>
+Citicorp Global Information Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0042</code>
+</td>
+<td>
+DBP Telekom Object Identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0043</code>
+</td>
+<td>
+HydroNETT
+</td>
+</tr>
+<tr>
+<td>
+<code>0044</code>
+</td>
+<td>
+Thai Industrial Standards Institute (TISI)
+</td>
+</tr>
+<tr>
+<td>
+<code>0045</code>
+</td>
+<td>
+ICI Company Identification System
+</td>
+</tr>
+<tr>
+<td>
+<code>0046</code>
+</td>
+<td>
+FUNLOC
+</td>
+</tr>
+<tr>
+<td>
+<code>0047</code>
+</td>
+<td>
+BULL ODI/DSA/UNIX Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0048</code>
+</td>
+<td>
+OSINZ
+</td>
+</tr>
+<tr>
+<td>
+<code>0049</code>
+</td>
+<td>
+Auckland Area Health
+</td>
+</tr>
+<tr>
+<td>
+<code>0050</code>
+</td>
+<td>
+Firmenich
+</td>
+</tr>
+<tr>
+<td>
+<code>0051</code>
+</td>
+<td>
+AGFA-DIS
+</td>
+</tr>
+<tr>
+<td>
+<code>0052</code>
+</td>
+<td>
+Society of Motion Picture and Television Engineers (SMPTE)
+</td>
+</tr>
+<tr>
+<td>
+<code>0053</code>
+</td>
+<td>
+Migros_Network M_NETOPZ
+</td>
+</tr>
+<tr>
+<td>
+<code>0054</code>
+</td>
+<td>
+ISO6523 - ICDPCR
+</td>
+</tr>
+<tr>
+<td>
+<code>0055</code>
+</td>
+<td>
+Energy Net
+</td>
+</tr>
+<tr>
+<td>
+<code>0056</code>
+</td>
+<td>
+Nokia Object Identifiers (NOI)
+</td>
+</tr>
+<tr>
+<td>
+<code>0057</code>
+</td>
+<td>
+Saint Gobain
+</td>
+</tr>
+<tr>
+<td>
+<code>0058</code>
+</td>
+<td>
+Siemens Corporate Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0059</code>
+</td>
+<td>
+DANZNET
+</td>
+</tr>
+<tr>
+<td>
+<code>0060</code>
+</td>
+<td>
+Data Universal Numbering System (D-U-N-S Number)
+</td>
+</tr>
+<tr>
+<td>
+<code>0061</code>
+</td>
+<td>
+SOFFEX OSI
+</td>
+</tr>
+<tr>
+<td>
+<code>0062</code>
+</td>
+<td>
+KPN OVN
+</td>
+</tr>
+<tr>
+<td>
+<code>0063</code>
+</td>
+<td>
+ascomOSINet
+</td>
+</tr>
+<tr>
+<td>
+<code>0064</code>
+</td>
+<td>
+UTC: Uniforme Transport Code
+</td>
+</tr>
+<tr>
+<td>
+<code>0065</code>
+</td>
+<td>
+SOLVAY OSI CODING
+</td>
+</tr>
+<tr>
+<td>
+<code>0066</code>
+</td>
+<td>
+Roche Corporate Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0067</code>
+</td>
+<td>
+ZellwegerOSINet
+</td>
+</tr>
+<tr>
+<td>
+<code>0068</code>
+</td>
+<td>
+Intel Corporation OSI
+</td>
+</tr>
+<tr>
+<td>
+<code>0069</code>
+</td>
+<td>
+SITA Object Identifier Tree
+</td>
+</tr>
+<tr>
+<td>
+<code>0070</code>
+</td>
+<td>
+DaimlerChrysler Corporate Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0071</code>
+</td>
+<td>
+LEGO /OSI NETWORK
+</td>
+</tr>
+<tr>
+<td>
+<code>0072</code>
+</td>
+<td>
+NAVISTAR/OSI Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0073</code>
+</td>
+<td>
+ICD Formatted ATM address
+</td>
+</tr>
+<tr>
+<td>
+<code>0074</code>
+</td>
+<td>
+ARINC
+</td>
+</tr>
+<tr>
+<td>
+<code>0075</code>
+</td>
+<td>
+Alcanet/Alcatel-Alsthom Corporate Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0076</code>
+</td>
+<td>
+Sistema Italiano di Identificazione di ogetti gestito da UNINFO
+</td>
+</tr>
+<tr>
+<td>
+<code>0077</code>
+</td>
+<td>
+Sistema Italiano di Indirizzamento di Reti OSI Gestito da UNINFO
+</td>
+</tr>
+<tr>
+<td>
+<code>0078</code>
+</td>
+<td>
+Mitel terminal or switching equipment
+</td>
+</tr>
+<tr>
+<td>
+<code>0079</code>
+</td>
+<td>
+ATM Forum
+</td>
+</tr>
+<tr>
+<td>
+<code>0080</code>
+</td>
+<td>
+UK National Health Service Scheme, (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0081</code>
+</td>
+<td>
+International NSAP
+</td>
+</tr>
+<tr>
+<td>
+<code>0082</code>
+</td>
+<td>
+Norwegian Telecommunications Authority's, NTA'S, EDI, identifier scheme (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0083</code>
+</td>
+<td>
+Advanced Telecommunications Modules Limited, Corporate Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0084</code>
+</td>
+<td>
+Athens Chamber of Commerce & Industry Scheme (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0085</code>
+</td>
+<td>
+Swiss Chambers of Commerce Scheme (EDIRA) compliant
+</td>
+</tr>
+<tr>
+<td>
+<code>0086</code>
+</td>
+<td>
+United States Council for International Business (USCIB) Scheme, (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0087</code>
+</td>
+<td>
+National Federation of Chambers of Commerce & Industry of Belgium, Scheme (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0088</code>
+</td>
+<td>
+EAN Location Code
+</td>
+</tr>
+<tr>
+<td>
+<code>0089</code>
+</td>
+<td>
+The Association of British Chambers of Commerce Ltd. Scheme, (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0090</code>
+</td>
+<td>
+Internet IP addressing - ISO 6523 ICD encoding
+</td>
+</tr>
+<tr>
+<td>
+<code>0091</code>
+</td>
+<td>
+Cisco Sysytems / OSI Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0093</code>
+</td>
+<td>
+Revenue Canada Business Number Registration (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0094</code>
+</td>
+<td>
+DEUTSCHER INDUSTRIE- UND HANDELSTAG (DIHT) Scheme (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0095</code>
+</td>
+<td>
+Hewlett - Packard Company Internal AM Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0096</code>
+</td>
+<td>
+DANISH CHAMBER OF COMMERCE Scheme (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0097</code>
+</td>
+<td>
+FTI - Ediforum Italia, (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0098</code>
+</td>
+<td>
+CHAMBER OF COMMERCE TEL AVIV-JAFFA Scheme (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0099</code>
+</td>
+<td>
+Siemens Supervisory Systems Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0100</code>
+</td>
+<td>
+PNG_ICD Scheme
+</td>
+</tr>
+<tr>
+<td>
+<code>0101</code>
+</td>
+<td>
+South African Code Allocation
+</td>
+</tr>
+<tr>
+<td>
+<code>0102</code>
+</td>
+<td>
+HEAG
+</td>
+</tr>
+<tr>
+<td>
+<code>0104</code>
+</td>
+<td>
+BT - ICD Coding System
+</td>
+</tr>
+<tr>
+<td>
+<code>0105</code>
+</td>
+<td>
+Portuguese Chamber of Commerce and Industry Scheme (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0106</code>
+</td>
+<td>
+Vereniging van Kamers van Koophandel en Fabrieken in Nederland (Association of Chambers of Commerce and Industry in the Netherlands), Scheme (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0107</code>
+</td>
+<td>
+Association of Swedish Chambers of Commerce and Industry Scheme (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0108</code>
+</td>
+<td>
+Australian Chambers of Commerce and Industry Scheme (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0109</code>
+</td>
+<td>
+BellSouth ICD AESA (ATM End System Address)
+</td>
+</tr>
+<tr>
+<td>
+<code>0110</code>
+</td>
+<td>
+Bell Atlantic
+</td>
+</tr>
+<tr>
+<td>
+<code>0111</code>
+</td>
+<td>
+Object Identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0112</code>
+</td>
+<td>
+ISO register for Standards producing Organizations
+</td>
+</tr>
+<tr>
+<td>
+<code>0113</code>
+</td>
+<td>
+OriginNet
+</td>
+</tr>
+<tr>
+<td>
+<code>0114</code>
+</td>
+<td>
+Check Point Software Technologies
+</td>
+</tr>
+<tr>
+<td>
+<code>0115</code>
+</td>
+<td>
+Pacific Bell Data Communications Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0116</code>
+</td>
+<td>
+PSS Object Identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0117</code>
+</td>
+<td>
+STENTOR-ICD CODING SYSTEM
+</td>
+</tr>
+<tr>
+<td>
+<code>0118</code>
+</td>
+<td>
+ATM-Network ZN'96
+</td>
+</tr>
+<tr>
+<td>
+<code>0119</code>
+</td>
+<td>
+MCI / OSI Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0120</code>
+</td>
+<td>
+Advantis
+</td>
+</tr>
+<tr>
+<td>
+<code>0121</code>
+</td>
+<td>
+Affable Software Data Interchange Codes
+</td>
+</tr>
+<tr>
+<td>
+<code>0122</code>
+</td>
+<td>
+BB-DATA GmbH
+</td>
+</tr>
+<tr>
+<td>
+<code>0123</code>
+</td>
+<td>
+BASF Company ATM-Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0124</code>
+</td>
+<td>
+IOTA Identifiers for Organizations for Telecommunications Addressing using the ICD system format defined in ISO/IEC 8348
+</td>
+</tr>
+<tr>
+<td>
+<code>0125</code>
+</td>
+<td>
+Henkel Corporate Network (H-Net)
+</td>
+</tr>
+<tr>
+<td>
+<code>0126</code>
+</td>
+<td>
+GTE/OSI Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0127</code>
+</td>
+<td>
+Dresdner Bank Corporate Network
+</td>
+</tr>
+<tr>
+<td>
+<code>0128</code>
+</td>
+<td>
+BCNR (Swiss Clearing Bank Number)
+</td>
+</tr>
+<tr>
+<td>
+<code>0129</code>
+</td>
+<td>
+BPI (Swiss Business Partner Identification) code
+</td>
+</tr>
+<tr>
+<td>
+<code>0130</code>
+</td>
+<td>
+Directorates of the European Commission
+</td>
+</tr>
+<tr>
+<td>
+<code>0131</code>
+</td>
+<td>
+Code for the Identification of National Organizations
+</td>
+</tr>
+<tr>
+<td>
+<code>0132</code>
+</td>
+<td>
+Certicom Object Identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0133</code>
+</td>
+<td>
+TC68 OID
+</td>
+</tr>
+<tr>
+<td>
+<code>0134</code>
+</td>
+<td>
+Infonet Services Corporation
+</td>
+</tr>
+<tr>
+<td>
+<code>0135</code>
+</td>
+<td>
+SIA Object Identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0136</code>
+</td>
+<td>
+Cable & Wireless Global ATM End-System Address Plan
+</td>
+</tr>
+<tr>
+<td>
+<code>0137</code>
+</td>
+<td>
+Global AESA scheme
+</td>
+</tr>
+<tr>
+<td>
+<code>0138</code>
+</td>
+<td>
+France Telecom ATM End System Address Plan
+</td>
+</tr>
+<tr>
+<td>
+<code>0139</code>
+</td>
+<td>
+Savvis Communications AESA:.
+</td>
+</tr>
+<tr>
+<td>
+<code>0140</code>
+</td>
+<td>
+Toshiba Organizations, Partners, And Suppliers' (TOPAS) Code
+</td>
+</tr>
+<tr>
+<td>
+<code>0141</code>
+</td>
+<td>
+NATO Commercial and Government Entity system
+</td>
+</tr>
+<tr>
+<td>
+<code>0142</code>
+</td>
+<td>
+SECETI Object Identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0143</code>
+</td>
+<td>
+EINESTEINet AG
+</td>
+</tr>
+<tr>
+<td>
+<code>0144</code>
+</td>
+<td>
+DoDAAC (Department of Defense Activity Address Code)
+</td>
+</tr>
+<tr>
+<td>
+<code>0145</code>
+</td>
+<td>
+DGCP (Direction Générale de la Comptabilité Publique)administrative accounting identification scheme
+</td>
+</tr>
+<tr>
+<td>
+<code>0146</code>
+</td>
+<td>
+DGI (Direction Générale des Impots) code
+</td>
+</tr>
+<tr>
+<td>
+<code>0147</code>
+</td>
+<td>
+Standard Company Code
+</td>
+</tr>
+<tr>
+<td>
+<code>0148</code>
+</td>
+<td>
+ITU (International Telecommunications Union)Data Network Identification Codes (DNIC)
+</td>
+</tr>
+<tr>
+<td>
+<code>0149</code>
+</td>
+<td>
+Global Business Identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>0150</code>
+</td>
+<td>
+Madge Networks Ltd- ICD ATM Addressing Scheme
+</td>
+</tr>
+<tr>
+<td>
+<code>0151</code>
+</td>
+<td>
+Australian Business Number (ABN) Scheme
+</td>
+</tr>
+<tr>
+<td>
+<code>0152</code>
+</td>
+<td>
+Edira Scheme Identifier Code
+</td>
+</tr>
+<tr>
+<td>
+<code>0153</code>
+</td>
+<td>
+Concert Global Network Services ICD AESA
+</td>
+</tr>
+<tr>
+<td>
+<code>0154</code>
+</td>
+<td>
+Identification number of economic subjects: (ICO)
+</td>
+</tr>
+<tr>
+<td>
+<code>0155</code>
+</td>
+<td>
+Global Crossing AESA (ATM End System Address)
+</td>
+</tr>
+<tr>
+<td>
+<code>0156</code>
+</td>
+<td>
+AUNA
+</td>
+</tr>
+<tr>
+<td>
+<code>0157</code>
+</td>
+<td>
+ATM interconnection with the Dutch KPN Telecom
+</td>
+</tr>
+<tr>
+<td>
+<code>0158</code>
+</td>
+<td>
+Identification number of economic subject (ICO) Act on State Statistics of 29 November 2'001, § 27
+</td>
+</tr>
+<tr>
+<td>
+<code>0159</code>
+</td>
+<td>
+ACTALIS Object Identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0160</code>
+</td>
+<td>
+GTIN - Global Trade Item Number
+</td>
+</tr>
+<tr>
+<td>
+<code>0161</code>
+</td>
+<td>
+ECCMA Open Technical Directory
+</td>
+</tr>
+<tr>
+<td>
+<code>0162</code>
+</td>
+<td>
+CEN/ISSS Object Identifier Scheme
+</td>
+</tr>
+<tr>
+<td>
+<code>0163</code>
+</td>
+<td>
+US-EPA Facility Identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>0164</code>
+</td>
+<td>
+TELUS Corporation
+</td>
+</tr>
+<tr>
+<td>
+<code>0165</code>
+</td>
+<td>
+FIEIE Object identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0166</code>
+</td>
+<td>
+Swissguide Identifier Scheme
+</td>
+</tr>
+<tr>
+<td>
+<code>0167</code>
+</td>
+<td>
+Priority Telecom ATM End System Address Plan
+</td>
+</tr>
+<tr>
+<td>
+<code>0168</code>
+</td>
+<td>
+Vodafone Ireland OSI Addressing
+</td>
+</tr>
+<tr>
+<td>
+<code>0169</code>
+</td>
+<td>
+Swiss Federal Business Identification Number. Central Business names Index (zefix) Identification Number
+</td>
+</tr>
+<tr>
+<td>
+<code>0170</code>
+</td>
+<td>
+Teikoku Company Code
+</td>
+</tr>
+<tr>
+<td>
+<code>0171</code>
+</td>
+<td>
+Luxembourg CP & CPS (Certification Policy and Certification Practice Statement) Index
+</td>
+</tr>
+<tr>
+<td>
+<code>0172</code>
+</td>
+<td>
+Project Group “Lists of Properties” (PROLIST®)
+</td>
+</tr>
+<tr>
+<td>
+<code>0173</code>
+</td>
+<td>
+eCI@ss
+</td>
+</tr>
+<tr>
+<td>
+<code>0174</code>
+</td>
+<td>
+StepNexus
+</td>
+</tr>
+<tr>
+<td>
+<code>0175</code>
+</td>
+<td>
+Siemens AG
+</td>
+</tr>
+<tr>
+<td>
+<code>0176</code>
+</td>
+<td>
+Paradine GmbH
+</td>
+</tr>
+<tr>
+<td>
+<code>0177</code>
+</td>
+<td>
+Odette International Limited
+</td>
+</tr>
+<tr>
+<td>
+<code>0178</code>
+</td>
+<td>
+Route1 MobiNET
+</td>
+</tr>
+<tr>
+<td>
+<code>0179</code>
+</td>
+<td>
+Penango Object Identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0180</code>
+</td>
+<td>
+Lithuanian military PKI
+</td>
+</tr>
+<tr>
+<td>
+<code>0183</code>
+</td>
+<td>
+Numéro d'identification suisse des enterprises (IDE), Swiss Unique Business Identification Number (UIDB)
+</td>
+</tr>
+<tr>
+<td>
+<code>0184</code>
+</td>
+<td>
+DIGSTORG
+</td>
+</tr>
+<tr>
+<td>
+<code>0185</code>
+</td>
+<td>
+Perceval Object Code
+</td>
+</tr>
+<tr>
+<td>
+<code>0186</code>
+</td>
+<td>
+TrustPoint Object Identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0187</code>
+</td>
+<td>
+Amazon Unique Identification Scheme
+</td>
+</tr>
+<tr>
+<td>
+<code>0188</code>
+</td>
+<td>
+Corporate Number of The Social Security and Tax Number System
+</td>
+</tr>
+<tr>
+<td>
+<code>0189</code>
+</td>
+<td>
+European Business Identifier (EBID)
+</td>
+</tr>
+<tr>
+<td>
+<code>0190</code>
+</td>
+<td>
+Organisatie Indentificatie Nummer (OIN)
+</td>
+</tr>
+<tr>
+<td>
+<code>0191</code>
+</td>
+<td>
+Company Code (Estonia)
+</td>
+</tr>
+<tr>
+<td>
+<code>0192</code>
+</td>
+<td>
+Organisasjonsnummer
+</td>
+</tr>
+<tr>
+<td>
+<code>0193</code>
+</td>
+<td>
+UBL.BE Party Identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>0194</code>
+</td>
+<td>
+KOIOS Open Technical Dictionary
+</td>
+</tr>
+<tr>
+<td>
+<code>0195</code>
+</td>
+<td>
+Singapore Nationwide E-lnvoice Framework
+</td>
+</tr>
+<tr>
+<td>
+<code>0196</code>
+</td>
+<td>
+Icelandic identifier - Íslensk kennitala
+</td>
+</tr>
+<tr>
+<td>
+<code>0197</code>
+</td>
+<td>
+APPLiA Pl Standard
+</td>
+</tr>
+<tr>
+<td>
+<code>0198</code>
+</td>
+<td>
+ERSTORG
+</td>
+</tr>
+<tr>
+<td>
+<code>0199</code>
+</td>
+<td>
+Legal Entity Identifier (LEI)
+</td>
+</tr>
+<tr>
+<td>
+<code>0200</code>
+</td>
+<td>
+Legal entity code (Lithuania)
+</td>
+</tr>
+<tr>
+<td>
+<code>0201</code>
+</td>
+<td>
+Codice Univoco Unità Organizzativa iPA
+</td>
+</tr>
+<tr>
+<td>
+<code>0202</code>
+</td>
+<td>
+Indirizzo di Posta Elettronica Certificata
+</td>
+</tr>
+<tr>
+<td>
+<code>0203</code>
+</td>
+<td>
+eDelivery Network Participant identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>0204</code>
+</td>
+<td>
+Leitweg-ID
+</td>
+</tr>
+<tr>
+<td>
+<code>0205</code>
+</td>
+<td>
+CODDEST
+</td>
+</tr>
+<tr>
+<td>
+<code>0206</code>
+</td>
+<td>
+Registre du Commerce et de l’Industrie : RCI
+</td>
+</tr>
+<tr>
+<td>
+<code>0207</code>
+</td>
+<td>
+PiLog Ontology Codification Identifier (POCI)
+</td>
+</tr>
+<tr>
+<td>
+<code>0208</code>
+</td>
+<td>
+Numero d'entreprise / ondernemingsnummer / Unternehmensnummer
+</td>
+</tr>
+<tr>
+<td>
+<code>0209</code>
+</td>
+<td>
+GS1 identification keys
+</td>
+</tr>
+<tr>
+<td>
+<code>0210</code>
+</td>
+<td>
+CODICE FISCALE
+</td>
+</tr>
+<tr>
+<td>
+<code>0211</code>
+</td>
+<td>
+PARTITA IVA
+</td>
+</tr>
+<tr>
+<td>
+<code>0212</code>
+</td>
+<td>
+Finnish Organization Identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>0213</code>
+</td>
+<td>
+Finnish Organization Value Add Tax Identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>0214</code>
+</td>
+<td>
+Tradeplace TradePI Standard
+</td>
+</tr>
+<tr>
+<td>
+<code>0215</code>
+</td>
+<td>
+Net service ID
+</td>
+</tr>
+<tr>
+<td>
+<code>0216</code>
+</td>
+<td>
+OVTcode
+</td>
+</tr>
+<tr>
+<td>
+<code>0217</code>
+</td>
+<td>
+The Netherlands Chamber of Commerce and Industry establishment number
+</td>
+</tr>
+<tr>
+<td>
+<code>0218</code>
+</td>
+<td>
+Unified registration number (Latvia)
+</td>
+</tr>
+<tr>
+<td>
+<code>0219</code>
+</td>
+<td>
+Taxpayer registration code (Latvia)
+</td>
+</tr>
+<tr>
+<td>
+<code>0220</code>
+</td>
+<td>
+The Register of Natural Persons (Latvia)
+</td>
+</tr>
+<tr>
+<td>
+<code>0221</code>
+</td>
+<td>
+The registered number of the qualified invoice issuer
+</td>
+</tr>
+<tr>
+<td>
+<code>0222</code>
+</td>
+<td>
+Metadata Registry Support
+</td>
+</tr>
+<tr>
+<td>
+<code>0223</code>
+</td>
+<td>
+EU based company
+</td>
+</tr>
+<tr>
+<td>
+<code>0224</code>
+</td>
+<td>
+FTCTC CODE ROUTAGE
+</td>
+</tr>
+<tr>
+<td>
+<code>0225</code>
+</td>
+<td>
+FRCTC ELECTRONIC ADDRESS
+</td>
+</tr>
+<tr>
+<td>
+<code>0226</code>
+</td>
+<td>
+FRCTC Particulier
+</td>
+</tr>
+<tr>
+<td>
+<code>0227</code>
+</td>
+<td>
+NON - EU based company
+</td>
+</tr>
+<tr>
+<td>
+<code>0228</code>
+</td>
+<td>
+Répertoire des Entreprises et des Etablissements (RIDET)
+</td>
+</tr>
+<tr>
+<td>
+<code>0229</code>
+</td>
+<td>
+T.A.H.I.T.I (traitement automatique hiérarchisé des institutions de Tahiti et des îles)
+</td>
+</tr>
+<tr>
+<td>
+<code>0230</code>
+</td>
+<td>
+National e-Invoicing Framework
+</td>
+</tr>
+<tr>
+<td>
+<code>0231</code>
+</td>
+<td>
+Single taxable company (France)
+</td>
+</tr>
+<tr>
+<td>
+<code>0232</code>
+</td>
+<td>
+NOBB product number
+</td>
+</tr>
+<tr>
+<td>
+<code>0233</code>
+</td>
+<td>
+Description not known
+</td>
+</tr>
+<tr>
+<td>
+<code>0234</code>
+</td>
+<td>
+Toimitusosoite ID
+</td>
+</tr>
+<tr>
+<td>
+<code>0235</code>
+</td>
+<td>
+UAE Tax Identification Number (TIN)
+</td>
+</tr>
+<tr>
+<td>
+<code>0236</code>
+</td>
+<td>
+Description not known
+</td>
+</tr>
+<tr>
+<td>
+<code>0237</code>
+</td>
+<td>
+CPR (Danish person civil registration number)
+</td>
+</tr>
+<tr>
+<td>
+<code>0238</code>
+</td>
+<td>
+Plateforme.s agréée.s à la facturation électronique (PPF/PDP)
+</td>
+</tr>
+<tr>
+<td>
+<code>0239</code>
+</td>
+<td>
+EAEU
+</td>
+</tr>
+<tr>
+<td>
+<code>0240</code>
+</td>
+<td>
+Register of legal persons (in French : Répertoire des personnes morales)
+</td>
+</tr>
+</tbody>
+</table>

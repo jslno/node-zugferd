@@ -42,5 +42,24 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/icd",
+			importPath: "/codelist/icd",
+			title: "ISO/IEC 6523 — Identifier scheme code",
+			description:
+				"Code specifying the identification scheme for organizations.",
+			sidebar: {
+				title: "ICD",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Identifier scheme name",
+					},
+				},
+			},
+		},
 	};
 });

@@ -1,0 +1,3253 @@
+---
+title: UNTDID 4451 — Text subject qualifier
+description: Code specifying subject of a free text.
+---
+
+import { TEXT } from "node-zugferd/codelist/text";
+
+### Codelist [toc]
+
+```ts
+import {
+	TEXT,
+	Text,
+	textCode,
+	PUBLISHED,
+	type TextDefinition,
+	type TextCode,
+} from "node-zugferd/codelist/text";
+
+```
+
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/text/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Code name
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>AAA</code>
+</td>
+<td>
+Goods item description
+</td>
+</tr>
+<tr>
+<td>
+<code>AAB</code>
+</td>
+<td>
+Payment term
+</td>
+</tr>
+<tr>
+<td>
+<code>AAC</code>
+</td>
+<td>
+Dangerous goods additional information
+</td>
+</tr>
+<tr>
+<td>
+<code>AAD</code>
+</td>
+<td>
+Dangerous goods technical name
+</td>
+</tr>
+<tr>
+<td>
+<code>AAE</code>
+</td>
+<td>
+Acknowledgement description
+</td>
+</tr>
+<tr>
+<td>
+<code>AAF</code>
+</td>
+<td>
+Rate additional information
+</td>
+</tr>
+<tr>
+<td>
+<code>AAG</code>
+</td>
+<td>
+Party instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>AAI</code>
+</td>
+<td>
+General information
+</td>
+</tr>
+<tr>
+<td>
+<code>AAJ</code>
+</td>
+<td>
+Additional conditions of sale/purchase
+</td>
+</tr>
+<tr>
+<td>
+<code>AAK</code>
+</td>
+<td>
+Price conditions
+</td>
+</tr>
+<tr>
+<td>
+<code>AAL</code>
+</td>
+<td>
+Goods dimensions in characters
+</td>
+</tr>
+<tr>
+<td>
+<code>AAM</code>
+</td>
+<td>
+Equipment re-usage restrictions
+</td>
+</tr>
+<tr>
+<td>
+<code>AAN</code>
+</td>
+<td>
+Handling restriction
+</td>
+</tr>
+<tr>
+<td>
+<code>AAO</code>
+</td>
+<td>
+Error description (free text)
+</td>
+</tr>
+<tr>
+<td>
+<code>AAP</code>
+</td>
+<td>
+Response (free text)
+</td>
+</tr>
+<tr>
+<td>
+<code>AAQ</code>
+</td>
+<td>
+Package content's description
+</td>
+</tr>
+<tr>
+<td>
+<code>AAR</code>
+</td>
+<td>
+Terms of delivery
+</td>
+</tr>
+<tr>
+<td>
+<code>AAS</code>
+</td>
+<td>
+Bill of lading remarks
+</td>
+</tr>
+<tr>
+<td>
+<code>AAT</code>
+</td>
+<td>
+Mode of settlement information
+</td>
+</tr>
+<tr>
+<td>
+<code>AAU</code>
+</td>
+<td>
+Consignment invoice information
+</td>
+</tr>
+<tr>
+<td>
+<code>AAV</code>
+</td>
+<td>
+Clearance invoice information
+</td>
+</tr>
+<tr>
+<td>
+<code>AAW</code>
+</td>
+<td>
+Letter of credit information
+</td>
+</tr>
+<tr>
+<td>
+<code>AAX</code>
+</td>
+<td>
+License information
+</td>
+</tr>
+<tr>
+<td>
+<code>AAY</code>
+</td>
+<td>
+Certification statements
+</td>
+</tr>
+<tr>
+<td>
+<code>AAZ</code>
+</td>
+<td>
+Additional export information
+</td>
+</tr>
+<tr>
+<td>
+<code>ABA</code>
+</td>
+<td>
+Tariff statements
+</td>
+</tr>
+<tr>
+<td>
+<code>ABB</code>
+</td>
+<td>
+Medical history
+</td>
+</tr>
+<tr>
+<td>
+<code>ABC</code>
+</td>
+<td>
+Conditions of sale or purchase
+</td>
+</tr>
+<tr>
+<td>
+<code>ABD</code>
+</td>
+<td>
+Contract document type
+</td>
+</tr>
+<tr>
+<td>
+<code>ABE</code>
+</td>
+<td>
+Additional terms and/or conditions (documentary credit)
+</td>
+</tr>
+<tr>
+<td>
+<code>ABF</code>
+</td>
+<td>
+Instructions or information about standby documentary
+</td>
+</tr>
+<tr>
+<td>
+<code>ABG</code>
+</td>
+<td>
+Instructions or information about partial shipment(s)
+</td>
+</tr>
+<tr>
+<td>
+<code>ABH</code>
+</td>
+<td>
+Instructions or information about transhipment(s)
+</td>
+</tr>
+<tr>
+<td>
+<code>ABI</code>
+</td>
+<td>
+Additional handling instructions documentary credit
+</td>
+</tr>
+<tr>
+<td>
+<code>ABJ</code>
+</td>
+<td>
+Domestic routing information
+</td>
+</tr>
+<tr>
+<td>
+<code>ABK</code>
+</td>
+<td>
+Chargeable category of equipment
+</td>
+</tr>
+<tr>
+<td>
+<code>ABL</code>
+</td>
+<td>
+Government information
+</td>
+</tr>
+<tr>
+<td>
+<code>ABM</code>
+</td>
+<td>
+Onward routing information
+</td>
+</tr>
+<tr>
+<td>
+<code>ABN</code>
+</td>
+<td>
+Accounting information
+</td>
+</tr>
+<tr>
+<td>
+<code>ABO</code>
+</td>
+<td>
+Discrepancy information
+</td>
+</tr>
+<tr>
+<td>
+<code>ABP</code>
+</td>
+<td>
+Confirmation instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>ABQ</code>
+</td>
+<td>
+Method of issuance
+</td>
+</tr>
+<tr>
+<td>
+<code>ABR</code>
+</td>
+<td>
+Documents delivery instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>ABS</code>
+</td>
+<td>
+Additional conditions
+</td>
+</tr>
+<tr>
+<td>
+<code>ABT</code>
+</td>
+<td>
+Information/instructions about additional amounts covered
+</td>
+</tr>
+<tr>
+<td>
+<code>ABU</code>
+</td>
+<td>
+Deferred payment termed additional
+</td>
+</tr>
+<tr>
+<td>
+<code>ABV</code>
+</td>
+<td>
+Acceptance terms additional
+</td>
+</tr>
+<tr>
+<td>
+<code>ABW</code>
+</td>
+<td>
+Negotiation terms additional
+</td>
+</tr>
+<tr>
+<td>
+<code>ABX</code>
+</td>
+<td>
+Document name and documentary requirements
+</td>
+</tr>
+<tr>
+<td>
+<code>ABZ</code>
+</td>
+<td>
+Instructions/information about revolving documentary credit
+</td>
+</tr>
+<tr>
+<td>
+<code>ACA</code>
+</td>
+<td>
+Documentary requirements
+</td>
+</tr>
+<tr>
+<td>
+<code>ACB</code>
+</td>
+<td>
+Additional information
+</td>
+</tr>
+<tr>
+<td>
+<code>ACC</code>
+</td>
+<td>
+Factor assignment clause
+</td>
+</tr>
+<tr>
+<td>
+<code>ACD</code>
+</td>
+<td>
+Reason
+</td>
+</tr>
+<tr>
+<td>
+<code>ACE</code>
+</td>
+<td>
+Dispute
+</td>
+</tr>
+<tr>
+<td>
+<code>ACF</code>
+</td>
+<td>
+Additional attribute information
+</td>
+</tr>
+<tr>
+<td>
+<code>ACG</code>
+</td>
+<td>
+Absence declaration
+</td>
+</tr>
+<tr>
+<td>
+<code>ACH</code>
+</td>
+<td>
+Aggregation statement
+</td>
+</tr>
+<tr>
+<td>
+<code>ACI</code>
+</td>
+<td>
+Compilation statement
+</td>
+</tr>
+<tr>
+<td>
+<code>ACJ</code>
+</td>
+<td>
+Definitional exception
+</td>
+</tr>
+<tr>
+<td>
+<code>ACK</code>
+</td>
+<td>
+Privacy statement
+</td>
+</tr>
+<tr>
+<td>
+<code>ACL</code>
+</td>
+<td>
+Quality statement
+</td>
+</tr>
+<tr>
+<td>
+<code>ACM</code>
+</td>
+<td>
+Statistical description
+</td>
+</tr>
+<tr>
+<td>
+<code>ACN</code>
+</td>
+<td>
+Statistical definition
+</td>
+</tr>
+<tr>
+<td>
+<code>ACO</code>
+</td>
+<td>
+Statistical name
+</td>
+</tr>
+<tr>
+<td>
+<code>ACP</code>
+</td>
+<td>
+Statistical title
+</td>
+</tr>
+<tr>
+<td>
+<code>ACQ</code>
+</td>
+<td>
+Off-dimension information
+</td>
+</tr>
+<tr>
+<td>
+<code>ACR</code>
+</td>
+<td>
+Unexpected stops information
+</td>
+</tr>
+<tr>
+<td>
+<code>ACS</code>
+</td>
+<td>
+Principles
+</td>
+</tr>
+<tr>
+<td>
+<code>ACT</code>
+</td>
+<td>
+Terms and definition
+</td>
+</tr>
+<tr>
+<td>
+<code>ACU</code>
+</td>
+<td>
+Segment name
+</td>
+</tr>
+<tr>
+<td>
+<code>ACV</code>
+</td>
+<td>
+Simple data element name
+</td>
+</tr>
+<tr>
+<td>
+<code>ACW</code>
+</td>
+<td>
+Scope
+</td>
+</tr>
+<tr>
+<td>
+<code>ACX</code>
+</td>
+<td>
+Message type name
+</td>
+</tr>
+<tr>
+<td>
+<code>ACY</code>
+</td>
+<td>
+Introduction
+</td>
+</tr>
+<tr>
+<td>
+<code>ACZ</code>
+</td>
+<td>
+Glossary
+</td>
+</tr>
+<tr>
+<td>
+<code>ADA</code>
+</td>
+<td>
+Functional definition
+</td>
+</tr>
+<tr>
+<td>
+<code>ADB</code>
+</td>
+<td>
+Examples
+</td>
+</tr>
+<tr>
+<td>
+<code>ADC</code>
+</td>
+<td>
+Cover page
+</td>
+</tr>
+<tr>
+<td>
+<code>ADD</code>
+</td>
+<td>
+Dependency (syntax) notes
+</td>
+</tr>
+<tr>
+<td>
+<code>ADE</code>
+</td>
+<td>
+Code value name
+</td>
+</tr>
+<tr>
+<td>
+<code>ADF</code>
+</td>
+<td>
+Code list name
+</td>
+</tr>
+<tr>
+<td>
+<code>ADG</code>
+</td>
+<td>
+Clarification of usage
+</td>
+</tr>
+<tr>
+<td>
+<code>ADH</code>
+</td>
+<td>
+Composite data element name
+</td>
+</tr>
+<tr>
+<td>
+<code>ADI</code>
+</td>
+<td>
+Field of application
+</td>
+</tr>
+<tr>
+<td>
+<code>ADJ</code>
+</td>
+<td>
+Type of assets and liabilities
+</td>
+</tr>
+<tr>
+<td>
+<code>ADK</code>
+</td>
+<td>
+Promotion information
+</td>
+</tr>
+<tr>
+<td>
+<code>ADL</code>
+</td>
+<td>
+Meter condition
+</td>
+</tr>
+<tr>
+<td>
+<code>ADM</code>
+</td>
+<td>
+Meter reading information
+</td>
+</tr>
+<tr>
+<td>
+<code>ADN</code>
+</td>
+<td>
+Type of transaction reason
+</td>
+</tr>
+<tr>
+<td>
+<code>ADO</code>
+</td>
+<td>
+Type of survey question
+</td>
+</tr>
+<tr>
+<td>
+<code>ADP</code>
+</td>
+<td>
+Carrier's agent counter information
+</td>
+</tr>
+<tr>
+<td>
+<code>ADQ</code>
+</td>
+<td>
+Description of work item on equipment
+</td>
+</tr>
+<tr>
+<td>
+<code>ADR</code>
+</td>
+<td>
+Message definition
+</td>
+</tr>
+<tr>
+<td>
+<code>ADS</code>
+</td>
+<td>
+Booked item information
+</td>
+</tr>
+<tr>
+<td>
+<code>ADT</code>
+</td>
+<td>
+Source of document
+</td>
+</tr>
+<tr>
+<td>
+<code>ADU</code>
+</td>
+<td>
+Note
+</td>
+</tr>
+<tr>
+<td>
+<code>ADV</code>
+</td>
+<td>
+Fixed part of segment clarification text
+</td>
+</tr>
+<tr>
+<td>
+<code>ADW</code>
+</td>
+<td>
+Characteristics of goods
+</td>
+</tr>
+<tr>
+<td>
+<code>ADX</code>
+</td>
+<td>
+Additional discharge instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>ADY</code>
+</td>
+<td>
+Container stripping instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>ADZ</code>
+</td>
+<td>
+CSC (Container Safety Convention) plate information
+</td>
+</tr>
+<tr>
+<td>
+<code>AEA</code>
+</td>
+<td>
+Cargo remarks
+</td>
+</tr>
+<tr>
+<td>
+<code>AEB</code>
+</td>
+<td>
+Temperature control instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>AEC</code>
+</td>
+<td>
+Text refers to expected data
+</td>
+</tr>
+<tr>
+<td>
+<code>AED</code>
+</td>
+<td>
+Text refers to received data
+</td>
+</tr>
+<tr>
+<td>
+<code>AEE</code>
+</td>
+<td>
+Section clarification text
+</td>
+</tr>
+<tr>
+<td>
+<code>AEF</code>
+</td>
+<td>
+Information to the beneficiary
+</td>
+</tr>
+<tr>
+<td>
+<code>AEG</code>
+</td>
+<td>
+Information to the applicant
+</td>
+</tr>
+<tr>
+<td>
+<code>AEH</code>
+</td>
+<td>
+Instructions to the beneficiary
+</td>
+</tr>
+<tr>
+<td>
+<code>AEI</code>
+</td>
+<td>
+Instructions to the applicant
+</td>
+</tr>
+<tr>
+<td>
+<code>AEJ</code>
+</td>
+<td>
+Controlled atmosphere
+</td>
+</tr>
+<tr>
+<td>
+<code>AEK</code>
+</td>
+<td>
+Take off annotation
+</td>
+</tr>
+<tr>
+<td>
+<code>AEL</code>
+</td>
+<td>
+Price variation narrative
+</td>
+</tr>
+<tr>
+<td>
+<code>AEM</code>
+</td>
+<td>
+Documentary credit amendment instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>AEN</code>
+</td>
+<td>
+Standard method narrative
+</td>
+</tr>
+<tr>
+<td>
+<code>AEO</code>
+</td>
+<td>
+Project narrative
+</td>
+</tr>
+<tr>
+<td>
+<code>AEP</code>
+</td>
+<td>
+Radioactive goods, additional information
+</td>
+</tr>
+<tr>
+<td>
+<code>AEQ</code>
+</td>
+<td>
+Bank-to-bank information
+</td>
+</tr>
+<tr>
+<td>
+<code>AER</code>
+</td>
+<td>
+Reimbursement instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>AES</code>
+</td>
+<td>
+Reason for amending a message
+</td>
+</tr>
+<tr>
+<td>
+<code>AET</code>
+</td>
+<td>
+Instructions to the paying and/or accepting and/or
+</td>
+</tr>
+<tr>
+<td>
+<code>AEU</code>
+</td>
+<td>
+Interest instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>AEV</code>
+</td>
+<td>
+Agent commission
+</td>
+</tr>
+<tr>
+<td>
+<code>AEW</code>
+</td>
+<td>
+Remitting bank instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>AEX</code>
+</td>
+<td>
+Instructions to the collecting bank
+</td>
+</tr>
+<tr>
+<td>
+<code>AEY</code>
+</td>
+<td>
+Collection amount instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>AEZ</code>
+</td>
+<td>
+Internal auditing information
+</td>
+</tr>
+<tr>
+<td>
+<code>AFA</code>
+</td>
+<td>
+Constraint
+</td>
+</tr>
+<tr>
+<td>
+<code>AFB</code>
+</td>
+<td>
+Comment
+</td>
+</tr>
+<tr>
+<td>
+<code>AFC</code>
+</td>
+<td>
+Semantic note
+</td>
+</tr>
+<tr>
+<td>
+<code>AFD</code>
+</td>
+<td>
+Help text
+</td>
+</tr>
+<tr>
+<td>
+<code>AFE</code>
+</td>
+<td>
+Legend
+</td>
+</tr>
+<tr>
+<td>
+<code>AFF</code>
+</td>
+<td>
+Batch code structure
+</td>
+</tr>
+<tr>
+<td>
+<code>AFG</code>
+</td>
+<td>
+Product application
+</td>
+</tr>
+<tr>
+<td>
+<code>AFH</code>
+</td>
+<td>
+Customer complaint
+</td>
+</tr>
+<tr>
+<td>
+<code>AFI</code>
+</td>
+<td>
+Probable cause of fault
+</td>
+</tr>
+<tr>
+<td>
+<code>AFJ</code>
+</td>
+<td>
+Defect description
+</td>
+</tr>
+<tr>
+<td>
+<code>AFK</code>
+</td>
+<td>
+Repair description
+</td>
+</tr>
+<tr>
+<td>
+<code>AFL</code>
+</td>
+<td>
+Review comments
+</td>
+</tr>
+<tr>
+<td>
+<code>AFM</code>
+</td>
+<td>
+Title
+</td>
+</tr>
+<tr>
+<td>
+<code>AFN</code>
+</td>
+<td>
+Description of amount
+</td>
+</tr>
+<tr>
+<td>
+<code>AFO</code>
+</td>
+<td>
+Responsibilities
+</td>
+</tr>
+<tr>
+<td>
+<code>AFP</code>
+</td>
+<td>
+Supplier
+</td>
+</tr>
+<tr>
+<td>
+<code>AFQ</code>
+</td>
+<td>
+Purchase region
+</td>
+</tr>
+<tr>
+<td>
+<code>AFR</code>
+</td>
+<td>
+Affiliation
+</td>
+</tr>
+<tr>
+<td>
+<code>AFS</code>
+</td>
+<td>
+Borrower
+</td>
+</tr>
+<tr>
+<td>
+<code>AFT</code>
+</td>
+<td>
+Line of business
+</td>
+</tr>
+<tr>
+<td>
+<code>AFU</code>
+</td>
+<td>
+Financial institution
+</td>
+</tr>
+<tr>
+<td>
+<code>AFV</code>
+</td>
+<td>
+Business founder
+</td>
+</tr>
+<tr>
+<td>
+<code>AFW</code>
+</td>
+<td>
+Business history
+</td>
+</tr>
+<tr>
+<td>
+<code>AFX</code>
+</td>
+<td>
+Banking arrangements
+</td>
+</tr>
+<tr>
+<td>
+<code>AFY</code>
+</td>
+<td>
+Business origin
+</td>
+</tr>
+<tr>
+<td>
+<code>AFZ</code>
+</td>
+<td>
+Brand names' description
+</td>
+</tr>
+<tr>
+<td>
+<code>AGA</code>
+</td>
+<td>
+Business financing details
+</td>
+</tr>
+<tr>
+<td>
+<code>AGB</code>
+</td>
+<td>
+Competition
+</td>
+</tr>
+<tr>
+<td>
+<code>AGC</code>
+</td>
+<td>
+Construction process details
+</td>
+</tr>
+<tr>
+<td>
+<code>AGD</code>
+</td>
+<td>
+Construction specialty
+</td>
+</tr>
+<tr>
+<td>
+<code>AGE</code>
+</td>
+<td>
+Contract information
+</td>
+</tr>
+<tr>
+<td>
+<code>AGF</code>
+</td>
+<td>
+Corporate filing
+</td>
+</tr>
+<tr>
+<td>
+<code>AGG</code>
+</td>
+<td>
+Customer information
+</td>
+</tr>
+<tr>
+<td>
+<code>AGH</code>
+</td>
+<td>
+Copyright notice
+</td>
+</tr>
+<tr>
+<td>
+<code>AGI</code>
+</td>
+<td>
+Contingent debt
+</td>
+</tr>
+<tr>
+<td>
+<code>AGJ</code>
+</td>
+<td>
+Conviction details
+</td>
+</tr>
+<tr>
+<td>
+<code>AGK</code>
+</td>
+<td>
+Equipment
+</td>
+</tr>
+<tr>
+<td>
+<code>AGL</code>
+</td>
+<td>
+Workforce description
+</td>
+</tr>
+<tr>
+<td>
+<code>AGM</code>
+</td>
+<td>
+Exemption
+</td>
+</tr>
+<tr>
+<td>
+<code>AGN</code>
+</td>
+<td>
+Future plans
+</td>
+</tr>
+<tr>
+<td>
+<code>AGO</code>
+</td>
+<td>
+Interviewee conversation information
+</td>
+</tr>
+<tr>
+<td>
+<code>AGP</code>
+</td>
+<td>
+Intangible asset
+</td>
+</tr>
+<tr>
+<td>
+<code>AGQ</code>
+</td>
+<td>
+Inventory
+</td>
+</tr>
+<tr>
+<td>
+<code>AGR</code>
+</td>
+<td>
+Investment
+</td>
+</tr>
+<tr>
+<td>
+<code>AGS</code>
+</td>
+<td>
+Intercompany relations information
+</td>
+</tr>
+<tr>
+<td>
+<code>AGT</code>
+</td>
+<td>
+Joint venture
+</td>
+</tr>
+<tr>
+<td>
+<code>AGU</code>
+</td>
+<td>
+Loan
+</td>
+</tr>
+<tr>
+<td>
+<code>AGV</code>
+</td>
+<td>
+Long term debt
+</td>
+</tr>
+<tr>
+<td>
+<code>AGW</code>
+</td>
+<td>
+Location
+</td>
+</tr>
+<tr>
+<td>
+<code>AGX</code>
+</td>
+<td>
+Current legal structure
+</td>
+</tr>
+<tr>
+<td>
+<code>AGY</code>
+</td>
+<td>
+Marital contract
+</td>
+</tr>
+<tr>
+<td>
+<code>AGZ</code>
+</td>
+<td>
+Marketing activities
+</td>
+</tr>
+<tr>
+<td>
+<code>AHA</code>
+</td>
+<td>
+Merger
+</td>
+</tr>
+<tr>
+<td>
+<code>AHB</code>
+</td>
+<td>
+Marketable securities
+</td>
+</tr>
+<tr>
+<td>
+<code>AHC</code>
+</td>
+<td>
+Business debt
+</td>
+</tr>
+<tr>
+<td>
+<code>AHD</code>
+</td>
+<td>
+Original legal structure
+</td>
+</tr>
+<tr>
+<td>
+<code>AHE</code>
+</td>
+<td>
+Employee sharing arrangements
+</td>
+</tr>
+<tr>
+<td>
+<code>AHF</code>
+</td>
+<td>
+Organization details
+</td>
+</tr>
+<tr>
+<td>
+<code>AHG</code>
+</td>
+<td>
+Public record details
+</td>
+</tr>
+<tr>
+<td>
+<code>AHH</code>
+</td>
+<td>
+Price range
+</td>
+</tr>
+<tr>
+<td>
+<code>AHI</code>
+</td>
+<td>
+Qualifications
+</td>
+</tr>
+<tr>
+<td>
+<code>AHJ</code>
+</td>
+<td>
+Registered activity
+</td>
+</tr>
+<tr>
+<td>
+<code>AHK</code>
+</td>
+<td>
+Criminal sentence
+</td>
+</tr>
+<tr>
+<td>
+<code>AHL</code>
+</td>
+<td>
+Sales method
+</td>
+</tr>
+<tr>
+<td>
+<code>AHM</code>
+</td>
+<td>
+Educational institution information
+</td>
+</tr>
+<tr>
+<td>
+<code>AHN</code>
+</td>
+<td>
+Status details
+</td>
+</tr>
+<tr>
+<td>
+<code>AHO</code>
+</td>
+<td>
+Sales
+</td>
+</tr>
+<tr>
+<td>
+<code>AHP</code>
+</td>
+<td>
+Spouse information
+</td>
+</tr>
+<tr>
+<td>
+<code>AHQ</code>
+</td>
+<td>
+Educational degree information
+</td>
+</tr>
+<tr>
+<td>
+<code>AHR</code>
+</td>
+<td>
+Shareholding information
+</td>
+</tr>
+<tr>
+<td>
+<code>AHS</code>
+</td>
+<td>
+Sales territory
+</td>
+</tr>
+<tr>
+<td>
+<code>AHT</code>
+</td>
+<td>
+Accountant's comments
+</td>
+</tr>
+<tr>
+<td>
+<code>AHU</code>
+</td>
+<td>
+Exemption law location
+</td>
+</tr>
+<tr>
+<td>
+<code>AHV</code>
+</td>
+<td>
+Share classifications
+</td>
+</tr>
+<tr>
+<td>
+<code>AHW</code>
+</td>
+<td>
+Forecast
+</td>
+</tr>
+<tr>
+<td>
+<code>AHX</code>
+</td>
+<td>
+Event location
+</td>
+</tr>
+<tr>
+<td>
+<code>AHY</code>
+</td>
+<td>
+Facility occupancy
+</td>
+</tr>
+<tr>
+<td>
+<code>AHZ</code>
+</td>
+<td>
+Import and export details
+</td>
+</tr>
+<tr>
+<td>
+<code>AIA</code>
+</td>
+<td>
+Additional facility information
+</td>
+</tr>
+<tr>
+<td>
+<code>AIB</code>
+</td>
+<td>
+Inventory value
+</td>
+</tr>
+<tr>
+<td>
+<code>AIC</code>
+</td>
+<td>
+Education
+</td>
+</tr>
+<tr>
+<td>
+<code>AID</code>
+</td>
+<td>
+Event
+</td>
+</tr>
+<tr>
+<td>
+<code>AIE</code>
+</td>
+<td>
+Agent
+</td>
+</tr>
+<tr>
+<td>
+<code>AIF</code>
+</td>
+<td>
+Domestically agreed financial statement details
+</td>
+</tr>
+<tr>
+<td>
+<code>AIG</code>
+</td>
+<td>
+Other current asset description
+</td>
+</tr>
+<tr>
+<td>
+<code>AIH</code>
+</td>
+<td>
+Other current liability description
+</td>
+</tr>
+<tr>
+<td>
+<code>AII</code>
+</td>
+<td>
+Former business activity
+</td>
+</tr>
+<tr>
+<td>
+<code>AIJ</code>
+</td>
+<td>
+Trade name use
+</td>
+</tr>
+<tr>
+<td>
+<code>AIK</code>
+</td>
+<td>
+Signing authority
+</td>
+</tr>
+<tr>
+<td>
+<code>AIL</code>
+</td>
+<td>
+Guarantee
+</td>
+</tr>
+<tr>
+<td>
+<code>AIM</code>
+</td>
+<td>
+Holding company operation
+</td>
+</tr>
+<tr>
+<td>
+<code>AIN</code>
+</td>
+<td>
+Consignment routing
+</td>
+</tr>
+<tr>
+<td>
+<code>AIO</code>
+</td>
+<td>
+Letter of protest
+</td>
+</tr>
+<tr>
+<td>
+<code>AIP</code>
+</td>
+<td>
+Question
+</td>
+</tr>
+<tr>
+<td>
+<code>AIQ</code>
+</td>
+<td>
+Party information
+</td>
+</tr>
+<tr>
+<td>
+<code>AIR</code>
+</td>
+<td>
+Area boundaries description
+</td>
+</tr>
+<tr>
+<td>
+<code>AIS</code>
+</td>
+<td>
+Advertisement information
+</td>
+</tr>
+<tr>
+<td>
+<code>AIT</code>
+</td>
+<td>
+Financial statement details
+</td>
+</tr>
+<tr>
+<td>
+<code>AIU</code>
+</td>
+<td>
+Access instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>AIV</code>
+</td>
+<td>
+Liquidity
+</td>
+</tr>
+<tr>
+<td>
+<code>AIW</code>
+</td>
+<td>
+Credit line
+</td>
+</tr>
+<tr>
+<td>
+<code>AIX</code>
+</td>
+<td>
+Warranty terms
+</td>
+</tr>
+<tr>
+<td>
+<code>AIY</code>
+</td>
+<td>
+Division description
+</td>
+</tr>
+<tr>
+<td>
+<code>AIZ</code>
+</td>
+<td>
+Reporting instruction
+</td>
+</tr>
+<tr>
+<td>
+<code>AJA</code>
+</td>
+<td>
+Examination result
+</td>
+</tr>
+<tr>
+<td>
+<code>AJB</code>
+</td>
+<td>
+Laboratory result
+</td>
+</tr>
+<tr>
+<td>
+<code>ALC</code>
+</td>
+<td>
+Allowance/charge information
+</td>
+</tr>
+<tr>
+<td>
+<code>ALD</code>
+</td>
+<td>
+X-ray result
+</td>
+</tr>
+<tr>
+<td>
+<code>ALE</code>
+</td>
+<td>
+Pathology result
+</td>
+</tr>
+<tr>
+<td>
+<code>ALF</code>
+</td>
+<td>
+Intervention description
+</td>
+</tr>
+<tr>
+<td>
+<code>ALG</code>
+</td>
+<td>
+Summary of admittance
+</td>
+</tr>
+<tr>
+<td>
+<code>ALH</code>
+</td>
+<td>
+Medical treatment course detail
+</td>
+</tr>
+<tr>
+<td>
+<code>ALI</code>
+</td>
+<td>
+Prognosis
+</td>
+</tr>
+<tr>
+<td>
+<code>ALJ</code>
+</td>
+<td>
+Instruction to patient
+</td>
+</tr>
+<tr>
+<td>
+<code>ALK</code>
+</td>
+<td>
+Instruction to physician
+</td>
+</tr>
+<tr>
+<td>
+<code>ALL</code>
+</td>
+<td>
+All documents
+</td>
+</tr>
+<tr>
+<td>
+<code>ALM</code>
+</td>
+<td>
+Medicine treatment
+</td>
+</tr>
+<tr>
+<td>
+<code>ALN</code>
+</td>
+<td>
+Medicine dosage and administration
+</td>
+</tr>
+<tr>
+<td>
+<code>ALO</code>
+</td>
+<td>
+Availability of patient
+</td>
+</tr>
+<tr>
+<td>
+<code>ALP</code>
+</td>
+<td>
+Reason for service request
+</td>
+</tr>
+<tr>
+<td>
+<code>ALQ</code>
+</td>
+<td>
+Purpose of service
+</td>
+</tr>
+<tr>
+<td>
+<code>ARR</code>
+</td>
+<td>
+Arrival conditions
+</td>
+</tr>
+<tr>
+<td>
+<code>ARS</code>
+</td>
+<td>
+Service requester's comment
+</td>
+</tr>
+<tr>
+<td>
+<code>AUT</code>
+</td>
+<td>
+Authentication
+</td>
+</tr>
+<tr>
+<td>
+<code>AUU</code>
+</td>
+<td>
+Requested location description
+</td>
+</tr>
+<tr>
+<td>
+<code>AUV</code>
+</td>
+<td>
+Medicine administration condition
+</td>
+</tr>
+<tr>
+<td>
+<code>AUW</code>
+</td>
+<td>
+Patient information
+</td>
+</tr>
+<tr>
+<td>
+<code>AUX</code>
+</td>
+<td>
+Precautionary measure
+</td>
+</tr>
+<tr>
+<td>
+<code>AUY</code>
+</td>
+<td>
+Service characteristic
+</td>
+</tr>
+<tr>
+<td>
+<code>AUZ</code>
+</td>
+<td>
+Planned event comment
+</td>
+</tr>
+<tr>
+<td>
+<code>AVA</code>
+</td>
+<td>
+Expected delay comment
+</td>
+</tr>
+<tr>
+<td>
+<code>AVB</code>
+</td>
+<td>
+Transport requirements comment
+</td>
+</tr>
+<tr>
+<td>
+<code>AVC</code>
+</td>
+<td>
+Temporary approval condition
+</td>
+</tr>
+<tr>
+<td>
+<code>AVD</code>
+</td>
+<td>
+Customs Valuation Information
+</td>
+</tr>
+<tr>
+<td>
+<code>AVE</code>
+</td>
+<td>
+Value Added Tax (VAT) margin scheme
+</td>
+</tr>
+<tr>
+<td>
+<code>AVF</code>
+</td>
+<td>
+Maritime Declaration of Health
+</td>
+</tr>
+<tr>
+<td>
+<code>BAG</code>
+</td>
+<td>
+Passenger baggage information
+</td>
+</tr>
+<tr>
+<td>
+<code>BAH</code>
+</td>
+<td>
+Maritime Declaration of Health
+</td>
+</tr>
+<tr>
+<td>
+<code>BAI</code>
+</td>
+<td>
+Additional product information address
+</td>
+</tr>
+<tr>
+<td>
+<code>BAJ</code>
+</td>
+<td>
+Information to be printed on despatch advice
+</td>
+</tr>
+<tr>
+<td>
+<code>BAK</code>
+</td>
+<td>
+Missing goods remarks
+</td>
+</tr>
+<tr>
+<td>
+<code>BAL</code>
+</td>
+<td>
+Non-acceptance information
+</td>
+</tr>
+<tr>
+<td>
+<code>BAM</code>
+</td>
+<td>
+Returns information
+</td>
+</tr>
+<tr>
+<td>
+<code>BAN</code>
+</td>
+<td>
+Sub-line item information
+</td>
+</tr>
+<tr>
+<td>
+<code>BAO</code>
+</td>
+<td>
+Test information
+</td>
+</tr>
+<tr>
+<td>
+<code>BAP</code>
+</td>
+<td>
+External link
+</td>
+</tr>
+<tr>
+<td>
+<code>BAQ</code>
+</td>
+<td>
+VAT exemption reason
+</td>
+</tr>
+<tr>
+<td>
+<code>BAR</code>
+</td>
+<td>
+Processing Instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>BAS</code>
+</td>
+<td>
+Relay Instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>BAT</code>
+</td>
+<td>
+SIMA applicable
+</td>
+</tr>
+<tr>
+<td>
+<code>BAU</code>
+</td>
+<td>
+Appeals program code
+</td>
+</tr>
+<tr>
+<td>
+<code>BAV</code>
+</td>
+<td>
+SIMA subject
+</td>
+</tr>
+<tr>
+<td>
+<code>BAW</code>
+</td>
+<td>
+Surtax applicable
+</td>
+</tr>
+<tr>
+<td>
+<code>BAX</code>
+</td>
+<td>
+SIMA security bond
+</td>
+</tr>
+<tr>
+<td>
+<code>BAY</code>
+</td>
+<td>
+Surtax subject
+</td>
+</tr>
+<tr>
+<td>
+<code>BAZ</code>
+</td>
+<td>
+Safeguard applicable
+</td>
+</tr>
+<tr>
+<td>
+<code>BBA</code>
+</td>
+<td>
+Safeguard applicable
+</td>
+</tr>
+<tr>
+<td>
+<code>BBB</code>
+</td>
+<td>
+Safeguard subject
+</td>
+</tr>
+<tr>
+<td>
+<code>BLC</code>
+</td>
+<td>
+Transport contract document clause
+</td>
+</tr>
+<tr>
+<td>
+<code>BLD</code>
+</td>
+<td>
+Instruction to prepare the patient
+</td>
+</tr>
+<tr>
+<td>
+<code>BLE</code>
+</td>
+<td>
+Medicine treatment comment
+</td>
+</tr>
+<tr>
+<td>
+<code>BLF</code>
+</td>
+<td>
+Examination result comment
+</td>
+</tr>
+<tr>
+<td>
+<code>BLG</code>
+</td>
+<td>
+Service request comment
+</td>
+</tr>
+<tr>
+<td>
+<code>BLH</code>
+</td>
+<td>
+Prescription reason
+</td>
+</tr>
+<tr>
+<td>
+<code>BLI</code>
+</td>
+<td>
+Prescription comment
+</td>
+</tr>
+<tr>
+<td>
+<code>BLJ</code>
+</td>
+<td>
+Clinical investigation comment
+</td>
+</tr>
+<tr>
+<td>
+<code>BLK</code>
+</td>
+<td>
+Medicinal specification comment
+</td>
+</tr>
+<tr>
+<td>
+<code>BLL</code>
+</td>
+<td>
+Economic contribution comment
+</td>
+</tr>
+<tr>
+<td>
+<code>BLM</code>
+</td>
+<td>
+Status of a plan
+</td>
+</tr>
+<tr>
+<td>
+<code>BLN</code>
+</td>
+<td>
+Random sample test information
+</td>
+</tr>
+<tr>
+<td>
+<code>BLO</code>
+</td>
+<td>
+Period of time
+</td>
+</tr>
+<tr>
+<td>
+<code>BLP</code>
+</td>
+<td>
+Legislation
+</td>
+</tr>
+<tr>
+<td>
+<code>BLQ</code>
+</td>
+<td>
+Security measures requested
+</td>
+</tr>
+<tr>
+<td>
+<code>BLR</code>
+</td>
+<td>
+Transport contract document remark
+</td>
+</tr>
+<tr>
+<td>
+<code>BLS</code>
+</td>
+<td>
+Previous port of call security information
+</td>
+</tr>
+<tr>
+<td>
+<code>BLT</code>
+</td>
+<td>
+Security information
+</td>
+</tr>
+<tr>
+<td>
+<code>BLU</code>
+</td>
+<td>
+Waste information
+</td>
+</tr>
+<tr>
+<td>
+<code>BLV</code>
+</td>
+<td>
+B2C marketing information, short description
+</td>
+</tr>
+<tr>
+<td>
+<code>BLW</code>
+</td>
+<td>
+B2B marketing information, long description
+</td>
+</tr>
+<tr>
+<td>
+<code>BLX</code>
+</td>
+<td>
+B2C marketing information, long description
+</td>
+</tr>
+<tr>
+<td>
+<code>BLY</code>
+</td>
+<td>
+Product ingredients
+</td>
+</tr>
+<tr>
+<td>
+<code>BLZ</code>
+</td>
+<td>
+Location short name
+</td>
+</tr>
+<tr>
+<td>
+<code>BMA</code>
+</td>
+<td>
+Packaging material information
+</td>
+</tr>
+<tr>
+<td>
+<code>BMB</code>
+</td>
+<td>
+Filler material information
+</td>
+</tr>
+<tr>
+<td>
+<code>BMC</code>
+</td>
+<td>
+Ship-to-ship activity information
+</td>
+</tr>
+<tr>
+<td>
+<code>BMD</code>
+</td>
+<td>
+Package material description
+</td>
+</tr>
+<tr>
+<td>
+<code>BME</code>
+</td>
+<td>
+Consumer level package marking
+</td>
+</tr>
+<tr>
+<td>
+<code>BMF</code>
+</td>
+<td>
+SIMA measure in force
+</td>
+</tr>
+<tr>
+<td>
+<code>BMG</code>
+</td>
+<td>
+Pre-CARM
+</td>
+</tr>
+<tr>
+<td>
+<code>BMH</code>
+</td>
+<td>
+SIMA measure type
+</td>
+</tr>
+<tr>
+<td>
+<code>CCI</code>
+</td>
+<td>
+Customs clearance instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>CCJ</code>
+</td>
+<td>
+Sub Type Code
+</td>
+</tr>
+<tr>
+<td>
+<code>CCK</code>
+</td>
+<td>
+SIMA information
+</td>
+</tr>
+<tr>
+<td>
+<code>CCL</code>
+</td>
+<td>
+Time limit end
+</td>
+</tr>
+<tr>
+<td>
+<code>CCM</code>
+</td>
+<td>
+Time limit start
+</td>
+</tr>
+<tr>
+<td>
+<code>CCN</code>
+</td>
+<td>
+Warehouse time limit
+</td>
+</tr>
+<tr>
+<td>
+<code>CCO</code>
+</td>
+<td>
+Value for duty information
+</td>
+</tr>
+<tr>
+<td>
+<code>CEX</code>
+</td>
+<td>
+Customs clearance instructions export
+</td>
+</tr>
+<tr>
+<td>
+<code>CHG</code>
+</td>
+<td>
+Change information
+</td>
+</tr>
+<tr>
+<td>
+<code>CIP</code>
+</td>
+<td>
+Customs clearance instruction import
+</td>
+</tr>
+<tr>
+<td>
+<code>CLP</code>
+</td>
+<td>
+Clearance place requested
+</td>
+</tr>
+<tr>
+<td>
+<code>CLR</code>
+</td>
+<td>
+Loading remarks
+</td>
+</tr>
+<tr>
+<td>
+<code>COI</code>
+</td>
+<td>
+Order information
+</td>
+</tr>
+<tr>
+<td>
+<code>CUR</code>
+</td>
+<td>
+Customer remarks
+</td>
+</tr>
+<tr>
+<td>
+<code>CUS</code>
+</td>
+<td>
+Customs declaration information
+</td>
+</tr>
+<tr>
+<td>
+<code>DAR</code>
+</td>
+<td>
+Damage remarks
+</td>
+</tr>
+<tr>
+<td>
+<code>DCL</code>
+</td>
+<td>
+Document issuer declaration
+</td>
+</tr>
+<tr>
+<td>
+<code>DEL</code>
+</td>
+<td>
+Delivery information
+</td>
+</tr>
+<tr>
+<td>
+<code>DIN</code>
+</td>
+<td>
+Delivery instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>DOC</code>
+</td>
+<td>
+Documentation instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>DUT</code>
+</td>
+<td>
+Duty declaration
+</td>
+</tr>
+<tr>
+<td>
+<code>EUR</code>
+</td>
+<td>
+Effective used routing
+</td>
+</tr>
+<tr>
+<td>
+<code>FBC</code>
+</td>
+<td>
+First block to be printed on the transport contract
+</td>
+</tr>
+<tr>
+<td>
+<code>GBL</code>
+</td>
+<td>
+Government bill of lading information
+</td>
+</tr>
+<tr>
+<td>
+<code>GEN</code>
+</td>
+<td>
+Entire transaction set
+</td>
+</tr>
+<tr>
+<td>
+<code>GS7</code>
+</td>
+<td>
+Further information concerning GGVS par. 7
+</td>
+</tr>
+<tr>
+<td>
+<code>HAN</code>
+</td>
+<td>
+Consignment handling instruction
+</td>
+</tr>
+<tr>
+<td>
+<code>HAZ</code>
+</td>
+<td>
+Hazard information
+</td>
+</tr>
+<tr>
+<td>
+<code>ICN</code>
+</td>
+<td>
+Consignment information for consignee
+</td>
+</tr>
+<tr>
+<td>
+<code>IIN</code>
+</td>
+<td>
+Insurance instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>IMI</code>
+</td>
+<td>
+Invoice mailing instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>IND</code>
+</td>
+<td>
+Commercial invoice item description
+</td>
+</tr>
+<tr>
+<td>
+<code>INS</code>
+</td>
+<td>
+Insurance information
+</td>
+</tr>
+<tr>
+<td>
+<code>INV</code>
+</td>
+<td>
+Invoice instruction
+</td>
+</tr>
+<tr>
+<td>
+<code>IRP</code>
+</td>
+<td>
+Information for railway purpose
+</td>
+</tr>
+<tr>
+<td>
+<code>ITR</code>
+</td>
+<td>
+Inland transport details
+</td>
+</tr>
+<tr>
+<td>
+<code>ITS</code>
+</td>
+<td>
+Testing instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>LAN</code>
+</td>
+<td>
+Location Alias
+</td>
+</tr>
+<tr>
+<td>
+<code>LIN</code>
+</td>
+<td>
+Line item
+</td>
+</tr>
+<tr>
+<td>
+<code>LOI</code>
+</td>
+<td>
+Loading instruction
+</td>
+</tr>
+<tr>
+<td>
+<code>MCO</code>
+</td>
+<td>
+Miscellaneous charge order
+</td>
+</tr>
+<tr>
+<td>
+<code>MDH</code>
+</td>
+<td>
+Maritime Declaration of Health
+</td>
+</tr>
+<tr>
+<td>
+<code>MKS</code>
+</td>
+<td>
+Additional marks/numbers information
+</td>
+</tr>
+<tr>
+<td>
+<code>ORI</code>
+</td>
+<td>
+Order instruction
+</td>
+</tr>
+<tr>
+<td>
+<code>OSI</code>
+</td>
+<td>
+Other service information
+</td>
+</tr>
+<tr>
+<td>
+<code>PAC</code>
+</td>
+<td>
+Packing/marking information
+</td>
+</tr>
+<tr>
+<td>
+<code>PAI</code>
+</td>
+<td>
+Payment instructions information
+</td>
+</tr>
+<tr>
+<td>
+<code>PAY</code>
+</td>
+<td>
+Payables information
+</td>
+</tr>
+<tr>
+<td>
+<code>PKG</code>
+</td>
+<td>
+Packaging information
+</td>
+</tr>
+<tr>
+<td>
+<code>PKT</code>
+</td>
+<td>
+Packaging terms information
+</td>
+</tr>
+<tr>
+<td>
+<code>PMD</code>
+</td>
+<td>
+Payment detail/remittance information
+</td>
+</tr>
+<tr>
+<td>
+<code>PMT</code>
+</td>
+<td>
+Payment information
+</td>
+</tr>
+<tr>
+<td>
+<code>PRD</code>
+</td>
+<td>
+Product information
+</td>
+</tr>
+<tr>
+<td>
+<code>PRF</code>
+</td>
+<td>
+Price calculation formula
+</td>
+</tr>
+<tr>
+<td>
+<code>PRI</code>
+</td>
+<td>
+Priority information
+</td>
+</tr>
+<tr>
+<td>
+<code>PUR</code>
+</td>
+<td>
+Purchasing information
+</td>
+</tr>
+<tr>
+<td>
+<code>QIN</code>
+</td>
+<td>
+Quarantine instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>QQD</code>
+</td>
+<td>
+Quality demands/requirements
+</td>
+</tr>
+<tr>
+<td>
+<code>QUT</code>
+</td>
+<td>
+Quotation instruction/information
+</td>
+</tr>
+<tr>
+<td>
+<code>RAH</code>
+</td>
+<td>
+Risk and handling information
+</td>
+</tr>
+<tr>
+<td>
+<code>REG</code>
+</td>
+<td>
+Regulatory information
+</td>
+</tr>
+<tr>
+<td>
+<code>RET</code>
+</td>
+<td>
+Return to origin information
+</td>
+</tr>
+<tr>
+<td>
+<code>REV</code>
+</td>
+<td>
+Receivables
+</td>
+</tr>
+<tr>
+<td>
+<code>RQR</code>
+</td>
+<td>
+Consignment route
+</td>
+</tr>
+<tr>
+<td>
+<code>SAF</code>
+</td>
+<td>
+Safety information
+</td>
+</tr>
+<tr>
+<td>
+<code>SIC</code>
+</td>
+<td>
+Consignment documentary instruction
+</td>
+</tr>
+<tr>
+<td>
+<code>SIN</code>
+</td>
+<td>
+Special instructions
+</td>
+</tr>
+<tr>
+<td>
+<code>SLR</code>
+</td>
+<td>
+Ship line requested
+</td>
+</tr>
+<tr>
+<td>
+<code>SPA</code>
+</td>
+<td>
+Special permission for transport, generally
+</td>
+</tr>
+<tr>
+<td>
+<code>SPG</code>
+</td>
+<td>
+Special permission concerning the goods to be transported
+</td>
+</tr>
+<tr>
+<td>
+<code>SPH</code>
+</td>
+<td>
+Special handling
+</td>
+</tr>
+<tr>
+<td>
+<code>SPP</code>
+</td>
+<td>
+Special permission concerning package
+</td>
+</tr>
+<tr>
+<td>
+<code>SPT</code>
+</td>
+<td>
+Special permission concerning transport means
+</td>
+</tr>
+<tr>
+<td>
+<code>SRN</code>
+</td>
+<td>
+Subsidiary risk number (IATA/DGR)
+</td>
+</tr>
+<tr>
+<td>
+<code>SSR</code>
+</td>
+<td>
+Special service request
+</td>
+</tr>
+<tr>
+<td>
+<code>SUR</code>
+</td>
+<td>
+Supplier remarks
+</td>
+</tr>
+<tr>
+<td>
+<code>TCA</code>
+</td>
+<td>
+Consignment tariff
+</td>
+</tr>
+<tr>
+<td>
+<code>TDT</code>
+</td>
+<td>
+Consignment transport
+</td>
+</tr>
+<tr>
+<td>
+<code>TRA</code>
+</td>
+<td>
+Transportation information
+</td>
+</tr>
+<tr>
+<td>
+<code>TRR</code>
+</td>
+<td>
+Requested tariff
+</td>
+</tr>
+<tr>
+<td>
+<code>TXD</code>
+</td>
+<td>
+Tax declaration
+</td>
+</tr>
+<tr>
+<td>
+<code>WHI</code>
+</td>
+<td>
+Warehouse instruction/information
+</td>
+</tr>
+<tr>
+<td>
+<code>ZZZ</code>
+</td>
+<td>
+Mutually defined
+</td>
+</tr>
+</tbody>
+</table>

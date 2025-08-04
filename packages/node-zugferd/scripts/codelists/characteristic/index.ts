@@ -34,8 +34,9 @@ export default createParser(async (ctx) => {
 		data: entries.map((entry: any) => {
 			const name = ctx.getTextNode(entry.name);
 			const value = ctx.getTextNode(entry.value);
-			const description =
-				entry.description && ctx.getTextNode(entry.description);
+			const description = entry.description
+				? ctx.getTextNode(entry.description)
+				: undefined;
 			const source = ctx.getTextNode(entry["@source"]);
 
 			return {
@@ -49,6 +50,36 @@ export default createParser(async (ctx) => {
 		enum: {
 			key: "key",
 			value: "value",
+		},
+		docs: {
+			path: "/codelists/characteristic",
+			importPath: "/codelist/characteristic",
+			title: "UNTDID 6313 - Measured attribute code and Factur-X Extension",
+			description: "Code specifying the attribute measured.",
+			sidebar: {
+				title: "Characteristic",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Name",
+						className: {
+							col: "w-1/2",
+						},
+					},
+					description: {
+						label: "Description",
+						className: {
+							col: "w-1/2",
+						},
+					},
+					source: {
+						label: "Source",
+					},
+				},
+			},
 		},
 	};
 });

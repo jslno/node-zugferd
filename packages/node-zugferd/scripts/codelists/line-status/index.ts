@@ -46,5 +46,26 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/line-status",
+			importPath: "/codelist/line-status",
+			title: "UNTDID 1229 - Action code",
+			description: "Code specifying the action to be taken or already taken.",
+			sidebar: {
+				title: "Line Status",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Code name",
+					},
+					description: {
+						label: "Description",
+					},
+				},
+			},
+		},
 	};
 });

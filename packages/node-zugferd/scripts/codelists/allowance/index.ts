@@ -42,5 +42,24 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/allowance",
+			importPath: "/codelist/allowance",
+			title: "UNTDID 5189 — Allowance codes",
+			description:
+				"Code specifying the identification of an allowance or charge.",
+			sidebar: {
+				title: "Allowance",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Description",
+					},
+				},
+			},
+		},
 	};
 });

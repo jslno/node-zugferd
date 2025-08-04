@@ -1,53 +1,823 @@
 ---
-title: EAS
-description: Electronic Address Scheme code list
+title: CEF EAS — Electronic address scheme identifier
+description: Code specifying the scheme used to identify an electronic address.
 ---
 
-import { EAS, EAS_IDENTIFIER, EAS_VERSION } from "node-zugferd/codelist/eas";
-import { MinusIcon } from "lucide-react";
+import { EAS } from "node-zugferd/codelist/eas";
 
-## Definition [toc]
-
-Identifier: <span className="text-fd-muted-foreground">{EAS_IDENTIFIER}</span>
-
-Version: <span className="text-fd-muted-foreground">{EAS_VERSION}</span>
-
-<div className="w-fit">
-  <Link
-    href="https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-CEN/TC434EN16931"
-    target="_blank"
-  >
-    Source
-  </Link>
-</div>
+### Codelist [toc]
 
 ```ts
-import { Eas, EAS, type EASCodes } from "node-zugferd/codelist/eas";
+import {
+	EAS,
+	Eas,
+	easCode,
+	PUBLISHED,
+	type EasDefinition,
+	type EasCode,
+} from "node-zugferd/codelist/eas";
+
 ```
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>Remark</th>
-    </tr>
-  </thead>
-  <tbody>
-    {EAS.map(({ code, name, remark }) => (
-      <tr key={code}>
-        <td className="text-center">
-          <code>{code}</code>
-        </td>
-        <td>{name}</td>
-        <td>
-          {!remark ? (
-            <MinusIcon className="mx-auto text-fd-muted-foreground" />
-          ) : (
-            remark
-          )}
-        </td>
-      </tr>
-    ))}
-  </tbody>
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/eas/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+AES
+</th>
+<th>
+Scheme name
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>0002</code>
+</td>
+<td>
+System Information et Repertoire des Entreprise et des Etablissements: SIRENE
+</td>
+</tr>
+<tr>
+<td>
+<code>0007</code>
+</td>
+<td>
+Organisationsnummer
+</td>
+</tr>
+<tr>
+<td>
+<code>0009</code>
+</td>
+<td>
+SIRET-CODE
+</td>
+</tr>
+<tr>
+<td>
+<code>0037</code>
+</td>
+<td>
+LY-tunnus
+</td>
+</tr>
+<tr>
+<td>
+<code>0060</code>
+</td>
+<td>
+Data Universal Numbering System (D-U-N-S Number)
+</td>
+</tr>
+<tr>
+<td>
+<code>0088</code>
+</td>
+<td>
+EAN Location Code
+</td>
+</tr>
+<tr>
+<td>
+<code>0096</code>
+</td>
+<td>
+The Danish Business Authority - P-number (DK:P)
+</td>
+</tr>
+<tr>
+<td>
+<code>0097</code>
+</td>
+<td>
+FTI - Ediforum Italia, (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0106</code>
+</td>
+<td>
+Vereniging van Kamers van Koophandel en Fabrieken in Nederland (Association of
+Chambers of Commerce and Industry in the Netherlands), Scheme (EDIRA compliant)
+</td>
+</tr>
+<tr>
+<td>
+<code>0130</code>
+</td>
+<td>
+Directorates of the European Commission
+</td>
+</tr>
+<tr>
+<td>
+<code>0135</code>
+</td>
+<td>
+SIA Object Identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0142</code>
+</td>
+<td>
+SECETI Object Identifiers
+</td>
+</tr>
+<tr>
+<td>
+<code>0147</code>
+</td>
+<td>
+Standard Company Code
+</td>
+</tr>
+<tr>
+<td>
+<code>0151</code>
+</td>
+<td>
+Australian Business Number (ABN) Scheme
+</td>
+</tr>
+<tr>
+<td>
+<code>0154</code>
+</td>
+<td>
+Identification number of economic subjects: (ICO)
+</td>
+</tr>
+<tr>
+<td>
+<code>0158</code>
+</td>
+<td>
+Identification number of economic subject (ICO) Act on State Statistics of 29 November 2001, § 27
+</td>
+</tr>
+<tr>
+<td>
+<code>0170</code>
+</td>
+<td>
+Teikoku Company Code
+</td>
+</tr>
+<tr>
+<td>
+<code>0177</code>
+</td>
+<td>
+Odette International Limited
+</td>
+</tr>
+<tr>
+<td>
+<code>0183</code>
+</td>
+<td>
+Numéro d'identification suisse des enterprises (IDE), Swiss Unique Business Identification Number (UIDB)
+</td>
+</tr>
+<tr>
+<td>
+<code>0184</code>
+</td>
+<td>
+DIGSTORG
+</td>
+</tr>
+<tr>
+<td>
+<code>0188</code>
+</td>
+<td>
+Corporate Number of The Social Security and Tax Number System
+</td>
+</tr>
+<tr>
+<td>
+<code>0190</code>
+</td>
+<td>
+Dutch Originator's Identification Number
+</td>
+</tr>
+<tr>
+<td>
+<code>0191</code>
+</td>
+<td>
+Centre of Registers and Information Systems of the Ministry of Justice
+</td>
+</tr>
+<tr>
+<td>
+<code>0192</code>
+</td>
+<td>
+Enhetsregisteret ved Bronnoysundregisterne
+</td>
+</tr>
+<tr>
+<td>
+<code>0193</code>
+</td>
+<td>
+UBL.BE party identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>0194</code>
+</td>
+<td>
+KOIOS Open Technical Dictionary
+</td>
+</tr>
+<tr>
+<td>
+<code>0195</code>
+</td>
+<td>
+Singapore UEN identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>0196</code>
+</td>
+<td>
+Kennitala - Iceland legal id for individuals and legal entities
+</td>
+</tr>
+<tr>
+<td>
+<code>0198</code>
+</td>
+<td>
+ERSTORG
+</td>
+</tr>
+<tr>
+<td>
+<code>0199</code>
+</td>
+<td>
+Global legal entity identifier (GLEIF)
+</td>
+</tr>
+<tr>
+<td>
+<code>0200</code>
+</td>
+<td>
+Legal entity code (Lithuania)
+</td>
+</tr>
+<tr>
+<td>
+<code>0201</code>
+</td>
+<td>
+Codice Univoco Unità Organizzativa iPA
+</td>
+</tr>
+<tr>
+<td>
+<code>0202</code>
+</td>
+<td>
+Indirizzo di Posta Elettronica Certificata
+</td>
+</tr>
+<tr>
+<td>
+<code>0203</code>
+</td>
+<td>
+eDelivery Network Participant identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>0204</code>
+</td>
+<td>
+Leitweg-ID
+</td>
+</tr>
+<tr>
+<td>
+<code>0205</code>
+</td>
+<td>
+CODDEST
+</td>
+</tr>
+<tr>
+<td>
+<code>0208</code>
+</td>
+<td>
+Numero d'entreprise / ondernemingsnummer / Unternehmensnummer
+</td>
+</tr>
+<tr>
+<td>
+<code>0209</code>
+</td>
+<td>
+GS1 identification keys
+</td>
+</tr>
+<tr>
+<td>
+<code>0210</code>
+</td>
+<td>
+CODICE FISCALE
+</td>
+</tr>
+<tr>
+<td>
+<code>0211</code>
+</td>
+<td>
+PARTITA IVA
+</td>
+</tr>
+<tr>
+<td>
+<code>0212</code>
+</td>
+<td>
+Finnish Organization Identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>0213</code>
+</td>
+<td>
+Finnish Organization Value Add Tax Identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>0215</code>
+</td>
+<td>
+Net service ID
+</td>
+</tr>
+<tr>
+<td>
+<code>0216</code>
+</td>
+<td>
+OVTcode
+</td>
+</tr>
+<tr>
+<td>
+<code>0217</code>
+</td>
+<td>
+The Netherlands Chamber of Commerce and Industry establishment number
+</td>
+</tr>
+<tr>
+<td>
+<code>0218</code>
+</td>
+<td>
+Unified registration number (Latvia)
+</td>
+</tr>
+<tr>
+<td>
+<code>0221</code>
+</td>
+<td>
+The registered number of the qualified invoice issuer
+</td>
+</tr>
+<tr>
+<td>
+<code>0225</code>
+</td>
+<td>
+FRCTC ELECTRONIC ADDRESS
+</td>
+</tr>
+<tr>
+<td>
+<code>0230</code>
+</td>
+<td>
+National e-Invoicing Framework
+</td>
+</tr>
+<tr>
+<td>
+<code>0235</code>
+</td>
+<td>
+UAE Tax Identification Number (TIN)
+</td>
+</tr>
+<tr>
+<td>
+<code>0240</code>
+</td>
+<td>
+Register of legal persons (in French : Répertoire des personnes morales)
+</td>
+</tr>
+<tr>
+<td>
+<code>9910</code>
+</td>
+<td>
+Hungary VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9913</code>
+</td>
+<td>
+Business Registers Network
+</td>
+</tr>
+<tr>
+<td>
+<code>9914</code>
+</td>
+<td>
+Österreichische Umsatzsteuer-Identifikationsnummer
+</td>
+</tr>
+<tr>
+<td>
+<code>9915</code>
+</td>
+<td>
+Österreichisches Verwaltungs bzw.
+Organisationskennzeichen
+</td>
+</tr>
+<tr>
+<td>
+<code>9918</code>
+</td>
+<td>
+SOCIETY FOR WORLDWIDE INTERBANK FINANCIAL, TELECOMMUNICATION S.W.I.F.T
+</td>
+</tr>
+<tr>
+<td>
+<code>9919</code>
+</td>
+<td>
+Kennziffer des Unternehmensregisters
+</td>
+</tr>
+<tr>
+<td>
+<code>9920</code>
+</td>
+<td>
+Agencia Española de Administración Tributaria
+</td>
+</tr>
+<tr>
+<td>
+<code>9922</code>
+</td>
+<td>
+Andorra VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9923</code>
+</td>
+<td>
+Albania VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9924</code>
+</td>
+<td>
+Bosnia and Herzegovina VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9925</code>
+</td>
+<td>
+Belgium VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9926</code>
+</td>
+<td>
+Bulgaria VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9927</code>
+</td>
+<td>
+Switzerland VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9928</code>
+</td>
+<td>
+Cyprus VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9929</code>
+</td>
+<td>
+Czech Republic VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9930</code>
+</td>
+<td>
+Germany VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9931</code>
+</td>
+<td>
+Estonia VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9932</code>
+</td>
+<td>
+United Kingdom VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9933</code>
+</td>
+<td>
+Greece VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9934</code>
+</td>
+<td>
+Croatia VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9935</code>
+</td>
+<td>
+Ireland VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9936</code>
+</td>
+<td>
+Liechtenstein VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9937</code>
+</td>
+<td>
+Lithuania VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9938</code>
+</td>
+<td>
+Luxemburg VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9939</code>
+</td>
+<td>
+Latvia VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9940</code>
+</td>
+<td>
+Monaco VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9941</code>
+</td>
+<td>
+Montenegro VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9942</code>
+</td>
+<td>
+Macedonia, the former Yugoslav Republic of VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9943</code>
+</td>
+<td>
+Malta VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9944</code>
+</td>
+<td>
+Netherlands VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9945</code>
+</td>
+<td>
+Poland VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9946</code>
+</td>
+<td>
+Portugal VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9947</code>
+</td>
+<td>
+Romania VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9948</code>
+</td>
+<td>
+Serbia VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9949</code>
+</td>
+<td>
+Slovenia VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9950</code>
+</td>
+<td>
+Slovakia VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9951</code>
+</td>
+<td>
+San Marino VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9952</code>
+</td>
+<td>
+Turkey VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9953</code>
+</td>
+<td>
+Holy See (Vatican City State) VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9957</code>
+</td>
+<td>
+French VAT number
+</td>
+</tr>
+<tr>
+<td>
+<code>9959</code>
+</td>
+<td>
+Employer Identification Number (EIN, USA)
+</td>
+</tr>
+<tr>
+<td>
+<code>AN</code>
+</td>
+<td>
+O.F.T.P. (ODETTE File Transfer Protocol)
+</td>
+</tr>
+<tr>
+<td>
+<code>AQ</code>
+</td>
+<td>
+X.400 address for mail text
+</td>
+</tr>
+<tr>
+<td>
+<code>AS</code>
+</td>
+<td>
+AS2 exchange
+</td>
+</tr>
+<tr>
+<td>
+<code>AU</code>
+</td>
+<td>
+File Transfer Protocol
+</td>
+</tr>
+<tr>
+<td>
+<code>EM</code>
+</td>
+<td>
+Electronic mail (SMPT)
+</td>
+</tr>
+</tbody>
 </table>

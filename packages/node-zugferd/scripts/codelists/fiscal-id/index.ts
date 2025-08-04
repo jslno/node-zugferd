@@ -36,5 +36,24 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/fiscal-id",
+			importPath: "/codelist/fiscal-id",
+			title: "Tax registration",
+			description:
+				"Code specifying the fiscal identification of a party.",
+			sidebar: {
+				title: "FISCAL ID",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Value",
+					},
+				},
+			},
+		},
 	};
 });

@@ -1,3 +1,9 @@
+import { Biome } from "@biomejs/js-api/nodejs";
+import serialize from "serialize-javascript";
+import { PROJECT_ROOT } from ".";
+import path from "path";
+import { mkdir, writeFile } from "fs/promises";
+
 const codelists = [
 	import("./country"),
 	import("./currency"),
@@ -35,11 +41,67 @@ const codelists = [
 ];
 
 const main = async () => {
+	const sidebarItems = [];
+
 	for await (const codelist of codelists) {
-		await codelist.default.generate();
+		const result = await codelist.default.generate();
+
+		if (!result.sidebar?.disabled) {
+			sidebarItems.push(result.sidebar);
+		}
+	}
+
+	if (sidebarItems.length > 0) {
+		await generateCodelistSidebarItems(sidebarItems);
 	}
 
 	return Promise.resolve();
 };
 
 void main();
+
+const generateCodelistSidebarItems = async (
+	items: {
+		disabled: boolean;
+		title: string;
+		href: string;
+	}[],
+) => {
+	const data = items
+		.map(({ href, title }) => ({
+			title,
+			href,
+		}))
+		.sort((a, b) =>
+			a.title.localeCompare(b.title, undefined, { sensitivity: "base" }),
+		);
+
+	const dest = path.resolve(
+		PROJECT_ROOT,
+		"./docs/src/data/sidebar-items/codelist-items.gen.ts",
+	);
+	const destDir = path.dirname(dest);
+
+	const content = `import { Content } from "@/types/content";
+
+export const codelistSidebarItems: Content["list"] = ${serialize(data, {
+		unsafe: true,
+	})};`;
+
+	const biome = new Biome();
+	const { projectKey } = biome.openProject(PROJECT_ROOT);
+
+	const { content: formattedContent } = biome.formatContent(
+		projectKey,
+		content,
+		{
+			filePath: dest,
+		},
+	);
+
+	await mkdir(destDir, { recursive: true });
+
+	await writeFile(dest, formattedContent);
+
+	return;
+};

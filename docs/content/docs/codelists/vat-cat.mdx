@@ -1,0 +1,664 @@
+---
+title: VAT Category code + Factur-X
+description: Code specifying the VAT category.
+---
+
+import { VAT_CAT } from "node-zugferd/codelist/vat-cat";
+
+### Codelist [toc]
+
+```ts
+import {
+	VAT_CAT,
+	VatCat,
+	vatCatCode,
+	type VatCatDefinition,
+	type VatCatCode,
+} from "node-zugferd/codelist/vat-cat";
+
+```
+
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/vat-cat/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Name
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>AAA</code>
+</td>
+<td>
+Petroleum tax
+</td>
+<td>
+A tax levied on the volume of petroleum being transacted.
+</td>
+</tr>
+<tr>
+<td>
+<code>AAB</code>
+</td>
+<td>
+Provisional countervailing duty cash
+</td>
+<td>
+Countervailing duty paid in cash prior to a formal finding of subsidization by Customs.
+</td>
+</tr>
+<tr>
+<td>
+<code>AAC</code>
+</td>
+<td>
+Provisional countervailing duty bond
+</td>
+<td>
+Countervailing duty paid by posting a bond during an investigation period prior to a formal decision on subsidization by Customs.
+</td>
+</tr>
+<tr>
+<td>
+<code>AAD</code>
+</td>
+<td>
+Tobacco tax
+</td>
+<td>
+A tax levied on tobacco products.
+</td>
+</tr>
+<tr>
+<td>
+<code>AAE</code>
+</td>
+<td>
+Energy fee
+</td>
+<td>
+General fee or tax for the use of energy.
+</td>
+</tr>
+<tr>
+<td>
+<code>AAF</code>
+</td>
+<td>
+Coffee tax
+</td>
+<td>
+A tax levied specifically on coffee products.
+</td>
+</tr>
+<tr>
+<td>
+<code>AAG</code>
+</td>
+<td>
+Harmonised sales tax, Canadian
+</td>
+<td>
+A harmonized sales tax consisting of a goods and service tax, a Canadian provincial sales tax and, as applicable, a Quebec sales tax which is recoverable.
+</td>
+</tr>
+<tr>
+<td>
+<code>AAH</code>
+</td>
+<td>
+Quebec sales tax
+</td>
+<td>
+A sales tax charged within the Canadian province of Quebec which is recoverable.
+</td>
+</tr>
+<tr>
+<td>
+<code>AAI</code>
+</td>
+<td>
+Canadian provincial sales tax
+</td>
+<td>
+A sales tax charged within Canadian provinces which is non-recoverable.
+</td>
+</tr>
+<tr>
+<td>
+<code>AAJ</code>
+</td>
+<td>
+Tax on replacement part
+</td>
+<td>
+A tax levied on a replacement part, where the original part is returned.
+</td>
+</tr>
+<tr>
+<td>
+<code>AAK</code>
+</td>
+<td>
+Mineral oil tax
+</td>
+<td>
+Tax that is levied specifically on products containing mineral oil.
+</td>
+</tr>
+<tr>
+<td>
+<code>AAL</code>
+</td>
+<td>
+Special tax
+</td>
+<td>
+To indicate a special type of tax.
+</td>
+</tr>
+<tr>
+<td>
+<code>AAM</code>
+</td>
+<td>
+Insurance tax
+</td>
+<td>
+A tax levied specifically on insurances.
+</td>
+</tr>
+<tr>
+<td>
+<code>AAO</code>
+</td>
+<td>
+Provincial Cannabis Tax
+</td>
+<td>
+A tax levied on Cannabis products
+</td>
+</tr>
+<tr>
+<td>
+<code>AAP</code>
+</td>
+<td>
+Outstanding duty interest
+</td>
+<td>
+Fee levied due to outstanding duties to be paid
+</td>
+</tr>
+<tr>
+<td>
+<code>ADD</code>
+</td>
+<td>
+Anti-dumping duty
+</td>
+<td>
+Duty applied to goods ruled to have been dumped in an import market at a price lower than that in the exporter's domestic market.
+</td>
+</tr>
+<tr>
+<td>
+<code>BOL</code>
+</td>
+<td>
+Stamp duty (Imposta di Bollo)
+</td>
+<td>
+Tax required in Italy, which may be fixed or graduated in various circumstances (e.g. VAT exempt documents or bank receipts).
+</td>
+</tr>
+<tr>
+<td>
+<code>CAP</code>
+</td>
+<td>
+Agricultural levy
+</td>
+<td>
+Levy imposed on agricultural products where there is a difference between the selling price between trading countries.
+</td>
+</tr>
+<tr>
+<td>
+<code>CAR</code>
+</td>
+<td>
+Car tax
+</td>
+<td>
+A tax that is levied on the value of the automobile.
+</td>
+</tr>
+<tr>
+<td>
+<code>COC</code>
+</td>
+<td>
+Paper consortium tax (Italy)
+</td>
+<td>
+Italian Paper consortium tax.
+</td>
+</tr>
+<tr>
+<td>
+<code>CST</code>
+</td>
+<td>
+Commodity specific tax
+</td>
+<td>
+Tax related to a specified commodity, e.g. illuminants, salts.
+</td>
+</tr>
+<tr>
+<td>
+<code>CUD</code>
+</td>
+<td>
+Customs duty
+</td>
+<td>
+Duties laid down in the Customs tariff, to which goods are liable on entering or leaving the Customs territory (CCC).
+</td>
+</tr>
+<tr>
+<td>
+<code>CVD</code>
+</td>
+<td>
+Countervailing duty
+</td>
+<td>
+A duty on imported goods applied for compensate for subsidies granted to those goods in the exporting country.
+</td>
+</tr>
+<tr>
+<td>
+<code>ENV</code>
+</td>
+<td>
+Environmental tax
+</td>
+<td>
+Tax assessed for funding or assuring environmental protection or clean-up.
+</td>
+</tr>
+<tr>
+<td>
+<code>EXC</code>
+</td>
+<td>
+Excise duty
+</td>
+<td>
+Customs or fiscal authorities code to identify a specific or ad valorem levy on a specific commodity, applied either domestically or at time of importation.
+</td>
+</tr>
+<tr>
+<td>
+<code>EXP</code>
+</td>
+<td>
+Agricultural export rebate
+</td>
+<td>
+Monetary rebate given to the seller in certain circumstances when agricultural products are exported.
+</td>
+</tr>
+<tr>
+<td>
+<code>FET</code>
+</td>
+<td>
+Federal excise tax
+</td>
+<td>
+Tax levied by the federal government on the manufacture of specific items.
+</td>
+</tr>
+<tr>
+<td>
+<code>FRE</code>
+</td>
+<td>
+Free
+</td>
+<td>
+No tax levied.
+</td>
+</tr>
+<tr>
+<td>
+<code>GCN</code>
+</td>
+<td>
+General construction tax
+</td>
+<td>
+General tax for construction.
+</td>
+</tr>
+<tr>
+<td>
+<code>GST</code>
+</td>
+<td>
+Goods and services tax
+</td>
+<td>
+Tax levied on the final consumption of goods and services throughout the production and distribution chain.
+</td>
+</tr>
+<tr>
+<td>
+<code>ILL</code>
+</td>
+<td>
+Illuminants tax
+</td>
+<td>
+Tax of illuminants.
+</td>
+</tr>
+<tr>
+<td>
+<code>IMP</code>
+</td>
+<td>
+Import tax
+</td>
+<td>
+Tax assessed on imports.
+</td>
+</tr>
+<tr>
+<td>
+<code>IND</code>
+</td>
+<td>
+Individual tax
+</td>
+<td>
+A tax levied based on an individual's ability to pay.
+</td>
+</tr>
+<tr>
+<td>
+<code>LAC</code>
+</td>
+<td>
+Business license fee
+</td>
+<td>
+Government assessed charge for permit to do business.
+</td>
+</tr>
+<tr>
+<td>
+<code>LCN</code>
+</td>
+<td>
+Local construction tax
+</td>
+<td>
+Local tax for construction.
+</td>
+</tr>
+<tr>
+<td>
+<code>LDP</code>
+</td>
+<td>
+Light dues payable
+</td>
+<td>
+Fee levied on a vessel to pay for port navigation lights.
+</td>
+</tr>
+<tr>
+<td>
+<code>LOC</code>
+</td>
+<td>
+Local sales tax
+</td>
+<td>
+Assessment charges on sale of goods or services by city, borough country or other taxing authorities below state or provincial level.
+</td>
+</tr>
+<tr>
+<td>
+<code>LST</code>
+</td>
+<td>
+Lust tax
+</td>
+<td>
+Tax imposed for clean-up of leaky underground storage tanks.
+</td>
+</tr>
+<tr>
+<td>
+<code>MCA</code>
+</td>
+<td>
+Monetary compensatory amount
+</td>
+<td>
+Levy on Common Agricultural Policy (European Union) goods used to compensate for fluctuating currencies between member states.
+</td>
+</tr>
+<tr>
+<td>
+<code>MCD</code>
+</td>
+<td>
+Miscellaneous cash deposit
+</td>
+<td>
+Duty paid and held on deposit, by Customs, during an investigation period prior to a final decision being made on any aspect related to imported goods (except valuation) by Customs.
+</td>
+</tr>
+<tr>
+<td>
+<code>OTH</code>
+</td>
+<td>
+Other taxes
+</td>
+<td>
+Unspecified, miscellaneous tax charges.
+</td>
+</tr>
+<tr>
+<td>
+<code>PDB</code>
+</td>
+<td>
+Provisional duty bond
+</td>
+<td>
+Anti-dumping duty paid by posting a bond during an investigation period prior to a formal decision on dumping by Customs.
+</td>
+</tr>
+<tr>
+<td>
+<code>PDC</code>
+</td>
+<td>
+Provisional duty cash
+</td>
+<td>
+Anti-dumping duty paid in cash prior to a formal finding of dumping by Customs.
+</td>
+</tr>
+<tr>
+<td>
+<code>PRF</code>
+</td>
+<td>
+Preference duty
+</td>
+<td>
+Duties laid down in the Customs tariff, to which goods are liable on entering or leaving the Customs territory falling under a preferential regime such as Generalised System of Preferences (GSP).
+</td>
+</tr>
+<tr>
+<td>
+<code>SCN</code>
+</td>
+<td>
+Special construction tax
+</td>
+<td>
+Special tax for construction.
+</td>
+</tr>
+<tr>
+<td>
+<code>SSS</code>
+</td>
+<td>
+Shifted social securities
+</td>
+<td>
+Social securities share of the invoice amount to be paid directly to the social securities collector.
+</td>
+</tr>
+<tr>
+<td>
+<code>STT</code>
+</td>
+<td>
+State/provincial sales tax
+</td>
+<td>
+All applicable sale taxes by authorities at the state or provincial level, below national level.
+</td>
+</tr>
+<tr>
+<td>
+<code>SUP</code>
+</td>
+<td>
+Suspended duty
+</td>
+<td>
+Duty suspended or deferred from payment.
+</td>
+</tr>
+<tr>
+<td>
+<code>SUR</code>
+</td>
+<td>
+Surtax
+</td>
+<td>
+A tax or duty applied on and in addition to existing duties and taxes.
+</td>
+</tr>
+<tr>
+<td>
+<code>SWT</code>
+</td>
+<td>
+Shifted wage tax
+</td>
+<td>
+Wage tax share of the invoice amount to be paid directly to the tax collector(s office).
+</td>
+</tr>
+<tr>
+<td>
+<code>TAC</code>
+</td>
+<td>
+Alcohol mark tax
+</td>
+<td>
+A tax levied based on the type of alcohol being obtained.
+</td>
+</tr>
+<tr>
+<td>
+<code>TOT</code>
+</td>
+<td>
+Total
+</td>
+<td>
+The summary amount of all taxes.
+</td>
+</tr>
+<tr>
+<td>
+<code>TOX</code>
+</td>
+<td>
+Turnover tax
+</td>
+<td>
+Tax levied on the total sales/turnover of a corporation.
+</td>
+</tr>
+<tr>
+<td>
+<code>TTA</code>
+</td>
+<td>
+Tonnage taxes
+</td>
+<td>
+Tax levied based on the vessel's net tonnage.
+</td>
+</tr>
+<tr>
+<td>
+<code>VAD</code>
+</td>
+<td>
+Valuation deposit
+</td>
+<td>
+Duty paid and held on deposit, by Customs, during an investigation period prior to a formal decision on valuation of the goods being made.
+</td>
+</tr>
+<tr>
+<td>
+<code>VAT</code>
+</td>
+<td>
+Value added tax
+</td>
+<td>
+A tax on domestic or imported goods applied to the value added at each stage in the production/distribution cycle.
+</td>
+</tr>
+</tbody>
+</table>

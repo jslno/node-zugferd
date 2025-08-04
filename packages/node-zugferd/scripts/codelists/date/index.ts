@@ -39,5 +39,23 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/date",
+			importPath: "/codelist/date",
+			title: "UNTDID 2379 - Date format",
+			description:
+				"Specification of the representation of a date, a date and time or of a period.",
+			sidebar: {
+				title: "Date",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: { label: "Code name" },
+					description: { label: "Description" },
+				},
+			},
+		},
 	};
 });

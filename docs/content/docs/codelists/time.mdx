@@ -1,0 +1,68 @@
+---
+title: UNTDID 2475 — Event time code
+description: Code relating payment terms to the date of a specific event.
+---
+
+import { TIME } from "node-zugferd/codelist/time";
+
+### Codelist [toc]
+
+```ts
+import {
+	TIME,
+	Time,
+	timeCode,
+	type TimeDefinition,
+	type TimeCode,
+} from "node-zugferd/codelist/time";
+
+```
+
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/time/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>5</code>
+</td>
+<td>
+Date of invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>29</code>
+</td>
+<td>
+Date of delivery of goods to establishments/domicile/site
+</td>
+</tr>
+<tr>
+<td>
+<code>72</code>
+</td>
+<td>
+Payment date
+</td>
+</tr>
+</tbody>
+</table>

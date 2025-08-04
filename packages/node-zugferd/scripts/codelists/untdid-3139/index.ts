@@ -25,5 +25,24 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/untdid-3139",
+			importPath: "/codelist/untdid-3139",
+			title: "UNTDID 3139 - Contact function, coded",
+			description: "Code specifying the function of a contact (e.g. department or person).",
+			sidebar: {
+				title: "UNTDID 3139",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Name",
+					},
+					description: { label: "Description" },
+				},
+			},
+		},
 	};
 });

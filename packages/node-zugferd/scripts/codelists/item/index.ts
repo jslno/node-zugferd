@@ -43,5 +43,24 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/item",
+			importPath: "/codelist/item",
+			title: "UNTDID 7143 — Item type identification code",
+			description:
+				"Identification of the type of item number.",
+			sidebar: {
+				title: "Item",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Code name",
+					},
+				},
+			},
+		},
 	};
 });

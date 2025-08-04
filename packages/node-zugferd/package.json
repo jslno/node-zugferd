@@ -162,14 +162,14 @@
 				"default": "./dist/codelist/allowance.cjs"
 			}
 		},
-		"./codelist/characteristics": {
+		"./codelist/characteristic": {
 			"import": {
-				"types": "./dist/codelist/characteristics.d.ts",
-				"default": "./dist/codelist/characteristics.js"
+				"types": "./dist/codelist/characteristic.d.ts",
+				"default": "./dist/codelist/characteristic.js"
 			},
 			"require": {
-				"types": "./dist/codelist/characteristics.d.cts",
-				"default": "./dist/codelist/characteristics.cjs"
+				"types": "./dist/codelist/characteristic.d.cts",
+				"default": "./dist/codelist/characteristic.cjs"
 			}
 		},
 		"./codelist/charge": {

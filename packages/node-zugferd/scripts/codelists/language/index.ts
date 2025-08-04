@@ -1,4 +1,4 @@
-// UNTDID 6313 - Measured attribute code  and Factur-X Extension
+// ISO 639-2 alpha-3 language Code
 
 import z from "zod";
 import { arrayable, createParser } from "..";
@@ -41,6 +41,25 @@ export default createParser(async (ctx) => {
 		enum: {
 			key: "key",
 			value: "value",
+		},
+		docs: {
+			path: "/codelists/language",
+			importPath: "/codelist/language",
+			title: "ISO 639-2 alpha-3 language Code",
+			description:
+				"Code representing a language.",
+			sidebar: {
+				title: "Language",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Code name",
+					},
+				},
+			},
 		},
 	};
 });

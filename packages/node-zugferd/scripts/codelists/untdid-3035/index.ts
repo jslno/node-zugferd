@@ -25,5 +25,24 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/untdid-3035",
+			importPath: "/codelist/untdid-3035",
+			title: "UNTDID 3035 - Party function code qualifier",
+			description: "Code giving specific meaning to a party.",
+			sidebar: {
+				title: "UNTDID 3035",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Name",
+					},
+					description: { label: "Description" },
+				},
+			},
+		},
 	};
 });

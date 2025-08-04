@@ -20,7 +20,7 @@ export default createParser(async (ctx) => {
 		constants: {
 			PUBLISHED: {
 				value: "14",
-                asConst: true,
+				asConst: true,
 				export: true,
 			},
 		},
@@ -42,6 +42,28 @@ export default createParser(async (ctx) => {
 		enum: {
 			key: "key",
 			value: "value",
+		},
+		docs: {
+			path: "/codelists/eas",
+			importPath: "/codelist/eas",
+			title: "CEF EAS — Electronic address scheme identifier",
+			description:
+				"Code specifying the scheme used to identify an electronic address.",
+			sidebar: {
+				title: "EAS",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: {
+						...ctx.CODE_COLUMN,
+						label: "AES",
+					},
+					name: {
+						label: "Scheme name",
+					},
+				},
+			},
 		},
 	};
 });

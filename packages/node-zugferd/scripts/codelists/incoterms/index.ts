@@ -43,5 +43,24 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/incoterms",
+			importPath: "/codelist/incoterms",
+			title: "INCOTERMS",
+			description:
+				"Code specifying the trade terms under which goods are delivered.",
+			sidebar: {
+				title: "INCOTERMS",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Code name",
+					},
+				},
+			},
+		},
 	};
 });

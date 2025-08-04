@@ -1,4 +1,4 @@
-// Mime type codes — Mime codes +  Factur-X
+// Mime type codes — Mime codes + Factur-X
 
 import z from "zod";
 import { arrayable, createParser } from "..";
@@ -29,6 +29,21 @@ export default createParser(async (ctx) => {
 		}),
 		enum: {
 			value: "value",
+		},
+		docs: {
+			path: "/codelists/mime",
+			importPath: "/codelist/mime",
+			title: "Mime type codes — Mime codes + Factur-X",
+			description:
+				"Code specifying the media type of the content.",
+			sidebar: {
+				title: "MIME",
+			},
+			table: {
+				columns: {
+					value: ctx.CODE_COLUMN,
+				},
+			},
 		},
 	};
 });

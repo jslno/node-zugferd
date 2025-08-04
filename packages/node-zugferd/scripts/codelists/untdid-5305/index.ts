@@ -39,5 +39,26 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/untdid-5305",
+			importPath: "/codelist/untdid-5305",
+			title: "UNTDID 5305  — Duty or tax or fee category",
+			description: "Code specifying a duty or tax or fee category.",
+			sidebar: {
+				title: "UNTDID 5305",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Name",
+					},
+					semantic_model: {
+						label: "Semantic model",
+					},
+				},
+			},
+		},
 	};
 });

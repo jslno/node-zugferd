@@ -12,6 +12,7 @@ import {
 	ScrollIcon,
 } from "lucide-react";
 import { SVGProps } from "react";
+import { codelistSidebarItems } from "./codelist-items.gen";
 
 export const contents: Content[] = [
 	{
@@ -89,88 +90,7 @@ export const contents: Content[] = [
 	{
 		title: "Codelists",
 		Icon: ScrollIcon,
-		list: [
-			{
-				title: "ISO 639-2",
-				href: "/docs/codelists/iso-639-2",
-			},
-			{
-				title: "ISO 3166",
-				href: "/docs/codelists/iso-3166",
-			},
-			{
-				title: "ISO 6523",
-				href: "/docs/codelists/iso-6523",
-			},
-			{
-				title: "UNTDID 1001",
-				href: "/docs/codelists/untdid-1001",
-			},
-			{
-				title: "UNTDID 1153",
-				href: "/docs/codelists/untdid-1153",
-			},
-			{
-				title: "UNTDID 1229",
-				href: "/docs/codelists/untdid-1229",
-			},
-			{
-				title: "UNTDID 2475",
-				href: "/docs/codelists/untdid-2475",
-			},
-			{
-				title: "UNTDID 3035",
-				href: "/docs/codelists/untdid-3035",
-			},
-			{
-				title: "UNTDID 3139",
-				href: "/docs/codelists/untdid-3139",
-			},
-			{
-				title: "UNTDID 4451",
-				href: "/docs/codelists/untdid-4451",
-			},
-			{
-				title: "UNTDID 4461",
-				href: "/docs/codelists/untdid-4461",
-			},
-			{
-				title: "UNTDID 5189",
-				href: "/docs/codelists/untdid-5189",
-			},
-			{
-				title: "UNTDID 5305",
-				href: "/docs/codelists/untdid-5305",
-			},
-			{
-				title: "UNTDID 7143",
-				href: "/docs/codelists/untdid-7143",
-			},
-			{
-				title: "UNTDID 7161",
-				href: "/docs/codelists/untdid-7161",
-			},
-			{
-				title: "VATEX",
-				href: "/docs/codelists/vatex",
-			},
-			{
-				title: "EAS",
-				href: "/docs/codelists/eas",
-			},
-			{
-				title: "Currency Codes",
-				href: "/docs/codelists/currency-codes",
-			},
-			{
-				title: "UN/ECE Recommendation N°20",
-				href: "/docs/codelists/rec20",
-			},
-			{
-				title: "UN/ECE Recommendation N°21",
-				href: "/docs/codelists/rec21",
-			},
-		],
+		list: codelistSidebarItems,
 	},
 	{
 		title: "Plugins",

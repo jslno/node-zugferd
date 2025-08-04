@@ -43,5 +43,24 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/text",
+			importPath: "/codelist/text",
+			title: "UNTDID 4451 — Text subject qualifier",
+			description:
+				"Code specifying subject of a free text.",
+			sidebar: {
+				title: "Text",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Code name",
+					},
+				},
+			},
+		},
 	};
 });

@@ -1,0 +1,1469 @@
+---
+title: ISO 4217 — Currency codes
+description: Code specifying the currency.
+---
+
+import { CURRENCY } from "node-zugferd/codelist/currency";
+
+### Codelist [toc]
+
+```ts
+import {
+	CURRENCY,
+	Currency,
+	currencyCode,
+	PUBLISHED,
+	type CurrencyDefinition,
+	type CurrencyCode,
+} from "node-zugferd/codelist/currency";
+
+```
+
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/currency/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Alphabetic Code
+</th>
+<th>
+Currency
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>AED</code>
+</td>
+<td>
+UAE Dirham
+</td>
+</tr>
+<tr>
+<td>
+<code>AFN</code>
+</td>
+<td>
+Afghani
+</td>
+</tr>
+<tr>
+<td>
+<code>ALL</code>
+</td>
+<td>
+Lek
+</td>
+</tr>
+<tr>
+<td>
+<code>AMD</code>
+</td>
+<td>
+Armenian Dram
+</td>
+</tr>
+<tr>
+<td>
+<code>ANG</code>
+</td>
+<td>
+Netherlands Antillean Guilder
+</td>
+</tr>
+<tr>
+<td>
+<code>AOA</code>
+</td>
+<td>
+Kwanza
+</td>
+</tr>
+<tr>
+<td>
+<code>ARS</code>
+</td>
+<td>
+Argentine Peso
+</td>
+</tr>
+<tr>
+<td>
+<code>AUD</code>
+</td>
+<td>
+Australian Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>AWG</code>
+</td>
+<td>
+Aruban Florin
+</td>
+</tr>
+<tr>
+<td>
+<code>AZN</code>
+</td>
+<td>
+Azerbaijan Manat
+</td>
+</tr>
+<tr>
+<td>
+<code>BAM</code>
+</td>
+<td>
+Convertible Mark
+</td>
+</tr>
+<tr>
+<td>
+<code>BBD</code>
+</td>
+<td>
+Barbados Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>BDT</code>
+</td>
+<td>
+Taka
+</td>
+</tr>
+<tr>
+<td>
+<code>BGN</code>
+</td>
+<td>
+Bulgarian Lev
+</td>
+</tr>
+<tr>
+<td>
+<code>BHD</code>
+</td>
+<td>
+Bahraini Dinar
+</td>
+</tr>
+<tr>
+<td>
+<code>BIF</code>
+</td>
+<td>
+Burundi Franc
+</td>
+</tr>
+<tr>
+<td>
+<code>BMD</code>
+</td>
+<td>
+Bermudian Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>BND</code>
+</td>
+<td>
+Brunei Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>BOB</code>
+</td>
+<td>
+Boliviano
+</td>
+</tr>
+<tr>
+<td>
+<code>BOV</code>
+</td>
+<td>
+Mvdol
+</td>
+</tr>
+<tr>
+<td>
+<code>BRL</code>
+</td>
+<td>
+Brazilian Real
+</td>
+</tr>
+<tr>
+<td>
+<code>BSD</code>
+</td>
+<td>
+Bahamian Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>BTN</code>
+</td>
+<td>
+Ngultrum
+</td>
+</tr>
+<tr>
+<td>
+<code>BWP</code>
+</td>
+<td>
+Pula
+</td>
+</tr>
+<tr>
+<td>
+<code>BYN</code>
+</td>
+<td>
+Belarusian Ruble
+</td>
+</tr>
+<tr>
+<td>
+<code>BZD</code>
+</td>
+<td>
+Belize Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>CAD</code>
+</td>
+<td>
+Canadian Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>CDF</code>
+</td>
+<td>
+Congolese Franc
+</td>
+</tr>
+<tr>
+<td>
+<code>CHE</code>
+</td>
+<td>
+WIR Euro
+</td>
+</tr>
+<tr>
+<td>
+<code>CHF</code>
+</td>
+<td>
+Swiss Franc
+</td>
+</tr>
+<tr>
+<td>
+<code>CHW</code>
+</td>
+<td>
+WIR Franc
+</td>
+</tr>
+<tr>
+<td>
+<code>CLF</code>
+</td>
+<td>
+Unidad de Fomento
+</td>
+</tr>
+<tr>
+<td>
+<code>CLP</code>
+</td>
+<td>
+Chilean Peso
+</td>
+</tr>
+<tr>
+<td>
+<code>CNY</code>
+</td>
+<td>
+Yuan Renminbi
+</td>
+</tr>
+<tr>
+<td>
+<code>COP</code>
+</td>
+<td>
+Colombian Peso
+</td>
+</tr>
+<tr>
+<td>
+<code>COU</code>
+</td>
+<td>
+Unidad de Valor Real
+</td>
+</tr>
+<tr>
+<td>
+<code>CRC</code>
+</td>
+<td>
+Costa Rican Colon
+</td>
+</tr>
+<tr>
+<td>
+<code>CUP</code>
+</td>
+<td>
+Cuban Peso
+</td>
+</tr>
+<tr>
+<td>
+<code>CVE</code>
+</td>
+<td>
+Cabo Verde Escudo
+</td>
+</tr>
+<tr>
+<td>
+<code>CZK</code>
+</td>
+<td>
+Czech Koruna
+</td>
+</tr>
+<tr>
+<td>
+<code>DJF</code>
+</td>
+<td>
+Djibouti Franc
+</td>
+</tr>
+<tr>
+<td>
+<code>DKK</code>
+</td>
+<td>
+Danish Krone
+</td>
+</tr>
+<tr>
+<td>
+<code>DOP</code>
+</td>
+<td>
+Dominican Peso
+</td>
+</tr>
+<tr>
+<td>
+<code>DZD</code>
+</td>
+<td>
+Algerian Dinar
+</td>
+</tr>
+<tr>
+<td>
+<code>EGP</code>
+</td>
+<td>
+Egyptian Pound
+</td>
+</tr>
+<tr>
+<td>
+<code>ERN</code>
+</td>
+<td>
+Nakfa
+</td>
+</tr>
+<tr>
+<td>
+<code>ETB</code>
+</td>
+<td>
+Ethiopian Birr
+</td>
+</tr>
+<tr>
+<td>
+<code>EUR</code>
+</td>
+<td>
+Euro
+</td>
+</tr>
+<tr>
+<td>
+<code>FJD</code>
+</td>
+<td>
+Fiji Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>FKP</code>
+</td>
+<td>
+Falkland Islands Pound
+</td>
+</tr>
+<tr>
+<td>
+<code>GBP</code>
+</td>
+<td>
+Pound Sterling
+</td>
+</tr>
+<tr>
+<td>
+<code>GEL</code>
+</td>
+<td>
+Lari
+</td>
+</tr>
+<tr>
+<td>
+<code>GHS</code>
+</td>
+<td>
+Ghana Cedi
+</td>
+</tr>
+<tr>
+<td>
+<code>GIP</code>
+</td>
+<td>
+Gibraltar Pound
+</td>
+</tr>
+<tr>
+<td>
+<code>GMD</code>
+</td>
+<td>
+Dalasi
+</td>
+</tr>
+<tr>
+<td>
+<code>GNF</code>
+</td>
+<td>
+Guinean Franc
+</td>
+</tr>
+<tr>
+<td>
+<code>GTQ</code>
+</td>
+<td>
+Quetzal
+</td>
+</tr>
+<tr>
+<td>
+<code>GYD</code>
+</td>
+<td>
+Guyana Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>HKD</code>
+</td>
+<td>
+Hong Kong Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>HNL</code>
+</td>
+<td>
+Lempira
+</td>
+</tr>
+<tr>
+<td>
+<code>HTG</code>
+</td>
+<td>
+Gourde
+</td>
+</tr>
+<tr>
+<td>
+<code>HUF</code>
+</td>
+<td>
+Forint
+</td>
+</tr>
+<tr>
+<td>
+<code>IDR</code>
+</td>
+<td>
+Rupiah
+</td>
+</tr>
+<tr>
+<td>
+<code>ILS</code>
+</td>
+<td>
+New Israeli Sheqel
+</td>
+</tr>
+<tr>
+<td>
+<code>INR</code>
+</td>
+<td>
+Indian Rupee
+</td>
+</tr>
+<tr>
+<td>
+<code>IQD</code>
+</td>
+<td>
+Iraqi Dinar
+</td>
+</tr>
+<tr>
+<td>
+<code>IRR</code>
+</td>
+<td>
+Iranian Rial
+</td>
+</tr>
+<tr>
+<td>
+<code>ISK</code>
+</td>
+<td>
+Iceland Krona
+</td>
+</tr>
+<tr>
+<td>
+<code>JMD</code>
+</td>
+<td>
+Jamaican Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>JOD</code>
+</td>
+<td>
+Jordanian Dinar
+</td>
+</tr>
+<tr>
+<td>
+<code>JPY</code>
+</td>
+<td>
+Yen
+</td>
+</tr>
+<tr>
+<td>
+<code>KES</code>
+</td>
+<td>
+Kenyan Shilling
+</td>
+</tr>
+<tr>
+<td>
+<code>KGS</code>
+</td>
+<td>
+Som
+</td>
+</tr>
+<tr>
+<td>
+<code>KHR</code>
+</td>
+<td>
+Riel
+</td>
+</tr>
+<tr>
+<td>
+<code>KMF</code>
+</td>
+<td>
+Comorian Franc
+</td>
+</tr>
+<tr>
+<td>
+<code>KPW</code>
+</td>
+<td>
+North Korean Won
+</td>
+</tr>
+<tr>
+<td>
+<code>KRW</code>
+</td>
+<td>
+Won
+</td>
+</tr>
+<tr>
+<td>
+<code>KWD</code>
+</td>
+<td>
+Kuwaiti Dinar
+</td>
+</tr>
+<tr>
+<td>
+<code>KYD</code>
+</td>
+<td>
+Cayman Islands Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>KZT</code>
+</td>
+<td>
+Tenge
+</td>
+</tr>
+<tr>
+<td>
+<code>LAK</code>
+</td>
+<td>
+Lao Kip
+</td>
+</tr>
+<tr>
+<td>
+<code>LBP</code>
+</td>
+<td>
+Lebanese Pound
+</td>
+</tr>
+<tr>
+<td>
+<code>LKR</code>
+</td>
+<td>
+Sri Lanka Rupee
+</td>
+</tr>
+<tr>
+<td>
+<code>LRD</code>
+</td>
+<td>
+Liberian Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>LSL</code>
+</td>
+<td>
+Loti
+</td>
+</tr>
+<tr>
+<td>
+<code>LYD</code>
+</td>
+<td>
+Libyan Dinar
+</td>
+</tr>
+<tr>
+<td>
+<code>MAD</code>
+</td>
+<td>
+Moroccan Dirham
+</td>
+</tr>
+<tr>
+<td>
+<code>MDL</code>
+</td>
+<td>
+Moldovan Leu
+</td>
+</tr>
+<tr>
+<td>
+<code>MGA</code>
+</td>
+<td>
+Malagasy Ariary
+</td>
+</tr>
+<tr>
+<td>
+<code>MKD</code>
+</td>
+<td>
+Denar
+</td>
+</tr>
+<tr>
+<td>
+<code>MMK</code>
+</td>
+<td>
+Kyat
+</td>
+</tr>
+<tr>
+<td>
+<code>MNT</code>
+</td>
+<td>
+Tugrik
+</td>
+</tr>
+<tr>
+<td>
+<code>MOP</code>
+</td>
+<td>
+Pataca
+</td>
+</tr>
+<tr>
+<td>
+<code>MRU</code>
+</td>
+<td>
+Ouguiya
+</td>
+</tr>
+<tr>
+<td>
+<code>MUR</code>
+</td>
+<td>
+Mauritius Rupee
+</td>
+</tr>
+<tr>
+<td>
+<code>MVR</code>
+</td>
+<td>
+Rufiyaa
+</td>
+</tr>
+<tr>
+<td>
+<code>MWK</code>
+</td>
+<td>
+Malawi Kwacha
+</td>
+</tr>
+<tr>
+<td>
+<code>MXN</code>
+</td>
+<td>
+Mexican Peso
+</td>
+</tr>
+<tr>
+<td>
+<code>MXV</code>
+</td>
+<td>
+Mexican Unidad de Inversion (UDI)
+</td>
+</tr>
+<tr>
+<td>
+<code>MYR</code>
+</td>
+<td>
+Malaysian Ringgit
+</td>
+</tr>
+<tr>
+<td>
+<code>MZN</code>
+</td>
+<td>
+Mozambique Metical
+</td>
+</tr>
+<tr>
+<td>
+<code>NAD</code>
+</td>
+<td>
+Namibia Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>NGN</code>
+</td>
+<td>
+Naira
+</td>
+</tr>
+<tr>
+<td>
+<code>NIO</code>
+</td>
+<td>
+Cordoba Oro
+</td>
+</tr>
+<tr>
+<td>
+<code>NOK</code>
+</td>
+<td>
+Norwegian Krone
+</td>
+</tr>
+<tr>
+<td>
+<code>NPR</code>
+</td>
+<td>
+Nepalese Rupee
+</td>
+</tr>
+<tr>
+<td>
+<code>NZD</code>
+</td>
+<td>
+New Zealand Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>OMR</code>
+</td>
+<td>
+Rial Omani
+</td>
+</tr>
+<tr>
+<td>
+<code>PAB</code>
+</td>
+<td>
+Balboa
+</td>
+</tr>
+<tr>
+<td>
+<code>PEN</code>
+</td>
+<td>
+Sol
+</td>
+</tr>
+<tr>
+<td>
+<code>PGK</code>
+</td>
+<td>
+Kina
+</td>
+</tr>
+<tr>
+<td>
+<code>PHP</code>
+</td>
+<td>
+Philippine Peso
+</td>
+</tr>
+<tr>
+<td>
+<code>PKR</code>
+</td>
+<td>
+Pakistan Rupee
+</td>
+</tr>
+<tr>
+<td>
+<code>PLN</code>
+</td>
+<td>
+Zloty
+</td>
+</tr>
+<tr>
+<td>
+<code>PYG</code>
+</td>
+<td>
+Guarani
+</td>
+</tr>
+<tr>
+<td>
+<code>QAR</code>
+</td>
+<td>
+Qatari Rial
+</td>
+</tr>
+<tr>
+<td>
+<code>RON</code>
+</td>
+<td>
+Romanian Leu
+</td>
+</tr>
+<tr>
+<td>
+<code>RSD</code>
+</td>
+<td>
+Serbian Dinar
+</td>
+</tr>
+<tr>
+<td>
+<code>RUB</code>
+</td>
+<td>
+Russian Ruble
+</td>
+</tr>
+<tr>
+<td>
+<code>RWF</code>
+</td>
+<td>
+Rwanda Franc
+</td>
+</tr>
+<tr>
+<td>
+<code>SAR</code>
+</td>
+<td>
+Saudi Riyal
+</td>
+</tr>
+<tr>
+<td>
+<code>SBD</code>
+</td>
+<td>
+Solomon Islands Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>SCR</code>
+</td>
+<td>
+Seychelles Rupee
+</td>
+</tr>
+<tr>
+<td>
+<code>SDG</code>
+</td>
+<td>
+Sudanese Pound
+</td>
+</tr>
+<tr>
+<td>
+<code>SEK</code>
+</td>
+<td>
+Swedish Krona
+</td>
+</tr>
+<tr>
+<td>
+<code>SGD</code>
+</td>
+<td>
+Singapore Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>SHP</code>
+</td>
+<td>
+Saint Helena Pound
+</td>
+</tr>
+<tr>
+<td>
+<code>SLE</code>
+</td>
+<td>
+Sierra Leone (new valuation 2022)
+</td>
+</tr>
+<tr>
+<td>
+<code>SOS</code>
+</td>
+<td>
+Somali Shilling
+</td>
+</tr>
+<tr>
+<td>
+<code>SRD</code>
+</td>
+<td>
+Surinam Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>SSP</code>
+</td>
+<td>
+South Sudanese Pound
+</td>
+</tr>
+<tr>
+<td>
+<code>STN</code>
+</td>
+<td>
+Dobra
+</td>
+</tr>
+<tr>
+<td>
+<code>SVC</code>
+</td>
+<td>
+El Salvador Colon
+</td>
+</tr>
+<tr>
+<td>
+<code>SYP</code>
+</td>
+<td>
+Syrian Pound
+</td>
+</tr>
+<tr>
+<td>
+<code>SZL</code>
+</td>
+<td>
+Lilangeni
+</td>
+</tr>
+<tr>
+<td>
+<code>THB</code>
+</td>
+<td>
+Baht
+</td>
+</tr>
+<tr>
+<td>
+<code>TJS</code>
+</td>
+<td>
+Somoni
+</td>
+</tr>
+<tr>
+<td>
+<code>TMT</code>
+</td>
+<td>
+Turkmenistan New Manat
+</td>
+</tr>
+<tr>
+<td>
+<code>TND</code>
+</td>
+<td>
+Tunisian Dinar
+</td>
+</tr>
+<tr>
+<td>
+<code>TOP</code>
+</td>
+<td>
+Pa’anga
+</td>
+</tr>
+<tr>
+<td>
+<code>TRY</code>
+</td>
+<td>
+Turkish Lira
+</td>
+</tr>
+<tr>
+<td>
+<code>TTD</code>
+</td>
+<td>
+Trinidad and Tobago Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>TWD</code>
+</td>
+<td>
+New Taiwan Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>TZS</code>
+</td>
+<td>
+Tanzanian Shilling
+</td>
+</tr>
+<tr>
+<td>
+<code>UAH</code>
+</td>
+<td>
+Hryvnia
+</td>
+</tr>
+<tr>
+<td>
+<code>UGX</code>
+</td>
+<td>
+Uganda Shilling
+</td>
+</tr>
+<tr>
+<td>
+<code>USD</code>
+</td>
+<td>
+US Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>USN</code>
+</td>
+<td>
+US Dollar (Next day)
+</td>
+</tr>
+<tr>
+<td>
+<code>UYI</code>
+</td>
+<td>
+Uruguay Peso en Unidades Indexadas (UI)
+</td>
+</tr>
+<tr>
+<td>
+<code>UYU</code>
+</td>
+<td>
+Peso Uruguayo
+</td>
+</tr>
+<tr>
+<td>
+<code>UYW</code>
+</td>
+<td>
+Unidad Previsional
+</td>
+</tr>
+<tr>
+<td>
+<code>UZS</code>
+</td>
+<td>
+Uzbekistan Sum
+</td>
+</tr>
+<tr>
+<td>
+<code>VED</code>
+</td>
+<td>
+Bolívar Soberano, new valuation
+</td>
+</tr>
+<tr>
+<td>
+<code>VES</code>
+</td>
+<td>
+Bolívar Soberano
+</td>
+</tr>
+<tr>
+<td>
+<code>VND</code>
+</td>
+<td>
+Dong
+</td>
+</tr>
+<tr>
+<td>
+<code>VUV</code>
+</td>
+<td>
+Vatu
+</td>
+</tr>
+<tr>
+<td>
+<code>WST</code>
+</td>
+<td>
+Tala
+</td>
+</tr>
+<tr>
+<td>
+<code>XAF</code>
+</td>
+<td>
+CFA Franc BEAC
+</td>
+</tr>
+<tr>
+<td>
+<code>XAG</code>
+</td>
+<td>
+Silver
+</td>
+</tr>
+<tr>
+<td>
+<code>XAU</code>
+</td>
+<td>
+Gold
+</td>
+</tr>
+<tr>
+<td>
+<code>XBA</code>
+</td>
+<td>
+Bond Markets Unit European Composite Unit (EURCO)
+</td>
+</tr>
+<tr>
+<td>
+<code>XBB</code>
+</td>
+<td>
+Bond Markets Unit European Monetary Unit (E.M.U.-6)
+</td>
+</tr>
+<tr>
+<td>
+<code>XBC</code>
+</td>
+<td>
+Bond Markets Unit European Unit of Account 9 (E.U.A.-9)
+</td>
+</tr>
+<tr>
+<td>
+<code>XBD</code>
+</td>
+<td>
+Bond Markets Unit European Unit of Account 17 (E.U.A.-17)
+</td>
+</tr>
+<tr>
+<td>
+<code>XCD</code>
+</td>
+<td>
+East Caribbean Dollar
+</td>
+</tr>
+<tr>
+<td>
+<code>XDR</code>
+</td>
+<td>
+SDR (Special Drawing Right)
+</td>
+</tr>
+<tr>
+<td>
+<code>XOF</code>
+</td>
+<td>
+CFA Franc BCEAO
+</td>
+</tr>
+<tr>
+<td>
+<code>XPD</code>
+</td>
+<td>
+Palladium
+</td>
+</tr>
+<tr>
+<td>
+<code>XPF</code>
+</td>
+<td>
+CFP Franc
+</td>
+</tr>
+<tr>
+<td>
+<code>XPT</code>
+</td>
+<td>
+Platinum
+</td>
+</tr>
+<tr>
+<td>
+<code>XSU</code>
+</td>
+<td>
+Sucre
+</td>
+</tr>
+<tr>
+<td>
+<code>XTS</code>
+</td>
+<td>
+Codes specifically reserved for testing purposes
+</td>
+</tr>
+<tr>
+<td>
+<code>XUA</code>
+</td>
+<td>
+ADB Unit of Account
+</td>
+</tr>
+<tr>
+<td>
+<code>XXX</code>
+</td>
+<td>
+The codes assigned for transactions where no currency is involved
+</td>
+</tr>
+<tr>
+<td>
+<code>YER</code>
+</td>
+<td>
+Yemeni Rial
+</td>
+</tr>
+<tr>
+<td>
+<code>ZAR</code>
+</td>
+<td>
+Rand
+</td>
+</tr>
+<tr>
+<td>
+<code>ZMW</code>
+</td>
+<td>
+Zambian Kwacha
+</td>
+</tr>
+<tr>
+<td>
+<code>ZWG</code>
+</td>
+<td>
+Zimbabwe Gold
+</td>
+</tr>
+</tbody>
+</table>

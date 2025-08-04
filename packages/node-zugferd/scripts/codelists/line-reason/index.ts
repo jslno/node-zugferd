@@ -43,5 +43,24 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/line-reason",
+			importPath: "/codelist/line-reason",
+			title: "Status Reason Code",
+			description:
+				"Code specifying the reason for the status.",
+			sidebar: {
+				title: "Line Reason",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Description",
+					},
+				},
+			},
+		},
 	};
 });

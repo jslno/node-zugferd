@@ -36,5 +36,24 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/vat-id",
+			importPath: "/codelist/vat-id",
+			title: "VAT Identifier",
+			description:
+				"Code specifying the VAT identifier.",
+			sidebar: {
+				title: "VAT-ID",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Value",
+					},
+				},
+			},
+		},
 	};
 });

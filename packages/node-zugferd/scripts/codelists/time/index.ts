@@ -1,4 +1,4 @@
-// UNTDID 2005/ UNTDID 2475 — Event time code
+// UNTDID 2475 — Event time code
 
 import z from "zod";
 import { arrayable, createParser } from "..";
@@ -35,6 +35,25 @@ export default createParser(async (ctx) => {
 		enum: {
 			key: "key",
 			value: "value",
+		},
+		docs: {
+			path: "/codelists/time",
+			importPath: "/codelist/time",
+			title: "UNTDID 2475 — Event time code",
+			description:
+				"Code relating payment terms to the date of a specific event.",
+			sidebar: {
+				title: "Time",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Value",
+					},
+				},
+			},
 		},
 	};
 });

@@ -45,5 +45,24 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/untdid-1001",
+			importPath: "/codelist/untdid-1001",
+			title: "UNTDID 1001 — Document type",
+			description: "Document/message identifier expressed in code.",
+			sidebar: {
+				title: "UNTDID 1001",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Name",
+					},
+					interpretation: { label: "EN16931 interpretation" },
+				},
+			},
+		},
 	};
 });

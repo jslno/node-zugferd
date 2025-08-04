@@ -12,7 +12,7 @@ export default defineConfig((env) => {
 			"profile/extended": "./src/profiles/extended/index.ts",
 			types: "./src/types/index.ts",
 			"codelist/allowance": "./src/codelists/allowance.gen.ts",
-			"codelist/characteristics": "./src/codelists/characteristic.gen.ts",
+			"codelist/characteristic": "./src/codelists/characteristic.gen.ts",
 			"codelist/charge": "./src/codelists/charge.gen.ts",
 			"codelist/country": "./src/codelists/country.gen.ts",
 			"codelist/currency": "./src/codelists/currency.gen.ts",

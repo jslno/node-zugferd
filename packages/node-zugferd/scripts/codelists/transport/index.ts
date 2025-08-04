@@ -39,5 +39,22 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/transport",
+			importPath: "/codelist/transport",
+			title: "UN/ECE Recommendation N°19 Transport mode codes",
+			description: "Code specifying the mode of transport.",
+			sidebar: {
+				title: "Transport",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: { label: "Code name" },
+					description: { label: "Description" },
+				},
+			},
+		},
 	};
 });

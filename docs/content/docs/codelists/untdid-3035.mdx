@@ -1,51 +1,6208 @@
 ---
-title: UNTDID 3035
-description: Party function code qualifier
+title: UNTDID 3035 - Party function code qualifier
+description: Code giving specific meaning to a party.
 ---
 
-import {
-  UNTDID_3035,
-  UNTDID_3035_IDENTIFIER,
-} from "node-zugferd/codelist/untdid.3035";
+import { UNTDID_3035 } from "node-zugferd/codelist/untdid-3035";
 
-## Definition [toc]
-
-Identifier: <span className="text-fd-muted-foreground">{UNTDID_3035_IDENTIFIER}</span>
-
-<div className="w-fit">
-  <Link
-    href="https://service.unece.org/trade/untdid/d00a/tred/tred3035.htm"
-    target="_blank"
-  >
-    Source
-  </Link>
-</div>
+### Codelist [toc]
 
 ```ts
 import {
-  Untdid3035,
-  UNTDID_3035,
-  type Untdid3035Code,
-} from "node-zugferd/codelist/untdid.3035";
+	UNTDID_3035,
+	Untdid3035,
+	untdid3035Code,
+	type Untdid3035Definition,
+	type Untdid3035Code,
+} from "node-zugferd/codelist/untdid-3035";
+
 ```
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    {UNTDID_3035.map(({ code, name, description }) => (
-      <tr key={code}>
-        <td className="text-center">
-          <code>{code}</code>
-        </td>
-        <td>{name}</td>
-        <td>{description}</td>
-      </tr>
-    ))}
-  </tbody>
+<div className="w-fit">
+<Link href="https://service.unece.org/trade/untdid/d06b/tred/tred3035.htm" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Name
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>AA</code>
+</td>
+<td>
+Party to be billed (AAR Accounting rule 11)
+</td>
+<td>
+Party to be billed in accordance with AAR Accounting rule 11.
+</td>
+</tr>
+<tr>
+<td>
+<code>AB</code>
+</td>
+<td>
+Buyer's agent/representative
+</td>
+<td>
+Third party who arranged the purchase of merchandise on behalf of the actual buyer.
+</td>
+</tr>
+<tr>
+<td>
+<code>AE</code>
+</td>
+<td>
+Declarant's agent/representative
+</td>
+<td>
+Any natural or legal person who makes a declaration to an official body on behalf of another natural or legal person, where legally permitted (CCC).
+</td>
+</tr>
+<tr>
+<td>
+<code>AF</code>
+</td>
+<td>
+Transit principal
+</td>
+<td>
+Natural or legal person responsible for the satisfactory performance of a Customs transit operation. Source: CCC.
+</td>
+</tr>
+<tr>
+<td>
+<code>AG</code>
+</td>
+<td>
+Agent
+</td>
+<td>
+(3196) Party authorized to act on behalf of another party. Synonym: Representative.
+</td>
+</tr>
+<tr>
+<td>
+<code>AH</code>
+</td>
+<td>
+Transit principal's agent/representative
+</td>
+<td>
+Agent acting on behalf of the transit principal (CCC).
+</td>
+</tr>
+<tr>
+<td>
+<code>AI</code>
+</td>
+<td>
+Successful job applicant
+</td>
+<td>
+Person who has been chosen for a job.
+</td>
+</tr>
+<tr>
+<td>
+<code>AJ</code>
+</td>
+<td>
+Party issuing mutually agreed codes
+</td>
+<td>
+The party which has issued all mutually agreed codes used in the message.
+</td>
+</tr>
+<tr>
+<td>
+<code>AK</code>
+</td>
+<td>
+Acknowledgement recipient
+</td>
+<td>
+Party to whom acknowledgement should be sent.
+</td>
+</tr>
+<tr>
+<td>
+<code>AL</code>
+</td>
+<td>
+Principal responsible party
+</td>
+<td>
+(3340) Party accepting liability for goods held or moving (e.g. transit) under a Customs authorization and - when applicable - a guarantee.
+</td>
+</tr>
+<tr>
+<td>
+<code>AM</code>
+</td>
+<td>
+Authorized official
+</td>
+<td>
+Employee of a company or firm authorized to act on behalf of that company or firm e.g. to make a Customs declaration.
+</td>
+</tr>
+<tr>
+<td>
+<code>AN</code>
+</td>
+<td>
+Approved importer
+</td>
+<td>
+Person or company which is authorised by the relevant Customs authority to import goods without payment all taxes or specific taxes at the point of entry into the country.
+</td>
+</tr>
+<tr>
+<td>
+<code>AO</code>
+</td>
+<td>
+Account of
+</td>
+<td>
+Party account is assigned to.
+</td>
+</tr>
+<tr>
+<td>
+<code>AP</code>
+</td>
+<td>
+Accepting party
+</td>
+<td>
+(3336) Party accepting goods, products, services, etc.
+</td>
+</tr>
+<tr>
+<td>
+<code>AQ</code>
+</td>
+<td>
+Approved consignor
+</td>
+<td>
+Person or company approved by the relevant authority in the country to pack and export specific goods under Customs supervision.
+</td>
+</tr>
+<tr>
+<td>
+<code>AR</code>
+</td>
+<td>
+Authorized exporter
+</td>
+<td>
+Exporter authorized/approved by Customs for special Customs procedures e.g. simplified procedure.
+</td>
+</tr>
+<tr>
+<td>
+<code>AS</code>
+</td>
+<td>
+Account servicing financial institution
+</td>
+<td>
+Identifies the financial institution servicing the account(s).
+</td>
+</tr>
+<tr>
+<td>
+<code>AT</code>
+</td>
+<td>
+Authorized importer
+</td>
+<td>
+Importer authorized/approved by Customs for special Customs procedures e.g. simplified procedure.
+</td>
+</tr>
+<tr>
+<td>
+<code>AU</code>
+</td>
+<td>
+Authorized trader (transit)
+</td>
+<td>
+Trader authorized/approved by Customs for special transit procedures e.g. simplified procedure.
+</td>
+</tr>
+<tr>
+<td>
+<code>AV</code>
+</td>
+<td>
+Authorizing official
+</td>
+<td>
+Party that has delegated the authority to take a certain action on behalf of a company or agency.
+</td>
+</tr>
+<tr>
+<td>
+<code>AW</code>
+</td>
+<td>
+Applicant's bank
+</td>
+<td>
+(3234) Financial institution which is requested to issue the documentary credit.
+</td>
+</tr>
+<tr>
+<td>
+<code>AX</code>
+</td>
+<td>
+Authenticating party
+</td>
+<td>
+Party which certifies that a document is authentic.
+</td>
+</tr>
+<tr>
+<td>
+<code>AY</code>
+</td>
+<td>
+Animal being investigated
+</td>
+<td>
+Animal being investigated.
+</td>
+</tr>
+<tr>
+<td>
+<code>AZ</code>
+</td>
+<td>
+Issuing bank
+</td>
+<td>
+Financial institution which issues the documentary credit, if the applicant's bank is not acting as the issuing bank.
+</td>
+</tr>
+<tr>
+<td>
+<code>B1</code>
+</td>
+<td>
+Contact bank 1
+</td>
+<td>
+Identifies an additional bank which must be informed of certain aspects of the message.
+</td>
+</tr>
+<tr>
+<td>
+<code>B2</code>
+</td>
+<td>
+Contact bank 2
+</td>
+<td>
+Identifies an additional bank which must be informed of certain aspects of the message.
+</td>
+</tr>
+<tr>
+<td>
+<code>BA</code>
+</td>
+<td>
+Booking agent
+</td>
+<td>
+Party acting as a booking office for transport and forwarding services.
+</td>
+</tr>
+<tr>
+<td>
+<code>BB</code>
+</td>
+<td>
+Buyer bank identification
+</td>
+<td>
+[3421]To identify a bank employed by the buyer to make a payment.
+</td>
+</tr>
+<tr>
+<td>
+<code>BC</code>
+</td>
+<td>
+Negotiating bank
+</td>
+<td>
+Financial institution to whom a negotiable documentary credit is directed.
+</td>
+</tr>
+<tr>
+<td>
+<code>BD</code>
+</td>
+<td>
+Documentary credit reimbursing bank
+</td>
+<td>
+A financial institution which reimburses documentary credit.
+</td>
+</tr>
+<tr>
+<td>
+<code>BE</code>
+</td>
+<td>
+Beneficiary
+</td>
+<td>
+The ultimate recipient of the funds. Normally the account owner who is reimbursed by the payer.
+</td>
+</tr>
+<tr>
+<td>
+<code>BF</code>
+</td>
+<td>
+Beneficiary's bank
+</td>
+<td>
+Identifies the account servicer for the beneficiary or the payee.
+</td>
+</tr>
+<tr>
+<td>
+<code>BG</code>
+</td>
+<td>
+Employer
+</td>
+<td>
+A party that keeps a person in service for payment.
+</td>
+</tr>
+<tr>
+<td>
+<code>BH</code>
+</td>
+<td>
+Previous employer
+</td>
+<td>
+Previous employer of a person(s).
+</td>
+</tr>
+<tr>
+<td>
+<code>BI</code>
+</td>
+<td>
+Buyer's financial institution
+</td>
+<td>
+Financial institution designated by buyer to make payment.
+</td>
+</tr>
+<tr>
+<td>
+<code>BJ</code>
+</td>
+<td>
+Release to party
+</td>
+<td>
+Party to which the goods or container(s) is (are) to be released.
+</td>
+</tr>
+<tr>
+<td>
+<code>BK</code>
+</td>
+<td>
+Financial institution
+</td>
+<td>
+Party acting as financial institution.
+</td>
+</tr>
+<tr>
+<td>
+<code>BL</code>
+</td>
+<td>
+Bill of lading recipient
+</td>
+<td>
+Party to receive B/L.
+</td>
+</tr>
+<tr>
+<td>
+<code>BM</code>
+</td>
+<td>
+Insured
+</td>
+<td>
+Party which is the object of an insurance contract.
+</td>
+</tr>
+<tr>
+<td>
+<code>BN</code>
+</td>
+<td>
+Insurance beneficiary
+</td>
+<td>
+Party which benefits from insurance coverage.
+</td>
+</tr>
+<tr>
+<td>
+<code>BO</code>
+</td>
+<td>
+Broker or sales office
+</td>
+<td>
+Party acting in the name of the seller as broker or as sales office.
+</td>
+</tr>
+<tr>
+<td>
+<code>BP</code>
+</td>
+<td>
+Building site purchaser
+</td>
+<td>
+Party at the building site responsible for the purchasing of goods and services for that particular site.
+</td>
+</tr>
+<tr>
+<td>
+<code>BQ</code>
+</td>
+<td>
+Cheque drawn bank
+</td>
+<td>
+Identifies the bank on which the cheque should be drawn, as instructed by the ordering customer.
+</td>
+</tr>
+<tr>
+<td>
+<code>BS</code>
+</td>
+<td>
+Bill and ship to
+</td>
+<td>
+Party receiving goods and relevant invoice.
+</td>
+</tr>
+<tr>
+<td>
+<code>BT</code>
+</td>
+<td>
+Party to be billed for other than freight (bill to)
+</td>
+<td>
+Party receiving invoice excluding freight costs.
+</td>
+</tr>
+<tr>
+<td>
+<code>BU</code>
+</td>
+<td>
+Service bureau
+</td>
+<td>
+Party carrying out service bureau processing work, (e.g. a payroll bureau).
+</td>
+</tr>
+<tr>
+<td>
+<code>BV</code>
+</td>
+<td>
+Member
+</td>
+<td>
+Member of a group (e.g. of a group of persons or a service scheme).
+</td>
+</tr>
+<tr>
+<td>
+<code>BW</code>
+</td>
+<td>
+Borrower
+</td>
+<td>
+A person who acquires something temporarily with the promise or intention of returning.
+</td>
+</tr>
+<tr>
+<td>
+<code>BX</code>
+</td>
+<td>
+Building site engineer
+</td>
+<td>
+Party at the building site responsible for engineering matters for that particular site.
+</td>
+</tr>
+<tr>
+<td>
+<code>BY</code>
+</td>
+<td>
+Buyer
+</td>
+<td>
+[3002] Party to which merchandise or services are sold.
+</td>
+</tr>
+<tr>
+<td>
+<code>BZ</code>
+</td>
+<td>
+Building site forwarder
+</td>
+<td>
+Party at the building site responsible for forwarding the received goods on that particular site.
+</td>
+</tr>
+<tr>
+<td>
+<code>C1</code>
+</td>
+<td>
+In care of party no. 1
+</td>
+<td>
+A person taking responsibility on behalf of party no. 1.
+</td>
+</tr>
+<tr>
+<td>
+<code>C2</code>
+</td>
+<td>
+In care of party no. 2
+</td>
+<td>
+A person taking responsibility on behalf of party no. 2.
+</td>
+</tr>
+<tr>
+<td>
+<code>CA</code>
+</td>
+<td>
+Carrier
+</td>
+<td>
+[3126] Party undertaking or arranging transport of goods between named points.
+</td>
+</tr>
+<tr>
+<td>
+<code>CB</code>
+</td>
+<td>
+Customs broker
+</td>
+<td>
+Agent or representative or a professional Customs clearing agent who deals directly with Customs on behalf of the importer or exporter (CCC).
+</td>
+</tr>
+<tr>
+<td>
+<code>CC</code>
+</td>
+<td>
+Claimant
+</td>
+<td>
+Party who claims goods or insurance.
+</td>
+</tr>
+<tr>
+<td>
+<code>CD</code>
+</td>
+<td>
+Agent's bank
+</td>
+<td>
+Bank of the agent.
+</td>
+</tr>
+<tr>
+<td>
+<code>CE</code>
+</td>
+<td>
+Ceding company
+</td>
+<td>
+Company which cedes something to someone.
+</td>
+</tr>
+<tr>
+<td>
+<code>CF</code>
+</td>
+<td>
+Container operator/lessee
+</td>
+<td>
+Party to whom the possession of specified property (e.g. container) has been conveyed for a period of time in return for rental payments.
+</td>
+</tr>
+<tr>
+<td>
+<code>CG</code>
+</td>
+<td>
+Carrier's agent
+</td>
+<td>
+Party authorized to act for or on behalf of carrier.
+</td>
+</tr>
+<tr>
+<td>
+<code>CH</code>
+</td>
+<td>
+Connecting carrier
+</td>
+<td>
+Owner or operator of a transportation conveyance to which goods in a given transaction will be transferred.
+</td>
+</tr>
+<tr>
+<td>
+<code>CI</code>
+</td>
+<td>
+Commission processor
+</td>
+<td>
+Party who provides extra treatment to goods on commission base.
+</td>
+</tr>
+<tr>
+<td>
+<code>CJ</code>
+</td>
+<td>
+Previous member
+</td>
+<td>
+Previous member of a group of persons or a service scheme.
+</td>
+</tr>
+<tr>
+<td>
+<code>CK</code>
+</td>
+<td>
+Empty equipment despatch party
+</td>
+<td>
+Party from whose premises empty equipment will be or has been despatched.
+</td>
+</tr>
+<tr>
+<td>
+<code>CL</code>
+</td>
+<td>
+Container location party
+</td>
+<td>
+Party from whose premises container will be or has been despatched.
+</td>
+</tr>
+<tr>
+<td>
+<code>CM</code>
+</td>
+<td>
+Customs
+</td>
+<td>
+Identification of customs authority relevant to the transaction or shipment.
+</td>
+</tr>
+<tr>
+<td>
+<code>CN</code>
+</td>
+<td>
+Consignee
+</td>
+<td>
+[3132] Party to which goods are consigned.
+</td>
+</tr>
+<tr>
+<td>
+<code>CNX</code>
+</td>
+<td>
+Cash pool top account servicing financial institution
+</td>
+<td>
+Identification of a financial institution servicing the top account of a cash pool.
+</td>
+</tr>
+<tr>
+<td>
+<code>CNY</code>
+</td>
+<td>
+Cash pool level account servicing financial institution
+</td>
+<td>
+Identification of a financial institution servicing the level account of a cash pool.
+</td>
+</tr>
+<tr>
+<td>
+<code>CNZ</code>
+</td>
+<td>
+Cash pool sub-account servicing financial institution
+</td>
+<td>
+Identification of a financial institution servicing the sub-account of a cash pool.
+</td>
+</tr>
+<tr>
+<td>
+<code>CO</code>
+</td>
+<td>
+Corporate office
+</td>
+<td>
+Identification of the Head Office within a company.
+</td>
+</tr>
+<tr>
+<td>
+<code>COA</code>
+</td>
+<td>
+Entity in which a financial interest is held
+</td>
+<td>
+Business in which a financial interest is held.
+</td>
+</tr>
+<tr>
+<td>
+<code>COB</code>
+</td>
+<td>
+Intermediate level parent company
+</td>
+<td>
+Identifies an intermediate parent company.
+</td>
+</tr>
+<tr>
+<td>
+<code>COC</code>
+</td>
+<td>
+Transshipment party
+</td>
+<td>
+A party responsible for transshipment.
+</td>
+</tr>
+<tr>
+<td>
+<code>COD</code>
+</td>
+<td>
+Quotation requesting party
+</td>
+<td>
+Party sending a request for a quotation.
+</td>
+</tr>
+<tr>
+<td>
+<code>COE</code>
+</td>
+<td>
+Party maintaining the codes used in the message
+</td>
+<td>
+The party which maintains the codes used in the message.
+</td>
+</tr>
+<tr>
+<td>
+<code>COF</code>
+</td>
+<td>
+Party maintaining the identifiers used in the message
+</td>
+<td>
+The party which maintains the identifiers used in the message.
+</td>
+</tr>
+<tr>
+<td>
+<code>COG</code>
+</td>
+<td>
+Dispatcher
+</td>
+<td>
+An individual responsible for sending something to a destination.
+</td>
+</tr>
+<tr>
+<td>
+<code>COH</code>
+</td>
+<td>
+Submitter of sample
+</td>
+<td>
+An entity responsible for the submission of a sample.
+</td>
+</tr>
+<tr>
+<td>
+<code>COI</code>
+</td>
+<td>
+Institutional provider
+</td>
+<td>
+The institution providing the service.
+</td>
+</tr>
+<tr>
+<td>
+<code>COJ</code>
+</td>
+<td>
+Primary health care provider
+</td>
+<td>
+Health care provider that has primary responsibility for patient.
+</td>
+</tr>
+<tr>
+<td>
+<code>COK</code>
+</td>
+<td>
+Assistant surgeon
+</td>
+<td>
+Physician assisting in surgery.
+</td>
+</tr>
+<tr>
+<td>
+<code>COL</code>
+</td>
+<td>
+Admitting health care provider
+</td>
+<td>
+Health care provider that admitted the patient.
+</td>
+</tr>
+<tr>
+<td>
+<code>COM</code>
+</td>
+<td>
+Referring health care provider
+</td>
+<td>
+Health care provider that referred patient to current provider of services.
+</td>
+</tr>
+<tr>
+<td>
+<code>CON</code>
+</td>
+<td>
+Supervising health care provider
+</td>
+<td>
+Health care provider that supervised the rendering of a service.
+</td>
+</tr>
+<tr>
+<td>
+<code>COO</code>
+</td>
+<td>
+Party providing financing
+</td>
+<td>
+Identifies the party providing the financing.
+</td>
+</tr>
+<tr>
+<td>
+<code>COP</code>
+</td>
+<td>
+Convoying party
+</td>
+<td>
+Party designated to escort the transported goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>COQ</code>
+</td>
+<td>
+Nominated bank
+</td>
+<td>
+Identifies the nominated bank.
+</td>
+</tr>
+<tr>
+<td>
+<code>COR</code>
+</td>
+<td>
+Family member
+</td>
+<td>
+Identifies a family member.
+</td>
+</tr>
+<tr>
+<td>
+<code>COS</code>
+</td>
+<td>
+Co-participant
+</td>
+<td>
+Identifies another party who participates in an activity.
+</td>
+</tr>
+<tr>
+<td>
+<code>COT</code>
+</td>
+<td>
+Involved party
+</td>
+<td>
+Party which is involved in an activity.
+</td>
+</tr>
+<tr>
+<td>
+<code>COU</code>
+</td>
+<td>
+Assigner
+</td>
+<td>
+Identifies the entity who assigns.
+</td>
+</tr>
+<tr>
+<td>
+<code>COV</code>
+</td>
+<td>
+Registered principal
+</td>
+<td>
+An individual who is registered as a principal for an entity.
+</td>
+</tr>
+<tr>
+<td>
+<code>COW</code>
+</td>
+<td>
+Freight payer on behalf of the consignor
+</td>
+<td>
+Freight payer is a third party acting on behalf of the consignor.
+</td>
+</tr>
+<tr>
+<td>
+<code>COX</code>
+</td>
+<td>
+Freight payer on behalf of the consignee
+</td>
+<td>
+Freight payer is a third party acting on behalf of the consignee.
+</td>
+</tr>
+<tr>
+<td>
+<code>COY</code>
+</td>
+<td>
+Party responsible for disinfection
+</td>
+<td>
+Party responsible for performing disinfection operations.
+</td>
+</tr>
+<tr>
+<td>
+<code>COZ</code>
+</td>
+<td>
+Party responsible for refueling
+</td>
+<td>
+Party responsible for performing refueling operations.
+</td>
+</tr>
+<tr>
+<td>
+<code>CP</code>
+</td>
+<td>
+Party to receive certificate of compliance
+</td>
+<td>
+Party acting for or on behalf of seller in matters concerning compliance.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPA</code>
+</td>
+<td>
+Advising bank
+</td>
+<td>
+Identifies the financial institution used by the issuing bank to advise the documentary credit.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPB</code>
+</td>
+<td>
+Reimbursing bank
+</td>
+<td>
+Identifies the financial institution through which the reimbursement is to be effected.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPC</code>
+</td>
+<td>
+Advise through bank
+</td>
+<td>
+Identifies the financial institution through which the advising bank is to advise.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPD</code>
+</td>
+<td>
+Charges payer at destination
+</td>
+<td>
+Party, other than the ordering party, which has to pay the charges concerning the destination operations.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPE</code>
+</td>
+<td>
+Transport means master name
+</td>
+<td>
+[3408] Name of the Master of a means of transport such as vessel.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPF</code>
+</td>
+<td>
+Means of transport charterer
+</td>
+<td>
+Charterer of the means of transport.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPG</code>
+</td>
+<td>
+Excise party
+</td>
+<td>
+Party to whom excise must be paid.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPH</code>
+</td>
+<td>
+Copy report to
+</td>
+<td>
+Party receiving a copy of a report.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPI</code>
+</td>
+<td>
+Related healthcare party
+</td>
+<td>
+A healthcare party related to the subject.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPJ</code>
+</td>
+<td>
+Clinical information provider
+</td>
+<td>
+Party providing clinical information.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPK</code>
+</td>
+<td>
+Service requester
+</td>
+<td>
+Party requesting a service.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPL</code>
+</td>
+<td>
+Patient admitted by
+</td>
+<td>
+Party who admitted a patient.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPM</code>
+</td>
+<td>
+Patient discharged to
+</td>
+<td>
+The party who receives the discharged patient.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPN</code>
+</td>
+<td>
+Patient hosted by
+</td>
+<td>
+The party hosting the patient.
+</td>
+</tr>
+<tr>
+<td>
+<code>CPO</code>
+</td>
+<td>
+Prescriber's contact person
+</td>
+<td>
+Contact person for the prescriber.
+</td>
+</tr>
+<tr>
+<td>
+<code>CQ</code>
+</td>
+<td>
+Cheque order
+</td>
+<td>
+Party to which the cheque will be ordered, when different from the beneficiary.
+</td>
+</tr>
+<tr>
+<td>
+<code>CR</code>
+</td>
+<td>
+Empty equipment return party
+</td>
+<td>
+Party to whose premises empty equipment will be or has been returned.
+</td>
+</tr>
+<tr>
+<td>
+<code>CS</code>
+</td>
+<td>
+Consolidator
+</td>
+<td>
+Party consolidating various consignments, payments etc.
+</td>
+</tr>
+<tr>
+<td>
+<code>CT</code>
+</td>
+<td>
+Consignee to be specified
+</td>
+<td>
+The party to be identified at a later time as the consignee.
+</td>
+</tr>
+<tr>
+<td>
+<code>CU</code>
+</td>
+<td>
+Container return company
+</td>
+<td>
+The company to which containers have to be returned.
+</td>
+</tr>
+<tr>
+<td>
+<code>CV</code>
+</td>
+<td>
+Consignee of vessel
+</td>
+<td>
+Party to which the vessel shall be delivered.
+</td>
+</tr>
+<tr>
+<td>
+<code>CW</code>
+</td>
+<td>
+Equipment owner
+</td>
+<td>
+Owner of equipment (container, etc.).
+</td>
+</tr>
+<tr>
+<td>
+<code>CX</code>
+</td>
+<td>
+Consignee's agent
+</td>
+<td>
+Party authorized to act on behalf of the consignee.
+</td>
+</tr>
+<tr>
+<td>
+<code>CY</code>
+</td>
+<td>
+Commissionable agent
+</td>
+<td>
+IATA cargo agent entitled to commission.
+</td>
+</tr>
+<tr>
+<td>
+<code>CZ</code>
+</td>
+<td>
+Consignor
+</td>
+<td>
+[3336] Party which, by contract with a carrier, consigns or sends goods with the carrier, or has them conveyed by him. Synonym: shipper, sender.
+</td>
+</tr>
+<tr>
+<td>
+<code>DA</code>
+</td>
+<td>
+Available with bank (documentary credits)
+</td>
+<td>
+Financial institution with whom the documentary credit is available.
+</td>
+</tr>
+<tr>
+<td>
+<code>DB</code>
+</td>
+<td>
+Distributor branch
+</td>
+<td>
+The affiliate of a retailer or distributor.
+</td>
+</tr>
+<tr>
+<td>
+<code>DC</code>
+</td>
+<td>
+Deconsolidator
+</td>
+<td>
+Party that splits up a large consignment composed of separate consignments of goods. The smaller consignments of goods were grouped together into that large consignment for carriage as a larger unit in order to obtain a reduced rate.
+</td>
+</tr>
+<tr>
+<td>
+<code>DCP</code>
+</td>
+<td>
+Despatch charge payer
+</td>
+<td>
+Party, other than the ordering party, which has to pay the charges concerning the despatch operations.
+</td>
+</tr>
+<tr>
+<td>
+<code>DCQ</code>
+</td>
+<td>
+Prescription database owner
+</td>
+<td>
+Organisation or person owning a prescription database.
+</td>
+</tr>
+<tr>
+<td>
+<code>DCR</code>
+</td>
+<td>
+Original prescriber
+</td>
+<td>
+The doctor who issued the original prescription.
+</td>
+</tr>
+<tr>
+<td>
+<code>DCS</code>
+</td>
+<td>
+Temporary employee
+</td>
+<td>
+A person employed on a temporary basis.
+</td>
+</tr>
+<tr>
+<td>
+<code>DCT</code>
+</td>
+<td>
+Designer
+</td>
+<td>
+A party who designs.
+</td>
+</tr>
+<tr>
+<td>
+<code>DCU</code>
+</td>
+<td>
+Quotation delivered to
+</td>
+<td>
+Party to whom the quotation is to be or has been delivered.
+</td>
+</tr>
+<tr>
+<td>
+<code>DCV</code>
+</td>
+<td>
+Developer
+</td>
+<td>
+A party who develops.
+</td>
+</tr>
+<tr>
+<td>
+<code>DCW</code>
+</td>
+<td>
+Test execution party
+</td>
+<td>
+The party performing a test.
+</td>
+</tr>
+<tr>
+<td>
+<code>DCX</code>
+</td>
+<td>
+Party to receive refund
+</td>
+<td>
+Party to whom a refund is given.
+</td>
+</tr>
+<tr>
+<td>
+<code>DCY</code>
+</td>
+<td>
+Authorised issuer of prescription
+</td>
+<td>
+Party authorised to issue a prescription.
+</td>
+</tr>
+<tr>
+<td>
+<code>DCZ</code>
+</td>
+<td>
+Authorised dispenser of medicine
+</td>
+<td>
+Organisation or person authorised to dispense medicine.
+</td>
+</tr>
+<tr>
+<td>
+<code>DD</code>
+</td>
+<td>
+Documentary credit account party's bank
+</td>
+<td>
+Bank of the documentary credit account party.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDA</code>
+</td>
+<td>
+Report responsible party
+</td>
+<td>
+The party or person taking responsibility for a report.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDB</code>
+</td>
+<td>
+Initial sender
+</td>
+<td>
+The party who does the initial sending.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDC</code>
+</td>
+<td>
+The party authorising the original prescription
+</td>
+<td>
+The party authorising the issuer of the original prescription.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDD</code>
+</td>
+<td>
+Applicant
+</td>
+<td>
+A party who applies for something.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDE</code>
+</td>
+<td>
+Meter reader
+</td>
+<td>
+A party physically reading the meter.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDF</code>
+</td>
+<td>
+Primary electronic business contact
+</td>
+<td>
+Code specifying a party who serves as a business entity's primary contact for matters related to electronic business.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDG</code>
+</td>
+<td>
+Alternate electronic business contact
+</td>
+<td>
+Code specifying a party who serves as a business entity's alternate contact for matters related to electronic business.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDH</code>
+</td>
+<td>
+Primary government business contact
+</td>
+<td>
+Code specifying a party who serves as a business entity's primary contact for matters related to doing business with the government.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDI</code>
+</td>
+<td>
+Alternate government business contact
+</td>
+<td>
+Code specifying a party who serves as a business entity's alternate contact for matters related to doing business with the government.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDJ</code>
+</td>
+<td>
+Past performance contact
+</td>
+<td>
+Code specifying a party who serves as a business entity's contact for matters related to the past performance of that entity.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDK</code>
+</td>
+<td>
+Balance responsible party
+</td>
+<td>
+A party responsible for balancing supply and consumption.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDL</code>
+</td>
+<td>
+Group of passengers
+</td>
+<td>
+A group of persons conveyed by a means of transport, other than the crew.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDM</code>
+</td>
+<td>
+Grid operator
+</td>
+<td>
+A party operating a grid.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDN</code>
+</td>
+<td>
+First financial institution in the transaction chain
+</td>
+<td>
+Identifies the financial institution that is the point of entry into the interbank transaction chain.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDO</code>
+</td>
+<td>
+Location manager
+</td>
+<td>
+Party responsible for the management of the location.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDP</code>
+</td>
+<td>
+Group leader
+</td>
+<td>
+Party responsible for leading the group.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDQ</code>
+</td>
+<td>
+Balance power supplier
+</td>
+<td>
+The supplier of balance power.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDR</code>
+</td>
+<td>
+Consignor's freight forwarder
+</td>
+<td>
+Identification of freight forwarder giving services to the consignor.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDS</code>
+</td>
+<td>
+Consignee's freight forwarder
+</td>
+<td>
+Identification of freight forwarder giving services to the consignee.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDT</code>
+</td>
+<td>
+In transit crew member
+</td>
+<td>
+The movement of a crew member from one country to another via the territory of an intermediate country for which no entry is intended.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDU</code>
+</td>
+<td>
+In transit passenger
+</td>
+<td>
+The movement of a passenger from one country to another via the territory of an intermediate country for which no entry is intended.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDV</code>
+</td>
+<td>
+Energy consumption imbalance responsible party
+</td>
+<td>
+A party who can be brought to rights, legally and financially, for any imbalance between energy bought and consumed for all associated metering points.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDW</code>
+</td>
+<td>
+Energy production imbalance responsible party
+</td>
+<td>
+A party who can be brought to rights, legally and financially, for any imbalance between energy sold and produced for all associated metering points.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDX</code>
+</td>
+<td>
+Imbalance settlement responsible party
+</td>
+<td>
+A party that is responsible for settlement of the difference between planned and realised quantities.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDY</code>
+</td>
+<td>
+Transmission capacity allocator
+</td>
+<td>
+A party managing the allocation of transmission capacity.
+</td>
+</tr>
+<tr>
+<td>
+<code>DDZ</code>
+</td>
+<td>
+Metering point administrator
+</td>
+<td>
+A party responsible for registering the technical specifications of metering points and the parties linked to them.
+</td>
+</tr>
+<tr>
+<td>
+<code>DE</code>
+</td>
+<td>
+Depositor
+</td>
+<td>
+Party depositing goods, financial payments or documents.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEA</code>
+</td>
+<td>
+Metered data aggregator
+</td>
+<td>
+A party responsible for aggregation of metered data.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEB</code>
+</td>
+<td>
+Meter operator
+</td>
+<td>
+A party responsible for the operation of a meter, including installing  maintaining, testing, certifying and decommissioning.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEC</code>
+</td>
+<td>
+Party connected to grid
+</td>
+<td>
+A party that contracts for the right to consume or produce electricity at a metering point.
+</td>
+</tr>
+<tr>
+<td>
+<code>DED</code>
+</td>
+<td>
+Profile maintenance party
+</td>
+<td>
+A party that maintains profiles.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEE</code>
+</td>
+<td>
+Stowaway
+</td>
+<td>
+A person who hides on a conveyance in order to obtain free passage.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEF</code>
+</td>
+<td>
+Meat cutter
+</td>
+<td>
+Person whose job is to cut up and/or mince meat.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEG</code>
+</td>
+<td>
+Consortium Carrier (maritime)
+</td>
+<td>
+A marine carrier that transports goods for more than one shipping line between named points.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEH</code>
+</td>
+<td>
+Non-vessel operating carrier
+</td>
+<td>
+A carrier that does not operate the vessel.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEI</code>
+</td>
+<td>
+Means of transport operator
+</td>
+<td>
+The operator of a means of transport, e.g. the captain of a vessel.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEJ</code>
+</td>
+<td>
+Stuffing address
+</td>
+<td>
+Address where cargo is loaded into the transport equipment e.g. container. Synonyms; vanning address / place of vanning.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEK</code>
+</td>
+<td>
+Mooring service provider
+</td>
+<td>
+Party responsible for mooring the vessel at the berth in the port. Synonym: Boatmen.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEL</code>
+</td>
+<td>
+Pilotage service provider
+</td>
+<td>
+Party responsible for the pilotage of the vessel.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEM</code>
+</td>
+<td>
+Berth towage service provider
+</td>
+<td>
+Party responsible for towing the vessel to/from the berth in the port.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEN</code>
+</td>
+<td>
+Agent/representative, direct representation
+</td>
+<td>
+Party authorised to act in the name and on behalf of another person.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEO</code>
+</td>
+<td>
+Agent/representative, indirect representation
+</td>
+<td>
+Party authorised to act in its own name but on behalf of another person.
+</td>
+</tr>
+<tr>
+<td>
+<code>DEP</code>
+</td>
+<td>
+Stevedore
+</td>
+<td>
+A party which handles the loading and unloading of marine vessels from several terminals. +    DEQ   Shipper Party responsible for the shipment of goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>DF</code>
+</td>
+<td>
+Documentary credit applicant
+</td>
+<td>
+Party at whose request the applicant's bank/issuing bank is to issue a documentary credit.
+</td>
+</tr>
+<tr>
+<td>
+<code>DG</code>
+</td>
+<td>
+Documentary credit beneficiary
+</td>
+<td>
+Party in whose favour the documentary credit is to be issued and the party that must comply with the credit's terms and conditions.
+</td>
+</tr>
+<tr>
+<td>
+<code>DH</code>
+</td>
+<td>
+Documentary credit account party
+</td>
+<td>
+Party which is responsible for the payment settlement of the documentary credit with the applicant's bank/issuing bank, if different from the documentary credit applicant.
+</td>
+</tr>
+<tr>
+<td>
+<code>DI</code>
+</td>
+<td>
+Documentary credit second beneficiary
+</td>
+<td>
+Party to whom the documentary credit can be transferred.
+</td>
+</tr>
+<tr>
+<td>
+<code>DJ</code>
+</td>
+<td>
+Party according to documentary credit transaction
+</td>
+<td>
+Party related to documentary credit transaction.
+</td>
+</tr>
+<tr>
+<td>
+<code>DK</code>
+</td>
+<td>
+Documentary credit beneficiary's bank
+</td>
+<td>
+Financial institution with which the beneficiary of the documentary credit maintains an account.
+</td>
+</tr>
+<tr>
+<td>
+<code>DL</code>
+</td>
+<td>
+Factor
+</td>
+<td>
+Company offering a financial service whereby a firm sells or transfers title to its accounts receivable to the factoring company.
+</td>
+</tr>
+<tr>
+<td>
+<code>DM</code>
+</td>
+<td>
+Party to whom documents are to be presented
+</td>
+<td>
+Party to whom documents are to be presented.
+</td>
+</tr>
+<tr>
+<td>
+<code>DN</code>
+</td>
+<td>
+Owner of operation
+</td>
+<td>
+Owner of the operation.
+</td>
+</tr>
+<tr>
+<td>
+<code>DO</code>
+</td>
+<td>
+Document recipient
+</td>
+<td>
+[1370] Party which should receive a specified document.
+</td>
+</tr>
+<tr>
+<td>
+<code>DP</code>
+</td>
+<td>
+Delivery party
+</td>
+<td>
+[3144] Party to which goods should be delivered, if not identical with consignee, such as the place where a container is to be, or has been, positioned.
+</td>
+</tr>
+<tr>
+<td>
+<code>DQ</code>
+</td>
+<td>
+Owner's agent
+</td>
+<td>
+Person acting on delegation of powers of the owner.
+</td>
+</tr>
+<tr>
+<td>
+<code>DR</code>
+</td>
+<td>
+Driver
+</td>
+<td>
+Person who drives a means of transport.
+</td>
+</tr>
+<tr>
+<td>
+<code>DS</code>
+</td>
+<td>
+Distributor
+</td>
+<td>
+Party distributing goods, financial payments or documents.
+</td>
+</tr>
+<tr>
+<td>
+<code>DT</code>
+</td>
+<td>
+Declarant
+</td>
+<td>
+[3140] Party which makes a declaration to an official body or - where legally permitted - in whose name, or on whose behalf, a declaration to an official body is made.
+</td>
+</tr>
+<tr>
+<td>
+<code>DU</code>
+</td>
+<td>
+Owner's representative
+</td>
+<td>
+Person commissioned by the owner to represent him in certain circumstances.
+</td>
+</tr>
+<tr>
+<td>
+<code>DV</code>
+</td>
+<td>
+Project management office
+</td>
+<td>
+Party commissioned by the owner to follow through the execution of all works.
+</td>
+</tr>
+<tr>
+<td>
+<code>DW</code>
+</td>
+<td>
+Drawee
+</td>
+<td>
+Party on whom drafts must be drawn.
+</td>
+</tr>
+<tr>
+<td>
+<code>DX</code>
+</td>
+<td>
+Engineer (construction)
+</td>
+<td>
+Party representing the contractor to advise and supervise engineering aspects of the works.
+</td>
+</tr>
+<tr>
+<td>
+<code>DY</code>
+</td>
+<td>
+Engineer, resident (construction)
+</td>
+<td>
+Party commissioned by the owner to advise and supervise engineering aspects of the works.
+</td>
+</tr>
+<tr>
+<td>
+<code>DZ</code>
+</td>
+<td>
+Architect
+</td>
+<td>
+A designer who prepares plans for buildings, ships, etc. and supervises their construction.
+</td>
+</tr>
+<tr>
+<td>
+<code>EA</code>
+</td>
+<td>
+Architect-designer
+</td>
+<td>
+Designer of the construction project.
+</td>
+</tr>
+<tr>
+<td>
+<code>EB</code>
+</td>
+<td>
+Building inspectorate
+</td>
+<td>
+Party controlling the conformity of works to legal and regulation rules.
+</td>
+</tr>
+<tr>
+<td>
+<code>EC</code>
+</td>
+<td>
+Exchanger
+</td>
+<td>
+Party exchanging currencies or goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>ED</code>
+</td>
+<td>
+Engineer, consultant
+</td>
+<td>
+Party providing professional engineering services.
+</td>
+</tr>
+<tr>
+<td>
+<code>EE</code>
+</td>
+<td>
+Location of goods for customs examination before clearance
+</td>
+<td>
+The location where the goods are examined by customs before clearance.
+</td>
+</tr>
+<tr>
+<td>
+<code>EF</code>
+</td>
+<td>
+Project coordination office
+</td>
+<td>
+Party responsible for technical coordination of works.
+</td>
+</tr>
+<tr>
+<td>
+<code>EG</code>
+</td>
+<td>
+Surveyor, topographical
+</td>
+<td>
+Party responsible for topographical measurements.
+</td>
+</tr>
+<tr>
+<td>
+<code>EH</code>
+</td>
+<td>
+Engineer, measurement
+</td>
+<td>
+Party responsible for quantity measurements.
+</td>
+</tr>
+<tr>
+<td>
+<code>EI</code>
+</td>
+<td>
+Controller, quality
+</td>
+<td>
+Party controlling the quality of goods and workmanship for the project.
+</td>
+</tr>
+<tr>
+<td>
+<code>EJ</code>
+</td>
+<td>
+Surveyor, quantity
+</td>
+<td>
+Party responsible for the quantification and valuation of the works on behalf of the contractor.
+</td>
+</tr>
+<tr>
+<td>
+<code>EK</code>
+</td>
+<td>
+Surveyor (professional), quantity
+</td>
+<td>
+Party responsible to the owner for the quantification and valuation of the works.
+</td>
+</tr>
+<tr>
+<td>
+<code>EL</code>
+</td>
+<td>
+Project
+</td>
+<td>
+Party responsible for a project, e.g. a construction project.
+</td>
+</tr>
+<tr>
+<td>
+<code>EM</code>
+</td>
+<td>
+Party to receive electronic memo of invoice
+</td>
+<td>
+Party being informed about invoice issue (via EDI).
+</td>
+</tr>
+<tr>
+<td>
+<code>EN</code>
+</td>
+<td>
+Tenderer
+</td>
+<td>
+Firm answering an invitation to tender.
+</td>
+</tr>
+<tr>
+<td>
+<code>EO</code>
+</td>
+<td>
+Owner of equipment
+</td>
+<td>
+Party who owns equipment.
+</td>
+</tr>
+<tr>
+<td>
+<code>EP</code>
+</td>
+<td>
+Equipment drop-off party
+</td>
+<td>
+The party which drops off equipment.
+</td>
+</tr>
+<tr>
+<td>
+<code>EQ</code>
+</td>
+<td>
+Empty container responsible party
+</td>
+<td>
+Party responsible for the empty container.
+</td>
+</tr>
+<tr>
+<td>
+<code>ER</code>
+</td>
+<td>
+Empty container return agent
+</td>
+<td>
+Party, designated by owner of containers, responsible for their collection as agreed between the owner and customer/ consignee.
+</td>
+</tr>
+<tr>
+<td>
+<code>ES</code>
+</td>
+<td>
+Contractor, lead
+</td>
+<td>
+Leader representing a grouping of co-contractors.
+</td>
+</tr>
+<tr>
+<td>
+<code>ET</code>
+</td>
+<td>
+Co-contractor
+</td>
+<td>
+Member of a grouping of co-contractors.
+</td>
+</tr>
+<tr>
+<td>
+<code>EU</code>
+</td>
+<td>
+Contractor, general
+</td>
+<td>
+Single contractor for the whole construction project, working by his own or with subcontractors.
+</td>
+</tr>
+<tr>
+<td>
+<code>EV</code>
+</td>
+<td>
+Subcontractor
+</td>
+<td>
+Firm carrying out a part of the works for a contractor.
+</td>
+</tr>
+<tr>
+<td>
+<code>EW</code>
+</td>
+<td>
+Subcontractor with direct payment
+</td>
+<td>
+Subcontractor benefiting from direct payments.
+</td>
+</tr>
+<tr>
+<td>
+<code>EX</code>
+</td>
+<td>
+Exporter
+</td>
+<td>
+[3030] Party who makes, or on whose behalf the export declaration is made, and who is the owner of the goods or has similar rights of disposal over them at the time when the declaration is accepted.
+</td>
+</tr>
+<tr>
+<td>
+<code>EY</code>
+</td>
+<td>
+Subcontractor, nominated
+</td>
+<td>
+Subcontractor authorized by the owner after having been proposed.
+</td>
+</tr>
+<tr>
+<td>
+<code>EZ</code>
+</td>
+<td>
+Operator, essential services
+</td>
+<td>
+Operator of essential services e.g. water, sewerage system, power.
+</td>
+</tr>
+<tr>
+<td>
+<code>FA</code>
+</td>
+<td>
+Operator, communication channel
+</td>
+<td>
+Operator of a communication channel.
+</td>
+</tr>
+<tr>
+<td>
+<code>FB</code>
+</td>
+<td>
+Nominated freight company
+</td>
+<td>
+Party nominated to act as transport company or carrier for the goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>FC</code>
+</td>
+<td>
+Contractor, main
+</td>
+<td>
+Firm or grouping of co-contractors which has been awarded the contract.
+</td>
+</tr>
+<tr>
+<td>
+<code>FD</code>
+</td>
+<td>
+Buyer's parent company
+</td>
+<td>
+Parent company, e.g. holding company.
+</td>
+</tr>
+<tr>
+<td>
+<code>FE</code>
+</td>
+<td>
+Credit rating agency
+</td>
+<td>
+A party which evaluates another party for credit rating.
+</td>
+</tr>
+<tr>
+<td>
+<code>FF</code>
+</td>
+<td>
+Factor, correspondent
+</td>
+<td>
+Factoring company engaged by another factoring company to assist the letter with the services provided to the clients (sellers).
+</td>
+</tr>
+<tr>
+<td>
+<code>FG</code>
+</td>
+<td>
+Buyer as officially registered
+</td>
+<td>
+Buying party as officially registered with government.
+</td>
+</tr>
+<tr>
+<td>
+<code>FH</code>
+</td>
+<td>
+Seller as officially registered
+</td>
+<td>
+Selling party as officially registered with government.
+</td>
+</tr>
+<tr>
+<td>
+<code>FI</code>
+</td>
+<td>
+Copy message to
+</td>
+<td>
+Party that is to receive a copy of a message.
+</td>
+</tr>
+<tr>
+<td>
+<code>FJ</code>
+</td>
+<td>
+Trade Union
+</td>
+<td>
+Organisation representing employees.
+</td>
+</tr>
+<tr>
+<td>
+<code>FK</code>
+</td>
+<td>
+Previous Trade Union
+</td>
+<td>
+Employee organisation who previously represented an employee .
+</td>
+</tr>
+<tr>
+<td>
+<code>FL</code>
+</td>
+<td>
+Passenger
+</td>
+<td>
+A person conveyed by a means of transport, other than the crew.
+</td>
+</tr>
+<tr>
+<td>
+<code>FM</code>
+</td>
+<td>
+Crew member
+</td>
+<td>
+A person manning a means of transport.
+</td>
+</tr>
+<tr>
+<td>
+<code>FN</code>
+</td>
+<td>
+Tariff issuer
+</td>
+<td>
+The issuer of a tariff, e.g. a freight tariff.
+</td>
+</tr>
+<tr>
+<td>
+<code>FO</code>
+</td>
+<td>
+Party performing inspection
+</td>
+<td>
+A party which inspects something.
+</td>
+</tr>
+<tr>
+<td>
+<code>FP</code>
+</td>
+<td>
+Freight/charges payer
+</td>
+<td>
+Party responsible for the payment of freight.
+</td>
+</tr>
+<tr>
+<td>
+<code>FQ</code>
+</td>
+<td>
+Container survey agent
+</td>
+<td>
+The container survey agency that will survey the containers.
+</td>
+</tr>
+<tr>
+<td>
+<code>FR</code>
+</td>
+<td>
+Message from
+</td>
+<td>
+Party where the message comes from.
+</td>
+</tr>
+<tr>
+<td>
+<code>FS</code>
+</td>
+<td>
+Party authorized to make definite a contract action
+</td>
+<td>
+Party who has the authority to make definite a contract action.
+</td>
+</tr>
+<tr>
+<td>
+<code>FT</code>
+</td>
+<td>
+Financial settlement party
+</td>
+<td>
+[3450] Party responsible for either the transfer or repatriation of the funds relating to a transaction.
+</td>
+</tr>
+<tr>
+<td>
+<code>FU</code>
+</td>
+<td>
+Hazardous material office
+</td>
+<td>
+The office responsible for providing information regarding hazardous material.
+</td>
+</tr>
+<tr>
+<td>
+<code>FV</code>
+</td>
+<td>
+Party providing government furnished property
+</td>
+<td>
+The party responsible for providing government furnished property.
+</td>
+</tr>
+<tr>
+<td>
+<code>FW</code>
+</td>
+<td>
+Freight forwarder
+</td>
+<td>
+Party arranging forwarding of goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>FX</code>
+</td>
+<td>
+Current receiver
+</td>
+<td>
+Current receiver of the goods in a multi-step transportation process (indirect flow) involving at least one grouping centre.
+</td>
+</tr>
+<tr>
+<td>
+<code>FY</code>
+</td>
+<td>
+Current sender
+</td>
+<td>
+Current sender of the goods in a multi-step transportation process (indirect flow) involving at least one grouping centre.
+</td>
+</tr>
+<tr>
+<td>
+<code>FZ</code>
+</td>
+<td>
+Grouping centre
+</td>
+<td>
+A party in charge of groupage, including degroupage and regroupage.
+</td>
+</tr>
+<tr>
+<td>
+<code>GA</code>
+</td>
+<td>
+Road carrier
+</td>
+<td>
+A road carrier moving cargo.
+</td>
+</tr>
+<tr>
+<td>
+<code>GB</code>
+</td>
+<td>
+Chamber of commerce
+</td>
+<td>
+Name of the Chamber of Commerce of the town where the company is registered.
+</td>
+</tr>
+<tr>
+<td>
+<code>GC</code>
+</td>
+<td>
+Goods custodian
+</td>
+<td>
+[3024] Party responsible for the keeping of goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>GD</code>
+</td>
+<td>
+Producer
+</td>
+<td>
+Party or person who has produced the produce.
+</td>
+</tr>
+<tr>
+<td>
+<code>GE</code>
+</td>
+<td>
+Registration tribunal
+</td>
+<td>
+Name of the tribunal where the company is registered.
+</td>
+</tr>
+<tr>
+<td>
+<code>GF</code>
+</td>
+<td>
+Slot charter party
+</td>
+<td>
+An identification code of a participant or user that books slots (space) on a ship, more likely on a long term basis on a series of sailings. He pays for the space whether he uses it or not.
+</td>
+</tr>
+<tr>
+<td>
+<code>GH</code>
+</td>
+<td>
+Applicant for job
+</td>
+<td>
+A person who applied for a job.
+</td>
+</tr>
+<tr>
+<td>
+<code>GI</code>
+</td>
+<td>
+Spouse
+</td>
+<td>
+Person is a spouse.
+</td>
+</tr>
+<tr>
+<td>
+<code>GJ</code>
+</td>
+<td>
+Mother
+</td>
+<td>
+Person is a mother.
+</td>
+</tr>
+<tr>
+<td>
+<code>GK</code>
+</td>
+<td>
+Father
+</td>
+<td>
+Person is a father.
+</td>
+</tr>
+<tr>
+<td>
+<code>GL</code>
+</td>
+<td>
+Socially insured person
+</td>
+<td>
+A person who is registered in a social security scheme.
+</td>
+</tr>
+<tr>
+<td>
+<code>GM</code>
+</td>
+<td>
+Inventory controller
+</td>
+<td>
+To specifically identify the party in charge of inventory control.
+</td>
+</tr>
+<tr>
+<td>
+<code>GN</code>
+</td>
+<td>
+Processor
+</td>
+<td>
+Party or person who has or will apply a process.
+</td>
+</tr>
+<tr>
+<td>
+<code>GO</code>
+</td>
+<td>
+Goods owner
+</td>
+<td>
+The party which owns the goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>GP</code>
+</td>
+<td>
+Packer
+</td>
+<td>
+Party or person who has undertaken or will undertake packing.
+</td>
+</tr>
+<tr>
+<td>
+<code>GQ</code>
+</td>
+<td>
+Slaughterer
+</td>
+<td>
+Party or person who has undertaken or will undertake a slaughter.
+</td>
+</tr>
+<tr>
+<td>
+<code>GR</code>
+</td>
+<td>
+Goods releasing party
+</td>
+<td>
+[3026] Party entitled to authorize release of goods from custodian.
+</td>
+</tr>
+<tr>
+<td>
+<code>GS</code>
+</td>
+<td>
+Consignor's representative
+</td>
+<td>
+Party authorised to represent the consignor.
+</td>
+</tr>
+<tr>
+<td>
+<code>GT</code>
+</td>
+<td>
+Rail carrier
+</td>
+<td>
+A carrier moving cargo, including containers, via rail.
+</td>
+</tr>
+<tr>
+<td>
+<code>GU</code>
+</td>
+<td>
+Originator of article number
+</td>
+<td>
+A code identifying the party which created a specific article number.
+</td>
+</tr>
+<tr>
+<td>
+<code>GV</code>
+</td>
+<td>
+Procurement responsibility for order
+</td>
+<td>
+A code used to identify the organization which is responsible for the procurement.
+</td>
+</tr>
+<tr>
+<td>
+<code>GW</code>
+</td>
+<td>
+Party fulfilling all operations
+</td>
+<td>
+Code indicating the fact that the party identified carries out all operations within that company's activities.
+</td>
+</tr>
+<tr>
+<td>
+<code>GX</code>
+</td>
+<td>
+Central catalogue party
+</td>
+<td>
+Party controlling a central catalogue.
+</td>
+</tr>
+<tr>
+<td>
+<code>GY</code>
+</td>
+<td>
+Inventory reporting party
+</td>
+<td>
+Party reporting inventory information.
+</td>
+</tr>
+<tr>
+<td>
+<code>GZ</code>
+</td>
+<td>
+Substitute supplier
+</td>
+<td>
+Party which may be in a position to supply products or services should the main usual supplier be unable to do so.
+</td>
+</tr>
+<tr>
+<td>
+<code>HA</code>
+</td>
+<td>
+Party which delivers consignments to the terminal
+</td>
+<td>
+Party which delivers consignments to a terminal.
+</td>
+</tr>
+<tr>
+<td>
+<code>HB</code>
+</td>
+<td>
+Party which picks up consignments from the terminal
+</td>
+<td>
+Party which picks up consignments from a terminal.
+</td>
+</tr>
+<tr>
+<td>
+<code>HC</code>
+</td>
+<td>
+Transit freight forwarder
+</td>
+<td>
+Freight forwarder to whom transit consignments are addressed, and from whom they are to be on-forwarded.
+</td>
+</tr>
+<tr>
+<td>
+<code>HD</code>
+</td>
+<td>
+Inspection and acceptance party
+</td>
+<td>
+The party who will perform inspection and acceptance.
+</td>
+</tr>
+<tr>
+<td>
+<code>HE</code>
+</td>
+<td>
+Transportation office
+</td>
+<td>
+The office that provides transportation information.
+</td>
+</tr>
+<tr>
+<td>
+<code>HF</code>
+</td>
+<td>
+Contract administration office
+</td>
+<td>
+The office responsible for the administration of a contract.
+</td>
+</tr>
+<tr>
+<td>
+<code>HG</code>
+</td>
+<td>
+Investigator
+</td>
+<td>
+A party who conducts investigations.
+</td>
+</tr>
+<tr>
+<td>
+<code>HH</code>
+</td>
+<td>
+Audit office
+</td>
+<td>
+The office responsible for conducting audits.
+</td>
+</tr>
+<tr>
+<td>
+<code>HI</code>
+</td>
+<td>
+Requestor
+</td>
+<td>
+The party requesting an action.
+</td>
+</tr>
+<tr>
+<td>
+<code>HJ</code>
+</td>
+<td>
+Foreign disclosure information office
+</td>
+<td>
+The office that reviews sensitive information for foreign disclosure.
+</td>
+</tr>
+<tr>
+<td>
+<code>HK</code>
+</td>
+<td>
+Mark-for party
+</td>
+<td>
+The party within an organization for whom the material is marked to be delivered.
+</td>
+</tr>
+<tr>
+<td>
+<code>HL</code>
+</td>
+<td>
+Party to receive reports
+</td>
+<td>
+The party to whom reports are to be submitted.
+</td>
+</tr>
+<tr>
+<td>
+<code>HM</code>
+</td>
+<td>
+Alternative manufacturer
+</td>
+<td>
+Party identification of an alternative manufacturer for a product.
+</td>
+</tr>
+<tr>
+<td>
+<code>HN</code>
+</td>
+<td>
+Service performer
+</td>
+<td>
+The party who is performing a service.
+</td>
+</tr>
+<tr>
+<td>
+<code>HO</code>
+</td>
+<td>
+Shipper's association
+</td>
+<td>
+An association of shippers.
+</td>
+</tr>
+<tr>
+<td>
+<code>HP</code>
+</td>
+<td>
+Final message recipient
+</td>
+<td>
+To identify the final recipient of the message.
+</td>
+</tr>
+<tr>
+<td>
+<code>HQ</code>
+</td>
+<td>
+Account owner
+</td>
+<td>
+Identifies the owner of the account.
+</td>
+</tr>
+<tr>
+<td>
+<code>HR</code>
+</td>
+<td>
+Shipping line service
+</td>
+<td>
+Identifies the shipping line service organization.
+</td>
+</tr>
+<tr>
+<td>
+<code>HS</code>
+</td>
+<td>
+Creditor
+</td>
+<td>
+Party to whom payment is due.
+</td>
+</tr>
+<tr>
+<td>
+<code>HT</code>
+</td>
+<td>
+Clearing house
+</td>
+<td>
+Institution through which funds will be paid.
+</td>
+</tr>
+<tr>
+<td>
+<code>HU</code>
+</td>
+<td>
+Ordering bank
+</td>
+<td>
+Bank which instructed the sender to act on the transaction(s).
+</td>
+</tr>
+<tr>
+<td>
+<code>HV</code>
+</td>
+<td>
+Receiver of funds
+</td>
+<td>
+Identifies the financial party that receives the funds.
+</td>
+</tr>
+<tr>
+<td>
+<code>HW</code>
+</td>
+<td>
+Sender of funds
+</td>
+<td>
+Identifies the party that sends the funds.
+</td>
+</tr>
+<tr>
+<td>
+<code>HX</code>
+</td>
+<td>
+Debtor
+</td>
+<td>
+Party from whom payment is due.
+</td>
+</tr>
+<tr>
+<td>
+<code>HY</code>
+</td>
+<td>
+Presenting bank
+</td>
+<td>
+The bank which presents documents to the drawee.
+</td>
+</tr>
+<tr>
+<td>
+<code>HZ</code>
+</td>
+<td>
+Work team
+</td>
+<td>
+Team responsible for performing work.
+</td>
+</tr>
+<tr>
+<td>
+<code>I1</code>
+</td>
+<td>
+Intermediary bank 1
+</td>
+<td>
+A financial institution between the ordered bank and the beneficiary's bank.
+</td>
+</tr>
+<tr>
+<td>
+<code>I2</code>
+</td>
+<td>
+Intermediary bank 2
+</td>
+<td>
+A financial institution between the ordered bank and the beneficiary's bank.
+</td>
+</tr>
+<tr>
+<td>
+<code>IB</code>
+</td>
+<td>
+Intermediary/broker
+</td>
+<td>
+A person intervening between parties to produce agreement or reconciliation.
+</td>
+</tr>
+<tr>
+<td>
+<code>IC</code>
+</td>
+<td>
+Intermediate consignee
+</td>
+<td>
+The intermediate consignee.
+</td>
+</tr>
+<tr>
+<td>
+<code>ID</code>
+</td>
+<td>
+Replacing manufacturer
+</td>
+<td>
+A code used to identify a party who replaces the previous party for the manufacture of an article.
+</td>
+</tr>
+<tr>
+<td>
+<code>IE</code>
+</td>
+<td>
+Non-resident third party company with whom financial
+</td>
+<td>
+account is held Identifies the non-resident third party company with whom the financial account is held.
+</td>
+</tr>
+<tr>
+<td>
+<code>IF</code>
+</td>
+<td>
+Non-resident group company with whom financial account is
+</td>
+<td>
+held Identifies the non-resident group company with whom the financial account is held.
+</td>
+</tr>
+<tr>
+<td>
+<code>IG</code>
+</td>
+<td>
+Non-resident beneficiary
+</td>
+<td>
+The ultimate non-resident recipient of the funds. Normally the account owner who is reimbursed by the payer.
+</td>
+</tr>
+<tr>
+<td>
+<code>IH</code>
+</td>
+<td>
+Resident beneficiary
+</td>
+<td>
+The ultimate resident recipient of the funds. Normally the account owner who is reimbursed by the payer.
+</td>
+</tr>
+<tr>
+<td>
+<code>II</code>
+</td>
+<td>
+Invoice issuer
+</td>
+<td>
+[3028] Party issuing an invoice.
+</td>
+</tr>
+<tr>
+<td>
+<code>IJ</code>
+</td>
+<td>
+Non-resident instructing party
+</td>
+<td>
+Identifies the non-resident party originating the instruction.
+</td>
+</tr>
+<tr>
+<td>
+<code>IL</code>
+</td>
+<td>
+Resident instructing party
+</td>
+<td>
+Identifies the resident party originating the instruction.
+</td>
+</tr>
+<tr>
+<td>
+<code>IM</code>
+</td>
+<td>
+Importer
+</td>
+<td>
+[3020] Party who makes - or on whose behalf a Customs clearing agent or other authorized person makes - an import declaration. This may include a person who has possession of the goods or to whom the goods are consigned.
+</td>
+</tr>
+<tr>
+<td>
+<code>IN</code>
+</td>
+<td>
+Insurer
+</td>
+<td>
+A person or company offering insurance policies for premiums.
+</td>
+</tr>
+<tr>
+<td>
+<code>IO</code>
+</td>
+<td>
+Insurance company
+</td>
+<td>
+A company engaged in the business of insurance.
+</td>
+</tr>
+<tr>
+<td>
+<code>IP</code>
+</td>
+<td>
+Insurance claim adjuster
+</td>
+<td>
+A party which adjusts losses on behalf of an insurer.
+</td>
+</tr>
+<tr>
+<td>
+<code>IQ</code>
+</td>
+<td>
+Domestic financial institution
+</td>
+<td>
+Domestic party acting as financial institution.
+</td>
+</tr>
+<tr>
+<td>
+<code>IR</code>
+</td>
+<td>
+Non-domestic financial institution
+</td>
+<td>
+Non-domestic party acting as financial institution.
+</td>
+</tr>
+<tr>
+<td>
+<code>IS</code>
+</td>
+<td>
+Party to receive certified inspection report
+</td>
+<td>
+Party (at buyer) to receive certified inspection report.
+</td>
+</tr>
+<tr>
+<td>
+<code>IT</code>
+</td>
+<td>
+Installation on site
+</td>
+<td>
+A party who possesses the site on which an installation shall be made.
+</td>
+</tr>
+<tr>
+<td>
+<code>IU</code>
+</td>
+<td>
+Non-resident debtor
+</td>
+<td>
+Non-resident party who makes the payment or against whom a claim exists.
+</td>
+</tr>
+<tr>
+<td>
+<code>IV</code>
+</td>
+<td>
+Invoicee
+</td>
+<td>
+[3006] Party to whom an invoice is issued.
+</td>
+</tr>
+<tr>
+<td>
+<code>IW</code>
+</td>
+<td>
+Non-resident creditor
+</td>
+<td>
+Non-resident party receiving the payment or against whom a liability exists.
+</td>
+</tr>
+<tr>
+<td>
+<code>IX</code>
+</td>
+<td>
+Supplier work team
+</td>
+<td>
+The supplier's team responsible for performing the work.
+</td>
+</tr>
+<tr>
+<td>
+<code>IY</code>
+</td>
+<td>
+Tenant manager
+</td>
+<td>
+A code to identify the party who rents the rights to use the goodwill and facilities of an enterprise.
+</td>
+</tr>
+<tr>
+<td>
+<code>IZ</code>
+</td>
+<td>
+Party mandated to liquidate an enterprise
+</td>
+<td>
+A code to identify the party who has been legally mandated to sell off an enterprise.
+</td>
+</tr>
+<tr>
+<td>
+<code>JA</code>
+</td>
+<td>
+Certified accountant
+</td>
+<td>
+Code identifying the party as a certified accountant.
+</td>
+</tr>
+<tr>
+<td>
+<code>JB</code>
+</td>
+<td>
+Goods collection party
+</td>
+<td>
+Party that will collect or has collected the goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>JC</code>
+</td>
+<td>
+Party at final place of positioning
+</td>
+<td>
+Identifies the party at the final place of positioning.
+</td>
+</tr>
+<tr>
+<td>
+<code>JD</code>
+</td>
+<td>
+Customs office of clearance
+</td>
+<td>
+Identifies the office where customs clearance procedures take place.
+</td>
+</tr>
+<tr>
+<td>
+<code>JE</code>
+</td>
+<td>
+Party from whom customs documents are to be picked up
+</td>
+<td>
+Identification of the party from whom customs documents are to be picked up.
+</td>
+</tr>
+<tr>
+<td>
+<code>JF</code>
+</td>
+<td>
+Party from whom non-customs documents are to be picked up
+</td>
+<td>
+Identification of the party from whom non-customs documents are to be picked up.
+</td>
+</tr>
+<tr>
+<td>
+<code>JG</code>
+</td>
+<td>
+Party to receive customs documents
+</td>
+<td>
+Identification of the party to whom customs documents are to be delivered.
+</td>
+</tr>
+<tr>
+<td>
+<code>JH</code>
+</td>
+<td>
+Party to receive non-customs documents
+</td>
+<td>
+Identification of the party to whom non-customs documents are to be delivered.
+</td>
+</tr>
+<tr>
+<td>
+<code>LA</code>
+</td>
+<td>
+Party designated to provide living animal care
+</td>
+<td>
+Party responsible to take care of transported living animals.
+</td>
+</tr>
+<tr>
+<td>
+<code>LB</code>
+</td>
+<td>
+Co-producer
+</td>
+<td>
+A code used to identify a party who participates in production.
+</td>
+</tr>
+<tr>
+<td>
+<code>LC</code>
+</td>
+<td>
+Party declaring the Value Added Tax (VAT)
+</td>
+<td>
+A code to identify the party who is responsible for declaring the Value Added Tax (VAT) on the sale of goods or services.
+</td>
+</tr>
+<tr>
+<td>
+<code>LD</code>
+</td>
+<td>
+Party recovering the Value Added Tax (VAT)
+</td>
+<td>
+A code to identify the party who is eligible to recover the Value Added Tax (VAT) on the sale of goods or services.
+</td>
+</tr>
+<tr>
+<td>
+<code>LE</code>
+</td>
+<td>
+Person on claim
+</td>
+<td>
+To identify the person who is the subject of the claim.
+</td>
+</tr>
+<tr>
+<td>
+<code>LF</code>
+</td>
+<td>
+Buyer's corporate office
+</td>
+<td>
+The identification of the buyer's corporate office.
+</td>
+</tr>
+<tr>
+<td>
+<code>LG</code>
+</td>
+<td>
+Supplier's corporate office
+</td>
+<td>
+The identification of the supplier's corporate office.
+</td>
+</tr>
+<tr>
+<td>
+<code>LH</code>
+</td>
+<td>
+Liquidator
+</td>
+<td>
+The party responsible for settling or paying a debt.
+</td>
+</tr>
+<tr>
+<td>
+<code>LI</code>
+</td>
+<td>
+Account coordinator
+</td>
+<td>
+An individual with coordination responsibilities for a specific account.
+</td>
+</tr>
+<tr>
+<td>
+<code>LJ</code>
+</td>
+<td>
+Inspection leader
+</td>
+<td>
+An individual responsible for an inspection team.
+</td>
+</tr>
+<tr>
+<td>
+<code>LK</code>
+</td>
+<td>
+Patient
+</td>
+<td>
+A person receiving or registered to receive medical treatment.
+</td>
+</tr>
+<tr>
+<td>
+<code>LL</code>
+</td>
+<td>
+Patient companion
+</td>
+<td>
+Person accompanying the patient.
+</td>
+</tr>
+<tr>
+<td>
+<code>LM</code>
+</td>
+<td>
+Medical treatment executant
+</td>
+<td>
+The party who executes a medical treatment.
+</td>
+</tr>
+<tr>
+<td>
+<code>LN</code>
+</td>
+<td>
+Lender
+</td>
+<td>
+Party lending goods or equipment.
+</td>
+</tr>
+<tr>
+<td>
+<code>LO</code>
+</td>
+<td>
+Medical treatment prescriber
+</td>
+<td>
+The party who prescribes a medical treatment.
+</td>
+</tr>
+<tr>
+<td>
+<code>LP</code>
+</td>
+<td>
+Loading party
+</td>
+<td>
+Party responsible for the loading when other than carrier.
+</td>
+</tr>
+<tr>
+<td>
+<code>LQ</code>
+</td>
+<td>
+Debt payment authorisation party
+</td>
+<td>
+A party which authorises the payment of a debt.
+</td>
+</tr>
+<tr>
+<td>
+<code>LR</code>
+</td>
+<td>
+Administration centre
+</td>
+<td>
+Identification of an administration centre.
+</td>
+</tr>
+<tr>
+<td>
+<code>LS</code>
+</td>
+<td>
+Product services and repairs centre
+</td>
+<td>
+A centre which services and repairs products.
+</td>
+</tr>
+<tr>
+<td>
+<code>LT</code>
+</td>
+<td>
+Secretariat
+</td>
+<td>
+Party is a secretariat.
+</td>
+</tr>
+<tr>
+<td>
+<code>LU</code>
+</td>
+<td>
+Entry point technical assessment group
+</td>
+<td>
+Party acts as an entry point for technical assessment.
+</td>
+</tr>
+<tr>
+<td>
+<code>LV</code>
+</td>
+<td>
+Party assigning a status
+</td>
+<td>
+Party responsible for assigning a status.
+</td>
+</tr>
+<tr>
+<td>
+<code>MA</code>
+</td>
+<td>
+Party for whom item is ultimately intended
+</td>
+<td>
+Party for whom item is ultimately intended.
+</td>
+</tr>
+<tr>
+<td>
+<code>MAD</code>
+</td>
+<td>
+Meter administrator
+</td>
+<td>
+A party responsible for keeping a register of meters and related characteristics.
+</td>
+</tr>
+<tr>
+<td>
+<code>MDR</code>
+</td>
+<td>
+Metered data responsible
+</td>
+<td>
+A party responsible for the establishment and validation of metered data received from the Metered Data Collector.
+</td>
+</tr>
+<tr>
+<td>
+<code>MF</code>
+</td>
+<td>
+Manufacturer of goods
+</td>
+<td>
+[3513] Party who manufactures the goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>MG</code>
+</td>
+<td>
+Party designated to execute re-icing
+</td>
+<td>
+Party designated to execute re-icing, selected in the official list of mandatories competent for this kind of operation.
+</td>
+</tr>
+<tr>
+<td>
+<code>MI</code>
+</td>
+<td>
+Planning schedule/material release issuer
+</td>
+<td>
+A party issuing a planning schedule/material release.
+</td>
+</tr>
+<tr>
+<td>
+<code>MP</code>
+</td>
+<td>
+Manufacturing unit
+</td>
+<td>
+A party acting as a particular production unit of a manufacturer.
+</td>
+</tr>
+<tr>
+<td>
+<code>MR</code>
+</td>
+<td>
+Message recipient
+</td>
+<td>
+A party to receive a message or messages.
+</td>
+</tr>
+<tr>
+<td>
+<code>MS</code>
+</td>
+<td>
+Document/message issuer/sender
+</td>
+<td>
+Issuer of a document and/or sender of a message.
+</td>
+</tr>
+<tr>
+<td>
+<code>MT</code>
+</td>
+<td>
+Party designated to execute sanitary procedures
+</td>
+<td>
+A party which is designated to execute sanitary procedures.
+</td>
+</tr>
+<tr>
+<td>
+<code>X</code>
+</td>
+<td>
+N1    Notify party no. 1
+</td>
+<td>
+The first party which is to be notified.
+</td>
+</tr>
+<tr>
+<td>
+<code>N2</code>
+</td>
+<td>
+Notify party no. 2
+</td>
+<td>
+The second party which is to be notified.
+</td>
+</tr>
+<tr>
+<td>
+<code>NI</code>
+</td>
+<td>
+Notify party
+</td>
+<td>
+[3180] Party to be notified. Synonym: Notify party No. 1.
+</td>
+</tr>
+<tr>
+<td>
+<code>OA</code>
+</td>
+<td>
+Break bulk berth operator
+</td>
+<td>
+Party who offers facilities for berthing of vessels, handling and storage of break bulk cargo.
+</td>
+</tr>
+<tr>
+<td>
+<code>OB</code>
+</td>
+<td>
+Ordered by
+</td>
+<td>
+Party who issued an order.
+</td>
+</tr>
+<tr>
+<td>
+<code>OC</code>
+</td>
+<td>
+Party data responsible party
+</td>
+<td>
+The party responsible for all party data.
+</td>
+</tr>
+<tr>
+<td>
+<code>OD</code>
+</td>
+<td>
+Equipment repair party
+</td>
+<td>
+A party making repairs to equipment.
+</td>
+</tr>
+<tr>
+<td>
+<code>OE</code>
+</td>
+<td>
+Owner of property
+</td>
+<td>
+Party owning a property.
+</td>
+</tr>
+<tr>
+<td>
+<code>OF</code>
+</td>
+<td>
+On behalf of
+</td>
+<td>
+Party on behalf of which an action is executed.
+</td>
+</tr>
+<tr>
+<td>
+<code>OG</code>
+</td>
+<td>
+Owner or lessor's surveyor
+</td>
+<td>
+Surveyor hired by the owner or lessor of the item.
+</td>
+</tr>
+<tr>
+<td>
+<code>OH</code>
+</td>
+<td>
+Lessee's surveyor
+</td>
+<td>
+Surveyor hired by the lessee of the item.
+</td>
+</tr>
+<tr>
+<td>
+<code>OI</code>
+</td>
+<td>
+Outside inspection agency
+</td>
+<td>
+Third party inspecting goods or equipment.
+</td>
+</tr>
+<tr>
+<td>
+<code>OJ</code>
+</td>
+<td>
+Third party
+</td>
+<td>
+Another party besides the two principals.
+</td>
+</tr>
+<tr>
+<td>
+<code>OK</code>
+</td>
+<td>
+Receiver's sub-entity
+</td>
+<td>
+Identifies a sub-entity within the receiver's organization.
+</td>
+</tr>
+<tr>
+<td>
+<code>OL</code>
+</td>
+<td>
+Case of need party
+</td>
+<td>
+Party to be approached in case of difficulty.
+</td>
+</tr>
+<tr>
+<td>
+<code>OM</code>
+</td>
+<td>
+Collecting bank
+</td>
+<td>
+Any bank, other than the remitting bank, involved in processing the collection.
+</td>
+</tr>
+<tr>
+<td>
+<code>ON</code>
+</td>
+<td>
+Remitting bank
+</td>
+<td>
+The bank to which the principal has entrusted the handling of a collection.
+</td>
+</tr>
+<tr>
+<td>
+<code>OO</code>
+</td>
+<td>
+Order of the shipper party
+</td>
+<td>
+The owner of goods under consignment which are moving under a negotiable transport document and will only be released upon receipt of the original transport document.
+</td>
+</tr>
+<tr>
+<td>
+<code>OP</code>
+</td>
+<td>
+Operator of property or equipment
+</td>
+<td>
+The party which operates property or a unit of equipment.
+</td>
+</tr>
+<tr>
+<td>
+<code>OQ</code>
+</td>
+<td>
+Collection principal
+</td>
+<td>
+The party entrusting the handling of a collection to a bank.
+</td>
+</tr>
+<tr>
+<td>
+<code>OR</code>
+</td>
+<td>
+Ordered bank
+</td>
+<td>
+Identifies the bank servicing the account for the ordering customer or payer.
+</td>
+</tr>
+<tr>
+<td>
+<code>OS</code>
+</td>
+<td>
+Original shipper
+</td>
+<td>
+The original supplier of the goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>OT</code>
+</td>
+<td>
+Outside test agency
+</td>
+<td>
+Third party testing goods, equipment or services.
+</td>
+</tr>
+<tr>
+<td>
+<code>OU</code>
+</td>
+<td>
+Account owner's servicing bank on the sending side
+</td>
+<td>
+Identifies the financial institution on the sending side which services the account owner's bank account(s).
+</td>
+</tr>
+<tr>
+<td>
+<code>OV</code>
+</td>
+<td>
+Transport means owner
+</td>
+<td>
+Party owning the means of transport. No synonym of carrier (= CA).
+</td>
+</tr>
+<tr>
+<td>
+<code>OW</code>
+</td>
+<td>
+Account owner's servicing bank on the receiving side
+</td>
+<td>
+Identifies the financial institution on the receiving side which services the account owner's bank account(s).
+</td>
+</tr>
+<tr>
+<td>
+<code>OX</code>
+</td>
+<td>
+Sender's correspondent bank
+</td>
+<td>
+The account, or branch of the sender, or another financial institution, through which the sender will reimburse the receiver.
+</td>
+</tr>
+<tr>
+<td>
+<code>OY</code>
+</td>
+<td>
+Ordering customer
+</td>
+<td>
+Identifies the originator of the instruction.
+</td>
+</tr>
+<tr>
+<td>
+<code>OZ</code>
+</td>
+<td>
+Receiver's correspondent bank
+</td>
+<td>
+The branch of the receiver, or another financial institution, at which the funds will be made available to the receiver.
+</td>
+</tr>
+<tr>
+<td>
+<code>P1</code>
+</td>
+<td>
+Contact party 1
+</td>
+<td>
+First party to contact.
+</td>
+</tr>
+<tr>
+<td>
+<code>P2</code>
+</td>
+<td>
+Contact party 2
+</td>
+<td>
+Second party to contact.
+</td>
+</tr>
+<tr>
+<td>
+<code>P3</code>
+</td>
+<td>
+Contact party 3
+</td>
+<td>
+Third party to contact.
+</td>
+</tr>
+<tr>
+<td>
+<code>P4</code>
+</td>
+<td>
+Contact party 4
+</td>
+<td>
+Fourth party to contact.
+</td>
+</tr>
+<tr>
+<td>
+<code>PA</code>
+</td>
+<td>
+Party to receive inspection report
+</td>
+<td>
+Party to whom the inspection report should be sent.
+</td>
+</tr>
+<tr>
+<td>
+<code>PB</code>
+</td>
+<td>
+Paying financial institution
+</td>
+<td>
+Financial institution designated to make payment.
+</td>
+</tr>
+<tr>
+<td>
+<code>PC</code>
+</td>
+<td>
+Actual purchaser's customer
+</td>
+<td>
+Party the purchaser within the actual message is selling the ordered goods or services to.
+</td>
+</tr>
+<tr>
+<td>
+<code>PD</code>
+</td>
+<td>
+Purchaser's department buyer
+</td>
+<td>
+Purchasing department of buyer.
+</td>
+</tr>
+<tr>
+<td>
+<code>PE</code>
+</td>
+<td>
+Payee
+</td>
+<td>
+Identifies the credit party when other than the beneficiary.
+</td>
+</tr>
+<tr>
+<td>
+<code>PF</code>
+</td>
+<td>
+Party to receive freight bill
+</td>
+<td>
+Party to whom the freight bill should be sent.
+</td>
+</tr>
+<tr>
+<td>
+<code>PG</code>
+</td>
+<td>
+Prime contractor
+</td>
+<td>
+Party responsible for the whole project if other than the buyer.
+</td>
+</tr>
+<tr>
+<td>
+<code>PH</code>
+</td>
+<td>
+Payer's financial institution
+</td>
+<td>
+Institution chosen by the payer to execute financial transactions on his behalf.
+</td>
+</tr>
+<tr>
+<td>
+<code>PI</code>
+</td>
+<td>
+Payee's company name/ID
+</td>
+<td>
+Receiving company name/ID (ACH transfers).
+</td>
+</tr>
+<tr>
+<td>
+<code>PJ</code>
+</td>
+<td>
+Party to receive correspondence
+</td>
+<td>
+Second party designated by a first party to receive certain correspondence in lieu of it being mailed directly to this first party.
+</td>
+</tr>
+<tr>
+<td>
+<code>PK</code>
+</td>
+<td>
+Contact party
+</td>
+<td>
+Party to contact.
+</td>
+</tr>
+<tr>
+<td>
+<code>X</code>
+</td>
+<td>
+PL    Payor
+</td>
+<td>
+Identifies the debit party when other than the ordering customer (for banking purposes). Note: 1. This code value will be removed effective with directory D.09A.
+</td>
+</tr>
+<tr>
+<td>
+<code>PM</code>
+</td>
+<td>
+Party to receive paper memo of invoice
+</td>
+<td>
+Party being informed about invoice issue (via paper).
+</td>
+</tr>
+<tr>
+<td>
+<code>PN</code>
+</td>
+<td>
+Party to receive shipping notice
+</td>
+<td>
+The party is to be the recipient of the shipping notice.
+</td>
+</tr>
+<tr>
+<td>
+<code>PO</code>
+</td>
+<td>
+Ordering party
+</td>
+<td>
+To be used only if ordering party and buyer are not identical.
+</td>
+</tr>
+<tr>
+<td>
+<code>PQ</code>
+</td>
+<td>
+Certifying party
+</td>
+<td>
+A party which certifies something.
+</td>
+</tr>
+<tr>
+<td>
+<code>PR</code>
+</td>
+<td>
+Payer
+</td>
+<td>
+[3308] Party responsible for making a payment.
+</td>
+</tr>
+<tr>
+<td>
+<code>PS</code>
+</td>
+<td>
+Payer's company name/ID (Check, Draft or Wire)
+</td>
+<td>
+Party to send cheque, draft or wire for payment.
+</td>
+</tr>
+<tr>
+<td>
+<code>PT</code>
+</td>
+<td>
+Party to receive test report
+</td>
+<td>
+A party which is named to be the recipient of test reports.
+</td>
+</tr>
+<tr>
+<td>
+<code>PW</code>
+</td>
+<td>
+Despatch party
+</td>
+<td>
+[3282] Party where goods are to be, or have been, taken over by a carrier such as the place where a container is picked-up.
+</td>
+</tr>
+<tr>
+<td>
+<code>PX</code>
+</td>
+<td>
+Party to receive all documents
+</td>
+<td>
+A party which is named to be the recipient of all documents.
+</td>
+</tr>
+<tr>
+<td>
+<code>PY</code>
+</td>
+<td>
+Checking party
+</td>
+<td>
+Party or contact designated on behalf of carrier or his agent to establish the actual figures for quantities, weight, volume and/or (cube) measurements of goods or containers which are to appear in the transport contract and on which charges will be based.
+</td>
+</tr>
+<tr>
+<td>
+<code>PZ</code>
+</td>
+<td>
+Party to print some document
+</td>
+<td>
+The party that is to print a specific document.
+</td>
+</tr>
+<tr>
+<td>
+<code>RA</code>
+</td>
+<td>
+Central bank or regulatory authority
+</td>
+<td>
+Identifies central bank or regulatory authority which must be informed of certain aspects of a message.
+</td>
+</tr>
+<tr>
+<td>
+<code>RB</code>
+</td>
+<td>
+Receiving financial institution
+</td>
+<td>
+Financial institution designated to receive payment.
+</td>
+</tr>
+<tr>
+<td>
+<code>RE</code>
+</td>
+<td>
+Party to receive commercial invoice remittance
+</td>
+<td>
+Party to whom payment for a commercial invoice or bill should be remitted.
+</td>
+</tr>
+<tr>
+<td>
+<code>RF</code>
+</td>
+<td>
+Received from
+</td>
+<td>
+Name of a person or department which actually delivers the goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>RH</code>
+</td>
+<td>
+Seller's financial institution
+</td>
+<td>
+Financial institution designated by seller to receive payment. RDFI (ACH transfers).
+</td>
+</tr>
+<tr>
+<td>
+<code>RI</code>
+</td>
+<td>
+Reinsurance intermediary/broker
+</td>
+<td>
+Intermediary party between ceding company and reinsurance.
+</td>
+</tr>
+<tr>
+<td>
+<code>RL</code>
+</td>
+<td>
+Reporting carrier (Customs)
+</td>
+<td>
+Party who makes the cargo report to Customs.
+</td>
+</tr>
+<tr>
+<td>
+<code>RM</code>
+</td>
+<td>
+Reporting carrier's nominated agent/representative
+</td>
+<td>
+(Customs) Agent who formally makes a cargo report to Customs on behalf of the carrier.
+</td>
+</tr>
+<tr>
+<td>
+<code>RP</code>
+</td>
+<td>
+Routing party
+</td>
+<td>
+Party responsible for the selection of the carrier(s).
+</td>
+</tr>
+<tr>
+<td>
+<code>RS</code>
+</td>
+<td>
+Party to receive statement of account
+</td>
+<td>
+Party to whom the statement of account should be sent.
+</td>
+</tr>
+<tr>
+<td>
+<code>RV</code>
+</td>
+<td>
+Receiver of cheque
+</td>
+<td>
+Identifies the party which is to receive the actual cheque, when different from the receiver of funds.
+</td>
+</tr>
+<tr>
+<td>
+<code>RW</code>
+</td>
+<td>
+Issuer of waybill
+</td>
+<td>
+Party issuing the contract (waybill) for carriage.
+</td>
+</tr>
+<tr>
+<td>
+<code>SB</code>
+</td>
+<td>
+Sales responsibility
+</td>
+<td>
+A party being responsible for sales.
+</td>
+</tr>
+<tr>
+<td>
+<code>SE</code>
+</td>
+<td>
+Seller
+</td>
+<td>
+[3346] Party selling merchandise or services to a buyer.
+</td>
+</tr>
+<tr>
+<td>
+<code>SF</code>
+</td>
+<td>
+Ship from
+</td>
+<td>
+Identification of the party from where goods will be or have been shipped.
+</td>
+</tr>
+<tr>
+<td>
+<code>SG</code>
+</td>
+<td>
+Store group
+</td>
+<td>
+A chain of shops or stores.
+</td>
+</tr>
+<tr>
+<td>
+<code>SI</code>
+</td>
+<td>
+Shipping schedule issuer
+</td>
+<td>
+The party which issues a shipping schedule.
+</td>
+</tr>
+<tr>
+<td>
+<code>SN</code>
+</td>
+<td>
+Store keeper
+</td>
+<td>
+A party keeping a shop or store.
+</td>
+</tr>
+<tr>
+<td>
+<code>SO</code>
+</td>
+<td>
+Sold to if different than bill to
+</td>
+<td>
+Party to whom the goods have been sold, if different to the bill to party.
+</td>
+</tr>
+<tr>
+<td>
+<code>SR</code>
+</td>
+<td>
+Seller agent
+</td>
+<td>
+[3254] Party representing the seller for the purpose of a trade transaction.
+</td>
+</tr>
+<tr>
+<td>
+<code>SS</code>
+</td>
+<td>
+Social securities collector's office
+</td>
+<td>
+Party collecting social securities premiums.
+</td>
+</tr>
+<tr>
+<td>
+<code>ST</code>
+</td>
+<td>
+Ship to
+</td>
+<td>
+Identification of the party to where goods will be or have been shipped.
+</td>
+</tr>
+<tr>
+<td>
+<code>SU</code>
+</td>
+<td>
+Supplier
+</td>
+<td>
+Party who supplies goods and or services.
+</td>
+</tr>
+<tr>
+<td>
+<code>SX</code>
+</td>
+<td>
+Surety for additions
+</td>
+<td>
+Natural of legal person (generally a bank of insurance company) who accepts responsibility in due legal form for the financial guarantee to Customs of the payment of additional duties or fees that become due against a particular shipment, which have not previously been covered by surety.
+</td>
+</tr>
+<tr>
+<td>
+<code>SY</code>
+</td>
+<td>
+Surety
+</td>
+<td>
+Natural or legal person (generally a bank or insurance company) who accepts responsibility in due legal form for the financial consequences of non-fulfillment of another's obligations to the Customs (CCC).
+</td>
+</tr>
+<tr>
+<td>
+<code>SZ</code>
+</td>
+<td>
+Surety for antidumping/countervailing duty
+</td>
+<td>
+Natural or legal person that has been contracted by the importer to guarantee to Customs the payment of antidumping and/or countervailing duties that become due against a particular shipment.
+</td>
+</tr>
+<tr>
+<td>
+<code>TA</code>
+</td>
+<td>
+Legal receiver
+</td>
+<td>
+The party responsible for a receivership.
+</td>
+</tr>
+<tr>
+<td>
+<code>TB</code>
+</td>
+<td>
+Submitter
+</td>
+<td>
+To specify that the party is a submitter.
+</td>
+</tr>
+<tr>
+<td>
+<code>TC</code>
+</td>
+<td>
+Tax collector's office
+</td>
+<td>
+Party collecting taxes.
+</td>
+</tr>
+<tr>
+<td>
+<code>TCP</code>
+</td>
+<td>
+Transit charge payer
+</td>
+<td>
+Party, other than the ordering party, which has to pay the charges concerning the transit operations.
+</td>
+</tr>
+<tr>
+<td>
+<code>TCR</code>
+</td>
+<td>
+Transport capacity responsible party
+</td>
+<td>
+Party responsible for transport capacity.
+</td>
+</tr>
+<tr>
+<td>
+<code>TD</code>
+</td>
+<td>
+Party to receive technical documentation
+</td>
+<td>
+Party to whom technical documentation should be sent.
+</td>
+</tr>
+<tr>
+<td>
+<code>TE</code>
+</td>
+<td>
+Bankruptcy referee
+</td>
+<td>
+To specify that the party is a referee in a bankruptcy case.
+</td>
+</tr>
+<tr>
+<td>
+<code>TF</code>
+</td>
+<td>
+Source of information
+</td>
+<td>
+To specify that the party is the source of information.
+</td>
+</tr>
+<tr>
+<td>
+<code>TG</code>
+</td>
+<td>
+Judge
+</td>
+<td>
+To specify that the party is a judge.
+</td>
+</tr>
+<tr>
+<td>
+<code>TH</code>
+</td>
+<td>
+Attorney
+</td>
+<td>
+To specify that the party is an attorney.
+</td>
+</tr>
+<tr>
+<td>
+<code>TI</code>
+</td>
+<td>
+Law firm
+</td>
+<td>
+To specify that the party is a law firm.
+</td>
+</tr>
+<tr>
+<td>
+<code>TJ</code>
+</td>
+<td>
+Trustee
+</td>
+<td>
+To specify that the party is a trustee.
+</td>
+</tr>
+<tr>
+<td>
+<code>TK</code>
+</td>
+<td>
+Signatory
+</td>
+<td>
+To specify that the party is a signatory.
+</td>
+</tr>
+<tr>
+<td>
+<code>TL</code>
+</td>
+<td>
+Occupant
+</td>
+<td>
+The party is an occupant.
+</td>
+</tr>
+<tr>
+<td>
+<code>TM</code>
+</td>
+<td>
+Co-occupant
+</td>
+<td>
+The party is a co-occupant.
+</td>
+</tr>
+<tr>
+<td>
+<code>TN</code>
+</td>
+<td>
+Subject of inquiry
+</td>
+<td>
+The party is the subject of an inquiry.
+</td>
+</tr>
+<tr>
+<td>
+<code>TO</code>
+</td>
+<td>
+Lessor
+</td>
+<td>
+The party is a lessor.
+</td>
+</tr>
+<tr>
+<td>
+<code>TP</code>
+</td>
+<td>
+Owner of residence
+</td>
+<td>
+Identifies the owner of a residence.
+</td>
+</tr>
+<tr>
+<td>
+<code>TQ</code>
+</td>
+<td>
+Founder
+</td>
+<td>
+Identifies the founder.
+</td>
+</tr>
+<tr>
+<td>
+<code>TR</code>
+</td>
+<td>
+Terminal operator
+</td>
+<td>
+A party which handles the loading and unloading of marine vessels.
+</td>
+</tr>
+<tr>
+<td>
+<code>TS</code>
+</td>
+<td>
+Party to receive certified test results
+</td>
+<td>
+Party to whom the certified test results should be sent.
+</td>
+</tr>
+<tr>
+<td>
+<code>TT</code>
+</td>
+<td>
+Transfer to
+</td>
+<td>
+The party which is the recipient of a transfer.
+</td>
+</tr>
+<tr>
+<td>
+<code>TU</code>
+</td>
+<td>
+President
+</td>
+<td>
+Identifies the president.
+</td>
+</tr>
+<tr>
+<td>
+<code>TV</code>
+</td>
+<td>
+Chairperson
+</td>
+<td>
+Identifies the chairperson.
+</td>
+</tr>
+<tr>
+<td>
+<code>TW</code>
+</td>
+<td>
+Legal title holder
+</td>
+<td>
+Identifies the legal title holder.
+</td>
+</tr>
+<tr>
+<td>
+<code>TX</code>
+</td>
+<td>
+Shareholder
+</td>
+<td>
+Identifies a shareholder.
+</td>
+</tr>
+<tr>
+<td>
+<code>TY</code>
+</td>
+<td>
+Provider
+</td>
+<td>
+Identifies the provider.
+</td>
+</tr>
+<tr>
+<td>
+<code>TZ</code>
+</td>
+<td>
+Military branch
+</td>
+<td>
+Identifies the branch of the military.
+</td>
+</tr>
+<tr>
+<td>
+<code>UA</code>
+</td>
+<td>
+Educational institution
+</td>
+<td>
+Identifies a university, college or school.
+</td>
+</tr>
+<tr>
+<td>
+<code>UB</code>
+</td>
+<td>
+Assignor
+</td>
+<td>
+Identifies the assignor.
+</td>
+</tr>
+<tr>
+<td>
+<code>UC</code>
+</td>
+<td>
+Ultimate consignee
+</td>
+<td>
+Party who has been designated on the invoice or packing list as the final recipient of the stated merchandise.
+</td>
+</tr>
+<tr>
+<td>
+<code>UD</code>
+</td>
+<td>
+Ultimate customer
+</td>
+<td>
+The final recipient of goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>UE</code>
+</td>
+<td>
+Advisor
+</td>
+<td>
+Identifies the advisor.
+</td>
+</tr>
+<tr>
+<td>
+<code>UF</code>
+</td>
+<td>
+Co-defendant
+</td>
+<td>
+Identifies the co-defendant.
+</td>
+</tr>
+<tr>
+<td>
+<code>UG</code>
+</td>
+<td>
+Merged company with retained identity
+</td>
+<td>
+Company whose identity has been retained from a merger.
+</td>
+</tr>
+<tr>
+<td>
+<code>UH</code>
+</td>
+<td>
+Party represented
+</td>
+<td>
+Identifies the party represented.
+</td>
+</tr>
+<tr>
+<td>
+<code>UHP</code>
+</td>
+<td>
+Unexpected handling party
+</td>
+<td>
+Party authorized (during a voyage) to apply unexpected handling procedures or party having applied these procedures.
+</td>
+</tr>
+<tr>
+<td>
+<code>UI</code>
+</td>
+<td>
+Assignee
+</td>
+<td>
+Identifies the assignee.
+</td>
+</tr>
+<tr>
+<td>
+<code>UJ</code>
+</td>
+<td>
+Key person
+</td>
+<td>
+Identifies the key person.
+</td>
+</tr>
+<tr>
+<td>
+<code>UK</code>
+</td>
+<td>
+Author
+</td>
+<td>
+Identifies the author.
+</td>
+</tr>
+<tr>
+<td>
+<code>UL</code>
+</td>
+<td>
+Ultimate parent company
+</td>
+<td>
+Identifies the ultimate parent company.
+</td>
+</tr>
+<tr>
+<td>
+<code>UM</code>
+</td>
+<td>
+Party not to be confused with
+</td>
+<td>
+Identifies a party not to be confused with another party.
+</td>
+</tr>
+<tr>
+<td>
+<code>UN</code>
+</td>
+<td>
+Accountant
+</td>
+<td>
+Identifies the accountant.
+</td>
+</tr>
+<tr>
+<td>
+<code>UO</code>
+</td>
+<td>
+Plaintiff
+</td>
+<td>
+Identifies the plaintiff.
+</td>
+</tr>
+<tr>
+<td>
+<code>UP</code>
+</td>
+<td>
+Unloading party
+</td>
+<td>
+A party to unload the goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>UQ</code>
+</td>
+<td>
+Parent company
+</td>
+<td>
+Identifies the parent company.
+</td>
+</tr>
+<tr>
+<td>
+<code>UR</code>
+</td>
+<td>
+Affiliated company
+</td>
+<td>
+Identifies the affiliated company.
+</td>
+</tr>
+<tr>
+<td>
+<code>US</code>
+</td>
+<td>
+Bailiff
+</td>
+<td>
+Identifies the bailiff.
+</td>
+</tr>
+<tr>
+<td>
+<code>UT</code>
+</td>
+<td>
+Merged company
+</td>
+<td>
+Identifies the company involved in a merger.
+</td>
+</tr>
+<tr>
+<td>
+<code>UU</code>
+</td>
+<td>
+Defendant
+</td>
+<td>
+Identifies the defendant.
+</td>
+</tr>
+<tr>
+<td>
+<code>UV</code>
+</td>
+<td>
+Petitioning creditor
+</td>
+<td>
+Identifies the petitioning creditor.
+</td>
+</tr>
+<tr>
+<td>
+<code>UW</code>
+</td>
+<td>
+Guarantee agency
+</td>
+<td>
+Identifies the guarantee agency.
+</td>
+</tr>
+<tr>
+<td>
+<code>UX</code>
+</td>
+<td>
+Organization group
+</td>
+<td>
+Identifies the organization group.
+</td>
+</tr>
+<tr>
+<td>
+<code>UY</code>
+</td>
+<td>
+Subsidiary
+</td>
+<td>
+Identifies the subsidiary.
+</td>
+</tr>
+<tr>
+<td>
+<code>UZ</code>
+</td>
+<td>
+Industry association
+</td>
+<td>
+Identifies the industry association.
+</td>
+</tr>
+<tr>
+<td>
+<code>VA</code>
+</td>
+<td>
+Joint owner
+</td>
+<td>
+Identifies the joint owner.
+</td>
+</tr>
+<tr>
+<td>
+<code>VB</code>
+</td>
+<td>
+Joint venture
+</td>
+<td>
+Identifies the joint venture.
+</td>
+</tr>
+<tr>
+<td>
+<code>VC</code>
+</td>
+<td>
+Filing office
+</td>
+<td>
+Identifies the filing office.
+</td>
+</tr>
+<tr>
+<td>
+<code>VE</code>
+</td>
+<td>
+Court
+</td>
+<td>
+Identifies the court.
+</td>
+</tr>
+<tr>
+<td>
+<code>VF</code>
+</td>
+<td>
+Liability holder
+</td>
+<td>
+Identifies the liability holder.
+</td>
+</tr>
+<tr>
+<td>
+<code>VG</code>
+</td>
+<td>
+Local government sponsor
+</td>
+<td>
+Identifies the local government sponsor.
+</td>
+</tr>
+<tr>
+<td>
+<code>VH</code>
+</td>
+<td>
+Mortgage company
+</td>
+<td>
+Identifies the mortgage company.
+</td>
+</tr>
+<tr>
+<td>
+<code>VI</code>
+</td>
+<td>
+Notary public
+</td>
+<td>
+Identifies the notary public.
+</td>
+</tr>
+<tr>
+<td>
+<code>VJ</code>
+</td>
+<td>
+Officer
+</td>
+<td>
+Identifies the officer.
+</td>
+</tr>
+<tr>
+<td>
+<code>VK</code>
+</td>
+<td>
+Publisher
+</td>
+<td>
+Identifies the publisher.
+</td>
+</tr>
+<tr>
+<td>
+<code>VL</code>
+</td>
+<td>
+Party manufactured for
+</td>
+<td>
+Identifies the party for whom manufacturing of goods is done.
+</td>
+</tr>
+<tr>
+<td>
+<code>VM</code>
+</td>
+<td>
+Previous owner
+</td>
+<td>
+Identifies the previous owner.
+</td>
+</tr>
+<tr>
+<td>
+<code>VN</code>
+</td>
+<td>
+Vendor
+</td>
+<td>
+Party vending goods or services.
+</td>
+</tr>
+<tr>
+<td>
+<code>VO</code>
+</td>
+<td>
+Purchased company
+</td>
+<td>
+Identifies the purchased company.
+</td>
+</tr>
+<tr>
+<td>
+<code>VP</code>
+</td>
+<td>
+Receiver manager
+</td>
+<td>
+Manager of a business which is in receivership status and which will not be liquidated.
+</td>
+</tr>
+<tr>
+<td>
+<code>VQ</code>
+</td>
+<td>
+Responsible government agency
+</td>
+<td>
+Identifies the responsible government agency.
+</td>
+</tr>
+<tr>
+<td>
+<code>VR</code>
+</td>
+<td>
+Sole proprietor
+</td>
+<td>
+Identifies the sole proprietor.
+</td>
+</tr>
+<tr>
+<td>
+<code>VS</code>
+</td>
+<td>
+Auctioneer
+</td>
+<td>
+Identifies the auctioneer.
+</td>
+</tr>
+<tr>
+<td>
+<code>VT</code>
+</td>
+<td>
+Branch
+</td>
+<td>
+Identifies the branch.
+</td>
+</tr>
+<tr>
+<td>
+<code>VU</code>
+</td>
+<td>
+Business
+</td>
+<td>
+Identifies the business.
+</td>
+</tr>
+<tr>
+<td>
+<code>VV</code>
+</td>
+<td>
+Ultimate same country parent company
+</td>
+<td>
+Identifies the highest level parent company in the same country.
+</td>
+</tr>
+<tr>
+<td>
+<code>VW</code>
+</td>
+<td>
+Responsible party
+</td>
+<td>
+Identifies the party that can be called to account.
+</td>
+</tr>
+<tr>
+<td>
+<code>VX</code>
+</td>
+<td>
+Secured party
+</td>
+<td>
+Identifies a party that is guaranteed against loss.
+</td>
+</tr>
+<tr>
+<td>
+<code>VY</code>
+</td>
+<td>
+Other related party
+</td>
+<td>
+Identifies an entity as an unspecified but related party.
+</td>
+</tr>
+<tr>
+<td>
+<code>VZ</code>
+</td>
+<td>
+Co-debtor
+</td>
+<td>
+Identifies an entity as a joint or mutual debtor.
+</td>
+</tr>
+<tr>
+<td>
+<code>WA</code>
+</td>
+<td>
+Company which holds financial interest
+</td>
+<td>
+Identifies a company which holds any financial stake in an undertaking or organization.
+</td>
+</tr>
+<tr>
+<td>
+<code>WB</code>
+</td>
+<td>
+Rating organization
+</td>
+<td>
+Identifies an organization responsible for assigning a classification or rating.
+</td>
+</tr>
+<tr>
+<td>
+<code>WC</code>
+</td>
+<td>
+Information reference agency
+</td>
+<td>
+The agency responsible for the reference of information.
+</td>
+</tr>
+<tr>
+<td>
+<code>WD</code>
+</td>
+<td>
+Warehouse depositor
+</td>
+<td>
+[3004] Party depositing goods in a warehouse.
+</td>
+</tr>
+<tr>
+<td>
+<code>WE</code>
+</td>
+<td>
+Compilation agency
+</td>
+<td>
+The agency responsible for the compilation of information.
+</td>
+</tr>
+<tr>
+<td>
+<code>WF</code>
+</td>
+<td>
+Information maintenance agency
+</td>
+<td>
+The agency responsible for the maintenance of information.
+</td>
+</tr>
+<tr>
+<td>
+<code>WG</code>
+</td>
+<td>
+Information dissemination agency
+</td>
+<td>
+The agency responsible for the dissemination of information.
+</td>
+</tr>
+<tr>
+<td>
+<code>WH</code>
+</td>
+<td>
+Warehouse keeper
+</td>
+<td>
+[3022] Party taking responsibility for goods entered into a warehouse.
+</td>
+</tr>
+<tr>
+<td>
+<code>WI</code>
+</td>
+<td>
+Inspection address
+</td>
+<td>
+Specifies the address for an inspection.
+</td>
+</tr>
+<tr>
+<td>
+<code>WJ</code>
+</td>
+<td>
+Refusal party
+</td>
+<td>
+Identification of the party responsible for a refusal.
+</td>
+</tr>
+<tr>
+<td>
+<code>WK</code>
+</td>
+<td>
+Value added network provider
+</td>
+<td>
+A party that provides telecommunications interconnectivity services in an electronic data interchange environment.
+</td>
+</tr>
+<tr>
+<td>
+<code>WL</code>
+</td>
+<td>
+Agency
+</td>
+<td>
+The business or establishment of an agent.
+</td>
+</tr>
+<tr>
+<td>
+<code>WM</code>
+</td>
+<td>
+Works manager
+</td>
+<td>
+A party managing works.
+</td>
+</tr>
+<tr>
+<td>
+<code>WN</code>
+</td>
+<td>
+Party to receive order to supply
+</td>
+<td>
+Party designated by the registering party to receive a binding direction to supply something.
+</td>
+</tr>
+<tr>
+<td>
+<code>WO</code>
+</td>
+<td>
+Party to receive invitation to offer
+</td>
+<td>
+An entity to receive an invitation to offer.
+</td>
+</tr>
+<tr>
+<td>
+<code>WP</code>
+</td>
+<td>
+Sub-entity
+</td>
+<td>
+A part into which an entity has been divided.
+</td>
+</tr>
+<tr>
+<td>
+<code>WPA</code>
+</td>
+<td>
+Weighting party
+</td>
+<td>
+Party designated (legally accepted) to ascertain the weight.
+</td>
+</tr>
+<tr>
+<td>
+<code>WQ</code>
+</td>
+<td>
+Doing business as
+</td>
+<td>
+The name under which business is conducted.
+</td>
+</tr>
+<tr>
+<td>
+<code>WR</code>
+</td>
+<td>
+Party submitting quote
+</td>
+<td>
+The party stating the price of something to be purchased.
+</td>
+</tr>
+<tr>
+<td>
+<code>WS</code>
+</td>
+<td>
+Wholesaler
+</td>
+<td>
+Seller of articles, often in large quantities, to be retailed by others.
+</td>
+</tr>
+<tr>
+<td>
+<code>WT</code>
+</td>
+<td>
+Affiliated party
+</td>
+<td>
+A party attached or connected to another party.
+</td>
+</tr>
+<tr>
+<td>
+<code>WU</code>
+</td>
+<td>
+Previous name
+</td>
+<td>
+Name of an entity used before the current name.
+</td>
+</tr>
+<tr>
+<td>
+<code>WV</code>
+</td>
+<td>
+Party performing task
+</td>
+<td>
+An entity responsible for performing a task to be undertaken.
+</td>
+</tr>
+<tr>
+<td>
+<code>WW</code>
+</td>
+<td>
+Registering party
+</td>
+<td>
+Party performing the registration.
+</td>
+</tr>
+<tr>
+<td>
+<code>ZZZ</code>
+</td>
+<td>
+Mutually defined
+</td>
+<td>
+Party specification mutually agreed between interchanging parties. Data Element Cross Reference DataElement 3035 is used in the following Batch Segments:
+</td>
+</tr>
+<tr>
+<td>
+<code>FII</code>
+</td>
+<td>
+NAD    PNA
+</td>
+<td>
+DataElement 3035 is used in the following Interactive Segments:
+</td>
+</tr>
+<tr>
+<td>
+<code>NAA</code>
+</td>
+<td>
+PRT
+</td>
+<td>
+DataElement 3035 is used in the following Interactive Composite Elements: E012    E032    E966    E985    E986 Copyright United Nations, all rights reserved     UN Economic Commission for Europe Palais des Nations, CH-1211 Geneva 10, Switzerland  Tel: +41-22 917 2773 Fax: +41-22 917 0037  E-mail: TradeMaster@unece.org UN/EDIFACT Directories
+</td>
+</tr>
+</tbody>
 </table>

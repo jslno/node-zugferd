@@ -33,7 +33,7 @@ export default createParser(async (ctx) => {
 		data: entries.map((entry: any) => {
 			const name = ctx.getTextNode(entry.name);
 			const value = ctx.getTextNode(entry.value);
-			const remark = entry.remark && ctx.getTextNode(entry.value);
+			const remark = entry.remark ? ctx.getTextNode(entry.value) : undefined;
 
 			return {
 				key: ctx.toScreamingSnakeCase(name),
@@ -45,6 +45,27 @@ export default createParser(async (ctx) => {
 		enum: {
 			key: "key",
 			value: "value",
+		},
+		docs: {
+			path: "/codelists/vatex",
+			importPath: "/codelist/vatex",
+			title: "CEF VATEX — VAT exemption reason code",
+			description: "Code specifying the VAT exemption reason.",
+			sidebar: {
+				title: "VATEX",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Code name (english)",
+					},
+					remark: {
+						label: "Remark",
+					},
+				},
+			},
 		},
 	};
 });

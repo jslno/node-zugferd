@@ -39,5 +39,26 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/vat-cat",
+			importPath: "/codelist/vat-cat",
+			title: "VAT Category code + Factur-X",
+			description: "Code specifying the VAT category.",
+			sidebar: {
+				title: "VAT-CAT",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Name",
+					},
+					description: {
+						label: "Description",
+					},
+				},
+			},
+		},
 	};
 });

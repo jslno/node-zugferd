@@ -42,5 +42,24 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/currency",
+			importPath: "/codelist/currency",
+			title: "ISO 4217 — Currency codes",
+			description:
+				"Code specifying the currency.",
+			sidebar: {
+				title: "Currency",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: { ...ctx.CODE_COLUMN, label: "Alphabetic Code" },
+					name: {
+						label: "Currency",
+					},
+				},
+			},
+		},
 	};
 });

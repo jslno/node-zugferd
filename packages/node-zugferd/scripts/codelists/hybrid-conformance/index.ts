@@ -34,7 +34,9 @@ export default createParser(async (ctx) => {
 			const value = ctx.getTextNode(entry.value);
 			const definition = ctx.getTextNode(entry.definition);
 			const usage = ctx.getTextNode(entry.usage);
-			const comment = entry.comment && ctx.getTextNode(entry.comment);
+			const comment = entry.comment
+				? ctx.getTextNode(entry.comment)
+				: undefined;
 
 			return {
 				value,

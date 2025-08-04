@@ -1,0 +1,1358 @@
+---
+title: UNTDID 1229 - Action code
+description: Code specifying the action to be taken or already taken.
+---
+
+import { LINE_STATUS } from "node-zugferd/codelist/line-status";
+
+### Codelist [toc]
+
+```ts
+import {
+	LINE_STATUS,
+	LineStatus,
+	lineStatusCode,
+	PUBLISHED,
+	type LineStatusDefinition,
+	type LineStatusCode,
+} from "node-zugferd/codelist/line-status";
+
+```
+
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/line-status/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Code name
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>1</code>
+</td>
+<td>
+Added
+</td>
+<td>
+The information is to be or has been added.
+</td>
+</tr>
+<tr>
+<td>
+<code>2</code>
+</td>
+<td>
+Deleted
+</td>
+<td>
+The information is to be or has been deleted.
+</td>
+</tr>
+<tr>
+<td>
+<code>3</code>
+</td>
+<td>
+Changed
+</td>
+<td>
+The information is to be or has been changed.
+</td>
+</tr>
+<tr>
+<td>
+<code>4</code>
+</td>
+<td>
+No action
+</td>
+<td>
+This line item is not affected by the actual message.
+</td>
+</tr>
+<tr>
+<td>
+<code>5</code>
+</td>
+<td>
+Accepted without amendment
+</td>
+<td>
+This line item is entirely accepted by the seller.
+</td>
+</tr>
+<tr>
+<td>
+<code>6</code>
+</td>
+<td>
+Accepted with amendment
+</td>
+<td>
+This line item is accepted but amended by the seller.
+</td>
+</tr>
+<tr>
+<td>
+<code>7</code>
+</td>
+<td>
+Not accepted
+</td>
+<td>
+This line item is not accepted by the seller.
+</td>
+</tr>
+<tr>
+<td>
+<code>8</code>
+</td>
+<td>
+Schedule only
+</td>
+<td>
+Code specifying that the message is a schedule only.
+</td>
+</tr>
+<tr>
+<td>
+<code>9</code>
+</td>
+<td>
+Amendments
+</td>
+<td>
+Code specifying that amendments are requested/notified.
+</td>
+</tr>
+<tr>
+<td>
+<code>10</code>
+</td>
+<td>
+Not found
+</td>
+<td>
+This line item is not found in the referenced message.
+</td>
+</tr>
+<tr>
+<td>
+<code>11</code>
+</td>
+<td>
+Not amended
+</td>
+<td>
+This line is not amended by the buyer.
+</td>
+</tr>
+<tr>
+<td>
+<code>12</code>
+</td>
+<td>
+Line item numbers changed
+</td>
+<td>
+Code specifying that the line item numbers have changed.
+</td>
+</tr>
+<tr>
+<td>
+<code>13</code>
+</td>
+<td>
+Buyer has deducted amount
+</td>
+<td>
+Buyer has deducted amount from payment.
+</td>
+</tr>
+<tr>
+<td>
+<code>14</code>
+</td>
+<td>
+Buyer claims against invoice
+</td>
+<td>
+Buyer has a claim against an outstanding invoice.
+</td>
+</tr>
+<tr>
+<td>
+<code>15</code>
+</td>
+<td>
+Charge back by seller
+</td>
+<td>
+Factor has been requested to charge back the outstanding item.
+</td>
+</tr>
+<tr>
+<td>
+<code>16</code>
+</td>
+<td>
+Seller will issue credit note
+</td>
+<td>
+Seller agrees to issue a credit note.
+</td>
+</tr>
+<tr>
+<td>
+<code>17</code>
+</td>
+<td>
+Terms changed for new terms
+</td>
+<td>
+New settlement terms have been agreed.
+</td>
+</tr>
+<tr>
+<td>
+<code>18</code>
+</td>
+<td>
+Abide outcome of negotiations
+</td>
+<td>
+Factor agrees to abide by the outcome of negotiations between seller and buyer.
+</td>
+</tr>
+<tr>
+<td>
+<code>19</code>
+</td>
+<td>
+Seller rejects dispute
+</td>
+<td>
+Seller does not accept validity of dispute.
+</td>
+</tr>
+<tr>
+<td>
+<code>20</code>
+</td>
+<td>
+Settlement
+</td>
+<td>
+The reported situation is settled.
+</td>
+</tr>
+<tr>
+<td>
+<code>21</code>
+</td>
+<td>
+No delivery
+</td>
+<td>
+Code indicating that no delivery will be required.
+</td>
+</tr>
+<tr>
+<td>
+<code>22</code>
+</td>
+<td>
+Call-off delivery
+</td>
+<td>
+A request for delivery of a particular quantity of goods to be delivered on a particular date (or within a particular period).
+</td>
+</tr>
+<tr>
+<td>
+<code>23</code>
+</td>
+<td>
+Proposed amendment
+</td>
+<td>
+A code used to indicate an amendment suggested by the sender.
+</td>
+</tr>
+<tr>
+<td>
+<code>24</code>
+</td>
+<td>
+Accepted with amendment, no confirmation required
+</td>
+<td>
+Accepted with changes which require no confirmation.
+</td>
+</tr>
+<tr>
+<td>
+<code>25</code>
+</td>
+<td>
+Equipment provisionally repaired
+</td>
+<td>
+The equipment or component has been provisionally repaired.
+</td>
+</tr>
+<tr>
+<td>
+<code>26</code>
+</td>
+<td>
+Included
+</td>
+<td>
+Code indicating that the entity is included.
+</td>
+</tr>
+<tr>
+<td>
+<code>27</code>
+</td>
+<td>
+Upon receipt and verification of documents we shall cover you when due as per your instructions
+</td>
+<td>
+Upon receipt and verification of documents we shall cover you when due as per your instructions.
+</td>
+</tr>
+<tr>
+<td>
+<code>28</code>
+</td>
+<td>
+Upon receipt and verification of documents we shall authorize you to debit our account with you when due
+</td>
+<td>
+Upon receipt and verification of documents we shall authorize you to debit our account with you when due.
+</td>
+</tr>
+<tr>
+<td>
+<code>29</code>
+</td>
+<td>
+On receipt of your authenticated advice we shall cover you when due as per your instructions
+</td>
+<td>
+On receipt of your authenticated advice we shall cover you when due as per your instructions.
+</td>
+</tr>
+<tr>
+<td>
+<code>30</code>
+</td>
+<td>
+On receipt of your authenticated advice we shall authorize you to debit our account with you when due
+</td>
+<td>
+On receipt of your authenticated advice we shall authorize you to debit our account with you when due.
+</td>
+</tr>
+<tr>
+<td>
+<code>31</code>
+</td>
+<td>
+On receipt of your authenticated advice we shall credit your account with us when due
+</td>
+<td>
+On receipt of your authenticated advice we shall credit your account with us when due.
+</td>
+</tr>
+<tr>
+<td>
+<code>32</code>
+</td>
+<td>
+Credit advice requested for direct debit
+</td>
+<td>
+A credit advice is requested for the direct debit.
+</td>
+</tr>
+<tr>
+<td>
+<code>33</code>
+</td>
+<td>
+Credit advice and acknowledgement for direct debit
+</td>
+<td>
+A credit advice and acknowledgement are requested for the direct debit.
+</td>
+</tr>
+<tr>
+<td>
+<code>34</code>
+</td>
+<td>
+Inquiry
+</td>
+<td>
+Request for information.
+</td>
+</tr>
+<tr>
+<td>
+<code>35</code>
+</td>
+<td>
+Checked
+</td>
+<td>
+Checked.
+</td>
+</tr>
+<tr>
+<td>
+<code>36</code>
+</td>
+<td>
+Not checked
+</td>
+<td>
+Not checked.
+</td>
+</tr>
+<tr>
+<td>
+<code>37</code>
+</td>
+<td>
+Cancelled
+</td>
+<td>
+Discontinued.
+</td>
+</tr>
+<tr>
+<td>
+<code>38</code>
+</td>
+<td>
+Replaced
+</td>
+<td>
+Provide a replacement.
+</td>
+</tr>
+<tr>
+<td>
+<code>39</code>
+</td>
+<td>
+New
+</td>
+<td>
+Not existing before.
+</td>
+</tr>
+<tr>
+<td>
+<code>40</code>
+</td>
+<td>
+Agreed
+</td>
+<td>
+Consent.
+</td>
+</tr>
+<tr>
+<td>
+<code>41</code>
+</td>
+<td>
+Proposed
+</td>
+<td>
+Put forward for consideration.
+</td>
+</tr>
+<tr>
+<td>
+<code>42</code>
+</td>
+<td>
+Already delivered
+</td>
+<td>
+Delivery has taken place.
+</td>
+</tr>
+<tr>
+<td>
+<code>43</code>
+</td>
+<td>
+Additional subordinate structures will follow
+</td>
+<td>
+Additional subordinate structures will follow the current hierarchy level.
+</td>
+</tr>
+<tr>
+<td>
+<code>44</code>
+</td>
+<td>
+Additional subordinate structures will not follow
+</td>
+<td>
+No additional subordinate structures will follow the current hierarchy level.
+</td>
+</tr>
+<tr>
+<td>
+<code>45</code>
+</td>
+<td>
+Result opposed
+</td>
+<td>
+A notification that the result is opposed.
+</td>
+</tr>
+<tr>
+<td>
+<code>46</code>
+</td>
+<td>
+Auction held
+</td>
+<td>
+A notification that an auction was held.
+</td>
+</tr>
+<tr>
+<td>
+<code>47</code>
+</td>
+<td>
+Legal action pursued
+</td>
+<td>
+A notification that legal action has been pursued.
+</td>
+</tr>
+<tr>
+<td>
+<code>48</code>
+</td>
+<td>
+Meeting held
+</td>
+<td>
+A notification that a meeting was held.
+</td>
+</tr>
+<tr>
+<td>
+<code>49</code>
+</td>
+<td>
+Result set aside
+</td>
+<td>
+A notification that the result has been set aside.
+</td>
+</tr>
+<tr>
+<td>
+<code>50</code>
+</td>
+<td>
+Result disputed
+</td>
+<td>
+A notification that the result has been disputed.
+</td>
+</tr>
+<tr>
+<td>
+<code>51</code>
+</td>
+<td>
+Countersued
+</td>
+<td>
+A notification that a countersuit has been filed.
+</td>
+</tr>
+<tr>
+<td>
+<code>52</code>
+</td>
+<td>
+Pending
+</td>
+<td>
+A notification that an action is awaiting settlement.
+</td>
+</tr>
+<tr>
+<td>
+<code>53</code>
+</td>
+<td>
+Court action dismissed
+</td>
+<td>
+A notification that a court action will no longer be heard.
+</td>
+</tr>
+<tr>
+<td>
+<code>54</code>
+</td>
+<td>
+Referred item, accepted
+</td>
+<td>
+The item being referred to has been accepted.
+</td>
+</tr>
+<tr>
+<td>
+<code>55</code>
+</td>
+<td>
+Referred item, rejected
+</td>
+<td>
+The item being referred to has been rejected.
+</td>
+</tr>
+<tr>
+<td>
+<code>56</code>
+</td>
+<td>
+Debit advice statement line
+</td>
+<td>
+Notification that the statement line is a debit advice.
+</td>
+</tr>
+<tr>
+<td>
+<code>57</code>
+</td>
+<td>
+Credit advice statement line
+</td>
+<td>
+Notification that the statement line is a credit advice.
+</td>
+</tr>
+<tr>
+<td>
+<code>58</code>
+</td>
+<td>
+Grouped credit advices
+</td>
+<td>
+Notification that the credit advices are grouped.
+</td>
+</tr>
+<tr>
+<td>
+<code>59</code>
+</td>
+<td>
+Grouped debit advices
+</td>
+<td>
+Notification that the debit advices are grouped.
+</td>
+</tr>
+<tr>
+<td>
+<code>60</code>
+</td>
+<td>
+Registered
+</td>
+<td>
+The name is registered.
+</td>
+</tr>
+<tr>
+<td>
+<code>61</code>
+</td>
+<td>
+Payment denied
+</td>
+<td>
+The payment has been denied.
+</td>
+</tr>
+<tr>
+<td>
+<code>62</code>
+</td>
+<td>
+Approved as amended
+</td>
+<td>
+Approved with modifications.
+</td>
+</tr>
+<tr>
+<td>
+<code>63</code>
+</td>
+<td>
+Approved as submitted
+</td>
+<td>
+The request has been approved as submitted.
+</td>
+</tr>
+<tr>
+<td>
+<code>64</code>
+</td>
+<td>
+Cancelled, no activity
+</td>
+<td>
+Cancelled due to the lack of activity.
+</td>
+</tr>
+<tr>
+<td>
+<code>65</code>
+</td>
+<td>
+Under investigation
+</td>
+<td>
+Investigation is being done.
+</td>
+</tr>
+<tr>
+<td>
+<code>66</code>
+</td>
+<td>
+Initial claim received
+</td>
+<td>
+Notification that the initial claim was received.
+</td>
+</tr>
+<tr>
+<td>
+<code>67</code>
+</td>
+<td>
+Not in process
+</td>
+<td>
+Not in process.
+</td>
+</tr>
+<tr>
+<td>
+<code>68</code>
+</td>
+<td>
+Rejected, duplicate
+</td>
+<td>
+Rejected because it is a duplicate.
+</td>
+</tr>
+<tr>
+<td>
+<code>69</code>
+</td>
+<td>
+Rejected, resubmit with corrections
+</td>
+<td>
+Rejected but may be resubmitted when corrected.
+</td>
+</tr>
+<tr>
+<td>
+<code>70</code>
+</td>
+<td>
+Pending, incomplete
+</td>
+<td>
+Pending because of incomplete information.
+</td>
+</tr>
+<tr>
+<td>
+<code>71</code>
+</td>
+<td>
+Under field office investigation
+</td>
+<td>
+Investigation by the field is being done.
+</td>
+</tr>
+<tr>
+<td>
+<code>72</code>
+</td>
+<td>
+Pending, awaiting additional material
+</td>
+<td>
+Pending awaiting receipt of additional material.
+</td>
+</tr>
+<tr>
+<td>
+<code>73</code>
+</td>
+<td>
+Pending, awaiting review
+</td>
+<td>
+Pending while awaiting review.
+</td>
+</tr>
+<tr>
+<td>
+<code>74</code>
+</td>
+<td>
+Reopened
+</td>
+<td>
+Opened again.
+</td>
+</tr>
+<tr>
+<td>
+<code>75</code>
+</td>
+<td>
+Processed by primary, forwarded to additional payer(s)
+</td>
+<td>
+This request has been processed by the primary payer and sent to additional payer(s).
+</td>
+</tr>
+<tr>
+<td>
+<code>76</code>
+</td>
+<td>
+Processed by secondary, forwarded to additional payer(s)
+</td>
+<td>
+This request has been processed by the secondary payer and sent to additional payer(s).
+</td>
+</tr>
+<tr>
+<td>
+<code>77</code>
+</td>
+<td>
+Processed by tertiary, forwarded to additional payer(s)
+</td>
+<td>
+This request has been processed by the tertiary payer and sent to additional payer(s).
+</td>
+</tr>
+<tr>
+<td>
+<code>78</code>
+</td>
+<td>
+Previous payment decision reversed
+</td>
+<td>
+A previous payment decision has been reversed.
+</td>
+</tr>
+<tr>
+<td>
+<code>79</code>
+</td>
+<td>
+Not our claim, forwarded to another payer(s)
+</td>
+<td>
+A request does not belong to this payer but has been forwarded to another payer(s).
+</td>
+</tr>
+<tr>
+<td>
+<code>80</code>
+</td>
+<td>
+Transferred to correct insurance carrier
+</td>
+<td>
+The request has been transferred to the correct insurance carrier for processing.
+</td>
+</tr>
+<tr>
+<td>
+<code>81</code>
+</td>
+<td>
+Not paid, predetermination pricing only
+</td>
+<td>
+Payment has not been made and the enclosed response is predetermination pricing only.
+</td>
+</tr>
+<tr>
+<td>
+<code>82</code>
+</td>
+<td>
+Documentation claim
+</td>
+<td>
+The claim is for documentation purposes only, no payment required.
+</td>
+</tr>
+<tr>
+<td>
+<code>83</code>
+</td>
+<td>
+Reviewed
+</td>
+<td>
+Assessed.
+</td>
+</tr>
+<tr>
+<td>
+<code>84</code>
+</td>
+<td>
+Repriced
+</td>
+<td>
+This price was changed.
+</td>
+</tr>
+<tr>
+<td>
+<code>85</code>
+</td>
+<td>
+Audited
+</td>
+<td>
+An official examination has occurred.
+</td>
+</tr>
+<tr>
+<td>
+<code>86</code>
+</td>
+<td>
+Conditionally paid
+</td>
+<td>
+Payment has been conditionally made.
+</td>
+</tr>
+<tr>
+<td>
+<code>87</code>
+</td>
+<td>
+On appeal
+</td>
+<td>
+Reconsideration of the decision has been applied for.
+</td>
+</tr>
+<tr>
+<td>
+<code>88</code>
+</td>
+<td>
+Closed
+</td>
+<td>
+Shut.
+</td>
+</tr>
+<tr>
+<td>
+<code>89</code>
+</td>
+<td>
+Reaudited
+</td>
+<td>
+A subsequent official examination has occurred.
+</td>
+</tr>
+<tr>
+<td>
+<code>90</code>
+</td>
+<td>
+Reissued
+</td>
+<td>
+Issued again.
+</td>
+</tr>
+<tr>
+<td>
+<code>91</code>
+</td>
+<td>
+Closed after reopening
+</td>
+<td>
+Reopened and then closed.
+</td>
+</tr>
+<tr>
+<td>
+<code>92</code>
+</td>
+<td>
+Redetermined
+</td>
+<td>
+Determined again or differently.
+</td>
+</tr>
+<tr>
+<td>
+<code>93</code>
+</td>
+<td>
+Processed as primary
+</td>
+<td>
+Processed as the first.
+</td>
+</tr>
+<tr>
+<td>
+<code>94</code>
+</td>
+<td>
+Processed as secondary
+</td>
+<td>
+Processed as the second.
+</td>
+</tr>
+<tr>
+<td>
+<code>95</code>
+</td>
+<td>
+Processed as tertiary
+</td>
+<td>
+Processed as the third.
+</td>
+</tr>
+<tr>
+<td>
+<code>96</code>
+</td>
+<td>
+Correction of error
+</td>
+<td>
+A correction to information previously communicated which contained an error.
+</td>
+</tr>
+<tr>
+<td>
+<code>97</code>
+</td>
+<td>
+Single credit item of a group
+</td>
+<td>
+Notification that the credit item is a single credit item of a group of credit items.
+</td>
+</tr>
+<tr>
+<td>
+<code>98</code>
+</td>
+<td>
+Single debit item of a group
+</td>
+<td>
+Notification that the debit item is a single debit item of a group of debit items.
+</td>
+</tr>
+<tr>
+<td>
+<code>99</code>
+</td>
+<td>
+Interim response
+</td>
+<td>
+The response is an interim one.
+</td>
+</tr>
+<tr>
+<td>
+<code>100</code>
+</td>
+<td>
+Final response
+</td>
+<td>
+The response is an final one.
+</td>
+</tr>
+<tr>
+<td>
+<code>101</code>
+</td>
+<td>
+Debit advice requested
+</td>
+<td>
+A debit advice is requested for the transaction.
+</td>
+</tr>
+<tr>
+<td>
+<code>102</code>
+</td>
+<td>
+Transaction not impacted
+</td>
+<td>
+Advice that the transaction is not impacted.
+</td>
+</tr>
+<tr>
+<td>
+<code>103</code>
+</td>
+<td>
+Patient to be notified
+</td>
+<td>
+The action to take is to notify the patient.
+</td>
+</tr>
+<tr>
+<td>
+<code>104</code>
+</td>
+<td>
+Healthcare provider to be notified
+</td>
+<td>
+The action to take is to notify the healthcare provider.
+</td>
+</tr>
+<tr>
+<td>
+<code>105</code>
+</td>
+<td>
+Usual general practitioner to be notified
+</td>
+<td>
+The action to take is to notify the usual general practitioner.
+</td>
+</tr>
+<tr>
+<td>
+<code>106</code>
+</td>
+<td>
+Advice without details
+</td>
+<td>
+An advice without details is requested or notified.
+</td>
+</tr>
+<tr>
+<td>
+<code>107</code>
+</td>
+<td>
+Advice with details
+</td>
+<td>
+An advice with details is requested or notified.
+</td>
+</tr>
+<tr>
+<td>
+<code>108</code>
+</td>
+<td>
+Amendment requested
+</td>
+<td>
+An amendment is requested.
+</td>
+</tr>
+<tr>
+<td>
+<code>109</code>
+</td>
+<td>
+For information
+</td>
+<td>
+Included for information only.
+</td>
+</tr>
+<tr>
+<td>
+<code>110</code>
+</td>
+<td>
+Withdraw
+</td>
+<td>
+A code indicating discontinuance or retraction.
+</td>
+</tr>
+<tr>
+<td>
+<code>111</code>
+</td>
+<td>
+Delivery date change
+</td>
+<td>
+The action / notiification is a change of the delivery date.
+</td>
+</tr>
+<tr>
+<td>
+<code>112</code>
+</td>
+<td>
+Quantity change
+</td>
+<td>
+The action / notification is a change of quantity.
+</td>
+</tr>
+<tr>
+<td>
+<code>113</code>
+</td>
+<td>
+Resale and claim
+</td>
+<td>
+The identified items have been sold by the distributor to the end customer, and compensation for the loss of inventory value is claimed.
+</td>
+</tr>
+<tr>
+<td>
+<code>114</code>
+</td>
+<td>
+Resale
+</td>
+<td>
+The identified items have been sold by the distributor to the end customer.
+</td>
+</tr>
+<tr>
+<td>
+<code>115</code>
+</td>
+<td>
+Prior addition
+</td>
+<td>
+This existing line item becomes available at an earlier date.
+</td>
+</tr>
+<tr>
+<td>
+<code>116</code>
+</td>
+<td>
+Expired
+</td>
+<td>
+This line has expired.
+</td>
+</tr>
+<tr>
+<td>
+<code>117</code>
+</td>
+<td>
+Hold
+</td>
+<td>
+This line is on Hold.
+</td>
+</tr>
+<tr>
+<td>
+<code>118</code>
+</td>
+<td>
+Open
+</td>
+<td>
+This line is open.
+</td>
+</tr>
+<tr>
+<td>
+<code>119</code>
+</td>
+<td>
+Observe
+</td>
+<td>
+The object or item is to be or has been observed.
+</td>
+</tr>
+</tbody>
+</table>

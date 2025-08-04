@@ -1,51 +1,983 @@
 ---
-title: UNTDID 3139
-description: Contact function code
+title: UNTDID 3139 - Contact function, coded
+description: Code specifying the function of a contact (e.g. department or person).
 ---
 
-import {
-  UNTDID_3139,
-  UNTDID_3139_IDENTIFIER,
-} from "node-zugferd/codelist/untdid.3139";
+import { UNTDID_3139 } from "node-zugferd/codelist/untdid-3139";
 
-## Definition [toc]
-
-Identifier: <span className="text-fd-muted-foreground">{UNTDID_3139_IDENTIFIER}</span>
-
-<div className="w-fit">
-  <Link
-    href="https://service.unece.org/trade/untdid/d17a/tred/tred3139.htm"
-    target="_blank"
-  >
-    Source
-  </Link>
-</div>
+### Codelist [toc]
 
 ```ts
 import {
-  Untdid3139,
-  UNTDID_3139,
-  type Untdid3139Code,
-} from "node-zugferd/codelist/untdid.3139";
+	UNTDID_3139,
+	Untdid3139,
+	untdid3139Code,
+	type Untdid3139Definition,
+	type Untdid3139Code,
+} from "node-zugferd/codelist/untdid-3139";
+
 ```
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    {UNTDID_3139.map(({ code, name, description }) => (
-      <tr key={code}>
-        <td className="text-center">
-          <code>{code}</code>
-        </td>
-        <td>{name}</td>
-        <td>{description}</td>
-      </tr>
-    ))}
-  </tbody>
+<div className="w-fit">
+<Link href="https://service.unece.org/trade/untdid/d96a/uncl/uncl3139.htm" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Name
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>AA</code>
+</td>
+<td>
+Insurance contact
+</td>
+<td>
+Department/person to contact for matters regarding insurance.
+</td>
+</tr>
+<tr>
+<td>
+<code>AB</code>
+</td>
+<td>
+Workshop contact
+</td>
+<td>
+Department/person to contact for matters regarding the workshop.
+</td>
+</tr>
+<tr>
+<td>
+<code>AC</code>
+</td>
+<td>
+Accepting contact
+</td>
+<td>
+Department/person in charge of accepting incoming goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>AD</code>
+</td>
+<td>
+Accounting contact
+</td>
+<td>
+Department/person responsible for the accounts payable function within a corporation.
+</td>
+</tr>
+<tr>
+<td>
+<code>AE</code>
+</td>
+<td>
+Contract contact
+</td>
+<td>
+Department/person to contact for matters regarding contracts.
+</td>
+</tr>
+<tr>
+<td>
+<code>AF</code>
+</td>
+<td>
+Land registry contact
+</td>
+<td>
+Department/person to contact for matters regarding land registry.
+</td>
+</tr>
+<tr>
+<td>
+<code>AG</code>
+</td>
+<td>
+Agent
+</td>
+<td>
+Department/person of the agent which acts on behalf of another party.
+</td>
+</tr>
+<tr>
+<td>
+<code>AH</code>
+</td>
+<td>
+Coordination contact
+</td>
+<td>
+Department/person to contact for matters regarding technical coordination of works.
+</td>
+</tr>
+<tr>
+<td>
+<code>AI</code>
+</td>
+<td>
+Project management contact
+</td>
+<td>
+Department/person to contact for matters regarding project management on behalf of the contractor.
+</td>
+</tr>
+<tr>
+<td>
+<code>AJ</code>
+</td>
+<td>
+Investment contact
+</td>
+<td>
+Department/person to contact for matters regarding investments.
+</td>
+</tr>
+<tr>
+<td>
+<code>AK</code>
+</td>
+<td>
+Works management contact
+</td>
+<td>
+Department/person to contact for matters regarding management of works on behalf of the owner.
+</td>
+</tr>
+<tr>
+<td>
+<code>AL</code>
+</td>
+<td>
+Personnel contact
+</td>
+<td>
+Department/person to contact for matters regarding personnel (human resources).
+</td>
+</tr>
+<tr>
+<td>
+<code>AM</code>
+</td>
+<td>
+Claims contact
+</td>
+<td>
+Department/person to contact for matters regarding claims.
+</td>
+</tr>
+<tr>
+<td>
+<code>AN</code>
+</td>
+<td>
+Laboratory contact
+</td>
+<td>
+Department/person to contact for laboratory matters.
+</td>
+</tr>
+<tr>
+<td>
+<code>AO</code>
+</td>
+<td>
+Plant/equipment contact
+</td>
+<td>
+Department/person to contact for matters regarding plant/equipment.
+</td>
+</tr>
+<tr>
+<td>
+<code>AP</code>
+</td>
+<td>
+Accounts payable contact
+</td>
+<td>
+Department/person responsible for the accounts payable function within a corporation.
+</td>
+</tr>
+<tr>
+<td>
+<code>AQ</code>
+</td>
+<td>
+Quantity surveyor contact
+</td>
+<td>
+Department/person to contact for matters regarding quantity surveying.
+</td>
+</tr>
+<tr>
+<td>
+<code>AR</code>
+</td>
+<td>
+Accounts receivable contact
+</td>
+<td>
+Department/person responsible for the accounts receivable within a corporation.
+</td>
+</tr>
+<tr>
+<td>
+<code>AS</code>
+</td>
+<td>
+Public relations contact
+</td>
+<td>
+Department/person to contact for matters regarding public relations.
+</td>
+</tr>
+<tr>
+<td>
+<code>AT</code>
+</td>
+<td>
+Technical contact
+</td>
+<td>
+Department/person to contact for matters regarding technical issues.
+</td>
+</tr>
+<tr>
+<td>
+<code>AU</code>
+</td>
+<td>
+City works authority contact
+</td>
+<td>
+Department/person to contact for matters regarding city works.
+</td>
+</tr>
+<tr>
+<td>
+<code>AV</code>
+</td>
+<td>
+Maintenance contact
+</td>
+<td>
+Department/person to contact for matters regarding maintenance.
+</td>
+</tr>
+<tr>
+<td>
+<code>AW</code>
+</td>
+<td>
+Town planning contact
+</td>
+<td>
+Department/person to contact for matters regarding town ` planning.
+</td>
+</tr>
+<tr>
+<td>
+<code>AX</code>
+</td>
+<td>
+Traffic authority contact
+</td>
+<td>
+Department/person to contact for matters regarding traffic.
+</td>
+</tr>
+<tr>
+<td>
+<code>AY</code>
+</td>
+<td>
+Electricity supply contact
+</td>
+<td>
+Department/person to contact for matters regarding electricity supply.
+</td>
+</tr>
+<tr>
+<td>
+<code>AZ</code>
+</td>
+<td>
+Gas supply contact
+</td>
+<td>
+Department/person to contact for matters regarding gas supply.
+</td>
+</tr>
+<tr>
+<td>
+<code>BA</code>
+</td>
+<td>
+Water supply contact
+</td>
+<td>
+Department/person to contact for matters regarding water supply.
+</td>
+</tr>
+<tr>
+<td>
+<code>BB</code>
+</td>
+<td>
+Telecommunications network contact
+</td>
+<td>
+Department/person to contact for matters regarding telecommunications network.
+</td>
+</tr>
+<tr>
+<td>
+<code>BC</code>
+</td>
+<td>
+Banking contact
+</td>
+<td>
+Contact person for bank.
+</td>
+</tr>
+<tr>
+<td>
+<code>BD</code>
+</td>
+<td>
+New developments contact
+</td>
+<td>
+Department/person to contact for matters regarding new developments (e.g. construction).
+</td>
+</tr>
+<tr>
+<td>
+<code>BE</code>
+</td>
+<td>
+Transport infrastructure authority
+</td>
+<td>
+Department/person to contact for matters regarding transport infrastructure.
+</td>
+</tr>
+<tr>
+<td>
+<code>BF</code>
+</td>
+<td>
+Service contact
+</td>
+<td>
+Department/person to be contacted in service matters.
+</td>
+</tr>
+<tr>
+<td>
+<code>BU</code>
+</td>
+<td>
+Ultimate consignee
+</td>
+<td>
+Department/designated on the invoice or packing list as the final recipient of the stated merchandise.
+</td>
+</tr>
+<tr>
+<td>
+<code>CA</code>
+</td>
+<td>
+Carrier
+</td>
+<td>
+(3126) Party undertaking or arranging transport of goods between named points.
+</td>
+</tr>
+<tr>
+<td>
+<code>CB</code>
+</td>
+<td>
+Changed by
+</td>
+<td>
+Person who made the change.
+</td>
+</tr>
+<tr>
+<td>
+<code>CC</code>
+</td>
+<td>
+Responsible person for information production
+</td>
+<td>
+Responsible person to contact for matters regarding the production of information.
+</td>
+</tr>
+<tr>
+<td>
+<code>CD</code>
+</td>
+<td>
+Responsible person for information dissemination
+</td>
+<td>
+Responsible person to contact for matters regarding information dissemination.
+</td>
+</tr>
+<tr>
+<td>
+<code>CE</code>
+</td>
+<td>
+Head of unit for computer data processing
+</td>
+<td>
+Head of unit to contact for matters regarding computer data processing.
+</td>
+</tr>
+<tr>
+<td>
+<code>CF</code>
+</td>
+<td>
+Head of unit for information production
+</td>
+<td>
+Head of unit to contact for matters regarding the production of information.
+</td>
+</tr>
+<tr>
+<td>
+<code>CG</code>
+</td>
+<td>
+Head of unit for information dissemination
+</td>
+<td>
+Head of unit to contact for matters regarding dissemination of information.
+</td>
+</tr>
+<tr>
+<td>
+<code>CN</code>
+</td>
+<td>
+Consignee
+</td>
+<td>
+(3132) Party to which goods are consigned.
+</td>
+</tr>
+<tr>
+<td>
+<code>CO</code>
+</td>
+<td>
+Consignor
+</td>
+<td>
+(3336) Party which, by contract with a carrier, consigns or sends goods with the carrier, or has them conveyed by him. Synonym: shipper/sender.
+</td>
+</tr>
+<tr>
+<td>
+<code>CP</code>
+</td>
+<td>
+Responsible person for computer data processing
+</td>
+<td>
+Responsible person to contact for matters regarding computer data processing.
+</td>
+</tr>
+<tr>
+<td>
+<code>CR</code>
+</td>
+<td>
+Customer relations
+</td>
+<td>
+Individual responsible for customer relations.
+</td>
+</tr>
+<tr>
+<td>
+<code>CW</code>
+</td>
+<td>
+Confirmed with
+</td>
+<td>
+Person with whom the contents of the purchase order has been discussed and agreed (e.g. by telephone) prior to the sending of this message.
+</td>
+</tr>
+<tr>
+<td>
+<code>DE</code>
+</td>
+<td>
+Department/employee to execute export procedures
+</td>
+<td>
+Self explanatory.
+</td>
+</tr>
+<tr>
+<td>
+<code>DI</code>
+</td>
+<td>
+Department/employee to execute import procedures
+</td>
+<td>
+Self explanatory.
+</td>
+</tr>
+<tr>
+<td>
+<code>DL</code>
+</td>
+<td>
+Delivery contact
+</td>
+<td>
+Department/person responsible for delivery.
+</td>
+</tr>
+<tr>
+<td>
+<code>EB</code>
+</td>
+<td>
+Entered by
+</td>
+<td>
+Name of an individual who made the entry.
+</td>
+</tr>
+<tr>
+<td>
+<code>EC</code>
+</td>
+<td>
+Education coordinator
+</td>
+<td>
+Person in charge of coordination of education.
+</td>
+</tr>
+<tr>
+<td>
+<code>ED</code>
+</td>
+<td>
+Engineering contact
+</td>
+<td>
+Department/person to contact for matters regarding engineering.
+</td>
+</tr>
+<tr>
+<td>
+<code>EX</code>
+</td>
+<td>
+Expeditor
+</td>
+<td>
+Party to be contacted where goods are (to be) expedited.
+</td>
+</tr>
+<tr>
+<td>
+<code>GR</code>
+</td>
+<td>
+Goods receiving contact
+</td>
+<td>
+Department/person responsible for receiving the goods at the place of delivery.
+</td>
+</tr>
+<tr>
+<td>
+<code>HE</code>
+</td>
+<td>
+Emergency dangerous goods contact
+</td>
+<td>
+Party who is to be contacted to intervene in case of emergency.
+</td>
+</tr>
+<tr>
+<td>
+<code>HG</code>
+</td>
+<td>
+Dangerous goods contact
+</td>
+<td>
+Department/person to be contacted for details about the transportation of dangerous goods/hazardous material.
+</td>
+</tr>
+<tr>
+<td>
+<code>HM</code>
+</td>
+<td>
+Hazardous material contact
+</td>
+<td>
+Department/person responsible for hazardous material control.
+</td>
+</tr>
+<tr>
+<td>
+<code>IC</code>
+</td>
+<td>
+Information contact
+</td>
+<td>
+Department/person to contact for questions regarding transactions.
+</td>
+</tr>
+<tr>
+<td>
+<code>IN</code>
+</td>
+<td>
+Insurer contact
+</td>
+<td>
+Self explanatory.
+</td>
+</tr>
+<tr>
+<td>
+<code>LB</code>
+</td>
+<td>
+Place of delivery contact
+</td>
+<td>
+Self explanatory.
+</td>
+</tr>
+<tr>
+<td>
+<code>LO</code>
+</td>
+<td>
+Place of collection contact
+</td>
+<td>
+Self explanatory.
+</td>
+</tr>
+<tr>
+<td>
+<code>MC</code>
+</td>
+<td>
+Material control contact
+</td>
+<td>
+Department/person responsible for the controlling/inspection of goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>MD</code>
+</td>
+<td>
+Material disposition contact
+</td>
+<td>
+Department/person responsible for the disposition/scheduling of goods.
+</td>
+</tr>
+<tr>
+<td>
+<code>MH</code>
+</td>
+<td>
+Material handling contact
+</td>
+<td>
+Self explanatory.
+</td>
+</tr>
+<tr>
+<td>
+<code>MR</code>
+</td>
+<td>
+Message recipient contact
+</td>
+<td>
+Self explanatory.
+</td>
+</tr>
+<tr>
+<td>
+<code>MS</code>
+</td>
+<td>
+Message sender contact
+</td>
+<td>
+Self explanatory.
+</td>
+</tr>
+<tr>
+<td>
+<code>NT</code>
+</td>
+<td>
+Notification contact
+</td>
+<td>
+Self explanatory.
+</td>
+</tr>
+<tr>
+<td>
+<code>OC</code>
+</td>
+<td>
+Order contact
+</td>
+<td>
+An individual to contact for questions regarding this order.
+</td>
+</tr>
+<tr>
+<td>
+<code>PA</code>
+</td>
+<td>
+Prototype coordinator
+</td>
+<td>
+Description to be provided.
+</td>
+</tr>
+<tr>
+<td>
+<code>PD</code>
+</td>
+<td>
+Purchasing contact
+</td>
+<td>
+Department/person responsible for issuing this purchase order.
+</td>
+</tr>
+<tr>
+<td>
+<code>PE</code>
+</td>
+<td>
+Payee contact
+</td>
+<td>
+Self explanatory.
+</td>
+</tr>
+<tr>
+<td>
+<code>PM</code>
+</td>
+<td>
+Product management contact
+</td>
+<td>
+Department/person to contact for questions regarding this order.
+</td>
+</tr>
+<tr>
+<td>
+<code>QA</code>
+</td>
+<td>
+Quality assurance contact
+</td>
+<td>
+Quality assurance contact within an organization.
+</td>
+</tr>
+<tr>
+<td>
+<code>QC</code>
+</td>
+<td>
+Quality coordinator contact
+</td>
+<td>
+Quality coordinator contact within an organization.
+</td>
+</tr>
+<tr>
+<td>
+<code>RD</code>
+</td>
+<td>
+Receiving dock contact
+</td>
+<td>
+The receiving dock contact within an organization.
+</td>
+</tr>
+<tr>
+<td>
+<code>SA</code>
+</td>
+<td>
+Sales administration
+</td>
+<td>
+Name of the sales administration contact within a corporation.
+</td>
+</tr>
+<tr>
+<td>
+<code>SC</code>
+</td>
+<td>
+Schedule contact
+</td>
+<td>
+Name of the scheduling contact within a corporation.
+</td>
+</tr>
+<tr>
+<td>
+<code>SD</code>
+</td>
+<td>
+Shipping contact
+</td>
+<td>
+The shipping department contact within an organization.
+</td>
+</tr>
+<tr>
+<td>
+<code>SR</code>
+</td>
+<td>
+Sales representative or department
+</td>
+<td>
+The sales representative or department contact within an organization.
+</td>
+</tr>
+<tr>
+<td>
+<code>SU</code>
+</td>
+<td>
+Supplier contact
+</td>
+<td>
+Department/person to be contacted at the supplier.
+</td>
+</tr>
+<tr>
+<td>
+<code>TA</code>
+</td>
+<td>
+Traffic administrator
+</td>
+<td>
+The traffic administrator contact within an organization.
+</td>
+</tr>
+<tr>
+<td>
+<code>TD</code>
+</td>
+<td>
+Test contact
+</td>
+<td>
+Department/person responsible for testing contact.
+</td>
+</tr>
+<tr>
+<td>
+<code>TI</code>
+</td>
+<td>
+Technical documentation recipient
+</td>
+<td>
+Department/person to receive technical documentation.
+</td>
+</tr>
+<tr>
+<td>
+<code>TR</code>
+</td>
+<td>
+Transport contact
+</td>
+<td>
+Department/person in charge of transportation.
+</td>
+</tr>
+<tr>
+<td>
+<code>WH</code>
+</td>
+<td>
+Warehouse
+</td>
+<td>
+The warehouse contact within an organization.
+</td>
+</tr>
+<tr>
+<td>
+<code>ZZZ</code>
+</td>
+<td>
+Mutually defined
+</td>
+<td>
+Self explanatory.
+</td>
+</tr>
+</tbody>
 </table>

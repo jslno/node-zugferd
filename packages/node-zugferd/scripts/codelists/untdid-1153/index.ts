@@ -43,5 +43,24 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/untdid-1153",
+			importPath: "/codelist/untdid-1153",
+			title: "UNTDID 1153 — Reference code qualifier",
+			description:
+				"Code giving specific meaning to a reference segment or a reference number.",
+			sidebar: {
+				title: "UNTDID 1153",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Name",
+					},
+				},
+			},
+		},
 	};
 });

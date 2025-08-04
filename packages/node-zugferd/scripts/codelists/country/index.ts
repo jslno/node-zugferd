@@ -42,5 +42,27 @@ export default createParser(async (ctx) => {
 			key: "key",
 			value: "value",
 		},
+		docs: {
+			path: "/codelists/country",
+			importPath: "/codelist/country",
+			title: "ISO 3166-1 — Country Codes",
+			description:
+				"Code specifying the country.",
+			sidebar: {
+				title: "Country",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: {
+						...ctx.CODE_COLUMN,
+						label: "Alpha-2 code"
+					},
+					name: {
+						label: "English short name",
+					},
+				},
+			},
+		},
 	};
 });

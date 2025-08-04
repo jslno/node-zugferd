@@ -32,7 +32,7 @@ export default createParser(async (ctx) => {
 		data: entries.map((entry: any) => {
 			const value = ctx.getTextNode(entry.value);
 			const definition = ctx.getTextNode(entry.definition);
-			const usage = entry.usage && ctx.getTextNode(entry.usage);
+			const usage = entry.usage ? ctx.getTextNode(entry.usage) : undefined;
 
 			return {
 				value,
