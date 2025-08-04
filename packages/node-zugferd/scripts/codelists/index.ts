@@ -74,6 +74,7 @@ export type CreateParserResult<
 		path: string;
 		title: string;
 		description: string;
+		priority?: number;
 		importPath?: string;
 		sidebar?: {
 			disabled?: boolean;
@@ -646,6 +647,7 @@ ${tbody}
 		const content = `---
 title: ${data.docs.title}
 description: ${data.docs.description}
+priority: ${data.docs.priority ?? 0.6}
 ---
 
 ### Codelist [toc]
