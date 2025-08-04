@@ -146,8 +146,8 @@ importers:
         specifier: ^0.4.4
         version: 0.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       node-zugferd:
-        specifier: workspace:*
-        version: link:../packages/node-zugferd
+        specifier: latest
+        version: 0.1.0
       prism-react-renderer:
         specifier: ^2.4.1
         version: 2.4.1(react@19.1.1)
@@ -3307,6 +3307,9 @@ packages:
 
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
+
+  node-zugferd@0.1.0:
+    resolution: {integrity: sha512-JDozDBRCz3zmnzTVhnU3kfn54J6BQGv+G3fpW85yUwBFghZtmDPqyNQRmEx++F2jWmo2gk4e+ZjkFWlO/TQLjg==}
 
   npm-to-yarn@3.0.1:
     resolution: {integrity: sha512-tt6PvKu4WyzPwWUzy/hvPFqn+uwXO0K1ZHka8az3NnrhWJDmSqI8ncWq0fkL0k/lmmi5tAC11FXwXuh0rFbt1A==}
@@ -7364,6 +7367,15 @@ snapshots:
   node-fetch-native@1.6.6: {}
 
   node-releases@2.0.19: {}
+
+  node-zugferd@0.1.0:
+    dependencies:
+      defu: 6.1.4
+      fast-xml-parser: 4.5.3
+      pdf-lib: 1.17.1
+      zod: 3.25.76
+    optionalDependencies:
+      xsd-schema-validator: 0.10.0
 
   npm-to-yarn@3.0.1: {}
 
