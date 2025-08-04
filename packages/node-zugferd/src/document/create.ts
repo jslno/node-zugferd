@@ -99,7 +99,7 @@ export const createDocumentFactory =
 					conformanceLevel: profile.conformanceLevel,
 					documentFileName: profile.documentFileName,
 					documentType: profile.documentType ?? "INVOICE",
-					version: String(parseInt(profile.version)),
+					version: profile.version,
 				},
 			});
 

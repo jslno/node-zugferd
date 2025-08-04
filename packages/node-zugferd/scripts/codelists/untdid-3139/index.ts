@@ -1,0 +1,49 @@
+// UNTDID 3139 - Contact function, coded
+
+import z from "zod";
+import { createParser } from "..";
+
+const source = "https://service.unece.org/trade/untdid/d96a/uncl/uncl3139.htm";
+
+export default createParser(async (ctx) => {
+	const data = await ctx.parseUneceList(source);
+
+	return {
+		path: __filename,
+		source,
+		destination: "untdid-3139.gen.ts",
+		identifier: "UNTDID_3139",
+		secondaryIdentifier: "Untdid3139",
+		definition: z.object({
+			key: z.string(),
+			name: z.string(),
+			value: z.string(),
+			description: z.string(),
+		}),
+		data,
+		enum: {
+			key: "key",
+			value: "value",
+		},
+		docs: {
+			path: "/codelists/untdid-3139",
+			importPath: "/codelist/untdid-3139",
+			title: "UNTDID 3139 - Contact function, coded",
+			description:
+				"Code specifying the function of a contact (e.g. department or person).",
+			sidebar: {
+				title: "UNTDID 3139",
+			},
+			table: {
+				columns: {
+					key: ctx.HIDE_COLUMN,
+					value: ctx.CODE_COLUMN,
+					name: {
+						label: "Name",
+					},
+					description: { label: "Description" },
+				},
+			},
+		},
+	};
+});

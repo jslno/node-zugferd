@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<entry>
+		<value>0</value>
+		<name>Transport mode not specified</name>
+		<description>Transport mode has not been specified
+Notes:
+1) This code can be used when the mode is not known or when information on it is not available at the time of issuing the document concerned.</description>
+	</entry>
+	<entry>
+		<value>1</value>
+		<name>Maritime transport</name>
+		<description>Transport of goods and/or persons is by sea.</description>
+	</entry>
+	<entry>
+		<value>2</value>
+		<name>Rail transport</name>
+		<description>Transport of goods and/or persons is by rail.</description>
+	</entry>
+	<entry>
+		<value>3</value>
+		<name>Road transport</name>
+		<description>Transport of goods and/or persons is by road.</description>
+	</entry>
+	<entry>
+		<value>4</value>
+		<name>Air transport</name>
+		<description>Transport of goods and/or persons is by air.</description>
+	</entry>
+	<entry>
+		<value>5</value>
+		<name>Mail</name>
+		<description>Method to convey goods is by mail
+Notes:
+1) This code is provided for practical reasons, despite the fact that mail is not a genuine mode of transport. In many countries, the value of merchandise exported and imported by mail is considerable, but the exporter or importer concerned would be unable to state by which mode postal items had been conveyed.</description>
+	</entry>
+	<entry>
+		<value>6</value>
+		<name>Multimodal transpo</name>
+		<description>Method to convey goods and/or persons is by multimodal transport.
+Notes:
+1) This code is provided for practical reasons, despite the fact that multimodal transport is not a genuine mode of transport. It can be used when goods are carried by at least two different modes from a place at which the goods are taken in charge by a transport operator to a place designated for delivery, on the basis of one transport contract. (Operations of pick-up and delivery of goods carried out in the performance of a single mode of transport, as defined in such a contract, shall not be considered as multimodal transport).</description>
+	</entry>
+	<entry>
+		<value>7</value>
+		<name>Fixed transport installation</name>
+		<description>Transport of item is via a fixed transport installation.
+Notes:
+1) This code applies to installations for continuous transport such as pipelines, ropeways and electric power lines.</description>
+	</entry>
+	<entry>
+		<value>8</value>
+		<name>Inland water transport</name>
+		<description>Transport of goods and/or persons is by inland water.</description>
+	</entry>
+	<entry>
+		<value>9</value>
+		<name>Transport mode not applicable</name>
+		<description>The mode of transport is not applicable.</description>
+	</entry>
+</entries>

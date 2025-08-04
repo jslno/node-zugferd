@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<entry>
+		<value>AA</value>
+		<name>Product version number</name>
+	</entry>
+	<entry>
+		<value>AB</value>
+		<name>Assembly</name>
+	</entry>
+	<entry>
+		<value>AC</value>
+		<name>HIBC (Health Industry Bar Code)</name>
+	</entry>
+	<entry>
+		<value>AD</value>
+		<name>Cold roll number</name>
+	</entry>
+	<entry>
+		<value>AE</value>
+		<name>Hot roll number</name>
+	</entry>
+	<entry>
+		<value>AF</value>
+		<name>Slab number</name>
+	</entry>
+	<entry>
+		<value>AG</value>
+		<name>Software revision number</name>
+	</entry>
+	<entry>
+		<value>AH</value>
+		<name>UPC (Universal Product Code) Consumer package code (1-5-5)</name>
+	</entry>
+	<entry>
+		<value>AI</value>
+		<name>UPC (Universal Product Code) Consumer package code (1-5-5-</name>
+	</entry>
+	<entry>
+		<value>AJ</value>
+		<name>Sample number</name>
+	</entry>
+	<entry>
+		<value>AK</value>
+		<name>Pack number</name>
+	</entry>
+	<entry>
+		<value>AL</value>
+		<name>UPC (Universal Product Code) Shipping container code (1-2-</name>
+	</entry>
+	<entry>
+		<value>AM</value>
+		<name>UPC (Universal Product Code)/EAN (European article number)</name>
+	</entry>
+	<entry>
+		<value>AN</value>
+		<name>UPC (Universal Product Code) suffix</name>
+	</entry>
+	<entry>
+		<value>AO</value>
+		<name>State label code</name>
+	</entry>
+	<entry>
+		<value>AP</value>
+		<name>Heat number</name>
+	</entry>
+	<entry>
+		<value>AQ</value>
+		<name>Coupon number</name>
+	</entry>
+	<entry>
+		<value>AR</value>
+		<name>Resource number</name>
+	</entry>
+	<entry>
+		<value>AS</value>
+		<name>Work task number</name>
+	</entry>
+	<entry>
+		<value>AT</value>
+		<name>Price look up number</name>
+	</entry>
+	<entry>
+		<value>AU</value>
+		<name>NSN (North Atlantic Treaty Organization Stock Number)</name>
+	</entry>
+	<entry>
+		<value>AV</value>
+		<name>Refined product code</name>
+	</entry>
+	<entry>
+		<value>AW</value>
+		<name>Exhibit</name>
+	</entry>
+	<entry>
+		<value>AX</value>
+		<name>End item</name>
+	</entry>
+	<entry>
+		<value>AY</value>
+		<name>Federal supply classification</name>
+	</entry>
+	<entry>
+		<value>AZ</value>
+		<name>Engineering data list</name>
+	</entry>
+	<entry>
+		<value>BA</value>
+		<name>Milestone event number</name>
+	</entry>
+	<entry>
+		<value>BB</value>
+		<name>Lot number</name>
+	</entry>
+	<entry>
+		<value>BC</value>
+		<name>National drug code 4-4-2 format</name>
+	</entry>
+	<entry>
+		<value>BD</value>
+		<name>National drug code 5-3-2 format</name>
+	</entry>
+	<entry>
+		<value>BE</value>
+		<name>National drug code 5-4-1 format</name>
+	</entry>
+	<entry>
+		<value>BF</value>
+		<name>National drug code 5-4-2 format</name>
+	</entry>
+	<entry>
+		<value>BG</value>
+		<name>National drug code</name>
+	</entry>
+	<entry>
+		<value>BH</value>
+		<name>Part number</name>
+	</entry>
+	<entry>
+		<value>BI</value>
+		<name>Local Stock Number (LSN)</name>
+	</entry>
+	<entry>
+		<value>BJ</value>
+		<name>Next higher assembly number</name>
+	</entry>
+	<entry>
+		<value>BK</value>
+		<name>Data category</name>
+	</entry>
+	<entry>
+		<value>BL</value>
+		<name>Control number</name>
+	</entry>
+	<entry>
+		<value>BM</value>
+		<name>Special material identification code</name>
+	</entry>
+	<entry>
+		<value>BN</value>
+		<name>Locally assigned control number</name>
+	</entry>
+	<entry>
+		<value>BO</value>
+		<name>Buyer's colour</name>
+	</entry>
+	<entry>
+		<value>BP</value>
+		<name>Buyer's part number</name>
+	</entry>
+	<entry>
+		<value>BQ</value>
+		<name>Variable measure product code</name>
+	</entry>
+	<entry>
+		<value>BR</value>
+		<name>Financial phase</name>
+	</entry>
+	<entry>
+		<value>BS</value>
+		<name>Contract breakdown</name>
+	</entry>
+	<entry>
+		<value>BT</value>
+		<name>Technical phase</name>
+	</entry>
+	<entry>
+		<value>BU</value>
+		<name>Dye lot number</name>
+	</entry>
+	<entry>
+		<value>BV</value>
+		<name>Daily statement of activities</name>
+	</entry>
+	<entry>
+		<value>BW</value>
+		<name>Periodical statement of activities within a bilaterally</name>
+	</entry>
+	<entry>
+		<value>BX</value>
+		<name>Calendar week statement of activities</name>
+	</entry>
+	<entry>
+		<value>BY</value>
+		<name>Calendar month statement of activities</name>
+	</entry>
+	<entry>
+		<value>BZ</value>
+		<name>Original equipment number</name>
+	</entry>
+	<entry>
+		<value>CC</value>
+		<name>Industry commodity code</name>
+	</entry>
+	<entry>
+		<value>CG</value>
+		<name>Commodity grouping</name>
+	</entry>
+	<entry>
+		<value>CL</value>
+		<name>Colour number</name>
+	</entry>
+	<entry>
+		<value>CR</value>
+		<name>Contract number</name>
+	</entry>
+	<entry>
+		<value>CV</value>
+		<name>Customs article number</name>
+	</entry>
+	<entry>
+		<value>DR</value>
+		<name>Drawing revision number</name>
+	</entry>
+	<entry>
+		<value>DW</value>
+		<name>Drawing</name>
+	</entry>
+	<entry>
+		<value>EC</value>
+		<name>Engineering change level</name>
+	</entry>
+	<entry>
+		<value>EF</value>
+		<name>Material code</name>
+	</entry>
+	<entry>
+		<value>EMD</value>
+		<name>EMDN (European Medical Device Nomenclature)</name>
+	</entry>
+	<entry>
+		<value>EN</value>
+		<name>International Article Numbering Association (EAN)</name>
+	</entry>
+	<entry>
+		<value>FS</value>
+		<name>Fish species</name>
+	</entry>
+	<entry>
+		<value>GB</value>
+		<name>Buyer's internal product group code</name>
+	</entry>
+	<entry>
+		<value>GMN</value>
+		<name>Global model number</name>
+	</entry>
+	<entry>
+		<value>GN</value>
+		<name>National product group code</name>
+	</entry>
+	<entry>
+		<value>GS</value>
+		<name>General specification number</name>
+	</entry>
+	<entry>
+		<value>HS</value>
+		<name>Harmonised system</name>
+	</entry>
+	<entry>
+		<value>IB</value>
+		<name>ISBN (International Standard Book Number)</name>
+	</entry>
+	<entry>
+		<value>IN</value>
+		<name>Buyer's item number</name>
+	</entry>
+	<entry>
+		<value>IS</value>
+		<name>ISSN (International Standard Serial Number)</name>
+	</entry>
+	<entry>
+		<value>IT</value>
+		<name>Buyer's style number</name>
+	</entry>
+	<entry>
+		<value>IZ</value>
+		<name>Buyer's size code</name>
+	</entry>
+	<entry>
+		<value>MA</value>
+		<name>Machine number</name>
+	</entry>
+	<entry>
+		<value>MF</value>
+		<name>Manufacturer's (producer's) article number</name>
+	</entry>
+	<entry>
+		<value>MN</value>
+		<name>Model number</name>
+	</entry>
+	<entry>
+		<value>MP</value>
+		<name>Product/service identification number</name>
+	</entry>
+	<entry>
+		<value>NB</value>
+		<name>Batch number</name>
+	</entry>
+	<entry>
+		<value>ON</value>
+		<name>Customer order number</name>
+	</entry>
+	<entry>
+		<value>PD</value>
+		<name>Part number description</name>
+	</entry>
+	<entry>
+		<value>PL</value>
+		<name>Purchaser's order line number</name>
+	</entry>
+	<entry>
+		<value>PO</value>
+		<name>Purchase order number</name>
+	</entry>
+	<entry>
+		<value>PPI</value>
+		<name>Phytosanitary Passport identifier</name>
+	</entry>
+	<entry>
+		<value>PV</value>
+		<name>Promotional variant number</name>
+	</entry>
+	<entry>
+		<value>QS</value>
+		<name>Buyer's qualifier for size</name>
+	</entry>
+	<entry>
+		<value>RC</value>
+		<name>Returnable container number</name>
+	</entry>
+	<entry>
+		<value>RN</value>
+		<name>Release number</name>
+	</entry>
+	<entry>
+		<value>RU</value>
+		<name>Run number</name>
+	</entry>
+	<entry>
+		<value>RY</value>
+		<name>Record keeping of model year</name>
+	</entry>
+	<entry>
+		<value>SA</value>
+		<name>Supplier's article number</name>
+	</entry>
+	<entry>
+		<value>SG</value>
+		<name>Standard group of products (mixed assortment)</name>
+	</entry>
+	<entry>
+		<value>SK</value>
+		<name>SKU (Stock keeping unit)</name>
+	</entry>
+	<entry>
+		<value>SN</value>
+		<name>Serial number</name>
+	</entry>
+	<entry>
+		<value>SRS</value>
+		<name>RSK number</name>
+	</entry>
+	<entry>
+		<value>SRT</value>
+		<name>IFLS (Institut Francais du Libre Service) 5 digit product</name>
+	</entry>
+	<entry>
+		<value>SRU</value>
+		<name>IFLS (Institut Francais du Libre Service) 9 digit product</name>
+	</entry>
+	<entry>
+		<value>SRV</value>
+		<name>GS1 Global Trade Item Number</name>
+	</entry>
+	<entry>
+		<value>SRW</value>
+		<name>EDIS (Energy Data Identification System)</name>
+	</entry>
+	<entry>
+		<value>SRX</value>
+		<name>Slaughter number</name>
+	</entry>
+	<entry>
+		<value>SRY</value>
+		<name>Official animal number</name>
+	</entry>
+	<entry>
+		<value>SRZ</value>
+		<name>Harmonized tariff schedule</name>
+	</entry>
+	<entry>
+		<value>SS</value>
+		<name>Supplier's supplier article number</name>
+	</entry>
+	<entry>
+		<value>SSA</value>
+		<name>46 Level DOT Code</name>
+	</entry>
+	<entry>
+		<value>SSB</value>
+		<name>Airline Tariff 6D</name>
+	</entry>
+	<entry>
+		<value>SSC</value>
+		<name>Title 49 Code of Federal Regulations</name>
+	</entry>
+	<entry>
+		<value>SSD</value>
+		<name>International Civil Aviation Administration code</name>
+	</entry>
+	<entry>
+		<value>SSE</value>
+		<name>Hazardous Materials ID DOT</name>
+	</entry>
+	<entry>
+		<value>SSF</value>
+		<name>Endorsement</name>
+	</entry>
+	<entry>
+		<value>SSG</value>
+		<name>Air Force Regulation 71-4</name>
+	</entry>
+	<entry>
+		<value>SSH</value>
+		<name>Breed</name>
+	</entry>
+	<entry>
+		<value>SSI</value>
+		<name>Chemical Abstract Service (CAS) registry number</name>
+	</entry>
+	<entry>
+		<value>SSJ</value>
+		<name>Engine model designation</name>
+	</entry>
+	<entry>
+		<value>SSK</value>
+		<name>Institutional Meat Purchase Specifications (IMPS) Number</name>
+	</entry>
+	<entry>
+		<value>SSL</value>
+		<name>Price Look-Up code (PLU)</name>
+	</entry>
+	<entry>
+		<value>SSM</value>
+		<name>International Maritime Organization (IMO) Code</name>
+	</entry>
+	<entry>
+		<value>SSN</value>
+		<name>Bureau of Explosives 600-A (rail)</name>
+	</entry>
+	<entry>
+		<value>SSO</value>
+		<name>United Nations Dangerous Goods List</name>
+	</entry>
+	<entry>
+		<value>SSP</value>
+		<name>International Code of Botanical Nomenclature (ICBN)</name>
+	</entry>
+	<entry>
+		<value>SSQ</value>
+		<name>International Code of Zoological Nomenclature (ICZN)</name>
+	</entry>
+	<entry>
+		<value>SSR</value>
+		<name>International Code of Nomenclature for Cultivated Plants</name>
+	</entry>
+	<entry>
+		<value>SSS</value>
+		<name>Distributor’s article identifier</name>
+	</entry>
+	<entry>
+		<value>SST</value>
+		<name>Norwegian Classification system ENVA</name>
+	</entry>
+	<entry>
+		<value>SSU</value>
+		<name>Supplier assigned classification</name>
+	</entry>
+	<entry>
+		<value>SSV</value>
+		<name>Mexican classification system AMECE</name>
+	</entry>
+	<entry>
+		<value>SSW</value>
+		<name>German classification system CCG</name>
+	</entry>
+	<entry>
+		<value>SSX</value>
+		<name>Finnish classification system EANFIN</name>
+	</entry>
+	<entry>
+		<value>SSY</value>
+		<name>Canadian classification system ICC</name>
+	</entry>
+	<entry>
+		<value>SSZ</value>
+		<name>French classification system IFLS5</name>
+	</entry>
+	<entry>
+		<value>ST</value>
+		<name>Style number</name>
+	</entry>
+	<entry>
+		<value>STA</value>
+		<name>Dutch classification system CBL</name>
+	</entry>
+	<entry>
+		<value>STB</value>
+		<name>Japanese classification system JICFS</name>
+	</entry>
+	<entry>
+		<value>STC</value>
+		<name>European Union dairy subsidy eligibility classification</name>
+	</entry>
+	<entry>
+		<value>STD</value>
+		<name>GS1 Spain classification system</name>
+	</entry>
+	<entry>
+		<value>STE</value>
+		<name>GS1 Poland classification system</name>
+	</entry>
+	<entry>
+		<value>STF</value>
+		<name>Federal Agency on Technical Regulating and Metrology of the</name>
+	</entry>
+	<entry>
+		<value>STG</value>
+		<name>Efficient Consumer Response (ECR) Austria classification</name>
+	</entry>
+	<entry>
+		<value>STH</value>
+		<name>GS1 Italy classification system</name>
+	</entry>
+	<entry>
+		<value>STI</value>
+		<name>CPV (Common Procurement Vocabulary)</name>
+	</entry>
+	<entry>
+		<value>STJ</value>
+		<name>IFDA (International Foodservice Distributors Association)</name>
+	</entry>
+	<entry>
+		<value>STK</value>
+		<name>AHFS (American Hospital Formulary Service) pharmacologic -</name>
+	</entry>
+	<entry>
+		<value>STL</value>
+		<name>ATC (Anatomical Therapeutic Chemical) classification system</name>
+	</entry>
+	<entry>
+		<value>STM</value>
+		<name>CLADIMED (Classification des Dispositifs Médicaux)</name>
+	</entry>
+	<entry>
+		<value>STN</value>
+		<name>CMDR (Canadian Medical Device Regulations) classification</name>
+	</entry>
+	<entry>
+		<value>STO</value>
+		<name>CNDM (Classificazione Nazionale dei Dispositivi Medici)</name>
+	</entry>
+	<entry>
+		<value>STP</value>
+		<name>UK DM&amp;D (Dictionary of Medicines &amp; Devices) standard coding</name>
+	</entry>
+	<entry>
+		<value>STQ</value>
+		<name>eCl@ss</name>
+	</entry>
+	<entry>
+		<value>STR</value>
+		<name>EDMA (European Diagnostic Manufacturers Association)</name>
+	</entry>
+	<entry>
+		<value>STS</value>
+		<name>EGAR (European Generic Article Register)</name>
+	</entry>
+	<entry>
+		<value>STT</value>
+		<name>GMDN (Global Medical Devices Nomenclature)</name>
+	</entry>
+	<entry>
+		<value>STU</value>
+		<name>GPI (Generic Product Identifier)</name>
+	</entry>
+	<entry>
+		<value>STV</value>
+		<name>HCPCS (Healthcare Common Procedure Coding System)</name>
+	</entry>
+	<entry>
+		<value>STW</value>
+		<name>ICPS (International Classification for Patient Safety)</name>
+	</entry>
+	<entry>
+		<value>STX</value>
+		<name>MedDRA (Medical Dictionary for Regulatory Activities)</name>
+	</entry>
+	<entry>
+		<value>STY</value>
+		<name>Medical Columbus</name>
+	</entry>
+	<entry>
+		<value>STZ</value>
+		<name>NAPCS (North American Product Classification System)</name>
+	</entry>
+	<entry>
+		<value>SUA</value>
+		<name>NHS (National Health Services) eClass</name>
+	</entry>
+	<entry>
+		<value>SUB</value>
+		<name>US FDA (Food and Drug Administration) Product Code</name>
+	</entry>
+	<entry>
+		<value>SUC</value>
+		<name>SNOMED CT (Systematized Nomenclature of Medicine-Clinical</name>
+	</entry>
+	<entry>
+		<value>SUD</value>
+		<name>UMDNS (Universal Medical Device Nomenclature System)</name>
+	</entry>
+	<entry>
+		<value>SUE</value>
+		<name>GS1 Global Returnable Asset Identifier, non-serialised</name>
+	</entry>
+	<entry>
+		<value>SUF</value>
+		<name>IMEI</name>
+	</entry>
+	<entry>
+		<value>SUG</value>
+		<name>Waste Type (EMSA)</name>
+	</entry>
+	<entry>
+		<value>SUH</value>
+		<name>Ship's store classification type</name>
+	</entry>
+	<entry>
+		<value>SUI</value>
+		<name>Emergency fire code</name>
+	</entry>
+	<entry>
+		<value>SUJ</value>
+		<name>Emergency spillage code</name>
+	</entry>
+	<entry>
+		<value>SUK</value>
+		<name>IMDG packing group</name>
+	</entry>
+	<entry>
+		<value>SUL</value>
+		<name>MARPOL Code IBC</name>
+	</entry>
+	<entry>
+		<value>SUM</value>
+		<name>IMDG subsidiary risk class</name>
+	</entry>
+	<entry>
+		<value>TG</value>
+		<name>Transport group number</name>
+	</entry>
+	<entry>
+		<value>TSN</value>
+		<name>Taxonomic Serial Number</name>
+	</entry>
+	<entry>
+		<value>TSO</value>
+		<name>IMDG main hazard class</name>
+	</entry>
+	<entry>
+		<value>TSP</value>
+		<name>EU Combined Nomenclature</name>
+	</entry>
+	<entry>
+		<value>TSQ</value>
+		<name>Therapeutic classification number</name>
+	</entry>
+	<entry>
+		<value>TSR</value>
+		<name>European Waste Catalogue</name>
+	</entry>
+	<entry>
+		<value>TSS</value>
+		<name>Price grouping code</name>
+	</entry>
+	<entry>
+		<value>TST</value>
+		<name>UNSPSC</name>
+	</entry>
+	<entry>
+		<value>TSU</value>
+		<name>EU RoHS Directive</name>
+	</entry>
+	<entry>
+		<value>UA</value>
+		<name>Ultimate customer's article number</name>
+	</entry>
+	<entry>
+		<value>UP</value>
+		<name>UPC (Universal product code)</name>
+	</entry>
+	<entry>
+		<value>VN</value>
+		<name>Vendor item number</name>
+	</entry>
+	<entry>
+		<value>VP</value>
+		<name>Vendor's (seller's) part number</name>
+	</entry>
+	<entry>
+		<value>VS</value>
+		<name>Vendor's supplemental item number</name>
+	</entry>
+	<entry>
+		<value>VX</value>
+		<name>Vendor specification number</name>
+	</entry>
+	<entry>
+		<value>ZZZ</value>
+		<name>Mutually defined</name>
+	</entry>
+</entries>

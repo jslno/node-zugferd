@@ -1,0 +1,971 @@
+---
+title: UNTDID 4461 — Payment means
+description: Indication of the instrument of payment, which may include a guarantee.
+---
+
+### Codelist [toc]
+
+```ts
+import {
+	PAYMENT,
+	Payment,
+	paymentCode,
+	PUBLISHED,
+	type PaymentDefinition,
+	type PaymentCode,
+} from "node-zugferd/codelist/payment";
+
+```
+
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/payment/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Code name
+</th>
+<th>
+Usage in EN16931
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>1</code>
+</td>
+<td>
+Instrument not defined
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>2</code>
+</td>
+<td>
+Automated clearing house credit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>3</code>
+</td>
+<td>
+Automated clearing house debit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>4</code>
+</td>
+<td>
+ACH demand debit reversal
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>5</code>
+</td>
+<td>
+ACH demand credit reversal
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>6</code>
+</td>
+<td>
+ACH demand credit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>7</code>
+</td>
+<td>
+ACH demand debit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>8</code>
+</td>
+<td>
+Hold
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>9</code>
+</td>
+<td>
+National or regional clearing
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>10</code>
+</td>
+<td>
+In cash
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>11</code>
+</td>
+<td>
+ACH savings credit reversal
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>12</code>
+</td>
+<td>
+ACH savings debit reversal
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>13</code>
+</td>
+<td>
+ACH savings credit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>14</code>
+</td>
+<td>
+ACH savings debit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>15</code>
+</td>
+<td>
+Bookentry credit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>16</code>
+</td>
+<td>
+Bookentry debit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>17</code>
+</td>
+<td>
+ACH demand cash concentration/disbursement (CCD) credit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>18</code>
+</td>
+<td>
+ACH demand cash concentration/disbursement (CCD) debit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>19</code>
+</td>
+<td>
+ACH demand corporate trade payment (CTP) credit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>20</code>
+</td>
+<td>
+Cheque
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>21</code>
+</td>
+<td>
+Banker's draft
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>22</code>
+</td>
+<td>
+Certified banker's draft
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>23</code>
+</td>
+<td>
+Bank cheque (issued by a banking or similar establishment)
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>24</code>
+</td>
+<td>
+Bill of exchange awaiting acceptance
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>25</code>
+</td>
+<td>
+Certified cheque
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>26</code>
+</td>
+<td>
+Local cheque
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>27</code>
+</td>
+<td>
+ACH demand corporate trade payment (CTP) debit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>28</code>
+</td>
+<td>
+ACH demand corporate trade exchange (CTX) credit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>29</code>
+</td>
+<td>
+ACH demand corporate trade exchange (CTX) debit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>30</code>
+</td>
+<td>
+Credit transfer
+</td>
+<td>
+30
+</td>
+</tr>
+<tr>
+<td>
+<code>31</code>
+</td>
+<td>
+Debit transfer
+</td>
+<td>
+31
+</td>
+</tr>
+<tr>
+<td>
+<code>32</code>
+</td>
+<td>
+ACH demand cash concentration/disbursement plus (CCD+)
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>33</code>
+</td>
+<td>
+ACH demand cash concentration/disbursement plus (CCD+)
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>34</code>
+</td>
+<td>
+ACH prearranged payment and deposit (PPD)
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>35</code>
+</td>
+<td>
+ACH savings cash concentration/disbursement (CCD) credit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>36</code>
+</td>
+<td>
+ACH savings cash concentration/disbursement (CCD) debit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>37</code>
+</td>
+<td>
+ACH savings corporate trade payment (CTP) credit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>38</code>
+</td>
+<td>
+ACH savings corporate trade payment (CTP) debit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>39</code>
+</td>
+<td>
+ACH savings corporate trade exchange (CTX) credit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>40</code>
+</td>
+<td>
+ACH savings corporate trade exchange (CTX) debit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>41</code>
+</td>
+<td>
+ACH savings cash concentration/disbursement plus (CCD+)
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>42</code>
+</td>
+<td>
+Payment to bank account
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>43</code>
+</td>
+<td>
+ACH savings cash concentration/disbursement plus (CCD+)
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>44</code>
+</td>
+<td>
+Accepted bill of exchange
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>45</code>
+</td>
+<td>
+Referenced home-banking credit transfer
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>46</code>
+</td>
+<td>
+Interbank debit transfer
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>47</code>
+</td>
+<td>
+Home-banking debit transfer
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>48</code>
+</td>
+<td>
+Bank card
+</td>
+<td>
+48
+</td>
+</tr>
+<tr>
+<td>
+<code>49</code>
+</td>
+<td>
+Direct debit
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>50</code>
+</td>
+<td>
+Payment by postgiro
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>51</code>
+</td>
+<td>
+FR, norme 6 97-Telereglement CFONB (French Organisation for
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>52</code>
+</td>
+<td>
+Urgent commercial payment
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>53</code>
+</td>
+<td>
+Urgent Treasury Payment
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>54</code>
+</td>
+<td>
+Credit card
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>55</code>
+</td>
+<td>
+Debit card
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>56</code>
+</td>
+<td>
+Bankgiro
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>57</code>
+</td>
+<td>
+Standing agreement
+</td>
+<td>
+57
+</td>
+</tr>
+<tr>
+<td>
+<code>58</code>
+</td>
+<td>
+SEPA credit transfer
+</td>
+<td>
+58
+</td>
+</tr>
+<tr>
+<td>
+<code>59</code>
+</td>
+<td>
+SEPA direct debit
+</td>
+<td>
+59
+</td>
+</tr>
+<tr>
+<td>
+<code>60</code>
+</td>
+<td>
+Promissory note
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>61</code>
+</td>
+<td>
+Promissory note signed by the debtor
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>62</code>
+</td>
+<td>
+Promissory note signed by the debtor and endorsed by a bank
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>63</code>
+</td>
+<td>
+Promissory note signed by the debtor and endorsed by a
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>64</code>
+</td>
+<td>
+Promissory note signed by a bank
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>65</code>
+</td>
+<td>
+Promissory note signed by a bank and endorsed by another
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>66</code>
+</td>
+<td>
+Promissory note signed by a third party
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>67</code>
+</td>
+<td>
+Promissory note signed by a third party and endorsed by a
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>68</code>
+</td>
+<td>
+Online payment service
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>69</code>
+</td>
+<td>
+Transfer Advice
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>70</code>
+</td>
+<td>
+Bill drawn by the creditor on the debtor
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>74</code>
+</td>
+<td>
+Bill drawn by the creditor on a bank
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>75</code>
+</td>
+<td>
+Bill drawn by the creditor, endorsed by another bank
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>76</code>
+</td>
+<td>
+Bill drawn by the creditor on a bank and endorsed by a
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>77</code>
+</td>
+<td>
+Bill drawn by the creditor on a third party
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>78</code>
+</td>
+<td>
+Bill drawn by creditor on third party, accepted and
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>91</code>
+</td>
+<td>
+Not transferable banker's draft
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>92</code>
+</td>
+<td>
+Not transferable local cheque
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>93</code>
+</td>
+<td>
+Reference giro
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>94</code>
+</td>
+<td>
+Urgent giro
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>95</code>
+</td>
+<td>
+Free format giro
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>96</code>
+</td>
+<td>
+Requested method for payment was not used
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>97</code>
+</td>
+<td>
+Clearing between partners
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>98</code>
+</td>
+<td>
+JP, Electronically Recorded Monetary Claims
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>ZZZ</code>
+</td>
+<td>
+Mutually defined
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>

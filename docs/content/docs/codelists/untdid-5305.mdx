@@ -1,54 +1,145 @@
 ---
-title: UNTDID 5305
-description: Duty or tax or fee category code
+title: UNTDID 5305  — Duty or tax or fee category
+description: Code specifying a duty or tax or fee category.
 ---
 
-import {
-  UNTDID_5305,
-  UNTDID_5305_IDENTIFIER,
-  UNTDID_5305_VERSION,
-} from "node-zugferd/codelist/untdid.5305";
-
-## Definition [toc]
-
-Identifier: <span className="text-fd-muted-foreground">{UNTDID_5305_IDENTIFIER}</span>
-
-Version: <span className="text-fd-muted-foreground">{UNTDID_5305_VERSION}</span>
-
-<div className="w-fit">
-  <Link
-    href="https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.5305"
-    target="_blank"
-  >
-    Source
-  </Link>
-</div>
+### Codelist [toc]
 
 ```ts
 import {
-  Untdid5305,
-  UNTDID_5305,
-  type Untdid5305Code,
-} from "node-zugferd/codelist/untdid.5305";
+	UNTDID_5305,
+	Untdid5305,
+	untdid5305Code,
+	type Untdid5305Definition,
+	type Untdid5305Code,
+} from "node-zugferd/codelist/untdid-5305";
+
 ```
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    {UNTDID_5305.map(({ code, name, description }) => (
-      <tr key={code}>
-        <td className="text-center">
-          <code>{code}</code>
-        </td>
-        <td>{name}</td>
-        <td>{description}</td>
-      </tr>
-    ))}
-  </tbody>
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/untdid-5305/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Name
+</th>
+<th>
+Semantic model
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>S</code>
+</td>
+<td>
+Standard rate
+</td>
+<td>
+Standard rate
+</td>
+</tr>
+<tr>
+<td>
+<code>Z</code>
+</td>
+<td>
+Zero rated goods
+</td>
+<td>
+Zero rated goods
+</td>
+</tr>
+<tr>
+<td>
+<code>E</code>
+</td>
+<td>
+Exempt from tax
+</td>
+<td>
+Exempt from tax
+</td>
+</tr>
+<tr>
+<td>
+<code>AE</code>
+</td>
+<td>
+VAT Reverse charge
+</td>
+<td>
+VAT reverse charge
+</td>
+</tr>
+<tr>
+<td>
+<code>K</code>
+</td>
+<td>
+VAT exempt for EEA intra-community supply of goods and services
+</td>
+<td>
+VAT exempt for intra community supply of goods
+</td>
+</tr>
+<tr>
+<td>
+<code>G</code>
+</td>
+<td>
+Free export item, tax not charged
+</td>
+<td>
+Free export item, tax not charged
+</td>
+</tr>
+<tr>
+<td>
+<code>O</code>
+</td>
+<td>
+Service outside scope of tax
+</td>
+<td>
+Services outside scope of tax
+</td>
+</tr>
+<tr>
+<td>
+<code>L</code>
+</td>
+<td>
+Canary Islands general indirect tax
+</td>
+<td>
+Canary Islands General Indirect Tax
+</td>
+</tr>
+<tr>
+<td>
+<code>M</code>
+</td>
+<td>
+Tax for production, services and importation in Ceuta and Melilla
+</td>
+<td>
+Liable for IPSI
+</td>
+</tr>
+</tbody>
 </table>

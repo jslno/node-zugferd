@@ -1,0 +1,1523 @@
+---
+title: UNTDID 7143 — Item type identification code
+description: Identification of the type of item number.
+---
+
+### Codelist [toc]
+
+```ts
+import {
+	ITEM,
+	Item,
+	itemCode,
+	PUBLISHED,
+	type ItemDefinition,
+	type ItemCode,
+} from "node-zugferd/codelist/item";
+
+```
+
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/item/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Code name
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>AA</code>
+</td>
+<td>
+Product version number
+</td>
+</tr>
+<tr>
+<td>
+<code>AB</code>
+</td>
+<td>
+Assembly
+</td>
+</tr>
+<tr>
+<td>
+<code>AC</code>
+</td>
+<td>
+HIBC (Health Industry Bar Code)
+</td>
+</tr>
+<tr>
+<td>
+<code>AD</code>
+</td>
+<td>
+Cold roll number
+</td>
+</tr>
+<tr>
+<td>
+<code>AE</code>
+</td>
+<td>
+Hot roll number
+</td>
+</tr>
+<tr>
+<td>
+<code>AF</code>
+</td>
+<td>
+Slab number
+</td>
+</tr>
+<tr>
+<td>
+<code>AG</code>
+</td>
+<td>
+Software revision number
+</td>
+</tr>
+<tr>
+<td>
+<code>AH</code>
+</td>
+<td>
+UPC (Universal Product Code) Consumer package code (1-5-5)
+</td>
+</tr>
+<tr>
+<td>
+<code>AI</code>
+</td>
+<td>
+UPC (Universal Product Code) Consumer package code (1-5-5-
+</td>
+</tr>
+<tr>
+<td>
+<code>AJ</code>
+</td>
+<td>
+Sample number
+</td>
+</tr>
+<tr>
+<td>
+<code>AK</code>
+</td>
+<td>
+Pack number
+</td>
+</tr>
+<tr>
+<td>
+<code>AL</code>
+</td>
+<td>
+UPC (Universal Product Code) Shipping container code (1-2-
+</td>
+</tr>
+<tr>
+<td>
+<code>AM</code>
+</td>
+<td>
+UPC (Universal Product Code)/EAN (European article number)
+</td>
+</tr>
+<tr>
+<td>
+<code>AN</code>
+</td>
+<td>
+UPC (Universal Product Code) suffix
+</td>
+</tr>
+<tr>
+<td>
+<code>AO</code>
+</td>
+<td>
+State label code
+</td>
+</tr>
+<tr>
+<td>
+<code>AP</code>
+</td>
+<td>
+Heat number
+</td>
+</tr>
+<tr>
+<td>
+<code>AQ</code>
+</td>
+<td>
+Coupon number
+</td>
+</tr>
+<tr>
+<td>
+<code>AR</code>
+</td>
+<td>
+Resource number
+</td>
+</tr>
+<tr>
+<td>
+<code>AS</code>
+</td>
+<td>
+Work task number
+</td>
+</tr>
+<tr>
+<td>
+<code>AT</code>
+</td>
+<td>
+Price look up number
+</td>
+</tr>
+<tr>
+<td>
+<code>AU</code>
+</td>
+<td>
+NSN (North Atlantic Treaty Organization Stock Number)
+</td>
+</tr>
+<tr>
+<td>
+<code>AV</code>
+</td>
+<td>
+Refined product code
+</td>
+</tr>
+<tr>
+<td>
+<code>AW</code>
+</td>
+<td>
+Exhibit
+</td>
+</tr>
+<tr>
+<td>
+<code>AX</code>
+</td>
+<td>
+End item
+</td>
+</tr>
+<tr>
+<td>
+<code>AY</code>
+</td>
+<td>
+Federal supply classification
+</td>
+</tr>
+<tr>
+<td>
+<code>AZ</code>
+</td>
+<td>
+Engineering data list
+</td>
+</tr>
+<tr>
+<td>
+<code>BA</code>
+</td>
+<td>
+Milestone event number
+</td>
+</tr>
+<tr>
+<td>
+<code>BB</code>
+</td>
+<td>
+Lot number
+</td>
+</tr>
+<tr>
+<td>
+<code>BC</code>
+</td>
+<td>
+National drug code 4-4-2 format
+</td>
+</tr>
+<tr>
+<td>
+<code>BD</code>
+</td>
+<td>
+National drug code 5-3-2 format
+</td>
+</tr>
+<tr>
+<td>
+<code>BE</code>
+</td>
+<td>
+National drug code 5-4-1 format
+</td>
+</tr>
+<tr>
+<td>
+<code>BF</code>
+</td>
+<td>
+National drug code 5-4-2 format
+</td>
+</tr>
+<tr>
+<td>
+<code>BG</code>
+</td>
+<td>
+National drug code
+</td>
+</tr>
+<tr>
+<td>
+<code>BH</code>
+</td>
+<td>
+Part number
+</td>
+</tr>
+<tr>
+<td>
+<code>BI</code>
+</td>
+<td>
+Local Stock Number (LSN)
+</td>
+</tr>
+<tr>
+<td>
+<code>BJ</code>
+</td>
+<td>
+Next higher assembly number
+</td>
+</tr>
+<tr>
+<td>
+<code>BK</code>
+</td>
+<td>
+Data category
+</td>
+</tr>
+<tr>
+<td>
+<code>BL</code>
+</td>
+<td>
+Control number
+</td>
+</tr>
+<tr>
+<td>
+<code>BM</code>
+</td>
+<td>
+Special material identification code
+</td>
+</tr>
+<tr>
+<td>
+<code>BN</code>
+</td>
+<td>
+Locally assigned control number
+</td>
+</tr>
+<tr>
+<td>
+<code>BO</code>
+</td>
+<td>
+Buyer's colour
+</td>
+</tr>
+<tr>
+<td>
+<code>BP</code>
+</td>
+<td>
+Buyer's part number
+</td>
+</tr>
+<tr>
+<td>
+<code>BQ</code>
+</td>
+<td>
+Variable measure product code
+</td>
+</tr>
+<tr>
+<td>
+<code>BR</code>
+</td>
+<td>
+Financial phase
+</td>
+</tr>
+<tr>
+<td>
+<code>BS</code>
+</td>
+<td>
+Contract breakdown
+</td>
+</tr>
+<tr>
+<td>
+<code>BT</code>
+</td>
+<td>
+Technical phase
+</td>
+</tr>
+<tr>
+<td>
+<code>BU</code>
+</td>
+<td>
+Dye lot number
+</td>
+</tr>
+<tr>
+<td>
+<code>BV</code>
+</td>
+<td>
+Daily statement of activities
+</td>
+</tr>
+<tr>
+<td>
+<code>BW</code>
+</td>
+<td>
+Periodical statement of activities within a bilaterally
+</td>
+</tr>
+<tr>
+<td>
+<code>BX</code>
+</td>
+<td>
+Calendar week statement of activities
+</td>
+</tr>
+<tr>
+<td>
+<code>BY</code>
+</td>
+<td>
+Calendar month statement of activities
+</td>
+</tr>
+<tr>
+<td>
+<code>BZ</code>
+</td>
+<td>
+Original equipment number
+</td>
+</tr>
+<tr>
+<td>
+<code>CC</code>
+</td>
+<td>
+Industry commodity code
+</td>
+</tr>
+<tr>
+<td>
+<code>CG</code>
+</td>
+<td>
+Commodity grouping
+</td>
+</tr>
+<tr>
+<td>
+<code>CL</code>
+</td>
+<td>
+Colour number
+</td>
+</tr>
+<tr>
+<td>
+<code>CR</code>
+</td>
+<td>
+Contract number
+</td>
+</tr>
+<tr>
+<td>
+<code>CV</code>
+</td>
+<td>
+Customs article number
+</td>
+</tr>
+<tr>
+<td>
+<code>DR</code>
+</td>
+<td>
+Drawing revision number
+</td>
+</tr>
+<tr>
+<td>
+<code>DW</code>
+</td>
+<td>
+Drawing
+</td>
+</tr>
+<tr>
+<td>
+<code>EC</code>
+</td>
+<td>
+Engineering change level
+</td>
+</tr>
+<tr>
+<td>
+<code>EF</code>
+</td>
+<td>
+Material code
+</td>
+</tr>
+<tr>
+<td>
+<code>EMD</code>
+</td>
+<td>
+EMDN (European Medical Device Nomenclature)
+</td>
+</tr>
+<tr>
+<td>
+<code>EN</code>
+</td>
+<td>
+International Article Numbering Association (EAN)
+</td>
+</tr>
+<tr>
+<td>
+<code>FS</code>
+</td>
+<td>
+Fish species
+</td>
+</tr>
+<tr>
+<td>
+<code>GB</code>
+</td>
+<td>
+Buyer's internal product group code
+</td>
+</tr>
+<tr>
+<td>
+<code>GMN</code>
+</td>
+<td>
+Global model number
+</td>
+</tr>
+<tr>
+<td>
+<code>GN</code>
+</td>
+<td>
+National product group code
+</td>
+</tr>
+<tr>
+<td>
+<code>GS</code>
+</td>
+<td>
+General specification number
+</td>
+</tr>
+<tr>
+<td>
+<code>HS</code>
+</td>
+<td>
+Harmonised system
+</td>
+</tr>
+<tr>
+<td>
+<code>IB</code>
+</td>
+<td>
+ISBN (International Standard Book Number)
+</td>
+</tr>
+<tr>
+<td>
+<code>IN</code>
+</td>
+<td>
+Buyer's item number
+</td>
+</tr>
+<tr>
+<td>
+<code>IS</code>
+</td>
+<td>
+ISSN (International Standard Serial Number)
+</td>
+</tr>
+<tr>
+<td>
+<code>IT</code>
+</td>
+<td>
+Buyer's style number
+</td>
+</tr>
+<tr>
+<td>
+<code>IZ</code>
+</td>
+<td>
+Buyer's size code
+</td>
+</tr>
+<tr>
+<td>
+<code>MA</code>
+</td>
+<td>
+Machine number
+</td>
+</tr>
+<tr>
+<td>
+<code>MF</code>
+</td>
+<td>
+Manufacturer's (producer's) article number
+</td>
+</tr>
+<tr>
+<td>
+<code>MN</code>
+</td>
+<td>
+Model number
+</td>
+</tr>
+<tr>
+<td>
+<code>MP</code>
+</td>
+<td>
+Product/service identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>NB</code>
+</td>
+<td>
+Batch number
+</td>
+</tr>
+<tr>
+<td>
+<code>ON</code>
+</td>
+<td>
+Customer order number
+</td>
+</tr>
+<tr>
+<td>
+<code>PD</code>
+</td>
+<td>
+Part number description
+</td>
+</tr>
+<tr>
+<td>
+<code>PL</code>
+</td>
+<td>
+Purchaser's order line number
+</td>
+</tr>
+<tr>
+<td>
+<code>PO</code>
+</td>
+<td>
+Purchase order number
+</td>
+</tr>
+<tr>
+<td>
+<code>PPI</code>
+</td>
+<td>
+Phytosanitary Passport identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>PV</code>
+</td>
+<td>
+Promotional variant number
+</td>
+</tr>
+<tr>
+<td>
+<code>QS</code>
+</td>
+<td>
+Buyer's qualifier for size
+</td>
+</tr>
+<tr>
+<td>
+<code>RC</code>
+</td>
+<td>
+Returnable container number
+</td>
+</tr>
+<tr>
+<td>
+<code>RN</code>
+</td>
+<td>
+Release number
+</td>
+</tr>
+<tr>
+<td>
+<code>RU</code>
+</td>
+<td>
+Run number
+</td>
+</tr>
+<tr>
+<td>
+<code>RY</code>
+</td>
+<td>
+Record keeping of model year
+</td>
+</tr>
+<tr>
+<td>
+<code>SA</code>
+</td>
+<td>
+Supplier's article number
+</td>
+</tr>
+<tr>
+<td>
+<code>SG</code>
+</td>
+<td>
+Standard group of products (mixed assortment)
+</td>
+</tr>
+<tr>
+<td>
+<code>SK</code>
+</td>
+<td>
+SKU (Stock keeping unit)
+</td>
+</tr>
+<tr>
+<td>
+<code>SN</code>
+</td>
+<td>
+Serial number
+</td>
+</tr>
+<tr>
+<td>
+<code>SRS</code>
+</td>
+<td>
+RSK number
+</td>
+</tr>
+<tr>
+<td>
+<code>SRT</code>
+</td>
+<td>
+IFLS (Institut Francais du Libre Service) 5 digit product
+</td>
+</tr>
+<tr>
+<td>
+<code>SRU</code>
+</td>
+<td>
+IFLS (Institut Francais du Libre Service) 9 digit product
+</td>
+</tr>
+<tr>
+<td>
+<code>SRV</code>
+</td>
+<td>
+GS1 Global Trade Item Number
+</td>
+</tr>
+<tr>
+<td>
+<code>SRW</code>
+</td>
+<td>
+EDIS (Energy Data Identification System)
+</td>
+</tr>
+<tr>
+<td>
+<code>SRX</code>
+</td>
+<td>
+Slaughter number
+</td>
+</tr>
+<tr>
+<td>
+<code>SRY</code>
+</td>
+<td>
+Official animal number
+</td>
+</tr>
+<tr>
+<td>
+<code>SRZ</code>
+</td>
+<td>
+Harmonized tariff schedule
+</td>
+</tr>
+<tr>
+<td>
+<code>SS</code>
+</td>
+<td>
+Supplier's supplier article number
+</td>
+</tr>
+<tr>
+<td>
+<code>SSA</code>
+</td>
+<td>
+46 Level DOT Code
+</td>
+</tr>
+<tr>
+<td>
+<code>SSB</code>
+</td>
+<td>
+Airline Tariff 6D
+</td>
+</tr>
+<tr>
+<td>
+<code>SSC</code>
+</td>
+<td>
+Title 49 Code of Federal Regulations
+</td>
+</tr>
+<tr>
+<td>
+<code>SSD</code>
+</td>
+<td>
+International Civil Aviation Administration code
+</td>
+</tr>
+<tr>
+<td>
+<code>SSE</code>
+</td>
+<td>
+Hazardous Materials ID DOT
+</td>
+</tr>
+<tr>
+<td>
+<code>SSF</code>
+</td>
+<td>
+Endorsement
+</td>
+</tr>
+<tr>
+<td>
+<code>SSG</code>
+</td>
+<td>
+Air Force Regulation 71-4
+</td>
+</tr>
+<tr>
+<td>
+<code>SSH</code>
+</td>
+<td>
+Breed
+</td>
+</tr>
+<tr>
+<td>
+<code>SSI</code>
+</td>
+<td>
+Chemical Abstract Service (CAS) registry number
+</td>
+</tr>
+<tr>
+<td>
+<code>SSJ</code>
+</td>
+<td>
+Engine model designation
+</td>
+</tr>
+<tr>
+<td>
+<code>SSK</code>
+</td>
+<td>
+Institutional Meat Purchase Specifications (IMPS) Number
+</td>
+</tr>
+<tr>
+<td>
+<code>SSL</code>
+</td>
+<td>
+Price Look-Up code (PLU)
+</td>
+</tr>
+<tr>
+<td>
+<code>SSM</code>
+</td>
+<td>
+International Maritime Organization (IMO) Code
+</td>
+</tr>
+<tr>
+<td>
+<code>SSN</code>
+</td>
+<td>
+Bureau of Explosives 600-A (rail)
+</td>
+</tr>
+<tr>
+<td>
+<code>SSO</code>
+</td>
+<td>
+United Nations Dangerous Goods List
+</td>
+</tr>
+<tr>
+<td>
+<code>SSP</code>
+</td>
+<td>
+International Code of Botanical Nomenclature (ICBN)
+</td>
+</tr>
+<tr>
+<td>
+<code>SSQ</code>
+</td>
+<td>
+International Code of Zoological Nomenclature (ICZN)
+</td>
+</tr>
+<tr>
+<td>
+<code>SSR</code>
+</td>
+<td>
+International Code of Nomenclature for Cultivated Plants
+</td>
+</tr>
+<tr>
+<td>
+<code>SSS</code>
+</td>
+<td>
+Distributor’s article identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>SST</code>
+</td>
+<td>
+Norwegian Classification system ENVA
+</td>
+</tr>
+<tr>
+<td>
+<code>SSU</code>
+</td>
+<td>
+Supplier assigned classification
+</td>
+</tr>
+<tr>
+<td>
+<code>SSV</code>
+</td>
+<td>
+Mexican classification system AMECE
+</td>
+</tr>
+<tr>
+<td>
+<code>SSW</code>
+</td>
+<td>
+German classification system CCG
+</td>
+</tr>
+<tr>
+<td>
+<code>SSX</code>
+</td>
+<td>
+Finnish classification system EANFIN
+</td>
+</tr>
+<tr>
+<td>
+<code>SSY</code>
+</td>
+<td>
+Canadian classification system ICC
+</td>
+</tr>
+<tr>
+<td>
+<code>SSZ</code>
+</td>
+<td>
+French classification system IFLS5
+</td>
+</tr>
+<tr>
+<td>
+<code>ST</code>
+</td>
+<td>
+Style number
+</td>
+</tr>
+<tr>
+<td>
+<code>STA</code>
+</td>
+<td>
+Dutch classification system CBL
+</td>
+</tr>
+<tr>
+<td>
+<code>STB</code>
+</td>
+<td>
+Japanese classification system JICFS
+</td>
+</tr>
+<tr>
+<td>
+<code>STC</code>
+</td>
+<td>
+European Union dairy subsidy eligibility classification
+</td>
+</tr>
+<tr>
+<td>
+<code>STD</code>
+</td>
+<td>
+GS1 Spain classification system
+</td>
+</tr>
+<tr>
+<td>
+<code>STE</code>
+</td>
+<td>
+GS1 Poland classification system
+</td>
+</tr>
+<tr>
+<td>
+<code>STF</code>
+</td>
+<td>
+Federal Agency on Technical Regulating and Metrology of the
+</td>
+</tr>
+<tr>
+<td>
+<code>STG</code>
+</td>
+<td>
+Efficient Consumer Response (ECR) Austria classification
+</td>
+</tr>
+<tr>
+<td>
+<code>STH</code>
+</td>
+<td>
+GS1 Italy classification system
+</td>
+</tr>
+<tr>
+<td>
+<code>STI</code>
+</td>
+<td>
+CPV (Common Procurement Vocabulary)
+</td>
+</tr>
+<tr>
+<td>
+<code>STJ</code>
+</td>
+<td>
+IFDA (International Foodservice Distributors Association)
+</td>
+</tr>
+<tr>
+<td>
+<code>STK</code>
+</td>
+<td>
+AHFS (American Hospital Formulary Service) pharmacologic -
+</td>
+</tr>
+<tr>
+<td>
+<code>STL</code>
+</td>
+<td>
+ATC (Anatomical Therapeutic Chemical) classification system
+</td>
+</tr>
+<tr>
+<td>
+<code>STM</code>
+</td>
+<td>
+CLADIMED (Classification des Dispositifs Médicaux)
+</td>
+</tr>
+<tr>
+<td>
+<code>STN</code>
+</td>
+<td>
+CMDR (Canadian Medical Device Regulations) classification
+</td>
+</tr>
+<tr>
+<td>
+<code>STO</code>
+</td>
+<td>
+CNDM (Classificazione Nazionale dei Dispositivi Medici)
+</td>
+</tr>
+<tr>
+<td>
+<code>STP</code>
+</td>
+<td>
+UK DM&D (Dictionary of Medicines & Devices) standard coding
+</td>
+</tr>
+<tr>
+<td>
+<code>STQ</code>
+</td>
+<td>
+eCl@ss
+</td>
+</tr>
+<tr>
+<td>
+<code>STR</code>
+</td>
+<td>
+EDMA (European Diagnostic Manufacturers Association)
+</td>
+</tr>
+<tr>
+<td>
+<code>STS</code>
+</td>
+<td>
+EGAR (European Generic Article Register)
+</td>
+</tr>
+<tr>
+<td>
+<code>STT</code>
+</td>
+<td>
+GMDN (Global Medical Devices Nomenclature)
+</td>
+</tr>
+<tr>
+<td>
+<code>STU</code>
+</td>
+<td>
+GPI (Generic Product Identifier)
+</td>
+</tr>
+<tr>
+<td>
+<code>STV</code>
+</td>
+<td>
+HCPCS (Healthcare Common Procedure Coding System)
+</td>
+</tr>
+<tr>
+<td>
+<code>STW</code>
+</td>
+<td>
+ICPS (International Classification for Patient Safety)
+</td>
+</tr>
+<tr>
+<td>
+<code>STX</code>
+</td>
+<td>
+MedDRA (Medical Dictionary for Regulatory Activities)
+</td>
+</tr>
+<tr>
+<td>
+<code>STY</code>
+</td>
+<td>
+Medical Columbus
+</td>
+</tr>
+<tr>
+<td>
+<code>STZ</code>
+</td>
+<td>
+NAPCS (North American Product Classification System)
+</td>
+</tr>
+<tr>
+<td>
+<code>SUA</code>
+</td>
+<td>
+NHS (National Health Services) eClass
+</td>
+</tr>
+<tr>
+<td>
+<code>SUB</code>
+</td>
+<td>
+US FDA (Food and Drug Administration) Product Code
+</td>
+</tr>
+<tr>
+<td>
+<code>SUC</code>
+</td>
+<td>
+SNOMED CT (Systematized Nomenclature of Medicine-Clinical
+</td>
+</tr>
+<tr>
+<td>
+<code>SUD</code>
+</td>
+<td>
+UMDNS (Universal Medical Device Nomenclature System)
+</td>
+</tr>
+<tr>
+<td>
+<code>SUE</code>
+</td>
+<td>
+GS1 Global Returnable Asset Identifier, non-serialised
+</td>
+</tr>
+<tr>
+<td>
+<code>SUF</code>
+</td>
+<td>
+IMEI
+</td>
+</tr>
+<tr>
+<td>
+<code>SUG</code>
+</td>
+<td>
+Waste Type (EMSA)
+</td>
+</tr>
+<tr>
+<td>
+<code>SUH</code>
+</td>
+<td>
+Ship's store classification type
+</td>
+</tr>
+<tr>
+<td>
+<code>SUI</code>
+</td>
+<td>
+Emergency fire code
+</td>
+</tr>
+<tr>
+<td>
+<code>SUJ</code>
+</td>
+<td>
+Emergency spillage code
+</td>
+</tr>
+<tr>
+<td>
+<code>SUK</code>
+</td>
+<td>
+IMDG packing group
+</td>
+</tr>
+<tr>
+<td>
+<code>SUL</code>
+</td>
+<td>
+MARPOL Code IBC
+</td>
+</tr>
+<tr>
+<td>
+<code>SUM</code>
+</td>
+<td>
+IMDG subsidiary risk class
+</td>
+</tr>
+<tr>
+<td>
+<code>TG</code>
+</td>
+<td>
+Transport group number
+</td>
+</tr>
+<tr>
+<td>
+<code>TSN</code>
+</td>
+<td>
+Taxonomic Serial Number
+</td>
+</tr>
+<tr>
+<td>
+<code>TSO</code>
+</td>
+<td>
+IMDG main hazard class
+</td>
+</tr>
+<tr>
+<td>
+<code>TSP</code>
+</td>
+<td>
+EU Combined Nomenclature
+</td>
+</tr>
+<tr>
+<td>
+<code>TSQ</code>
+</td>
+<td>
+Therapeutic classification number
+</td>
+</tr>
+<tr>
+<td>
+<code>TSR</code>
+</td>
+<td>
+European Waste Catalogue
+</td>
+</tr>
+<tr>
+<td>
+<code>TSS</code>
+</td>
+<td>
+Price grouping code
+</td>
+</tr>
+<tr>
+<td>
+<code>TST</code>
+</td>
+<td>
+UNSPSC
+</td>
+</tr>
+<tr>
+<td>
+<code>TSU</code>
+</td>
+<td>
+EU RoHS Directive
+</td>
+</tr>
+<tr>
+<td>
+<code>UA</code>
+</td>
+<td>
+Ultimate customer's article number
+</td>
+</tr>
+<tr>
+<td>
+<code>UP</code>
+</td>
+<td>
+UPC (Universal product code)
+</td>
+</tr>
+<tr>
+<td>
+<code>VN</code>
+</td>
+<td>
+Vendor item number
+</td>
+</tr>
+<tr>
+<td>
+<code>VP</code>
+</td>
+<td>
+Vendor's (seller's) part number
+</td>
+</tr>
+<tr>
+<td>
+<code>VS</code>
+</td>
+<td>
+Vendor's supplemental item number
+</td>
+</tr>
+<tr>
+<td>
+<code>VX</code>
+</td>
+<td>
+Vendor specification number
+</td>
+</tr>
+<tr>
+<td>
+<code>ZZZ</code>
+</td>
+<td>
+Mutually defined
+</td>
+</tr>
+</tbody>
+</table>

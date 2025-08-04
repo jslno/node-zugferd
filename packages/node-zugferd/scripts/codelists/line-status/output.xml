@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<entry>
+		<value>1</value>
+		<name>Added</name>
+		<description>The information is to be or has been added.</description>
+	</entry>
+	<entry>
+		<value>2</value>
+		<name>Deleted</name>
+		<description>The information is to be or has been deleted.</description>
+	</entry>
+	<entry>
+		<value>3</value>
+		<name>Changed</name>
+		<description>The information is to be or has been changed.</description>
+	</entry>
+	<entry>
+		<value>4</value>
+		<name>No action</name>
+		<description>This line item is not affected by the actual message.</description>
+	</entry>
+	<entry>
+		<value>5</value>
+		<name>Accepted without amendment</name>
+		<description>This line item is entirely accepted by the seller.</description>
+	</entry>
+	<entry>
+		<value>6</value>
+		<name>Accepted with amendment</name>
+		<description>This line item is accepted but amended by the seller.</description>
+	</entry>
+	<entry>
+		<value>7</value>
+		<name>Not accepted</name>
+		<description>This line item is not accepted by the seller.</description>
+	</entry>
+	<entry>
+		<value>8</value>
+		<name>Schedule only</name>
+		<description>Code specifying that the message is a schedule only.</description>
+	</entry>
+	<entry>
+		<value>9</value>
+		<name>Amendments</name>
+		<description>Code specifying that amendments are requested/notified.</description>
+	</entry>
+	<entry>
+		<value>10</value>
+		<name>Not found</name>
+		<description>This line item is not found in the referenced message.</description>
+	</entry>
+	<entry>
+		<value>11</value>
+		<name>Not amended</name>
+		<description>This line is not amended by the buyer.</description>
+	</entry>
+	<entry>
+		<value>12</value>
+		<name>Line item numbers changed</name>
+		<description>Code specifying that the line item numbers have changed.</description>
+	</entry>
+	<entry>
+		<value>13</value>
+		<name>Buyer has deducted amount</name>
+		<description>Buyer has deducted amount from payment.</description>
+	</entry>
+	<entry>
+		<value>14</value>
+		<name>Buyer claims against invoice</name>
+		<description>Buyer has a claim against an outstanding invoice.</description>
+	</entry>
+	<entry>
+		<value>15</value>
+		<name>Charge back by seller</name>
+		<description>Factor has been requested to charge back the outstanding item.</description>
+	</entry>
+	<entry>
+		<value>16</value>
+		<name>Seller will issue credit note</name>
+		<description>Seller agrees to issue a credit note.</description>
+	</entry>
+	<entry>
+		<value>17</value>
+		<name>Terms changed for new terms</name>
+		<description>New settlement terms have been agreed.</description>
+	</entry>
+	<entry>
+		<value>18</value>
+		<name>Abide outcome of negotiations</name>
+		<description>Factor agrees to abide by the outcome of negotiations between seller and buyer.</description>
+	</entry>
+	<entry>
+		<value>19</value>
+		<name>Seller rejects dispute</name>
+		<description>Seller does not accept validity of dispute.</description>
+	</entry>
+	<entry>
+		<value>20</value>
+		<name>Settlement</name>
+		<description>The reported situation is settled.</description>
+	</entry>
+	<entry>
+		<value>21</value>
+		<name>No delivery</name>
+		<description>Code indicating that no delivery will be required.</description>
+	</entry>
+	<entry>
+		<value>22</value>
+		<name>Call-off delivery</name>
+		<description>A request for delivery of a particular quantity of goods to be delivered on a particular date (or within a particular period).</description>
+	</entry>
+	<entry>
+		<value>23</value>
+		<name>Proposed amendment</name>
+		<description>A code used to indicate an amendment suggested by the sender.</description>
+	</entry>
+	<entry>
+		<value>24</value>
+		<name>Accepted with amendment, no confirmation required</name>
+		<description>Accepted with changes which require no confirmation.</description>
+	</entry>
+	<entry>
+		<value>25</value>
+		<name>Equipment provisionally repaired</name>
+		<description>The equipment or component has been provisionally repaired.</description>
+	</entry>
+	<entry>
+		<value>26</value>
+		<name>Included</name>
+		<description>Code indicating that the entity is included.</description>
+	</entry>
+	<entry>
+		<value>27</value>
+		<name>Upon receipt and verification of documents we shall cover you when due as per your instructions</name>
+		<description>Upon receipt and verification of documents we shall cover you when due as per your instructions.</description>
+	</entry>
+	<entry>
+		<value>28</value>
+		<name>Upon receipt and verification of documents we shall authorize you to debit our account with you when due</name>
+		<description>Upon receipt and verification of documents we shall authorize you to debit our account with you when due.</description>
+	</entry>
+	<entry>
+		<value>29</value>
+		<name>On receipt of your authenticated advice we shall cover you when due as per your instructions</name>
+		<description>On receipt of your authenticated advice we shall cover you when due as per your instructions.</description>
+	</entry>
+	<entry>
+		<value>30</value>
+		<name>On receipt of your authenticated advice we shall authorize you to debit our account with you when due</name>
+		<description>On receipt of your authenticated advice we shall authorize you to debit our account with you when due.</description>
+	</entry>
+	<entry>
+		<value>31</value>
+		<name>On receipt of your authenticated advice we shall credit your account with us when due</name>
+		<description>On receipt of your authenticated advice we shall credit your account with us when due.</description>
+	</entry>
+	<entry>
+		<value>32</value>
+		<name>Credit advice requested for direct debit</name>
+		<description>A credit advice is requested for the direct debit.</description>
+	</entry>
+	<entry>
+		<value>33</value>
+		<name>Credit advice and acknowledgement for direct debit</name>
+		<description>A credit advice and acknowledgement are requested for the direct debit.</description>
+	</entry>
+	<entry>
+		<value>34</value>
+		<name>Inquiry</name>
+		<description>Request for information.</description>
+	</entry>
+	<entry>
+		<value>35</value>
+		<name>Checked</name>
+		<description>Checked.</description>
+	</entry>
+	<entry>
+		<value>36</value>
+		<name>Not checked</name>
+		<description>Not checked.</description>
+	</entry>
+	<entry>
+		<value>37</value>
+		<name>Cancelled</name>
+		<description>Discontinued.</description>
+	</entry>
+	<entry>
+		<value>38</value>
+		<name>Replaced</name>
+		<description>Provide a replacement.</description>
+	</entry>
+	<entry>
+		<value>39</value>
+		<name>New</name>
+		<description>Not existing before.</description>
+	</entry>
+	<entry>
+		<value>40</value>
+		<name>Agreed</name>
+		<description>Consent.</description>
+	</entry>
+	<entry>
+		<value>41</value>
+		<name>Proposed</name>
+		<description>Put forward for consideration.</description>
+	</entry>
+	<entry>
+		<value>42</value>
+		<name>Already delivered</name>
+		<description>Delivery has taken place.</description>
+	</entry>
+	<entry>
+		<value>43</value>
+		<name>Additional subordinate structures will follow</name>
+		<description>Additional subordinate structures will follow the current hierarchy level.</description>
+	</entry>
+	<entry>
+		<value>44</value>
+		<name>Additional subordinate structures will not follow</name>
+		<description>No additional subordinate structures will follow the current hierarchy level.</description>
+	</entry>
+	<entry>
+		<value>45</value>
+		<name>Result opposed</name>
+		<description>A notification that the result is opposed.</description>
+	</entry>
+	<entry>
+		<value>46</value>
+		<name>Auction held</name>
+		<description>A notification that an auction was held.</description>
+	</entry>
+	<entry>
+		<value>47</value>
+		<name>Legal action pursued</name>
+		<description>A notification that legal action has been pursued.</description>
+	</entry>
+	<entry>
+		<value>48</value>
+		<name>Meeting held</name>
+		<description>A notification that a meeting was held.</description>
+	</entry>
+	<entry>
+		<value>49</value>
+		<name>Result set aside</name>
+		<description>A notification that the result has been set aside.</description>
+	</entry>
+	<entry>
+		<value>50</value>
+		<name>Result disputed</name>
+		<description>A notification that the result has been disputed.</description>
+	</entry>
+	<entry>
+		<value>51</value>
+		<name>Countersued</name>
+		<description>A notification that a countersuit has been filed.</description>
+	</entry>
+	<entry>
+		<value>52</value>
+		<name>Pending</name>
+		<description>A notification that an action is awaiting settlement.</description>
+	</entry>
+	<entry>
+		<value>53</value>
+		<name>Court action dismissed</name>
+		<description>A notification that a court action will no longer be heard.</description>
+	</entry>
+	<entry>
+		<value>54</value>
+		<name>Referred item, accepted</name>
+		<description>The item being referred to has been accepted.</description>
+	</entry>
+	<entry>
+		<value>55</value>
+		<name>Referred item, rejected</name>
+		<description>The item being referred to has been rejected.</description>
+	</entry>
+	<entry>
+		<value>56</value>
+		<name>Debit advice statement line</name>
+		<description>Notification that the statement line is a debit advice.</description>
+	</entry>
+	<entry>
+		<value>57</value>
+		<name>Credit advice statement line</name>
+		<description>Notification that the statement line is a credit advice.</description>
+	</entry>
+	<entry>
+		<value>58</value>
+		<name>Grouped credit advices</name>
+		<description>Notification that the credit advices are grouped.</description>
+	</entry>
+	<entry>
+		<value>59</value>
+		<name>Grouped debit advices</name>
+		<description>Notification that the debit advices are grouped.</description>
+	</entry>
+	<entry>
+		<value>60</value>
+		<name>Registered</name>
+		<description>The name is registered.</description>
+	</entry>
+	<entry>
+		<value>61</value>
+		<name>Payment denied</name>
+		<description>The payment has been denied.</description>
+	</entry>
+	<entry>
+		<value>62</value>
+		<name>Approved as amended</name>
+		<description>Approved with modifications.</description>
+	</entry>
+	<entry>
+		<value>63</value>
+		<name>Approved as submitted</name>
+		<description>The request has been approved as submitted.</description>
+	</entry>
+	<entry>
+		<value>64</value>
+		<name>Cancelled, no activity</name>
+		<description>Cancelled due to the lack of activity.</description>
+	</entry>
+	<entry>
+		<value>65</value>
+		<name>Under investigation</name>
+		<description>Investigation is being done.</description>
+	</entry>
+	<entry>
+		<value>66</value>
+		<name>Initial claim received</name>
+		<description>Notification that the initial claim was received.</description>
+	</entry>
+	<entry>
+		<value>67</value>
+		<name>Not in process</name>
+		<description>Not in process.</description>
+	</entry>
+	<entry>
+		<value>68</value>
+		<name>Rejected, duplicate</name>
+		<description>Rejected because it is a duplicate.</description>
+	</entry>
+	<entry>
+		<value>69</value>
+		<name>Rejected, resubmit with corrections</name>
+		<description>Rejected but may be resubmitted when corrected.</description>
+	</entry>
+	<entry>
+		<value>70</value>
+		<name>Pending, incomplete</name>
+		<description>Pending because of incomplete information.</description>
+	</entry>
+	<entry>
+		<value>71</value>
+		<name>Under field office investigation</name>
+		<description>Investigation by the field is being done.</description>
+	</entry>
+	<entry>
+		<value>72</value>
+		<name>Pending, awaiting additional material</name>
+		<description>Pending awaiting receipt of additional material.</description>
+	</entry>
+	<entry>
+		<value>73</value>
+		<name>Pending, awaiting review</name>
+		<description>Pending while awaiting review.</description>
+	</entry>
+	<entry>
+		<value>74</value>
+		<name>Reopened</name>
+		<description>Opened again.</description>
+	</entry>
+	<entry>
+		<value>75</value>
+		<name>Processed by primary, forwarded to additional payer(s)</name>
+		<description>This request has been processed by the primary payer and sent to additional payer(s).</description>
+	</entry>
+	<entry>
+		<value>76</value>
+		<name>Processed by secondary, forwarded to additional payer(s)</name>
+		<description>This request has been processed by the secondary payer and sent to additional payer(s).</description>
+	</entry>
+	<entry>
+		<value>77</value>
+		<name>Processed by tertiary, forwarded to additional payer(s)</name>
+		<description>This request has been processed by the tertiary payer and sent to additional payer(s).</description>
+	</entry>
+	<entry>
+		<value>78</value>
+		<name>Previous payment decision reversed</name>
+		<description>A previous payment decision has been reversed.</description>
+	</entry>
+	<entry>
+		<value>79</value>
+		<name>Not our claim, forwarded to another payer(s)</name>
+		<description>A request does not belong to this payer but has been forwarded to another payer(s).</description>
+	</entry>
+	<entry>
+		<value>80</value>
+		<name>Transferred to correct insurance carrier</name>
+		<description>The request has been transferred to the correct insurance carrier for processing.</description>
+	</entry>
+	<entry>
+		<value>81</value>
+		<name>Not paid, predetermination pricing only</name>
+		<description>Payment has not been made and the enclosed response is predetermination pricing only.</description>
+	</entry>
+	<entry>
+		<value>82</value>
+		<name>Documentation claim</name>
+		<description>The claim is for documentation purposes only, no payment required.</description>
+	</entry>
+	<entry>
+		<value>83</value>
+		<name>Reviewed</name>
+		<description>Assessed.</description>
+	</entry>
+	<entry>
+		<value>84</value>
+		<name>Repriced</name>
+		<description>This price was changed.</description>
+	</entry>
+	<entry>
+		<value>85</value>
+		<name>Audited</name>
+		<description>An official examination has occurred.</description>
+	</entry>
+	<entry>
+		<value>86</value>
+		<name>Conditionally paid</name>
+		<description>Payment has been conditionally made.</description>
+	</entry>
+	<entry>
+		<value>87</value>
+		<name>On appeal</name>
+		<description>Reconsideration of the decision has been applied for.</description>
+	</entry>
+	<entry>
+		<value>88</value>
+		<name>Closed</name>
+		<description>Shut.</description>
+	</entry>
+	<entry>
+		<value>89</value>
+		<name>Reaudited</name>
+		<description>A subsequent official examination has occurred.</description>
+	</entry>
+	<entry>
+		<value>90</value>
+		<name>Reissued</name>
+		<description>Issued again.</description>
+	</entry>
+	<entry>
+		<value>91</value>
+		<name>Closed after reopening</name>
+		<description>Reopened and then closed.</description>
+	</entry>
+	<entry>
+		<value>92</value>
+		<name>Redetermined</name>
+		<description>Determined again or differently.</description>
+	</entry>
+	<entry>
+		<value>93</value>
+		<name>Processed as primary</name>
+		<description>Processed as the first.</description>
+	</entry>
+	<entry>
+		<value>94</value>
+		<name>Processed as secondary</name>
+		<description>Processed as the second.</description>
+	</entry>
+	<entry>
+		<value>95</value>
+		<name>Processed as tertiary</name>
+		<description>Processed as the third.</description>
+	</entry>
+	<entry>
+		<value>96</value>
+		<name>Correction of error</name>
+		<description>A correction to information previously communicated which contained an error.</description>
+	</entry>
+	<entry>
+		<value>97</value>
+		<name>Single credit item of a group</name>
+		<description>Notification that the credit item is a single credit item of a group of credit items.</description>
+	</entry>
+	<entry>
+		<value>98</value>
+		<name>Single debit item of a group</name>
+		<description>Notification that the debit item is a single debit item of a group of debit items.</description>
+	</entry>
+	<entry>
+		<value>99</value>
+		<name>Interim response</name>
+		<description>The response is an interim one.</description>
+	</entry>
+	<entry>
+		<value>100</value>
+		<name>Final response</name>
+		<description>The response is an final one.</description>
+	</entry>
+	<entry>
+		<value>101</value>
+		<name>Debit advice requested</name>
+		<description>A debit advice is requested for the transaction.</description>
+	</entry>
+	<entry>
+		<value>102</value>
+		<name>Transaction not impacted</name>
+		<description>Advice that the transaction is not impacted.</description>
+	</entry>
+	<entry>
+		<value>103</value>
+		<name>Patient to be notified</name>
+		<description>The action to take is to notify the patient.</description>
+	</entry>
+	<entry>
+		<value>104</value>
+		<name>Healthcare provider to be notified</name>
+		<description>The action to take is to notify the healthcare provider.</description>
+	</entry>
+	<entry>
+		<value>105</value>
+		<name>Usual general practitioner to be notified</name>
+		<description>The action to take is to notify the usual general practitioner.</description>
+	</entry>
+	<entry>
+		<value>106</value>
+		<name>Advice without details</name>
+		<description>An advice without details is requested or notified.</description>
+	</entry>
+	<entry>
+		<value>107</value>
+		<name>Advice with details</name>
+		<description>An advice with details is requested or notified.</description>
+	</entry>
+	<entry>
+		<value>108</value>
+		<name>Amendment requested</name>
+		<description>An amendment is requested.</description>
+	</entry>
+	<entry>
+		<value>109</value>
+		<name>For information</name>
+		<description>Included for information only.</description>
+	</entry>
+	<entry>
+		<value>110</value>
+		<name>Withdraw</name>
+		<description>A code indicating discontinuance or retraction.</description>
+	</entry>
+	<entry>
+		<value>111</value>
+		<name>Delivery date change</name>
+		<description>The action / notiification is a change of the delivery date.</description>
+	</entry>
+	<entry>
+		<value>112</value>
+		<name>Quantity change</name>
+		<description>The action / notification is a change of quantity.</description>
+	</entry>
+	<entry>
+		<value>113</value>
+		<name>Resale and claim</name>
+		<description>The identified items have been sold by the distributor to the end customer, and compensation for the loss of inventory value is claimed.</description>
+	</entry>
+	<entry>
+		<value>114</value>
+		<name>Resale</name>
+		<description>The identified items have been sold by the distributor to the end customer.</description>
+	</entry>
+	<entry>
+		<value>115</value>
+		<name>Prior addition</name>
+		<description>This existing line item becomes available at an earlier date.</description>
+	</entry>
+	<entry>
+		<value>116</value>
+		<name>Expired</name>
+		<description>This line has expired.</description>
+	</entry>
+	<entry>
+		<value>117</value>
+		<name>Hold</name>
+		<description>This line is on Hold.</description>
+	</entry>
+	<entry>
+		<value>118</value>
+		<name>Open</name>
+		<description>This line is open.</description>
+	</entry>
+	<entry>
+		<value>119</value>
+		<name>Observe</name>
+		<description>The object or item is to be or has been observed.</description>
+	</entry>
+</entries>

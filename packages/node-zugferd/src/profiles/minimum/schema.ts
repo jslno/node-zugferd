@@ -1,9 +1,9 @@
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
-import { UNTDID_1001 } from "../../codelists/untdid/1001.gen";
-import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
-import { ISO_6523 } from "../../codelists/iso/6523.gen";
-import { ISO_3166 } from "../../codelists/iso/3166";
+import { countryCode } from "../../codelists/country.gen";
+import { currencyCode } from "../../codelists/currency.gen";
+import { icdCode } from "../../codelists/icd.gen";
+import { untdid1001Code } from "../../codelists/untdid1001.gen";
 
 export const minimumSchema = {
 	/**
@@ -105,7 +105,7 @@ BR-2: An Invoice shall have an Invoice number (BT-1).`,
 	 */
 	typeCode: {
 		key: "BT-3",
-		type: UNTDID_1001.map(({ code }) => code),
+		type: untdid1001Code,
 		description: `**Invoice type code**
 
 A code specifying the functional type of the Invoice.
@@ -274,7 +274,7 @@ If no identification scheme is specified, it must be known by Buyer and Seller.`
 											 * For a SIREN or a SIRET, the value of this field is "0002"
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Seller legal registration identifier.
@@ -324,7 +324,7 @@ BR-8: An Invoice shall contain the Seller postal address (BG-5).`,
 									 */
 									countryCode: {
 										key: "BT-40",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Seller country code**
 
 A code that identifies the country.
@@ -498,7 +498,7 @@ CHORUSPRO: the identifier of the buyer (public entity) is mandatory and is alway
 											 * For a SIREN or a SIRET, the value of this field is "0002"
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -595,7 +595,7 @@ CHORUS PRO : not used`,
 					 */
 					currencyCode: {
 						key: "BT-5",
-						type: CURRENCY_CODES.map(({ code }) => code),
+						type: currencyCode,
 						description: `**Invoice currency code**
 
 The currency in which all Invoice amounts are given, except for the Total VAT amount in accounting currency.
@@ -688,7 +688,7 @@ The Invoice total VAT amount is the sum of all VAT category tax amounts.`,
 									 * Invoice currency code
 									 */
 									currencyCode: {
-										type: CURRENCY_CODES.map(({ code }) => code),
+										type: currencyCode,
 										description: "Invoice currency code",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[0]/@currencyID",
