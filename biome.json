@@ -35,8 +35,7 @@
 			".next",
 			".cache",
 			".source",
-			"**/*.gen.ts",
-			"scripts/*"
+			"**/*.gen.ts"
 		]
 	}
 }

@@ -1,63 +1,1005 @@
 ---
-title: VATEX
-description: VAT exemption reason code list
+title: CEF VATEX — VAT exemption reason code
+description: Code specifying the VAT exemption reason.
 ---
 
-import {
-  VATEX,
-  VATEX_IDENTIFIER,
-  VATEX_VERSION,
-} from "node-zugferd/codelist/vatex";
-import { MinusIcon } from "lucide-react";
-
-## Definition [toc]
-
-Identifier: <span className="text-fd-muted-foreground">{VATEX_IDENTIFIER}</span>
-
-Version: <span className="text-fd-muted-foreground">{VATEX_VERSION}</span>
-
-<div className="w-fit">
-  <Link
-    href="https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:vatex_1"
-    target="_blank"
-  >
-    Source
-  </Link>
-</div>
+### Codelist [toc]
 
 ```ts
 import {
-  VatEx,
-  VATEX,
-  type VatExCode,
+	VATEX,
+	VatEx,
+	vatExCode,
+	PUBLISHED,
+	type VatExDefinition,
+	type VatExCode,
 } from "node-zugferd/codelist/vatex";
+
 ```
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Remark</th>
-    </tr>
-  </thead>
-  <tbody>
-    {VATEX.map(({ code, name, description, remark }) => (
-      <tr key={code}>
-        <td className="text-center">
-          <code>{code}</code>
-        </td>
-        <td>{name}</td>
-        <td>{description}</td>
-        <td>
-          {!remark ? (
-            <MinusIcon className="mx-auto text-fd-muted-foreground" />
-          ) : (
-            remark
-          )}
-        </td>
-      </tr>
-    ))}
-  </tbody>
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/vatex/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Code name (english)
+</th>
+<th>
+Remark
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>VATEX-EU-79-C</code>
+</td>
+<td>
+Exempt based on article 79, point c of Council Directive 2006/112/EC
+</td>
+<td>
+VATEX-EU-79-C
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132</code>
+</td>
+<td>
+Exempt based on article 132 of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1A</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (a) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1B</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (b) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1C</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (c) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1D</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (d) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1E</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (e) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1F</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (f) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1G</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (g) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1H</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (h) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1I</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (i) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1J</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (j) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1K</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (k) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1L</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (l) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1M</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (m) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1N</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (n) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1O</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (o) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1P</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (p) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-132-1Q</code>
+</td>
+<td>
+Exempt based on article 132, section 1 (q) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143</code>
+</td>
+<td>
+Exempt based on article 143 of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143-1A</code>
+</td>
+<td>
+Exempt based on article 143, section 1 (a) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143-1B</code>
+</td>
+<td>
+Exempt based on article 143, section 1 (b) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143-1C</code>
+</td>
+<td>
+Exempt based on article 143, section 1 (c) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143-1D</code>
+</td>
+<td>
+Exempt based on article 143, section 1 (d) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143-1E</code>
+</td>
+<td>
+Exempt based on article 143, section 1 (e) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143-1F</code>
+</td>
+<td>
+Exempt based on article 143, section 1 (f) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143-1FA</code>
+</td>
+<td>
+Exempt based on article 143, section 1 (fa) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143-1G</code>
+</td>
+<td>
+Exempt based on article 143, section 1 (g) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143-1H</code>
+</td>
+<td>
+Exempt based on article 143, section 1 (h) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143-1I</code>
+</td>
+<td>
+Exempt based on article 143, section 1 (i) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143-1J</code>
+</td>
+<td>
+Exempt based on article 143, section 1 (j) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143-1K</code>
+</td>
+<td>
+Exempt based on article 143, section 1 (k) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-143-1L</code>
+</td>
+<td>
+Exempt based on article 143, section 1 (l) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-144</code>
+</td>
+<td>
+Exempt based on article 144 of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-146-1E</code>
+</td>
+<td>
+Exempt based on article 146 section 1 (e) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-148</code>
+</td>
+<td>
+Exempt based on article 148 of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-148-A</code>
+</td>
+<td>
+Exempt based on article 148, section (a) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-148-B</code>
+</td>
+<td>
+Exempt based on article 148, section (b) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-148-C</code>
+</td>
+<td>
+Exempt based on article 148, section (c) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-148-D</code>
+</td>
+<td>
+Exempt based on article 148, section (d) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-148-E</code>
+</td>
+<td>
+Exempt based on article 148, section (e) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-148-F</code>
+</td>
+<td>
+Exempt based on article 148, section (f) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-148-G</code>
+</td>
+<td>
+Exempt based on article 148, section (g) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-151</code>
+</td>
+<td>
+Exempt based on article 151 of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-151-1A</code>
+</td>
+<td>
+Exempt based on article 151, section 1 (a) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-151-1AA</code>
+</td>
+<td>
+Exempt based on article 151, section 1 (aa) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-151-1B</code>
+</td>
+<td>
+Exempt based on article 151, section 1 (b) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-151-1C</code>
+</td>
+<td>
+Exempt based on article 151, section 1 (c) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-151-1D</code>
+</td>
+<td>
+Exempt based on article 151, section 1 (d) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-151-1E</code>
+</td>
+<td>
+Exempt based on article 151, section 1 (e) of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-153</code>
+</td>
+<td>
+Exempt based on article 153 of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-159</code>
+</td>
+<td>
+Exempt based on article 159 of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-309</code>
+</td>
+<td>
+Exempt based on article 309 of Council Directive 2006/112/EC
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-AE</code>
+</td>
+<td>
+Reverse charge
+</td>
+<td>
+VATEX-EU-AE
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-D</code>
+</td>
+<td>
+Travel agents VAT scheme.
+</td>
+<td>
+VATEX-EU-D
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-F</code>
+</td>
+<td>
+Second hand goods VAT scheme.
+</td>
+<td>
+VATEX-EU-F
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-G</code>
+</td>
+<td>
+Export outside the EU
+</td>
+<td>
+VATEX-EU-G
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-I</code>
+</td>
+<td>
+Works of art VAT scheme.
+</td>
+<td>
+VATEX-EU-I
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-IC</code>
+</td>
+<td>
+Intra-community supply
+</td>
+<td>
+VATEX-EU-IC
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-J</code>
+</td>
+<td>
+Collectors items and antiques VAT scheme.
+</td>
+<td>
+VATEX-EU-J
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-EU-O</code>
+</td>
+<td>
+Not subject to VAT
+</td>
+<td>
+VATEX-EU-O
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-FRANCHISE</code>
+</td>
+<td>
+France domestic VAT franchise in base
+</td>
+<td>
+VATEX-FR-FRANCHISE
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CNWVAT</code>
+</td>
+<td>
+France domestic Credit Notes without VAT, due to supplier forfeit of VAT for discount
+</td>
+<td>
+VATEX-FR-CNWVAT
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261-1</code>
+</td>
+<td>
+Exempt based on 1 of article 261 of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261-1
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261-2</code>
+</td>
+<td>
+Exempt based on 2 of article 261 of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261-2
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261-3</code>
+</td>
+<td>
+Exempt based on 3 of article 261 of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261-3
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261-4</code>
+</td>
+<td>
+Exempt based on 4 of article 261 of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261-4
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261-5</code>
+</td>
+<td>
+Exempt based on 5 of article 261 of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261-5
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261-7</code>
+</td>
+<td>
+Exempt based on 7 of article 261 of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261-7
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261-8</code>
+</td>
+<td>
+Exempt based on 8 of article 261 of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261-8
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261A</code>
+</td>
+<td>
+Exempt based on article 261 A of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261A
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261B</code>
+</td>
+<td>
+Exempt based on article 261 B of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261B
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261C-1</code>
+</td>
+<td>
+Exempt based on 1° of article 261 C of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261C-1
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261C-2</code>
+</td>
+<td>
+Exempt based on 2° of article 261 C of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261C-2
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261C-3</code>
+</td>
+<td>
+Exempt based on 3° of article 261 C of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261C-3
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261D-1</code>
+</td>
+<td>
+Exempt based on 1° of article 261 D of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261D-1
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261D-1BIS</code>
+</td>
+<td>
+Exempt based on 1°bis of article 261 D of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261D-1BIS
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261D-2</code>
+</td>
+<td>
+Exempt based on 2° of article 261 D of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261D-2
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261D-3</code>
+</td>
+<td>
+Exempt based on 3° of article 261 D of the Code Général des Impôts (CGI ; General tax code)
+Exonération de TVA - Article 261 D-3° du Code Général des Impôts
+</td>
+<td>
+VATEX-FR-CGI261D-3
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261D-4</code>
+</td>
+<td>
+Exempt based on 4° of article 261 D of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261D-4
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261E-1</code>
+</td>
+<td>
+Exempt based on 1° of article 261 E of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261E-1
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI261E-2</code>
+</td>
+<td>
+Exempt based on 2° of article 261 E of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI261E-2
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI277A</code>
+</td>
+<td>
+Exempt based on article 277 A of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI277A
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI275</code>
+</td>
+<td>
+Exempt based on article 275 of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI275
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-298SEXDECIESA</code>
+</td>
+<td>
+Exempt based on article 298 sexdecies A of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-298SEXDECIESA
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-CGI295</code>
+</td>
+<td>
+Exempt based on article 295 of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-CGI295
+</td>
+</tr>
+<tr>
+<td>
+<code>VATEX-FR-AE</code>
+</td>
+<td>
+Exempt based on 2 of article 283 of the Code Général des Impôts (CGI ; General tax code)
+</td>
+<td>
+VATEX-FR-AE
+</td>
+</tr>
+</tbody>
 </table>

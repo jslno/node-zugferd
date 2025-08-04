@@ -1,0 +1,69 @@
+---
+title: UNTDID 2379 - Date format
+description: Specification of the representation of a date, a date and time or of a period.
+---
+
+### Codelist [toc]
+
+```ts
+import {
+	DATE,
+	Date,
+	dateCode,
+	type DateDefinition,
+	type DateCode,
+} from "node-zugferd/codelist/date";
+
+```
+
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/date/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Code name
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>102</code>
+</td>
+<td>
+CCYYMMDD
+</td>
+<td>
+Calendar date: C = Century ; Y = Year ; M = Month ; D = Day.
+</td>
+</tr>
+<tr>
+<td>
+<code>205</code>
+</td>
+<td>
+CCYYMMDDHHMMZHHMM
+</td>
+<td>
+Calendar date including time and time zone expressed in hours and minutes.
+ZHHMM = time zone given as offset from Coordinated Universal Time (UTC).
+</td>
+</tr>
+</tbody>
+</table>

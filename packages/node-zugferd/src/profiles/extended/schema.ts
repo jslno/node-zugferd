@@ -1,23 +1,31 @@
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
 import { z } from "zod";
-import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
-import { UNTDID_5189 } from "../../codelists/untdid/5189.gen";
-import { UNTDID_1153 } from "../../codelists/untdid/1153.gen";
-import { UNTDID_7161 } from "../../codelists/untdid/7161.gen";
-import { UNTDID_4451 } from "../../codelists/untdid/4451.gen";
-import { VATEX } from "../../codelists/vatex.gen";
-import { EAS } from "../../codelists/eas";
-import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
-import { UNTDID_1229 } from "../../codelists/untdid/1229";
-import { UNTDID_3139 } from "../../codelists/untdid/3139";
-import { UNTDID_3035 } from "../../codelists/untdid/3035";
-import { ISO_6523 } from "../../codelists/iso/6523.gen";
-import { ISO_3166 } from "../../codelists/iso/3166";
-import { ISO_639_2 } from "../../codelists/iso/639-2";
+import { vatExCode } from "../../codelists/vatex.gen";
+import { untdid3139Code } from "../../codelists/untdid3139.gen";
+import { untdid3035Code } from "../../codelists/untdid3035.gen";
+import { countryCode } from "../../codelists/country.gen";
+import { currencyCode } from "../../codelists/currency.gen";
+import { icdCode } from "../../codelists/icd.gen";
+import { untdid1001Code } from "../../codelists/untdid1001.gen";
+import { untdid1153Code } from "../../codelists/untdid1153.gen";
+import { vatCatCode } from "../../codelists/vat-cat.gen";
+import { textCode } from "../../codelists/text.gen";
+import { untdid5305Code } from "../../codelists/untdid5305.gen";
+import { allowanceCode } from "../../codelists/allowance.gen";
+import { easCode } from "../../codelists/eas.gen";
+import { unitCode } from "../../codelists/unit.gen";
+import { lineStatusCode } from "../../codelists/line-status.gen";
+import { languageCode } from "../../codelists/language.gen";
+import { characteristicCode } from "../../codelists/characteristic.gen";
+import { lineReasonCode } from "../../codelists/line-reason.gen";
+import { incotermsCode } from "../../codelists/incoterms.gen";
+import { transportCode } from "../../codelists/transport.gen";
+import { chargeCode } from "../../codelists/charge.gen";
 
 export const extendedSchema = {
 	specificationIdentifier: {
+		key: "BT-24",
 		type: "string",
 		required: false,
 		defaultValue:
@@ -84,7 +92,7 @@ With indicator = true, the document is a copy.`,
 	 */
 	language: {
 		key: "BT-X-4",
-		type: ISO_639_2.map(({ code }) => code),
+		type: languageCode,
 		description: `**Invoice language code**
 
 Indicates the language used in the invoice document.
@@ -105,7 +113,7 @@ Valid languages are registered with the ISO 639-2 "Codes for the representation 
 			 * The code is bilaterally agreed on and must have the same meaning as BT-22.
 			 */
 			contentCode: {
-				key: "BT-21",
+				key: "BT-X-5",
 				type: "string",
 				description: `**Free text on header level (qualifying the content)**
 
@@ -167,7 +175,7 @@ Information only required if the contractual due date differs from due date of t
 							 */
 							typeCode: {
 								key: "BT-X-543",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Seller Role (code)**
 
 A code qualifying the role of the party
@@ -287,7 +295,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-105",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -333,7 +341,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 */
 									typeCode: {
 										key: "BT-X-317",
-										type: UNTDID_3139.map(({ code }) => code),
+										type: untdid3139Code,
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -374,7 +382,7 @@ A fax number for the contact point.`,
 							 */
 							typeCode: {
 								key: "BT-X-544",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -512,7 +520,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-113",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -556,7 +564,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 */
 									typeCode: {
 										key: "BT-X-318",
-										type: UNTDID_3139.map(({ code }) => code),
+										type: untdid3139Code,
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -645,7 +653,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -674,7 +682,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 */
 							typeCode: {
 								key: "BT-X-545",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -727,7 +735,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -863,7 +871,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-360",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -942,7 +950,7 @@ If a contact person is indicated, either the name or the department is to be tra
 											 */
 											typeCode: {
 												key: "BT-X-347",
-												type: UNTDID_3139.map(({ code }) => code),
+												type: untdid3139Code,
 												description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -1097,7 +1105,7 @@ The common name of the city, town or village.`,
 									 */
 									countryCode: {
 										key: "BT-X-353",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Country code**
 
 A code that identifies the country.
@@ -1150,7 +1158,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Scheme identifier
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: "Scheme identifier",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -1247,7 +1255,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -1276,7 +1284,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 */
 							typeCode: {
 								key: "BT-X-546",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -1330,7 +1338,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -1463,7 +1471,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-387",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -1544,7 +1552,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 */
 									typeCode: {
 										key: "BT-X-371",
-										type: UNTDID_3139.map(({ code }) => code),
+										type: untdid3139Code,
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -1697,7 +1705,7 @@ The common name of the city, town or village.`,
 									 */
 									countryCode: {
 										key: "BT-X-380",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Country code**
 
 A code that identifies the country.
@@ -1750,7 +1758,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Scheme identifier
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: "Scheme identifier",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -1842,7 +1850,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -1861,7 +1869,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 */
 							typeCode: {
 								key: "BT-X-547",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -1915,7 +1923,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -2048,7 +2056,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-394",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -2120,7 +2128,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 */
 									typeCode: {
 										key: "BT-X-319",
-										type: UNTDID_3139.map(({ code }) => code),
+										type: untdid3139Code,
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -2196,7 +2204,7 @@ An e-mail address for the contact point.`,
 									 * Scheme identifier
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: "Scheme identifier",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -2260,7 +2268,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -2289,7 +2297,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 */
 							typeCode: {
 								key: "BT-X-548",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -2340,7 +2348,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * The identification scheme identifier of the Buyer legal registration identifier.
 											 */
 											schemeIdentifier: {
-												type: "string",
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.`,
@@ -2470,7 +2478,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-401",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -2551,7 +2559,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 */
 									typeCode: {
 										key: "BT-X-320",
-										type: UNTDID_3139.map(({ code }) => code),
+										type: untdid3139Code,
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -2705,7 +2713,7 @@ The common name of the city, town or village.`,
 									 */
 									countryCode: {
 										key: "BT-X-141",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Country code**
 
 A code that identifies the country.
@@ -2758,7 +2766,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Scheme identifier
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: "Scheme identifier",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -2816,7 +2824,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 */
 							typeCode: {
 								key: "BT-X-145",
-								type: "string",
+								type: incotermsCode,
 								description: `**Delivery condition (Code)**
 
 The code specifying the type of delivery for these trade delivery terms.
@@ -2943,7 +2951,7 @@ To be chosen from the entries in UNTDID 4053 + INCOTERMS List`,
 							 */
 							typeCode: {
 								key: "BT-X-405",
-								type: UNTDID_1153.map(({ code }) => code),
+								type: untdid1153Code,
 								description: `**Type of contract (code)**
 
 Use codes from UNTDID 1153
@@ -3121,7 +3129,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -3150,7 +3158,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 */
 							typeCode: {
 								key: "BT-X-549",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -3194,7 +3202,7 @@ If the identification scheme is used, it must be selected from the entries in th
 											 * If the identification scheme is used, it must be selected from the entries in the list published by the ISO/IEC 6523 Maintenance Agency.
 											 */
 											value: {
-												type: ISO_6523.map(({ code }) => code),
+												type: "string",
 												description: `**Company Registration Number**
 
 The identification scheme identifier of the Buyer Agent legal registration identifier.
@@ -3211,7 +3219,7 @@ If the identification scheme is used, it must be selected from the entries in th
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer Agent legal registration identifier.
@@ -3344,7 +3352,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-431",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -3425,7 +3433,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 */
 									typeCode: {
 										key: "BT-X-415",
-										type: UNTDID_3139.map(({ code }) => code),
+										type: untdid3139Code,
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -3574,7 +3582,7 @@ The common name of the city, town or village.`,
 									 */
 									countryCode: {
 										key: "BT-X-424",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Country code**
 
 A code that identifies the country.
@@ -3628,7 +3636,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Scheme identifier
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: "Scheme identifier",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -3754,7 +3762,7 @@ The code specifying the mode, such as air, sea, rail, road or inland waterway, f
 							 */
 							deliveryMethod: {
 								key: "BT-X-152",
-								type: "string",
+								type: transportCode,
 								description: `**Delivery method (Code)**
 
 A logistics transport movement specified for this supply chain consignment.`,
@@ -3778,7 +3786,7 @@ A logistics transport movement specified for this supply chain consignment.`,
 							 */
 							typeCode: {
 								key: "BT-X-550",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -3834,7 +3842,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -3967,7 +3975,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-438",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -4039,7 +4047,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 */
 									typeCode: {
 										key: "BT-X-321",
-										type: UNTDID_3139.map(({ code }) => code),
+										type: untdid3139Code,
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -4115,7 +4123,7 @@ An e-mail address for the contact point.`,
 									 * Scheme identifier
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: "Scheme identifier",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -4208,7 +4216,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -4237,7 +4245,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 */
 							typeCode: {
 								key: "BT-X-551",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -4290,7 +4298,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -4423,7 +4431,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-445",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -4503,7 +4511,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 */
 									typeCode: {
 										key: "BT-X-322",
-										type: UNTDID_3139.map(({ code }) => code),
+										type: untdid3139Code,
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -4657,7 +4665,7 @@ The common name of the city, town or village.`,
 									 */
 									countryCode: {
 										key: "BT-X-177",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Country code**
 
 A code that identifies the country.
@@ -4710,7 +4718,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Scheme identifier
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: "Scheme identifier",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -4802,7 +4810,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -4831,7 +4839,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 */
 							typeCode: {
 								key: "BT-X-552",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -4884,7 +4892,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -5017,7 +5025,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-452",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -5097,7 +5105,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 */
 									typeCode: {
 										key: "BT-X-323",
-										type: UNTDID_3139.map(({ code }) => code),
+										type: untdid3139Code,
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -5251,7 +5259,7 @@ The common name of the city, town or village.`,
 									 */
 									countryCode: {
 										key: "BT-X-196",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Country code**
 
 A code that identifies the country.
@@ -5304,7 +5312,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Scheme identifier
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: "Scheme identifier",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -5520,7 +5528,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -5548,7 +5556,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 */
 							typeCode: {
 								key: "BT-X-553",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -5601,7 +5609,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -5734,7 +5742,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-459",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -5814,7 +5822,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 */
 									typeCode: {
 										key: "BT-X-324",
-										type: UNTDID_3139.map(({ code }) => code),
+										type: untdid3139Code,
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -5967,7 +5975,7 @@ The common name of the city, town or village.`,
 									 */
 									countryCode: {
 										key: "BT-X-220",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Country code**
 
 A code that identifies the country.
@@ -6020,7 +6028,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Scheme identifier
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: "Scheme identifier",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -6113,7 +6121,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -6142,7 +6150,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 */
 							typeCode: {
 								key: "BT-X-554",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -6195,7 +6203,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -6328,7 +6336,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-466",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -6408,7 +6416,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 */
 									typeCode: {
 										key: "BT-X-325",
-										type: UNTDID_3139.map(({ code }) => code),
+										type: untdid3139Code,
 										description: `**Type of contact (code)**
 									 *
 									 * The code specifying the type of trade contact
@@ -6561,7 +6569,7 @@ The common name of the city, town or village.`,
 									 */
 									countryCode: {
 										key: "BT-X-239",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Country code**
 
 A code that identifies the country.
@@ -6614,7 +6622,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Scheme identifier
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: "Scheme identifier",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -6668,7 +6676,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 */
 							typeCode: {
 								key: "BT-X-468",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Payee role (code)**
 
 A code qualifying the role of the payee
@@ -6803,7 +6811,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-474",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -6875,7 +6883,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 */
 									typeCode: {
 										key: "BT-X-326",
-										type: UNTDID_3139.map(({ code }) => code),
+										type: untdid3139Code,
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -7030,7 +7038,7 @@ The common name of the city, town or village.`,
 									 */
 									countryCode: {
 										key: "BT-X-254",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Country code**
 
 A code that identifies the country.
@@ -7083,7 +7091,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Scheme identifier
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: "Scheme identifier",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -7183,7 +7191,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Payer identifier Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -7212,7 +7220,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 							 */
 							typeCode: {
 								key: "BT-X-483",
-								type: UNTDID_3035.map(({ code }) => code),
+								type: untdid3035Code,
 								description: `**Role (code)**
 
 A code qualifying the role
@@ -7265,7 +7273,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Payer legal registration identifier.
@@ -7398,7 +7406,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-502",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -7478,7 +7486,7 @@ If a contact person is indicated, either the name or the department is to be tra
 									 */
 									typeCode: {
 										key: "BT-X-486",
-										type: UNTDID_3139.map(({ code }) => code),
+										type: untdid3139Code,
 										description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -7631,7 +7639,7 @@ The common name of the city, town or village.`,
 									 */
 									countryCode: {
 										key: "BT-X-495",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Country code**
 
 A code that identifies the country.
@@ -7684,7 +7692,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Scheme identifier
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: "Scheme identifier",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -7739,7 +7747,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 */
 							invoiceCurrency: {
 								key: "BT-X-258",
-								type: CURRENCY_CODES.map(({ code }) => code),
+								type: currencyCode,
 								description: "Invoice currency",
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:SourceCurrencyCode",
@@ -7749,7 +7757,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 */
 							localCurrency: {
 								key: "BT-X-259",
-								type: CURRENCY_CODES.map(({ code }) => code),
+								type: currencyCode,
 								description: "Local currency",
 								xpath:
 									"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange/ram:TargetCurrencyCode",
@@ -7875,7 +7883,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 									 * Unit code
 									 */
 									unit: {
-										type: "string",
+										type: unitCode,
 										description: "Unit code",
 										required: false,
 										xpath:
@@ -7922,7 +7930,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 									 * Unit code
 									 */
 									unit: {
-										type: "string",
+										type: unitCode,
 										description: "Unit code",
 										required: false,
 										xpath:
@@ -7972,7 +7980,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 									 */
 									typeCode: {
 										key: "BT-X-273-0",
-										type: "string",
+										type: vatCatCode,
 										description: "Tax type (Code)",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedLogisticsServiceCharge[logistics-service-charge]/ram:AppliedTradeTax/ram:TypeCode",
@@ -7984,7 +7992,7 @@ A monetary value used as the line total basis on which this trade related tax, l
 									 */
 									categoryCode: {
 										key: "BT-X-273",
-										type: "string",
+										type: untdid5305Code,
 										description: `**VAT category code**
 
 Coded identification of a VAT category.`,
@@ -8291,7 +8299,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Payee scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -8328,7 +8336,7 @@ Shall be used when the Payee is different from the Seller. The Payee name may ho
 									 */
 									typeCode: {
 										key: "BT-X-511",
-										type: UNTDID_3035.map(({ code }) => code),
+										type: untdid3035Code,
 										description: `**Role (code)**
 
 A code qualifying the role
@@ -8381,7 +8389,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 													 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 													 */
 													schemeIdentifier: {
-														type: ISO_6523.map(({ code }) => code),
+														type: icdCode,
 														description: `**Scheme identifier**
 
 The identification scheme identifier of the Payee legal registration identifier.
@@ -8513,7 +8521,7 @@ The common name of the city, town or village.`,
 													 */
 													countryCode: {
 														key: "BT-X-530",
-														type: ISO_3166.map(({ code }) => code.alpha2),
+														type: countryCode,
 														description: `**Country code**
 
 A code that identifies the country.
@@ -8593,7 +8601,7 @@ If a contact person is indicated, either the name or the department is to be tra
 											 */
 											typeCode: {
 												key: "BT-X-514",
-												type: UNTDID_3139.map(({ code }) => code),
+												type: untdid3139Code,
 												description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -8746,7 +8754,7 @@ The common name of the city, town or village.`,
 											 */
 											countryCode: {
 												key: "BT-X-523",
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -8799,7 +8807,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
+												type: easCode,
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -8852,7 +8860,7 @@ Such as a region, a county, a state, a province, etc.`,
 							 */
 							typeCode: {
 								key: "BT-X-555",
-								type: "string",
+								type: untdid1001Code,
 								description: `**Preceding incoive type code**
 
 The same rules apply as for BT-3`,
@@ -8975,7 +8983,7 @@ A textual statement of the reason why the amount is exempted from VAT or why no 
 									 */
 									exemptionReasonCode: {
 										key: "BT-X-297",
-										type: VATEX.map(({ code }) => code),
+										type: vatExCode,
 										description: `**VAT exemption reason code**
 
 A coded statement of the reason for why the amount is exempted from VAT.
@@ -9003,7 +9011,7 @@ Code list issued and maintained by the Connecting Europe Facility.`,
 									 */
 									categoryCode: {
 										key: "BT-X-296",
-										type: UNTDID_5305.map(({ code }) => code),
+										type: untdid5305Code,
 										description: `**VAT category code**
 
 Coded identification of a VAT category.
@@ -9083,7 +9091,7 @@ The identification of an Invoice that was previously sent by the Seller.`,
 									 */
 									typeCode: {
 										key: "BT-X-559",
-										type: "string",
+										type: untdid1001Code,
 										required: false,
 										description: `**Preceding incoive type code**
  
@@ -9155,7 +9163,7 @@ The value given here refers to the superior line. In this way, a hierarchy tree 
 					 */
 					typeCode: {
 						key: "BT-X-7",
-						type: UNTDID_1229.map(({ code }) => code),
+						type: lineStatusCode,
 						description: `**Type of the inovice line item (Code)**
 
 Indicating whether an item includes the prices which must be taken into account when calculating the invoice amount, or whether it only contains information.
@@ -9178,7 +9186,7 @@ Use codes from codelist UNTDID 1229. The following code should be applied per de
 					 */
 					subTypeCode: {
 						key: "BT-X-8",
-						type: ["DETAIL", "GROUP", "INFORMATION"],
+						type: lineReasonCode,
 						description: `**Subtype of the invoice line item**
 
 Complements the type to clarify whether the invoice item is one of the following:
@@ -9217,7 +9225,7 @@ The code is agreed bilaterally and must have the same meaning as BT-127.`,
 					 */
 					noteSubjectCode: {
 						key: "BT-X-10",
-						type: UNTDID_4451.map(({ code }) => code),
+						type: textCode,
 						description: `**Invoice line note subject code**
 
 To be chosen from the entries in UNTDID 4451 [6].`,
@@ -9325,7 +9333,7 @@ The brand name, expressed as text, for this item.`,
 									 */
 									typeCode: {
 										key: "BT-X-11",
-										type: "string",
+										type: characteristicCode,
 										description: `**Item Attribute Type (Code)**
 
 To ensure automated processing of the article attributes without bilateral reconciliation, only values from the code list UNTDED 6313+Factur-X-Extension should be used.`,
@@ -9481,7 +9489,7 @@ An item identifier based on a registered scheme.`,
 											 * The identification scheme shall be identified from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Item standard identifier
@@ -9583,7 +9591,7 @@ The Item description allows for describing the item and its features in more det
 									 */
 									measureUnit: {
 										key: "BT-X-20-1",
-										type: "string",
+										type: unitCode,
 										description: "Measurement unit",
 										required: false,
 										xpath:
@@ -9856,7 +9864,8 @@ External documents do not form part of the invoice. Risks can be involved when a
 									 * Type of the document (code)
 									 */
 									typeCode: {
-										type: "string",
+										key: "BT-X-30",
+										type: untdid1001Code,
 										description: "Type of the document (code)",
 										required: false,
 										xpath:
@@ -9921,7 +9930,8 @@ The file name of the attached document`,
 									 * Type of the document reference (code)
 									 */
 									referenceTypeCode: {
-										type: "string",
+										key: "BT-X-32",
+										type: untdid1153Code,
 										description: "Type of the document reference (code)",
 										required: false,
 										xpath:
@@ -9990,7 +10000,8 @@ The file name of the attached document`,
 											 * Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance reason code and the Invoice line level allowance reason shall indicate the same allowance reason.
 											 */
 											reasonCode: {
-												type: UNTDID_5189.map(({ code }) => code),
+												key: "BT-X-313",
+												type: allowanceCode,
 												description: `**Reason for the discount (code)**
 
 Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance reason code and the Invoice line level allowance reason shall indicate the same allowance reason.`,
@@ -10032,6 +10043,7 @@ Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance r
 									 * Price-related surcharges
 									 */
 									surcharges: {
+										key: "BT-X-302-00",
 										type: "object[]",
 										description: "Price-related surcharges",
 										sibling: (data, { line }) =>
@@ -10110,7 +10122,8 @@ Only applies if the surcharge is given per unit and is not included in the gross
 											 * Use entries of the UNTDID 7161 code list [6]. The Invoice line charge reason code and the Invoice line charge reason shall indicate the same charge reason.
 											 */
 											reasonCode: {
-												type: UNTDID_7161.map(({ code }) => code),
+												key: "BT-X-314",
+												type: chargeCode,
 												description: `**Reason for the charge (code)**
 
 Use entries of the UNTDID 7161 code list [6]. The Invoice line charge reason code and the Invoice line charge reason shall indicate the same charge reason.`,
@@ -10158,6 +10171,7 @@ Use entries of the UNTDID 7161 code list [6]. The Invoice line charge reason cod
 									 * Included tax for B2C
 									 */
 									tradeTax: {
+										key: "BG-X-4",
 										type: "object",
 										description: "Included tax for B2C",
 										required: false,
@@ -10193,7 +10207,8 @@ A textual statement of the reason why the amount is exempted from VAT or why no 
 											 * Code list issued and maintained by the Connecting Europe Facility.
 											 */
 											exemptionReasonCode: {
-												type: VATEX.map(({ code }) => code),
+												key: "BT-X-41",
+												type: vatExCode,
 												description: `**VAT exemption reason code**
 
 A coded statement of the reason for why the amount is exempted from VAT.
@@ -10220,7 +10235,8 @@ Code list issued and maintained by the Connecting Europe Facility.`,
 											 * - Liable for IPSI (Ceuta/Melilla tax)
 											 */
 											categoryCode: {
-												type: UNTDID_5305.map(({ code }) => code),
+												key: "BT-X-40",
+												type: untdid5305Code,
 												description: `**VAT category code**
 
 Coded identification of a VAT category.
@@ -10338,6 +10354,7 @@ The VAT category code and the VAT category rate shall be consistent.`,
 									 * Quantity, without charge
 									 */
 									value: {
+										key: "BT-X-46",
 										type: "string | number",
 										description: "Quantity, without charge",
 										xpath:
@@ -10347,7 +10364,7 @@ The VAT category code and the VAT category rate shall be consistent.`,
 									 * Unit of measure
 									 */
 									unit: {
-										type: "string",
+										type: unitCode,
 										description: "Unit of measure",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ChargeFreeQuantity/@unitCode",
@@ -10366,6 +10383,7 @@ The VAT category code and the VAT category rate shall be consistent.`,
 									 * Package quantity
 									 */
 									value: {
+										key: "BT-X-47",
 										type: "string | number",
 										description: "Package quantity",
 										xpath:
@@ -10375,7 +10393,7 @@ The VAT category code and the VAT category rate shall be consistent.`,
 									 * Unit of measure
 									 */
 									unit: {
-										type: "string",
+										type: unitCode,
 										description: "Unit of measure",
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:PackageQuantity/@unitCode",
@@ -10411,6 +10429,7 @@ A previously exchanged assigned identifier of the business partner.`,
 									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
 									 */
 									globalIdentifier: {
+										key: "BT-X-49",
 										type: "object",
 										description: `**Goods recipient global identifier**
 
@@ -10436,7 +10455,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -10463,7 +10482,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 * To be chosen from UNTDID 3035.
 									 */
 									roleCode: {
-										type: UNTDID_3035.map(({ code }) => code),
+										type: untdid3035Code,
 										description: `**Role (code)**
 
 A code qualifying the role
@@ -10487,6 +10506,7 @@ To be chosen from UNTDID 3035.`,
 											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
 											 */
 											identifier: {
+												key: "BT-X-51",
 												type: "object",
 												description: `**ShipTo Legal ID**
 
@@ -10514,7 +10534,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 													 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 													 */
 													schemeIdentifier: {
-														type: ISO_6523.map(({ code }) => code),
+														type: icdCode,
 														description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -10585,7 +10605,7 @@ If a contact person is indicated, either the name or the department is to be tra
 													 * To be chosen from the entries of UNTDID 3139
 													 */
 													typeCode: {
-														type: UNTDID_3139.map(({ code }) => code),
+														type: untdid3139Code,
 														description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -10732,7 +10752,7 @@ The common name of the city, town or village.`,
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -10765,6 +10785,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-65-00",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -10783,7 +10804,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
+												type: easCode,
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -10852,6 +10873,7 @@ A previously exchanged assigned identifier of the business partner.`,
 									 * GlobalID, if a global identifier exists and can be determined in the @schemeID, otherwise use ID
 									 */
 									globalIdentifier: {
+										key: "BT-X-68",
 										type: "object",
 										description: `**Final recipient global identifier**
 
@@ -10877,7 +10899,7 @@ GlobalID, if a global identifier exists and can be determined in the @schemeID, 
 											 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.`,
@@ -10904,7 +10926,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
 									 * To be chosen from UNTDID 3035.
 									 */
 									roleCode: {
-										type: UNTDID_3035.map(({ code }) => code),
+										type: untdid3035Code,
 										description: `**Role (code)**
 
 A code qualifying the role
@@ -10928,6 +10950,7 @@ To be chosen from UNTDID 3035.`,
 											 * An identifier issued by an official registrar that identifies the party as a legal entity or person.
 											 */
 											identifier: {
+												key: "BT-X-70",
 												type: "object",
 												description: `**Company Registration Number**
 
@@ -10955,7 +10978,7 @@ An identifier issued by an official registrar that identifies the party as a leg
 													 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO 6523 maintenance agency.
 													 */
 													schemeIdentifier: {
-														type: ISO_6523.map(({ code }) => code),
+														type: icdCode,
 														description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer legal registration identifier.
@@ -11032,7 +11055,7 @@ If a contact person is indicated, either the name or the department is to be tra
 											 * To be chosen from the entries of UNTDID 3139
 											 */
 											typeCode: {
-												type: UNTDID_3139.map(({ code }) => code),
+												type: untdid3139Code,
 												description: `**Type of contact (code)**
 
 The code specifying the type of trade contact
@@ -11162,7 +11185,7 @@ An additional address line in an address that can be used to give further detail
 											 * The lists of valid countries are registered with the ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their subdivisions".
 											 */
 											countryCode: {
-												type: ISO_3166.map(({ code }) => code.alpha2),
+												type: countryCode,
 												description: `**Country code**
 
 A code that identifies the country.
@@ -11195,6 +11218,7 @@ Such as a region, a county, a state, a province, etc.`,
 									 * Details about the electronic address
 									 */
 									electronicAddress: {
+										key: "BT-X-83-00",
 										type: "object",
 										description: "Details about the electronic address",
 										required: false,
@@ -11213,7 +11237,7 @@ Such as a region, a county, a state, a province, etc.`,
 											 * Scheme identifier
 											 */
 											schemeIdentifier: {
-												type: EAS.map(({ code }) => code),
+												type: easCode,
 												description: "Scheme identifier",
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeDelivery/ram:UltimateShipToTradeParty/ram:URIUniversalCommunication/ram:URIID/@schemeID",
@@ -11496,7 +11520,8 @@ A textual statement of the reason why the amount is exempted from VAT or why no 
 									 * Code list issued and maintained by the Connecting Europe Facility.
 									 */
 									exemptionReasonCode: {
-										type: VATEX.map(({ code }) => code),
+										key: "BT-X-97",
+										type: vatExCode,
 										description: `**VAT exemption reason code**
 
 A coded statement of the reason for why the amount is exempted from VAT.
@@ -11620,7 +11645,7 @@ The identification of an Invoice that was previously sent by the Seller.`,
 									 */
 									typeCode: {
 										key: "BT-X-332",
-										type: "string",
+										type: untdid1001Code,
 										description: `**Preceding incoive type code**
 
 Can be used in case of final invoive after prepaid invoice, in order to refernce the previous prepaid invoices.

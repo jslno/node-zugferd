@@ -1,20 +1,24 @@
 import { type InferSchema, type Schema } from "./schema";
 import { type BaseZugferdContext } from "../init";
 import { type LiteralString } from "./helper";
+import type { HybridConformanceCode } from "../codelists/hybrid-conformance.gen";
+import type { HybridDocumentCode } from "../codelists/hybrid-document.gen";
+import type { HybridVersionCode } from "../codelists/hybrid-version.gen";
+import type { FilenameCode } from "../codelists/filename.gen";
 
 export type Profile = {
 	id: LiteralString;
 	extends?: Profile[];
 	schema: Schema;
 	xsdPath?: string | (() => Promise<string> | string);
-	conformanceLevel: string;
-	documentFileName: string;
+	conformanceLevel: HybridConformanceCode;
+	documentFileName: FilenameCode;
 	mask?: Record<string, any>;
 	/**
-	 * @default 'INVOICE'
+	 * @default "INVOICE"
 	 */
-	documentType?: "INVOICE" | "ORDER";
-	version: string;
+	documentType?: HybridDocumentCode;
+	version: HybridVersionCode;
 };
 
 export type ProfileParseHandlerContext<P extends Profile = Profile> = {

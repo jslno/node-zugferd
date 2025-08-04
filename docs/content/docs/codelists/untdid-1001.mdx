@@ -1,54 +1,729 @@
 ---
-title: UNTDID 1001
-description: Document name code
+title: UNTDID 1001 — Document type
+description: Document/message identifier expressed in code.
 ---
 
-import {
-  UNTDID_1001,
-  UNTDID_1001_IDENTIFIER,
-  UNTDID_1001_VERSION,
-} from "node-zugferd/codelist/untdid.1001";
-
-## Definition [toc]
-
-Identifier: <span className="text-fd-muted-foreground">{UNTDID_1001_IDENTIFIER}</span>
-
-Version: <span className="text-fd-muted-foreground">{UNTDID_1001_VERSION}</span>
-
-<div className="w-fit">
-  <Link
-    href="https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.1001"
-    target="_blank"
-  >
-    Source
-  </Link>
-</div>
+### Codelist [toc]
 
 ```ts
 import {
-  Untdid1001,
-  UNTDID_1001,
-  type Untdid1001Code,
-} from "node-zugferd/codelist/untdid.1001";
+	UNTDID_1001,
+	Untdid1001,
+	untdid1001Code,
+	PUBLISHED,
+	type Untdid1001Definition,
+	type Untdid1001Code,
+} from "node-zugferd/codelist/untdid-1001";
+
 ```
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    {UNTDID_1001.map(({ code, name, description }) => (
-      <tr key={code}>
-        <td className="text-center">
-          <code>{code}</code>
-        </td>
-        <td>{name}</td>
-        <td>{description}</td>
-      </tr>
-    ))}
-  </tbody>
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/untdid-1001/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Name
+</th>
+<th>
+EN16931 interpretation
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>71</code>
+</td>
+<td>
+Request for payment
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>80</code>
+</td>
+<td>
+Debit note related to goods or services
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>81</code>
+</td>
+<td>
+Credit note related to goods or services
+</td>
+<td>
+Credit Note
+</td>
+</tr>
+<tr>
+<td>
+<code>82</code>
+</td>
+<td>
+Metered services invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>83</code>
+</td>
+<td>
+Credit note related to financial adjustments
+</td>
+<td>
+Credit Note
+</td>
+</tr>
+<tr>
+<td>
+<code>84</code>
+</td>
+<td>
+Debit note related to financial adjustments
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>102</code>
+</td>
+<td>
+Tax notification
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>130</code>
+</td>
+<td>
+Invoicing data sheet
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>202</code>
+</td>
+<td>
+Direct payment valuation
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>203</code>
+</td>
+<td>
+Provisional payment valuation
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>204</code>
+</td>
+<td>
+Payment valuation
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>211</code>
+</td>
+<td>
+Interim application for payment
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>218</code>
+</td>
+<td>
+Final payment request based on completion of work
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>219</code>
+</td>
+<td>
+Payment request for completed units
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>261</code>
+</td>
+<td>
+Self billed credit note
+</td>
+<td>
+Credit Note
+</td>
+</tr>
+<tr>
+<td>
+<code>262</code>
+</td>
+<td>
+Consolidated credit note - goods and services
+</td>
+<td>
+Credit Note
+</td>
+</tr>
+<tr>
+<td>
+<code>295</code>
+</td>
+<td>
+Price variation invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>296</code>
+</td>
+<td>
+Credit note for price variation
+</td>
+<td>
+Credit Note
+</td>
+</tr>
+<tr>
+<td>
+<code>308</code>
+</td>
+<td>
+Delcredere credit note
+</td>
+<td>
+Credit Note
+</td>
+</tr>
+<tr>
+<td>
+<code>325</code>
+</td>
+<td>
+Proforma invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>326</code>
+</td>
+<td>
+Partial invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>331</code>
+</td>
+<td>
+Commercial invoice which includes a packing list
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>380</code>
+</td>
+<td>
+Commercial invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>381</code>
+</td>
+<td>
+Credit note
+</td>
+<td>
+Credit Note
+</td>
+</tr>
+<tr>
+<td>
+<code>382</code>
+</td>
+<td>
+Commission note
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>383</code>
+</td>
+<td>
+Debit note
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>384</code>
+</td>
+<td>
+Corrected invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>385</code>
+</td>
+<td>
+Consolidated invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>386</code>
+</td>
+<td>
+Prepayment invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>387</code>
+</td>
+<td>
+Hire invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>388</code>
+</td>
+<td>
+Tax invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>389</code>
+</td>
+<td>
+Self-billed invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>390</code>
+</td>
+<td>
+Delcredere invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>393</code>
+</td>
+<td>
+Factored invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>394</code>
+</td>
+<td>
+Lease invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>395</code>
+</td>
+<td>
+Consignment invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>396</code>
+</td>
+<td>
+Factored credit note
+</td>
+<td>
+Credit Note
+</td>
+</tr>
+<tr>
+<td>
+<code>420</code>
+</td>
+<td>
+Optical Character Reading (OCR) payment credit note
+</td>
+<td>
+Credit Note
+</td>
+</tr>
+<tr>
+<td>
+<code>456</code>
+</td>
+<td>
+Debit advice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>457</code>
+</td>
+<td>
+Reversal of debit
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>458</code>
+</td>
+<td>
+Reversal of credit
+</td>
+<td>
+Credit Note
+</td>
+</tr>
+<tr>
+<td>
+<code>471</code>
+</td>
+<td>
+Self-billed corrective invoice, invoice type, Corrected
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>472</code>
+</td>
+<td>
+Factored Corrective Invoice, invoice type, Corrected
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>473</code>
+</td>
+<td>
+Self billed Factored corrective invoice, invoice type, Corrected
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>500</code>
+</td>
+<td>
+Self Prepayment invoice, invoice type, Original
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>501</code>
+</td>
+<td>
+Self billed factored invoice, invoice type, Original
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>502</code>
+</td>
+<td>
+Self billet factored Credit Note, Credit note type, Corrected
+</td>
+<td>
+Credit Note
+</td>
+</tr>
+<tr>
+<td>
+<code>503</code>
+</td>
+<td>
+Prepayment credit note, credit note type, Corrected
+</td>
+<td>
+Credit Note
+</td>
+</tr>
+<tr>
+<td>
+<code>527</code>
+</td>
+<td>
+Self billed debit note
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>532</code>
+</td>
+<td>
+Forwarder's credit note
+</td>
+<td>
+Credit Note
+</td>
+</tr>
+<tr>
+<td>
+<code>553</code>
+</td>
+<td>
+Forwarder's invoice discrepancy report
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>575</code>
+</td>
+<td>
+Insurer's invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>623</code>
+</td>
+<td>
+Forwarder's invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>633</code>
+</td>
+<td>
+Port charges documents
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>751</code>
+</td>
+<td>
+Invoice information for accounting purposes
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>780</code>
+</td>
+<td>
+Freight invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>817</code>
+</td>
+<td>
+Claim notification
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>870</code>
+</td>
+<td>
+Consular invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>875</code>
+</td>
+<td>
+Partial construction invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>876</code>
+</td>
+<td>
+Partial final construction invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>877</code>
+</td>
+<td>
+Final construction invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+<tr>
+<td>
+<code>935</code>
+</td>
+<td>
+Customs invoice
+</td>
+<td>
+Invoice
+</td>
+</tr>
+</tbody>
 </table>

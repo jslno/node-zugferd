@@ -1,55 +1,6587 @@
 ---
-title: UNTDID 1153
-description: Reference code qualifier
+title: UNTDID 1153 — Reference code qualifier
+description: Code giving specific meaning to a reference segment or a reference number.
 ---
 
-import {
-  UNTDID_1153,
-  UNTDID_1153_IDENTIFIER,
-  UNTDID_1153_VERSION,
-} from "node-zugferd/codelist/untdid.1153";
-import { ExternalLink } from "lucide-react";
-
-## Definition [toc]
-
-Identifier: <span className="text-fd-muted-foreground">{UNTDID_1153_IDENTIFIER}</span>
-
-Version: <span className="text-fd-muted-foreground">{UNTDID_1153_VERSION}</span>
-
-<div className="w-fit">
-  <Link
-    href="https://www.xrepository.de/details/urn:xoev-de:kosit:codeliste:untdid.1153"
-    target="_blank"
-  >
-    Source
-  </Link>
-</div>
+### Codelist [toc]
 
 ```ts
 import {
-  Untdid1153,
-  UNTDID_1153,
-  type Untdid1153Code,
-} from "node-zugferd/codelist/untdid.1153";
+	UNTDID_1153,
+	Untdid1153,
+	untdid1153Code,
+	PUBLISHED,
+	type Untdid1153Definition,
+	type Untdid1153Code,
+} from "node-zugferd/codelist/untdid-1153";
+
 ```
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    {UNTDID_1153.map(({ code, name, description }) => (
-      <tr key={code}>
-        <td className="text-center">
-          <code>{code}</code>
-        </td>
-        <td>{name}</td>
-        <td>{description}</td>
-      </tr>
-    ))}
-  </tbody>
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/untdid-1153/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Name
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>AAA</code>
+</td>
+<td>
+Order acknowledgement document identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AAB</code>
+</td>
+<td>
+Proforma invoice document identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AAC</code>
+</td>
+<td>
+Documentary credit identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AAD</code>
+</td>
+<td>
+Contract document addendum identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AAE</code>
+</td>
+<td>
+Goods declaration number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAF</code>
+</td>
+<td>
+Debit card number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAG</code>
+</td>
+<td>
+Offer number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAH</code>
+</td>
+<td>
+Bank's batch interbank transaction reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAI</code>
+</td>
+<td>
+Bank's individual interbank transaction reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAJ</code>
+</td>
+<td>
+Delivery order number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAK</code>
+</td>
+<td>
+Despatch advice number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAL</code>
+</td>
+<td>
+Drawing number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAM</code>
+</td>
+<td>
+Waybill number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAN</code>
+</td>
+<td>
+Delivery schedule number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAO</code>
+</td>
+<td>
+Consignment identifier, consignee assigned
+</td>
+</tr>
+<tr>
+<td>
+<code>AAP</code>
+</td>
+<td>
+Partial shipment identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AAQ</code>
+</td>
+<td>
+Transport equipment identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AAR</code>
+</td>
+<td>
+Municipality assigned business registry number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAS</code>
+</td>
+<td>
+Transport contract document identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AAT</code>
+</td>
+<td>
+Master label number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAU</code>
+</td>
+<td>
+Despatch note document identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AAV</code>
+</td>
+<td>
+Enquiry number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAW</code>
+</td>
+<td>
+Docket number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAX</code>
+</td>
+<td>
+Civil action number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAY</code>
+</td>
+<td>
+Carrier's agent reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AAZ</code>
+</td>
+<td>
+Standard Carrier Alpha Code (SCAC) number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABA</code>
+</td>
+<td>
+Customs valuation decision number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABB</code>
+</td>
+<td>
+End use authorization number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABC</code>
+</td>
+<td>
+Anti-dumping case number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABD</code>
+</td>
+<td>
+Customs tariff number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABE</code>
+</td>
+<td>
+Declarant's reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABF</code>
+</td>
+<td>
+Repair estimate number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABG</code>
+</td>
+<td>
+Customs decision request number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABH</code>
+</td>
+<td>
+Sub-house bill of lading number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABI</code>
+</td>
+<td>
+Tax payment identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>ABJ</code>
+</td>
+<td>
+Quota number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABK</code>
+</td>
+<td>
+Transit (onward carriage) guarantee (bond) number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABL</code>
+</td>
+<td>
+Customs guarantee number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABM</code>
+</td>
+<td>
+Replacing part number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABN</code>
+</td>
+<td>
+Seller's catalogue number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABO</code>
+</td>
+<td>
+Originator's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ABP</code>
+</td>
+<td>
+Declarant's Customs identity number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABQ</code>
+</td>
+<td>
+Importer reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABR</code>
+</td>
+<td>
+Export clearance instruction reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABS</code>
+</td>
+<td>
+Import clearance instruction reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABT</code>
+</td>
+<td>
+Goods declaration document identifier, Customs
+</td>
+</tr>
+<tr>
+<td>
+<code>ABU</code>
+</td>
+<td>
+Article number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABV</code>
+</td>
+<td>
+Intra-plant routing
+</td>
+</tr>
+<tr>
+<td>
+<code>ABW</code>
+</td>
+<td>
+Stock keeping unit number
+</td>
+</tr>
+<tr>
+<td>
+<code>ABX</code>
+</td>
+<td>
+Text Element Identifier deletion reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ABY</code>
+</td>
+<td>
+Allotment identification (Air)
+</td>
+</tr>
+<tr>
+<td>
+<code>ABZ</code>
+</td>
+<td>
+Vehicle licence number
+</td>
+</tr>
+<tr>
+<td>
+<code>AC</code>
+</td>
+<td>
+Air cargo transfer manifest
+</td>
+</tr>
+<tr>
+<td>
+<code>ACA</code>
+</td>
+<td>
+Cargo acceptance order reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACB</code>
+</td>
+<td>
+US government agency number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACC</code>
+</td>
+<td>
+Shipping unit identification
+</td>
+</tr>
+<tr>
+<td>
+<code>ACD</code>
+</td>
+<td>
+Additional reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACE</code>
+</td>
+<td>
+Related document number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACF</code>
+</td>
+<td>
+Addressee reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ACG</code>
+</td>
+<td>
+ATA carnet number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACH</code>
+</td>
+<td>
+Packaging unit identification
+</td>
+</tr>
+<tr>
+<td>
+<code>ACI</code>
+</td>
+<td>
+Outerpackaging unit identification
+</td>
+</tr>
+<tr>
+<td>
+<code>ACJ</code>
+</td>
+<td>
+Customer material specification number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACK</code>
+</td>
+<td>
+Bank reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ACL</code>
+</td>
+<td>
+Principal reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACN</code>
+</td>
+<td>
+Collection advice document identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>ACO</code>
+</td>
+<td>
+Iron charge number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACP</code>
+</td>
+<td>
+Hot roll number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACQ</code>
+</td>
+<td>
+Cold roll number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACR</code>
+</td>
+<td>
+Railway wagon number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACT</code>
+</td>
+<td>
+Unique claims reference number of the sender
+</td>
+</tr>
+<tr>
+<td>
+<code>ACU</code>
+</td>
+<td>
+Loss/event number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACV</code>
+</td>
+<td>
+Estimate order reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACW</code>
+</td>
+<td>
+Reference number to previous message
+</td>
+</tr>
+<tr>
+<td>
+<code>ACX</code>
+</td>
+<td>
+Banker's acceptance
+</td>
+</tr>
+<tr>
+<td>
+<code>ACY</code>
+</td>
+<td>
+Duty memo number
+</td>
+</tr>
+<tr>
+<td>
+<code>ACZ</code>
+</td>
+<td>
+Equipment transport charge number
+</td>
+</tr>
+<tr>
+<td>
+<code>ADA</code>
+</td>
+<td>
+Buyer's item number
+</td>
+</tr>
+<tr>
+<td>
+<code>ADB</code>
+</td>
+<td>
+Matured certificate of deposit
+</td>
+</tr>
+<tr>
+<td>
+<code>ADC</code>
+</td>
+<td>
+Loan
+</td>
+</tr>
+<tr>
+<td>
+<code>ADD</code>
+</td>
+<td>
+Analysis number/test number
+</td>
+</tr>
+<tr>
+<td>
+<code>ADE</code>
+</td>
+<td>
+Account number
+</td>
+</tr>
+<tr>
+<td>
+<code>ADF</code>
+</td>
+<td>
+Treaty number
+</td>
+</tr>
+<tr>
+<td>
+<code>ADG</code>
+</td>
+<td>
+Catastrophe number
+</td>
+</tr>
+<tr>
+<td>
+<code>ADI</code>
+</td>
+<td>
+Bureau signing (statement reference)
+</td>
+</tr>
+<tr>
+<td>
+<code>ADJ</code>
+</td>
+<td>
+Company / syndicate reference 1
+</td>
+</tr>
+<tr>
+<td>
+<code>ADK</code>
+</td>
+<td>
+Company / syndicate reference 2
+</td>
+</tr>
+<tr>
+<td>
+<code>ADL</code>
+</td>
+<td>
+Ordering customer consignment reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ADM</code>
+</td>
+<td>
+Shipowner's authorization number
+</td>
+</tr>
+<tr>
+<td>
+<code>ADN</code>
+</td>
+<td>
+Inland transport order number
+</td>
+</tr>
+<tr>
+<td>
+<code>ADO</code>
+</td>
+<td>
+Container work order reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ADP</code>
+</td>
+<td>
+Statement number
+</td>
+</tr>
+<tr>
+<td>
+<code>ADQ</code>
+</td>
+<td>
+Unique market reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ADT</code>
+</td>
+<td>
+Group accounting
+</td>
+</tr>
+<tr>
+<td>
+<code>ADU</code>
+</td>
+<td>
+Broker reference 1
+</td>
+</tr>
+<tr>
+<td>
+<code>ADV</code>
+</td>
+<td>
+Broker reference 2
+</td>
+</tr>
+<tr>
+<td>
+<code>ADW</code>
+</td>
+<td>
+Lloyd's claims office reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ADX</code>
+</td>
+<td>
+Secure delivery terms and conditions agreement reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ADY</code>
+</td>
+<td>
+Report number
+</td>
+</tr>
+<tr>
+<td>
+<code>ADZ</code>
+</td>
+<td>
+Trader account number
+</td>
+</tr>
+<tr>
+<td>
+<code>AE</code>
+</td>
+<td>
+Authorization for expense (AFE) number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEA</code>
+</td>
+<td>
+Government agency reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEB</code>
+</td>
+<td>
+Assembly number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEC</code>
+</td>
+<td>
+Symbol number
+</td>
+</tr>
+<tr>
+<td>
+<code>AED</code>
+</td>
+<td>
+Commodity number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEE</code>
+</td>
+<td>
+Eur 1 certificate number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEF</code>
+</td>
+<td>
+Customer process specification number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEG</code>
+</td>
+<td>
+Customer specification number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEH</code>
+</td>
+<td>
+Applicable instructions or standards
+</td>
+</tr>
+<tr>
+<td>
+<code>AEI</code>
+</td>
+<td>
+Registration number of previous Customs declaration
+</td>
+</tr>
+<tr>
+<td>
+<code>AEJ</code>
+</td>
+<td>
+Post-entry reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AEK</code>
+</td>
+<td>
+Payment order number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEL</code>
+</td>
+<td>
+Delivery number (transport)
+</td>
+</tr>
+<tr>
+<td>
+<code>AEM</code>
+</td>
+<td>
+Transport route
+</td>
+</tr>
+<tr>
+<td>
+<code>AEN</code>
+</td>
+<td>
+Customer's unit inventory number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEO</code>
+</td>
+<td>
+Product reservation number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEP</code>
+</td>
+<td>
+Project number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEQ</code>
+</td>
+<td>
+Drawing list number
+</td>
+</tr>
+<tr>
+<td>
+<code>AER</code>
+</td>
+<td>
+Project specification number
+</td>
+</tr>
+<tr>
+<td>
+<code>AES</code>
+</td>
+<td>
+Primary reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AET</code>
+</td>
+<td>
+Request for cancellation number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEU</code>
+</td>
+<td>
+Supplier's control number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEV</code>
+</td>
+<td>
+Shipping note number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEW</code>
+</td>
+<td>
+Empty container bill number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEX</code>
+</td>
+<td>
+Non-negotiable maritime transport document number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEY</code>
+</td>
+<td>
+Substitute air waybill number
+</td>
+</tr>
+<tr>
+<td>
+<code>AEZ</code>
+</td>
+<td>
+Despatch note (post parcels) number
+</td>
+</tr>
+<tr>
+<td>
+<code>AF</code>
+</td>
+<td>
+Airlines flight identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>AFA</code>
+</td>
+<td>
+Through bill of lading number
+</td>
+</tr>
+<tr>
+<td>
+<code>AFB</code>
+</td>
+<td>
+Cargo manifest number
+</td>
+</tr>
+<tr>
+<td>
+<code>AFC</code>
+</td>
+<td>
+Bordereau number
+</td>
+</tr>
+<tr>
+<td>
+<code>AFD</code>
+</td>
+<td>
+Customs item number
+</td>
+</tr>
+<tr>
+<td>
+<code>AFE</code>
+</td>
+<td>
+Export Control Commodity number (ECCN)
+</td>
+</tr>
+<tr>
+<td>
+<code>AFF</code>
+</td>
+<td>
+Marking/label reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AFG</code>
+</td>
+<td>
+Tariff number
+</td>
+</tr>
+<tr>
+<td>
+<code>AFH</code>
+</td>
+<td>
+Replenishment purchase order number
+</td>
+</tr>
+<tr>
+<td>
+<code>AFI</code>
+</td>
+<td>
+Immediate transportation no. for in bond movement
+</td>
+</tr>
+<tr>
+<td>
+<code>AFJ</code>
+</td>
+<td>
+Transportation exportation no. for in bond movement
+</td>
+</tr>
+<tr>
+<td>
+<code>AFK</code>
+</td>
+<td>
+Immediate exportation no. for in bond movement
+</td>
+</tr>
+<tr>
+<td>
+<code>AFL</code>
+</td>
+<td>
+Associated invoices
+</td>
+</tr>
+<tr>
+<td>
+<code>AFM</code>
+</td>
+<td>
+Secondary Customs reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AFN</code>
+</td>
+<td>
+Account party's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AFO</code>
+</td>
+<td>
+Beneficiary's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AFP</code>
+</td>
+<td>
+Second beneficiary's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AFQ</code>
+</td>
+<td>
+Applicant's bank reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AFR</code>
+</td>
+<td>
+Issuing bank's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AFS</code>
+</td>
+<td>
+Beneficiary's bank reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AFT</code>
+</td>
+<td>
+Direct payment valuation number
+</td>
+</tr>
+<tr>
+<td>
+<code>AFU</code>
+</td>
+<td>
+Direct payment valuation request number
+</td>
+</tr>
+<tr>
+<td>
+<code>AFV</code>
+</td>
+<td>
+Quantity valuation number
+</td>
+</tr>
+<tr>
+<td>
+<code>AFW</code>
+</td>
+<td>
+Quantity valuation request number
+</td>
+</tr>
+<tr>
+<td>
+<code>AFX</code>
+</td>
+<td>
+Bill of quantities number
+</td>
+</tr>
+<tr>
+<td>
+<code>AFY</code>
+</td>
+<td>
+Payment valuation number
+</td>
+</tr>
+<tr>
+<td>
+<code>AFZ</code>
+</td>
+<td>
+Situation number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGA</code>
+</td>
+<td>
+Agreement to pay number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGB</code>
+</td>
+<td>
+Contract party reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGC</code>
+</td>
+<td>
+Account party's bank reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AGD</code>
+</td>
+<td>
+Agent's bank reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AGE</code>
+</td>
+<td>
+Agent's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AGF</code>
+</td>
+<td>
+Applicant's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AGG</code>
+</td>
+<td>
+Dispute number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGH</code>
+</td>
+<td>
+Credit rating agency's reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGI</code>
+</td>
+<td>
+Request number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGJ</code>
+</td>
+<td>
+Single transaction sequence number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGK</code>
+</td>
+<td>
+Application reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGL</code>
+</td>
+<td>
+Delivery verification certificate
+</td>
+</tr>
+<tr>
+<td>
+<code>AGM</code>
+</td>
+<td>
+Number of temporary importation document
+</td>
+</tr>
+<tr>
+<td>
+<code>AGN</code>
+</td>
+<td>
+Reference number quoted on statement
+</td>
+</tr>
+<tr>
+<td>
+<code>AGO</code>
+</td>
+<td>
+Sender's reference to the original message
+</td>
+</tr>
+<tr>
+<td>
+<code>AGP</code>
+</td>
+<td>
+Company issued equipment ID
+</td>
+</tr>
+<tr>
+<td>
+<code>AGQ</code>
+</td>
+<td>
+Domestic flight number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGR</code>
+</td>
+<td>
+International flight number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGS</code>
+</td>
+<td>
+Employer identification number of service bureau
+</td>
+</tr>
+<tr>
+<td>
+<code>AGT</code>
+</td>
+<td>
+Service group identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGU</code>
+</td>
+<td>
+Member number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGV</code>
+</td>
+<td>
+Previous member number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGW</code>
+</td>
+<td>
+Scheme/plan number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGX</code>
+</td>
+<td>
+Previous scheme/plan number
+</td>
+</tr>
+<tr>
+<td>
+<code>AGY</code>
+</td>
+<td>
+Receiving party's member identification
+</td>
+</tr>
+<tr>
+<td>
+<code>AGZ</code>
+</td>
+<td>
+Payroll number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHA</code>
+</td>
+<td>
+Packaging specification number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHB</code>
+</td>
+<td>
+Authority issued equipment identification
+</td>
+</tr>
+<tr>
+<td>
+<code>AHC</code>
+</td>
+<td>
+Training flight number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHD</code>
+</td>
+<td>
+Fund code number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHE</code>
+</td>
+<td>
+Signal code number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHF</code>
+</td>
+<td>
+Major force program number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHG</code>
+</td>
+<td>
+Nomination number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHH</code>
+</td>
+<td>
+Laboratory registration number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHI</code>
+</td>
+<td>
+Transport contract reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHJ</code>
+</td>
+<td>
+Payee's reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHK</code>
+</td>
+<td>
+Payer's reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHL</code>
+</td>
+<td>
+Creditor's reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHM</code>
+</td>
+<td>
+Debtor's reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHN</code>
+</td>
+<td>
+Joint venture reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHO</code>
+</td>
+<td>
+Chamber of Commerce registration number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHP</code>
+</td>
+<td>
+Tax registration number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHQ</code>
+</td>
+<td>
+Wool identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHR</code>
+</td>
+<td>
+Wool tax reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHS</code>
+</td>
+<td>
+Meat processing establishment registration number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHT</code>
+</td>
+<td>
+Quarantine/treatment status reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHU</code>
+</td>
+<td>
+Request for quote number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHV</code>
+</td>
+<td>
+Manual processing authority number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHX</code>
+</td>
+<td>
+Rate note number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHY</code>
+</td>
+<td>
+Freight Forwarder number
+</td>
+</tr>
+<tr>
+<td>
+<code>AHZ</code>
+</td>
+<td>
+Customs release code
+</td>
+</tr>
+<tr>
+<td>
+<code>AIA</code>
+</td>
+<td>
+Compliance code number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIB</code>
+</td>
+<td>
+Department of transportation bond number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIC</code>
+</td>
+<td>
+Export establishment number
+</td>
+</tr>
+<tr>
+<td>
+<code>AID</code>
+</td>
+<td>
+Certificate of conformity
+</td>
+</tr>
+<tr>
+<td>
+<code>AIE</code>
+</td>
+<td>
+Ministerial certificate of homologation
+</td>
+</tr>
+<tr>
+<td>
+<code>AIF</code>
+</td>
+<td>
+Previous delivery instruction number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIG</code>
+</td>
+<td>
+Passport number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIH</code>
+</td>
+<td>
+Common transaction reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AII</code>
+</td>
+<td>
+Bank's common transaction reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIJ</code>
+</td>
+<td>
+Customer's individual transaction reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIK</code>
+</td>
+<td>
+Bank's individual transaction reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIL</code>
+</td>
+<td>
+Customer's common transaction reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIM</code>
+</td>
+<td>
+Individual transaction reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIN</code>
+</td>
+<td>
+Product sourcing agreement number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIO</code>
+</td>
+<td>
+Customs transhipment number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIP</code>
+</td>
+<td>
+Customs preference inquiry number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIQ</code>
+</td>
+<td>
+Packing plant number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIR</code>
+</td>
+<td>
+Original certificate number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIS</code>
+</td>
+<td>
+Processing plant number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIT</code>
+</td>
+<td>
+Slaughter plant number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIU</code>
+</td>
+<td>
+Charge card account number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIV</code>
+</td>
+<td>
+Event reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIW</code>
+</td>
+<td>
+Transport section reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AIX</code>
+</td>
+<td>
+Referred product for mechanical analysis
+</td>
+</tr>
+<tr>
+<td>
+<code>AIY</code>
+</td>
+<td>
+Referred product for chemical analysis
+</td>
+</tr>
+<tr>
+<td>
+<code>AIZ</code>
+</td>
+<td>
+Consolidated invoice number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJA</code>
+</td>
+<td>
+Part reference indicator in a drawing
+</td>
+</tr>
+<tr>
+<td>
+<code>AJB</code>
+</td>
+<td>
+U.S. Code of Federal Regulations (CFR)
+</td>
+</tr>
+<tr>
+<td>
+<code>AJC</code>
+</td>
+<td>
+Purchasing activity clause number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJD</code>
+</td>
+<td>
+U.S. Defense Federal Acquisition Regulation Supplement
+</td>
+</tr>
+<tr>
+<td>
+<code>AJE</code>
+</td>
+<td>
+Agency clause number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJF</code>
+</td>
+<td>
+Circular publication number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJG</code>
+</td>
+<td>
+U.S. Federal Acquisition Regulation
+</td>
+</tr>
+<tr>
+<td>
+<code>AJH</code>
+</td>
+<td>
+U.S. General Services Administration Regulation
+</td>
+</tr>
+<tr>
+<td>
+<code>AJI</code>
+</td>
+<td>
+U.S. Federal Information Resources Management Regulation
+</td>
+</tr>
+<tr>
+<td>
+<code>AJJ</code>
+</td>
+<td>
+Paragraph
+</td>
+</tr>
+<tr>
+<td>
+<code>AJK</code>
+</td>
+<td>
+Special instructions number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJL</code>
+</td>
+<td>
+Site specific procedures, terms, and conditions number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJM</code>
+</td>
+<td>
+Master solicitation procedures, terms, and conditions
+</td>
+</tr>
+<tr>
+<td>
+<code>AJN</code>
+</td>
+<td>
+U.S. Department of Veterans Affairs Acquisition Regulation
+</td>
+</tr>
+<tr>
+<td>
+<code>AJO</code>
+</td>
+<td>
+Military Interdepartmental Purchase Request (MIPR) number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJP</code>
+</td>
+<td>
+Foreign military sales number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJQ</code>
+</td>
+<td>
+Defense priorities allocation system priority rating
+</td>
+</tr>
+<tr>
+<td>
+<code>AJR</code>
+</td>
+<td>
+Wage determination number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJS</code>
+</td>
+<td>
+Agreement number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJT</code>
+</td>
+<td>
+Standard Industry Classification (SIC) number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJU</code>
+</td>
+<td>
+End item number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJV</code>
+</td>
+<td>
+Federal supply schedule item number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJW</code>
+</td>
+<td>
+Technical document number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJX</code>
+</td>
+<td>
+Technical order number
+</td>
+</tr>
+<tr>
+<td>
+<code>AJY</code>
+</td>
+<td>
+Suffix
+</td>
+</tr>
+<tr>
+<td>
+<code>AJZ</code>
+</td>
+<td>
+Transportation account number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKA</code>
+</td>
+<td>
+Container disposition order reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKB</code>
+</td>
+<td>
+Container prefix
+</td>
+</tr>
+<tr>
+<td>
+<code>AKC</code>
+</td>
+<td>
+Transport equipment return reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AKD</code>
+</td>
+<td>
+Transport equipment survey reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AKE</code>
+</td>
+<td>
+Transport equipment survey report number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKF</code>
+</td>
+<td>
+Transport equipment stuffing order
+</td>
+</tr>
+<tr>
+<td>
+<code>AKG</code>
+</td>
+<td>
+Vehicle Identification Number (VIN)
+</td>
+</tr>
+<tr>
+<td>
+<code>AKH</code>
+</td>
+<td>
+Government bill of lading
+</td>
+</tr>
+<tr>
+<td>
+<code>AKI</code>
+</td>
+<td>
+Ordering customer's second reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKJ</code>
+</td>
+<td>
+Direct debit reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AKK</code>
+</td>
+<td>
+Meter reading at the beginning of the delivery
+</td>
+</tr>
+<tr>
+<td>
+<code>AKL</code>
+</td>
+<td>
+Meter reading at the end of delivery
+</td>
+</tr>
+<tr>
+<td>
+<code>AKM</code>
+</td>
+<td>
+Replenishment purchase order range start number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKN</code>
+</td>
+<td>
+Third bank's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AKO</code>
+</td>
+<td>
+Action authorization number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKP</code>
+</td>
+<td>
+Appropriation number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKQ</code>
+</td>
+<td>
+Product change authority number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKR</code>
+</td>
+<td>
+General cargo consignment reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKS</code>
+</td>
+<td>
+Catalogue sequence number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKT</code>
+</td>
+<td>
+Forwarding order number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKU</code>
+</td>
+<td>
+Transport equipment survey reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKV</code>
+</td>
+<td>
+Lease contract reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AKW</code>
+</td>
+<td>
+Transport costs reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKX</code>
+</td>
+<td>
+Transport equipment stripping order
+</td>
+</tr>
+<tr>
+<td>
+<code>AKY</code>
+</td>
+<td>
+Prior policy number
+</td>
+</tr>
+<tr>
+<td>
+<code>AKZ</code>
+</td>
+<td>
+Policy number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALA</code>
+</td>
+<td>
+Procurement budget number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALB</code>
+</td>
+<td>
+Domestic inventory management code
+</td>
+</tr>
+<tr>
+<td>
+<code>ALC</code>
+</td>
+<td>
+Customer reference number assigned to previous balance of
+</td>
+</tr>
+<tr>
+<td>
+<code>ALD</code>
+</td>
+<td>
+Previous credit advice reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALE</code>
+</td>
+<td>
+Reporting form number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALF</code>
+</td>
+<td>
+Authorization number for exception to dangerous goods
+</td>
+</tr>
+<tr>
+<td>
+<code>ALG</code>
+</td>
+<td>
+Dangerous goods security number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALH</code>
+</td>
+<td>
+Dangerous goods transport licence number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALI</code>
+</td>
+<td>
+Previous rental agreement number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALJ</code>
+</td>
+<td>
+Next rental agreement reason number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALK</code>
+</td>
+<td>
+Consignee's invoice number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALL</code>
+</td>
+<td>
+Message batch number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALM</code>
+</td>
+<td>
+Previous delivery schedule number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALN</code>
+</td>
+<td>
+Physical inventory recount reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALO</code>
+</td>
+<td>
+Receiving advice number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALP</code>
+</td>
+<td>
+Returnable container reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALQ</code>
+</td>
+<td>
+Returns notice number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALR</code>
+</td>
+<td>
+Sales forecast number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALS</code>
+</td>
+<td>
+Sales report number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALT</code>
+</td>
+<td>
+Previous tax control number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALU</code>
+</td>
+<td>
+AGERD (Aerospace Ground Equipment Requirement Data) number
+</td>
+</tr>
+<tr>
+<td>
+<code>ALV</code>
+</td>
+<td>
+Registered capital reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ALW</code>
+</td>
+<td>
+Standard number of inspection document
+</td>
+</tr>
+<tr>
+<td>
+<code>ALX</code>
+</td>
+<td>
+Model
+</td>
+</tr>
+<tr>
+<td>
+<code>ALY</code>
+</td>
+<td>
+Financial management reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ALZ</code>
+</td>
+<td>
+NOTIfication for COLlection number (NOTICOL)
+</td>
+</tr>
+<tr>
+<td>
+<code>AMA</code>
+</td>
+<td>
+Previous request for metered reading reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMB</code>
+</td>
+<td>
+Next rental agreement number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMC</code>
+</td>
+<td>
+Reference number of a request for metered reading
+</td>
+</tr>
+<tr>
+<td>
+<code>AMD</code>
+</td>
+<td>
+Hastening number
+</td>
+</tr>
+<tr>
+<td>
+<code>AME</code>
+</td>
+<td>
+Repair data request number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMF</code>
+</td>
+<td>
+Consumption data request number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMG</code>
+</td>
+<td>
+Profile number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMH</code>
+</td>
+<td>
+Case number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMI</code>
+</td>
+<td>
+Government quality assurance and control level Number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMJ</code>
+</td>
+<td>
+Payment plan reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AMK</code>
+</td>
+<td>
+Replaced meter unit number
+</td>
+</tr>
+<tr>
+<td>
+<code>AML</code>
+</td>
+<td>
+Replenishment purchase order range end number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMM</code>
+</td>
+<td>
+Insurer assigned reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMN</code>
+</td>
+<td>
+Canadian excise entry number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMO</code>
+</td>
+<td>
+Premium rate table
+</td>
+</tr>
+<tr>
+<td>
+<code>AMP</code>
+</td>
+<td>
+Advise through bank's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AMQ</code>
+</td>
+<td>
+US, Department of Transportation bond surety code
+</td>
+</tr>
+<tr>
+<td>
+<code>AMR</code>
+</td>
+<td>
+US, Food and Drug Administration establishment indicator
+</td>
+</tr>
+<tr>
+<td>
+<code>AMS</code>
+</td>
+<td>
+US, Federal Communications Commission (FCC) import
+</td>
+</tr>
+<tr>
+<td>
+<code>AMT</code>
+</td>
+<td>
+Goods and Services Tax identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMU</code>
+</td>
+<td>
+Integrated logistic support cross reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMV</code>
+</td>
+<td>
+Department number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMW</code>
+</td>
+<td>
+Buyer's catalogue number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMX</code>
+</td>
+<td>
+Financial settlement party's reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMY</code>
+</td>
+<td>
+Standard's version number
+</td>
+</tr>
+<tr>
+<td>
+<code>AMZ</code>
+</td>
+<td>
+Pipeline number
+</td>
+</tr>
+<tr>
+<td>
+<code>ANA</code>
+</td>
+<td>
+Account servicing bank's reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ANB</code>
+</td>
+<td>
+Completed units payment request reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ANC</code>
+</td>
+<td>
+Payment in advance request reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AND</code>
+</td>
+<td>
+Parent file
+</td>
+</tr>
+<tr>
+<td>
+<code>ANE</code>
+</td>
+<td>
+Sub file
+</td>
+</tr>
+<tr>
+<td>
+<code>ANF</code>
+</td>
+<td>
+CAD file layer convention
+</td>
+</tr>
+<tr>
+<td>
+<code>ANG</code>
+</td>
+<td>
+Technical regulation
+</td>
+</tr>
+<tr>
+<td>
+<code>ANH</code>
+</td>
+<td>
+Plot file
+</td>
+</tr>
+<tr>
+<td>
+<code>ANI</code>
+</td>
+<td>
+File conversion journal
+</td>
+</tr>
+<tr>
+<td>
+<code>ANJ</code>
+</td>
+<td>
+Authorization number
+</td>
+</tr>
+<tr>
+<td>
+<code>ANK</code>
+</td>
+<td>
+Reference number assigned by third party
+</td>
+</tr>
+<tr>
+<td>
+<code>ANL</code>
+</td>
+<td>
+Deposit reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ANM</code>
+</td>
+<td>
+Named bank's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ANN</code>
+</td>
+<td>
+Drawee's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ANO</code>
+</td>
+<td>
+Case of need party's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ANP</code>
+</td>
+<td>
+Collecting bank's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ANQ</code>
+</td>
+<td>
+Remitting bank's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ANR</code>
+</td>
+<td>
+Principal's bank reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ANS</code>
+</td>
+<td>
+Presenting bank's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ANT</code>
+</td>
+<td>
+Consignee's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ANU</code>
+</td>
+<td>
+Financial transaction reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ANV</code>
+</td>
+<td>
+Credit reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ANW</code>
+</td>
+<td>
+Receiving bank's authorization number
+</td>
+</tr>
+<tr>
+<td>
+<code>ANX</code>
+</td>
+<td>
+Clearing reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ANY</code>
+</td>
+<td>
+Sending bank's reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AOA</code>
+</td>
+<td>
+Documentary payment reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AOD</code>
+</td>
+<td>
+Accounting file reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AOE</code>
+</td>
+<td>
+Sender's file reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AOF</code>
+</td>
+<td>
+Receiver's file reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AOG</code>
+</td>
+<td>
+Source document internal reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AOH</code>
+</td>
+<td>
+Principal's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AOI</code>
+</td>
+<td>
+Debit reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AOJ</code>
+</td>
+<td>
+Calendar
+</td>
+</tr>
+<tr>
+<td>
+<code>AOK</code>
+</td>
+<td>
+Work shift
+</td>
+</tr>
+<tr>
+<td>
+<code>AOL</code>
+</td>
+<td>
+Work breakdown structure
+</td>
+</tr>
+<tr>
+<td>
+<code>AOM</code>
+</td>
+<td>
+Organisation breakdown structure
+</td>
+</tr>
+<tr>
+<td>
+<code>AON</code>
+</td>
+<td>
+Work task charge number
+</td>
+</tr>
+<tr>
+<td>
+<code>AOO</code>
+</td>
+<td>
+Functional work group
+</td>
+</tr>
+<tr>
+<td>
+<code>AOP</code>
+</td>
+<td>
+Work team
+</td>
+</tr>
+<tr>
+<td>
+<code>AOQ</code>
+</td>
+<td>
+Department
+</td>
+</tr>
+<tr>
+<td>
+<code>AOR</code>
+</td>
+<td>
+Statement of work
+</td>
+</tr>
+<tr>
+<td>
+<code>AOS</code>
+</td>
+<td>
+Work package
+</td>
+</tr>
+<tr>
+<td>
+<code>AOT</code>
+</td>
+<td>
+Planning package
+</td>
+</tr>
+<tr>
+<td>
+<code>AOU</code>
+</td>
+<td>
+Cost account
+</td>
+</tr>
+<tr>
+<td>
+<code>AOV</code>
+</td>
+<td>
+Work order
+</td>
+</tr>
+<tr>
+<td>
+<code>AOW</code>
+</td>
+<td>
+Transportation Control Number (TCN)
+</td>
+</tr>
+<tr>
+<td>
+<code>AOX</code>
+</td>
+<td>
+Constraint notation
+</td>
+</tr>
+<tr>
+<td>
+<code>AOY</code>
+</td>
+<td>
+ETERMS reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AOZ</code>
+</td>
+<td>
+Implementation version number
+</td>
+</tr>
+<tr>
+<td>
+<code>AP</code>
+</td>
+<td>
+Accounts receivable number
+</td>
+</tr>
+<tr>
+<td>
+<code>APA</code>
+</td>
+<td>
+Incorporated legal reference
+</td>
+</tr>
+<tr>
+<td>
+<code>APB</code>
+</td>
+<td>
+Payment instalment reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>APC</code>
+</td>
+<td>
+Equipment owner reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>APD</code>
+</td>
+<td>
+Cedent's claim number
+</td>
+</tr>
+<tr>
+<td>
+<code>APE</code>
+</td>
+<td>
+Reinsurer's claim number
+</td>
+</tr>
+<tr>
+<td>
+<code>APF</code>
+</td>
+<td>
+Price/sales catalogue response reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>APG</code>
+</td>
+<td>
+General purpose message reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>APH</code>
+</td>
+<td>
+Invoicing data sheet reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>API</code>
+</td>
+<td>
+Inventory report reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>APJ</code>
+</td>
+<td>
+Ceiling formula reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>APK</code>
+</td>
+<td>
+Price variation formula reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>APL</code>
+</td>
+<td>
+Reference to account servicing bank's message
+</td>
+</tr>
+<tr>
+<td>
+<code>APM</code>
+</td>
+<td>
+Party sequence number
+</td>
+</tr>
+<tr>
+<td>
+<code>APN</code>
+</td>
+<td>
+Purchaser's request reference
+</td>
+</tr>
+<tr>
+<td>
+<code>APO</code>
+</td>
+<td>
+Contractor request reference
+</td>
+</tr>
+<tr>
+<td>
+<code>APP</code>
+</td>
+<td>
+Accident reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>APQ</code>
+</td>
+<td>
+Commercial account summary reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>APR</code>
+</td>
+<td>
+Contract breakdown reference
+</td>
+</tr>
+<tr>
+<td>
+<code>APS</code>
+</td>
+<td>
+Contractor registration number
+</td>
+</tr>
+<tr>
+<td>
+<code>APT</code>
+</td>
+<td>
+Applicable coefficient identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>APU</code>
+</td>
+<td>
+Special budget account number
+</td>
+</tr>
+<tr>
+<td>
+<code>APV</code>
+</td>
+<td>
+Authorisation for repair reference
+</td>
+</tr>
+<tr>
+<td>
+<code>APW</code>
+</td>
+<td>
+Manufacturer defined repair rates reference
+</td>
+</tr>
+<tr>
+<td>
+<code>APX</code>
+</td>
+<td>
+Original submitter log number
+</td>
+</tr>
+<tr>
+<td>
+<code>APY</code>
+</td>
+<td>
+Original submitter, parent Data Maintenance Request (DMR)
+</td>
+</tr>
+<tr>
+<td>
+<code>APZ</code>
+</td>
+<td>
+Original submitter, child Data Maintenance Request (DMR)
+</td>
+</tr>
+<tr>
+<td>
+<code>AQA</code>
+</td>
+<td>
+Entry point assessment log number
+</td>
+</tr>
+<tr>
+<td>
+<code>AQB</code>
+</td>
+<td>
+Entry point assessment log number, parent DMR
+</td>
+</tr>
+<tr>
+<td>
+<code>AQC</code>
+</td>
+<td>
+Entry point assessment log number, child DMR
+</td>
+</tr>
+<tr>
+<td>
+<code>AQD</code>
+</td>
+<td>
+Data structure tag
+</td>
+</tr>
+<tr>
+<td>
+<code>AQE</code>
+</td>
+<td>
+Central secretariat log number
+</td>
+</tr>
+<tr>
+<td>
+<code>AQF</code>
+</td>
+<td>
+Central secretariat log number, parent Data Maintenance
+</td>
+</tr>
+<tr>
+<td>
+<code>AQG</code>
+</td>
+<td>
+Central secretariat log number, child Data Maintenance
+</td>
+</tr>
+<tr>
+<td>
+<code>AQH</code>
+</td>
+<td>
+International assessment log number
+</td>
+</tr>
+<tr>
+<td>
+<code>AQI</code>
+</td>
+<td>
+International assessment log number, parent Data
+</td>
+</tr>
+<tr>
+<td>
+<code>AQJ</code>
+</td>
+<td>
+International assessment log number, child Data Maintenance
+</td>
+</tr>
+<tr>
+<td>
+<code>AQK</code>
+</td>
+<td>
+Status report number
+</td>
+</tr>
+<tr>
+<td>
+<code>AQL</code>
+</td>
+<td>
+Message design group number
+</td>
+</tr>
+<tr>
+<td>
+<code>AQM</code>
+</td>
+<td>
+US Customs Service (USCS) entry code
+</td>
+</tr>
+<tr>
+<td>
+<code>AQN</code>
+</td>
+<td>
+Beginning job sequence number
+</td>
+</tr>
+<tr>
+<td>
+<code>AQO</code>
+</td>
+<td>
+Sender's clause number
+</td>
+</tr>
+<tr>
+<td>
+<code>AQP</code>
+</td>
+<td>
+Dun and Bradstreet Canada's 8 digit Standard Industrial
+</td>
+</tr>
+<tr>
+<td>
+<code>AQQ</code>
+</td>
+<td>
+Activite Principale Exercee (APE) identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AQR</code>
+</td>
+<td>
+Dun and Bradstreet US 8 digit Standard Industrial
+</td>
+</tr>
+<tr>
+<td>
+<code>AQS</code>
+</td>
+<td>
+Nomenclature Activity Classification Economy (NACE)
+</td>
+</tr>
+<tr>
+<td>
+<code>AQT</code>
+</td>
+<td>
+Norme Activite Francaise (NAF) identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AQU</code>
+</td>
+<td>
+Registered contractor activity type
+</td>
+</tr>
+<tr>
+<td>
+<code>AQV</code>
+</td>
+<td>
+Statistic Bundes Amt (SBA) identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AQW</code>
+</td>
+<td>
+State or province assigned entity identification
+</td>
+</tr>
+<tr>
+<td>
+<code>AQX</code>
+</td>
+<td>
+Institute of Security and Future Market Development (ISFMD)
+</td>
+</tr>
+<tr>
+<td>
+<code>AQY</code>
+</td>
+<td>
+File identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>AQZ</code>
+</td>
+<td>
+Bankruptcy procedure number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARA</code>
+</td>
+<td>
+National government business identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARB</code>
+</td>
+<td>
+Prior Data Universal Number System (DUNS) number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARC</code>
+</td>
+<td>
+Companies Registry Office (CRO) number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARD</code>
+</td>
+<td>
+Costa Rican judicial number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARE</code>
+</td>
+<td>
+Numero de Identificacion Tributaria (NIT)
+</td>
+</tr>
+<tr>
+<td>
+<code>ARF</code>
+</td>
+<td>
+Patron number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARG</code>
+</td>
+<td>
+Registro Informacion Fiscal (RIF) number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARH</code>
+</td>
+<td>
+Registro Unico de Contribuyente (RUC) number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARI</code>
+</td>
+<td>
+Tokyo SHOKO Research (TSR) business identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>ARJ</code>
+</td>
+<td>
+Personal identity card number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARK</code>
+</td>
+<td>
+Systeme Informatique pour le Repertoire des ENtreprises
+</td>
+</tr>
+<tr>
+<td>
+<code>ARL</code>
+</td>
+<td>
+Systeme Informatique pour le Repertoire des ETablissements
+</td>
+</tr>
+<tr>
+<td>
+<code>ARM</code>
+</td>
+<td>
+Publication issue number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARN</code>
+</td>
+<td>
+Original filing number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARO</code>
+</td>
+<td>
+Document page identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>ARP</code>
+</td>
+<td>
+Public filing registration number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARQ</code>
+</td>
+<td>
+Regiristo Federal de Contribuyentes
+</td>
+</tr>
+<tr>
+<td>
+<code>ARR</code>
+</td>
+<td>
+Social security number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARS</code>
+</td>
+<td>
+Document volume number
+</td>
+</tr>
+<tr>
+<td>
+<code>ART</code>
+</td>
+<td>
+Book number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARU</code>
+</td>
+<td>
+Stock exchange company identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>ARV</code>
+</td>
+<td>
+Imputation account
+</td>
+</tr>
+<tr>
+<td>
+<code>ARW</code>
+</td>
+<td>
+Financial phase reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ARX</code>
+</td>
+<td>
+Technical phase reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ARY</code>
+</td>
+<td>
+Prior contractor registration number
+</td>
+</tr>
+<tr>
+<td>
+<code>ARZ</code>
+</td>
+<td>
+Stock adjustment number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASA</code>
+</td>
+<td>
+Dispensation reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ASB</code>
+</td>
+<td>
+Investment reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASC</code>
+</td>
+<td>
+Assuming company
+</td>
+</tr>
+<tr>
+<td>
+<code>ASD</code>
+</td>
+<td>
+Budget chapter
+</td>
+</tr>
+<tr>
+<td>
+<code>ASE</code>
+</td>
+<td>
+Duty free products security number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASF</code>
+</td>
+<td>
+Duty free products receipt authorisation number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASG</code>
+</td>
+<td>
+Party information message reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ASH</code>
+</td>
+<td>
+Formal statement reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ASI</code>
+</td>
+<td>
+Proof of delivery reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASJ</code>
+</td>
+<td>
+Supplier's credit claim reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASK</code>
+</td>
+<td>
+Picture of actual product
+</td>
+</tr>
+<tr>
+<td>
+<code>ASL</code>
+</td>
+<td>
+Picture of a generic product
+</td>
+</tr>
+<tr>
+<td>
+<code>ASM</code>
+</td>
+<td>
+Trading partner identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASN</code>
+</td>
+<td>
+Prior trading partner identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASO</code>
+</td>
+<td>
+Password
+</td>
+</tr>
+<tr>
+<td>
+<code>ASP</code>
+</td>
+<td>
+Formal report number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASQ</code>
+</td>
+<td>
+Fund account number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASR</code>
+</td>
+<td>
+Safe custody number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASS</code>
+</td>
+<td>
+Master account number
+</td>
+</tr>
+<tr>
+<td>
+<code>AST</code>
+</td>
+<td>
+Group reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASU</code>
+</td>
+<td>
+Accounting transmission number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASV</code>
+</td>
+<td>
+Product data file number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASW</code>
+</td>
+<td>
+Cadastro Geral do Contribuinte (CGC)
+</td>
+</tr>
+<tr>
+<td>
+<code>ASX</code>
+</td>
+<td>
+Foreign resident identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>ASY</code>
+</td>
+<td>
+CD-ROM
+</td>
+</tr>
+<tr>
+<td>
+<code>ASZ</code>
+</td>
+<td>
+Physical medium
+</td>
+</tr>
+<tr>
+<td>
+<code>ATA</code>
+</td>
+<td>
+Financial cancellation reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATB</code>
+</td>
+<td>
+Purchase for export Customs agreement number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATC</code>
+</td>
+<td>
+Judgment number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATD</code>
+</td>
+<td>
+Secretariat number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATE</code>
+</td>
+<td>
+Previous banking status message reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ATF</code>
+</td>
+<td>
+Last received banking status message reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ATG</code>
+</td>
+<td>
+Bank's documentary procedure reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ATH</code>
+</td>
+<td>
+Customer's documentary procedure reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ATI</code>
+</td>
+<td>
+Safe deposit box number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATJ</code>
+</td>
+<td>
+Receiving Bankgiro number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATK</code>
+</td>
+<td>
+Sending Bankgiro number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATL</code>
+</td>
+<td>
+Bankgiro reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ATM</code>
+</td>
+<td>
+Guarantee number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATN</code>
+</td>
+<td>
+Collection instrument number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATO</code>
+</td>
+<td>
+Converted Postgiro number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATP</code>
+</td>
+<td>
+Cost centre alignment number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATQ</code>
+</td>
+<td>
+Kamer Van Koophandel (KVK) number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATR</code>
+</td>
+<td>
+Institut Belgo-Luxembourgeois de Codification (IBLC) number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATS</code>
+</td>
+<td>
+External object reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ATT</code>
+</td>
+<td>
+Exceptional transport authorisation number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATU</code>
+</td>
+<td>
+Clave Unica de Identificacion Tributaria (CUIT)
+</td>
+</tr>
+<tr>
+<td>
+<code>ATV</code>
+</td>
+<td>
+Registro Unico Tributario (RUT)
+</td>
+</tr>
+<tr>
+<td>
+<code>ATW</code>
+</td>
+<td>
+Flat rack container bundle identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>ATX</code>
+</td>
+<td>
+Transport equipment acceptance order reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ATY</code>
+</td>
+<td>
+Transport equipment release order reference
+</td>
+</tr>
+<tr>
+<td>
+<code>ATZ</code>
+</td>
+<td>
+Ship's stay reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AU</code>
+</td>
+<td>
+Authorization to meet competition number
+</td>
+</tr>
+<tr>
+<td>
+<code>AUA</code>
+</td>
+<td>
+Place of positioning reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AUB</code>
+</td>
+<td>
+Party reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AUC</code>
+</td>
+<td>
+Issued prescription identification
+</td>
+</tr>
+<tr>
+<td>
+<code>AUD</code>
+</td>
+<td>
+Collection reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AUE</code>
+</td>
+<td>
+Travel service
+</td>
+</tr>
+<tr>
+<td>
+<code>AUF</code>
+</td>
+<td>
+Consignment stock contract
+</td>
+</tr>
+<tr>
+<td>
+<code>AUG</code>
+</td>
+<td>
+Importer's letter of credit reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AUH</code>
+</td>
+<td>
+Performed prescription identification
+</td>
+</tr>
+<tr>
+<td>
+<code>AUI</code>
+</td>
+<td>
+Image reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AUJ</code>
+</td>
+<td>
+Proposed purchase order reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AUK</code>
+</td>
+<td>
+Application for financial support reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AUL</code>
+</td>
+<td>
+Manufacturing quality agreement number
+</td>
+</tr>
+<tr>
+<td>
+<code>AUM</code>
+</td>
+<td>
+Software editor reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AUN</code>
+</td>
+<td>
+Software reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AUO</code>
+</td>
+<td>
+Software quality reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AUP</code>
+</td>
+<td>
+Consolidated orders' reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AUQ</code>
+</td>
+<td>
+Customs binding ruling number
+</td>
+</tr>
+<tr>
+<td>
+<code>AUR</code>
+</td>
+<td>
+Customs non-binding ruling number
+</td>
+</tr>
+<tr>
+<td>
+<code>AUS</code>
+</td>
+<td>
+Delivery route reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AUT</code>
+</td>
+<td>
+Net area supplier reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AUU</code>
+</td>
+<td>
+Time series reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AUV</code>
+</td>
+<td>
+Connecting point to central grid
+</td>
+</tr>
+<tr>
+<td>
+<code>AUW</code>
+</td>
+<td>
+Marketing plan identification number (MPIN)
+</td>
+</tr>
+<tr>
+<td>
+<code>AUX</code>
+</td>
+<td>
+Entity reference number, previous
+</td>
+</tr>
+<tr>
+<td>
+<code>AUY</code>
+</td>
+<td>
+International Standard Industrial Classification (ISIC)
+</td>
+</tr>
+<tr>
+<td>
+<code>AUZ</code>
+</td>
+<td>
+Customs pre-approval ruling number
+</td>
+</tr>
+<tr>
+<td>
+<code>AV</code>
+</td>
+<td>
+Account payable number
+</td>
+</tr>
+<tr>
+<td>
+<code>AVA</code>
+</td>
+<td>
+First financial institution's transaction reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AVB</code>
+</td>
+<td>
+Product characteristics directory
+</td>
+</tr>
+<tr>
+<td>
+<code>AVC</code>
+</td>
+<td>
+Supplier's customer reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AVD</code>
+</td>
+<td>
+Inventory report request number
+</td>
+</tr>
+<tr>
+<td>
+<code>AVE</code>
+</td>
+<td>
+Metering point
+</td>
+</tr>
+<tr>
+<td>
+<code>AVF</code>
+</td>
+<td>
+Passenger reservation number
+</td>
+</tr>
+<tr>
+<td>
+<code>AVG</code>
+</td>
+<td>
+Slaughterhouse approval number
+</td>
+</tr>
+<tr>
+<td>
+<code>AVH</code>
+</td>
+<td>
+Meat cutting plant approval number
+</td>
+</tr>
+<tr>
+<td>
+<code>AVI</code>
+</td>
+<td>
+Customer travel service identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AVJ</code>
+</td>
+<td>
+Export control classification number
+</td>
+</tr>
+<tr>
+<td>
+<code>AVK</code>
+</td>
+<td>
+Broker reference 3
+</td>
+</tr>
+<tr>
+<td>
+<code>AVL</code>
+</td>
+<td>
+Consignment information
+</td>
+</tr>
+<tr>
+<td>
+<code>AVM</code>
+</td>
+<td>
+Goods item information
+</td>
+</tr>
+<tr>
+<td>
+<code>AVN</code>
+</td>
+<td>
+Dangerous Goods information
+</td>
+</tr>
+<tr>
+<td>
+<code>AVO</code>
+</td>
+<td>
+Pilotage services exemption number
+</td>
+</tr>
+<tr>
+<td>
+<code>AVP</code>
+</td>
+<td>
+Person registration number
+</td>
+</tr>
+<tr>
+<td>
+<code>AVQ</code>
+</td>
+<td>
+Place of packing approval number
+</td>
+</tr>
+<tr>
+<td>
+<code>AVR</code>
+</td>
+<td>
+Original Mandate Reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AVS</code>
+</td>
+<td>
+Mandate Reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AVT</code>
+</td>
+<td>
+Reservation station indentifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AVU</code>
+</td>
+<td>
+Unique goods shipment identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AVV</code>
+</td>
+<td>
+Framework Agreement Number
+</td>
+</tr>
+<tr>
+<td>
+<code>AVW</code>
+</td>
+<td>
+Hash value
+</td>
+</tr>
+<tr>
+<td>
+<code>AVX</code>
+</td>
+<td>
+Movement reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AVY</code>
+</td>
+<td>
+Economic Operators Registration and Identification Number
+</td>
+</tr>
+<tr>
+<td>
+<code>AVZ</code>
+</td>
+<td>
+Local Reference Number
+</td>
+</tr>
+<tr>
+<td>
+<code>AWA</code>
+</td>
+<td>
+Rate code number
+</td>
+</tr>
+<tr>
+<td>
+<code>AWB</code>
+</td>
+<td>
+Air waybill number
+</td>
+</tr>
+<tr>
+<td>
+<code>AWC</code>
+</td>
+<td>
+Documentary credit amendment number
+</td>
+</tr>
+<tr>
+<td>
+<code>AWD</code>
+</td>
+<td>
+Advising bank's reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AWE</code>
+</td>
+<td>
+Cost centre
+</td>
+</tr>
+<tr>
+<td>
+<code>AWF</code>
+</td>
+<td>
+Work item quantity determination
+</td>
+</tr>
+<tr>
+<td>
+<code>AWG</code>
+</td>
+<td>
+Internal data process number
+</td>
+</tr>
+<tr>
+<td>
+<code>AWH</code>
+</td>
+<td>
+Category of work reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AWI</code>
+</td>
+<td>
+Policy form number
+</td>
+</tr>
+<tr>
+<td>
+<code>AWJ</code>
+</td>
+<td>
+Net area
+</td>
+</tr>
+<tr>
+<td>
+<code>AWK</code>
+</td>
+<td>
+Service provider
+</td>
+</tr>
+<tr>
+<td>
+<code>AWL</code>
+</td>
+<td>
+Error position
+</td>
+</tr>
+<tr>
+<td>
+<code>AWM</code>
+</td>
+<td>
+Service category reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AWN</code>
+</td>
+<td>
+Connected location
+</td>
+</tr>
+<tr>
+<td>
+<code>AWO</code>
+</td>
+<td>
+Related party
+</td>
+</tr>
+<tr>
+<td>
+<code>AWP</code>
+</td>
+<td>
+Latest accounting entry record reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AWQ</code>
+</td>
+<td>
+Accounting entry
+</td>
+</tr>
+<tr>
+<td>
+<code>AWR</code>
+</td>
+<td>
+Document reference, original
+</td>
+</tr>
+<tr>
+<td>
+<code>AWS</code>
+</td>
+<td>
+Hygienic Certificate number, national
+</td>
+</tr>
+<tr>
+<td>
+<code>AWT</code>
+</td>
+<td>
+Administrative Reference Code
+</td>
+</tr>
+<tr>
+<td>
+<code>AWU</code>
+</td>
+<td>
+Pick-up sheet number
+</td>
+</tr>
+<tr>
+<td>
+<code>AWV</code>
+</td>
+<td>
+Phone number
+</td>
+</tr>
+<tr>
+<td>
+<code>AWW</code>
+</td>
+<td>
+Buyer's fund number
+</td>
+</tr>
+<tr>
+<td>
+<code>AWX</code>
+</td>
+<td>
+Company trading account number
+</td>
+</tr>
+<tr>
+<td>
+<code>AWY</code>
+</td>
+<td>
+Reserved goods identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>AWZ</code>
+</td>
+<td>
+Handling and movement reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXA</code>
+</td>
+<td>
+Instruction to despatch reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXB</code>
+</td>
+<td>
+Instruction for returns number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXC</code>
+</td>
+<td>
+Metered services consumption report number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXD</code>
+</td>
+<td>
+Order status enquiry number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXE</code>
+</td>
+<td>
+Firm booking reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXF</code>
+</td>
+<td>
+Product inquiry number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXG</code>
+</td>
+<td>
+Split delivery number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXH</code>
+</td>
+<td>
+Service relation number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXI</code>
+</td>
+<td>
+Serial shipping container code
+</td>
+</tr>
+<tr>
+<td>
+<code>AXJ</code>
+</td>
+<td>
+Test specification number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXK</code>
+</td>
+<td>
+Transport status report number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXL</code>
+</td>
+<td>
+Tooling contract number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXM</code>
+</td>
+<td>
+Formula reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXN</code>
+</td>
+<td>
+Pre-agreement number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXO</code>
+</td>
+<td>
+Product certification number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXP</code>
+</td>
+<td>
+Consignment contract number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXQ</code>
+</td>
+<td>
+Product specification reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>AXR</code>
+</td>
+<td>
+Payroll deduction advice reference
+</td>
+</tr>
+<tr>
+<td>
+<code>AXS</code>
+</td>
+<td>
+TRACES party identification
+</td>
+</tr>
+<tr>
+<td>
+<code>AXU</code>
+</td>
+<td>
+Block Stowage Reference
+</td>
+</tr>
+<tr>
+<td>
+<code>BA</code>
+</td>
+<td>
+Beginning meter reading actual
+</td>
+</tr>
+<tr>
+<td>
+<code>BC</code>
+</td>
+<td>
+Buyer's contract number
+</td>
+</tr>
+<tr>
+<td>
+<code>BD</code>
+</td>
+<td>
+Bid number
+</td>
+</tr>
+<tr>
+<td>
+<code>BE</code>
+</td>
+<td>
+Beginning meter reading estimated
+</td>
+</tr>
+<tr>
+<td>
+<code>BH</code>
+</td>
+<td>
+House bill of lading number
+</td>
+</tr>
+<tr>
+<td>
+<code>BM</code>
+</td>
+<td>
+Bill of lading number
+</td>
+</tr>
+<tr>
+<td>
+<code>BN</code>
+</td>
+<td>
+Consignment identifier, carrier assigned
+</td>
+</tr>
+<tr>
+<td>
+<code>BO</code>
+</td>
+<td>
+Blanket order number
+</td>
+</tr>
+<tr>
+<td>
+<code>BR</code>
+</td>
+<td>
+Broker or sales office number
+</td>
+</tr>
+<tr>
+<td>
+<code>BT</code>
+</td>
+<td>
+Batch number/lot number
+</td>
+</tr>
+<tr>
+<td>
+<code>BTP</code>
+</td>
+<td>
+Battery and accumulator producer registration number
+</td>
+</tr>
+<tr>
+<td>
+<code>BW</code>
+</td>
+<td>
+Blended with number
+</td>
+</tr>
+<tr>
+<td>
+<code>CAS</code>
+</td>
+<td>
+IATA Cargo Agent CASS Address number
+</td>
+</tr>
+<tr>
+<td>
+<code>CAT</code>
+</td>
+<td>
+Matching of entries, balanced
+</td>
+</tr>
+<tr>
+<td>
+<code>CAU</code>
+</td>
+<td>
+Entry flagging
+</td>
+</tr>
+<tr>
+<td>
+<code>CAV</code>
+</td>
+<td>
+Matching of entries, unbalanced
+</td>
+</tr>
+<tr>
+<td>
+<code>CAW</code>
+</td>
+<td>
+Document reference, internal
+</td>
+</tr>
+<tr>
+<td>
+<code>CAX</code>
+</td>
+<td>
+European Value Added Tax identification
+</td>
+</tr>
+<tr>
+<td>
+<code>CAY</code>
+</td>
+<td>
+Cost accounting document
+</td>
+</tr>
+<tr>
+<td>
+<code>CAZ</code>
+</td>
+<td>
+Grid operator's customer reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>CBA</code>
+</td>
+<td>
+Ticket control number
+</td>
+</tr>
+<tr>
+<td>
+<code>CBB</code>
+</td>
+<td>
+Order shipment grouping reference
+</td>
+</tr>
+<tr>
+<td>
+<code>CD</code>
+</td>
+<td>
+Credit note number
+</td>
+</tr>
+<tr>
+<td>
+<code>CEC</code>
+</td>
+<td>
+Ceding company
+</td>
+</tr>
+<tr>
+<td>
+<code>CED</code>
+</td>
+<td>
+Debit letter number
+</td>
+</tr>
+<tr>
+<td>
+<code>CFE</code>
+</td>
+<td>
+Consignee's further order
+</td>
+</tr>
+<tr>
+<td>
+<code>CFF</code>
+</td>
+<td>
+Animal farm licence number
+</td>
+</tr>
+<tr>
+<td>
+<code>CFO</code>
+</td>
+<td>
+Consignor's further order
+</td>
+</tr>
+<tr>
+<td>
+<code>CG</code>
+</td>
+<td>
+Consignee's order number
+</td>
+</tr>
+<tr>
+<td>
+<code>CH</code>
+</td>
+<td>
+Customer catalogue number
+</td>
+</tr>
+<tr>
+<td>
+<code>CK</code>
+</td>
+<td>
+Cheque number
+</td>
+</tr>
+<tr>
+<td>
+<code>CKN</code>
+</td>
+<td>
+Checking number
+</td>
+</tr>
+<tr>
+<td>
+<code>CM</code>
+</td>
+<td>
+Credit memo number
+</td>
+</tr>
+<tr>
+<td>
+<code>CMR</code>
+</td>
+<td>
+Road consignment note number
+</td>
+</tr>
+<tr>
+<td>
+<code>CN</code>
+</td>
+<td>
+Carrier's reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>CNO</code>
+</td>
+<td>
+Charges note document attachment indicator
+</td>
+</tr>
+<tr>
+<td>
+<code>COF</code>
+</td>
+<td>
+Call off order number
+</td>
+</tr>
+<tr>
+<td>
+<code>CP</code>
+</td>
+<td>
+Condition of purchase document number
+</td>
+</tr>
+<tr>
+<td>
+<code>CR</code>
+</td>
+<td>
+Customer reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>CRN</code>
+</td>
+<td>
+Transport means journey identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>CS</code>
+</td>
+<td>
+Condition of sale document number
+</td>
+</tr>
+<tr>
+<td>
+<code>CST</code>
+</td>
+<td>
+Team assignment number
+</td>
+</tr>
+<tr>
+<td>
+<code>CT</code>
+</td>
+<td>
+Contract number
+</td>
+</tr>
+<tr>
+<td>
+<code>CU</code>
+</td>
+<td>
+Consignment identifier, consignor assigned
+</td>
+</tr>
+<tr>
+<td>
+<code>CV</code>
+</td>
+<td>
+Container operators reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>CW</code>
+</td>
+<td>
+Package number
+</td>
+</tr>
+<tr>
+<td>
+<code>CZ</code>
+</td>
+<td>
+Cooperation contract number
+</td>
+</tr>
+<tr>
+<td>
+<code>DA</code>
+</td>
+<td>
+Deferment approval number
+</td>
+</tr>
+<tr>
+<td>
+<code>DAN</code>
+</td>
+<td>
+Debit account number
+</td>
+</tr>
+<tr>
+<td>
+<code>DB</code>
+</td>
+<td>
+Buyer's debtor number
+</td>
+</tr>
+<tr>
+<td>
+<code>DI</code>
+</td>
+<td>
+Distributor invoice number
+</td>
+</tr>
+<tr>
+<td>
+<code>DL</code>
+</td>
+<td>
+Debit note number
+</td>
+</tr>
+<tr>
+<td>
+<code>DM</code>
+</td>
+<td>
+Document identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>DQ</code>
+</td>
+<td>
+Delivery note number
+</td>
+</tr>
+<tr>
+<td>
+<code>DR</code>
+</td>
+<td>
+Dock receipt number
+</td>
+</tr>
+<tr>
+<td>
+<code>EA</code>
+</td>
+<td>
+Ending meter reading actual
+</td>
+</tr>
+<tr>
+<td>
+<code>EB</code>
+</td>
+<td>
+Embargo permit number
+</td>
+</tr>
+<tr>
+<td>
+<code>ED</code>
+</td>
+<td>
+Export declaration
+</td>
+</tr>
+<tr>
+<td>
+<code>EE</code>
+</td>
+<td>
+Ending meter reading estimated
+</td>
+</tr>
+<tr>
+<td>
+<code>EEP</code>
+</td>
+<td>
+Electrical and electronic equipment producer registration
+</td>
+</tr>
+<tr>
+<td>
+<code>EI</code>
+</td>
+<td>
+Employer's identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>EN</code>
+</td>
+<td>
+Embargo number
+</td>
+</tr>
+<tr>
+<td>
+<code>EQ</code>
+</td>
+<td>
+Equipment number
+</td>
+</tr>
+<tr>
+<td>
+<code>ER</code>
+</td>
+<td>
+Container/equipment receipt number
+</td>
+</tr>
+<tr>
+<td>
+<code>ERN</code>
+</td>
+<td>
+Exporter's reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ET</code>
+</td>
+<td>
+Excess transportation number
+</td>
+</tr>
+<tr>
+<td>
+<code>EX</code>
+</td>
+<td>
+Export permit identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>FC</code>
+</td>
+<td>
+Fiscal number
+</td>
+</tr>
+<tr>
+<td>
+<code>FF</code>
+</td>
+<td>
+Consignment identifier, freight forwarder assigned
+</td>
+</tr>
+<tr>
+<td>
+<code>FI</code>
+</td>
+<td>
+File line identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>FLW</code>
+</td>
+<td>
+Flow reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>FN</code>
+</td>
+<td>
+Freight bill number
+</td>
+</tr>
+<tr>
+<td>
+<code>FO</code>
+</td>
+<td>
+Foreign exchange
+</td>
+</tr>
+<tr>
+<td>
+<code>FS</code>
+</td>
+<td>
+Final sequence number
+</td>
+</tr>
+<tr>
+<td>
+<code>FT</code>
+</td>
+<td>
+Free zone identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>FV</code>
+</td>
+<td>
+File version number
+</td>
+</tr>
+<tr>
+<td>
+<code>FX</code>
+</td>
+<td>
+Foreign exchange contract number
+</td>
+</tr>
+<tr>
+<td>
+<code>GA</code>
+</td>
+<td>
+Standard's number
+</td>
+</tr>
+<tr>
+<td>
+<code>GC</code>
+</td>
+<td>
+Government contract number
+</td>
+</tr>
+<tr>
+<td>
+<code>GD</code>
+</td>
+<td>
+Standard's code number
+</td>
+</tr>
+<tr>
+<td>
+<code>GDN</code>
+</td>
+<td>
+General declaration number
+</td>
+</tr>
+<tr>
+<td>
+<code>GN</code>
+</td>
+<td>
+Government reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>HS</code>
+</td>
+<td>
+Harmonised system number
+</td>
+</tr>
+<tr>
+<td>
+<code>HWB</code>
+</td>
+<td>
+House waybill number
+</td>
+</tr>
+<tr>
+<td>
+<code>IA</code>
+</td>
+<td>
+Internal vendor number
+</td>
+</tr>
+<tr>
+<td>
+<code>IB</code>
+</td>
+<td>
+In bond number
+</td>
+</tr>
+<tr>
+<td>
+<code>ICA</code>
+</td>
+<td>
+IATA cargo agent code number
+</td>
+</tr>
+<tr>
+<td>
+<code>ICE</code>
+</td>
+<td>
+Insurance certificate reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>ICO</code>
+</td>
+<td>
+Insurance contract reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>II</code>
+</td>
+<td>
+Initial sample inspection report number
+</td>
+</tr>
+<tr>
+<td>
+<code>IL</code>
+</td>
+<td>
+Internal order number
+</td>
+</tr>
+<tr>
+<td>
+<code>INB</code>
+</td>
+<td>
+Intermediary broker
+</td>
+</tr>
+<tr>
+<td>
+<code>INN</code>
+</td>
+<td>
+Interchange number new
+</td>
+</tr>
+<tr>
+<td>
+<code>INO</code>
+</td>
+<td>
+Interchange number old
+</td>
+</tr>
+<tr>
+<td>
+<code>IP</code>
+</td>
+<td>
+Import permit identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>IS</code>
+</td>
+<td>
+Invoice number suffix
+</td>
+</tr>
+<tr>
+<td>
+<code>IT</code>
+</td>
+<td>
+Internal customer number
+</td>
+</tr>
+<tr>
+<td>
+<code>IV</code>
+</td>
+<td>
+Invoice document identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>JB</code>
+</td>
+<td>
+Job number
+</td>
+</tr>
+<tr>
+<td>
+<code>JE</code>
+</td>
+<td>
+Ending job sequence number
+</td>
+</tr>
+<tr>
+<td>
+<code>LA</code>
+</td>
+<td>
+Shipping label serial number
+</td>
+</tr>
+<tr>
+<td>
+<code>LAN</code>
+</td>
+<td>
+Loading authorisation identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>LAR</code>
+</td>
+<td>
+Lower number in range
+</td>
+</tr>
+<tr>
+<td>
+<code>LB</code>
+</td>
+<td>
+Lockbox
+</td>
+</tr>
+<tr>
+<td>
+<code>LC</code>
+</td>
+<td>
+Letter of credit number
+</td>
+</tr>
+<tr>
+<td>
+<code>LI</code>
+</td>
+<td>
+Document line identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>LO</code>
+</td>
+<td>
+Load planning number
+</td>
+</tr>
+<tr>
+<td>
+<code>LRC</code>
+</td>
+<td>
+Reservation office identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>LS</code>
+</td>
+<td>
+Bar coded label serial number
+</td>
+</tr>
+<tr>
+<td>
+<code>MA</code>
+</td>
+<td>
+Ship notice/manifest number
+</td>
+</tr>
+<tr>
+<td>
+<code>MB</code>
+</td>
+<td>
+Master bill of lading number
+</td>
+</tr>
+<tr>
+<td>
+<code>MF</code>
+</td>
+<td>
+Manufacturer's part number
+</td>
+</tr>
+<tr>
+<td>
+<code>MG</code>
+</td>
+<td>
+Meter unit number
+</td>
+</tr>
+<tr>
+<td>
+<code>MH</code>
+</td>
+<td>
+Manufacturing order number
+</td>
+</tr>
+<tr>
+<td>
+<code>MR</code>
+</td>
+<td>
+Message recipient
+</td>
+</tr>
+<tr>
+<td>
+<code>MRN</code>
+</td>
+<td>
+Mailing reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>MS</code>
+</td>
+<td>
+Message sender
+</td>
+</tr>
+<tr>
+<td>
+<code>MSS</code>
+</td>
+<td>
+Manufacturer's material safety data sheet number
+</td>
+</tr>
+<tr>
+<td>
+<code>MWB</code>
+</td>
+<td>
+Master air waybill number
+</td>
+</tr>
+<tr>
+<td>
+<code>NA</code>
+</td>
+<td>
+North American hazardous goods classification number
+</td>
+</tr>
+<tr>
+<td>
+<code>NF</code>
+</td>
+<td>
+Nota Fiscal
+</td>
+</tr>
+<tr>
+<td>
+<code>OH</code>
+</td>
+<td>
+Current invoice number
+</td>
+</tr>
+<tr>
+<td>
+<code>OI</code>
+</td>
+<td>
+Previous invoice number
+</td>
+</tr>
+<tr>
+<td>
+<code>ON</code>
+</td>
+<td>
+Order document identifier, buyer assigned
+</td>
+</tr>
+<tr>
+<td>
+<code>OP</code>
+</td>
+<td>
+Original purchase order
+</td>
+</tr>
+<tr>
+<td>
+<code>OR</code>
+</td>
+<td>
+General order number
+</td>
+</tr>
+<tr>
+<td>
+<code>PB</code>
+</td>
+<td>
+Payer's financial institution account number
+</td>
+</tr>
+<tr>
+<td>
+<code>PC</code>
+</td>
+<td>
+Production code
+</td>
+</tr>
+<tr>
+<td>
+<code>PD</code>
+</td>
+<td>
+Promotion deal number
+</td>
+</tr>
+<tr>
+<td>
+<code>PE</code>
+</td>
+<td>
+Plant number
+</td>
+</tr>
+<tr>
+<td>
+<code>PF</code>
+</td>
+<td>
+Prime contractor contract number
+</td>
+</tr>
+<tr>
+<td>
+<code>PI</code>
+</td>
+<td>
+Price list version number
+</td>
+</tr>
+<tr>
+<td>
+<code>PK</code>
+</td>
+<td>
+Packing list number
+</td>
+</tr>
+<tr>
+<td>
+<code>PL</code>
+</td>
+<td>
+Price list number
+</td>
+</tr>
+<tr>
+<td>
+<code>POR</code>
+</td>
+<td>
+Purchase order response number
+</td>
+</tr>
+<tr>
+<td>
+<code>PP</code>
+</td>
+<td>
+Purchase order change number
+</td>
+</tr>
+<tr>
+<td>
+<code>PQ</code>
+</td>
+<td>
+Payment reference
+</td>
+</tr>
+<tr>
+<td>
+<code>PR</code>
+</td>
+<td>
+Price quote number
+</td>
+</tr>
+<tr>
+<td>
+<code>PS</code>
+</td>
+<td>
+Purchase order number suffix
+</td>
+</tr>
+<tr>
+<td>
+<code>PW</code>
+</td>
+<td>
+Prior purchase order number
+</td>
+</tr>
+<tr>
+<td>
+<code>PY</code>
+</td>
+<td>
+Payee's financial institution account number
+</td>
+</tr>
+<tr>
+<td>
+<code>RA</code>
+</td>
+<td>
+Remittance advice number
+</td>
+</tr>
+<tr>
+<td>
+<code>RC</code>
+</td>
+<td>
+Rail/road routing code
+</td>
+</tr>
+<tr>
+<td>
+<code>RCN</code>
+</td>
+<td>
+Railway consignment note number
+</td>
+</tr>
+<tr>
+<td>
+<code>RE</code>
+</td>
+<td>
+Release number
+</td>
+</tr>
+<tr>
+<td>
+<code>REN</code>
+</td>
+<td>
+Consignment receipt identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>RF</code>
+</td>
+<td>
+Export reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>RR</code>
+</td>
+<td>
+Payer's financial institution transit routing No.(ACH
+</td>
+</tr>
+<tr>
+<td>
+<code>RT</code>
+</td>
+<td>
+Payee's financial institution transit routing No.
+</td>
+</tr>
+<tr>
+<td>
+<code>SA</code>
+</td>
+<td>
+Sales person number
+</td>
+</tr>
+<tr>
+<td>
+<code>SB</code>
+</td>
+<td>
+Sales region number
+</td>
+</tr>
+<tr>
+<td>
+<code>SD</code>
+</td>
+<td>
+Sales department number
+</td>
+</tr>
+<tr>
+<td>
+<code>SE</code>
+</td>
+<td>
+Serial number
+</td>
+</tr>
+<tr>
+<td>
+<code>SEA</code>
+</td>
+<td>
+Allocated seat
+</td>
+</tr>
+<tr>
+<td>
+<code>SF</code>
+</td>
+<td>
+Ship from
+</td>
+</tr>
+<tr>
+<td>
+<code>SH</code>
+</td>
+<td>
+Previous highest schedule number
+</td>
+</tr>
+<tr>
+<td>
+<code>SI</code>
+</td>
+<td>
+SID (Shipper's identifying number for shipment)
+</td>
+</tr>
+<tr>
+<td>
+<code>SM</code>
+</td>
+<td>
+Sales office number
+</td>
+</tr>
+<tr>
+<td>
+<code>SN</code>
+</td>
+<td>
+Transport equipment seal identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>SP</code>
+</td>
+<td>
+Scan line
+</td>
+</tr>
+<tr>
+<td>
+<code>SQ</code>
+</td>
+<td>
+Equipment sequence number
+</td>
+</tr>
+<tr>
+<td>
+<code>SRN</code>
+</td>
+<td>
+Shipment reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>SS</code>
+</td>
+<td>
+Sellers reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>STA</code>
+</td>
+<td>
+Station reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>SW</code>
+</td>
+<td>
+Swap order number
+</td>
+</tr>
+<tr>
+<td>
+<code>SZ</code>
+</td>
+<td>
+Specification number
+</td>
+</tr>
+<tr>
+<td>
+<code>TB</code>
+</td>
+<td>
+Trucker's bill of lading
+</td>
+</tr>
+<tr>
+<td>
+<code>TCR</code>
+</td>
+<td>
+Terminal operator's consignment reference
+</td>
+</tr>
+<tr>
+<td>
+<code>TE</code>
+</td>
+<td>
+Telex message number
+</td>
+</tr>
+<tr>
+<td>
+<code>TF</code>
+</td>
+<td>
+Transfer number
+</td>
+</tr>
+<tr>
+<td>
+<code>TI</code>
+</td>
+<td>
+TIR carnet number
+</td>
+</tr>
+<tr>
+<td>
+<code>TIN</code>
+</td>
+<td>
+Transport instruction number
+</td>
+</tr>
+<tr>
+<td>
+<code>TL</code>
+</td>
+<td>
+Tax exemption licence number
+</td>
+</tr>
+<tr>
+<td>
+<code>TN</code>
+</td>
+<td>
+Transaction reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>TP</code>
+</td>
+<td>
+Test report number
+</td>
+</tr>
+<tr>
+<td>
+<code>UAR</code>
+</td>
+<td>
+Upper number of range
+</td>
+</tr>
+<tr>
+<td>
+<code>UC</code>
+</td>
+<td>
+Ultimate customer's reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>UCN</code>
+</td>
+<td>
+Unique consignment reference number
+</td>
+</tr>
+<tr>
+<td>
+<code>UN</code>
+</td>
+<td>
+United Nations Dangerous Goods identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>UO</code>
+</td>
+<td>
+Ultimate customer's order number
+</td>
+</tr>
+<tr>
+<td>
+<code>URI</code>
+</td>
+<td>
+Uniform Resource Identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>VA</code>
+</td>
+<td>
+VAT registration number
+</td>
+</tr>
+<tr>
+<td>
+<code>VC</code>
+</td>
+<td>
+Vendor contract number
+</td>
+</tr>
+<tr>
+<td>
+<code>VGR</code>
+</td>
+<td>
+Transport equipment gross mass verification reference
+</td>
+</tr>
+<tr>
+<td>
+<code>VM</code>
+</td>
+<td>
+Vessel identifier
+</td>
+</tr>
+<tr>
+<td>
+<code>VN</code>
+</td>
+<td>
+Order number (vendor)
+</td>
+</tr>
+<tr>
+<td>
+<code>VON</code>
+</td>
+<td>
+Voyage number
+</td>
+</tr>
+<tr>
+<td>
+<code>VOR</code>
+</td>
+<td>
+Transport equipment gross mass verification order reference
+</td>
+</tr>
+<tr>
+<td>
+<code>VP</code>
+</td>
+<td>
+Vendor product number
+</td>
+</tr>
+<tr>
+<td>
+<code>VR</code>
+</td>
+<td>
+Vendor ID number
+</td>
+</tr>
+<tr>
+<td>
+<code>VS</code>
+</td>
+<td>
+Vendor order number suffix
+</td>
+</tr>
+<tr>
+<td>
+<code>VT</code>
+</td>
+<td>
+Motor vehicle identification number
+</td>
+</tr>
+<tr>
+<td>
+<code>VV</code>
+</td>
+<td>
+Voucher number
+</td>
+</tr>
+<tr>
+<td>
+<code>WE</code>
+</td>
+<td>
+Warehouse entry number
+</td>
+</tr>
+<tr>
+<td>
+<code>WM</code>
+</td>
+<td>
+Weight agreement number
+</td>
+</tr>
+<tr>
+<td>
+<code>WN</code>
+</td>
+<td>
+Well number
+</td>
+</tr>
+<tr>
+<td>
+<code>WR</code>
+</td>
+<td>
+Warehouse receipt number
+</td>
+</tr>
+<tr>
+<td>
+<code>WS</code>
+</td>
+<td>
+Warehouse storage location number
+</td>
+</tr>
+<tr>
+<td>
+<code>WY</code>
+</td>
+<td>
+Rail waybill number
+</td>
+</tr>
+<tr>
+<td>
+<code>XA</code>
+</td>
+<td>
+Company/place registration number
+</td>
+</tr>
+<tr>
+<td>
+<code>XC</code>
+</td>
+<td>
+Cargo control number
+</td>
+</tr>
+<tr>
+<td>
+<code>XP</code>
+</td>
+<td>
+Previous cargo control number
+</td>
+</tr>
+<tr>
+<td>
+<code>ZZZ</code>
+</td>
+<td>
+Mutually defined reference number
+</td>
+</tr>
+</tbody>
 </table>

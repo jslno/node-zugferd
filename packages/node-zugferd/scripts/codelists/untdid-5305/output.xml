@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<entry>
+		<value>S</value>
+		<name>Standard rate</name>
+		<semantic-model>Standard rate</semantic-model>
+	</entry>
+	<entry>
+		<value>Z</value>
+		<name>Zero rated goods</name>
+		<semantic-model>Zero rated goods</semantic-model>
+	</entry>
+	<entry>
+		<value>E</value>
+		<name>Exempt from tax</name>
+		<semantic-model>Exempt from tax</semantic-model>
+	</entry>
+	<entry>
+		<value>AE</value>
+		<name>VAT Reverse charge</name>
+		<semantic-model>VAT reverse charge</semantic-model>
+	</entry>
+	<entry>
+		<value>K</value>
+		<name>VAT exempt for EEA intra-community supply of goods and services</name>
+		<semantic-model>VAT exempt for intra community supply of goods</semantic-model>
+	</entry>
+	<entry>
+		<value>G</value>
+		<name>Free export item, tax not charged</name>
+		<semantic-model>Free export item, tax not charged</semantic-model>
+	</entry>
+	<entry>
+		<value>O</value>
+		<name>Service outside scope of tax</name>
+		<semantic-model>Services outside scope of tax</semantic-model>
+	</entry>
+	<entry>
+		<value>L</value>
+		<name>Canary Islands general indirect tax</name>
+		<semantic-model>Canary Islands General Indirect Tax</semantic-model>
+	</entry>
+	<entry>
+		<value>M</value>
+		<name>Tax for production, services and importation in Ceuta and Melilla</name>
+		<semantic-model>Liable for IPSI</semantic-model>
+	</entry>
+</entries>

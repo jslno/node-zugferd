@@ -1,0 +1,164 @@
+---
+title: UN/ECE Recommendation N°19 Transport mode codes
+description: Code specifying the mode of transport.
+---
+
+### Codelist [toc]
+
+```ts
+import {
+	TRANSPORT,
+	Transport,
+	transportCode,
+	type TransportDefinition,
+	type TransportCode,
+} from "node-zugferd/codelist/transport";
+
+```
+
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/transport/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Code name
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>0</code>
+</td>
+<td>
+Transport mode not specified
+</td>
+<td>
+Transport mode has not been specified
+Notes:
+1) This code can be used when the mode is not known or when information on it is not available at the time of issuing the document concerned.
+</td>
+</tr>
+<tr>
+<td>
+<code>1</code>
+</td>
+<td>
+Maritime transport
+</td>
+<td>
+Transport of goods and/or persons is by sea.
+</td>
+</tr>
+<tr>
+<td>
+<code>2</code>
+</td>
+<td>
+Rail transport
+</td>
+<td>
+Transport of goods and/or persons is by rail.
+</td>
+</tr>
+<tr>
+<td>
+<code>3</code>
+</td>
+<td>
+Road transport
+</td>
+<td>
+Transport of goods and/or persons is by road.
+</td>
+</tr>
+<tr>
+<td>
+<code>4</code>
+</td>
+<td>
+Air transport
+</td>
+<td>
+Transport of goods and/or persons is by air.
+</td>
+</tr>
+<tr>
+<td>
+<code>5</code>
+</td>
+<td>
+Mail
+</td>
+<td>
+Method to convey goods is by mail
+Notes:
+1) This code is provided for practical reasons, despite the fact that mail is not a genuine mode of transport. In many countries, the value of merchandise exported and imported by mail is considerable, but the exporter or importer concerned would be unable to state by which mode postal items had been conveyed.
+</td>
+</tr>
+<tr>
+<td>
+<code>6</code>
+</td>
+<td>
+Multimodal transpo
+</td>
+<td>
+Method to convey goods and/or persons is by multimodal transport.
+Notes:
+1) This code is provided for practical reasons, despite the fact that multimodal transport is not a genuine mode of transport. It can be used when goods are carried by at least two different modes from a place at which the goods are taken in charge by a transport operator to a place designated for delivery, on the basis of one transport contract. (Operations of pick-up and delivery of goods carried out in the performance of a single mode of transport, as defined in such a contract, shall not be considered as multimodal transport).
+</td>
+</tr>
+<tr>
+<td>
+<code>7</code>
+</td>
+<td>
+Fixed transport installation
+</td>
+<td>
+Transport of item is via a fixed transport installation.
+Notes:
+1) This code applies to installations for continuous transport such as pipelines, ropeways and electric power lines.
+</td>
+</tr>
+<tr>
+<td>
+<code>8</code>
+</td>
+<td>
+Inland water transport
+</td>
+<td>
+Transport of goods and/or persons is by inland water.
+</td>
+</tr>
+<tr>
+<td>
+<code>9</code>
+</td>
+<td>
+Transport mode not applicable
+</td>
+<td>
+The mode of transport is not applicable.
+</td>
+</tr>
+</tbody>
+</table>

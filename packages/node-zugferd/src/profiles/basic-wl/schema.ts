@@ -1,20 +1,22 @@
 import z from "zod";
 import { dateTimeStringFormatter } from "../../utils/helper";
 import { type Schema } from "../../types/schema";
-import { UNTDID_5305 } from "../../codelists/untdid/5305.gen";
-import { UNTDID_5189 } from "../../codelists/untdid/5189.gen";
-import { UNTDID_4461 } from "../../codelists/untdid/4461.gen";
-import { UNTDID_7161 } from "../../codelists/untdid/7161.gen";
-import { UNTDID_4451 } from "../../codelists/untdid/4451.gen";
-import { EAS } from "../../codelists/eas";
-import { CURRENCY_CODES } from "../../codelists/currency-codes.gen";
-import { ISO_6523 } from "../../codelists/iso/6523.gen";
-import { ISO_3166 } from "../../codelists/iso/3166";
-import { UNTDID_2475 } from "../../codelists/untdid/2475";
-import { VATEX } from "../../codelists/vatex.gen";
+import { vatExCode } from "../../codelists/vatex.gen";
+import { countryCode } from "../../codelists/country.gen";
+import { currencyCode } from "../../codelists/currency.gen";
+import { icdCode } from "../../codelists/icd.gen";
+import { vatCatCode } from "../../codelists/vat-cat.gen";
+import { timeCode } from "../../codelists/time.gen";
+import { textCode } from "../../codelists/text.gen";
+import { paymentCode } from "../../codelists/payment.gen";
+import { untdid5305Code } from "../../codelists/untdid5305.gen";
+import { allowanceCode } from "../../codelists/allowance.gen";
+import { easCode } from "../../codelists/eas.gen";
+import { chargeCode } from "../../codelists/charge.gen";
 
 export const basicWlSchema = {
 	specificationIdentifier: {
+		key: "BT-24",
 		type: "string",
 		required: false,
 		defaultValue: "urn:factur-x.eu:1p0:basicwl",
@@ -68,7 +70,7 @@ Such as the reason for any correction or assignment note in case the invoice has
 			 */
 			subjectCode: {
 				key: "BT-21",
-				type: UNTDID_4451.map(({ code }) => code),
+				type: textCode,
 				description: `**Invoice note subject code**
 
 The subject of the textual note in BT-22.
@@ -217,7 +219,7 @@ If the seller has a GlobalID, he can qualify it with this attribute. Otherwise, 
 									 * - 0177 : ODETTE
 									 */
 									schemeIdentifier: {
-										type: ["0021", "0060", "0088", "0177"],
+										type: icdCode,
 										description: `**Seller identifier identification scheme identifier**
 
 Scheme identifier
@@ -403,7 +405,7 @@ Identifies the Seller's electronic address to which a business document may be d
 									 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Seller electronic address
@@ -563,7 +565,7 @@ The common name of the city, town or village, where the tax representative addre
 									 */
 									countryCode: {
 										key: "BT-69",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Tax representative country code**
 
 A code that identifies the country.
@@ -702,7 +704,7 @@ The global identifier of a buyer is the specific identification given to him by 
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer identifier.
@@ -811,7 +813,7 @@ The common name of the city, town or village, where the Buyer's address is locat
 									 */
 									countryCode: {
 										key: "BT-55",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Buyer country code**
 
 A code that identifies the country.
@@ -872,7 +874,7 @@ Identifies the Buyer's electronic address to which a business document should be
 									 * The scheme identifier shall be chosen from a list to be maintained by the Connecting Europe Facility.
 									 */
 									schemeIdentifier: {
-										type: EAS.map(({ code }) => code),
+										type: easCode,
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Buyer electronic address.
@@ -996,7 +998,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. a previo
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Deliver to location identifier.
@@ -1140,7 +1142,7 @@ The common name of the city, town or village, where the deliver to address is lo
 									 */
 									countryCode: {
 										key: "BT-80",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Deliver to country code**
 
 A code that identifies the country.
@@ -1314,7 +1316,7 @@ If remittance information is to be mapped to the End To End Identification field
 					 */
 					vatAccountingCurrencyCode: {
 						key: "BT-6",
-						type: CURRENCY_CODES.map(({ code }) => code),
+						type: currencyCode,
 						description: `**VAT accounting currency code**
 
 The currency used for VAT accounting and reporting purposes as accepted or required in the country of the Seller.
@@ -1393,7 +1395,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. a previo
 									 * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
 									 */
 									schemeIdentifier: {
-										type: ISO_6523.map(({ code }) => code),
+										type: icdCode,
 										description: `**Scheme identifier**
 
 The identification scheme identifier of the Payee identifier.
@@ -1485,7 +1487,7 @@ If no scheme is specified, it should be known by Buyer and Seller, e.g. the iden
 											 * For a SIREN or a SIRET, the value of this field is "0002"
 											 */
 											schemeIdentifier: {
-												type: ISO_6523.map(({ code }) => code),
+												type: icdCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Payee legal registration identifier.
@@ -1632,7 +1634,7 @@ The sum of Invoice line net amount minus allowances plus charges on document lev
 							 */
 							categoryCode: {
 								key: "BT-118",
-								type: UNTDID_5305.map(({ code }) => code),
+								type: [...vatCatCode, ...untdid5305Code],
 								description: `**VAT category code**
 
 Coded identification of a VAT category.
@@ -1674,7 +1676,7 @@ For EXTENDED profile only, BR-O-11, BR-O-12, BR-O-13 and BR-O-14 are not applied
 							 */
 							exemptionReasonCode: {
 								key: "BT-121",
-								type: VATEX.map(({ code }) => code),
+								type: vatExCode,
 								description: `**VAT exemption reason code**
 
 A coded statement of the reason for why the amount is exempted from VAT.
@@ -1704,7 +1706,7 @@ Code list issued and maintained by the Connecting Europe Facility.`,
 							 */
 							dueDateTypeCode: {
 								key: "BT-8",
-								type: UNTDID_2475.map(({ code }) => code),
+								type: timeCode,
 								description: `**Value added tax point date code**
 
 The code of the date when the VAT becomes accountable for the Seller and for the Buyer.
@@ -1885,7 +1887,7 @@ A group of business terms providing information about the payment.`,
 							 */
 							typeCode: {
 								key: "BT-81",
-								type: UNTDID_4461.map(({ code }) => code),
+								type: paymentCode,
 								description: `**Payment means type code**
 
 The means, expressed as code, for how a payment is expected to be or has been settled.
@@ -2065,7 +2067,7 @@ The amount of an allowance, without VAT.`,
 							 */
 							reasonCode: {
 								key: "BT-98",
-								type: UNTDID_5189.map(({ code }) => code),
+								type: allowanceCode,
 								description: `**Document level allowance reason code**
 
 The reason for the document level allowance, expressed as a code.
@@ -2152,7 +2154,7 @@ BR-CO-21: Each Document level allowance (BG-20) shall contain a Document level a
 									 */
 									categoryCode: {
 										key: "BT-95",
-										type: UNTDID_5305.map(({ code }) => code),
+										type: [...vatCatCode, ...untdid5305Code],
 										description: `**Document level allowance VAT category code**
 
 A coded identification of what VAT category applies to the document level allowance.
@@ -2308,7 +2310,7 @@ The amount of a charge, without VAT.`,
 							 */
 							reasonCode: {
 								key: "BT-105",
-								type: UNTDID_7161.map(({ code }) => code),
+								type: chargeCode,
 								description: `**Document level charge reason code**
 
 The reason for the document level charge, expressed as a code.
@@ -2408,7 +2410,7 @@ A finite sequence of characters.`,
 									 */
 									categoryCode: {
 										key: "BT-102",
-										type: UNTDID_5305.map(({ code }) => code),
+										type: [...vatCatCode, ...untdid5305Code],
 										description: `**Document level charge VAT category code**
 
 A coded identification of what VAT category applies to the document level charge.

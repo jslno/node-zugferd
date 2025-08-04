@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<entry>
+		<value>41</value>
+		<name>Bonus for works ahead of schedule</name>
+	</entry>
+	<entry>
+		<value>42</value>
+		<name>Other bonus</name>
+	</entry>
+	<entry>
+		<value>60</value>
+		<name>Manufacturer’s consumer discount</name>
+	</entry>
+	<entry>
+		<value>62</value>
+		<name>Due to military status</name>
+	</entry>
+	<entry>
+		<value>63</value>
+		<name>Due to work accident</name>
+	</entry>
+	<entry>
+		<value>64</value>
+		<name>Special agreement</name>
+	</entry>
+	<entry>
+		<value>65</value>
+		<name>Production error discount</name>
+	</entry>
+	<entry>
+		<value>66</value>
+		<name>New outlet discount</name>
+	</entry>
+	<entry>
+		<value>67</value>
+		<name>Sample discount</name>
+	</entry>
+	<entry>
+		<value>68</value>
+		<name>End-of-range discount</name>
+	</entry>
+	<entry>
+		<value>70</value>
+		<name>Incoterm discount</name>
+	</entry>
+	<entry>
+		<value>71</value>
+		<name>Point of sales threshold allowance</name>
+	</entry>
+	<entry>
+		<value>88</value>
+		<name>Material surcharge/deduction</name>
+	</entry>
+	<entry>
+		<value>95</value>
+		<name>Discount</name>
+	</entry>
+	<entry>
+		<value>100</value>
+		<name>Special rebate</name>
+	</entry>
+	<entry>
+		<value>102</value>
+		<name>Fixed long term</name>
+	</entry>
+	<entry>
+		<value>103</value>
+		<name>Temporary</name>
+	</entry>
+	<entry>
+		<value>104</value>
+		<name>Standard</name>
+	</entry>
+	<entry>
+		<value>105</value>
+		<name>Yearly turnover</name>
+	</entry>
+</entries>

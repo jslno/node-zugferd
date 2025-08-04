@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<entry>
+		<value>AAA</value>
+		<name>Petroleum tax</name>
+		<description>A tax levied on the volume of petroleum being transacted.</description>
+	</entry>
+	<entry>
+		<value>AAB</value>
+		<name>Provisional countervailing duty cash</name>
+		<description>Countervailing duty paid in cash prior to a formal finding of subsidization by Customs.</description>
+	</entry>
+	<entry>
+		<value>AAC</value>
+		<name>Provisional countervailing duty bond</name>
+		<description>Countervailing duty paid by posting a bond during an investigation period prior to a formal decision on subsidization by Customs.</description>
+	</entry>
+	<entry>
+		<value>AAD</value>
+		<name>Tobacco tax</name>
+		<description>A tax levied on tobacco products.</description>
+	</entry>
+	<entry>
+		<value>AAE</value>
+		<name>Energy fee</name>
+		<description>General fee or tax for the use of energy.</description>
+	</entry>
+	<entry>
+		<value>AAF</value>
+		<name>Coffee tax</name>
+		<description>A tax levied specifically on coffee products.</description>
+	</entry>
+	<entry>
+		<value>AAG</value>
+		<name>Harmonised sales tax, Canadian</name>
+		<description>A harmonized sales tax consisting of a goods and service tax, a Canadian provincial sales tax and, as applicable, a Quebec sales tax which is recoverable.</description>
+	</entry>
+	<entry>
+		<value>AAH</value>
+		<name>Quebec sales tax</name>
+		<description>A sales tax charged within the Canadian province of Quebec which is recoverable.</description>
+	</entry>
+	<entry>
+		<value>AAI</value>
+		<name>Canadian provincial sales tax</name>
+		<description>A sales tax charged within Canadian provinces which is non-recoverable.</description>
+	</entry>
+	<entry>
+		<value>AAJ</value>
+		<name>Tax on replacement part</name>
+		<description>A tax levied on a replacement part, where the original part is returned.</description>
+	</entry>
+	<entry>
+		<value>AAK</value>
+		<name>Mineral oil tax</name>
+		<description>Tax that is levied specifically on products containing mineral oil.</description>
+	</entry>
+	<entry>
+		<value>AAL</value>
+		<name>Special tax</name>
+		<description>To indicate a special type of tax.</description>
+	</entry>
+	<entry>
+		<value>AAM</value>
+		<name>Insurance tax</name>
+		<description>A tax levied specifically on insurances.</description>
+	</entry>
+	<entry>
+		<value>AAO</value>
+		<name>Provincial Cannabis Tax</name>
+		<description>A tax levied on Cannabis products</description>
+	</entry>
+	<entry>
+		<value>AAP</value>
+		<name>Outstanding duty interest</name>
+		<description>Fee levied due to outstanding duties to be paid</description>
+	</entry>
+	<entry>
+		<value>ADD</value>
+		<name>Anti-dumping duty</name>
+		<description>Duty applied to goods ruled to have been dumped in an import market at a price lower than that in the exporter's domestic market.</description>
+	</entry>
+	<entry>
+		<value>BOL</value>
+		<name>Stamp duty (Imposta di Bollo)</name>
+		<description>Tax required in Italy, which may be fixed or graduated in various circumstances (e.g. VAT exempt documents or bank receipts).</description>
+	</entry>
+	<entry>
+		<value>CAP</value>
+		<name>Agricultural levy</name>
+		<description>Levy imposed on agricultural products where there is a difference between the selling price between trading countries.</description>
+	</entry>
+	<entry>
+		<value>CAR</value>
+		<name>Car tax</name>
+		<description>A tax that is levied on the value of the automobile.</description>
+	</entry>
+	<entry>
+		<value>COC</value>
+		<name>Paper consortium tax (Italy)</name>
+		<description>Italian Paper consortium tax.</description>
+	</entry>
+	<entry>
+		<value>CST</value>
+		<name>Commodity specific tax</name>
+		<description>Tax related to a specified commodity, e.g. illuminants, salts.</description>
+	</entry>
+	<entry>
+		<value>CUD</value>
+		<name>Customs duty</name>
+		<description>Duties laid down in the Customs tariff, to which goods are liable on entering or leaving the Customs territory (CCC).</description>
+	</entry>
+	<entry>
+		<value>CVD</value>
+		<name>Countervailing duty</name>
+		<description>A duty on imported goods applied for compensate for subsidies granted to those goods in the exporting country.</description>
+	</entry>
+	<entry>
+		<value>ENV</value>
+		<name>Environmental tax</name>
+		<description>Tax assessed for funding or assuring environmental protection or clean-up.</description>
+	</entry>
+	<entry>
+		<value>EXC</value>
+		<name>Excise duty</name>
+		<description>Customs or fiscal authorities code to identify a specific or ad valorem levy on a specific commodity, applied either domestically or at time of importation.</description>
+	</entry>
+	<entry>
+		<value>EXP</value>
+		<name>Agricultural export rebate</name>
+		<description>Monetary rebate given to the seller in certain circumstances when agricultural products are exported.</description>
+	</entry>
+	<entry>
+		<value>FET</value>
+		<name>Federal excise tax</name>
+		<description>Tax levied by the federal government on the manufacture of specific items.</description>
+	</entry>
+	<entry>
+		<value>FRE</value>
+		<name>Free</name>
+		<description>No tax levied.</description>
+	</entry>
+	<entry>
+		<value>GCN</value>
+		<name>General construction tax</name>
+		<description>General tax for construction.</description>
+	</entry>
+	<entry>
+		<value>GST</value>
+		<name>Goods and services tax</name>
+		<description>Tax levied on the final consumption of goods and services throughout the production and distribution chain.</description>
+	</entry>
+	<entry>
+		<value>ILL</value>
+		<name>Illuminants tax</name>
+		<description>Tax of illuminants.</description>
+	</entry>
+	<entry>
+		<value>IMP</value>
+		<name>Import tax</name>
+		<description>Tax assessed on imports.</description>
+	</entry>
+	<entry>
+		<value>IND</value>
+		<name>Individual tax</name>
+		<description>A tax levied based on an individual's ability to pay.</description>
+	</entry>
+	<entry>
+		<value>LAC</value>
+		<name>Business license fee</name>
+		<description>Government assessed charge for permit to do business.</description>
+	</entry>
+	<entry>
+		<value>LCN</value>
+		<name>Local construction tax</name>
+		<description>Local tax for construction.</description>
+	</entry>
+	<entry>
+		<value>LDP</value>
+		<name>Light dues payable</name>
+		<description>Fee levied on a vessel to pay for port navigation lights.</description>
+	</entry>
+	<entry>
+		<value>LOC</value>
+		<name>Local sales tax</name>
+		<description>Assessment charges on sale of goods or services by city, borough country or other taxing authorities below state or provincial level.</description>
+	</entry>
+	<entry>
+		<value>LST</value>
+		<name>Lust tax</name>
+		<description>Tax imposed for clean-up of leaky underground storage tanks.</description>
+	</entry>
+	<entry>
+		<value>MCA</value>
+		<name>Monetary compensatory amount</name>
+		<description>Levy on Common Agricultural Policy (European Union) goods used to compensate for fluctuating currencies between member states.</description>
+	</entry>
+	<entry>
+		<value>MCD</value>
+		<name>Miscellaneous cash deposit</name>
+		<description>Duty paid and held on deposit, by Customs, during an investigation period prior to a final decision being made on any aspect related to imported goods (except valuation) by Customs.</description>
+	</entry>
+	<entry>
+		<value>OTH</value>
+		<name>Other taxes</name>
+		<description>Unspecified, miscellaneous tax charges.</description>
+	</entry>
+	<entry>
+		<value>PDB</value>
+		<name>Provisional duty bond</name>
+		<description>Anti-dumping duty paid by posting a bond during an investigation period prior to a formal decision on dumping by Customs.</description>
+	</entry>
+	<entry>
+		<value>PDC</value>
+		<name>Provisional duty cash</name>
+		<description>Anti-dumping duty paid in cash prior to a formal finding of dumping by Customs.</description>
+	</entry>
+	<entry>
+		<value>PRF</value>
+		<name>Preference duty</name>
+		<description>Duties laid down in the Customs tariff, to which goods are liable on entering or leaving the Customs territory falling under a preferential regime such as Generalised System of Preferences (GSP).</description>
+	</entry>
+	<entry>
+		<value>SCN</value>
+		<name>Special construction tax</name>
+		<description>Special tax for construction.</description>
+	</entry>
+	<entry>
+		<value>SSS</value>
+		<name>Shifted social securities</name>
+		<description>Social securities share of the invoice amount to be paid directly to the social securities collector.</description>
+	</entry>
+	<entry>
+		<value>STT</value>
+		<name>State/provincial sales tax</name>
+		<description>All applicable sale taxes by authorities at the state or provincial level, below national level.</description>
+	</entry>
+	<entry>
+		<value>SUP</value>
+		<name>Suspended duty</name>
+		<description>Duty suspended or deferred from payment.</description>
+	</entry>
+	<entry>
+		<value>SUR</value>
+		<name>Surtax</name>
+		<description>A tax or duty applied on and in addition to existing duties and taxes.</description>
+	</entry>
+	<entry>
+		<value>SWT</value>
+		<name>Shifted wage tax</name>
+		<description>Wage tax share of the invoice amount to be paid directly to the tax collector(s office).</description>
+	</entry>
+	<entry>
+		<value>TAC</value>
+		<name>Alcohol mark tax</name>
+		<description>A tax levied based on the type of alcohol being obtained.</description>
+	</entry>
+	<entry>
+		<value>TOT</value>
+		<name>Total</name>
+		<description>The summary amount of all taxes.</description>
+	</entry>
+	<entry>
+		<value>TOX</value>
+		<name>Turnover tax</name>
+		<description>Tax levied on the total sales/turnover of a corporation.</description>
+	</entry>
+	<entry>
+		<value>TTA</value>
+		<name>Tonnage taxes</name>
+		<description>Tax levied based on the vessel's net tonnage.</description>
+	</entry>
+	<entry>
+		<value>VAD</value>
+		<name>Valuation deposit</name>
+		<description>Duty paid and held on deposit, by Customs, during an investigation period prior to a formal decision on valuation of the goods being made.</description>
+	</entry>
+	<entry>
+		<value>VAT</value>
+		<name>Value added tax</name>
+		<description>A tax on domestic or imported goods applied to the value added at each stage in the production/distribution cycle.</description>
+	</entry>
+</entries>

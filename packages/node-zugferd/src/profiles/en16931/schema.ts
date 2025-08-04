@@ -1,12 +1,14 @@
 import z from "zod";
 import { type Schema } from "../../types/schema";
 import { dateTimeStringFormatter } from "../../utils/helper";
-import { UNTDID_1153 } from "../../codelists/untdid/1153.gen";
-import { UNTDID_7143 } from "../../codelists/untdid/7143.gen";
-import { ISO_3166 } from "../../codelists/iso/3166";
+import { countryCode } from "../../codelists/country.gen";
+import { untdid1153Code } from "../../codelists/untdid1153.gen";
+import { mimeCode } from "../../codelists/mime.gen";
+import { itemCode } from "../../codelists/item.gen";
 
 export const en16931Schema = {
 	specificationIdentifier: {
+		key: "BT-24",
 		type: "string",
 		required: false,
 		defaultValue: "urn:cen.eu:en16931:2017",
@@ -383,14 +385,7 @@ CHORUS PRO : The attachment must be contained in a ZIP file. The maximum size of
 							 */
 							mimeCode: {
 								key: "BT-125-1",
-								type: [
-									"application/pdf",
-									"image/png",
-									"image/jpeg",
-									"text/csv",
-									"application/vnd.openxmlformatsofficedocument.spreadsheetml.sheet",
-									"application/vnd.oasis.opendocument.spreadsheet",
-								],
+								type: mimeCode,
 								description: `**Attached document Mime code**
 
 The mime code of the attached document.
@@ -515,7 +510,7 @@ It may be a subscription number, telephone number, meter point, vehicle, person 
 							 */
 							referenceTypeCode: {
 								key: "BT-18-1",
-								type: UNTDID_1153.map(({ code }) => code),
+								type: untdid1153Code,
 								description: `**Scheme identifier**
 
 The identification scheme identifier of the Invoiced object identifier.
@@ -988,7 +983,7 @@ Classification codes are used to allow grouping of similar items for a various p
 											 * The identification scheme shall be chosen from the entries in UNTDID 7143 [6].
 											 */
 											schemeIdentifier: {
-												type: UNTDID_7143.map(({ code }) => code),
+												type: itemCode,
 												description: `**Scheme identifier**
 
 The identification scheme identifier of the Item classification identifier
@@ -1033,7 +1028,7 @@ The version of the identification scheme.`,
 									 */
 									countryCode: {
 										key: "BT-159",
-										type: ISO_3166.map(({ code }) => code.alpha2),
+										type: countryCode,
 										description: `**Item country of origin**
 
 The code identifying the country from which the item originates.
@@ -1164,7 +1159,8 @@ It may be a subscription number, telephone number, meter point etc., as applicab
 									 * If it may be not clear for the receiver what scheme is used for the identifier, a conditional scheme identifier should be used that shall be chosen from the UNTDID 1153 code list [6] entries.
 									 */
 									referenceTypeCode: {
-										type: UNTDID_1153.map(({ code }) => code),
+										key: "BT-128-1",
+										type: untdid1153Code,
 										description: `**Scheme identifier**
 Invocice line object identifier
 

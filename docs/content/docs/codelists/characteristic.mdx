@@ -1,0 +1,4471 @@
+---
+title: UNTDID 6313 - Measured attribute code and Factur-X Extension
+description: Code specifying the attribute measured.
+---
+
+### Codelist [toc]
+
+```ts
+import {
+	CHARACTERISTIC,
+	Characteristic,
+	characteristicCode,
+	PUBLISHED,
+	type CharacteristicDefinition,
+	type CharacteristicCode,
+} from "node-zugferd/codelist/characteristic";
+
+```
+
+<div className="w-fit">
+<Link href="https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/scripts/codelists/characteristic/output.xml" rel="noreferrer noopener" target="_blank">
+Source
+</Link>
+</div>
+
+<table className="[&_*>_*]:mt-0! [&_*>_*]:mb-0!">
+<colgroup>
+<col />
+<col className="w-1/2" />
+<col className="w-1/2" />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th>
+Code
+</th>
+<th>
+Name
+</th>
+<th>
+Description
+</th>
+<th>
+Source
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>A</code>
+</td>
+<td>
+Consolidated weight
+</td>
+<td>
+The measured consolidated weight.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAA</code>
+</td>
+<td>
+Net weight
+</td>
+<td>
+Weight of goods including any packaging that normally going with the goods.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAB</code>
+</td>
+<td>
+Goods item gross weight
+</td>
+<td>
+Weight (mass) of goods including packing but excluding the carrier's equipment.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAC</code>
+</td>
+<td>
+Total net weight
+</td>
+<td>
+Total weight of goods excluding packaging.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAD</code>
+</td>
+<td>
+Consignment gross weight
+</td>
+<td>
+Total gross weight (mass) of all goods items referred to as one consignment including packaging but excluding any transport equipment.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAF</code>
+</td>
+<td>
+Net net weight
+</td>
+<td>
+Weight (mass) if goods without any packaging.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAG</code>
+</td>
+<td>
+Stern thrust
+</td>
+<td>
+Force exerted by a thruster installed at the stern of a vessel.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAH</code>
+</td>
+<td>
+Bow thrust
+</td>
+<td>
+Force exerted by a thruster installed at the bow of a vessel.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAI</code>
+</td>
+<td>
+Hydrate content of an alcoholic product at bottling
+</td>
+<td>
+The hydrate content of an alcoholic product at the moment of bottling.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAJ</code>
+</td>
+<td>
+Number of units per pallet
+</td>
+<td>
+The number of units contained on a pallet.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAK</code>
+</td>
+<td>
+Fat content
+</td>
+<td>
+An indication of the fat content of a product.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAM</code>
+</td>
+<td>
+Transport means gross weight
+</td>
+<td>
+The measure of the overall size of a ship determined in accordance with the provisions of the International Convention on Tonnage Measurement of Ships.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAN</code>
+</td>
+<td>
+Net tonnage of the vessel
+</td>
+<td>
+The measure of the useful capacity of a ship determined in accordance with the provisions of the International Convention on Tonnage Measurement of Ships.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAO</code>
+</td>
+<td>
+Humidity
+</td>
+<td>
+Degree of moisture.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAP</code>
+</td>
+<td>
+Voltage
+</td>
+<td>
+Electromotive force, or difference of electronic potential between two points.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAQ</code>
+</td>
+<td>
+Power consumption
+</td>
+<td>
+Value of energy consumption.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAR</code>
+</td>
+<td>
+Heat dissipation
+</td>
+<td>
+Measurement of the rate of dispersal of heat.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAS</code>
+</td>
+<td>
+Air flow
+</td>
+<td>
+Measurement of the flow of air.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAT</code>
+</td>
+<td>
+Shock impact
+</td>
+<td>
+Measurement of the impact of a shock.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAU</code>
+</td>
+<td>
+Operative temperature
+</td>
+<td>
+Temperature identified system or process works according to specifications.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAV</code>
+</td>
+<td>
+Non operative temperature
+</td>
+<td>
+Temperature identified system or process does not work according to specifications.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAW</code>
+</td>
+<td>
+Gross volume
+</td>
+<td>
+The volume unadjusted for factors such as temperature or gravity.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAX</code>
+</td>
+<td>
+Net volume
+</td>
+<td>
+The volume after adjustment for factors such as temperature or gravity.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAY</code>
+</td>
+<td>
+Water content
+</td>
+<td>
+Water content in product.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AAZ</code>
+</td>
+<td>
+Tensile stress
+</td>
+<td>
+The measured tensile stress.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABA</code>
+</td>
+<td>
+Fibrosity
+</td>
+<td>
+The measured fibrosity.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABB</code>
+</td>
+<td>
+Gauge length
+</td>
+<td>
+The measured gauge length.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABC</code>
+</td>
+<td>
+Radius
+</td>
+<td>
+The measured radius.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABD</code>
+</td>
+<td>
+Straightness
+</td>
+<td>
+Straightness of the item.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABE</code>
+</td>
+<td>
+Strain
+</td>
+<td>
+The measured strain.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABF</code>
+</td>
+<td>
+Item width when unrolled
+</td>
+<td>
+The width of an item when unrolled.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABG</code>
+</td>
+<td>
+Item length when unrolled
+</td>
+<td>
+The length of an item when unrolled.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABH</code>
+</td>
+<td>
+Item area when unrolled
+</td>
+<td>
+The area occupied by an item when unrolled.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABI</code>
+</td>
+<td>
+Original wort
+</td>
+<td>
+Measure of the malt and hops content of beer, before fermentation has taken place.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABJ</code>
+</td>
+<td>
+Volume
+</td>
+<td>
+The amount of air space taken up by the entity identified in the 6311 qualifier.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABK</code>
+</td>
+<td>
+Angle
+</td>
+<td>
+The angle of an object.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABL</code>
+</td>
+<td>
+Peg hole horizontal distance from package leftmost edge
+</td>
+<td>
+Horizontal distance from the left most edge of the package to the center of the hole into which the peg is inserted.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABM</code>
+</td>
+<td>
+Peg hole vertical distance from package top
+</td>
+<td>
+Vertical distance from the top of the package to the top of the hole into which the peg is inserted.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABN</code>
+</td>
+<td>
+Number of layers per pallet
+</td>
+<td>
+The number of layers per pallet.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABO</code>
+</td>
+<td>
+Product strengh, chemical
+</td>
+<td>
+The amount of the single active chemical ingredient within a product.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABP</code>
+</td>
+<td>
+Product strength basis, chemical
+</td>
+<td>
+Amount of product used as the basis for the specification of the chemical product strenght.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABS</code>
+</td>
+<td>
+Item weight
+</td>
+<td>
+Weight at line item level.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABT</code>
+</td>
+<td>
+Payload weight, maximum
+</td>
+<td>
+The maximum weight of a payload.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABX</code>
+</td>
+<td>
+Weight of conveyance
+</td>
+<td>
+Tonnage of conveyance.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABY</code>
+</td>
+<td>
+Conveyance summer dead weight
+</td>
+<td>
+Registered summer dead weight total tonnage of the vessel.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ABZ</code>
+</td>
+<td>
+Containerized cargo on vessel's weight
+</td>
+<td>
+Total weight of containerized cargo on vessel.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ACA</code>
+</td>
+<td>
+Non-containerized cargo on vessel's weight
+</td>
+<td>
+Total weight of non-containerized cargo on vessel.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ACE</code>
+</td>
+<td>
+Ascertained weight
+</td>
+<td>
+Endorsement of the true weight (mass) as ascertained or verified.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ACG</code>
+</td>
+<td>
+Chargeable weight
+</td>
+<td>
+The weight on which charges are based.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ACN</code>
+</td>
+<td>
+Estimated gross weight
+</td>
+<td>
+Estimated weight (mass) of goods, including packing and excluding carrier's.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ACP</code>
+</td>
+<td>
+Estimated volume
+</td>
+<td>
+Estimated size or measure of anything in three dimensions.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ACS</code>
+</td>
+<td>
+Vessel overall length
+</td>
+<td>
+Total overall length of the vessel.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ACV</code>
+</td>
+<td>
+Loading meters
+</td>
+<td>
+The length in a vehicle, whereby the complete width and height over that length is needed for the goods.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ACW</code>
+</td>
+<td>
+Number of axles
+</td>
+<td>
+Number of axles of movable equipment or means of transport on wheels.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ACX</code>
+</td>
+<td>
+Payload
+</td>
+<td>
+The revenue-producing load carried by a means of transport.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ADR</code>
+</td>
+<td>
+Start position in the length
+</td>
+<td>
+The starting position from the beginning of an item located in the length direction.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ADS</code>
+</td>
+<td>
+End position in the length
+</td>
+<td>
+The end position from the beginning of an item located in the length direction.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ADT</code>
+</td>
+<td>
+Start position in the width
+</td>
+<td>
+The start position from the beginning of an item located in the width direction.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ADU</code>
+</td>
+<td>
+End position in the width
+</td>
+<td>
+The end position from the beginning of an item located in the width direction.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ADV</code>
+</td>
+<td>
+Start position in the thickness
+</td>
+<td>
+The start position from the beginning of an item located in the thickness direction.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ADW</code>
+</td>
+<td>
+End position in the thickness
+</td>
+<td>
+The end position from the beginning of an item located in the thickness direction.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ADX</code>
+</td>
+<td>
+Transport container actual filling weight
+</td>
+<td>
+Actual filling weight of a transport container.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ADY</code>
+</td>
+<td>
+Transport container maximum capacity
+</td>
+<td>
+Maximum capacity of a transport container.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ADZ</code>
+</td>
+<td>
+Declared net weight
+</td>
+<td>
+The declared net weight of a product or products used for invoicing, customs or transport purposes.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEA</code>
+</td>
+<td>
+Loading height
+</td>
+<td>
+Maximum height of products or packages loaded onto a given transportation device or equipment such as a pallet.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEB</code>
+</td>
+<td>
+Stacking height
+</td>
+<td>
+Maximum height up to which the same product or package may be placed one upon the other for storage purposes.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEC</code>
+</td>
+<td>
+Calculated weight
+</td>
+<td>
+The calculated weight of the item based on the ordered dimensions.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AED</code>
+</td>
+<td>
+Ferrite
+</td>
+<td>
+The chemical composition ferrite.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEE</code>
+</td>
+<td>
+Impurity
+</td>
+<td>
+The impurity of the product i.e. the measurement of other chemical elements not normally appearing in a product.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEF</code>
+</td>
+<td>
+Grain size
+</td>
+<td>
+The grain size.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEG</code>
+</td>
+<td>
+Lanthanides
+</td>
+<td>
+The chemical element Lanthanides.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEH</code>
+</td>
+<td>
+Elasticity
+</td>
+<td>
+The value of the elasticity.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEI</code>
+</td>
+<td>
+Drained weight
+</td>
+<td>
+The weight of a product when all liquids used in the packaging of the product have been removed.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEJ</code>
+</td>
+<td>
+Gallium
+</td>
+<td>
+Measurement of the gallium component.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEK</code>
+</td>
+<td>
+Strontium
+</td>
+<td>
+Measurement of the strontium component.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEL</code>
+</td>
+<td>
+Area
+</td>
+<td>
+Extent or measure of a surface.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEM</code>
+</td>
+<td>
+Equipment storage limitation
+</td>
+<td>
+Maximum storage limit of the equipment.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEN</code>
+</td>
+<td>
+Radioactive index of transport
+</td>
+<td>
+The index of transport determines the maximum radiation level at a distance of 1m from the external surface.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEO</code>
+</td>
+<td>
+Radioactivity
+</td>
+<td>
+Activity of radioactive material.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEP</code>
+</td>
+<td>
+Average gross weight
+</td>
+<td>
+Weight which is the outcome of the division of the total gross weight by the number of units.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEQ</code>
+</td>
+<td>
+Forward draft
+</td>
+<td>
+Depth of water from the surface of water to the bottom of the vessel measured at the draft mark of the bow.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AER</code>
+</td>
+<td>
+After draft
+</td>
+<td>
+Depth of water from the surface of water to the bottom of the vessel measured at the draft mark of the stern.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AES</code>
+</td>
+<td>
+Acidity
+</td>
+<td>
+The quality, state, or degree of being acid.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AET</code>
+</td>
+<td>
+Transport equipment gross weight
+</td>
+<td>
+Weight of a transport equipment including the cargo and carrier's equipment.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEU</code>
+</td>
+<td>
+Total transport equipment gross weight
+</td>
+<td>
+Total weight of all transport equipment including the cargo and carrier's equipment.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEV</code>
+</td>
+<td>
+Acidity of juice
+</td>
+<td>
+Acid measurement of juice.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEW</code>
+</td>
+<td>
+Penetrometry
+</td>
+<td>
+Measurement of force required to drive a standard penetrating stamp.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEX</code>
+</td>
+<td>
+Durofel
+</td>
+<td>
+Measurement of the elastic force using a standard penetrating stamp.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEY</code>
+</td>
+<td>
+Juice weight per 100 grams
+</td>
+<td>
+Measurement of weight of juice, based on 100 grams of the entire weight.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AEZ</code>
+</td>
+<td>
+Fruit skin colour
+</td>
+<td>
+Measurement of the colouring of the epidermis of a fruit.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AF</code>
+</td>
+<td>
+Angle of bend
+</td>
+<td>
+The measured angle of bend.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFA</code>
+</td>
+<td>
+Fixed incremental measurement
+</td>
+<td>
+The measurement of the fixed increment.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFB</code>
+</td>
+<td>
+Durofel D10
+</td>
+<td>
+Measure of the elastic force of the pulp of a fruit. It is measured with a penetrating stamp with diameter 10.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFC</code>
+</td>
+<td>
+Durofel D25
+</td>
+<td>
+Measure of the elastic force of the pulp of a fruit. It is measured with a penetrating stamp with diameter 25.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFD</code>
+</td>
+<td>
+Durofel D50
+</td>
+<td>
+Measure of the elastic force of the pulp of a fruit. It is measured with a penetrating stamp with diameter 50.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFE</code>
+</td>
+<td>
+Maximum stacking weight
+</td>
+<td>
+The maximum weight which may be stacked upon a product or package without the product or packaging being crushed.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFF</code>
+</td>
+<td>
+Gross measure cube
+</td>
+<td>
+The total cubic space occupied by an item, taking into account any protruding components, arrived at by multiplying the maximum length, width and height.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFG</code>
+</td>
+<td>
+Percentage fat content in dry matter
+</td>
+<td>
+The percentage of fat content in dry matter.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFH</code>
+</td>
+<td>
+Saccharometric content
+</td>
+<td>
+Measurement of the sugar content of a solution.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFI</code>
+</td>
+<td>
+Hydrate content of an alcoholic product after bottling
+</td>
+<td>
+The hydrate content which occurs in an alcoholic product after bottling.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFJ</code>
+</td>
+<td>
+Anhydrous content
+</td>
+<td>
+The non-water content.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFK</code>
+</td>
+<td>
+Certified weight
+</td>
+<td>
+Weight which has been certified.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFL</code>
+</td>
+<td>
+Freeboard
+</td>
+<td>
+The vertical distance between the waterline and the upper edge of the deck line.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFM</code>
+</td>
+<td>
+Maximum vessel draught
+</td>
+<td>
+The depth of water needed to float the ship (Maximum vessel draught according to Load Line Certificate IMO, MSC/Circ. 920 15 June 1999).
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFN</code>
+</td>
+<td>
+Net explosive weight
+</td>
+<td>
+Mass of the explosive part or substance of goods without any packing.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFO</code>
+</td>
+<td>
+Radioactive criticality safety index
+</td>
+<td>
+A number, assigned to fissile material i.e. material capable of sustaining a nuclear chain reaction, which is used to provide control over the accumulation of packages containing such material.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFP</code>
+</td>
+<td>
+Waste currently on board
+</td>
+<td>
+Amount of waste on board at the moment of the notification.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFQ</code>
+</td>
+<td>
+Waste to be delivered at waste reception facility
+</td>
+<td>
+Amount of waste to be delivered to a waste reception facility, e.g. in the port of call.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFR</code>
+</td>
+<td>
+Waste to be generated until next port of call, estimated
+</td>
+<td>
+Estimated amount of waste to be generated between creation of the current notification and arrival in the next port of call, irrespective of use of incinerator or compactor or disposal at sea.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFS</code>
+</td>
+<td>
+Waste remaining on board at departure
+</td>
+<td>
+Amount of waste remaining on board when leaving the port of call.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFT</code>
+</td>
+<td>
+Colour depth
+</td>
+<td>
+The number of distinct colours represented, e.g. in an image or in a display.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFU</code>
+</td>
+<td>
+Colour depth, maximum
+</td>
+<td>
+The maximum number of distinct colours that can be represented, e.g. in an image or in a display.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFV</code>
+</td>
+<td>
+Image resolution
+</td>
+<td>
+The level of detail of an image.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFW</code>
+</td>
+<td>
+Device resolution, maximum
+</td>
+<td>
+The maximum level of detail produced by a device.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>AFX</code>
+</td>
+<td>
+Acoustic absorption coefficient
+</td>
+<td>
+The portion of sound energy a surface absorbs, measured at different frequencies.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>B</code>
+</td>
+<td>
+Billed weight
+</td>
+<td>
+The measured billed weight.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BL</code>
+</td>
+<td>
+Breaking load
+</td>
+<td>
+The measured breaking load.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BMY</code>
+</td>
+<td>
+Platinum
+</td>
+<td>
+The measurement of the platinum component.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BMZ</code>
+</td>
+<td>
+Silver
+</td>
+<td>
+The measurement of the silver component.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNA</code>
+</td>
+<td>
+List
+</td>
+<td>
+The leaning or inclination of a vessel expressed in degrees port or starboard.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNB</code>
+</td>
+<td>
+Trim
+</td>
+<td>
+The condition of a vessel with reference to its longitudinal axis.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNC</code>
+</td>
+<td>
+Free water
+</td>
+<td>
+The volume of water present in a container that is not in suspension in the contained liquid.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BND</code>
+</td>
+<td>
+Bands
+</td>
+<td>
+The measured bands.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNE</code>
+</td>
+<td>
+API (American Petroleum Institute) gravity
+</td>
+<td>
+The relative density of petroleum liquids as specified by a standard developed by the API.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNF</code>
+</td>
+<td>
+Petroleum gross observed volume
+</td>
+<td>
+The total volume of all petroleum liquids and sediment and water, excluding free water, at observed temperature and pressure.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNG</code>
+</td>
+<td>
+Petroleum gross standard volume
+</td>
+<td>
+The total volume of all petroleum liquids, sediment, and water excluding free water, corrected by the appropriate volume correction factor for the observed temperature and American Petroleum Institute relative density, or density to a standard temperature.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNH</code>
+</td>
+<td>
+Volume variance
+</td>
+<td>
+The change in the volume measurement.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNI</code>
+</td>
+<td>
+Petroleum net standard volume
+</td>
+<td>
+The total volume of all petroleum liquids, excluding sediment and water and free water, corrected by the appropriate volume correction factor for the observed temperature and American Petroleum Institute gravity relative to density or to a standard temperature.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNJ</code>
+</td>
+<td>
+Material on-board quantity, after discharge
+</td>
+<td>
+The material in vessel tanks, void spaces, and pipelines after discharge.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNK</code>
+</td>
+<td>
+Petroleum total calculated volume
+</td>
+<td>
+The total volume of all petroleum liquids, sediment and water corrected by the appropriate volume correction factor for the observed temperature and American Petroleum Institute (API) gravity, relative density, or density to a standard temperature.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNL</code>
+</td>
+<td>
+Petroleum total observed volume
+</td>
+<td>
+The total volume of all petroleum liquids, sediment and water and free water at observed temperature and pressure.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNM</code>
+</td>
+<td>
+Innage gauge distance
+</td>
+<td>
+The measured distance from the surface of the liquid to a fixed datum plate or to the tank bottom.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNN</code>
+</td>
+<td>
+Petroleum net standard weight
+</td>
+<td>
+The total weight of all petroleum liquids excluding sediments, water and free water.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNO</code>
+</td>
+<td>
+Sediment and water in petroleum
+</td>
+<td>
+The measurement of non-hydrocarbon solid material and water in suspension in petroleum liquid.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNP</code>
+</td>
+<td>
+Observed reference height, tank
+</td>
+<td>
+The observed distance from the tank bottom or datum plate to the established reference point.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNQ</code>
+</td>
+<td>
+Reference height, tank
+</td>
+<td>
+The measured distance from the tank bottom or datum plate to the established reference point.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNR</code>
+</td>
+<td>
+Ullage gauge distance
+</td>
+<td>
+The measured distance from the cargo liquid surface to the reference point.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNS</code>
+</td>
+<td>
+Trim correction
+</td>
+<td>
+The correction applied to the observed gauge or observed volume when a vessel is not on an even keel.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNT</code>
+</td>
+<td>
+Bow to bridge distance
+</td>
+<td>
+The distance between the bow and the bridge of a vessel.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNU</code>
+</td>
+<td>
+Peg hole number
+</td>
+<td>
+Used to identify the peg hole if more than one hole is present in the product or packaging.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNV</code>
+</td>
+<td>
+Number of inner packs
+</td>
+<td>
+Indicates the number of non coded physical groupings (inner packs) of next lower level trade items within the current trade item level.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNW</code>
+</td>
+<td>
+Number of next level trade items within inner pack
+</td>
+<td>
+The number of next lower level trade items contained within the physical non-coded grouping (inner pack).
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNX</code>
+</td>
+<td>
+Number of trade items per pallet layer
+</td>
+<td>
+The number of trade items contained on a single layer of a pallet.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNY</code>
+</td>
+<td>
+Packed items layer height
+</td>
+<td>
+The height of a single layer of packed items.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BNZ</code>
+</td>
+<td>
+Packing material weight, skin tight covering
+</td>
+<td>
+The weight measurement of the packing material used for skin tight covering (e.g. when packaging prepared meats, poultry, cheese, and other food products).
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BR</code>
+</td>
+<td>
+Brightness
+</td>
+<td>
+The measured brightness.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRA</code>
+</td>
+<td>
+Brakes
+</td>
+<td>
+The measured brakes.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRB</code>
+</td>
+<td>
+Components labelled for recycling percentage
+</td>
+<td>
+Percentage of trade item components that clearly label how to facilitate product disassembly and recycling.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRC</code>
+</td>
+<td>
+Renewable plastic components percentage, by net weight
+</td>
+<td>
+The percentage of the plastic components only made from rapidly renewable plant-based material by net weight of product.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRD</code>
+</td>
+<td>
+Clamp pressure, required
+</td>
+<td>
+The pressure that should be applied by a clamp.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRE</code>
+</td>
+<td>
+Break
+</td>
+<td>
+The measured break.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRF</code>
+</td>
+<td>
+Ascertained volume
+</td>
+<td>
+Endorsement of the true volume as ascertained or verified.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRG</code>
+</td>
+<td>
+Unit weight
+</td>
+<td>
+The weight of a unit.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRH</code>
+</td>
+<td>
+Total volume
+</td>
+<td>
+Total volume of goods and/or parcels.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRI</code>
+</td>
+<td>
+Unit volume
+</td>
+<td>
+The volume of a unit.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRJ</code>
+</td>
+<td>
+Vertical center of gravity
+</td>
+<td>
+Distance of vertical center of gravity relative to item's base.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRK</code>
+</td>
+<td>
+Maximum allowable transport stacking weight
+</td>
+<td>
+Maximum weight allowed to be stowed on top of an item during transport.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRL</code>
+</td>
+<td>
+Carbon Dioxide
+</td>
+<td>
+Measurement of the carbon dioxide (C02) component.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRM</code>
+</td>
+<td>
+Number of base units per pallet
+</td>
+<td>
+The number of base units contained on a pallet.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRN</code>
+</td>
+<td>
+Colony forming unit
+</td>
+<td>
+Micro-organism colonies that are to be counted under determined conditions.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRO</code>
+</td>
+<td>
+Diluted liquid volume
+</td>
+<td>
+The volume of liquid which results after a dilution agent has been added, e.g. undiluted orange juice of 200ml, after dilution with water the volume of diluted liquid equals 1 litre.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRP</code>
+</td>
+<td>
+Energy efficiency
+</td>
+<td>
+A measurement of the energy efficiency of an article.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRQ</code>
+</td>
+<td>
+Number of layers
+</td>
+<td>
+Number of layers of a product or products within a package, container, etc.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRR</code>
+</td>
+<td>
+Maximum demand
+</td>
+<td>
+The highest demand recorded during the period of recording of usage of the supply.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRS</code>
+</td>
+<td>
+Number of pallet places
+</td>
+<td>
+The number of pallet places needed to store or to transport pallets (can be stacked).
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRT</code>
+</td>
+<td>
+Package net measurement, cubed
+</td>
+<td>
+An indication of the net cubed measurement of a package.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRU</code>
+</td>
+<td>
+Power factor
+</td>
+<td>
+The ratio of the power dissipated (active power in kW) to the total power (which is the product of the input volts times amps given in kVa). When equipment which uses reactive power is being operated the power factor will be less than one.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BRV</code>
+</td>
+<td>
+Stacking factor excluding bottom item
+</td>
+<td>
+Maximum number of identical items stackable on top of item.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BS</code>
+</td>
+<td>
+Breaking strength
+</td>
+<td>
+The measured breaking strength.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BSW</code>
+</td>
+<td>
+Breaking strength wet
+</td>
+<td>
+The measured breaking strength when wet.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BSX</code>
+</td>
+<td>
+Step size
+</td>
+<td>
+An indication of measurements in which options contained within a Customer Specific Article are available, e.g. 10 metre planks of wood may be sold in step sizes of 2 metres.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BSY</code>
+</td>
+<td>
+Number of units per package
+</td>
+<td>
+The number of identified units per package.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BSZ</code>
+</td>
+<td>
+Number of units per layer
+</td>
+<td>
+Number of units of a product or package within one layer of a package, container, etc.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BTA</code>
+</td>
+<td>
+Weight per running metre
+</td>
+<td>
+A code used to indicate the weight per running metre of floor coverings over floor area.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BTB</code>
+</td>
+<td>
+Weight per square metre
+</td>
+<td>
+A code used to indicate the weight per square metre of floor coverings over floor area.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BTC</code>
+</td>
+<td>
+Acidity of meat
+</td>
+<td>
+The meat's acid quality or condition.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BTD</code>
+</td>
+<td>
+Slaughtering weight
+</td>
+<td>
+Weight immediately after slaughter.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BTE</code>
+</td>
+<td>
+Stacking factor including bottom item
+</td>
+<td>
+Maximum number of items stackable upon each other, including the bottom item.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BTF</code>
+</td>
+<td>
+Number of units in the width of a layer
+</td>
+<td>
+Number of units of a product or package which make up the width of a layer in a package, container, pallet, etc.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BTG</code>
+</td>
+<td>
+Number of units in the depth of a layer
+</td>
+<td>
+Number of units of a product or package which make up the depth of a layer in a package, container, pallet, etc.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BTH</code>
+</td>
+<td>
+Nestable percentage
+</td>
+<td>
+Extent expressed as a percentage to which an item can be nested within an identical item, e.g. paper cups.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BTI</code>
+</td>
+<td>
+Gross weight including carrier's equipment
+</td>
+<td>
+Weight (mass) of goods including packaging and the carrier's equipment. In this context 'carrier's equipment' means any material resources necessary to facilitate the transport and handling of the goods without having the ability to move by its own propulsion, e.g. pallet, container, etc.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BTJ</code>
+</td>
+<td>
+Sugar content
+</td>
+<td>
+The rate of sugar.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BTK</code>
+</td>
+<td>
+Self-accelerating polymerization temperature (SAPT)
+</td>
+<td>
+The lowest temperature at which polymerization may occur for a substance as packed for transport.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BTL</code>
+</td>
+<td>
+Self-accelerating decomposition temperature (SADT)
+</td>
+<td>
+The lowest temperature at which self-accelerating decomposition may occur for a substance as packed for transport.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BTM</code>
+</td>
+<td>
+Control temperature
+</td>
+<td>
+The controlled transport temperature to avoid decomposition of self-reactive substances and organic peroxides.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BW</code>
+</td>
+<td>
+Basis weight
+</td>
+<td>
+The measured basis weight.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>CHN</code>
+</td>
+<td>
+Change
+</td>
+<td>
+The measured change.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>CHO</code>
+</td>
+<td>
+Emergency temperature
+</td>
+<td>
+The temperature at which emergency response is required for self-reactive substances and organic peroxides.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>CM</code>
+</td>
+<td>
+Colour
+</td>
+<td>
+The measured colour.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>CT</code>
+</td>
+<td>
+Contents of package
+</td>
+<td>
+In combination with the other data elements of the actual segment this code indicates the measured content of a package.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>CV</code>
+</td>
+<td>
+Commercial weight
+</td>
+<td>
+Item weight considering its maximum possible humidity.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>CZ</code>
+</td>
+<td>
+Core length
+</td>
+<td>
+To specify length of core on which product is to be placed.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>D</code>
+</td>
+<td>
+Destination weight agreement
+</td>
+<td>
+The agreed weight of despatched goods whose weight may change during transport.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>DI</code>
+</td>
+<td>
+Diameter
+</td>
+<td>
+Diameter of an article.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>DL</code>
+</td>
+<td>
+Delta value L
+</td>
+<td>
+The measured delta value L.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>DN</code>
+</td>
+<td>
+Density
+</td>
+<td>
+The measured density.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>DP</code>
+</td>
+<td>
+Depth
+</td>
+<td>
+The measured depth.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>DR</code>
+</td>
+<td>
+Denier
+</td>
+<td>
+The measured fineness of a material.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>DS</code>
+</td>
+<td>
+Distance between points
+</td>
+<td>
+The measured distance between points.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>DW</code>
+</td>
+<td>
+Width, boxcar door
+</td>
+<td>
+The measured width of a boxcar door.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>E</code>
+</td>
+<td>
+Estimated new weight
+</td>
+<td>
+The measured estimated new weight.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>EA</code>
+</td>
+<td>
+Elongation
+</td>
+<td>
+The measured elongation.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>F</code>
+</td>
+<td>
+Deficit weight
+</td>
+<td>
+The measured deficit weight.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>FI</code>
+</td>
+<td>
+Filament count
+</td>
+<td>
+Used e.g. in textile, print industries.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>FL</code>
+</td>
+<td>
+Longitudinal flatness
+</td>
+<td>
+The measured longitudinal flatness.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>FN</code>
+</td>
+<td>
+Flatness
+</td>
+<td>
+The measured flatness.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>FV</code>
+</td>
+<td>
+Transverse flatness
+</td>
+<td>
+The measured transverse flatness.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>GG</code>
+</td>
+<td>
+Gauge
+</td>
+<td>
+The measured gauge.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>GW</code>
+</td>
+<td>
+Gross weight, maximum
+</td>
+<td>
+The measured maximum gross weight.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>HF</code>
+</td>
+<td>
+Hardness
+</td>
+<td>
+The measured hardness.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>HM</code>
+</td>
+<td>
+Height, maximum
+</td>
+<td>
+The measured maximum height.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>HT</code>
+</td>
+<td>
+Height dimension
+</td>
+<td>
+Numeric value of height.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>IB</code>
+</td>
+<td>
+Impact energy
+</td>
+<td>
+The measured impact energy.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ID</code>
+</td>
+<td>
+Inside diameter
+</td>
+<td>
+The measured inside diameter.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>L</code>
+</td>
+<td>
+Legal weight
+</td>
+<td>
+The measured legal weight.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>LM</code>
+</td>
+<td>
+Length, maximum
+</td>
+<td>
+The measured maximum length.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>LN</code>
+</td>
+<td>
+Length
+</td>
+<td>
+To specify the value of a length dimension.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>LND</code>
+</td>
+<td>
+Lost end
+</td>
+<td>
+The measured lost end.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>M</code>
+</td>
+<td>
+Minimum weight
+</td>
+<td>
+The measured minimum weight.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>MO</code>
+</td>
+<td>
+Moisture
+</td>
+<td>
+Measurement application is the moisture content of the item.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>MW</code>
+</td>
+<td>
+Maximum weight
+</td>
+<td>
+The measured maximum weight.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>N</code>
+</td>
+<td>
+Actual net weight
+</td>
+<td>
+The actual weight of the goods excluding packaging.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>OD</code>
+</td>
+<td>
+Outside diameter
+</td>
+<td>
+The measured outside diameter.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>PRS</code>
+</td>
+<td>
+Pre stretch
+</td>
+<td>
+Measurement identifying the amount an item has been stretched prior to use.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>PTN</code>
+</td>
+<td>
+Per tonne
+</td>
+<td>
+A measurement per tonne.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>RA</code>
+</td>
+<td>
+Relative humidity
+</td>
+<td>
+The measured relative humidity.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>RF</code>
+</td>
+<td>
+Resistivity
+</td>
+<td>
+The measured resistivity.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>RJ</code>
+</td>
+<td>
+Rockwell C
+</td>
+<td>
+Hardness in the Rockwell C scale.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>RMW</code>
+</td>
+<td>
+Ream weight
+</td>
+<td>
+Measurement indication for paper.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>RP</code>
+</td>
+<td>
+Reduction of area
+</td>
+<td>
+The measured reduction of area.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>RUN</code>
+</td>
+<td>
+Run (process)
+</td>
+<td>
+The measured run (process).
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>RY</code>
+</td>
+<td>
+Ratio
+</td>
+<td>
+The measured ratio.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>SQ</code>
+</td>
+<td>
+Shipped quantity
+</td>
+<td>
+The measured shipped quantity.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>T</code>
+</td>
+<td>
+Tare weight
+</td>
+<td>
+Weight excluding goods and loose accessories.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>TC</code>
+</td>
+<td>
+Temperature
+</td>
+<td>
+A measurement in relation to temperature.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>TH</code>
+</td>
+<td>
+Thickness
+</td>
+<td>
+The measured thickness.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>TN</code>
+</td>
+<td>
+Time period
+</td>
+<td>
+Measurement of a specific length of time.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>TT</code>
+</td>
+<td>
+Time
+</td>
+<td>
+The measured time.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>VGM</code>
+</td>
+<td>
+Transport equipment verified gross mass (weight)
+</td>
+<td>
+The gross mass (weight) of the transport equipment verified according to SOLAS Chapter VI, Regulation 2, paragraphs 4-6.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>VH</code>
+</td>
+<td>
+Height, van door
+</td>
+<td>
+The height of the door of a van or container.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>VW</code>
+</td>
+<td>
+Width, van door
+</td>
+<td>
+The width of the door of a van or container.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>WA</code>
+</td>
+<td>
+Weight per unit of area
+</td>
+<td>
+The weight per unit of an area.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>WD</code>
+</td>
+<td>
+Width dimension
+</td>
+<td>
+Numeric value of width.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>WM</code>
+</td>
+<td>
+Width, maximum
+</td>
+<td>
+The maximum distance from side to side.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>WU</code>
+</td>
+<td>
+Weight per unit of length
+</td>
+<td>
+The weight per unit of length.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>XH</code>
+</td>
+<td>
+Side height, flat bed with removable sides
+</td>
+<td>
+The height of the removable sides of a flat bed truck.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>XQ</code>
+</td>
+<td>
+Squareness
+</td>
+<td>
+The measured squareness.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>XZ</code>
+</td>
+<td>
+Spool size
+</td>
+<td>
+The measured spool size.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>YS</code>
+</td>
+<td>
+Yield stress
+</td>
+<td>
+The measured yield stress.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZAL</code>
+</td>
+<td>
+Aluminium
+</td>
+<td>
+The measured chemical element aluminium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZAS</code>
+</td>
+<td>
+Arsenic
+</td>
+<td>
+The measured chemical element arsenic.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZB</code>
+</td>
+<td>
+Boron
+</td>
+<td>
+The measured chemical element boron.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZBI</code>
+</td>
+<td>
+Bismuth
+</td>
+<td>
+The measured chemical element bismuth.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZC</code>
+</td>
+<td>
+Carbon
+</td>
+<td>
+The measured chemical element carbon.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZCA</code>
+</td>
+<td>
+Calcium
+</td>
+<td>
+The measured chemical element calcium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZCB</code>
+</td>
+<td>
+Columbium
+</td>
+<td>
+The measured chemical element columbium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZCE</code>
+</td>
+<td>
+Cerium
+</td>
+<td>
+The measured chemical element cerium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZCL</code>
+</td>
+<td>
+Chlorine
+</td>
+<td>
+The measured chemical element chlorine.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZCO</code>
+</td>
+<td>
+Cobalt
+</td>
+<td>
+The measured chemical element cobalt.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZCR</code>
+</td>
+<td>
+Chromium
+</td>
+<td>
+The measured chemical element chromium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZCU</code>
+</td>
+<td>
+Copper
+</td>
+<td>
+The measured chemical element copper.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZFE</code>
+</td>
+<td>
+Iron
+</td>
+<td>
+The measured chemical element iron.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZFS</code>
+</td>
+<td>
+Iron plus silicon
+</td>
+<td>
+The measured substance iron plus silicon.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZGE</code>
+</td>
+<td>
+Germanium
+</td>
+<td>
+The measured chemical element germanium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZH</code>
+</td>
+<td>
+Hydrogen
+</td>
+<td>
+The measured chemical element hydrogen.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZK</code>
+</td>
+<td>
+Potassium
+</td>
+<td>
+The measured chemical element potassium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZMG</code>
+</td>
+<td>
+Magnesium
+</td>
+<td>
+The measured chemical element magnesium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZMN</code>
+</td>
+<td>
+Manganese
+</td>
+<td>
+The measured chemical element manganese.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZMO</code>
+</td>
+<td>
+Molybdenum
+</td>
+<td>
+The measured chemical element molybdenum.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZN</code>
+</td>
+<td>
+Nitrogen
+</td>
+<td>
+The measured chemical element nitrogen.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZNA</code>
+</td>
+<td>
+Sodium
+</td>
+<td>
+The measured chemical element sodium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZNB</code>
+</td>
+<td>
+Niobium
+</td>
+<td>
+The chemical element niobium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZNI</code>
+</td>
+<td>
+Nickel
+</td>
+<td>
+The measured chemical element nickel.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZO</code>
+</td>
+<td>
+Oxygen
+</td>
+<td>
+The measured chemical element oxygen.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZP</code>
+</td>
+<td>
+Phosphorus
+</td>
+<td>
+The measured chemical element phosphorus.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZPB</code>
+</td>
+<td>
+Lead
+</td>
+<td>
+The measured chemical element lead.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZS</code>
+</td>
+<td>
+Sulphur
+</td>
+<td>
+The measured chemical element sulphur.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZSB</code>
+</td>
+<td>
+Antimony
+</td>
+<td>
+The measured chemical element antimony.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZSE</code>
+</td>
+<td>
+Selenium
+</td>
+<td>
+The measured chemical element selenium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZSI</code>
+</td>
+<td>
+Silicon
+</td>
+<td>
+The measured chemical element silicon.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZSL</code>
+</td>
+<td>
+Silicium oxyd
+</td>
+<td>
+The measured substance silicium oxyd.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZSN</code>
+</td>
+<td>
+Tin
+</td>
+<td>
+The measured chemical element tin.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZTA</code>
+</td>
+<td>
+Tantalium
+</td>
+<td>
+The measured chemical element tantalium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZTE</code>
+</td>
+<td>
+Tellurium
+</td>
+<td>
+The measured chemical element tellurium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZTI</code>
+</td>
+<td>
+Titanium
+</td>
+<td>
+The measured chemical element titanium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZV</code>
+</td>
+<td>
+Vanadium
+</td>
+<td>
+The measured chemical element vanadium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZW</code>
+</td>
+<td>
+Tungsten
+</td>
+<td>
+The measured chemical element tungsten.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZWA</code>
+</td>
+<td>
+Waste content
+</td>
+<td>
+The measured waste content.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZZN</code>
+</td>
+<td>
+Zinc
+</td>
+<td>
+The measured chemical element zinc.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZZR</code>
+</td>
+<td>
+Zirconium
+</td>
+<td>
+The measured chemical element zirconium.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>ZZZ</code>
+</td>
+<td>
+Mutually defined
+</td>
+<td>
+A code assigned within a code list to be used on an interim basis and as defined among trading partners until a precise code can be assigned to the code list.
+</td>
+<td>
+6313
+</td>
+</tr>
+<tr>
+<td>
+<code>BEST_BEFORE_DATE</code>
+</td>
+<td>
+Best before date
+</td>
+<td>
+
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>COLOR_TEXT</code>
+</td>
+<td>
+Colour as text
+</td>
+<td>
+
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>COMMISSION</code>
+</td>
+<td>
+Commission indicator
+</td>
+<td>
+true / false
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>DEPOSIT_SYSTEM</code>
+</td>
+<td>
+Deposit system
+</td>
+<td>
+Permitted values:
+
+DISPOSABLE
+RETURNABLE
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>DEPOSIT_TYPE</code>
+</td>
+<td>
+Deposit type
+</td>
+<td>
+Permitted values:
+
+PRODUCT_PACKAGING
+TRANSPORT_EQUIPMENT
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>ENERGY_CLASS</code>
+</td>
+<td>
+Energy efficiency class
+</td>
+<td>
+
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>EXPIRATION_DATE</code>
+</td>
+<td>
+Expiration date
+</td>
+<td>
+
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>FEE</code>
+</td>
+<td>
+Fee indicator
+</td>
+<td>
+true = item is a fee
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>KIND_OF_ARTICLE</code>
+</td>
+<td>
+Type of article
+</td>
+<td>
+Allowed values:
+GOODS
+OTHER_SERVICES
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>MATERIAL</code>
+</td>
+<td>
+Material of the product
+</td>
+<td>
+
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>METER_LOCATION</code>
+</td>
+<td>
+Metering point designation, e.g. for electricity or gas
+</td>
+<td>
+
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>METER_NUMBER</code>
+</td>
+<td>
+Meter number, e.g. for electricity or gas
+</td>
+<td>
+
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>ORGANIC_CONTROL_BODY</code>
+</td>
+<td>
+Organic control body number
+</td>
+<td>
+
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>PACKAGING_MATERIAL</code>
+</td>
+<td>
+Packaging material
+</td>
+<td>
+
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>PACKAGING_TYPE</code>
+</td>
+<td>
+Type of packaging (code)
+</td>
+<td>
+Type of packaging in coded form. The packaging units from Rec 20 / Rec 21 are used as the code list. Example XBO=bottle
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>PROMOTIONAL_VARIANT</code>
+</td>
+<td>
+Number of the action variant
+</td>
+<td>
+
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>SEAL_NUMBER</code>
+</td>
+<td>
+Seal number
+</td>
+<td>
+
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>SIZE_CODE</code>
+</td>
+<td>
+Size code
+</td>
+<td>
+Size information in coded form
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>SIZE_TEXT</code>
+</td>
+<td>
+Size designation
+</td>
+<td>
+Size specifications in text form
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>TRADING_UNIT</code>
+</td>
+<td>
+Type of trading unit
+</td>
+<td>
+Permitted values:
+MIXED_ASSORTMENT = Assortment
+UNMIXED_UNIT = Container
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>WASTE_CODE</code>
+</td>
+<td>
+Waste code (EWC)
+</td>
+<td>
+Waste code according to the European Waste Catalogue (EWC)
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>WASTE_FRACTION</code>
+</td>
+<td>
+Waste fraction
+</td>
+<td>
+
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+<tr>
+<td>
+<code>WEEE_NUMBER</code>
+</td>
+<td>
+WEEE registration number
+</td>
+<td>
+WEEE registration number of the manufacturer of the product
+</td>
+<td>
+Factur-X
+</td>
+</tr>
+</tbody>
+</table>
