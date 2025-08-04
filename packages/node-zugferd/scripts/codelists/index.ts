@@ -1,6 +1,6 @@
 import { XMLParser } from "fast-xml-parser";
 import path from "path";
-import { objectUtil, z, type ZodType } from "zod";
+import { z, type ZodType } from "zod";
 import { createTypeAlias, printNode, zodToTs } from "zod-to-ts";
 import { mkdir, writeFile } from "fs/promises";
 import serialize from "serialize-javascript";
@@ -647,8 +647,6 @@ ${tbody}
 title: ${data.docs.title}
 description: ${data.docs.description}
 ---
-
-import { ${data.identifier} } from "${importPath}";
 
 ### Codelist [toc]
 ${imports}
