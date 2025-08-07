@@ -1,6 +1,6 @@
 {
 	"name": "@node-zugferd/api",
-	"version": "0.1.0",
+	"version": "0.1.1-beta.1",
 	"type": "module",
 	"scripts": {
 		"build": "tsup --clean --dts",
