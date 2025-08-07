@@ -937,7 +937,7 @@ BR-CO-9: The Seller VAT identifier (BT-31), the Seller tax representative VAT id
 				},
 			},
 			tradeDelivery: {
-				key: "trade-delivery",
+				key: "BG-13-00",
 				type: "object",
 				shape: {
 					/**
@@ -946,6 +946,7 @@ BR-CO-9: The Seller VAT identifier (BT-31), the Seller tax representative VAT id
 					 * A group of business terms providing information about where and when the goods and services invoiced are delivered.
 					 */
 					shipTo: {
+						key: "BG-13",
 						type: "object",
 						description: `**Delivery Information**
 
