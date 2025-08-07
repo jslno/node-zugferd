@@ -23,7 +23,7 @@ export type ClientOptions = Omit<RpcClientOptions, "baseURL"> & {
 
 export const createClient = <
 	API extends {
-		context: Promise<ZugferdApiContext>;
+		context: Promise<ZugferdApiContext<any>>;
 		invoicer: Zugferd;
 		templates: Record<string, any>;
 	},

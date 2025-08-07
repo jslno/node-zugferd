@@ -1,39 +1,32 @@
 import { zugferd } from "node-zugferd";
-import { BASIC } from "node-zugferd/profile/basic";
+import { mustangValidator } from "@node-zugferd/validator-mustang";
+import { EXTENDED } from "node-zugferd/profile";
 
 const main = async () => {
 	const invoicer = zugferd({
-		profile: BASIC,
+		profile: EXTENDED,
 		strict: false,
+		validator: mustangValidator({
+			tempDir: "./.tmp",
+		}),
 		logger: {
 			level: "debug",
 		},
 	});
 
 	const data: typeof invoicer.$Infer.Schema = {
-		businessProcessType: "A1",
-		number: "471102",
-		issueDate: new Date("2024-11-15"),
+		testIndicator: true,
+		number: "RE4123123162018",
+		name: "Rechnung",
 		typeCode: "380",
+		issueDate: new Date("2020-02-14"),
 		includedNote: [
 			{
-				content: "Rechnung gemäß Bestellung vom 01.11.2024.",
+				content: "",
+				subjectCode: "REG",
 			},
 			{
-				content: `Lieferant GmbH				
-Lieferantenstraße 20				
-80333 München				
-Deutschland				
-Geschäftsführer: Hans Muster
-Handelsregisternummer: H A 123`,
-			},
-			{
-				content: `Unsere GLN: 4000001123452
-Ihre GLN: 4000001987658
-Ihre Kundennummer: GE2020211
-
-
-Zahlbar innerhalb 30 Tagen netto bis 25.12.2024, 3% Skonto innerhalb 10 Tagen bis 25.11.2024.`,
+				content: "Kopftext",
 			},
 		],
 		transaction: {
@@ -43,108 +36,177 @@ Zahlbar innerhalb 30 Tagen netto bis 25.12.2024, 3% Skonto innerhalb 10 Tagen bi
 					tradeProduct: {
 						globalIdentifier: {
 							schemeIdentifier: "0160",
-							value: "4012345001235",
+							value: "ART232323",
 						},
-						name: `GTIN: 4012345001235
-Unsere Art.-Nr.: TB100A4
-Trennblätter A4`,
+						sellerAssignedID: "",
+						buyerAssignedID: "",
+						name: "Käse",
 					},
 					tradeAgreement: {
+						grossTradePrice: {
+							chargeAmount: "32.0000",
+							discounts: {
+								actualAmount: "3.2000",
+							},
+						},
 						netTradePrice: {
-							chargeAmount: "9.90",
+							chargeAmount: "28.8000",
 						},
 					},
 					tradeDelivery: {
 						billedQuantity: {
-							amount: "20.0000",
-							unitMeasureCode: "H87",
+							amount: "32.0000",
+							unitMeasureCode: "KGM",
 						},
 					},
 					tradeSettlement: {
 						tradeTax: {
+							calculatedAmount: "64.51",
 							typeCode: "VAT",
 							categoryCode: "S",
-							rateApplicablePercent: "19",
+							rateApplicablePercent: "7.00",
+						},
+						monetarySummation: {
+							lineTotalAmount: "1024.00",
+							totalAllowanceChargeAmount: "102.40",
+						},
+					},
+				},
+				{
+					identifier: "2",
+					tradeProduct: {
+						globalIdentifier: {
+							value: "PN000001",
+							schemeIdentifier: "0160",
+						},
+						sellerAssignedID: "",
+						buyerAssignedID: "",
+						name: "Fleisch",
+					},
+					tradeAgreement: {
+						grossTradePrice: {
+							chargeAmount: "32.0000",
+							discounts: {
+								actualAmount: "10.0000",
+							},
+						},
+						netTradePrice: {
+							chargeAmount: "22.0000",
+						},
+					},
+					tradeDelivery: {
+						billedQuantity: {
+							amount: "1.0000",
+							unitMeasureCode: "KGM",
+						},
+					},
+					tradeSettlement: {
+						tradeTax: {
+							calculatedAmount: "1.54",
+							typeCode: "VAT",
+							categoryCode: "S",
+							rateApplicablePercent: "7.00",
+						},
+						monetarySummation: {
+							lineTotalAmount: "32.00",
+							totalAllowanceChargeAmount: "10.00",
 						},
 					},
 				},
 			],
 			tradeAgreement: {
 				seller: {
-					name: "Lieferant GmbH",
+					name: "Muster GmbH",
+					tradeContact: {
+						name: "Max Mustermann",
+					},
 					postalAddress: {
+						postCode: "75331",
+						line1: "Buckelweg 110",
+						city: "Engelsbrand",
 						countryCode: "DE",
-						city: "München",
-						line1: "Lieferantenstraße 20",
-						postCode: "80333",
 					},
 					taxRegistration: {
-						localIdentifier: "201/113/40209",
-						vatIdentifier: "DE123456789",
+						localIdentifier: "1234567890",
 					},
 				},
 				buyer: {
-					name: "Kunden AG Mitte",
+					name: "Test Kunde",
+					tradeContact: {
+						name: "Ansprechpartner",
+					},
 					postalAddress: {
+						postCode: "12334",
+						line1: "Adresse",
+						city: "Basdsd",
 						countryCode: "DE",
-						city: "Frankfurt",
-						line1: "Hans Muster",
-						line2: "Kundenstraße 15",
-						postCode: "69876",
 					},
 				},
+				customerOrderReference: {
+					issuerAssignedID: "Bestellnummer",
+					date: new Date("2020-02-14"),
+				} as any,
 			},
 			tradeDelivery: {
-				information: {
-					deliveryDate: new Date("2024-11-14"),
+				shipTo: {
+					name: "Test Kunde",
+					postalAddress: {
+						postCode: "1234",
+						line1: "Adresse",
+						city: "Basdsd",
+						countryCode: "DE",
+					},
 				},
 			},
 			tradeSettlement: {
 				currencyCode: "EUR",
+				paymentInstruction: {
+					typeCode: "1",
+					transfers: [
+						{
+							accountName: "Norisbank Berlin",
+							paymentAccountIdentifier: "DE27100777770209299700",
+							nationalAccountNumber: "NORSDE51XXX",
+						},
+					],
+				},
 				vatBreakdown: [
 					{
+						calculatedAmount: "66.06",
 						typeCode: "VAT",
-						calculatedAmount: "37.62",
-						basisAmount: "198.00",
+						basisAmount: "943.60",
 						categoryCode: "S",
-						rateApplicablePercent: "19.00",
+						rateApplicablePercent: "7.00",
+					},
+				],
+				charges: [
+					{
+						actualAmount: "112.40",
+						reason: "Gesamt Rabatt",
+						categoryTradeTax: {
+							categoryCode: "S",
+							vatRate: "7.00",
+						},
 					},
 				],
 				monetarySummation: {
-					lineTotalAmount: "198.00",
+					lineTotalAmount: "1056.00",
 					chargeTotalAmount: "0.00",
-					allowanceTotalAmount: "0.00",
-					taxBasisTotalAmount: "198.00",
+					allowanceTotalAmount: "112.40",
+					taxBasisTotalAmount: "943.60",
 					taxTotal: {
 						currencyCode: "EUR",
-						amount: "37.62",
+						amount: "66.05",
 					},
-					grandTotalAmount: "235.62",
-					duePayableAmount: "235.62",
+					grandTotalAmount: "1009.65",
+					paidAmount: "0.00",
+					duePayableAmount: "1009.65",
 				},
-				allowances: [
-					{
-						actualAmount: "7.00",
-						reasonCode: "95",
-						reason: "Discount",
-						categoryTradeTax: {
-							categoryCode: "S",
-						},
-					},
-					{
-						actualAmount: "3.00",
-						reasonCode: "95",
-						reason: "Coupon",
-						categoryTradeTax: {
-							categoryCode: "S",
-						},
-					},
-				],
 			},
 		},
 	};
 
-	const invoice = invoicer.create(data);
+	const invoice = await invoicer.create(data);
 
 	console.log(await invoice.toXML());
 };

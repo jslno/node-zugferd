@@ -25,7 +25,7 @@ export const api = <
 	};
 	const opts = options as Options;
 
-	const context = init(opts);
+	const context = init<I["options"]>(opts);
 
 	const { api } = getEndpoints<Awaited<typeof context>, O, R, I, T>(context);
 

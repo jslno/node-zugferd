@@ -2,7 +2,6 @@ import { createProfile } from "../factory";
 import { type InferSchema } from "../../types/schema";
 import { BASIC_WL } from "../basic-wl";
 import { basicSchema } from "./schema";
-import { getAsset } from "../../utils/asset";
 import { basicMask } from "./mask";
 
 export const BASIC = createProfile({
@@ -12,7 +11,6 @@ export const BASIC = createProfile({
 	extends: [...BASIC_WL.extends, BASIC_WL],
 	schema: basicSchema,
 	mask: basicMask,
-	xsdPath: () => getAsset("Factur-X_1.07.3_BASIC.xsd"),
 	conformanceLevel: "BASIC",
 	documentFileName: "factur-x.xml",
 	documentType: "INVOICE",

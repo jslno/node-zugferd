@@ -43,7 +43,7 @@ export const create = <I extends Zugferd, T extends Record<string, any>>() =>
 			context.context.logger.debug(
 				`[api:${create.name}] Interpolating document with provided data`,
 			);
-			const invoice = context.context.document.create(body.data || {});
+			const invoice = await context.options.invoicer.create(body.data || {});
 			context.context.logger.debug(
 				`[api:${create.name}] Generating document and embedding in PDF`,
 			);

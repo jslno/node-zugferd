@@ -1,22 +1,38 @@
 import { AFRelationship, PDFDocument, type AttachmentOptions } from "pdf-lib";
-import type { BaseZugferdContext } from "../init";
-import type { InferSchema, ZugferdOptions } from "../types";
+import type {
+	InferSchema,
+	Promisable,
+	ZugferdContext,
+	ZugferdOptions,
+} from "../types";
 import type { PDFAMetadata } from "../formatter/pdf";
-import { validateDocumentFactory } from "./validate";
+import { validateDocument } from "./validate";
 import { colors } from "../utils/logger";
+import { ZugferdError } from "../error";
 
-export const createDocumentFactory =
-	<O extends ZugferdOptions>(ctx: BaseZugferdContext, options: O) =>
-	(data: InferSchema<O["profile"]>) => {
-		const toObj = () =>
-			options.profile.parse({
-				context: ctx,
+export const createDocument =
+	<O extends ZugferdOptions>(ctx: Promisable<ZugferdContext>) =>
+	async (data: InferSchema<O["profile"]>) => {
+		const context = await ctx;
+
+		const toObj = () => {
+			return context.options.profile.parse({
+				context,
 				data,
 			});
+		};
 
 		const toXML = async () => {
-			const xml = ctx.xml.format(toObj());
-			await validateDocumentFactory(ctx)(xml);
+			const xml = context.xml.format(toObj());
+			const runValidate = await validateDocument(context);
+			const res = await runValidate(xml);
+			if (!res.valid) {
+				const code = res.code ?? "VALIDATION_ERROR";
+				const message =
+					res.messages?.join("\n\n") ?? "An unknown error occurred";
+				context.logger.error(`${code}: ${message}`);
+				throw new ZugferdError(code, message);
+			}
 			return xml;
 		};
 
@@ -35,7 +51,7 @@ export const createDocumentFactory =
 		) => {
 			const xml = await toXML();
 			let { metadata } = opts;
-			const { profile } = options;
+			const { profile } = context.options;
 
 			const now = new Date();
 			metadata ??= {};
@@ -45,7 +61,7 @@ export const createDocumentFactory =
 			let pdfDoc =
 				pdf instanceof PDFDocument ? pdf : await PDFDocument.load(pdf);
 
-			ctx.logger.debug(
+			context.logger.debug(
 				`[${embedInPdf.name}] Attaching ${colors.bright}${profile.documentFileName}${colors.reset}`,
 			);
 			await pdfDoc.attach(Buffer.from(xml), profile.documentFileName, {
@@ -55,11 +71,11 @@ export const createDocumentFactory =
 				modificationDate: metadata.modifyDate,
 				afRelationship: AFRelationship.Alternative,
 			});
-			ctx.logger.debug(
+			context.logger.debug(
 				`[${embedInPdf.name}] Attached ${colors.bright}${profile.documentFileName}${colors.reset}`,
 			);
 
-			ctx.logger.debug(`[${embedInPdf.name}] Setting PDF metadata`);
+			context.logger.debug(`[${embedInPdf.name}] Setting PDF metadata`);
 			if (!!metadata.author) {
 				pdfDoc.setAuthor(metadata.author);
 			}
@@ -84,13 +100,15 @@ export const createDocumentFactory =
 				pdfDoc.setTitle(metadata.title);
 			}
 
-			ctx.logger.debug(`[${embedInPdf.name}] Applying PDF/A-3b enhancements`);
-			pdfDoc = ctx.pdf.addTrailerInfoId(pdfDoc, metadata.subject || "");
-			pdfDoc = ctx.pdf.addMarkInfo(pdfDoc);
-			pdfDoc = ctx.pdf.addStructTreeRoot(pdfDoc);
-			pdfDoc = ctx.pdf.fixLinkAnnotations(pdfDoc);
-			pdfDoc = ctx.pdf.addICC(pdfDoc);
-			ctx.pdf.addMetadata(pdfDoc, {
+			context.logger.debug(
+				`[${embedInPdf.name}] Applying PDF/A-3b enhancements`,
+			);
+			pdfDoc = context.pdf.addTrailerInfoId(pdfDoc, metadata.subject || "");
+			pdfDoc = context.pdf.addMarkInfo(pdfDoc);
+			pdfDoc = context.pdf.addStructTreeRoot(pdfDoc);
+			pdfDoc = context.pdf.fixLinkAnnotations(pdfDoc);
+			pdfDoc = context.pdf.addICC(pdfDoc);
+			context.pdf.addMetadata(pdfDoc, {
 				...metadata,
 				createDate: metadata.createDate!,
 				modifyDate: metadata.modifyDate!,
@@ -104,7 +122,7 @@ export const createDocumentFactory =
 			});
 
 			if (opts.additionalFiles?.length && opts.additionalFiles.length > 0) {
-				ctx.logger.debug(
+				context.logger.debug(
 					`[${embedInPdf.name}] Attaching ${colors.bright}${opts.additionalFiles.length}${colors.reset} additional file(s)`,
 				);
 				for (const item of opts.additionalFiles) {
@@ -118,10 +136,12 @@ export const createDocumentFactory =
 					});
 				}
 			} else {
-				ctx.logger.debug(`[${embedInPdf.name}] No additional files to attach`);
+				context.logger.debug(
+					`[${embedInPdf.name}] No additional files to attach`,
+				);
 			}
 
-			ctx.logger.debug(`[${embedInPdf.name}] Saving PDF`);
+			context.logger.debug(`[${embedInPdf.name}] Saving PDF`);
 			return await pdfDoc.save();
 		};
 

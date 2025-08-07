@@ -3725,6 +3725,7 @@ Such as a region, a county, a state, a province, etc.`,
 				},
 			},
 			tradeDelivery: {
+				key: "BG-13-00",
 				type: "object",
 				shape: {
 					/**
@@ -8015,6 +8016,7 @@ Coded identification of a VAT category.`,
 					},
 					paymentTerms: {
 						type: "object",
+						required: false,
 						shape: {
 							/**
 							 * Partial payment amount
@@ -9955,6 +9957,7 @@ The file name of the attached document`,
 								shape: {
 									discounts: {
 										type: "object",
+										required: false,
 										shape: {
 											/**
 											 * Discount in percent
@@ -9965,15 +9968,15 @@ The file name of the attached document`,
 												required: false,
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:CalculationPercent",
-												// additionalXml: {
-												// 	chargeIndicator: {
-												// 		key: "BT-147-01",
-												// 		type: "boolean",
-												// 		xpath:
-												// 			"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator",
-												// 		defaultValue: false,
-												// 	},
-												// },
+												additionalXml: {
+													chargeIndicator: {
+														key: "BT-147-01",
+														type: "boolean",
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator",
+														defaultValue: false,
+													},
+												},
 											},
 											/**
 											 * Discount base amount
@@ -9984,15 +9987,15 @@ The file name of the attached document`,
 												required: false,
 												xpath:
 													"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:BasisAmount",
-												// additionalXml: {
-												// 	chargeIndicator: {
-												// 		key: "BT-147-01",
-												// 		type: "boolean",
-												// 		xpath:
-												// 			"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator",
-												// 		defaultValue: false,
-												// 	},
-												// },
+												additionalXml: {
+													chargeIndicator: {
+														key: "BT-147-01",
+														type: "boolean",
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[line]/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ChargeIndicator/udt:Indicator",
+														defaultValue: false,
+													},
+												},
 											},
 											/**
 											 * Reason for the discount (code)
@@ -10050,6 +10053,7 @@ Use entries of the UNTDID 5189 code list [6]. The Invoice line level allowance r
 											data.transaction.line[line]?.tradeAgreement
 												?.grossTradePrice?.discounts,
 										group: "line-item-surcharges",
+										required: false,
 										shape: {
 											/**
 											 * Charge in percent

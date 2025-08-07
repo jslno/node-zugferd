@@ -9,6 +9,7 @@
     "tsx": "^4.19.2"
   },
   "dependencies": {
-    "node-zugferd": "workspace:*"
+    "node-zugferd": "workspace:*",
+    "@node-zugferd/validator-mustang": "workspace:*"
   }
 }

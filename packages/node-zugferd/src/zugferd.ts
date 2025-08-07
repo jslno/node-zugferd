@@ -1,57 +1,56 @@
 import { init, type ZugferdContext } from "./init";
 import { type ZugferdOptions } from "./types/options";
-import { createDocumentFactory } from "./document/create";
-import { validateDocumentFactory } from "./document/validate";
-import type { InferSchema, UnionToIntersection } from "./types";
-import type { ZugferdPlugin } from "./types/plugins";
+import { createDocument } from "./document/create";
+import { validateDocument } from "./document/validate";
+import type {
+	InferSchema,
+	IsExact,
+	Promisable,
+	UnionToIntersection,
+	ZugferdPlugin,
+} from "./types";
+import { BASIC } from "./profiles";
 
 export const zugferd = <O extends ZugferdOptions>(options: O) => {
 	const context = init(options);
 
-	const handlers = getPluginHandlers(context, options as O);
-
 	const ctx = {
 		context,
 		options: options as O,
-		create: context.document.create as ReturnType<
-			typeof createDocumentFactory<O>
-		>,
-		validate: context.document.validate,
 		$Infer: {
 			Schema: {} as InferSchema<O["profile"]>,
 		},
 	};
 
+	const handlers = getHandlers(context, options as O);
+
 	return {
 		...ctx,
-		...(handlers ?? {}),
-	} as typeof ctx & typeof handlers satisfies Zugferd;
+		...handlers,
+	} satisfies Zugferd;
 };
 
-export type Zugferd = {
-	context: ZugferdContext;
-	options: ZugferdOptions;
-	create: (data: any) => ReturnType<ZugferdContext["document"]["create"]>;
-	validate: ZugferdContext["document"]["validate"];
-} & Record<string, any>;
+export type Zugferd<O extends ZugferdOptions = ZugferdOptions> = {
+	context: Promise<ZugferdContext>;
+	options: O;
+} & (IsExact<O, ZugferdOptions> extends true
+	? Record<string, any>
+	: ReturnType<typeof getHandlers<O>>);
 
-const getPluginHandlers = <
-	C extends ZugferdContext & {
-		document: {
-			create: ReturnType<typeof createDocumentFactory<O>>;
-			validate: ReturnType<typeof validateDocumentFactory>;
-		};
-	},
-	O extends ZugferdOptions,
->(
-	ctx: C,
+const getHandlers = <O extends ZugferdOptions>(
+	ctx: Promisable<ZugferdContext>,
 	options: O,
 ) => {
 	const pluginHandlers = (options.plugins || []).reduce(
 		(acc, plugin) => {
 			return {
 				...acc,
-				...plugin(ctx as any),
+				...Object.fromEntries(
+					Object.entries(plugin.handlers).map(([key, handler]) => [
+						key,
+						handler(ctx),
+					]),
+				),
 			};
 		},
 		{} as Record<string, any>,
@@ -60,10 +59,29 @@ const getPluginHandlers = <
 	type PluginHandler = UnionToIntersection<
 		O["plugins"] extends Array<infer T>
 			? T extends ZugferdPlugin
-				? ReturnType<T>
+				? T extends {
+						handlers: infer H;
+					}
+					? H
+					: {}
 				: {}
 			: {}
 	>;
 
-	return pluginHandlers as PluginHandler;
+	const baseHandlers = {
+		create: createDocument<O>(ctx),
+		validate: validateDocument(ctx),
+	};
+
+	const handlers = {
+		...baseHandlers,
+		...pluginHandlers,
+	};
+
+	return handlers as typeof handlers & PluginHandler;
 };
+
+const x: Zugferd = zugferd({
+	profile: BASIC,
+	validator: false,
+});
