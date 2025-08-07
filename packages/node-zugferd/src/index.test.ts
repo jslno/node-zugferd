@@ -10,8 +10,9 @@ describe("Application Tests", async () => {
 	describe("Generate invoice", async () => {
 		for (const profile of [MINIMUM, BASIC_WL, BASIC, EN16931, EXTENDED]) {
 			const { invoicer, data } = await getTestInstance({ profile });
+			const context = await invoicer.context;
 			suite(profile.id, async () => {
-				const invoice = invoicer.create(data);
+				const invoice = await invoicer.create(data);
 
 				expect(invoice).toBeDefined();
 
@@ -26,7 +27,7 @@ describe("Application Tests", async () => {
 
 				it("should have factur-x.xml embedded", async () => {
 					const doc = await PDFDocument.load(pdfA);
-					const attachments = invoicer.context.pdf.getAttachments(doc);
+					const attachments = context.pdf.getAttachments(doc);
 					const facturXFile = attachments.find(
 						(val) => val.name === BASIC.documentFileName,
 					);

@@ -1,10 +1,13 @@
-import type { ZugferdContext } from "node-zugferd/types";
+import type { ZugferdContext, ZugferdOptions } from "node-zugferd/types";
 import type { ZugferdApiOptions } from "./types/options";
 import { getBaseURL } from "./utils";
 import type { GenericEndpointContext } from "./types/context";
 import type { Promisable } from "./types/helper";
+import type { Zugferd } from "node-zugferd";
 
-export const init = async (options: ZugferdApiOptions) => {
+export const init = async <I extends ZugferdOptions>(
+	options: ZugferdApiOptions,
+) => {
 	options = {
 		...options,
 		onAPIError: {
@@ -12,13 +15,14 @@ export const init = async (options: ZugferdApiOptions) => {
 			...(options.onAPIError ?? {}),
 		},
 	};
-	const context = options.invoicer.context;
+	const context = await options.invoicer.context;
 	context.logger.debug(`[api:${init.name}] Initializing API Plugin`);
 
 	const baseURL = getBaseURL(options.baseURL, options.basePath) || "";
 
-	const ctx: ZugferdApiContext = {
+	const ctx: ZugferdApiContext<I> = {
 		options,
+		invoicer: options.invoicer as Zugferd<I>,
 		context,
 		logger: context.logger,
 		baseURL,
@@ -29,9 +33,12 @@ export const init = async (options: ZugferdApiOptions) => {
 	return ctx;
 };
 
-export type ZugferdApiContext = {
+export type ZugferdApiContext<
+	InvoicerOptions extends ZugferdOptions = ZugferdOptions,
+> = {
 	options: ZugferdApiOptions;
 	context: ZugferdContext;
+	invoicer: Zugferd<InvoicerOptions>;
 	logger: ZugferdContext["logger"];
 	baseURL: string;
 	trustedOrigins: string[];

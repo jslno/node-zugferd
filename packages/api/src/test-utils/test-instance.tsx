@@ -11,6 +11,7 @@ import type {
 import { api as zugferdApi } from "..";
 import { getBaseURL } from "../utils/url";
 import { createClient } from "../client";
+import { xsdValidator } from "@node-zugferd/validator-xsd"
 
 export const getTestInstance = async <
 	O extends Partial<ZugferdApiOptions>,
@@ -31,6 +32,7 @@ export const getTestInstance = async <
 	const invoicer = zugferd({
 		...config.zugferdOptions,
 		profile,
+		validator: xsdValidator()
 	});
 
 	const api = zugferdApi({
@@ -64,7 +66,7 @@ export const getTestInstance = async <
 		: typeof BASIC;
 
 	const data: InferSchema<Profile> = (
-		await import(`./data/${invoicer.context.options.profile.id}.ts`)
+		await import(`./data/${invoicer.options.profile.id}.ts`)
 	).default;
 
 	const customFetchImpl = async (

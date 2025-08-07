@@ -13,11 +13,10 @@ import {
 	getPdfAttachments,
 } from "./formatter/pdf";
 import { type ZugferdOptions } from "./types/options";
-import { createDocumentFactory } from "./document/create";
-import { validateDocumentFactory } from "./document/validate";
 import { createLogger } from "./utils/logger";
+import { getTextNode, parseXml } from "./formatter/xml";
 
-export const init = (options: ZugferdOptions) => {
+export const init = async (options: ZugferdOptions) => {
 	const logger = createLogger(options?.logger);
 
 	if (options.strict === false) {
@@ -26,7 +25,7 @@ export const init = (options: ZugferdOptions) => {
 		);
 	}
 
-	const ctx = {
+	const context: ZugferdContext = {
 		options,
 		logger,
 		...getInternalTools({
@@ -35,28 +34,17 @@ export const init = (options: ZugferdOptions) => {
 		}),
 	};
 
-	const context: ZugferdContext = {
-		...ctx,
-		document: {
-			create: createDocumentFactory(ctx, options),
-			validate: validateDocumentFactory(ctx),
-		},
-	};
+	typeof options.validator === "object"
+		? await options.validator.init?.(context)
+		: null;
 
 	return context;
 };
 
-export type BaseZugferdContext = {
+export type ZugferdContext = {
 	options: ZugferdOptions;
 	logger: ReturnType<typeof createLogger>;
 } & InternalTools;
-
-export type ZugferdContext = BaseZugferdContext & {
-	document: {
-		create: ReturnType<typeof createDocumentFactory<ZugferdOptions>>;
-		validate: ReturnType<typeof validateDocumentFactory>;
-	};
-};
 
 type InternalTools = ReturnType<typeof getInternalTools>;
 
@@ -70,6 +58,8 @@ const getInternalTools = (ctx: InternalContext) => ({
 	mergeSchemas,
 	xml: {
 		format: formatXml.bind(null, ctx),
+		parse: parseXml.bind(null, ctx),
+		getTextNode,
 	},
 	pdf: {
 		addMetadata: addPdfMetadata.bind(null, ctx),

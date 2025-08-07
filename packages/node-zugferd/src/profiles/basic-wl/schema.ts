@@ -1978,6 +1978,7 @@ Use IBANID when appropriate, otherwise use ProprietaryID`,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:PayeePartyCreditorFinancialAccount[transfers]/ram:ProprietaryID",
 									},
+
 								},
 							},
 						},

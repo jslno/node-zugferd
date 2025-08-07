@@ -8,5 +8,6 @@ export class ZugferdError extends Error {
 
 		this.code = code;
 		this.name = "ZugferdError";
+		this.cause = options?.cause;
 	}
 }

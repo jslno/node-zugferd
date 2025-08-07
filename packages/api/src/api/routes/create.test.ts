@@ -16,6 +16,8 @@ describe(
 			},
 		});
 
+		const context = (await invoicer.context);
+
 		it("should generate valid pdf/a3-b invoice", async () => {
 			const res = await client("@post/create", {
 				body: {
@@ -50,16 +52,16 @@ describe(
 			expect(isPdfA3b(pdfA)).toBe(true);
 
 			const doc = await PDFDocument.load(pdfA!);
-			const attachments = invoicer.context.pdf.getAttachments(doc);
+			const attachments = context.pdf.getAttachments(doc);
 			const facturXFile = attachments.find(
-				(val) => val.name === invoicer.context.options.profile.documentFileName,
+				(val) => val.name === invoicer.options.profile.documentFileName,
 			);
 
 			expect(facturXFile).toBeDefined();
 
 			const facturX = new TextDecoder("utf-8").decode(facturXFile?.data);
 
-			const invoice = invoicer.create(data);
+			const invoice = await invoicer.create(data);
 
 			expect(facturX).toEqual(await invoice.toXML());
 		});

@@ -574,6 +574,7 @@ The identification of the project the invoice refers to`,
 				},
 			},
 			tradeDelivery: {
+				key: "BG-13-00",
 				type: "object",
 				shape: {
 					/**
