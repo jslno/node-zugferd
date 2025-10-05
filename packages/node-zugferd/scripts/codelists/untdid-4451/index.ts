@@ -29,8 +29,7 @@ export default createParser(async (ctx) => {
 			path: "/codelists/untdid-4451",
 			importPath: "/codelist/untdid-4451",
 			title: "UNTDID 4451 - Text subject qualifier",
-			description:
-				"Code specifying subject of a free text.",
+			description: "Code specifying subject of a free text.",
 			sidebar: {
 				title: "UNTDID 4451",
 			},

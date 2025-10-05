@@ -54,7 +54,7 @@ const main = async () => {
 
 		// Extract codelist name from the href for package.json exports
 		if (result.sidebar?.href) {
-			const codelistName = result.sidebar.href.replace('/docs/codelists/', '');
+			const codelistName = result.sidebar.href.replace("/docs/codelists/", "");
 			codelistNames.push(codelistName);
 		}
 	}
@@ -119,8 +119,11 @@ export const codelistSidebarItems: Content["list"] = ${serialize(data, {
 };
 
 const updatePackageJsonExports = async (codelistNames: string[]) => {
-	const packageJsonPath = path.resolve(PROJECT_ROOT, "packages/node-zugferd/package.json");
-	
+	const packageJsonPath = path.resolve(
+		PROJECT_ROOT,
+		"packages/node-zugferd/package.json",
+	);
+
 	// Read the current package.json
 	const packageJsonContent = await readFile(packageJsonPath, "utf-8");
 	const packageJson = JSON.parse(packageJsonContent);
@@ -128,19 +131,26 @@ const updatePackageJsonExports = async (codelistNames: string[]) => {
 	// Generate exports for each codelist
 	const codelistExports: Record<string, any> = {};
 
-	const additionals = ["filename", "hybrid-conformance", "hybrid-document", "hybrid-version"];
+	const additionals = [
+		"filename",
+		"hybrid-conformance",
+		"hybrid-document",
+		"hybrid-version",
+	];
 
-	for (const codelistName of [...codelistNames, ...additionals].filter((c) => c != "/docs").sort()) {
+	for (const codelistName of [...codelistNames, ...additionals]
+		.filter((c) => c != "/docs")
+		.sort()) {
 		const exportKey = `./codelist/${codelistName}`;
 		codelistExports[exportKey] = {
 			import: {
 				types: `./dist/codelist/${codelistName}.d.ts`,
-				default: `./dist/codelist/${codelistName}.js`
+				default: `./dist/codelist/${codelistName}.js`,
 			},
 			require: {
 				types: `./dist/codelist/${codelistName}.d.cts`,
-				default: `./dist/codelist/${codelistName}.cjs`
-			}
+				default: `./dist/codelist/${codelistName}.cjs`,
+			},
 		};
 	}
 
@@ -148,14 +158,14 @@ const updatePackageJsonExports = async (codelistNames: string[]) => {
 	// First, remove existing codelist exports
 	const updatedExports: Record<string, any> = {};
 	for (const [key, value] of Object.entries(packageJson.exports)) {
-		if (!key.startsWith('./codelist/')) {
+		if (!key.startsWith("./codelist/")) {
 			updatedExports[key] = value;
 		}
 	}
 
 	// Add the new codelist exports after the existing non-codelist exports
 	Object.assign(updatedExports, codelistExports);
-	
+
 	packageJson.exports = updatedExports;
 
 	// Format the JSON content
@@ -173,5 +183,7 @@ const updatePackageJsonExports = async (codelistNames: string[]) => {
 	// Write the updated package.json
 	await writeFile(packageJsonPath, formattedContent);
 
-	console.log(`Updated package.json with ${codelistNames.length} codelist exports`);
+	console.log(
+		`Updated package.json with ${codelistNames.length} codelist exports`,
+	);
 };
