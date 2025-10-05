@@ -237,7 +237,7 @@ export const createParser = <D extends ZodType<object>>(
 
 	const getSource = (data: CreateParserResult<D>) => {
 		return new URL(
-			deserializePath(data.source.replace(`${WORKSPACE_ROOT}\\`, "")),
+			deserializePath(data.source.replace(`${WORKSPACE_ROOT}${path.sep}`, "")),
 			"https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/",
 		).toString();
 	};
