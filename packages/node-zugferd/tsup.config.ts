@@ -41,6 +41,7 @@ export default defineConfig((env) => {
 			"codelist/untdid-3035": "./src/codelists/untdid-3035.gen.ts",
 			"codelist/untdid-3139": "./src/codelists/untdid-3139.gen.ts",
 			"codelist/untdid-5305": "./src/codelists/untdid-5305.gen.ts",
+			"codelist/untdid-4451": "./src/codelists/untdid-4451.gen.ts",
 			"codelist/vat-cat": "./src/codelists/vat-cat.gen.ts",
 			"codelist/vat-id": "./src/codelists/vat-id.gen.ts",
 			"codelist/vatex": "./src/codelists/vatex.gen.ts",
