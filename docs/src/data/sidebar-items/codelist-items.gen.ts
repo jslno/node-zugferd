@@ -25,7 +25,6 @@ export const codelistSidebarItems: Content["list"] = [
 	{ title: "UNTDID 1153", href: "/docs/codelists/untdid-1153" },
 	{ title: "UNTDID 3035", href: "/docs/codelists/untdid-3035" },
 	{ title: "UNTDID 3139", href: "/docs/codelists/untdid-3139" },
-	{ title: "UNTDID 4451", href: "/docs/codelists/untdid-4451" },
 	{ title: "UNTDID 5305", href: "/docs/codelists/untdid-5305" },
 	{ title: "VAT-CAT", href: "/docs/codelists/vat-cat" },
 	{ title: "VAT-ID", href: "/docs/codelists/vat-id" },
