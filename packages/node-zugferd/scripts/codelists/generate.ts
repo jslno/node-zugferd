@@ -2,7 +2,7 @@ import { Biome } from "@biomejs/js-api/nodejs";
 import serialize from "serialize-javascript";
 import { PROJECT_ROOT } from ".";
 import path from "path";
-import { mkdir, writeFile } from "fs/promises";
+import { mkdir, writeFile, readFile } from "fs/promises";
 
 const codelists = [
 	import("./country"),
@@ -42,6 +42,7 @@ const codelists = [
 
 const main = async () => {
 	const sidebarItems = [];
+	const codelistNames = [];
 
 	for await (const codelist of codelists) {
 		const result = await codelist.default.generate();
@@ -49,10 +50,20 @@ const main = async () => {
 		if (!result.sidebar?.disabled) {
 			sidebarItems.push(result.sidebar);
 		}
+
+		// Extract codelist name from the href for package.json exports
+		if (result.sidebar?.href) {
+			const codelistName = result.sidebar.href.replace("/docs/codelists/", "");
+			codelistNames.push(codelistName);
+		}
 	}
 
 	if (sidebarItems.length > 0) {
 		await generateCodelistSidebarItems(sidebarItems);
+	}
+
+	if (codelistNames.length > 0) {
+		await updatePackageJsonExports(codelistNames);
 	}
 
 	return Promise.resolve();
@@ -104,4 +115,74 @@ export const codelistSidebarItems: Content["list"] = ${serialize(data, {
 	await writeFile(dest, formattedContent);
 
 	return;
+};
+
+const updatePackageJsonExports = async (codelistNames: string[]) => {
+	const packageJsonPath = path.resolve(
+		PROJECT_ROOT,
+		"packages/node-zugferd/package.json",
+	);
+
+	// Read the current package.json
+	const packageJsonContent = await readFile(packageJsonPath, "utf-8");
+	const packageJson = JSON.parse(packageJsonContent);
+
+	// Generate exports for each codelist
+	const codelistExports: Record<string, any> = {};
+
+	const additionals = [
+		"filename",
+		"hybrid-conformance",
+		"hybrid-document",
+		"hybrid-version",
+	];
+
+	for (const codelistName of [...codelistNames, ...additionals]
+		.filter((c) => c != "/docs")
+		.sort()) {
+		const exportKey = `./codelist/${codelistName}`;
+		codelistExports[exportKey] = {
+			import: {
+				types: `./dist/codelist/${codelistName}.d.ts`,
+				default: `./dist/codelist/${codelistName}.js`,
+			},
+			require: {
+				types: `./dist/codelist/${codelistName}.d.cts`,
+				default: `./dist/codelist/${codelistName}.cjs`,
+			},
+		};
+	}
+
+	// Update the exports section
+	// First, remove existing codelist exports
+	const updatedExports: Record<string, any> = {};
+	for (const [key, value] of Object.entries(packageJson.exports)) {
+		if (!key.startsWith("./codelist/")) {
+			updatedExports[key] = value;
+		}
+	}
+
+	// Add the new codelist exports after the existing non-codelist exports
+	Object.assign(updatedExports, codelistExports);
+
+	packageJson.exports = updatedExports;
+
+	// Format the JSON content
+	const biome = new Biome();
+	const { projectKey } = biome.openProject(PROJECT_ROOT);
+
+	const { content: formattedContent } = biome.formatContent(
+		projectKey,
+		JSON.stringify(packageJson, null, "\t"),
+		{
+			filePath: packageJsonPath,
+		},
+	);
+
+	// Write the updated package.json
+	await writeFile(packageJsonPath, formattedContent);
+
+	console.log(
+		`Updated package.json with ${codelistNames.length} codelist exports`,
+	);
 };
