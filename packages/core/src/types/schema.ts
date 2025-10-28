@@ -1,4 +1,4 @@
-import type { LiteralString, Prettify, PrettifyDeep, WithoutEmpty } from "./helper";
+import type { LiteralString, PrettifyDeep } from "./helper";
 import type { StandardSchemaV1 } from ".";
 
 export type FieldType =
@@ -27,30 +27,46 @@ export type InferValueType<T extends FieldType> = T extends StandardSchemaV1
 		? T[number]
 		: never;
 
-export type InferSchema<S extends Schema> = Prettify<WithoutEmpty<
+type IsFieldOptional<F extends Field> = F["required"] extends false
+	? true
+	: F["type"] extends StandardSchemaV1<infer I>
+		? undefined extends I
+			? true
+			: false
+		: F["type"] extends "object"
+			? F["shape"] extends Schema
+				? AllOptional<F["shape"]>
+				: false
+			: F["type"] extends "object[]"
+				? F["shape"] extends Schema
+					? AllOptional<F["shape"]>
+					: false
+				: false;
+
+type AllOptional<S extends Schema> = {
+	[K in keyof S]: IsFieldOptional<S[K]> extends true ? never : K;
+}[keyof S] extends never
+	? true
+	: false;
+
+export type InferSchema<S extends Schema> = PrettifyDeep<
 	{
-		[K in keyof S as S[K]["required"] extends false
+		[K in keyof S as IsFieldOptional<S[K]> extends true
 			? K
-			: never]?: S[K]["type"] extends "object"
-			? S[K]["shape"] extends Schema
-				? InferSchema<S[K]["shape"]>
-				: {}
-			: S[K]["type"] extends "object[]"
-				? S[K]["shape"] extends Schema
-					? InferSchema<S[K]["shape"]>[]
-					: []
-				: InferValueType<S[K]["type"]>;
+			: never]?: InferField<S[K]>;
 	} & {
-		[K in keyof S as S[K]["required"] extends false
+		[K in keyof S as IsFieldOptional<S[K]> extends true
 			? never
-			: K]: S[K]["type"] extends "object"
-			? S[K]["shape"] extends Schema
-				? InferSchema<S[K]["shape"]>
-				: {}
-			: S[K]["type"] extends "object[]"
-				? S[K]["shape"] extends Schema
-					? InferSchema<S[K]["shape"]>[]
-					: []
-				: InferValueType<S[K]["type"]>;
+			: K]: InferField<S[K]>;
 	}
-, Record<string, any>>>;
+>;
+
+export type InferField<F extends Field> = F["type"] extends "object"
+	? F["shape"] extends Schema
+		? InferSchema<F["shape"]>
+		: {}
+	: F["type"] extends "object[]"
+		? F["shape"] extends Schema
+			? InferSchema<F["shape"]>[]
+			: []
+		: InferValueType<F["type"]>;

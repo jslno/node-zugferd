@@ -14,6 +14,20 @@ export type PrettifyDeep<T> = {
 			: T[K];
 } & {};
 
+export type DeepPartial<T> = T extends Function
+	? T
+	: T extends object
+		? { [K in keyof T]?: DeepPartial<T[K]> }
+		: T;
+
+export type UnionToIntersection<U> = (
+	U extends any
+		? (k: U) => void
+		: never
+) extends (k: infer I) => void
+	? I
+	: never;
+
 export type RequiredKeysOf<BaseType extends object> = Exclude<
 	{
 		[Key in keyof BaseType]: BaseType extends Record<Key, BaseType[Key]>
@@ -25,62 +39,3 @@ export type RequiredKeysOf<BaseType extends object> = Exclude<
 
 export type HasRequiredKeys<BaseType extends object> =
 	RequiredKeysOf<BaseType> extends never ? false : true;
-
-export type DeepPartial<T> = T extends Function
-	? T
-	: T extends object
-		? { [K in keyof T]?: DeepPartial<T[K]> }
-		: T;
-
-export type WithoutEmpty<T, F = never> = T extends T
-	? {} extends T
-		? F
-		: T
-	: F;
-
-export type UnionToIntersection<U> = (
-	U extends any
-		? (k: U) => void
-		: never
-) extends (k: infer I) => void
-	? I
-	: never;
-
-type OptionalIfAllChildrenOptional<T> = T extends Function
-	? T
-	: T extends object
-		? {
-				[K in keyof T]-?: T[K] extends object
-					? HasRequiredKeys<T[K]> extends true
-						? OptionalIfAllChildrenOptional<T[K]>
-						: OptionalIfAllChildrenOptional<T[K]> | undefined
-					: T[K];
-			} & {}
-		: T;
-
-type Example = {
-	a: {
-		x?: number;
-		y?: string;
-	};
-	b: string;
-	c: {
-		d?: boolean;
-		e: number;
-	};
-};
-
-type Result = OptionalIfAllChildrenOptional<Example>;
-/* Result:
-		  {
-			a?: {
-			  x?: number;
-			  y?: string;
-			};
-			b: string;
-			c: {
-			  d?: boolean;
-			  e: number;
-			};
-		  }
-		  */
