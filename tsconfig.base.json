@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false,
+    "incremental": true,
+    "noErrorTruncation": true,
+    "composite": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+	"types": ["node", "bun"],
+    "outDir": "${configDir}/node_modules/.cache/ts/out",
+    "tsBuildInfoFile": "${configDir}/node_modules/.cache/ts/tsbuildinfo",
+    "customConditions": ["node-zugferd-dev-source"]
+  },
+  "exclude": ["**/dist/**", "**/node_modules/**"]
+}

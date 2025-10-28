@@ -1,69 +1,34 @@
-import { init, type ZugferdContext } from "./init";
-import { type ZugferdOptions } from "./types/options";
-import { createDocumentFactory } from "./document/create";
-import { validateDocumentFactory } from "./document/validate";
-import type { InferSchema, UnionToIntersection } from "./types";
-import type { ZugferdPlugin } from "./types/plugins";
+import { type InferSchema, type Profile } from "@node-zugferd/core";
+import type { ZugferdOptions } from "./types/options";
 
-export const zugferd = <O extends ZugferdOptions>(options: O) => {
-	const context = init(options);
-
-	const handlers = getPluginHandlers(context, options as O);
-
-	const ctx = {
-		context,
-		options: options as O,
-		create: context.document.create as ReturnType<
-			typeof createDocumentFactory<O>
-		>,
-		validate: context.document.validate,
-		$Infer: {
-			Schema: {} as InferSchema<O["profile"]>,
-		},
+export function createZugferd<const O extends ZugferdOptions>(options: O) {
+	const context: ZugferdContext = {
+		options,
+		profile: options.profile,
+		logger: {} as never,
 	};
 
 	return {
-		...ctx,
-		...(handlers ?? {}),
-	} as typeof ctx & typeof handlers satisfies Zugferd;
-};
-
-export type Zugferd = {
-	context: ZugferdContext;
-	options: ZugferdOptions;
-	create: (data: any) => ReturnType<ZugferdContext["document"]["create"]>;
-	validate: ZugferdContext["document"]["validate"];
-} & Record<string, any>;
-
-const getPluginHandlers = <
-	C extends ZugferdContext & {
-		document: {
-			create: ReturnType<typeof createDocumentFactory<O>>;
-			validate: ReturnType<typeof validateDocumentFactory>;
-		};
-	},
-	O extends ZugferdOptions,
->(
-	ctx: C,
-	options: O,
-) => {
-	const pluginHandlers = (options.plugins || []).reduce(
-		(acc, plugin) => {
+		$context: context,
+		createInvoice: (input: InferSchema<O["profile"]["schema"]>) => {
 			return {
-				...acc,
-				...plugin(ctx as any),
+				values: input,
+				toXML: async () => {
+					const xml = context.profile.toXML(input);
+					// TODO: Run validator
+					return xml;
+				},
 			};
 		},
-		{} as Record<string, any>,
-	);
+		$Infer: {
+			Schema: {} as InferSchema<O["profile"]["schema"]>,
+		},
+	};
+}
 
-	type PluginHandler = UnionToIntersection<
-		O["plugins"] extends Array<infer T>
-			? T extends ZugferdPlugin
-				? ReturnType<T>
-				: {}
-			: {}
-	>;
-
-	return pluginHandlers as PluginHandler;
+export type ZugferdContext = {
+	options: ZugferdOptions;
+	profile: Profile;
+	// TODO:
+	logger: never;
 };

@@ -1,19 +1,13 @@
 {
-	"compilerOptions": {
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"target": "ES2022",
-		"allowJs": true,
-		"resolveJsonModule": true,
-		"module": "Preserve",
-		"noEmit": true,
-		"moduleDetection": "force",
-		"isolatedModules": true,
-		"verbatimModuleSyntax": true,
-		"strict": true,
-		"noUncheckedIndexedAccess": true,
-		"noImplicitOverride": true,
-		"noFallthroughCasesInSwitch": true
-	},
-	"exclude": ["**/dist/**", "**/node_modules/**", "**/examples/**"]
+    "extends": "./tsconfig.base.json",
+    "include": [
+      // Only include files that are in the root directory. All other files are included by the references.
+      "./*.ts",
+      "./*.js"
+    ],
+    "references": [
+        {
+            "path": "./packages/core/tsconfig.json"
+        }
+    ]
 }

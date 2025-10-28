@@ -1,10 +1,7 @@
-import type { Logger } from "../utils/logger";
-import type { ZugferdPlugin } from "./plugins";
-import { type ProfileContext } from "./profile";
+import type { Profile } from "@node-zugferd/core";
 
 export type ZugferdOptions = {
-	profile: ProfileContext;
-	strict?: boolean;
-	plugins?: ZugferdPlugin[];
-	logger?: Logger;
+	profile: Profile;
+	// plugins?: ZugferdPlugin[]
+	// logger?: Logger;
 };

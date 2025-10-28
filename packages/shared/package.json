@@ -1,17 +1,10 @@
 {
-    "name": "node-zugferd",
+    "name": "@node-zugferd/shared",
     "version": "0.1.1-beta.1",
-    "description": "",
+    "private": true,
     "type": "module",
     "main": "./dist/index.js",
     "module": "./dist/index.js",
-    "license": "MIT",
-    "homepage": "https://node-zugferd.jsolano.de",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/better-auth/better-auth",
-        "directory": "packages/better-auth"
-    },
     "scripts": {
         "build": "tsdown",
         "dev": "tsdown --watch",
@@ -37,12 +30,11 @@
             ]
         }
     },
-    "dependencies": {
-        "@node-zugferd/core": "workspace:*",
-        "zod": "catalog:"
+    "peerDependencies": {
+        "@node-zugferd/core": "workspace:*"
     },
     "devDependencies": {
-        "typescript": "catalog:",
+        "@node-zugferd/core": "workspace:*",
         "tsdown": "catalog:"
     },
     "files": ["dist"]

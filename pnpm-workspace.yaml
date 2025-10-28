@@ -1,5 +1,11 @@
 packages:
   - packages/**
-  - dev/**
   - docs
-  - examples/**
+
+catalog:
+  typescript: ^5.9.3
+  vitest: ^4.0.3
+  tsdown: ^0.15.10
+  zod: ^3.25.76
+
+neverBuiltDependencies: []
