@@ -1,4 +1,4 @@
-import type { LiteralString } from "./helper";
+import type { LiteralString, PrettifyDeep } from "./helper";
 import type { StandardSchemaV1 } from ".";
 
 export type FieldType =
@@ -27,16 +27,30 @@ export type InferValueType<T extends FieldType> = T extends StandardSchemaV1
 		? T[number]
 		: never;
 
-export type InferSchema<S extends Schema> = {
-	[K in keyof S as S[K]["required"] extends false
-		? K
-		: never]?: S[K]["type"] extends "object"
-		? S[K]["shape"] extends Schema
-			? InferSchema<S[K]["shape"]>
-			: {}
-		: S[K]["type"] extends "object[]"
+export type InferSchema<S extends Schema> = PrettifyDeep<
+	{
+		[K in keyof S as S[K]["required"] extends false
+			? K
+			: never]?: S[K]["type"] extends "object"
 			? S[K]["shape"] extends Schema
-				? InferSchema<S[K]["shape"]>[]
-				: []
-			: InferValueType<S[K]["type"]>;
-};
+				? InferSchema<S[K]["shape"]>
+				: {}
+			: S[K]["type"] extends "object[]"
+				? S[K]["shape"] extends Schema
+					? InferSchema<S[K]["shape"]>[]
+					: []
+				: InferValueType<S[K]["type"]>;
+	} & {
+		[K in keyof S as S[K]["required"] extends false
+			? never
+			: K]: S[K]["type"] extends "object"
+			? S[K]["shape"] extends Schema
+				? InferSchema<S[K]["shape"]>
+				: {}
+			: S[K]["type"] extends "object[]"
+				? S[K]["shape"] extends Schema
+					? InferSchema<S[K]["shape"]>[]
+					: []
+				: InferValueType<S[K]["type"]>;
+	}
+>;
