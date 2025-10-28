@@ -1,4 +1,4 @@
-import type { LiteralString, PrettifyDeep } from "./helper";
+import type { LiteralString, Prettify, PrettifyDeep, WithoutEmpty } from "./helper";
 import type { StandardSchemaV1 } from ".";
 
 export type FieldType =
@@ -27,7 +27,7 @@ export type InferValueType<T extends FieldType> = T extends StandardSchemaV1
 		? T[number]
 		: never;
 
-export type InferSchema<S extends Schema> = PrettifyDeep<
+export type InferSchema<S extends Schema> = Prettify<WithoutEmpty<
 	{
 		[K in keyof S as S[K]["required"] extends false
 			? K
@@ -53,4 +53,4 @@ export type InferSchema<S extends Schema> = PrettifyDeep<
 					: []
 				: InferValueType<S[K]["type"]>;
 	}
->;
+, Record<string, any>>>;
