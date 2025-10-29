@@ -39,3 +39,17 @@ export type RequiredKeysOf<BaseType extends object> = Exclude<
 
 export type HasRequiredKeys<BaseType extends object> =
 	RequiredKeysOf<BaseType> extends never ? false : true;
+
+export type DeepMerge<A, B> = {
+	[K in keyof A | keyof B]: K extends keyof B
+		? K extends keyof A
+			? A[K] extends Record<string, any>
+				? B[K] extends Record<string, any>
+					? DeepMerge<A[K], B[K]>
+					: B[K]
+				: B[K]
+			: B[K] // only in B
+		: K extends keyof A
+			? A[K] // only in A
+			: never;
+};

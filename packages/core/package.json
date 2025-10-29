@@ -6,6 +6,7 @@
     "module": "./dist/index.js",
     "scripts": {
         "build": "tsdown",
+        "test": "vitest --typecheck",
         "dev": "tsdown --watch",
         "typecheck": "tsc --project tsconfig.json"
     },
@@ -30,6 +31,7 @@
         }
     },
     "devDependencies": {
+        "@node-zugferd/shared": "workspace:*",
         "tsdown": "catalog:",
         "zod": "catalog:"
     },

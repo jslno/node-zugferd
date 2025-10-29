@@ -1,74 +1,21 @@
+import { XMLBuilder } from "fast-xml-parser";
 import type { InferSchema, Schema } from "./types";
-import type { LiteralString } from "./types/helper";
+import type {
+	Interpolator,
+	MergeProfileConfig,
+	ProfileConfig,
+} from "./types/profile";
+import { t } from "@node-zugferd/shared";
+import { mergeSchema, type MergeSchema } from "./utils/merge-schema";
 
-export type InterpolateSchemaContext<S extends Schema> = Omit<
-	ProfileConfig<S>,
-	"interpolate"
-> & {
-	id: LiteralString;
-	input: InferSchema<S>;
-};
-
-export type ExtensionSchemaFields = {
-	uri?:
-		| "urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#"
-		| LiteralString
-		| null;
-	documentType?: "INVOICE" | "ORDER" | LiteralString;
-	documentFileName?: "factur-x.xml" | "xrechnung.xml" | LiteralString;
-	version?: "1.0" | LiteralString;
-	conformanceLevel:
-		| "MINIMUM"
-		| "BASIC WL"
-		| "BASIC"
-		| "EN 16931"
-		| "EXTENDED"
-		| "XRECHNUNG"
-		| LiteralString;
-};
-
-export type ProfileConfig<S extends Schema> = {
-	id: LiteralString;
-	/**
-	 * The fields of the invoice.
-	 */
-	schema: S;
-	interpolate: (ctx: InterpolateSchemaContext<S>) => any;
-	/**
-	 * PDF/A extension schema for Factur-X 1.0
-	 */
-	extensionSchema: ExtensionSchemaFields & {
-		customFieldMap?: {
-			[K in keyof Omit<ExtensionSchemaFields, "uri">]: string;
-		};
-	};
-	dataRelationship?:
-		| "Data"
-		| "Source"
-		| "Alternative"
-		| "Supplement"
-		| "Unspecified";
-	contextParamter?: string;
-	supportsPDFA?: boolean;
-	allowedAttachmentFormats?:
-		| (
-				| "PDF"
-				| "TXT"
-				| "GIF"
-				| "TIFF"
-				| "JPG"
-				| "CSV"
-				| "XML"
-				| "JSON"
-				| "XLSX"
-				| "ODS"
-				| LiteralString
-		  )[]
-		| "*";
-};
-
-export type Profile<O extends ProfileConfig<any> = ProfileConfig<any>> = O & {
+export type Profile<O extends ProfileConfig = ProfileConfig> = O & {
 	toXML: (input: InferSchema<O["schema"]>) => string;
+	extend: <S extends Schema, P extends Partial<ProfileConfig<S>>>(
+		profile: Omit<P, "interpolate"> & {
+			schema?: S;
+			interpolate?: Interpolator<MergeSchema<O["schema"], S>>;
+		},
+	) => Profile<MergeProfileConfig<O, P>>;
 };
 
 export function createProfile<
@@ -82,14 +29,70 @@ export function createProfile<
 	return {
 		...config,
 		toXML: (input) => {
+			const { build } = new XMLBuilder({
+				preserveOrder: true,
+				ignoreAttributes: false,
+				attributeNamePrefix: "@",
+				textNodeName: "#",
+				suppressBooleanAttributes: false,
+				suppressEmptyNode: true,
+				suppressUnpairedNode: false,
+			});
 			const { interpolate, ...cfg } = config;
-			const ast = interpolate({
+
+			const tree = interpolate({
 				...cfg,
+				// @ts-expect-error,
 				input,
 			});
+			return build(tree);
+		},
+		extend: (profile) => {
+			const mergedConfig: Record<string, any> = {
+				...config,
+			};
 
-			// TODO: Build xml
-			return `${ast}`;
+			if (profile.id) {
+				mergedConfig.id = profile.id;
+			}
+			if (profile.extensionSchema) {
+				// TODO: merge properties?
+				mergedConfig.extensionSchema = mergedConfig.extensionSchema;
+			}
+			if (profile.interpolate) {
+				mergedConfig.interpolate = profile.interpolate;
+			}
+			if (profile.schema) {
+				mergedConfig.schema = mergeSchema(mergedConfig.schema, profile.schema);
+			}
+			if (profile.config) {
+				if (!mergedConfig.config) {
+					mergedConfig.config = profile.config;
+				} else {
+					// top-level merge
+					for (const attr of Object.keys(profile.config)) {
+						// @ts-expect-error
+						mergedConfig.config[attr] = profile.config[attr];
+					}
+				}
+			}
+
+			return createProfile(mergedConfig as any);
 		},
 	};
 }
+
+const profile = createProfile({
+	id: "some-profile",
+	schema: {
+		test: {
+			type: t.Text,
+		},
+	},
+	extensionSchema: {
+		conformanceLevel: "MINIMUM",
+	},
+	interpolate: (ctx) => {
+		return {};
+	},
+});
