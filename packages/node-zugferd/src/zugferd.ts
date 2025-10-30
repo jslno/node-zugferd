@@ -7,6 +7,7 @@ import type {
 	ZugferdOptions,
 	ZugferdPlugin,
 } from "@node-zugferd/core";
+import defu from "defu";
 
 export function createZugferd<const O extends ZugferdOptions>(
 	options: O,
@@ -69,10 +70,13 @@ function runPluginInit(ctx: ZugferdContext) {
 			const result = plugin.init(context);
 			if (typeof result === "object") {
 				if (result.options) {
-					// TODO:
+					options = defu(options, result.options)
 				}
 				if (result.context) {
-					// TODO:
+					context = {
+						...context,
+						...(result.context as Partial<ZugferdContext>),
+					}
 				}
 				if (result.actions) {
 					actions = {

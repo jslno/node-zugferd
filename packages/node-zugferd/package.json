@@ -39,11 +39,12 @@
   },
   "dependencies": {
     "@node-zugferd/core": "workspace:*",
+    "defu": "^6.1.4",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "typescript": "catalog:",
-    "tsdown": "catalog:"
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
   },
   "files": [
     "dist"
