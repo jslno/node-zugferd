@@ -1,7 +1,7 @@
 "use client";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
 
 interface AuroraBackgroundProps extends React.HTMLProps<HTMLDivElement> {
 	children: React.ReactNode;

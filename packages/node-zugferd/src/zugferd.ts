@@ -1,10 +1,10 @@
 import type {
+	InferPluginActions,
 	InferSchema,
 	UnionToIntersection,
-	InferPluginActions,
-	ZugferdPlugin,
-	ZugferdOptions,
 	ZugferdContext,
+	ZugferdOptions,
+	ZugferdPlugin,
 } from "@node-zugferd/core";
 
 export function createZugferd<const O extends ZugferdOptions>(
@@ -51,7 +51,9 @@ export type StrictZugferd<O extends ZugferdOptions = ZugferdOptions> =
 			: {}) & {
 			$Infer: {
 				Schema: InferSchema<O["profile"]["schema"]>;
-			};
+			} & (O["plugins"] extends ZugferdPlugin[]
+				? UnionToIntersection<O["plugins"][number]["$Infer"]>
+				: {});
 		};
 
 function runPluginInit(ctx: ZugferdContext) {

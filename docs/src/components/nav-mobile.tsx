@@ -1,6 +1,5 @@
 "use client";
 
-import { contents } from "@/data/sidebar-items";
 import { Menu } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
@@ -9,9 +8,10 @@ import {
 	createContext,
 	Fragment,
 	useContext,
-	useState,
 	useEffect,
+	useState,
 } from "react";
+import { contents } from "@/data/sidebar-items";
 import {
 	Accordion,
 	AccordionContent,

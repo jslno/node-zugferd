@@ -1,9 +1,9 @@
 "use client";
 
-import { MouseEventHandler, useEffect, useRef, useState } from "react";
 import { useEffectEvent } from "fumadocs-core/utils/use-effect-event";
-import { Button } from "./ui/button";
 import { CheckIcon, CopyIcon } from "lucide-react";
+import { MouseEventHandler, useEffect, useRef, useState } from "react";
+import { Button } from "./ui/button";
 
 export const useCopyButton = (
 	onCopy: () => void | Promise<void>,

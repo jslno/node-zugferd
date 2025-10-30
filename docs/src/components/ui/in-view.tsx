@@ -1,12 +1,12 @@
 "use client";
-import { ReactNode, useRef, useState } from "react";
 import {
 	motion,
-	useInView,
-	Variant,
 	Transition,
 	UseInViewOptions,
+	useInView,
+	Variant,
 } from "motion/react";
+import { ReactNode, useRef, useState } from "react";
 import { slideInUp } from "@/lib/utils";
 
 export type InViewVariant = {

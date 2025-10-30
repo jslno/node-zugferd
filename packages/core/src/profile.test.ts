@@ -1,6 +1,6 @@
+import { t } from "@node-zugferd/shared";
 import { describe, expect, it, vi } from "vitest";
 import { createProfile, type Profile } from "./profile";
-import { t } from "@node-zugferd/shared";
 import type { InferSchema, ProfileConfig } from "./types";
 
 const mocks = vi.hoisted(() => {

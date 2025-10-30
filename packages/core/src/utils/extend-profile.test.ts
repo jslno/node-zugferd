@@ -1,8 +1,8 @@
+import { t } from "@node-zugferd/shared";
 import { describe, expect, vi } from "vitest";
 import { useProfileTests } from "../profile.test";
-import { t } from "@node-zugferd/shared";
-import { extendProfile } from "./extend-profile";
 import type { ExtensionSchemaFields } from "../types";
+import { extendProfile } from "./extend-profile";
 
 const mocks = vi.hoisted(() => {
 	return {

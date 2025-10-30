@@ -1,6 +1,6 @@
-import { getRandomValues } from "uncrypto";
-import { clsx, type ClassValue } from "clsx";
+import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { getRandomValues } from "uncrypto";
 import { InViewVariant } from "@/components/ui/in-view";
 
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));

@@ -1,10 +1,10 @@
 "use client";
 
+import { ReactLenis, useLenis } from "lenis/react";
+import { useEffect } from "react";
 import { Features } from "@/components/landing/features";
 import { Hero } from "@/components/landing/hero";
 import { AuroraBackground } from "@/components/ui/aurora-background";
-import { ReactLenis, useLenis } from "lenis/react";
-import { useEffect } from "react";
 
 export type HomeProps = {
 	stars: string;

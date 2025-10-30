@@ -1,8 +1,16 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowRightIcon, CheckIcon, CodeIcon, CopyIcon } from "lucide-react";
+import { AnimatePresence, MotionConfig, motion } from "motion/react";
+import Link from "next/link";
+import { useTheme } from "next-themes";
+import { Highlight, themes } from "prism-react-renderer";
+import { useEffect, useRef, useState } from "react";
+import useMeasure from "react-use-measure";
+import { cn } from "@/lib/utils";
+import { LiteralString } from "@/types/helper";
 import { Button } from "../ui/button";
+import { InView } from "../ui/in-view";
 import { Input } from "../ui/input";
 import {
 	Tooltip,
@@ -10,14 +18,6 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "../ui/tooltip";
-import { cn } from "@/lib/utils";
-import { AnimatePresence, motion, MotionConfig } from "motion/react";
-import useMeasure from "react-use-measure";
-import { LiteralString } from "@/types/helper";
-import { useEffect, useRef, useState } from "react";
-import { Highlight, themes } from "prism-react-renderer";
-import { useTheme } from "next-themes";
-import { InView } from "../ui/in-view";
 
 type Tab = {
 	name: LiteralString;

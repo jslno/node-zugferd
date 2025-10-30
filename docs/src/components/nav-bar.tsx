@@ -1,14 +1,14 @@
 "use client";
 
-import { cn, fadeIn } from "@/lib/utils";
 import { useSearchContext } from "fumadocs-ui/provider";
 import { CommandIcon, SearchIcon, SparkleIcon } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { badgeVariants } from "./ui/badge";
+import { cn, fadeIn } from "@/lib/utils";
 import Device from "./device";
 import { NavMobile, NavMobileButton } from "./nav-mobile";
+import { badgeVariants } from "./ui/badge";
 
 type Props = {
 	href: string;

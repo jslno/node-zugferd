@@ -1,18 +1,18 @@
 "use client";
 
 import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from "@/components/ui/popover";
-import { useState } from "react";
-import { buttonVariants } from "./ui/button";
-import {
 	ChevronDownIcon,
 	ExternalLinkIcon,
 	MessageCircleIcon,
 } from "lucide-react";
 import { motion } from "motion/react";
+import { useState } from "react";
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover";
+import { buttonVariants } from "./ui/button";
 
 export type ViewOptionsProps = {
 	markdownUrl: string;

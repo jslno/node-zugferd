@@ -1,7 +1,7 @@
+import { notFound } from "next/navigation";
+import { type NextRequest, NextResponse } from "next/server";
 import { getLLMText } from "@/app/docs/lib/get-llm-text";
 import { source } from "@/app/source";
-import { notFound } from "next/navigation";
-import { NextResponse, type NextRequest } from "next/server";
 
 export const revalidate = false;
 

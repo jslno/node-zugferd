@@ -1,6 +1,6 @@
 import { createProfile, type Profile } from "../profile";
 import type { DeepMerge, Interpolator, ProfileConfig, Schema } from "../types";
-import { mergeSchema, type MergeSchema } from "./merge-schema";
+import { type MergeSchema, mergeSchema } from "./merge-schema";
 
 export type MergeProfileConfig<
 	A extends ProfileConfig,

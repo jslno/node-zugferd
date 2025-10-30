@@ -1,37 +1,37 @@
-import { source } from "@/app/source";
+import { AutoTypeTable } from "fumadocs-typescript/ui";
+import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
+import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
+import { File, Files, Folder } from "fumadocs-ui/components/files";
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+import { TypeTable } from "fumadocs-ui/components/type-table";
+import defaultMdxComponents from "fumadocs-ui/mdx";
 import {
-	DocsPage,
 	DocsBody,
 	DocsDescription,
+	DocsPage,
 	DocsTitle,
 } from "fumadocs-ui/page";
-import { notFound } from "next/navigation";
-import defaultMdxComponents from "fumadocs-ui/mdx";
-import { buttonVariants } from "@/components/ui/button";
-import { contents } from "@/data/sidebar-items";
 import {
 	BookOpenIcon,
 	ChevronLeft,
 	ChevronRight,
 	EditIcon,
 } from "lucide-react";
-import { Step, Steps } from "fumadocs-ui/components/steps";
-import { File, Folder, Files } from "fumadocs-ui/components/files";
-import { TypeTable } from "fumadocs-ui/components/type-table";
-import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
-import { Tab, Tabs } from "fumadocs-ui/components/tabs";
-import { AutoTypeTable } from "fumadocs-typescript/ui";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { Features } from "@/components/blocks/features";
-import { ProfileTree } from "@/components/blocks/profile-tree";
-import { NeedHelp } from "@/components/blocks/need-help";
-import { GithubInfo } from "@/components/github-info";
-import { APIFeatures } from "@/components/blocks/api-features";
-import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
+import { notFound } from "next/navigation";
 import React from "react";
+import { source } from "@/app/source";
+import { APIFeatures } from "@/components/blocks/api-features";
+import { Features } from "@/components/blocks/features";
+import { NeedHelp } from "@/components/blocks/need-help";
+import { ProfileTree } from "@/components/blocks/profile-tree";
+import { GithubInfo } from "@/components/github-info";
 import { LLMCopyButton } from "@/components/llm-copy-button";
+import { buttonVariants } from "@/components/ui/button";
 import { ViewOptions } from "@/components/view-options";
+import { contents } from "@/data/sidebar-items";
+import { cn } from "@/lib/utils";
 
 export default async function Page(props: {
 	params: Promise<{ slug?: string[] }>;

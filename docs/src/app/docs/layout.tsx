@@ -2,13 +2,13 @@ import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import type { ReactNode } from "react";
 import { baseOptions } from "@/app/layout.config";
 import { source } from "@/app/source";
-import { SideBar } from "@/components/side-bar";
 import { Footer } from "@/components/footer";
 import {
 	DocsNavBarMobile,
 	DocsNavBarMobileTitle,
 	DocsNavMobileButton,
 } from "@/components/nav-mobile";
+import { SideBar } from "@/components/side-bar";
 
 export default function Layout({ children }: { children: ReactNode }) {
 	return (

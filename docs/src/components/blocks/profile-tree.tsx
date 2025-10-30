@@ -3,11 +3,7 @@ import Link from "next/link";
 import type { Schema, SchemaField } from "node-zugferd/types";
 import Markdown from "react-markdown";
 
-export const ProfileTree = ({
-	schema,
-}: {
-	schema: Schema;
-}) => {
+export const ProfileTree = ({ schema }: { schema: Schema }) => {
 	const fields = Object.entries(schema);
 
 	return (
@@ -22,7 +18,10 @@ export const ProfileTree = ({
 const TreeItem = ({
 	data,
 	prefix = "",
-}: { data: [string, SchemaField]; prefix?: string }) => {
+}: {
+	data: [string, SchemaField];
+	prefix?: string;
+}) => {
 	const [name, def] = data;
 
 	const children = def.shape ? Object.entries(def.shape) : undefined;

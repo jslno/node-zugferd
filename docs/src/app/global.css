@@ -8,7 +8,7 @@
 @import "fumadocs-ui/css/shadcn.css";
 @import "fumadocs-ui/css/preset.css";
 
-@source '../../node_modules/fumadocs-ui/dist/**/*.js';
+@source "../../node_modules/fumadocs-ui/dist/**/*.js";
 
 :root {
 	.hljs {
@@ -243,10 +243,14 @@
 	--animate-aurora: aurora 60s linear infinite;
 	@keyframes aurora {
 		from {
-			background-position: 50% 50%, 50% 50%;
+			background-position:
+				50% 50%,
+				50% 50%;
 		}
 		to {
-			background-position: 350% 50%, 350% 50%;
+			background-position:
+				350% 50%,
+				350% 50%;
 		}
 	}
 }

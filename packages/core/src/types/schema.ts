@@ -1,5 +1,5 @@
-import type { LiteralString, PrettifyDeep } from "./helper";
 import type { StandardSchemaV1 } from ".";
+import type { LiteralString, PrettifyDeep } from "./helper";
 
 export type FieldType =
 	| StandardSchemaV1

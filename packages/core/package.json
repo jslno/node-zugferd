@@ -1,45 +1,45 @@
 {
-    "name": "@node-zugferd/core",
-    "version": "0.1.1-beta.1",
-    "type": "module",
-    "main": "./dist/index.js",
-    "module": "./dist/index.js",
-    "scripts": {
-        "build": "tsdown",
-        "test": "vitest --typecheck",
-        "dev": "tsdown --watch",
-        "typecheck": "tsc --project tsconfig.json"
-    },
-    "exports": {
-        ".": {
-            "node-zugferd-dev-source": "./src/index.ts",
-            "import": {
-                "types": "./dist/index.d.ts",
-                "default": "./dist/index.js"
-            },
-            "require": {
-                "types": "./dist/index.d.cts",
-                "default": "./dist/index.cjs"
-            }
-        }
-    },
-    "typesVersions": {
-        "*": {
-            ".": [
-                "dist/index.d.ts"
-            ]
-        }
-    },
-    "devDependencies": {
-        "@node-zugferd/shared": "workspace:*",
-        "tsdown": "catalog:",
-        "zod": "catalog:"
-    },
-    "files": [
-        "dist"
-    ],
-    "dependencies": {
-        "@standard-schema/spec": "^1.0.0",
-        "fast-xml-parser": "^5.3.0"
+  "name": "@node-zugferd/core",
+  "version": "0.1.1-beta.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "scripts": {
+    "build": "tsdown",
+    "test": "vitest --typecheck",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --project tsconfig.json"
+  },
+  "exports": {
+    ".": {
+      "node-zugferd-dev-source": "./src/index.ts",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "dist/index.d.ts"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@node-zugferd/shared": "workspace:*",
+    "tsdown": "catalog:",
+    "zod": "catalog:"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@standard-schema/spec": "^1.0.0",
+    "fast-xml-parser": "^5.3.0"
+  }
 }

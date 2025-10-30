@@ -15,7 +15,7 @@
     "composite": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-	"types": ["node", "bun"],
+    "types": ["node", "bun"],
     "outDir": "${configDir}/node_modules/.cache/ts/out",
     "tsBuildInfoFile": "${configDir}/node_modules/.cache/ts/tsbuildinfo",
     "customConditions": ["node-zugferd-dev-source"]

@@ -1,8 +1,8 @@
 import { remarkNpm } from "fumadocs-core/mdx-plugins";
 import {
+	frontmatterSchema as defaultFrontmatterSchema,
 	defineConfig,
 	defineDocs,
-	frontmatterSchema as defaultFrontmatterSchema,
 } from "fumadocs-mdx/config";
 import { z } from "zod";
 

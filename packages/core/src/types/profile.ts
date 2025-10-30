@@ -1,5 +1,5 @@
-import type { InferSchema, Schema } from "./schema";
 import type { LiteralString } from "./helper";
+import type { InferSchema, Schema } from "./schema";
 
 export type InterpolateSchemaContext<S extends Schema> = Omit<
 	ProfileConfig<S>,

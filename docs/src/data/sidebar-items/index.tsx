@@ -1,4 +1,3 @@
-import { Content } from "@/types/content";
 import {
 	BlocksIcon,
 	BookIcon,
@@ -12,6 +11,7 @@ import {
 	ScrollIcon,
 } from "lucide-react";
 import { SVGProps } from "react";
+import { Content } from "@/types/content";
 import { codelistSidebarItems } from "./codelist-items.gen";
 
 export const contents: Content[] = [

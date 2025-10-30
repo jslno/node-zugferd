@@ -1,6 +1,13 @@
 "use client";
 
 import { AppWindowIcon, ChevronDownIcon, LibraryIcon } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { usePathname, useRouter } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { contents } from "@/data/sidebar-items";
+import { cn } from "@/lib/utils";
+import { SideBarLink } from "./side-bar-link";
+import { Badge } from "./ui/badge";
 import {
 	Select,
 	SelectContent,
@@ -8,13 +15,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "./ui/select";
-import { Badge } from "./ui/badge";
-import { usePathname, useRouter } from "next/navigation";
-import { contents } from "@/data/sidebar-items";
-import { Suspense, useEffect, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
-import { SideBarLink } from "./side-bar-link";
-import { cn } from "@/lib/utils";
 
 export const SideBar = () => {
 	const [currentOpen, setCurrentOpen] = useState(0);

@@ -1,6 +1,6 @@
+import svgToDataUri from "mini-svg-data-uri";
 import { type Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
-import svgToDataUri from "mini-svg-data-uri";
 
 export default {
 	theme: {

@@ -1,4 +1,3 @@
-import { cn, kFormatter, slideInUp } from "@/lib/utils";
 import {
 	ArrowRight,
 	ArrowRightIcon,
@@ -11,11 +10,12 @@ import {
 	PencilRuler,
 	StarIcon,
 } from "lucide-react";
-import Link from "next/link";
-import { Button, buttonVariants } from "../ui/button";
-import { Badge } from "../ui/badge";
-import { InView } from "../ui/in-view";
 import { motion } from "motion/react";
+import Link from "next/link";
+import { cn, kFormatter, slideInUp } from "@/lib/utils";
+import { Badge } from "../ui/badge";
+import { Button, buttonVariants } from "../ui/button";
+import { InView } from "../ui/in-view";
 
 type Feature = {
 	Icon?: LucideIcon | (() => React.ReactNode);

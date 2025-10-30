@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ResourceCard } from "./resource-card";
 import { cn } from "@/lib/utils";
+import { ResourceCard } from "./resource-card";
 
 export type Resource = {
 	title: string;

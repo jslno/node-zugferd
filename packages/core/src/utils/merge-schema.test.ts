@@ -1,6 +1,6 @@
+import { t } from "@node-zugferd/shared";
 import { describe, expect, it } from "vitest";
 import type { Schema } from "../types";
-import { t } from "@node-zugferd/shared";
 import { mergeSchema } from "./merge-schema";
 
 describe("mergeSchema", () => {

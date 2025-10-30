@@ -1,7 +1,7 @@
 import { XMLBuilder } from "fast-xml-parser";
 import type { InferSchema, Schema } from "./types";
-import type { ProfileConfig } from "./types/profile";
 import type { ZugferdContext } from "./types/context";
+import type { ProfileConfig } from "./types/profile";
 
 export type Profile<O extends ProfileConfig = ProfileConfig> = O & {
 	toXML: (input: InferSchema<O["schema"]>, ctx?: ZugferdContext) => string;
