@@ -4,11 +4,12 @@ import type { ZugferdOptions } from "./types/options";
 export function createZugferd<const O extends ZugferdOptions>(
 	options: O,
 ): StrictZugferd<O> {
-	const context: ZugferdContext = {
+	const ctx: ZugferdContext = {
 		options,
 		profile: options.profile,
 		logger: {} as never,
 	};
+	const { context, actions } = runPluginInit(ctx);
 
 	return {
 		$context: context,
@@ -22,6 +23,8 @@ export function createZugferd<const O extends ZugferdOptions>(
 				},
 			};
 		},
+		// TODO: Infer
+		...actions,
 	} satisfies Zugferd<O> as unknown as StrictZugferd<O>;
 }
 
@@ -48,3 +51,33 @@ export type StrictZugferd<O extends ZugferdOptions = ZugferdOptions> = {
 		Schema: InferSchema<O["profile"]["schema"]>;
 	};
 };
+
+function runPluginInit(ctx: ZugferdContext) {
+	let options = ctx.options;
+	const plugins = options.plugins ?? [];
+	let context: ZugferdContext = ctx;
+	let actions: Record<string, any> = {};
+
+	for (const plugin of plugins) {
+		if (plugin.init) {
+			const result = plugin.init(context);
+			if (typeof result === "object") {
+				if (result.options) {
+					// TODO:
+				}
+				if (result.context) {
+					// TODO:
+				}
+				if (result.actions) {
+					actions = {
+						...actions,
+						...result.actions,
+					};
+				}
+			}
+		}
+	}
+
+	context.options = options;
+	return { context, actions };
+}

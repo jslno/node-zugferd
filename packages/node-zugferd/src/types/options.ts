@@ -1,7 +1,8 @@
 import type { Profile } from "@node-zugferd/core";
+import type { ZugferdPlugin } from "./plugin";
 
 export type ZugferdOptions = {
 	profile: Profile<any>;
-	// plugins?: ZugferdPlugin[]
+	plugins?: ZugferdPlugin[];
 	// logger?: Logger;
 };
