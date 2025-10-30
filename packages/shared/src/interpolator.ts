@@ -5,10 +5,10 @@ import type {
 	InterpolateSchemaContext,
 } from "@node-zugferd/core";
 
-export const createInterpolator = <S extends Schema>(
+export function createInterpolator<S extends Schema>(
 	fn: (ctx: InterpolateSchemaContext<S>) => EnvelopeInput,
-): Interpolator<S> => {
+): Interpolator<S> {
 	return (ctx) => {
 		return createEnvelope(fn(ctx));
 	};
-};
+}

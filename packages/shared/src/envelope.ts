@@ -13,7 +13,7 @@ export type EnvelopeInput = {
 	supplyChainTradeTransaction: Record<string, any>;
 };
 
-export const createEnvelope = (input: EnvelopeInput) => {
+export function createEnvelope(input: EnvelopeInput) {
 	return {
 		"rsm:CrossIndustryInvoice": {
 			"@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
@@ -29,4 +29,4 @@ export const createEnvelope = (input: EnvelopeInput) => {
 			"rsm:SupplyChainTradeTransaction": input.supplyChainTradeTransaction,
 		},
 	};
-};
+}

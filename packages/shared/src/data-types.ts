@@ -30,7 +30,7 @@ export type CoerceNumber = StandardSchemaV1<string | number, number> & {
 	>;
 };
 
-export const coerceNumber = (message?: string) => {
+export function coerceNumber(message?: string) {
 	const constraints: Partial<{
 		min: number;
 		max: number;
@@ -154,7 +154,7 @@ export const coerceNumber = (message?: string) => {
 	});
 
 	return constructor();
-};
+}
 
 export const Amount = coerceNumber()
 	.finite()

@@ -24,10 +24,10 @@ export type MergeSchema<A extends Schema, B extends Schema> = PrettifyDeep<{
 	? V
 	: never;
 
-export const mergeSchema = <A extends Schema, B extends Schema>(
+export function mergeSchema<A extends Schema, B extends Schema>(
 	a: A,
 	b: B,
-): MergeSchema<A, B> => {
+): MergeSchema<A, B> {
 	const isObjectLike = ({ type }: { type: FieldType }) => {
 		return type === "object" || type === "object[]";
 	};
@@ -67,4 +67,4 @@ export const mergeSchema = <A extends Schema, B extends Schema>(
 	}
 
 	return mergedSchema as any;
-};
+}

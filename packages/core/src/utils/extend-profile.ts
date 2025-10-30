@@ -1,14 +1,37 @@
 import { createProfile, type Profile } from "../profile";
-import type { MergeProfileConfig, ProfileConfig } from "../types";
-import { mergeSchema } from "./merge-schema";
+import type { DeepMerge, Interpolator, ProfileConfig, Schema } from "../types";
+import { mergeSchema, type MergeSchema } from "./merge-schema";
 
-export const extendProfile = <
+export type MergeProfileConfig<
 	A extends ProfileConfig,
 	B extends Partial<ProfileConfig>,
->(
-	original: A,
-	extension: B,
-): Profile<MergeProfileConfig<A, B>> => {
+> = {
+	id: B["id"] extends string ? B["id"] : A["id"];
+	schema: B["schema"] extends infer BSchema extends Schema
+		? MergeSchema<A["schema"], BSchema>
+		: A["schema"];
+	extensionSchema: B["extensionSchema"] extends ProfileConfig["extensionSchema"]
+		? B["extensionSchema"]
+		: A["extensionSchema"];
+	interpolate: Interpolator<
+		B["schema"] extends infer BSchema extends Schema
+			? MergeSchema<A["schema"], BSchema>
+			: A["schema"]
+	>;
+	config: B["config"] extends Record<string, any>
+		? A["config"] extends Record<string, any>
+			? DeepMerge<A["config"], B["config"]>
+			: B["config"]
+		: A["config"] extends Record<string, any>
+			? A["config"]
+			: never;
+};
+export type { MergeProfileConfig as MergeProfile };
+
+export function extendProfile<
+	A extends ProfileConfig,
+	B extends Partial<ProfileConfig>,
+>(original: A, extension: B): Profile<MergeProfileConfig<A, B>> {
 	const mergedConfig: Record<string, any> = {
 		...original,
 	};
@@ -39,4 +62,4 @@ export const extendProfile = <
 	}
 
 	return createProfile(mergedConfig as any);
-};
+}

@@ -1,6 +1,5 @@
 import type { InferSchema, Schema } from "./schema";
-import type { DeepMerge, LiteralString } from "./helper";
-import type { MergeSchema } from "../utils/merge-schema";
+import type { LiteralString } from "./helper";
 
 export type InterpolateSchemaContext<S extends Schema> = Omit<
 	ProfileConfig<S>,
@@ -71,29 +70,4 @@ export type ProfileConfig<S extends Schema = any> = {
 			  )[]
 			| "*";
 	};
-};
-
-export type MergeProfileConfig<
-	A extends ProfileConfig,
-	B extends Partial<ProfileConfig>,
-> = {
-	id: B["id"] extends string ? B["id"] : A["id"];
-	schema: B["schema"] extends infer BSchema extends Schema
-		? MergeSchema<A["schema"], BSchema>
-		: A["schema"];
-	extensionSchema: B["extensionSchema"] extends ProfileConfig["extensionSchema"]
-		? B["extensionSchema"]
-		: A["extensionSchema"];
-	interpolate: Interpolator<
-		B["schema"] extends infer BSchema extends Schema
-			? MergeSchema<A["schema"], BSchema>
-			: A["schema"]
-	>;
-	config: B["config"] extends Record<string, any>
-		? A["config"] extends Record<string, any>
-			? DeepMerge<A["config"], B["config"]>
-			: B["config"]
-		: A["config"] extends Record<string, any>
-			? A["config"]
-			: never;
 };
