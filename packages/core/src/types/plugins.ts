@@ -1,6 +1,6 @@
 import type { DeepPartial, LiteralString } from "@node-zugferd/core";
 import type { ZugferdContext } from "./context";
-import type { ZugferdOptions } from "./options";
+import type { ZugferdHooks, ZugferdOptions } from "./options";
 
 export type ZugferdPlugin = {
 	id: LiteralString;
@@ -9,6 +9,7 @@ export type ZugferdPlugin = {
 		options?: Partial<ZugferdOptions>;
 		actions?: Record<string, any>;
 	} | void;
+	hooks?: ZugferdHooks;
 	options?: Record<string, any>;
 	$Infer?: Record<string, any>;
 };

@@ -1,7 +1,7 @@
 import type { LiteralString } from "./helper";
 import type { InferSchema, Schema } from "./schema";
 
-export type InterpolateSchemaContext<S extends Schema> = Omit<
+export type InterpolateSchemaContext<S extends Schema = any> = Omit<
 	ProfileConfig<S>,
 	"interpolate"
 > & {

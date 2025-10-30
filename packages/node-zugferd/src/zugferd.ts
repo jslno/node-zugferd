@@ -3,6 +3,7 @@ import type {
 	InferSchema,
 	UnionToIntersection,
 	ZugferdContext,
+	ZugferdHooks,
 	ZugferdOptions,
 	ZugferdPlugin,
 } from "@node-zugferd/core";
@@ -14,6 +15,7 @@ export function createZugferd<const O extends ZugferdOptions>(
 		options,
 		profile: options.profile,
 		logger: {} as never,
+		hooks: getHooks(options),
 	};
 	const { context, actions } = runPluginInit(ctx);
 
@@ -23,7 +25,7 @@ export function createZugferd<const O extends ZugferdOptions>(
 			return {
 				values: input,
 				toXML: async (): Promise<string> => {
-					const xml = context.profile.toXML(input);
+					const xml = await context.profile.toXML(input, ctx);
 					// TODO: Run validator
 					return xml;
 				},
@@ -84,4 +86,47 @@ function runPluginInit(ctx: ZugferdContext) {
 
 	context.options = options;
 	return { context, actions };
+}
+
+function getHooks(options: ZugferdOptions): ZugferdHooks {
+	const hooks = [
+		options.hooks,
+		...(options.plugins?.map((p) => p.hooks) ?? []),
+	].filter(Boolean);
+
+	const chainHooks = <R extends ((...args: any[]) => any) | undefined>(
+		hooks: (ZugferdHooks | undefined)[],
+		mapFn: (data: ZugferdHooks) => R,
+	): NonNullable<R> | undefined => {
+		const fns = hooks
+			.filter(Boolean)
+			.map((value) => mapFn(value!))
+			.filter((fn): fn is NonNullable<R> => Boolean(fn));
+
+		if (fns.length === 0) return undefined;
+
+		return (async (...args: any[]) => {
+			let result: any;
+			for (const fn of fns) {
+				const res = await fn(...args);
+				if (res) result = res;
+			}
+			return result;
+		}) as NonNullable<R>;
+	};
+
+	return {
+		xml: {
+			interpolate: {
+				before: chainHooks(hooks, ({ xml }) => xml?.interpolate?.before),
+				after: chainHooks(hooks, ({ xml }) => xml?.interpolate?.after),
+			},
+			build: {
+				before: chainHooks(hooks, ({ xml }) => xml?.build?.before),
+				after: chainHooks(hooks, ({ xml }) => xml?.build?.after),
+			},
+		},
+		// TODO:
+		pdfa: {},
+	};
 }
