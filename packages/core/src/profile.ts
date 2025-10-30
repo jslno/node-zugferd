@@ -1,9 +1,10 @@
 import { XMLBuilder } from "fast-xml-parser";
 import type { InferSchema, Schema } from "./types";
 import type { ProfileConfig } from "./types/profile";
+import type { ZugferdContext } from "./types/context";
 
 export type Profile<O extends ProfileConfig = ProfileConfig> = O & {
-	toXML: (input: InferSchema<O["schema"]>) => string;
+	toXML: (input: InferSchema<O["schema"]>, ctx?: ZugferdContext) => string;
 };
 
 export function createProfile<
@@ -16,7 +17,7 @@ export function createProfile<
 ): Profile<O> {
 	return {
 		...config,
-		toXML: (input) => {
+		toXML: (input, ctx) => {
 			const { build } = new XMLBuilder({
 				preserveOrder: true,
 				ignoreAttributes: false,
@@ -27,7 +28,6 @@ export function createProfile<
 				suppressUnpairedNode: false,
 			});
 			const { interpolate, ...cfg } = config;
-
 			const tree = interpolate({
 				...cfg,
 				// @ts-expect-error,

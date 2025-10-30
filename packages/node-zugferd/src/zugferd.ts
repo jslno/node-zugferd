@@ -1,5 +1,11 @@
-import type { InferSchema, Profile } from "@node-zugferd/core";
-import type { ZugferdOptions } from "./types/options";
+import type {
+	InferSchema,
+	UnionToIntersection,
+	InferPluginActions,
+	ZugferdPlugin,
+	ZugferdOptions,
+	ZugferdContext,
+} from "@node-zugferd/core";
 
 export function createZugferd<const O extends ZugferdOptions>(
 	options: O,
@@ -23,17 +29,9 @@ export function createZugferd<const O extends ZugferdOptions>(
 				},
 			};
 		},
-		// TODO: Infer
 		...actions,
 	} satisfies Zugferd<O> as unknown as StrictZugferd<O>;
 }
-
-export type ZugferdContext = {
-	options: ZugferdOptions;
-	profile: Profile;
-	// TODO:
-	logger: never;
-};
 
 type Zugferd_base<O extends ZugferdOptions> = {
 	$context: ZugferdContext;
@@ -46,11 +44,15 @@ type Zugferd_base<O extends ZugferdOptions> = {
 export type Zugferd<O extends ZugferdOptions = ZugferdOptions> =
 	Zugferd_base<O> & Record<string, any>;
 
-export type StrictZugferd<O extends ZugferdOptions = ZugferdOptions> = {
-	$Infer: {
-		Schema: InferSchema<O["profile"]["schema"]>;
-	};
-};
+export type StrictZugferd<O extends ZugferdOptions = ZugferdOptions> =
+	Zugferd_base<O> &
+		(O["plugins"] extends ZugferdPlugin[]
+			? UnionToIntersection<InferPluginActions<O["plugins"][number]>>
+			: {}) & {
+			$Infer: {
+				Schema: InferSchema<O["profile"]["schema"]>;
+			};
+		};
 
 function runPluginInit(ctx: ZugferdContext) {
 	let options = ctx.options;

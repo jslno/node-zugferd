@@ -1,7 +1,7 @@
 import type { LiteralString } from "@node-zugferd/core";
-import type { ZugferdContext } from "../zugferd";
 import type { DeepPartial } from "@node-zugferd/core";
 import type { ZugferdOptions } from "./options";
+import type { ZugferdContext } from "./context";
 
 export type ZugferdPlugin = {
 	id: LiteralString;
@@ -13,3 +13,11 @@ export type ZugferdPlugin = {
 	options?: Record<string, any>;
 	$Infer?: Record<string, any>;
 };
+
+export type InferPluginActions<T extends ZugferdPlugin> = NonNullable<
+	T["init"]
+> extends (...args: any[]) => infer R
+	? R extends { actions?: Record<string, any> }
+		? NonNullable<R["actions"]>
+		: Record<string, never>
+	: Record<string, never>;
