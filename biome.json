@@ -1,41 +1,61 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-	"formatter": {
-		"enabled": true,
-		"indentStyle": "tab"
-	},
-	"organizeImports": {
-		"enabled": false
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": false,
-			"suspicious": {
-				"noImplicitAnyLet": "warn",
-				"noDuplicateObjectKeys": "warn"
-			},
-			"performance": {
-				"noDelete": "error"
-			},
-			"complexity": {
-				"noUselessSwitchCase": "warn",
-				"noUselessTypeConstraint": "warn"
-			},
-			"correctness": {
-				"noUnusedImports": "warn"
-			}
-		}
-	},
-	"files": {
-		"ignore": [
-			"dist",
-			"package.json",
-			".turbo",
-			".next",
-			".cache",
-			".source",
-			"**/*.gen.ts"
-		]
-	}
+  "root": true,
+  "$schema": "https://biomejs.dev/schemas/2.3.2/schema.json",
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "tab"
+  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": false,
+      "suspicious": {
+        "noImplicitAnyLet": "warn",
+        "noDuplicateObjectKeys": "warn",
+        "noTsIgnore": "error",
+        "noDebugger": "error"
+      },
+      "performance": {
+        "noDelete": "error"
+      },
+      "complexity": {
+        "noUselessSwitchCase": "warn",
+        "noUselessTypeConstraint": "warn"
+      },
+      "correctness": {
+        "noUnusedImports": "warn"
+      },
+      "nursery": {
+        "noMisusedPromises": "error",
+        "noFloatingPromises": "error"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.json"],
+      "formatter": {
+        "indentStyle": "space",
+        "indentWidth": 2
+      }
+    }
+  ],
+  "files": {
+    "includes": [
+      "**",
+      "!**/dist",
+      "!**/build",
+      "!**/.next",
+      "!**/.svelte-kit",
+      "!**/.contentlayer",
+      "!**/.turbo",
+      "!**/.nuxt",
+      "!**/.source",
+      "!**/.cache",
+      "!**/playwright-report",
+      "!**/.output",
+      "!**/.tmp"
+    ]
+  }
 }

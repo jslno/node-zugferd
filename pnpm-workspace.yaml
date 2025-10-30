@@ -3,9 +3,9 @@ packages:
   - docs
 
 catalog:
-  typescript: ^5.9.3
-  vitest: ^4.0.3
   tsdown: ^0.15.10
+  typescript: ^5.9.3
+  vitest: ^4.0.5
   zod: ^3.25.76
 
 neverBuiltDependencies: []
