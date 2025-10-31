@@ -1,0 +1,46 @@
+{
+  "name": "@node-zugferd/minimum",
+  "version": "0.1.1-beta.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --project tsconfig.json"
+  },
+  "exports": {
+    ".": {
+      "node-zugferd-dev-source": "./src/index.ts",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "dist/index.d.ts"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@node-zugferd/core": "workspace:*"
+  },
+  "dependencies": {
+    "@node-zugferd/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@node-zugferd/core": "workspace:*",
+    "tsdown": "catalog:"
+  },
+  "files": [
+    "dist"
+  ]
+}
