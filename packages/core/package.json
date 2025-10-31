@@ -31,7 +31,6 @@
     }
   },
   "devDependencies": {
-    "@node-zugferd/shared": "workspace:*",
     "tsdown": "catalog:",
     "zod": "catalog:"
   },

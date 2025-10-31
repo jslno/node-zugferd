@@ -1,94 +1,124 @@
 import type { StandardSchemaV1 } from "@node-zugferd/core";
+import { defu } from "defu";
 
-export const optional = <I, O>(
-	type: StandardSchemaV1<I, O>,
-): StandardSchemaV1<I | undefined | null, O | undefined> => {
-	return {
-		...type,
+type Constraint<T> = T | [T, string];
+type WrapConstraints<T extends Record<string, any>> = {
+	[K in keyof T]?: Constraint<T[K]>;
+};
+function getConstraint<T>(constraint: Constraint<T>) {
+	return Array.isArray(constraint) && typeof constraint[1] === "string"
+		? {
+				value: constraint[0],
+				message: constraint[1],
+			}
+		: {
+				value: constraint as T,
+			};
+}
+
+export function optional<T extends StandardSchemaV1>(
+	type: T,
+): StandardSchemaV1<
+	StandardSchemaV1.InferInput<T> | undefined,
+	StandardSchemaV1.InferOutput<T> | undefined
+> {
+	return defu(type, {
 		"~standard": {
-			...type["~standard"],
 			validate(value) {
-				if (value === null || value === undefined) {
-					return { value: undefined };
+				if (value === undefined) {
+					return { value };
 				}
 				return type["~standard"].validate(value);
 			},
-		},
-	};
-};
+		} satisfies Partial<StandardSchemaV1["~standard"]>,
+	});
+}
 
-export type CoerceNumber = StandardSchemaV1<string | number, number> & {
-	max: (limit: number, message?: string) => CoerceNumber;
-	min: (limit: number, message?: string) => CoerceNumber;
-	finite: (message?: string) => CoerceNumber;
-	positive: (message?: string) => CoerceNumber;
-	negative: (message?: string) => CoerceNumber;
-	pattern: (pattern: RegExp, message?: string) => CoerceNumber;
-	optional: () => StandardSchemaV1<
-		string | number | null | undefined,
-		number | undefined
-	>;
-};
+export function withDefault<T extends StandardSchemaV1>(
+	type: T,
+	defaultValue: StandardSchemaV1.InferInput<T>,
+): StandardSchemaV1<
+	StandardSchemaV1.InferInput<T> | undefined,
+	StandardSchemaV1.InferOutput<T>
+> {
+	return defu(type, {
+		"~standard": {
+			validate(value) {
+				if (value === undefined) {
+					return { value: defaultValue };
+				}
+				return type["~standard"].validate(value);
+			},
+		} satisfies Partial<StandardSchemaV1["~standard"]>,
+	});
+}
 
-export function coerceNumber(message?: string) {
-	const constraints: Partial<{
-		min: number;
-		max: number;
-		positive: boolean;
-		negative: boolean;
-		finite: boolean;
-		pattern: RegExp;
-	}> = {};
-	const messages: Partial<Record<keyof typeof constraints, string>> = {};
-
-	const constructor = (): CoerceNumber => ({
-		pattern(pattern, message) {
-			constraints.pattern = pattern;
-			messages.pattern = message;
-			return constructor();
-		},
-		min(limit, message) {
-			constraints.min = limit;
-			messages.min = message;
-			return constructor();
-		},
-		max(limit, message) {
-			constraints.max = limit;
-			messages.max = message;
-			return constructor();
-		},
-		finite(message) {
-			constraints.finite = true;
-			messages.finite = message;
-			return constructor();
-		},
-		positive(message) {
-			constraints.positive = true;
-			messages.positive = message;
-			return constructor();
-		},
-		negative(message) {
-			constraints.negative = true;
-			messages.negative = message;
-			return constructor();
-		},
-		optional() {
-			return optional(constructor());
-		},
+export function string(message?: string): StandardSchemaV1<string> {
+	return {
 		"~standard": {
 			version: 1,
 			vendor: "node-zugferd",
-			validate(input) {
+			validate(value) {
+				if (typeof value !== "string") {
+					return {
+						issues: [
+							{
+								message: message ?? "Expected value to be type of `string`.",
+							},
+						],
+					};
+				}
+				return {
+					value,
+				};
+			},
+			types: {
+				input: {} as string,
+				output: {} as string,
+			},
+		},
+	};
+}
+
+type NumberConstraints = WrapConstraints<{
+	finite: boolean;
+	min: number;
+	max: number;
+	positive: boolean;
+	negative: boolean;
+	pattern: RegExp;
+}>;
+
+export function number(
+	message?: string,
+): StandardSchemaV1<string | number, number>;
+export function number(
+	constraints?: NumberConstraints,
+	message?: string,
+): StandardSchemaV1<string | number, number>;
+export function number(
+	constraints?: NumberConstraints | string,
+	message?: string,
+): StandardSchemaV1<string | number, number> {
+	const constr = typeof constraints === "object" ? constraints : {};
+	let msg = typeof constraints === "string" ? constraints : message;
+
+	return {
+		"~standard": {
+			version: 1,
+			vendor: "node-zugferd",
+			validate(input: unknown) {
 				let value: number = NaN;
 				if (typeof input === "number") {
 					value = input;
 				} else if (typeof input === "string") {
-					if (constraints.pattern && !constraints.pattern.test(input)) {
+					const pattern = getConstraint(constr.pattern);
+					if (pattern.value !== undefined && !pattern.value.test(input)) {
 						return {
 							issues: [
 								{
 									message:
-										messages.pattern ?? "Value does not match the pattern.",
+										pattern.message ?? "Value does not match the pattern.",
 								},
 							],
 						};
@@ -100,47 +130,50 @@ export function coerceNumber(message?: string) {
 					return {
 						issues: [
 							{
-								message:
-									message ?? "Value must be a number or a numeric string.",
+								message: msg ?? "Value must be a number or a numeric string.",
 							},
 						],
 					};
 				}
 				let issues: StandardSchemaV1.Issue[] = [];
+				const finite = getConstraint(constr.finite);
+				const min = getConstraint(constr.min);
+				const positive = getConstraint(constr.positive);
 
-				if (constraints.finite && !Number.isFinite(value)) {
+				if (finite.value !== undefined && !Number.isFinite(value)) {
 					issues.push({
-						message: messages.finite ?? "Value must be finite.",
+						message: finite.message ?? "Value must be finite.",
 					});
 				}
 
-				if (constraints.min !== undefined) {
-					if (value < constraints.min) {
+				if (min.value !== undefined) {
+					if (value < min.value) {
 						issues.push({
 							message:
-								messages.min ??
-								`Value must be greater than ${constraints.min}.`,
+								min.message ?? `Value must be greater than ${min.value}.`,
 						});
 					}
-				} else if (constraints.positive) {
+				} else if (positive.value !== undefined) {
 					if (value < 0) {
 						issues.push({
-							message: messages.positive ?? "Value must be positive.",
+							message: positive.message ?? "Value must be positive.",
 						});
 					}
 				}
 
-				if (constraints.max !== undefined) {
-					if (value > constraints.max) {
+				const max = getConstraint(constr.max);
+				const negative = getConstraint(constr.negative);
+
+				if (max.value !== undefined) {
+					if (value > max.value) {
 						issues.push({
-							message:
-								messages.max ?? `Value must be less than ${constraints.max}.`,
+							message: max.message ?? `Value must be less than ${max.value}.`,
 						});
 					}
-				} else if (constraints.negative) {
+				} else if (negative.value !== undefined) {
 					if (value > 0) {
 						issues.push({
-							message: messages.positive ?? "Value must be positive.",
+							message: negative.message ?? "Value must be negative.",
 						});
 					}
 				}
@@ -150,44 +183,32 @@ export function coerceNumber(message?: string) {
 				}
 				return { value };
 			},
+			types: {
+				input: {} as string | number,
+				output: {} as number,
+			},
 		},
-	});
-
-	return constructor();
+	};
 }
 
-export const Amount = coerceNumber()
-	.finite()
-	.pattern(/^-?\d+(\.\d{1,2})?$/);
+export const Amount = number({
+	finite: true,
+	pattern: /^-?\d+(\.\d{1,2})?$/,
+});
 
-export const UnitPriceAmount = coerceNumber()
-	.finite()
-	.pattern(/^-?\d+(\.\d+)?$/);
+export const UnitPriceAmount = number({
+	finite: true,
+	pattern: /^-?\d+(\.\d+)?$/,
+});
 
 export const Quantity = UnitPriceAmount;
 
-export const Percentage = coerceNumber().min(0).max(100);
+export const Percentage = number({
+	min: 0,
+	max: 100,
+});
 
-export const Text: StandardSchemaV1<string> = {
-	"~standard": {
-		version: 1,
-		vendor: "node-zugferd",
-		validate(value) {
-			if (typeof value !== "string") {
-				return {
-					issues: [
-						{
-							message: "Value must be type string.",
-						},
-					],
-				};
-			}
-			return {
-				value,
-			};
-		},
-	},
-};
+export const Text = string();
 
 export const Identifier = Text;
 
@@ -238,7 +259,10 @@ const $Date: StandardSchemaV1<string | Date, string> = {
 
 			return {
 				issues: [
-					{ message: "Value must be a Date object or a YYYYMMDD string." },
+					{
+						message:
+							"Expected value to be a Date object or string in YYYYMMDD format.",
+					},
 				],
 			};
 		},

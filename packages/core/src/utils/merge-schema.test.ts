@@ -1,5 +1,5 @@
-import { t } from "@node-zugferd/shared";
 import { describe, expect, it } from "vitest";
+import { z } from "zod";
 import type { Schema } from "../types";
 import { mergeSchema } from "./merge-schema";
 
@@ -7,39 +7,146 @@ describe("mergeSchema", () => {
 	it("should merge flat schemas with overrides", () => {
 		const a = {
 			foo: {
-				type: t.Text,
+				type: z.string(),
 			},
 			bar: {
 				key: "some-key",
-				type: t.Amount,
+				type: z.number(),
 			},
 		} as const satisfies Schema;
 		const b = {
 			bar: {
 				key: "new-key",
-				type: t.Date,
+				type: z.date(),
 			},
 			baz: {
-				type: t.Text,
+				type: z.string(),
 				required: false,
 			},
 		} as const satisfies Schema;
 
 		const result = mergeSchema(a, b);
 
-		expect(result).toEqual({
-			foo: {
-				type: t.Text,
-			},
-			bar: {
-				key: "new-key",
-				type: t.Date,
-			},
-			baz: {
-				type: t.Text,
-				required: false,
-			},
-		});
+		expect(result).toMatchInlineSnapshot(`
+			{
+			  "bar": {
+			    "key": "new-key",
+			    "type": ZodDate {
+			      "_def": {
+			        "checks": [],
+			        "coerce": false,
+			        "typeName": "ZodDate",
+			      },
+			      "and": [Function],
+			      "array": [Function],
+			      "brand": [Function],
+			      "catch": [Function],
+			      "default": [Function],
+			      "describe": [Function],
+			      "isNullable": [Function],
+			      "isOptional": [Function],
+			      "nullable": [Function],
+			      "nullish": [Function],
+			      "optional": [Function],
+			      "or": [Function],
+			      "parse": [Function],
+			      "parseAsync": [Function],
+			      "pipe": [Function],
+			      "promise": [Function],
+			      "readonly": [Function],
+			      "refine": [Function],
+			      "refinement": [Function],
+			      "safeParse": [Function],
+			      "safeParseAsync": [Function],
+			      "spa": [Function],
+			      "superRefine": [Function],
+			      "transform": [Function],
+			      "~standard": {
+			        "validate": [Function],
+			        "vendor": "zod",
+			        "version": 1,
+			      },
+			    },
+			  },
+			  "baz": {
+			    "required": false,
+			    "type": ZodString {
+			      "_def": {
+			        "checks": [],
+			        "coerce": false,
+			        "typeName": "ZodString",
+			      },
+			      "and": [Function],
+			      "array": [Function],
+			      "brand": [Function],
+			      "catch": [Function],
+			      "default": [Function],
+			      "describe": [Function],
+			      "isNullable": [Function],
+			      "isOptional": [Function],
+			      "nullable": [Function],
+			      "nullish": [Function],
+			      "optional": [Function],
+			      "or": [Function],
+			      "parse": [Function],
+			      "parseAsync": [Function],
+			      "pipe": [Function],
+			      "promise": [Function],
+			      "readonly": [Function],
+			      "refine": [Function],
+			      "refinement": [Function],
+			      "safeParse": [Function],
+			      "safeParseAsync": [Function],
+			      "spa": [Function],
+			      "superRefine": [Function],
+			      "transform": [Function],
+			      "~standard": {
+			        "validate": [Function],
+			        "vendor": "zod",
+			        "version": 1,
+			      },
+			    },
+			  },
+			  "foo": {
+			    "type": ZodString {
+			      "_def": {
+			        "checks": [],
+			        "coerce": false,
+			        "typeName": "ZodString",
+			      },
+			      "and": [Function],
+			      "array": [Function],
+			      "brand": [Function],
+			      "catch": [Function],
+			      "default": [Function],
+			      "describe": [Function],
+			      "isNullable": [Function],
+			      "isOptional": [Function],
+			      "nullable": [Function],
+			      "nullish": [Function],
+			      "optional": [Function],
+			      "or": [Function],
+			      "parse": [Function],
+			      "parseAsync": [Function],
+			      "pipe": [Function],
+			      "promise": [Function],
+			      "readonly": [Function],
+			      "refine": [Function],
+			      "refinement": [Function],
+			      "safeParse": [Function],
+			      "safeParseAsync": [Function],
+			      "spa": [Function],
+			      "superRefine": [Function],
+			      "transform": [Function],
+			      "~standard": {
+			        "validate": [Function],
+			        "vendor": "zod",
+			        "version": 1,
+			      },
+			    },
+			  },
+			}
+		`);
 	});
 
 	it("should merge nested object schemas recursively", () => {
@@ -48,11 +155,11 @@ describe("mergeSchema", () => {
 				type: "object",
 				shape: {
 					bar: {
-						type: t.Text,
+						type: z.string(),
 					},
 					baz: {
 						key: "some-key",
-						type: t.Amount,
+						type: z.string(),
 					},
 				},
 			},
@@ -63,10 +170,10 @@ describe("mergeSchema", () => {
 				shape: {
 					baz: {
 						key: "new-key",
-						type: t.Date,
+						type: z.date(),
 					},
 					qux: {
-						type: t.Text,
+						type: z.string(),
 					},
 				},
 			},
@@ -74,23 +181,130 @@ describe("mergeSchema", () => {
 
 		const result = mergeSchema(a, b);
 
-		expect(result).toEqual({
-			foo: {
-				type: "object",
-				shape: {
-					bar: {
-						type: t.Text,
-					},
-					baz: {
-						key: "new-key",
-						type: t.Date,
-					},
-					qux: {
-						type: t.Text,
-					},
-				},
-			},
-		});
+		expect(result).toMatchInlineSnapshot(`
+			{
+			  "foo": {
+			    "shape": {
+			      "bar": {
+			        "type": ZodString {
+			          "_def": {
+			            "checks": [],
+			            "coerce": false,
+			            "typeName": "ZodString",
+			          },
+			          "and": [Function],
+			          "array": [Function],
+			          "brand": [Function],
+			          "catch": [Function],
+			          "default": [Function],
+			          "describe": [Function],
+			          "isNullable": [Function],
+			          "isOptional": [Function],
+			          "nullable": [Function],
+			          "nullish": [Function],
+			          "optional": [Function],
+			          "or": [Function],
+			          "parse": [Function],
+			          "parseAsync": [Function],
+			          "pipe": [Function],
+			          "promise": [Function],
+			          "readonly": [Function],
+			          "refine": [Function],
+			          "refinement": [Function],
+			          "safeParse": [Function],
+			          "safeParseAsync": [Function],
+			          "spa": [Function],
+			          "superRefine": [Function],
+			          "transform": [Function],
+			          "~standard": {
+			            "validate": [Function],
+			            "vendor": "zod",
+			            "version": 1,
+			          },
+			        },
+			      },
+			      "baz": {
+			        "key": "new-key",
+			        "type": ZodDate {
+			          "_def": {
+			            "checks": [],
+			            "coerce": false,
+			            "typeName": "ZodDate",
+			          },
+			          "and": [Function],
+			          "array": [Function],
+			          "brand": [Function],
+			          "catch": [Function],
+			          "default": [Function],
+			          "describe": [Function],
+			          "isNullable": [Function],
+			          "isOptional": [Function],
+			          "nullable": [Function],
+			          "nullish": [Function],
+			          "optional": [Function],
+			          "or": [Function],
+			          "parse": [Function],
+			          "parseAsync": [Function],
+			          "pipe": [Function],
+			          "promise": [Function],
+			          "readonly": [Function],
+			          "refine": [Function],
+			          "refinement": [Function],
+			          "safeParse": [Function],
+			          "safeParseAsync": [Function],
+			          "spa": [Function],
+			          "superRefine": [Function],
+			          "transform": [Function],
+			          "~standard": {
+			            "validate": [Function],
+			            "vendor": "zod",
+			            "version": 1,
+			          },
+			        },
+			      },
+			      "qux": {
+			        "type": ZodString {
+			          "_def": {
+			            "checks": [],
+			            "coerce": false,
+			            "typeName": "ZodString",
+			          },
+			          "and": [Function],
+			          "array": [Function],
+			          "brand": [Function],
+			          "catch": [Function],
+			          "default": [Function],
+			          "describe": [Function],
+			          "isNullable": [Function],
+			          "isOptional": [Function],
+			          "nullable": [Function],
+			          "nullish": [Function],
+			          "optional": [Function],
+			          "or": [Function],
+			          "parse": [Function],
+			          "parseAsync": [Function],
+			          "pipe": [Function],
+			          "promise": [Function],
+			          "readonly": [Function],
+			          "refine": [Function],
+			          "refinement": [Function],
+			          "safeParse": [Function],
+			          "safeParseAsync": [Function],
+			          "spa": [Function],
+			          "superRefine": [Function],
+			          "transform": [Function],
+			          "~standard": {
+			            "validate": [Function],
+			            "vendor": "zod",
+			            "version": 1,
+			          },
+			        },
+			      },
+			    },
+			    "type": "object",
+			  },
+			}
+		`);
 	});
 
 	it("should merge array object schemas", () => {
@@ -99,10 +313,10 @@ describe("mergeSchema", () => {
 				type: "object[]",
 				shape: {
 					bar: {
-						type: t.Text,
+						type: z.string(),
 					},
 					baz: {
-						type: t.Amount,
+						type: z.number(),
 					},
 				},
 			},
@@ -112,10 +326,10 @@ describe("mergeSchema", () => {
 				type: "object[]",
 				shape: {
 					baz: {
-						type: t.Date,
+						type: z.date(),
 					},
 					qux: {
-						type: t.Text,
+						type: z.string(),
 						required: false,
 					},
 				},
@@ -124,23 +338,130 @@ describe("mergeSchema", () => {
 
 		const result = mergeSchema(a, b);
 
-		expect(result).toEqual({
-			foo: {
-				type: "object[]",
-				shape: {
-					bar: {
-						type: t.Text,
-					},
-					baz: {
-						type: t.Date,
-					},
-					qux: {
-						type: t.Text,
-						required: false,
-					},
-				},
-			},
-		});
+		expect(result).toMatchInlineSnapshot(`
+			{
+			  "foo": {
+			    "shape": {
+			      "bar": {
+			        "type": ZodString {
+			          "_def": {
+			            "checks": [],
+			            "coerce": false,
+			            "typeName": "ZodString",
+			          },
+			          "and": [Function],
+			          "array": [Function],
+			          "brand": [Function],
+			          "catch": [Function],
+			          "default": [Function],
+			          "describe": [Function],
+			          "isNullable": [Function],
+			          "isOptional": [Function],
+			          "nullable": [Function],
+			          "nullish": [Function],
+			          "optional": [Function],
+			          "or": [Function],
+			          "parse": [Function],
+			          "parseAsync": [Function],
+			          "pipe": [Function],
+			          "promise": [Function],
+			          "readonly": [Function],
+			          "refine": [Function],
+			          "refinement": [Function],
+			          "safeParse": [Function],
+			          "safeParseAsync": [Function],
+			          "spa": [Function],
+			          "superRefine": [Function],
+			          "transform": [Function],
+			          "~standard": {
+			            "validate": [Function],
+			            "vendor": "zod",
+			            "version": 1,
+			          },
+			        },
+			      },
+			      "baz": {
+			        "type": ZodDate {
+			          "_def": {
+			            "checks": [],
+			            "coerce": false,
+			            "typeName": "ZodDate",
+			          },
+			          "and": [Function],
+			          "array": [Function],
+			          "brand": [Function],
+			          "catch": [Function],
+			          "default": [Function],
+			          "describe": [Function],
+			          "isNullable": [Function],
+			          "isOptional": [Function],
+			          "nullable": [Function],
+			          "nullish": [Function],
+			          "optional": [Function],
+			          "or": [Function],
+			          "parse": [Function],
+			          "parseAsync": [Function],
+			          "pipe": [Function],
+			          "promise": [Function],
+			          "readonly": [Function],
+			          "refine": [Function],
+			          "refinement": [Function],
+			          "safeParse": [Function],
+			          "safeParseAsync": [Function],
+			          "spa": [Function],
+			          "superRefine": [Function],
+			          "transform": [Function],
+			          "~standard": {
+			            "validate": [Function],
+			            "vendor": "zod",
+			            "version": 1,
+			          },
+			        },
+			      },
+			      "qux": {
+			        "required": false,
+			        "type": ZodString {
+			          "_def": {
+			            "checks": [],
+			            "coerce": false,
+			            "typeName": "ZodString",
+			          },
+			          "and": [Function],
+			          "array": [Function],
+			          "brand": [Function],
+			          "catch": [Function],
+			          "default": [Function],
+			          "describe": [Function],
+			          "isNullable": [Function],
+			          "isOptional": [Function],
+			          "nullable": [Function],
+			          "nullish": [Function],
+			          "optional": [Function],
+			          "or": [Function],
+			          "parse": [Function],
+			          "parseAsync": [Function],
+			          "pipe": [Function],
+			          "promise": [Function],
+			          "readonly": [Function],
+			          "refine": [Function],
+			          "refinement": [Function],
+			          "safeParse": [Function],
+			          "safeParseAsync": [Function],
+			          "spa": [Function],
+			          "superRefine": [Function],
+			          "transform": [Function],
+			          "~standard": {
+			            "validate": [Function],
+			            "vendor": "zod",
+			            "version": 1,
+			          },
+			        },
+			      },
+			    },
+			    "type": "object[]",
+			  },
+			}
+		`);
 	});
 
 	it("should merge deeply nested schemas", () => {
@@ -153,10 +474,10 @@ describe("mergeSchema", () => {
 						shape: {
 							baz: {
 								key: "some-key",
-								type: t.Text,
+								type: z.string(),
 							},
 							qux: {
-								type: t.Text,
+								type: z.string(),
 							},
 						},
 					},
@@ -172,10 +493,10 @@ describe("mergeSchema", () => {
 						shape: {
 							baz: {
 								key: "new-key",
-								type: t.Date,
+								type: z.date(),
 							},
 							quux: {
-								type: t.Amount,
+								type: z.number(),
 							},
 						},
 					},
@@ -185,27 +506,137 @@ describe("mergeSchema", () => {
 
 		const result = mergeSchema(a, b);
 
-		expect(result).toEqual({
-			foo: {
-				type: "object",
-				shape: {
-					bar: {
-						type: "object",
-						shape: {
-							baz: {
-								key: "new-key",
-								type: t.Date,
-							},
-							qux: {
-								type: t.Text,
-							},
-							quux: {
-								type: t.Amount,
-							},
-						},
-					},
-				},
-			},
-		});
+		expect(result).toMatchInlineSnapshot(`
+			{
+			  "foo": {
+			    "shape": {
+			      "bar": {
+			        "shape": {
+			          "baz": {
+			            "key": "new-key",
+			            "type": ZodDate {
+			              "_def": {
+			                "checks": [],
+			                "coerce": false,
+			                "typeName": "ZodDate",
+			              },
+			              "and": [Function],
+			              "array": [Function],
+			              "brand": [Function],
+			              "catch": [Function],
+			              "default": [Function],
+			              "describe": [Function],
+			              "isNullable": [Function],
+			              "isOptional": [Function],
+			              "nullable": [Function],
+			              "nullish": [Function],
+			              "optional": [Function],
+			              "or": [Function],
+			              "parse": [Function],
+			              "parseAsync": [Function],
+			              "pipe": [Function],
+			              "promise": [Function],
+			              "readonly": [Function],
+			              "refine": [Function],
+			              "refinement": [Function],
+			              "safeParse": [Function],
+			              "safeParseAsync": [Function],
+			              "spa": [Function],
+			              "superRefine": [Function],
+			              "transform": [Function],
+			              "~standard": {
+			                "validate": [Function],
+			                "vendor": "zod",
+			                "version": 1,
+			              },
+			            },
+			          },
+			          "quux": {
+			            "type": ZodNumber {
+			              "_def": {
+			                "checks": [],
+			                "coerce": false,
+			                "typeName": "ZodNumber",
+			              },
+			              "and": [Function],
+			              "array": [Function],
+			              "brand": [Function],
+			              "catch": [Function],
+			              "default": [Function],
+			              "describe": [Function],
+			              "isNullable": [Function],
+			              "isOptional": [Function],
+			              "max": [Function],
+			              "min": [Function],
+			              "nullable": [Function],
+			              "nullish": [Function],
+			              "optional": [Function],
+			              "or": [Function],
+			              "parse": [Function],
+			              "parseAsync": [Function],
+			              "pipe": [Function],
+			              "promise": [Function],
+			              "readonly": [Function],
+			              "refine": [Function],
+			              "refinement": [Function],
+			              "safeParse": [Function],
+			              "safeParseAsync": [Function],
+			              "spa": [Function],
+			              "step": [Function],
+			              "superRefine": [Function],
+			              "transform": [Function],
+			              "~standard": {
+			                "validate": [Function],
+			                "vendor": "zod",
+			                "version": 1,
+			              },
+			            },
+			          },
+			          "qux": {
+			            "type": ZodString {
+			              "_def": {
+			                "checks": [],
+			                "coerce": false,
+			                "typeName": "ZodString",
+			              },
+			              "and": [Function],
+			              "array": [Function],
+			              "brand": [Function],
+			              "catch": [Function],
+			              "default": [Function],
+			              "describe": [Function],
+			              "isNullable": [Function],
+			              "isOptional": [Function],
+			              "nullable": [Function],
+			              "nullish": [Function],
+			              "optional": [Function],
+			              "or": [Function],
+			              "parse": [Function],
+			              "parseAsync": [Function],
+			              "pipe": [Function],
+			              "promise": [Function],
+			              "readonly": [Function],
+			              "refine": [Function],
+			              "refinement": [Function],
+			              "safeParse": [Function],
+			              "safeParseAsync": [Function],
+			              "spa": [Function],
+			              "superRefine": [Function],
+			              "transform": [Function],
+			              "~standard": {
+			                "validate": [Function],
+			                "vendor": "zod",
+			                "version": 1,
+			              },
+			            },
+			          },
+			        },
+			        "type": "object",
+			      },
+			    },
+			    "type": "object",
+			  },
+			}
+		`);
 	});
 });

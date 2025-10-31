@@ -39,8 +39,7 @@
   },
   "dependencies": {
     "@node-zugferd/core": "workspace:*",
-    "defu": "^6.1.4",
-    "zod": "catalog:"
+    "defu": "catalog:"
   },
   "devDependencies": {
     "tsdown": "catalog:",

@@ -33,6 +33,9 @@
   "peerDependencies": {
     "@node-zugferd/core": "workspace:*"
   },
+  "dependencies": {
+    "defu": "catalog:"
+  },
   "devDependencies": {
     "@node-zugferd/core": "workspace:*",
     "tsdown": "catalog:"

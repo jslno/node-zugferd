@@ -1,5 +1,5 @@
-import { t } from "@node-zugferd/shared";
 import { describe, expect, vi } from "vitest";
+import { z } from "zod";
 import { useProfileTests } from "../profile.test";
 import type { ExtensionSchemaFields } from "../types";
 import { extendProfile } from "./extend-profile";
@@ -25,7 +25,7 @@ describe("extendProfile", () => {
 		extendProfile(profile, {
 			schema: {
 				bar: {
-					type: t.Text,
+					type: z.string(),
 				},
 			},
 		});

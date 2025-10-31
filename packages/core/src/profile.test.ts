@@ -1,5 +1,5 @@
-import { t } from "@node-zugferd/shared";
 import { describe, expect, it, vi } from "vitest";
+import { z } from "zod";
 import { createProfile, type Profile } from "./profile";
 import type { InferSchema, ProfileConfig } from "./types";
 
@@ -24,7 +24,7 @@ export const useProfileTests = () => {
 		id: "profile",
 		schema: {
 			foo: {
-				type: t.Text,
+				type: z.string(),
 			},
 		},
 		interpolate,
@@ -63,7 +63,7 @@ describe("createProfile", () => {
 		// TODO: match snapshot
 	});
 
-	test("should call interpolate and xml builder inside toXML", ({
+	test("should call interpolate and xml builder inside toXML", async ({
 		profile,
 		interpolate,
 	}) => {
@@ -71,7 +71,7 @@ describe("createProfile", () => {
 			foo: "bar",
 		};
 
-		const result = profile.toXML(input);
+		const result = await profile.toXML(input);
 
 		expect(interpolate).toHaveBeenCalledExactlyOnceWith(
 			expect.objectContaining({ input }),
