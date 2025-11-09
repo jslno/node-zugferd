@@ -78,7 +78,10 @@ describe("validateSchema", () => {
 			validateSchema(schema, { status: "approved" }),
 		).resolves.toEqual({ status: "approved" });
 		await expect(
-			validateSchema(schema, { status: "invalid" }),
+			validateSchema(schema, {
+				// @ts-expect-error
+				status: "invalid",
+			}),
 		).rejects.toThrowError('Invalid value for field "status": "invalid"');
 	});
 

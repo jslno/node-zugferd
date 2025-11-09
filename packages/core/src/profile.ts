@@ -35,7 +35,11 @@ export function createProfile<
 
 			let context: InterpolateSchemaContext = {
 				...cfg,
-				input: await validateSchema(config.schema, input),
+				input: await validateSchema(
+					config.schema,
+					// @ts-expect-error
+					input,
+				),
 			};
 			if (ctx?.hooks.xml?.interpolate?.before) {
 				const res = await ctx.hooks.xml.interpolate.before(context);
@@ -43,10 +47,7 @@ export function createProfile<
 					context = res.context;
 				}
 			}
-			let tree = interpolate(
-				// @ts-expect-error
-				context,
-			);
+			let tree = await interpolate(context as any);
 			if (ctx?.hooks.xml?.interpolate?.after) {
 				const res = await ctx.hooks.xml.interpolate.after(tree);
 				if (typeof res === "object" && "tree" in res) {

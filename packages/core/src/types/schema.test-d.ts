@@ -1,6 +1,6 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 import { describe, expectTypeOf, it } from "vitest";
-import type { InferSchema } from "./schema";
+import type { InferSchema, Schema } from "./schema";
 
 describe("InferSchema", () => {
 	it("infers simple flat schema", () => {
@@ -142,6 +142,31 @@ describe("InferSchema", () => {
 				garply: string;
 				waldo?: number | undefined;
 			}[];
+		};
+
+		expectTypeOf<Result>().toEqualTypeOf<Expected>();
+	});
+
+	it("infers output correctly", () => {
+		type Schema = {
+			foo: {
+				type: StandardSchemaV1<string, number>;
+			};
+			bar: {
+				type: StandardSchemaV1<number | undefined, string | undefined>;
+			};
+			baz: {
+				type: StandardSchemaV1<boolean, string>;
+				required: false;
+			};
+		};
+
+		type Result = InferSchema<Schema, "output">;
+
+		type Expected = {
+			foo: number;
+			bar?: string | undefined;
+			baz?: string | undefined;
 		};
 
 		expectTypeOf<Result>().toEqualTypeOf<Expected>();

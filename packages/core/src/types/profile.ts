@@ -1,4 +1,4 @@
-import type { LiteralString } from "./helper";
+import type { Awaitable, LiteralString } from "./helper";
 import type { InferSchema, Schema } from "./schema";
 
 export type InterpolateSchemaContext<S extends Schema = any> = Omit<
@@ -6,13 +6,12 @@ export type InterpolateSchemaContext<S extends Schema = any> = Omit<
 	"interpolate"
 > & {
 	id: LiteralString;
-	// TODO: infer output type
-	input: InferSchema<S>;
+	input: InferSchema<S, "output">;
 };
 
 export type Interpolator<S extends Schema = Schema> = (
 	ctx: InterpolateSchemaContext<S>,
-) => Record<string, any>;
+) => Awaitable<Record<string, any>>;
 
 export type ExtensionSchemaFields = {
 	uri?:

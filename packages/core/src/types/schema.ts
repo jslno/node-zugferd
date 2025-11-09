@@ -8,9 +8,9 @@ export type FieldType =
 	| LiteralString[];
 
 export type FieldAttributes<T extends FieldType = FieldType> = {
-	key?: LiteralString;
-	required?: boolean;
-	shape?: T extends "object" | "object[]" ? Schema : never;
+	key?: LiteralString | undefined;
+	required?: boolean | undefined;
+	shape?: (T extends "object" | "object[]" ? Schema : never) | undefined;
 };
 
 export type Field<T extends FieldType = FieldType> = {
@@ -21,52 +21,70 @@ export type Schema = {
 	[key: string]: Field;
 };
 
-export type InferValueType<T extends FieldType> = T extends StandardSchemaV1
-	? StandardSchemaV1.InferInput<T>
+type InferValueType<
+	T extends FieldType,
+	U extends "input" | "output",
+> = T extends StandardSchemaV1
+	? U extends "output"
+		? StandardSchemaV1.InferOutput<T>
+		: StandardSchemaV1.InferInput<T>
 	: T extends Array<any>
 		? T[number]
 		: never;
 
-type IsFieldOptional<F extends Field> = F["required"] extends false
+type IsFieldOptional<
+	F extends Field,
+	T extends "input" | "output",
+> = F["required"] extends false
 	? true
-	: F["type"] extends StandardSchemaV1<infer I>
-		? undefined extends I
-			? true
-			: false
+	: F["type"] extends StandardSchemaV1<infer I, infer O>
+		? T extends "output"
+			? undefined extends O
+				? true
+				: false
+			: undefined extends I
+				? true
+				: false
 		: F["type"] extends "object"
 			? F["shape"] extends Schema
-				? AllOptional<F["shape"]>
+				? AllOptional<F["shape"], T>
 				: false
 			: F["type"] extends "object[]"
 				? F["shape"] extends Schema
-					? AllOptional<F["shape"]>
+					? AllOptional<F["shape"], T>
 					: false
 				: false;
 
-type AllOptional<S extends Schema> = {
-	[K in keyof S]: IsFieldOptional<S[K]> extends true ? never : K;
+type AllOptional<S extends Schema, T extends "input" | "output"> = {
+	[K in keyof S]: IsFieldOptional<S[K], T> extends true ? never : K;
 }[keyof S] extends never
 	? true
 	: false;
 
-export type InferSchema<S extends Schema> = PrettifyDeep<
+export type InferSchema<
+	S extends Schema,
+	T extends "input" | "output" = "input",
+> = PrettifyDeep<
 	{
-		[K in keyof S as IsFieldOptional<S[K]> extends true
+		[K in keyof S as IsFieldOptional<S[K], T> extends true
 			? K
-			: never]?: InferField<S[K]>;
+			: never]?: InferField<S[K], T>;
 	} & {
-		[K in keyof S as IsFieldOptional<S[K]> extends true
+		[K in keyof S as IsFieldOptional<S[K], T> extends true
 			? never
-			: K]: InferField<S[K]>;
+			: K]: InferField<S[K], T>;
 	}
 >;
 
-export type InferField<F extends Field> = F["type"] extends "object"
+export type InferField<
+	F extends Field,
+	T extends "input" | "output" = "input",
+> = F["type"] extends "object"
 	? F["shape"] extends Schema
-		? InferSchema<F["shape"]>
+		? InferSchema<F["shape"], T>
 		: {}
 	: F["type"] extends "object[]"
 		? F["shape"] extends Schema
-			? InferSchema<F["shape"]>[]
+			? InferSchema<F["shape"], T>[]
 			: []
-		: InferValueType<F["type"]>;
+		: InferValueType<F["type"], T>;

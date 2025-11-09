@@ -11,12 +11,11 @@ function getCurrentPath(
 		: fieldName;
 }
 
-// TODO: Infer output type
 // TODO: Validate concurrently with queue to improve performance
-export async function validateSchema(
-	schema: Schema,
-	input: InferSchema<Schema>,
-) {
+export async function validateSchema<S extends Schema>(
+	schema: S,
+	input: InferSchema<S>,
+): Promise<InferSchema<S, "output">> {
 	const validate = async (
 		schema: Schema,
 		input: Record<string, any>,
@@ -79,5 +78,5 @@ export async function validateSchema(
 		return result;
 	};
 
-	return validate(schema, input);
+	return validate(schema, input) as InferSchema<S, "output">;
 }

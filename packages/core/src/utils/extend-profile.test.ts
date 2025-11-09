@@ -54,13 +54,13 @@ describe("extendProfile", () => {
 		expect(extendedProfile.id).toEqual("extended");
 	});
 
-	test("should use new interpolate function", ({ profile }) => {
+	test("should use new interpolate function", async ({ profile }) => {
 		const interpolate = vi.fn(({ input }) => input);
 		const extendedProfile = extendProfile(profile, {
 			interpolate,
 		});
 
-		extendedProfile.toXML({
+		await extendedProfile.toXML({
 			foo: "bar",
 		});
 		expect(interpolate).toHaveBeenCalledExactlyOnceWith(
