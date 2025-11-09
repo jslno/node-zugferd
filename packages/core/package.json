@@ -21,12 +21,26 @@
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       }
+    },
+    "./error": {
+      "dev-source": "./src/error/index.ts",
+      "import": {
+        "types": "./dist/error/index.d.ts",
+        "default": "./dist/error/index.js"
+      },
+      "require": {
+        "types": "./dist/error/index.d.cts",
+        "default": "./dist/error/index.cjs"
+      }
     }
   },
   "typesVersions": {
     "*": {
       ".": [
         "dist/index.d.ts"
+      ],
+      "./error": [
+        "dist/error/index.d.ts"
       ]
     }
   },
