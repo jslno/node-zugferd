@@ -9,8 +9,8 @@
   "homepage": "https://node-zugferd.jsolano.de",
   "repository": {
     "type": "git",
-    "url": "https://github.com/better-auth/better-auth",
-    "directory": "packages/better-auth"
+    "url": "https://github.com/jslno/node-zugferd",
+    "directory": "packages/node-zugferd"
   },
   "scripts": {
     "build": "tsdown",
@@ -19,7 +19,7 @@
   },
   "exports": {
     ".": {
-      "node-zugferd-dev-source": "./src/index.ts",
+      "dev-source": "./src/index.ts",
       "import": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
@@ -38,8 +38,7 @@
     }
   },
   "dependencies": {
-    "@node-zugferd/core": "workspace:*",
-    "defu": "catalog:"
+    "@node-zugferd/core": "workspace:*"
   },
   "devDependencies": {
     "tsdown": "catalog:",
