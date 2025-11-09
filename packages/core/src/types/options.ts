@@ -7,7 +7,7 @@ import type { Logger } from "../utils/logger";
 import type { ZugferdPlugin } from "./plugins";
 
 export type ZugferdOptions = {
-	profile: Profile<any>;
+	profile: Profile;
 	plugins?: ZugferdPlugin[] | undefined;
 	hooks?: ZugferdHooks | undefined;
 	logger?: Logger | undefined;

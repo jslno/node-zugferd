@@ -1,6 +1,6 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 import { describe, expectTypeOf, it } from "vitest";
-import type { InferSchema, Schema } from "./schema";
+import type { InferSchema } from "./schema";
 
 describe("InferSchema", () => {
 	it("infers simple flat schema", () => {

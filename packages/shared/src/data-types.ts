@@ -1,4 +1,4 @@
-import type { StandardSchemaV1 } from "@node-zugferd/core";
+import type { PrettifyDeep, StandardSchemaV1 } from "@node-zugferd/core";
 import { defu } from "defu";
 
 type Constraint<T> = T | [T, string];
@@ -186,6 +186,89 @@ export function number(
 			types: {
 				input: {} as string | number,
 				output: {} as number,
+			},
+		},
+	};
+}
+
+export function object<Shape extends Record<string, StandardSchemaV1>>(
+	shape: Shape,
+): StandardSchemaV1<
+	PrettifyDeep<
+		{
+			[K in keyof Shape as undefined extends StandardSchemaV1.InferInput<
+				Shape[K]
+			>
+				? K
+				: never]?: StandardSchemaV1.InferInput<Shape[K]>;
+		} & {
+			[K in keyof Shape as undefined extends StandardSchemaV1.InferInput<
+				Shape[K]
+			>
+				? never
+				: K]: StandardSchemaV1.InferInput<Shape[K]>;
+		}
+	>,
+	{
+		[K in keyof Shape]: StandardSchemaV1.InferOutput<Shape[K]>;
+	}
+> {
+	return {
+		"~standard": {
+			version: 1,
+			vendor: "node-zugferd",
+			async validate(value) {
+				if (typeof value !== "object" || value === null) {
+					return {
+						issues: [
+							{
+								message: "Expected value to be an object.",
+							},
+						],
+					};
+				}
+
+				const result: Record<string, any> = {};
+				const issues: StandardSchemaV1.Issue[] = [];
+
+				await Promise.allSettled(
+					Object.keys(shape).map(async (key) => {
+						const fieldSchema = shape[key]!;
+						const fieldValue = (value as Record<string, any>)[key];
+						const res = await fieldSchema["~standard"].validate(fieldValue);
+						if (res.issues) {
+							issues.push(
+								...res.issues.map((issue) => ({
+									...issue,
+									message: `In field "${key}": ${issue.message}`,
+								})),
+							);
+						} else {
+							result[key] = res.value;
+						}
+					}),
+				);
+				for (const key of Object.keys(shape)) {
+					const fieldSchema = shape[key]!;
+					const fieldValue = (value as Record<string, any>)[key];
+					const res = await fieldSchema["~standard"].validate(fieldValue);
+					if (res.issues) {
+						issues.push(
+							...res.issues.map((issue) => ({
+								...issue,
+								message: `In field "${key}": ${issue.message}`,
+							})),
+						);
+					} else {
+						result[key] = res.value;
+					}
+				}
+
+				if (issues.length > 0) {
+					return { issues };
+				}
+
+				return { value: result as any };
 			},
 		},
 	};

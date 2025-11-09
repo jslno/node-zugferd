@@ -223,9 +223,6 @@ importers:
       '@node-zugferd/core':
         specifier: workspace:*
         version: link:../core
-      defu:
-        specifier: 'catalog:'
-        version: 6.1.4
     devDependencies:
       tsdown:
         specifier: 'catalog:'
@@ -234,15 +231,15 @@ importers:
         specifier: 'catalog:'
         version: 5.9.3
 
-  packages/profile-minimum:
+  packages/profiles/minimum:
     dependencies:
       '@node-zugferd/shared':
         specifier: workspace:*
-        version: link:../shared
+        version: link:../../shared
     devDependencies:
       '@node-zugferd/core':
         specifier: workspace:*
-        version: link:../core
+        version: link:../../core
       tsdown:
         specifier: 'catalog:'
         version: 0.15.10(typescript@5.9.3)

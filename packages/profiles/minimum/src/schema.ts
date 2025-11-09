@@ -69,8 +69,10 @@ export const schema = {
 								shape: {
 									legalRegistrationID: {
 										key: "BT-30",
-										// TODO: Support @schemeID
-										type: t.Identifier,
+										type: t.object({
+											value: t.Identifier,
+											schemeID: t.optional(t.string()),
+										}),
 										required: false,
 									},
 								},

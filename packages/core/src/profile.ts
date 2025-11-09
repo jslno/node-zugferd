@@ -4,7 +4,7 @@ import type { ZugferdContext } from "./types/context";
 import type { InterpolateSchemaContext, ProfileConfig } from "./types/profile";
 import { validateSchema } from "./utils";
 
-export type Profile<O extends ProfileConfig = ProfileConfig> = O & {
+export type Profile<O extends ProfileConfig = any> = O & {
 	toXML: (
 		input: InferSchema<O["schema"]>,
 		ctx?: ZugferdContext | undefined,
