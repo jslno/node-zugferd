@@ -6,6 +6,7 @@ export type InterpolateSchemaContext<S extends Schema = any> = Omit<
 	"interpolate"
 > & {
 	id: LiteralString;
+	// TODO: infer output type
 	input: InferSchema<S>;
 };
 

@@ -2,6 +2,7 @@ import { XMLBuilder } from "fast-xml-parser";
 import type { InferSchema, Schema } from "./types";
 import type { ZugferdContext } from "./types/context";
 import type { InterpolateSchemaContext, ProfileConfig } from "./types/profile";
+import { validateSchema } from "./utils";
 
 export type Profile<O extends ProfileConfig = ProfileConfig> = O & {
 	toXML: (
@@ -34,7 +35,7 @@ export function createProfile<
 
 			let context: InterpolateSchemaContext = {
 				...cfg,
-				input,
+				input: await validateSchema(config.schema, input),
 			};
 			if (ctx?.hooks.xml?.interpolate?.before) {
 				const res = await ctx.hooks.xml.interpolate.before(context);
