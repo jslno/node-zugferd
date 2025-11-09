@@ -7,6 +7,7 @@ import type {
 	ZugferdOptions,
 	ZugferdPlugin,
 } from "@node-zugferd/core";
+import { createLogger } from "@node-zugferd/core/utils";
 import defu from "defu";
 
 export function createZugferd<const O extends ZugferdOptions>(
@@ -15,7 +16,7 @@ export function createZugferd<const O extends ZugferdOptions>(
 	const ctx: ZugferdContext = {
 		options,
 		profile: options.profile,
-		logger: {} as never,
+		logger: createLogger(options.logger),
 		hooks: getHooks(options),
 	};
 	const { context, actions } = runPluginInit(ctx);
@@ -70,13 +71,13 @@ function runPluginInit(ctx: ZugferdContext) {
 			const result = plugin.init(context);
 			if (typeof result === "object") {
 				if (result.options) {
-					options = defu(options, result.options)
+					options = defu(options, result.options);
 				}
 				if (result.context) {
 					context = {
 						...context,
 						...(result.context as Partial<ZugferdContext>),
-					}
+					};
 				}
 				if (result.actions) {
 					actions = {

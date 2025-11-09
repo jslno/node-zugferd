@@ -32,6 +32,17 @@
         "types": "./dist/error/index.d.cts",
         "default": "./dist/error/index.cjs"
       }
+    },
+    "./utils": {
+      "dev-source": "./src/utils/index.ts",
+      "import": {
+        "types": "./dist/utils/index.d.ts",
+        "default": "./dist/utils/index.js"
+      },
+      "require": {
+        "types": "./dist/utils/index.d.cts",
+        "default": "./dist/utils/index.cjs"
+      }
     }
   },
   "typesVersions": {
@@ -41,6 +52,9 @@
       ],
       "./error": [
         "dist/error/index.d.ts"
+      ],
+      "./utils": [
+        "dist/utils/index.d.ts"
       ]
     }
   },

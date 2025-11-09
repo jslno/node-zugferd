@@ -3,32 +3,45 @@ import type {
 	InterpolateSchemaContext,
 	Profile,
 } from "@node-zugferd/core";
+import type { Logger } from "../utils/logger";
 import type { ZugferdPlugin } from "./plugins";
 
 export type ZugferdOptions = {
 	profile: Profile<any>;
-	plugins?: ZugferdPlugin[];
-	hooks?: ZugferdHooks;
-	// logger?: Logger;
+	plugins?: ZugferdPlugin[] | undefined;
+	hooks?: ZugferdHooks | undefined;
+	logger?: Logger | undefined;
 };
 
 export type ZugferdHooks = {
-	xml?: {
-		interpolate?: {
-			before?: (ctx: InterpolateSchemaContext) => Awaitable<{
-				context: InterpolateSchemaContext;
-			} | void>;
-			after?: (
-				tree: Record<string, any>,
-			) => Awaitable<{ tree: Record<string, any> } | void>;
-		};
-		build?: {
-			before?: (
-				tree?: Record<string, any>,
-			) => Awaitable<{ tree: Record<string, any> } | void>;
-			after?: (xml: string) => Awaitable<string | void>;
-		};
-	};
+	xml?:
+		| {
+				interpolate?:
+					| {
+							before?:
+								| ((ctx: InterpolateSchemaContext) => Awaitable<{
+										context: InterpolateSchemaContext;
+								  } | void>)
+								| undefined;
+							after?:
+								| ((
+										tree: Record<string, any>,
+								  ) => Awaitable<{ tree: Record<string, any> } | void>)
+								| undefined;
+					  }
+					| undefined;
+				build?:
+					| {
+							before?:
+								| ((
+										tree?: Record<string, any>,
+								  ) => Awaitable<{ tree: Record<string, any> } | void>)
+								| undefined;
+							after?: ((xml: string) => Awaitable<string | void>) | undefined;
+					  }
+					| undefined;
+		  }
+		| undefined;
 	// TODO:
-	pdfa?: {};
+	pdfa?: {} | undefined;
 };

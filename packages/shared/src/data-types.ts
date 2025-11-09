@@ -90,15 +90,15 @@ type NumberConstraints = WrapConstraints<{
 }>;
 
 export function number(
-	message?: string,
+	message?: string | undefined,
 ): StandardSchemaV1<string | number, number>;
 export function number(
-	constraints?: NumberConstraints,
-	message?: string,
+	constraints?: NumberConstraints | undefined,
+	message?: string | undefined,
 ): StandardSchemaV1<string | number, number>;
 export function number(
-	constraints?: NumberConstraints | string,
-	message?: string,
+	constraints?: NumberConstraints | string | undefined,
+	message?: string | undefined,
 ): StandardSchemaV1<string | number, number> {
 	const constr = typeof constraints === "object" ? constraints : {};
 	let msg = typeof constraints === "string" ? constraints : message;

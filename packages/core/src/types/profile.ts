@@ -17,10 +17,15 @@ export type ExtensionSchemaFields = {
 	uri?:
 		| "urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#"
 		| LiteralString
-		| null;
-	documentType?: "INVOICE" | "ORDER" | LiteralString;
-	documentFileName?: "factur-x.xml" | "xrechnung.xml" | LiteralString;
-	version?: "1.0" | LiteralString;
+		| null
+		| undefined;
+	documentType?: "INVOICE" | "ORDER" | LiteralString | undefined;
+	documentFileName?:
+		| "factur-x.xml"
+		| "xrechnung.xml"
+		| LiteralString
+		| undefined;
+	version?: "1.0" | LiteralString | undefined;
 	conformanceLevel:
 		| "MINIMUM"
 		| "BASIC WL"
@@ -42,32 +47,38 @@ export type ProfileConfig<S extends Schema = any> = {
 	 * PDF/A extension schema for Factur-X 1.0
 	 */
 	extensionSchema: ExtensionSchemaFields & {
-		customFieldMap?: {
-			[K in keyof Omit<ExtensionSchemaFields, "uri">]: string;
-		};
+		customFieldMap?:
+			| {
+					[K in keyof Omit<ExtensionSchemaFields, "uri">]: string;
+			  }
+			| undefined;
 	};
-	config?: {
-		dataRelationship?:
-			| "Data"
-			| "Source"
-			| "Alternative"
-			| "Supplement"
-			| "Unspecified";
-		supportsPDFA?: boolean;
-		allowedAttachmentFormats?:
-			| (
-					| "PDF"
-					| "TXT"
-					| "GIF"
-					| "TIFF"
-					| "JPG"
-					| "CSV"
-					| "XML"
-					| "JSON"
-					| "XLSX"
-					| "ODS"
-					| LiteralString
-			  )[]
-			| "*";
-	};
+	config?:
+		| {
+				dataRelationship?:
+					| "Data"
+					| "Source"
+					| "Alternative"
+					| "Supplement"
+					| "Unspecified"
+					| undefined;
+				supportsPDFA?: boolean | undefined;
+				allowedAttachmentFormats?:
+					| (
+							| "PDF"
+							| "TXT"
+							| "GIF"
+							| "TIFF"
+							| "JPG"
+							| "CSV"
+							| "XML"
+							| "JSON"
+							| "XLSX"
+							| "ODS"
+							| LiteralString
+					  )[]
+					| "*"
+					| undefined;
+		  }
+		| undefined;
 };

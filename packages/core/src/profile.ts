@@ -6,7 +6,7 @@ import type { InterpolateSchemaContext, ProfileConfig } from "./types/profile";
 export type Profile<O extends ProfileConfig = ProfileConfig> = O & {
 	toXML: (
 		input: InferSchema<O["schema"]>,
-		ctx?: ZugferdContext,
+		ctx?: ZugferdContext | undefined,
 	) => Promise<string>;
 };
 
