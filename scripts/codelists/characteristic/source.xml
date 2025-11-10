@@ -1,0 +1,1576 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<entry source="6313">
+		<value>A</value>
+		<name>Consolidated weight</name>
+		<description>The measured consolidated weight.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAA</value>
+		<name>Net weight</name>
+		<description>Weight of goods including any packaging that normally going with the goods.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAB</value>
+		<name>Goods item gross weight</name>
+		<description>Weight (mass) of goods including packing but excluding the carrier's equipment.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAC</value>
+		<name>Total net weight</name>
+		<description>Total weight of goods excluding packaging.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAD</value>
+		<name>Consignment gross weight</name>
+		<description>Total gross weight (mass) of all goods items referred to as one consignment including packaging but excluding any transport equipment.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAF</value>
+		<name>Net net weight</name>
+		<description>Weight (mass) if goods without any packaging.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAG</value>
+		<name>Stern thrust</name>
+		<description>Force exerted by a thruster installed at the stern of a vessel.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAH</value>
+		<name>Bow thrust</name>
+		<description>Force exerted by a thruster installed at the bow of a vessel.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAI</value>
+		<name>Hydrate content of an alcoholic product at bottling</name>
+		<description>The hydrate content of an alcoholic product at the moment of bottling.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAJ</value>
+		<name>Number of units per pallet</name>
+		<description>The number of units contained on a pallet.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAK</value>
+		<name>Fat content</name>
+		<description>An indication of the fat content of a product.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAM</value>
+		<name>Transport means gross weight</name>
+		<description>The measure of the overall size of a ship determined in accordance with the provisions of the International Convention on Tonnage Measurement of Ships.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAN</value>
+		<name>Net tonnage of the vessel</name>
+		<description>The measure of the useful capacity of a ship determined in accordance with the provisions of the International Convention on Tonnage Measurement of Ships.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAO</value>
+		<name>Humidity</name>
+		<description>Degree of moisture.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAP</value>
+		<name>Voltage</name>
+		<description>Electromotive force, or difference of electronic potential between two points.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAQ</value>
+		<name>Power consumption</name>
+		<description>Value of energy consumption.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAR</value>
+		<name>Heat dissipation</name>
+		<description>Measurement of the rate of dispersal of heat.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAS</value>
+		<name>Air flow</name>
+		<description>Measurement of the flow of air.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAT</value>
+		<name>Shock impact</name>
+		<description>Measurement of the impact of a shock.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAU</value>
+		<name>Operative temperature</name>
+		<description>Temperature identified system or process works according to specifications.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAV</value>
+		<name>Non operative temperature</name>
+		<description>Temperature identified system or process does not work according to specifications.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAW</value>
+		<name>Gross volume</name>
+		<description>The volume unadjusted for factors such as temperature or gravity.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAX</value>
+		<name>Net volume</name>
+		<description>The volume after adjustment for factors such as temperature or gravity.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAY</value>
+		<name>Water content</name>
+		<description>Water content in product.</description>
+	</entry>
+	<entry source="6313">
+		<value>AAZ</value>
+		<name>Tensile stress</name>
+		<description>The measured tensile stress.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABA</value>
+		<name>Fibrosity</name>
+		<description>The measured fibrosity.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABB</value>
+		<name>Gauge length</name>
+		<description>The measured gauge length.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABC</value>
+		<name>Radius</name>
+		<description>The measured radius.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABD</value>
+		<name>Straightness</name>
+		<description>Straightness of the item.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABE</value>
+		<name>Strain</name>
+		<description>The measured strain.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABF</value>
+		<name>Item width when unrolled</name>
+		<description>The width of an item when unrolled.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABG</value>
+		<name>Item length when unrolled</name>
+		<description>The length of an item when unrolled.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABH</value>
+		<name>Item area when unrolled</name>
+		<description>The area occupied by an item when unrolled.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABI</value>
+		<name>Original wort</name>
+		<description>Measure of the malt and hops content of beer, before fermentation has taken place.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABJ</value>
+		<name>Volume</name>
+		<description>The amount of air space taken up by the entity identified in the 6311 qualifier.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABK</value>
+		<name>Angle</name>
+		<description>The angle of an object.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABL</value>
+		<name>Peg hole horizontal distance from package leftmost edge</name>
+		<description>Horizontal distance from the left most edge of the package to the center of the hole into which the peg is inserted.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABM</value>
+		<name>Peg hole vertical distance from package top</name>
+		<description>Vertical distance from the top of the package to the top of the hole into which the peg is inserted.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABN</value>
+		<name>Number of layers per pallet</name>
+		<description>The number of layers per pallet.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABO</value>
+		<name>Product strengh, chemical</name>
+		<description>The amount of the single active chemical ingredient within a product.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABP</value>
+		<name>Product strength basis, chemical</name>
+		<description>Amount of product used as the basis for the specification of the chemical product strenght.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABS</value>
+		<name>Item weight</name>
+		<description>Weight at line item level.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABT</value>
+		<name>Payload weight, maximum</name>
+		<description>The maximum weight of a payload.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABX</value>
+		<name>Weight of conveyance</name>
+		<description>Tonnage of conveyance.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABY</value>
+		<name>Conveyance summer dead weight</name>
+		<description>Registered summer dead weight total tonnage of the vessel.</description>
+	</entry>
+	<entry source="6313">
+		<value>ABZ</value>
+		<name>Containerized cargo on vessel's weight</name>
+		<description>Total weight of containerized cargo on vessel.</description>
+	</entry>
+	<entry source="6313">
+		<value>ACA</value>
+		<name>Non-containerized cargo on vessel's weight</name>
+		<description>Total weight of non-containerized cargo on vessel.</description>
+	</entry>
+	<entry source="6313">
+		<value>ACE</value>
+		<name>Ascertained weight</name>
+		<description>Endorsement of the true weight (mass) as ascertained or verified.</description>
+	</entry>
+	<entry source="6313">
+		<value>ACG</value>
+		<name>Chargeable weight</name>
+		<description>The weight on which charges are based.</description>
+	</entry>
+	<entry source="6313">
+		<value>ACN</value>
+		<name>Estimated gross weight</name>
+		<description>Estimated weight (mass) of goods, including packing and excluding carrier's.</description>
+	</entry>
+	<entry source="6313">
+		<value>ACP</value>
+		<name>Estimated volume</name>
+		<description>Estimated size or measure of anything in three dimensions.</description>
+	</entry>
+	<entry source="6313">
+		<value>ACS</value>
+		<name>Vessel overall length</name>
+		<description>Total overall length of the vessel.</description>
+	</entry>
+	<entry source="6313">
+		<value>ACV</value>
+		<name>Loading meters</name>
+		<description>The length in a vehicle, whereby the complete width and height over that length is needed for the goods.</description>
+	</entry>
+	<entry source="6313">
+		<value>ACW</value>
+		<name>Number of axles</name>
+		<description>Number of axles of movable equipment or means of transport on wheels.</description>
+	</entry>
+	<entry source="6313">
+		<value>ACX</value>
+		<name>Payload</name>
+		<description>The revenue-producing load carried by a means of transport.</description>
+	</entry>
+	<entry source="6313">
+		<value>ADR</value>
+		<name>Start position in the length</name>
+		<description>The starting position from the beginning of an item located in the length direction.</description>
+	</entry>
+	<entry source="6313">
+		<value>ADS</value>
+		<name>End position in the length</name>
+		<description>The end position from the beginning of an item located in the length direction.</description>
+	</entry>
+	<entry source="6313">
+		<value>ADT</value>
+		<name>Start position in the width</name>
+		<description>The start position from the beginning of an item located in the width direction.</description>
+	</entry>
+	<entry source="6313">
+		<value>ADU</value>
+		<name>End position in the width</name>
+		<description>The end position from the beginning of an item located in the width direction.</description>
+	</entry>
+	<entry source="6313">
+		<value>ADV</value>
+		<name>Start position in the thickness</name>
+		<description>The start position from the beginning of an item located in the thickness direction.</description>
+	</entry>
+	<entry source="6313">
+		<value>ADW</value>
+		<name>End position in the thickness</name>
+		<description>The end position from the beginning of an item located in the thickness direction.</description>
+	</entry>
+	<entry source="6313">
+		<value>ADX</value>
+		<name>Transport container actual filling weight</name>
+		<description>Actual filling weight of a transport container.</description>
+	</entry>
+	<entry source="6313">
+		<value>ADY</value>
+		<name>Transport container maximum capacity</name>
+		<description>Maximum capacity of a transport container.</description>
+	</entry>
+	<entry source="6313">
+		<value>ADZ</value>
+		<name>Declared net weight</name>
+		<description>The declared net weight of a product or products used for invoicing, customs or transport purposes.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEA</value>
+		<name>Loading height</name>
+		<description>Maximum height of products or packages loaded onto a given transportation device or equipment such as a pallet.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEB</value>
+		<name>Stacking height</name>
+		<description>Maximum height up to which the same product or package may be placed one upon the other for storage purposes.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEC</value>
+		<name>Calculated weight</name>
+		<description>The calculated weight of the item based on the ordered dimensions.</description>
+	</entry>
+	<entry source="6313">
+		<value>AED</value>
+		<name>Ferrite</name>
+		<description>The chemical composition ferrite.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEE</value>
+		<name>Impurity</name>
+		<description>The impurity of the product i.e. the measurement of other chemical elements not normally appearing in a product.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEF</value>
+		<name>Grain size</name>
+		<description>The grain size.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEG</value>
+		<name>Lanthanides</name>
+		<description>The chemical element Lanthanides.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEH</value>
+		<name>Elasticity</name>
+		<description>The value of the elasticity.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEI</value>
+		<name>Drained weight</name>
+		<description>The weight of a product when all liquids used in the packaging of the product have been removed.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEJ</value>
+		<name>Gallium</name>
+		<description>Measurement of the gallium component.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEK</value>
+		<name>Strontium</name>
+		<description>Measurement of the strontium component.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEL</value>
+		<name>Area</name>
+		<description>Extent or measure of a surface.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEM</value>
+		<name>Equipment storage limitation</name>
+		<description>Maximum storage limit of the equipment.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEN</value>
+		<name>Radioactive index of transport</name>
+		<description>The index of transport determines the maximum radiation level at a distance of 1m from the external surface.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEO</value>
+		<name>Radioactivity</name>
+		<description>Activity of radioactive material.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEP</value>
+		<name>Average gross weight</name>
+		<description>Weight which is the outcome of the division of the total gross weight by the number of units.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEQ</value>
+		<name>Forward draft</name>
+		<description>Depth of water from the surface of water to the bottom of the vessel measured at the draft mark of the bow.</description>
+	</entry>
+	<entry source="6313">
+		<value>AER</value>
+		<name>After draft</name>
+		<description>Depth of water from the surface of water to the bottom of the vessel measured at the draft mark of the stern.</description>
+	</entry>
+	<entry source="6313">
+		<value>AES</value>
+		<name>Acidity</name>
+		<description>The quality, state, or degree of being acid.</description>
+	</entry>
+	<entry source="6313">
+		<value>AET</value>
+		<name>Transport equipment gross weight</name>
+		<description>Weight of a transport equipment including the cargo and carrier's equipment.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEU</value>
+		<name>Total transport equipment gross weight</name>
+		<description>Total weight of all transport equipment including the cargo and carrier's equipment.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEV</value>
+		<name>Acidity of juice</name>
+		<description>Acid measurement of juice.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEW</value>
+		<name>Penetrometry</name>
+		<description>Measurement of force required to drive a standard penetrating stamp.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEX</value>
+		<name>Durofel</name>
+		<description>Measurement of the elastic force using a standard penetrating stamp.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEY</value>
+		<name>Juice weight per 100 grams</name>
+		<description>Measurement of weight of juice, based on 100 grams of the entire weight.</description>
+	</entry>
+	<entry source="6313">
+		<value>AEZ</value>
+		<name>Fruit skin colour</name>
+		<description>Measurement of the colouring of the epidermis of a fruit.</description>
+	</entry>
+	<entry source="6313">
+		<value>AF</value>
+		<name>Angle of bend</name>
+		<description>The measured angle of bend.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFA</value>
+		<name>Fixed incremental measurement</name>
+		<description>The measurement of the fixed increment.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFB</value>
+		<name>Durofel D10</name>
+		<description>Measure of the elastic force of the pulp of a fruit. It is measured with a penetrating stamp with diameter 10.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFC</value>
+		<name>Durofel D25</name>
+		<description>Measure of the elastic force of the pulp of a fruit. It is measured with a penetrating stamp with diameter 25.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFD</value>
+		<name>Durofel D50</name>
+		<description>Measure of the elastic force of the pulp of a fruit. It is measured with a penetrating stamp with diameter 50.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFE</value>
+		<name>Maximum stacking weight</name>
+		<description>The maximum weight which may be stacked upon a product or package without the product or packaging being crushed.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFF</value>
+		<name>Gross measure cube</name>
+		<description>The total cubic space occupied by an item, taking into account any protruding components, arrived at by multiplying the maximum length, width and height.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFG</value>
+		<name>Percentage fat content in dry matter</name>
+		<description>The percentage of fat content in dry matter.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFH</value>
+		<name>Saccharometric content</name>
+		<description>Measurement of the sugar content of a solution.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFI</value>
+		<name>Hydrate content of an alcoholic product after bottling</name>
+		<description>The hydrate content which occurs in an alcoholic product after bottling.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFJ</value>
+		<name>Anhydrous content</name>
+		<description>The non-water content.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFK</value>
+		<name>Certified weight</name>
+		<description>Weight which has been certified.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFL</value>
+		<name>Freeboard</name>
+		<description>The vertical distance between the waterline and the upper edge of the deck line.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFM</value>
+		<name>Maximum vessel draught</name>
+		<description>The depth of water needed to float the ship (Maximum vessel draught according to Load Line Certificate IMO, MSC/Circ. 920 15 June 1999).</description>
+	</entry>
+	<entry source="6313">
+		<value>AFN</value>
+		<name>Net explosive weight</name>
+		<description>Mass of the explosive part or substance of goods without any packing.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFO</value>
+		<name>Radioactive criticality safety index</name>
+		<description>A number, assigned to fissile material i.e. material capable of sustaining a nuclear chain reaction, which is used to provide control over the accumulation of packages containing such material.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFP</value>
+		<name>Waste currently on board</name>
+		<description>Amount of waste on board at the moment of the notification.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFQ</value>
+		<name>Waste to be delivered at waste reception facility</name>
+		<description>Amount of waste to be delivered to a waste reception facility, e.g. in the port of call.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFR</value>
+		<name>Waste to be generated until next port of call, estimated</name>
+		<description>Estimated amount of waste to be generated between creation of the current notification and arrival in the next port of call, irrespective of use of incinerator or compactor or disposal at sea.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFS</value>
+		<name>Waste remaining on board at departure</name>
+		<description>Amount of waste remaining on board when leaving the port of call.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFT</value>
+		<name>Colour depth</name>
+		<description>The number of distinct colours represented, e.g. in an image or in a display.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFU</value>
+		<name>Colour depth, maximum</name>
+		<description>The maximum number of distinct colours that can be represented, e.g. in an image or in a display.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFV</value>
+		<name>Image resolution</name>
+		<description>The level of detail of an image.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFW</value>
+		<name>Device resolution, maximum</name>
+		<description>The maximum level of detail produced by a device.</description>
+	</entry>
+	<entry source="6313">
+		<value>AFX</value>
+		<name>Acoustic absorption coefficient</name>
+		<description>The portion of sound energy a surface absorbs, measured at different frequencies.</description>
+	</entry>
+	<entry source="6313">
+		<value>B</value>
+		<name>Billed weight</name>
+		<description>The measured billed weight.</description>
+	</entry>
+	<entry source="6313">
+		<value>BL</value>
+		<name>Breaking load</name>
+		<description>The measured breaking load.</description>
+	</entry>
+	<entry source="6313">
+		<value>BMY</value>
+		<name>Platinum</name>
+		<description>The measurement of the platinum component.</description>
+	</entry>
+	<entry source="6313">
+		<value>BMZ</value>
+		<name>Silver</name>
+		<description>The measurement of the silver component.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNA</value>
+		<name>List</name>
+		<description>The leaning or inclination of a vessel expressed in degrees port or starboard.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNB</value>
+		<name>Trim</name>
+		<description>The condition of a vessel with reference to its longitudinal axis.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNC</value>
+		<name>Free water</name>
+		<description>The volume of water present in a container that is not in suspension in the contained liquid.</description>
+	</entry>
+	<entry source="6313">
+		<value>BND</value>
+		<name>Bands</name>
+		<description>The measured bands.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNE</value>
+		<name>API (American Petroleum Institute) gravity</name>
+		<description>The relative density of petroleum liquids as specified by a standard developed by the API.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNF</value>
+		<name>Petroleum gross observed volume</name>
+		<description>The total volume of all petroleum liquids and sediment and water, excluding free water, at observed temperature and pressure.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNG</value>
+		<name>Petroleum gross standard volume</name>
+		<description>The total volume of all petroleum liquids, sediment, and water excluding free water, corrected by the appropriate volume correction factor for the observed temperature and American Petroleum Institute relative density, or density to a standard temperature.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNH</value>
+		<name>Volume variance</name>
+		<description>The change in the volume measurement.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNI</value>
+		<name>Petroleum net standard volume</name>
+		<description>The total volume of all petroleum liquids, excluding sediment and water and free water, corrected by the appropriate volume correction factor for the observed temperature and American Petroleum Institute gravity relative to density or to a standard temperature.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNJ</value>
+		<name>Material on-board quantity, after discharge</name>
+		<description>The material in vessel tanks, void spaces, and pipelines after discharge.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNK</value>
+		<name>Petroleum total calculated volume</name>
+		<description>The total volume of all petroleum liquids, sediment and water corrected by the appropriate volume correction factor for the observed temperature and American Petroleum Institute (API) gravity, relative density, or density to a standard temperature.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNL</value>
+		<name>Petroleum total observed volume</name>
+		<description>The total volume of all petroleum liquids, sediment and water and free water at observed temperature and pressure.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNM</value>
+		<name>Innage gauge distance</name>
+		<description>The measured distance from the surface of the liquid to a fixed datum plate or to the tank bottom.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNN</value>
+		<name>Petroleum net standard weight</name>
+		<description>The total weight of all petroleum liquids excluding sediments, water and free water.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNO</value>
+		<name>Sediment and water in petroleum</name>
+		<description>The measurement of non-hydrocarbon solid material and water in suspension in petroleum liquid.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNP</value>
+		<name>Observed reference height, tank</name>
+		<description>The observed distance from the tank bottom or datum plate to the established reference point.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNQ</value>
+		<name>Reference height, tank</name>
+		<description>The measured distance from the tank bottom or datum plate to the established reference point.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNR</value>
+		<name>Ullage gauge distance</name>
+		<description>The measured distance from the cargo liquid surface to the reference point.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNS</value>
+		<name>Trim correction</name>
+		<description>The correction applied to the observed gauge or observed volume when a vessel is not on an even keel.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNT</value>
+		<name>Bow to bridge distance</name>
+		<description>The distance between the bow and the bridge of a vessel.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNU</value>
+		<name>Peg hole number</name>
+		<description>Used to identify the peg hole if more than one hole is present in the product or packaging.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNV</value>
+		<name>Number of inner packs</name>
+		<description>Indicates the number of non coded physical groupings (inner packs) of next lower level trade items within the current trade item level.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNW</value>
+		<name>Number of next level trade items within inner pack</name>
+		<description>The number of next lower level trade items contained within the physical non-coded grouping (inner pack).</description>
+	</entry>
+	<entry source="6313">
+		<value>BNX</value>
+		<name>Number of trade items per pallet layer</name>
+		<description>The number of trade items contained on a single layer of a pallet.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNY</value>
+		<name>Packed items layer height</name>
+		<description>The height of a single layer of packed items.</description>
+	</entry>
+	<entry source="6313">
+		<value>BNZ</value>
+		<name>Packing material weight, skin tight covering</name>
+		<description>The weight measurement of the packing material used for skin tight covering (e.g. when packaging prepared meats, poultry, cheese, and other food products).</description>
+	</entry>
+	<entry source="6313">
+		<value>BR</value>
+		<name>Brightness</name>
+		<description>The measured brightness.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRA</value>
+		<name>Brakes</name>
+		<description>The measured brakes.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRB</value>
+		<name>Components labelled for recycling percentage</name>
+		<description>Percentage of trade item components that clearly label how to facilitate product disassembly and recycling.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRC</value>
+		<name>Renewable plastic components percentage, by net weight</name>
+		<description>The percentage of the plastic components only made from rapidly renewable plant-based material by net weight of product.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRD</value>
+		<name>Clamp pressure, required</name>
+		<description>The pressure that should be applied by a clamp.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRE</value>
+		<name>Break</name>
+		<description>The measured break.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRF</value>
+		<name>Ascertained volume</name>
+		<description>Endorsement of the true volume as ascertained or verified.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRG</value>
+		<name>Unit weight</name>
+		<description>The weight of a unit.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRH</value>
+		<name>Total volume</name>
+		<description>Total volume of goods and/or parcels.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRI</value>
+		<name>Unit volume</name>
+		<description>The volume of a unit.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRJ</value>
+		<name>Vertical center of gravity</name>
+		<description>Distance of vertical center of gravity relative to item's base.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRK</value>
+		<name>Maximum allowable transport stacking weight</name>
+		<description>Maximum weight allowed to be stowed on top of an item during transport.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRL</value>
+		<name>Carbon Dioxide</name>
+		<description>Measurement of the carbon dioxide (C02) component.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRM</value>
+		<name>Number of base units per pallet</name>
+		<description>The number of base units contained on a pallet.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRN</value>
+		<name>Colony forming unit</name>
+		<description>Micro-organism colonies that are to be counted under determined conditions.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRO</value>
+		<name>Diluted liquid volume</name>
+		<description>The volume of liquid which results after a dilution agent has been added, e.g. undiluted orange juice of 200ml, after dilution with water the volume of diluted liquid equals 1 litre.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRP</value>
+		<name>Energy efficiency</name>
+		<description>A measurement of the energy efficiency of an article.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRQ</value>
+		<name>Number of layers</name>
+		<description>Number of layers of a product or products within a package, container, etc.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRR</value>
+		<name>Maximum demand</name>
+		<description>The highest demand recorded during the period of recording of usage of the supply.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRS</value>
+		<name>Number of pallet places</name>
+		<description>The number of pallet places needed to store or to transport pallets (can be stacked).</description>
+	</entry>
+	<entry source="6313">
+		<value>BRT</value>
+		<name>Package net measurement, cubed</name>
+		<description>An indication of the net cubed measurement of a package.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRU</value>
+		<name>Power factor</name>
+		<description>The ratio of the power dissipated (active power in kW) to the total power (which is the product of the input volts times amps given in kVa). When equipment which uses reactive power is being operated the power factor will be less than one.</description>
+	</entry>
+	<entry source="6313">
+		<value>BRV</value>
+		<name>Stacking factor excluding bottom item</name>
+		<description>Maximum number of identical items stackable on top of item.</description>
+	</entry>
+	<entry source="6313">
+		<value>BS</value>
+		<name>Breaking strength</name>
+		<description>The measured breaking strength.</description>
+	</entry>
+	<entry source="6313">
+		<value>BSW</value>
+		<name>Breaking strength wet</name>
+		<description>The measured breaking strength when wet.</description>
+	</entry>
+	<entry source="6313">
+		<value>BSX</value>
+		<name>Step size</name>
+		<description>An indication of measurements in which options contained within a Customer Specific Article are available, e.g. 10 metre planks of wood may be sold in step sizes of 2 metres.</description>
+	</entry>
+	<entry source="6313">
+		<value>BSY</value>
+		<name>Number of units per package</name>
+		<description>The number of identified units per package.</description>
+	</entry>
+	<entry source="6313">
+		<value>BSZ</value>
+		<name>Number of units per layer</name>
+		<description>Number of units of a product or package within one layer of a package, container, etc.</description>
+	</entry>
+	<entry source="6313">
+		<value>BTA</value>
+		<name>Weight per running metre</name>
+		<description>A code used to indicate the weight per running metre of floor coverings over floor area.</description>
+	</entry>
+	<entry source="6313">
+		<value>BTB</value>
+		<name>Weight per square metre</name>
+		<description>A code used to indicate the weight per square metre of floor coverings over floor area.</description>
+	</entry>
+	<entry source="6313">
+		<value>BTC</value>
+		<name>Acidity of meat</name>
+		<description>The meat's acid quality or condition.</description>
+	</entry>
+	<entry source="6313">
+		<value>BTD</value>
+		<name>Slaughtering weight</name>
+		<description>Weight immediately after slaughter.</description>
+	</entry>
+	<entry source="6313">
+		<value>BTE</value>
+		<name>Stacking factor including bottom item</name>
+		<description>Maximum number of items stackable upon each other, including the bottom item.</description>
+	</entry>
+	<entry source="6313">
+		<value>BTF</value>
+		<name>Number of units in the width of a layer</name>
+		<description>Number of units of a product or package which make up the width of a layer in a package, container, pallet, etc.</description>
+	</entry>
+	<entry source="6313">
+		<value>BTG</value>
+		<name>Number of units in the depth of a layer</name>
+		<description>Number of units of a product or package which make up the depth of a layer in a package, container, pallet, etc.</description>
+	</entry>
+	<entry source="6313">
+		<value>BTH</value>
+		<name>Nestable percentage</name>
+		<description>Extent expressed as a percentage to which an item can be nested within an identical item, e.g. paper cups.</description>
+	</entry>
+	<entry source="6313">
+		<value>BTI</value>
+		<name>Gross weight including carrier's equipment</name>
+		<description>Weight (mass) of goods including packaging and the carrier's equipment. In this context 'carrier's equipment' means any material resources necessary to facilitate the transport and handling of the goods without having the ability to move by its own propulsion, e.g. pallet, container, etc.</description>
+	</entry>
+	<entry source="6313">
+		<value>BTJ</value>
+		<name>Sugar content</name>
+		<description>The rate of sugar.</description>
+	</entry>
+	<entry source="6313">
+		<value>BTK</value>
+		<name>Self-accelerating polymerization temperature (SAPT)</name>
+		<description>The lowest temperature at which polymerization may occur for a substance as packed for transport.</description>
+	</entry>
+	<entry source="6313">
+		<value>BTL</value>
+		<name>Self-accelerating decomposition temperature (SADT)</name>
+		<description>The lowest temperature at which self-accelerating decomposition may occur for a substance as packed for transport.</description>
+	</entry>
+	<entry source="6313">
+		<value>BTM</value>
+		<name>Control temperature</name>
+		<description>The controlled transport temperature to avoid decomposition of self-reactive substances and organic peroxides.</description>
+	</entry>
+	<entry source="6313">
+		<value>BW</value>
+		<name>Basis weight</name>
+		<description>The measured basis weight.</description>
+	</entry>
+	<entry source="6313">
+		<value>CHN</value>
+		<name>Change</name>
+		<description>The measured change.</description>
+	</entry>
+	<entry source="6313">
+		<value>CHO</value>
+		<name>Emergency temperature</name>
+		<description>The temperature at which emergency response is required for self-reactive substances and organic peroxides.</description>
+	</entry>
+	<entry source="6313">
+		<value>CM</value>
+		<name>Colour</name>
+		<description>The measured colour.</description>
+	</entry>
+	<entry source="6313">
+		<value>CT</value>
+		<name>Contents of package</name>
+		<description>In combination with the other data elements of the actual segment this code indicates the measured content of a package.</description>
+	</entry>
+	<entry source="6313">
+		<value>CV</value>
+		<name>Commercial weight</name>
+		<description>Item weight considering its maximum possible humidity.</description>
+	</entry>
+	<entry source="6313">
+		<value>CZ</value>
+		<name>Core length</name>
+		<description>To specify length of core on which product is to be placed.</description>
+	</entry>
+	<entry source="6313">
+		<value>D</value>
+		<name>Destination weight agreement</name>
+		<description>The agreed weight of despatched goods whose weight may change during transport.</description>
+	</entry>
+	<entry source="6313">
+		<value>DI</value>
+		<name>Diameter</name>
+		<description>Diameter of an article.</description>
+	</entry>
+	<entry source="6313">
+		<value>DL</value>
+		<name>Delta value L</name>
+		<description>The measured delta value L.</description>
+	</entry>
+	<entry source="6313">
+		<value>DN</value>
+		<name>Density</name>
+		<description>The measured density.</description>
+	</entry>
+	<entry source="6313">
+		<value>DP</value>
+		<name>Depth</name>
+		<description>The measured depth.</description>
+	</entry>
+	<entry source="6313">
+		<value>DR</value>
+		<name>Denier</name>
+		<description>The measured fineness of a material.</description>
+	</entry>
+	<entry source="6313">
+		<value>DS</value>
+		<name>Distance between points</name>
+		<description>The measured distance between points.</description>
+	</entry>
+	<entry source="6313">
+		<value>DW</value>
+		<name>Width, boxcar door</name>
+		<description>The measured width of a boxcar door.</description>
+	</entry>
+	<entry source="6313">
+		<value>E</value>
+		<name>Estimated new weight</name>
+		<description>The measured estimated new weight.</description>
+	</entry>
+	<entry source="6313">
+		<value>EA</value>
+		<name>Elongation</name>
+		<description>The measured elongation.</description>
+	</entry>
+	<entry source="6313">
+		<value>F</value>
+		<name>Deficit weight</name>
+		<description>The measured deficit weight.</description>
+	</entry>
+	<entry source="6313">
+		<value>FI</value>
+		<name>Filament count</name>
+		<description>Used e.g. in textile, print industries.</description>
+	</entry>
+	<entry source="6313">
+		<value>FL</value>
+		<name>Longitudinal flatness</name>
+		<description>The measured longitudinal flatness.</description>
+	</entry>
+	<entry source="6313">
+		<value>FN</value>
+		<name>Flatness</name>
+		<description>The measured flatness.</description>
+	</entry>
+	<entry source="6313">
+		<value>FV</value>
+		<name>Transverse flatness</name>
+		<description>The measured transverse flatness.</description>
+	</entry>
+	<entry source="6313">
+		<value>GG</value>
+		<name>Gauge</name>
+		<description>The measured gauge.</description>
+	</entry>
+	<entry source="6313">
+		<value>GW</value>
+		<name>Gross weight, maximum</name>
+		<description>The measured maximum gross weight.</description>
+	</entry>
+	<entry source="6313">
+		<value>HF</value>
+		<name>Hardness</name>
+		<description>The measured hardness.</description>
+	</entry>
+	<entry source="6313">
+		<value>HM</value>
+		<name>Height, maximum</name>
+		<description>The measured maximum height.</description>
+	</entry>
+	<entry source="6313">
+		<value>HT</value>
+		<name>Height dimension</name>
+		<description>Numeric value of height.</description>
+	</entry>
+	<entry source="6313">
+		<value>IB</value>
+		<name>Impact energy</name>
+		<description>The measured impact energy.</description>
+	</entry>
+	<entry source="6313">
+		<value>ID</value>
+		<name>Inside diameter</name>
+		<description>The measured inside diameter.</description>
+	</entry>
+	<entry source="6313">
+		<value>L</value>
+		<name>Legal weight</name>
+		<description>The measured legal weight.</description>
+	</entry>
+	<entry source="6313">
+		<value>LM</value>
+		<name>Length, maximum</name>
+		<description>The measured maximum length.</description>
+	</entry>
+	<entry source="6313">
+		<value>LN</value>
+		<name>Length</name>
+		<description>To specify the value of a length dimension.</description>
+	</entry>
+	<entry source="6313">
+		<value>LND</value>
+		<name>Lost end</name>
+		<description>The measured lost end.</description>
+	</entry>
+	<entry source="6313">
+		<value>M</value>
+		<name>Minimum weight</name>
+		<description>The measured minimum weight.</description>
+	</entry>
+	<entry source="6313">
+		<value>MO</value>
+		<name>Moisture</name>
+		<description>Measurement application is the moisture content of the item.</description>
+	</entry>
+	<entry source="6313">
+		<value>MW</value>
+		<name>Maximum weight</name>
+		<description>The measured maximum weight.</description>
+	</entry>
+	<entry source="6313">
+		<value>N</value>
+		<name>Actual net weight</name>
+		<description>The actual weight of the goods excluding packaging.</description>
+	</entry>
+	<entry source="6313">
+		<value>OD</value>
+		<name>Outside diameter</name>
+		<description>The measured outside diameter.</description>
+	</entry>
+	<entry source="6313">
+		<value>PRS</value>
+		<name>Pre stretch</name>
+		<description>Measurement identifying the amount an item has been stretched prior to use.</description>
+	</entry>
+	<entry source="6313">
+		<value>PTN</value>
+		<name>Per tonne</name>
+		<description>A measurement per tonne.</description>
+	</entry>
+	<entry source="6313">
+		<value>RA</value>
+		<name>Relative humidity</name>
+		<description>The measured relative humidity.</description>
+	</entry>
+	<entry source="6313">
+		<value>RF</value>
+		<name>Resistivity</name>
+		<description>The measured resistivity.</description>
+	</entry>
+	<entry source="6313">
+		<value>RJ</value>
+		<name>Rockwell C</name>
+		<description>Hardness in the Rockwell C scale.</description>
+	</entry>
+	<entry source="6313">
+		<value>RMW</value>
+		<name>Ream weight</name>
+		<description>Measurement indication for paper.</description>
+	</entry>
+	<entry source="6313">
+		<value>RP</value>
+		<name>Reduction of area</name>
+		<description>The measured reduction of area.</description>
+	</entry>
+	<entry source="6313">
+		<value>RUN</value>
+		<name>Run (process)</name>
+		<description>The measured run (process).</description>
+	</entry>
+	<entry source="6313">
+		<value>RY</value>
+		<name>Ratio</name>
+		<description>The measured ratio.</description>
+	</entry>
+	<entry source="6313">
+		<value>SQ</value>
+		<name>Shipped quantity</name>
+		<description>The measured shipped quantity.</description>
+	</entry>
+	<entry source="6313">
+		<value>T</value>
+		<name>Tare weight</name>
+		<description>Weight excluding goods and loose accessories.</description>
+	</entry>
+	<entry source="6313">
+		<value>TC</value>
+		<name>Temperature</name>
+		<description>A measurement in relation to temperature.</description>
+	</entry>
+	<entry source="6313">
+		<value>TH</value>
+		<name>Thickness</name>
+		<description>The measured thickness.</description>
+	</entry>
+	<entry source="6313">
+		<value>TN</value>
+		<name>Time period</name>
+		<description>Measurement of a specific length of time.</description>
+	</entry>
+	<entry source="6313">
+		<value>TT</value>
+		<name>Time</name>
+		<description>The measured time.</description>
+	</entry>
+	<entry source="6313">
+		<value>VGM</value>
+		<name>Transport equipment verified gross mass (weight)</name>
+		<description>The gross mass (weight) of the transport equipment verified according to SOLAS Chapter VI, Regulation 2, paragraphs 4-6.</description>
+	</entry>
+	<entry source="6313">
+		<value>VH</value>
+		<name>Height, van door</name>
+		<description>The height of the door of a van or container.</description>
+	</entry>
+	<entry source="6313">
+		<value>VW</value>
+		<name>Width, van door</name>
+		<description>The width of the door of a van or container.</description>
+	</entry>
+	<entry source="6313">
+		<value>WA</value>
+		<name>Weight per unit of area</name>
+		<description>The weight per unit of an area.</description>
+	</entry>
+	<entry source="6313">
+		<value>WD</value>
+		<name>Width dimension</name>
+		<description>Numeric value of width.</description>
+	</entry>
+	<entry source="6313">
+		<value>WM</value>
+		<name>Width, maximum</name>
+		<description>The maximum distance from side to side.</description>
+	</entry>
+	<entry source="6313">
+		<value>WU</value>
+		<name>Weight per unit of length</name>
+		<description>The weight per unit of length.</description>
+	</entry>
+	<entry source="6313">
+		<value>XH</value>
+		<name>Side height, flat bed with removable sides</name>
+		<description>The height of the removable sides of a flat bed truck.</description>
+	</entry>
+	<entry source="6313">
+		<value>XQ</value>
+		<name>Squareness</name>
+		<description>The measured squareness.</description>
+	</entry>
+	<entry source="6313">
+		<value>XZ</value>
+		<name>Spool size</name>
+		<description>The measured spool size.</description>
+	</entry>
+	<entry source="6313">
+		<value>YS</value>
+		<name>Yield stress</name>
+		<description>The measured yield stress.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZAL</value>
+		<name>Aluminium</name>
+		<description>The measured chemical element aluminium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZAS</value>
+		<name>Arsenic</name>
+		<description>The measured chemical element arsenic.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZB</value>
+		<name>Boron</name>
+		<description>The measured chemical element boron.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZBI</value>
+		<name>Bismuth</name>
+		<description>The measured chemical element bismuth.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZC</value>
+		<name>Carbon</name>
+		<description>The measured chemical element carbon.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZCA</value>
+		<name>Calcium</name>
+		<description>The measured chemical element calcium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZCB</value>
+		<name>Columbium</name>
+		<description>The measured chemical element columbium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZCE</value>
+		<name>Cerium</name>
+		<description>The measured chemical element cerium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZCL</value>
+		<name>Chlorine</name>
+		<description>The measured chemical element chlorine.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZCO</value>
+		<name>Cobalt</name>
+		<description>The measured chemical element cobalt.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZCR</value>
+		<name>Chromium</name>
+		<description>The measured chemical element chromium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZCU</value>
+		<name>Copper</name>
+		<description>The measured chemical element copper.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZFE</value>
+		<name>Iron</name>
+		<description>The measured chemical element iron.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZFS</value>
+		<name>Iron plus silicon</name>
+		<description>The measured substance iron plus silicon.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZGE</value>
+		<name>Germanium</name>
+		<description>The measured chemical element germanium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZH</value>
+		<name>Hydrogen</name>
+		<description>The measured chemical element hydrogen.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZK</value>
+		<name>Potassium</name>
+		<description>The measured chemical element potassium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZMG</value>
+		<name>Magnesium</name>
+		<description>The measured chemical element magnesium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZMN</value>
+		<name>Manganese</name>
+		<description>The measured chemical element manganese.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZMO</value>
+		<name>Molybdenum</name>
+		<description>The measured chemical element molybdenum.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZN</value>
+		<name>Nitrogen</name>
+		<description>The measured chemical element nitrogen.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZNA</value>
+		<name>Sodium</name>
+		<description>The measured chemical element sodium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZNB</value>
+		<name>Niobium</name>
+		<description>The chemical element niobium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZNI</value>
+		<name>Nickel</name>
+		<description>The measured chemical element nickel.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZO</value>
+		<name>Oxygen</name>
+		<description>The measured chemical element oxygen.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZP</value>
+		<name>Phosphorus</name>
+		<description>The measured chemical element phosphorus.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZPB</value>
+		<name>Lead</name>
+		<description>The measured chemical element lead.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZS</value>
+		<name>Sulphur</name>
+		<description>The measured chemical element sulphur.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZSB</value>
+		<name>Antimony</name>
+		<description>The measured chemical element antimony.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZSE</value>
+		<name>Selenium</name>
+		<description>The measured chemical element selenium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZSI</value>
+		<name>Silicon</name>
+		<description>The measured chemical element silicon.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZSL</value>
+		<name>Silicium oxyd</name>
+		<description>The measured substance silicium oxyd.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZSN</value>
+		<name>Tin</name>
+		<description>The measured chemical element tin.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZTA</value>
+		<name>Tantalium</name>
+		<description>The measured chemical element tantalium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZTE</value>
+		<name>Tellurium</name>
+		<description>The measured chemical element tellurium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZTI</value>
+		<name>Titanium</name>
+		<description>The measured chemical element titanium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZV</value>
+		<name>Vanadium</name>
+		<description>The measured chemical element vanadium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZW</value>
+		<name>Tungsten</name>
+		<description>The measured chemical element tungsten.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZWA</value>
+		<name>Waste content</name>
+		<description>The measured waste content.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZZN</value>
+		<name>Zinc</name>
+		<description>The measured chemical element zinc.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZZR</value>
+		<name>Zirconium</name>
+		<description>The measured chemical element zirconium.</description>
+	</entry>
+	<entry source="6313">
+		<value>ZZZ</value>
+		<name>Mutually defined</name>
+		<description>A code assigned within a code list to be used on an interim basis and as defined among trading partners until a precise code can be assigned to the code list.</description>
+	</entry>
+	<entry source="Factur-X">
+		<value>BEST_BEFORE_DATE</value>
+		<name>Best before date</name>
+	</entry>
+	<entry source="Factur-X">
+		<value>COLOR_TEXT</value>
+		<name>Colour as text</name>
+	</entry>
+	<entry source="Factur-X">
+		<value>COMMISSION</value>
+		<name>Commission indicator</name>
+		<description>true / false</description>
+	</entry>
+	<entry source="Factur-X">
+		<value>DEPOSIT_SYSTEM</value>
+		<name>Deposit system</name>
+		<description>Permitted values:
+
+DISPOSABLE
+RETURNABLE</description>
+	</entry>
+	<entry source="Factur-X">
+		<value>DEPOSIT_TYPE</value>
+		<name>Deposit type</name>
+		<description>Permitted values:
+
+PRODUCT_PACKAGING
+TRANSPORT_EQUIPMENT</description>
+	</entry>
+	<entry source="Factur-X">
+		<value>ENERGY_CLASS</value>
+		<name>Energy efficiency class</name>
+	</entry>
+	<entry source="Factur-X">
+		<value>EXPIRATION_DATE</value>
+		<name>Expiration date</name>
+	</entry>
+	<entry source="Factur-X">
+		<value>FEE</value>
+		<name>Fee indicator</name>
+		<description>true = item is a fee</description>
+	</entry>
+	<entry source="Factur-X">
+		<value>KIND_OF_ARTICLE</value>
+		<name>Type of article</name>
+		<description>Allowed values:
+GOODS
+OTHER_SERVICES</description>
+	</entry>
+	<entry source="Factur-X">
+		<value>MATERIAL</value>
+		<name>Material of the product</name>
+	</entry>
+	<entry source="Factur-X">
+		<value>METER_LOCATION</value>
+		<name>Metering point designation, e.g. for electricity or gas</name>
+	</entry>
+	<entry source="Factur-X">
+		<value>METER_NUMBER</value>
+		<name>Meter number, e.g. for electricity or gas</name>
+	</entry>
+	<entry source="Factur-X">
+		<value>ORGANIC_CONTROL_BODY</value>
+		<name>Organic control body number</name>
+	</entry>
+	<entry source="Factur-X">
+		<value>PACKAGING_MATERIAL</value>
+		<name>Packaging material</name>
+	</entry>
+	<entry source="Factur-X">
+		<value>PACKAGING_TYPE</value>
+		<name>Type of packaging (code)</name>
+		<description>Type of packaging in coded form. The packaging units from Rec 20 / Rec 21 are used as the code list. Example XBO=bottle</description>
+	</entry>
+	<entry source="Factur-X">
+		<value>PROMOTIONAL_VARIANT</value>
+		<name>Number of the action variant</name>
+	</entry>
+	<entry source="Factur-X">
+		<value>SEAL_NUMBER</value>
+		<name>Seal number</name>
+	</entry>
+	<entry source="Factur-X">
+		<value>SIZE_CODE</value>
+		<name>Size code</name>
+		<description>Size information in coded form</description>
+	</entry>
+	<entry source="Factur-X">
+		<value>SIZE_TEXT</value>
+		<name>Size designation</name>
+		<description>Size specifications in text form</description>
+	</entry>
+	<entry source="Factur-X">
+		<value>TRADING_UNIT</value>
+		<name>Type of trading unit</name>
+		<description>Permitted values:
+MIXED_ASSORTMENT = Assortment
+UNMIXED_UNIT = Container</description>
+	</entry>
+	<entry source="Factur-X">
+		<value>WASTE_CODE</value>
+		<name>Waste code (EWC)</name>
+		<description>Waste code according to the European Waste Catalogue (EWC)</description>
+	</entry>
+	<entry source="Factur-X">
+		<value>WASTE_FRACTION</value>
+		<name>Waste fraction</name>
+	</entry>
+	<entry source="Factur-X">
+		<value>WEEE_NUMBER</value>
+		<name>WEEE registration number</name>
+		<description>WEEE registration number of the manufacturer of the product</description>
+	</entry>
+</entries>

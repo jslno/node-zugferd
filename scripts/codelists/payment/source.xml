@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<entry>
+		<value>1</value>
+		<name>Instrument not defined</name>
+	</entry>
+	<entry>
+		<value>2</value>
+		<name>Automated clearing house credit</name>
+	</entry>
+	<entry>
+		<value>3</value>
+		<name>Automated clearing house debit</name>
+	</entry>
+	<entry>
+		<value>4</value>
+		<name>ACH demand debit reversal</name>
+	</entry>
+	<entry>
+		<value>5</value>
+		<name>ACH demand credit reversal</name>
+	</entry>
+	<entry>
+		<value>6</value>
+		<name>ACH demand credit</name>
+	</entry>
+	<entry>
+		<value>7</value>
+		<name>ACH demand debit</name>
+	</entry>
+	<entry>
+		<value>8</value>
+		<name>Hold</name>
+	</entry>
+	<entry>
+		<value>9</value>
+		<name>National or regional clearing</name>
+	</entry>
+	<entry>
+		<value>10</value>
+		<name>In cash</name>
+	</entry>
+	<entry>
+		<value>11</value>
+		<name>ACH savings credit reversal</name>
+	</entry>
+	<entry>
+		<value>12</value>
+		<name>ACH savings debit reversal</name>
+	</entry>
+	<entry>
+		<value>13</value>
+		<name>ACH savings credit</name>
+	</entry>
+	<entry>
+		<value>14</value>
+		<name>ACH savings debit</name>
+	</entry>
+	<entry>
+		<value>15</value>
+		<name>Bookentry credit</name>
+	</entry>
+	<entry>
+		<value>16</value>
+		<name>Bookentry debit</name>
+	</entry>
+	<entry>
+		<value>17</value>
+		<name>ACH demand cash concentration/disbursement (CCD) credit</name>
+	</entry>
+	<entry>
+		<value>18</value>
+		<name>ACH demand cash concentration/disbursement (CCD) debit</name>
+	</entry>
+	<entry>
+		<value>19</value>
+		<name>ACH demand corporate trade payment (CTP) credit</name>
+	</entry>
+	<entry>
+		<value>20</value>
+		<name>Cheque</name>
+	</entry>
+	<entry>
+		<value>21</value>
+		<name>Banker's draft</name>
+	</entry>
+	<entry>
+		<value>22</value>
+		<name>Certified banker's draft</name>
+	</entry>
+	<entry>
+		<value>23</value>
+		<name>Bank cheque (issued by a banking or similar establishment)</name>
+	</entry>
+	<entry>
+		<value>24</value>
+		<name>Bill of exchange awaiting acceptance</name>
+	</entry>
+	<entry>
+		<value>25</value>
+		<name>Certified cheque</name>
+	</entry>
+	<entry>
+		<value>26</value>
+		<name>Local cheque</name>
+	</entry>
+	<entry>
+		<value>27</value>
+		<name>ACH demand corporate trade payment (CTP) debit</name>
+	</entry>
+	<entry>
+		<value>28</value>
+		<name>ACH demand corporate trade exchange (CTX) credit</name>
+	</entry>
+	<entry>
+		<value>29</value>
+		<name>ACH demand corporate trade exchange (CTX) debit</name>
+	</entry>
+	<entry>
+		<value>30</value>
+		<name>Credit transfer</name>
+		<usage>non-SEPA</usage>
+	</entry>
+	<entry>
+		<value>31</value>
+		<name>Debit transfer</name>
+		<usage>non-SEPA</usage>
+	</entry>
+	<entry>
+		<value>32</value>
+		<name>ACH demand cash concentration/disbursement plus (CCD+)</name>
+	</entry>
+	<entry>
+		<value>33</value>
+		<name>ACH demand cash concentration/disbursement plus (CCD+)</name>
+	</entry>
+	<entry>
+		<value>34</value>
+		<name>ACH prearranged payment and deposit (PPD)</name>
+	</entry>
+	<entry>
+		<value>35</value>
+		<name>ACH savings cash concentration/disbursement (CCD) credit</name>
+	</entry>
+	<entry>
+		<value>36</value>
+		<name>ACH savings cash concentration/disbursement (CCD) debit</name>
+	</entry>
+	<entry>
+		<value>37</value>
+		<name>ACH savings corporate trade payment (CTP) credit</name>
+	</entry>
+	<entry>
+		<value>38</value>
+		<name>ACH savings corporate trade payment (CTP) debit</name>
+	</entry>
+	<entry>
+		<value>39</value>
+		<name>ACH savings corporate trade exchange (CTX) credit</name>
+	</entry>
+	<entry>
+		<value>40</value>
+		<name>ACH savings corporate trade exchange (CTX) debit</name>
+	</entry>
+	<entry>
+		<value>41</value>
+		<name>ACH savings cash concentration/disbursement plus (CCD+)</name>
+	</entry>
+	<entry>
+		<value>42</value>
+		<name>Payment to bank account</name>
+	</entry>
+	<entry>
+		<value>43</value>
+		<name>ACH savings cash concentration/disbursement plus (CCD+)</name>
+	</entry>
+	<entry>
+		<value>44</value>
+		<name>Accepted bill of exchange</name>
+	</entry>
+	<entry>
+		<value>45</value>
+		<name>Referenced home-banking credit transfer</name>
+	</entry>
+	<entry>
+		<value>46</value>
+		<name>Interbank debit transfer</name>
+	</entry>
+	<entry>
+		<value>47</value>
+		<name>Home-banking debit transfer</name>
+	</entry>
+	<entry>
+		<value>48</value>
+		<name>Bank card</name>
+		<usage>Use for all payment cards</usage>
+	</entry>
+	<entry>
+		<value>49</value>
+		<name>Direct debit</name>
+	</entry>
+	<entry>
+		<value>50</value>
+		<name>Payment by postgiro</name>
+	</entry>
+	<entry>
+		<value>51</value>
+		<name>FR, norme 6 97-Telereglement CFONB (French Organisation for</name>
+	</entry>
+	<entry>
+		<value>52</value>
+		<name>Urgent commercial payment</name>
+	</entry>
+	<entry>
+		<value>53</value>
+		<name>Urgent Treasury Payment</name>
+	</entry>
+	<entry>
+		<value>54</value>
+		<name>Credit card</name>
+	</entry>
+	<entry>
+		<value>55</value>
+		<name>Debit card</name>
+	</entry>
+	<entry>
+		<value>56</value>
+		<name>Bankgiro</name>
+	</entry>
+	<entry>
+		<value>57</value>
+		<name>Standing agreement</name>
+		<usage>Contractual payment means</usage>
+	</entry>
+	<entry>
+		<value>58</value>
+		<name>SEPA credit transfer</name>
+		<usage>SEPA</usage>
+	</entry>
+	<entry>
+		<value>59</value>
+		<name>SEPA direct debit</name>
+		<usage>SEPA</usage>
+	</entry>
+	<entry>
+		<value>60</value>
+		<name>Promissory note</name>
+	</entry>
+	<entry>
+		<value>61</value>
+		<name>Promissory note signed by the debtor</name>
+	</entry>
+	<entry>
+		<value>62</value>
+		<name>Promissory note signed by the debtor and endorsed by a bank</name>
+	</entry>
+	<entry>
+		<value>63</value>
+		<name>Promissory note signed by the debtor and endorsed by a</name>
+	</entry>
+	<entry>
+		<value>64</value>
+		<name>Promissory note signed by a bank</name>
+	</entry>
+	<entry>
+		<value>65</value>
+		<name>Promissory note signed by a bank and endorsed by another</name>
+	</entry>
+	<entry>
+		<value>66</value>
+		<name>Promissory note signed by a third party</name>
+	</entry>
+	<entry>
+		<value>67</value>
+		<name>Promissory note signed by a third party and endorsed by a</name>
+	</entry>
+	<entry>
+		<value>68</value>
+		<name>Online payment service</name>
+	</entry>
+	<entry>
+		<value>69</value>
+		<name>Transfer Advice</name>
+	</entry>
+	<entry>
+		<value>70</value>
+		<name>Bill drawn by the creditor on the debtor</name>
+	</entry>
+	<entry>
+		<value>74</value>
+		<name>Bill drawn by the creditor on a bank</name>
+	</entry>
+	<entry>
+		<value>75</value>
+		<name>Bill drawn by the creditor, endorsed by another bank</name>
+	</entry>
+	<entry>
+		<value>76</value>
+		<name>Bill drawn by the creditor on a bank and endorsed by a</name>
+	</entry>
+	<entry>
+		<value>77</value>
+		<name>Bill drawn by the creditor on a third party</name>
+	</entry>
+	<entry>
+		<value>78</value>
+		<name>Bill drawn by creditor on third party, accepted and</name>
+	</entry>
+	<entry>
+		<value>91</value>
+		<name>Not transferable banker's draft</name>
+	</entry>
+	<entry>
+		<value>92</value>
+		<name>Not transferable local cheque</name>
+	</entry>
+	<entry>
+		<value>93</value>
+		<name>Reference giro</name>
+	</entry>
+	<entry>
+		<value>94</value>
+		<name>Urgent giro</name>
+	</entry>
+	<entry>
+		<value>95</value>
+		<name>Free format giro</name>
+	</entry>
+	<entry>
+		<value>96</value>
+		<name>Requested method for payment was not used</name>
+	</entry>
+	<entry>
+		<value>97</value>
+		<name>Clearing between partners</name>
+	</entry>
+	<entry>
+		<value>98</value>
+		<name>JP, Electronically Recorded Monetary Claims</name>
+	</entry>
+	<entry>
+		<value>ZZZ</value>
+		<name>Mutually defined</name>
+	</entry>
+</entries>

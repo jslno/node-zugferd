@@ -17,7 +17,7 @@
     },
     {
       "path": "./packages/profiles/minimum/tsconfig.json"
-    }
+    },
     // {
     //   "path": "./packages/profiles/basic-wl/tsconfig.json"
     // },
@@ -38,6 +38,90 @@
     // },
     // {
     //   "path": "./packages/validators/xsd/tsconfig.json"
-    // }
+    // },
+    {
+      "path": "./packages/codelists/allowance/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/characteristic/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/charge/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/country/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/currency/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/date/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/eas/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/fiscal-id/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/icd/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/incoterms/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/item/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/language/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/line-reason/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/line-status/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/mime/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/payment/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/text/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/time/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/transport/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/unit/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/untdid-1001/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/untdid-1153/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/untdid-3035/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/untdid-3139/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/untdid-5305/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/vat-cat/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/vat-id/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/vatex/tsconfig.json"
+    }
   ]
 }

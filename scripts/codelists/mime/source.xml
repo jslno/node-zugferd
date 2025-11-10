@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<entry>
+		<value>application/pdf</value>
+	</entry>
+	<entry>
+		<value>image/png</value>
+	</entry>
+	<entry>
+		<value>image/jpeg</value>
+	</entry>
+	<entry>
+		<value>text/csv</value>
+	</entry>
+	<entry>
+		<value>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</value>
+	</entry>
+	<entry>
+		<value>application/vnd.oasis.opendocument.spreadsheet</value>
+	</entry>
+	<entry>
+		<value>application/xml</value>
+	</entry>
+	<entry>
+		<value>text/xml</value>
+	</entry>
+</entries>

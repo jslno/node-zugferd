@@ -1,0 +1,3275 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<entry>
+		<value>AAA</value>
+		<name>Order acknowledgement document identifier</name>
+	</entry>
+	<entry>
+		<value>AAB</value>
+		<name>Proforma invoice document identifier</name>
+	</entry>
+	<entry>
+		<value>AAC</value>
+		<name>Documentary credit identifier</name>
+	</entry>
+	<entry>
+		<value>AAD</value>
+		<name>Contract document addendum identifier</name>
+	</entry>
+	<entry>
+		<value>AAE</value>
+		<name>Goods declaration number</name>
+	</entry>
+	<entry>
+		<value>AAF</value>
+		<name>Debit card number</name>
+	</entry>
+	<entry>
+		<value>AAG</value>
+		<name>Offer number</name>
+	</entry>
+	<entry>
+		<value>AAH</value>
+		<name>Bank's batch interbank transaction reference number</name>
+	</entry>
+	<entry>
+		<value>AAI</value>
+		<name>Bank's individual interbank transaction reference number</name>
+	</entry>
+	<entry>
+		<value>AAJ</value>
+		<name>Delivery order number</name>
+	</entry>
+	<entry>
+		<value>AAK</value>
+		<name>Despatch advice number</name>
+	</entry>
+	<entry>
+		<value>AAL</value>
+		<name>Drawing number</name>
+	</entry>
+	<entry>
+		<value>AAM</value>
+		<name>Waybill number</name>
+	</entry>
+	<entry>
+		<value>AAN</value>
+		<name>Delivery schedule number</name>
+	</entry>
+	<entry>
+		<value>AAO</value>
+		<name>Consignment identifier, consignee assigned</name>
+	</entry>
+	<entry>
+		<value>AAP</value>
+		<name>Partial shipment identifier</name>
+	</entry>
+	<entry>
+		<value>AAQ</value>
+		<name>Transport equipment identifier</name>
+	</entry>
+	<entry>
+		<value>AAR</value>
+		<name>Municipality assigned business registry number</name>
+	</entry>
+	<entry>
+		<value>AAS</value>
+		<name>Transport contract document identifier</name>
+	</entry>
+	<entry>
+		<value>AAT</value>
+		<name>Master label number</name>
+	</entry>
+	<entry>
+		<value>AAU</value>
+		<name>Despatch note document identifier</name>
+	</entry>
+	<entry>
+		<value>AAV</value>
+		<name>Enquiry number</name>
+	</entry>
+	<entry>
+		<value>AAW</value>
+		<name>Docket number</name>
+	</entry>
+	<entry>
+		<value>AAX</value>
+		<name>Civil action number</name>
+	</entry>
+	<entry>
+		<value>AAY</value>
+		<name>Carrier's agent reference number</name>
+	</entry>
+	<entry>
+		<value>AAZ</value>
+		<name>Standard Carrier Alpha Code (SCAC) number</name>
+	</entry>
+	<entry>
+		<value>ABA</value>
+		<name>Customs valuation decision number</name>
+	</entry>
+	<entry>
+		<value>ABB</value>
+		<name>End use authorization number</name>
+	</entry>
+	<entry>
+		<value>ABC</value>
+		<name>Anti-dumping case number</name>
+	</entry>
+	<entry>
+		<value>ABD</value>
+		<name>Customs tariff number</name>
+	</entry>
+	<entry>
+		<value>ABE</value>
+		<name>Declarant's reference number</name>
+	</entry>
+	<entry>
+		<value>ABF</value>
+		<name>Repair estimate number</name>
+	</entry>
+	<entry>
+		<value>ABG</value>
+		<name>Customs decision request number</name>
+	</entry>
+	<entry>
+		<value>ABH</value>
+		<name>Sub-house bill of lading number</name>
+	</entry>
+	<entry>
+		<value>ABI</value>
+		<name>Tax payment identifier</name>
+	</entry>
+	<entry>
+		<value>ABJ</value>
+		<name>Quota number</name>
+	</entry>
+	<entry>
+		<value>ABK</value>
+		<name>Transit (onward carriage) guarantee (bond) number</name>
+	</entry>
+	<entry>
+		<value>ABL</value>
+		<name>Customs guarantee number</name>
+	</entry>
+	<entry>
+		<value>ABM</value>
+		<name>Replacing part number</name>
+	</entry>
+	<entry>
+		<value>ABN</value>
+		<name>Seller's catalogue number</name>
+	</entry>
+	<entry>
+		<value>ABO</value>
+		<name>Originator's reference</name>
+	</entry>
+	<entry>
+		<value>ABP</value>
+		<name>Declarant's Customs identity number</name>
+	</entry>
+	<entry>
+		<value>ABQ</value>
+		<name>Importer reference number</name>
+	</entry>
+	<entry>
+		<value>ABR</value>
+		<name>Export clearance instruction reference number</name>
+	</entry>
+	<entry>
+		<value>ABS</value>
+		<name>Import clearance instruction reference number</name>
+	</entry>
+	<entry>
+		<value>ABT</value>
+		<name>Goods declaration document identifier, Customs</name>
+	</entry>
+	<entry>
+		<value>ABU</value>
+		<name>Article number</name>
+	</entry>
+	<entry>
+		<value>ABV</value>
+		<name>Intra-plant routing</name>
+	</entry>
+	<entry>
+		<value>ABW</value>
+		<name>Stock keeping unit number</name>
+	</entry>
+	<entry>
+		<value>ABX</value>
+		<name>Text Element Identifier deletion reference</name>
+	</entry>
+	<entry>
+		<value>ABY</value>
+		<name>Allotment identification (Air)</name>
+	</entry>
+	<entry>
+		<value>ABZ</value>
+		<name>Vehicle licence number</name>
+	</entry>
+	<entry>
+		<value>AC</value>
+		<name> Air cargo transfer manifest</name>
+	</entry>
+	<entry>
+		<value>ACA</value>
+		<name>Cargo acceptance order reference number</name>
+	</entry>
+	<entry>
+		<value>ACB</value>
+		<name>US government agency number</name>
+	</entry>
+	<entry>
+		<value>ACC</value>
+		<name>Shipping unit identification</name>
+	</entry>
+	<entry>
+		<value>ACD</value>
+		<name>Additional reference number</name>
+	</entry>
+	<entry>
+		<value>ACE</value>
+		<name>Related document number</name>
+	</entry>
+	<entry>
+		<value>ACF</value>
+		<name>Addressee reference</name>
+	</entry>
+	<entry>
+		<value>ACG</value>
+		<name>ATA carnet number</name>
+	</entry>
+	<entry>
+		<value>ACH</value>
+		<name>Packaging unit identification</name>
+	</entry>
+	<entry>
+		<value>ACI</value>
+		<name>Outerpackaging unit identification</name>
+	</entry>
+	<entry>
+		<value>ACJ</value>
+		<name>Customer material specification number</name>
+	</entry>
+	<entry>
+		<value>ACK</value>
+		<name>Bank reference</name>
+	</entry>
+	<entry>
+		<value>ACL</value>
+		<name>Principal reference number</name>
+	</entry>
+	<entry>
+		<value>ACN</value>
+		<name>Collection advice document identifier</name>
+	</entry>
+	<entry>
+		<value>ACO</value>
+		<name>Iron charge number</name>
+	</entry>
+	<entry>
+		<value>ACP</value>
+		<name>Hot roll number</name>
+	</entry>
+	<entry>
+		<value>ACQ</value>
+		<name>Cold roll number</name>
+	</entry>
+	<entry>
+		<value>ACR</value>
+		<name>Railway wagon number</name>
+	</entry>
+	<entry>
+		<value>ACT</value>
+		<name>Unique claims reference number of the sender</name>
+	</entry>
+	<entry>
+		<value>ACU</value>
+		<name>Loss/event number</name>
+	</entry>
+	<entry>
+		<value>ACV</value>
+		<name>Estimate order reference number</name>
+	</entry>
+	<entry>
+		<value>ACW</value>
+		<name>Reference number to previous message</name>
+	</entry>
+	<entry>
+		<value>ACX</value>
+		<name>Banker's acceptance</name>
+	</entry>
+	<entry>
+		<value>ACY</value>
+		<name>Duty memo number</name>
+	</entry>
+	<entry>
+		<value>ACZ</value>
+		<name>Equipment transport charge number</name>
+	</entry>
+	<entry>
+		<value>ADA</value>
+		<name>Buyer's item number</name>
+	</entry>
+	<entry>
+		<value>ADB</value>
+		<name>Matured certificate of deposit</name>
+	</entry>
+	<entry>
+		<value>ADC</value>
+		<name>Loan</name>
+	</entry>
+	<entry>
+		<value>ADD</value>
+		<name>Analysis number/test number</name>
+	</entry>
+	<entry>
+		<value>ADE</value>
+		<name>Account number</name>
+	</entry>
+	<entry>
+		<value>ADF</value>
+		<name>Treaty number</name>
+	</entry>
+	<entry>
+		<value>ADG</value>
+		<name>Catastrophe number</name>
+	</entry>
+	<entry>
+		<value>ADI</value>
+		<name>Bureau signing (statement reference)</name>
+	</entry>
+	<entry>
+		<value>ADJ</value>
+		<name>Company / syndicate reference 1</name>
+	</entry>
+	<entry>
+		<value>ADK</value>
+		<name>Company / syndicate reference 2</name>
+	</entry>
+	<entry>
+		<value>ADL</value>
+		<name>Ordering customer consignment reference number</name>
+	</entry>
+	<entry>
+		<value>ADM</value>
+		<name>Shipowner's authorization number</name>
+	</entry>
+	<entry>
+		<value>ADN</value>
+		<name>Inland transport order number</name>
+	</entry>
+	<entry>
+		<value>ADO</value>
+		<name>Container work order reference number</name>
+	</entry>
+	<entry>
+		<value>ADP</value>
+		<name>Statement number</name>
+	</entry>
+	<entry>
+		<value>ADQ</value>
+		<name>Unique market reference</name>
+	</entry>
+	<entry>
+		<value>ADT</value>
+		<name>Group accounting</name>
+	</entry>
+	<entry>
+		<value>ADU</value>
+		<name>Broker reference 1</name>
+	</entry>
+	<entry>
+		<value>ADV</value>
+		<name>Broker reference 2</name>
+	</entry>
+	<entry>
+		<value>ADW</value>
+		<name>Lloyd's claims office reference</name>
+	</entry>
+	<entry>
+		<value>ADX</value>
+		<name>Secure delivery terms and conditions agreement reference</name>
+	</entry>
+	<entry>
+		<value>ADY</value>
+		<name>Report number</name>
+	</entry>
+	<entry>
+		<value>ADZ</value>
+		<name>Trader account number</name>
+	</entry>
+	<entry>
+		<value>AE</value>
+		<name> Authorization for expense (AFE) number</name>
+	</entry>
+	<entry>
+		<value>AEA</value>
+		<name>Government agency reference number</name>
+	</entry>
+	<entry>
+		<value>AEB</value>
+		<name>Assembly number</name>
+	</entry>
+	<entry>
+		<value>AEC</value>
+		<name>Symbol number</name>
+	</entry>
+	<entry>
+		<value>AED</value>
+		<name>Commodity number</name>
+	</entry>
+	<entry>
+		<value>AEE</value>
+		<name>Eur 1 certificate number</name>
+	</entry>
+	<entry>
+		<value>AEF</value>
+		<name>Customer process specification number</name>
+	</entry>
+	<entry>
+		<value>AEG</value>
+		<name>Customer specification number</name>
+	</entry>
+	<entry>
+		<value>AEH</value>
+		<name>Applicable instructions or standards</name>
+	</entry>
+	<entry>
+		<value>AEI</value>
+		<name>Registration number of previous Customs declaration</name>
+	</entry>
+	<entry>
+		<value>AEJ</value>
+		<name>Post-entry reference</name>
+	</entry>
+	<entry>
+		<value>AEK</value>
+		<name>Payment order number</name>
+	</entry>
+	<entry>
+		<value>AEL</value>
+		<name>Delivery number (transport)</name>
+	</entry>
+	<entry>
+		<value>AEM</value>
+		<name>Transport route</name>
+	</entry>
+	<entry>
+		<value>AEN</value>
+		<name>Customer's unit inventory number</name>
+	</entry>
+	<entry>
+		<value>AEO</value>
+		<name>Product reservation number</name>
+	</entry>
+	<entry>
+		<value>AEP</value>
+		<name>Project number</name>
+	</entry>
+	<entry>
+		<value>AEQ</value>
+		<name>Drawing list number</name>
+	</entry>
+	<entry>
+		<value>AER</value>
+		<name>Project specification number</name>
+	</entry>
+	<entry>
+		<value>AES</value>
+		<name>Primary reference</name>
+	</entry>
+	<entry>
+		<value>AET</value>
+		<name>Request for cancellation number</name>
+	</entry>
+	<entry>
+		<value>AEU</value>
+		<name>Supplier's control number</name>
+	</entry>
+	<entry>
+		<value>AEV</value>
+		<name>Shipping note number</name>
+	</entry>
+	<entry>
+		<value>AEW</value>
+		<name>Empty container bill number</name>
+	</entry>
+	<entry>
+		<value>AEX</value>
+		<name>Non-negotiable maritime transport document number</name>
+	</entry>
+	<entry>
+		<value>AEY</value>
+		<name>Substitute air waybill number</name>
+	</entry>
+	<entry>
+		<value>AEZ</value>
+		<name>Despatch note (post parcels) number</name>
+	</entry>
+	<entry>
+		<value>AF</value>
+		<name> Airlines flight identification number</name>
+	</entry>
+	<entry>
+		<value>AFA</value>
+		<name>Through bill of lading number</name>
+	</entry>
+	<entry>
+		<value>AFB</value>
+		<name>Cargo manifest number</name>
+	</entry>
+	<entry>
+		<value>AFC</value>
+		<name>Bordereau number</name>
+	</entry>
+	<entry>
+		<value>AFD</value>
+		<name>Customs item number</name>
+	</entry>
+	<entry>
+		<value>AFE</value>
+		<name>Export Control Commodity number (ECCN)</name>
+	</entry>
+	<entry>
+		<value>AFF</value>
+		<name>Marking/label reference</name>
+	</entry>
+	<entry>
+		<value>AFG</value>
+		<name>Tariff number</name>
+	</entry>
+	<entry>
+		<value>AFH</value>
+		<name>Replenishment purchase order number</name>
+	</entry>
+	<entry>
+		<value>AFI</value>
+		<name>Immediate transportation no. for in bond movement</name>
+	</entry>
+	<entry>
+		<value>AFJ</value>
+		<name>Transportation exportation no. for in bond movement</name>
+	</entry>
+	<entry>
+		<value>AFK</value>
+		<name>Immediate exportation no. for in bond movement</name>
+	</entry>
+	<entry>
+		<value>AFL</value>
+		<name>Associated invoices</name>
+	</entry>
+	<entry>
+		<value>AFM</value>
+		<name>Secondary Customs reference</name>
+	</entry>
+	<entry>
+		<value>AFN</value>
+		<name>Account party's reference</name>
+	</entry>
+	<entry>
+		<value>AFO</value>
+		<name>Beneficiary's reference</name>
+	</entry>
+	<entry>
+		<value>AFP</value>
+		<name>Second beneficiary's reference</name>
+	</entry>
+	<entry>
+		<value>AFQ</value>
+		<name>Applicant's bank reference</name>
+	</entry>
+	<entry>
+		<value>AFR</value>
+		<name>Issuing bank's reference</name>
+	</entry>
+	<entry>
+		<value>AFS</value>
+		<name>Beneficiary's bank reference</name>
+	</entry>
+	<entry>
+		<value>AFT</value>
+		<name>Direct payment valuation number</name>
+	</entry>
+	<entry>
+		<value>AFU</value>
+		<name>Direct payment valuation request number</name>
+	</entry>
+	<entry>
+		<value>AFV</value>
+		<name>Quantity valuation number</name>
+	</entry>
+	<entry>
+		<value>AFW</value>
+		<name>Quantity valuation request number</name>
+	</entry>
+	<entry>
+		<value>AFX</value>
+		<name>Bill of quantities number</name>
+	</entry>
+	<entry>
+		<value>AFY</value>
+		<name>Payment valuation number</name>
+	</entry>
+	<entry>
+		<value>AFZ</value>
+		<name>Situation number</name>
+	</entry>
+	<entry>
+		<value>AGA</value>
+		<name>Agreement to pay number</name>
+	</entry>
+	<entry>
+		<value>AGB</value>
+		<name>Contract party reference number</name>
+	</entry>
+	<entry>
+		<value>AGC</value>
+		<name>Account party's bank reference</name>
+	</entry>
+	<entry>
+		<value>AGD</value>
+		<name>Agent's bank reference</name>
+	</entry>
+	<entry>
+		<value>AGE</value>
+		<name>Agent's reference</name>
+	</entry>
+	<entry>
+		<value>AGF</value>
+		<name>Applicant's reference</name>
+	</entry>
+	<entry>
+		<value>AGG</value>
+		<name>Dispute number</name>
+	</entry>
+	<entry>
+		<value>AGH</value>
+		<name>Credit rating agency's reference number</name>
+	</entry>
+	<entry>
+		<value>AGI</value>
+		<name>Request number</name>
+	</entry>
+	<entry>
+		<value>AGJ</value>
+		<name>Single transaction sequence number</name>
+	</entry>
+	<entry>
+		<value>AGK</value>
+		<name>Application reference number</name>
+	</entry>
+	<entry>
+		<value>AGL</value>
+		<name>Delivery verification certificate</name>
+	</entry>
+	<entry>
+		<value>AGM</value>
+		<name>Number of temporary importation document</name>
+	</entry>
+	<entry>
+		<value>AGN</value>
+		<name>Reference number quoted on statement</name>
+	</entry>
+	<entry>
+		<value>AGO</value>
+		<name>Sender's reference to the original message</name>
+	</entry>
+	<entry>
+		<value>AGP</value>
+		<name>Company issued equipment ID</name>
+	</entry>
+	<entry>
+		<value>AGQ</value>
+		<name>Domestic flight number</name>
+	</entry>
+	<entry>
+		<value>AGR</value>
+		<name>International flight number</name>
+	</entry>
+	<entry>
+		<value>AGS</value>
+		<name>Employer identification number of service bureau</name>
+	</entry>
+	<entry>
+		<value>AGT</value>
+		<name>Service group identification number</name>
+	</entry>
+	<entry>
+		<value>AGU</value>
+		<name>Member number</name>
+	</entry>
+	<entry>
+		<value>AGV</value>
+		<name>Previous member number</name>
+	</entry>
+	<entry>
+		<value>AGW</value>
+		<name>Scheme/plan number</name>
+	</entry>
+	<entry>
+		<value>AGX</value>
+		<name>Previous scheme/plan number</name>
+	</entry>
+	<entry>
+		<value>AGY</value>
+		<name>Receiving party's member identification</name>
+	</entry>
+	<entry>
+		<value>AGZ</value>
+		<name>Payroll number</name>
+	</entry>
+	<entry>
+		<value>AHA</value>
+		<name>Packaging specification number</name>
+	</entry>
+	<entry>
+		<value>AHB</value>
+		<name>Authority issued equipment identification</name>
+	</entry>
+	<entry>
+		<value>AHC</value>
+		<name>Training flight number</name>
+	</entry>
+	<entry>
+		<value>AHD</value>
+		<name>Fund code number</name>
+	</entry>
+	<entry>
+		<value>AHE</value>
+		<name>Signal code number</name>
+	</entry>
+	<entry>
+		<value>AHF</value>
+		<name>Major force program number</name>
+	</entry>
+	<entry>
+		<value>AHG</value>
+		<name>Nomination number</name>
+	</entry>
+	<entry>
+		<value>AHH</value>
+		<name>Laboratory registration number</name>
+	</entry>
+	<entry>
+		<value>AHI</value>
+		<name>Transport contract reference number</name>
+	</entry>
+	<entry>
+		<value>AHJ</value>
+		<name>Payee's reference number</name>
+	</entry>
+	<entry>
+		<value>AHK</value>
+		<name>Payer's reference number</name>
+	</entry>
+	<entry>
+		<value>AHL</value>
+		<name>Creditor's reference number</name>
+	</entry>
+	<entry>
+		<value>AHM</value>
+		<name>Debtor's reference number</name>
+	</entry>
+	<entry>
+		<value>AHN</value>
+		<name>Joint venture reference number</name>
+	</entry>
+	<entry>
+		<value>AHO</value>
+		<name>Chamber of Commerce registration number</name>
+	</entry>
+	<entry>
+		<value>AHP</value>
+		<name>Tax registration number</name>
+	</entry>
+	<entry>
+		<value>AHQ</value>
+		<name>Wool identification number</name>
+	</entry>
+	<entry>
+		<value>AHR</value>
+		<name>Wool tax reference number</name>
+	</entry>
+	<entry>
+		<value>AHS</value>
+		<name>Meat processing establishment registration number</name>
+	</entry>
+	<entry>
+		<value>AHT</value>
+		<name>Quarantine/treatment status reference number</name>
+	</entry>
+	<entry>
+		<value>AHU</value>
+		<name>Request for quote number</name>
+	</entry>
+	<entry>
+		<value>AHV</value>
+		<name>Manual processing authority number</name>
+	</entry>
+	<entry>
+		<value>AHX</value>
+		<name>Rate note number</name>
+	</entry>
+	<entry>
+		<value>AHY</value>
+		<name>Freight Forwarder number</name>
+	</entry>
+	<entry>
+		<value>AHZ</value>
+		<name>Customs release code</name>
+	</entry>
+	<entry>
+		<value>AIA</value>
+		<name>Compliance code number</name>
+	</entry>
+	<entry>
+		<value>AIB</value>
+		<name>Department of transportation bond number</name>
+	</entry>
+	<entry>
+		<value>AIC</value>
+		<name>Export establishment number</name>
+	</entry>
+	<entry>
+		<value>AID</value>
+		<name>Certificate of conformity</name>
+	</entry>
+	<entry>
+		<value>AIE</value>
+		<name>Ministerial certificate of homologation</name>
+	</entry>
+	<entry>
+		<value>AIF</value>
+		<name>Previous delivery instruction number</name>
+	</entry>
+	<entry>
+		<value>AIG</value>
+		<name>Passport number</name>
+	</entry>
+	<entry>
+		<value>AIH</value>
+		<name>Common transaction reference number</name>
+	</entry>
+	<entry>
+		<value>AII</value>
+		<name>Bank's common transaction reference number</name>
+	</entry>
+	<entry>
+		<value>AIJ</value>
+		<name>Customer's individual transaction reference number</name>
+	</entry>
+	<entry>
+		<value>AIK</value>
+		<name>Bank's individual transaction reference number</name>
+	</entry>
+	<entry>
+		<value>AIL</value>
+		<name>Customer's common transaction reference number</name>
+	</entry>
+	<entry>
+		<value>AIM</value>
+		<name>Individual transaction reference number</name>
+	</entry>
+	<entry>
+		<value>AIN</value>
+		<name>Product sourcing agreement number</name>
+	</entry>
+	<entry>
+		<value>AIO</value>
+		<name>Customs transhipment number</name>
+	</entry>
+	<entry>
+		<value>AIP</value>
+		<name>Customs preference inquiry number</name>
+	</entry>
+	<entry>
+		<value>AIQ</value>
+		<name>Packing plant number</name>
+	</entry>
+	<entry>
+		<value>AIR</value>
+		<name>Original certificate number</name>
+	</entry>
+	<entry>
+		<value>AIS</value>
+		<name>Processing plant number</name>
+	</entry>
+	<entry>
+		<value>AIT</value>
+		<name>Slaughter plant number</name>
+	</entry>
+	<entry>
+		<value>AIU</value>
+		<name>Charge card account number</name>
+	</entry>
+	<entry>
+		<value>AIV</value>
+		<name>Event reference number</name>
+	</entry>
+	<entry>
+		<value>AIW</value>
+		<name>Transport section reference number</name>
+	</entry>
+	<entry>
+		<value>AIX</value>
+		<name>Referred product for mechanical analysis</name>
+	</entry>
+	<entry>
+		<value>AIY</value>
+		<name>Referred product for chemical analysis</name>
+	</entry>
+	<entry>
+		<value>AIZ</value>
+		<name>Consolidated invoice number</name>
+	</entry>
+	<entry>
+		<value>AJA</value>
+		<name>Part reference indicator in a drawing</name>
+	</entry>
+	<entry>
+		<value>AJB</value>
+		<name>U.S. Code of Federal Regulations (CFR)</name>
+	</entry>
+	<entry>
+		<value>AJC</value>
+		<name>Purchasing activity clause number</name>
+	</entry>
+	<entry>
+		<value>AJD</value>
+		<name>U.S. Defense Federal Acquisition Regulation Supplement</name>
+	</entry>
+	<entry>
+		<value>AJE</value>
+		<name>Agency clause number</name>
+	</entry>
+	<entry>
+		<value>AJF</value>
+		<name>Circular publication number</name>
+	</entry>
+	<entry>
+		<value>AJG</value>
+		<name>U.S. Federal Acquisition Regulation</name>
+	</entry>
+	<entry>
+		<value>AJH</value>
+		<name>U.S. General Services Administration Regulation</name>
+	</entry>
+	<entry>
+		<value>AJI</value>
+		<name>U.S. Federal Information Resources Management Regulation</name>
+	</entry>
+	<entry>
+		<value>AJJ</value>
+		<name>Paragraph</name>
+	</entry>
+	<entry>
+		<value>AJK</value>
+		<name>Special instructions number</name>
+	</entry>
+	<entry>
+		<value>AJL</value>
+		<name>Site specific procedures, terms, and conditions number</name>
+	</entry>
+	<entry>
+		<value>AJM</value>
+		<name>Master solicitation procedures, terms, and conditions</name>
+	</entry>
+	<entry>
+		<value>AJN</value>
+		<name>U.S. Department of Veterans Affairs Acquisition Regulation</name>
+	</entry>
+	<entry>
+		<value>AJO</value>
+		<name>Military Interdepartmental Purchase Request (MIPR) number</name>
+	</entry>
+	<entry>
+		<value>AJP</value>
+		<name>Foreign military sales number</name>
+	</entry>
+	<entry>
+		<value>AJQ</value>
+		<name>Defense priorities allocation system priority rating</name>
+	</entry>
+	<entry>
+		<value>AJR</value>
+		<name>Wage determination number</name>
+	</entry>
+	<entry>
+		<value>AJS</value>
+		<name>Agreement number</name>
+	</entry>
+	<entry>
+		<value>AJT</value>
+		<name>Standard Industry Classification (SIC) number</name>
+	</entry>
+	<entry>
+		<value>AJU</value>
+		<name>End item number</name>
+	</entry>
+	<entry>
+		<value>AJV</value>
+		<name>Federal supply schedule item number</name>
+	</entry>
+	<entry>
+		<value>AJW</value>
+		<name>Technical document number</name>
+	</entry>
+	<entry>
+		<value>AJX</value>
+		<name>Technical order number</name>
+	</entry>
+	<entry>
+		<value>AJY</value>
+		<name>Suffix</name>
+	</entry>
+	<entry>
+		<value>AJZ</value>
+		<name>Transportation account number</name>
+	</entry>
+	<entry>
+		<value>AKA</value>
+		<name>Container disposition order reference number</name>
+	</entry>
+	<entry>
+		<value>AKB</value>
+		<name>Container prefix</name>
+	</entry>
+	<entry>
+		<value>AKC</value>
+		<name>Transport equipment return reference</name>
+	</entry>
+	<entry>
+		<value>AKD</value>
+		<name>Transport equipment survey reference</name>
+	</entry>
+	<entry>
+		<value>AKE</value>
+		<name>Transport equipment survey report number</name>
+	</entry>
+	<entry>
+		<value>AKF</value>
+		<name>Transport equipment stuffing order</name>
+	</entry>
+	<entry>
+		<value>AKG</value>
+		<name>Vehicle Identification Number (VIN)</name>
+	</entry>
+	<entry>
+		<value>AKH</value>
+		<name>Government bill of lading</name>
+	</entry>
+	<entry>
+		<value>AKI</value>
+		<name>Ordering customer's second reference number</name>
+	</entry>
+	<entry>
+		<value>AKJ</value>
+		<name>Direct debit reference</name>
+	</entry>
+	<entry>
+		<value>AKK</value>
+		<name>Meter reading at the beginning of the delivery</name>
+	</entry>
+	<entry>
+		<value>AKL</value>
+		<name>Meter reading at the end of delivery</name>
+	</entry>
+	<entry>
+		<value>AKM</value>
+		<name>Replenishment purchase order range start number</name>
+	</entry>
+	<entry>
+		<value>AKN</value>
+		<name>Third bank's reference</name>
+	</entry>
+	<entry>
+		<value>AKO</value>
+		<name>Action authorization number</name>
+	</entry>
+	<entry>
+		<value>AKP</value>
+		<name>Appropriation number</name>
+	</entry>
+	<entry>
+		<value>AKQ</value>
+		<name>Product change authority number</name>
+	</entry>
+	<entry>
+		<value>AKR</value>
+		<name>General cargo consignment reference number</name>
+	</entry>
+	<entry>
+		<value>AKS</value>
+		<name>Catalogue sequence number</name>
+	</entry>
+	<entry>
+		<value>AKT</value>
+		<name>Forwarding order number</name>
+	</entry>
+	<entry>
+		<value>AKU</value>
+		<name>Transport equipment survey reference number</name>
+	</entry>
+	<entry>
+		<value>AKV</value>
+		<name>Lease contract reference</name>
+	</entry>
+	<entry>
+		<value>AKW</value>
+		<name>Transport costs reference number</name>
+	</entry>
+	<entry>
+		<value>AKX</value>
+		<name>Transport equipment stripping order</name>
+	</entry>
+	<entry>
+		<value>AKY</value>
+		<name>Prior policy number</name>
+	</entry>
+	<entry>
+		<value>AKZ</value>
+		<name>Policy number</name>
+	</entry>
+	<entry>
+		<value>ALA</value>
+		<name>Procurement budget number</name>
+	</entry>
+	<entry>
+		<value>ALB</value>
+		<name>Domestic inventory management code</name>
+	</entry>
+	<entry>
+		<value>ALC</value>
+		<name>Customer reference number assigned to previous balance of</name>
+	</entry>
+	<entry>
+		<value>ALD</value>
+		<name>Previous credit advice reference number</name>
+	</entry>
+	<entry>
+		<value>ALE</value>
+		<name>Reporting form number</name>
+	</entry>
+	<entry>
+		<value>ALF</value>
+		<name>Authorization number for exception to dangerous goods</name>
+	</entry>
+	<entry>
+		<value>ALG</value>
+		<name>Dangerous goods security number</name>
+	</entry>
+	<entry>
+		<value>ALH</value>
+		<name>Dangerous goods transport licence number</name>
+	</entry>
+	<entry>
+		<value>ALI</value>
+		<name>Previous rental agreement number</name>
+	</entry>
+	<entry>
+		<value>ALJ</value>
+		<name>Next rental agreement reason number</name>
+	</entry>
+	<entry>
+		<value>ALK</value>
+		<name>Consignee's invoice number</name>
+	</entry>
+	<entry>
+		<value>ALL</value>
+		<name>Message batch number</name>
+	</entry>
+	<entry>
+		<value>ALM</value>
+		<name>Previous delivery schedule number</name>
+	</entry>
+	<entry>
+		<value>ALN</value>
+		<name>Physical inventory recount reference number</name>
+	</entry>
+	<entry>
+		<value>ALO</value>
+		<name>Receiving advice number</name>
+	</entry>
+	<entry>
+		<value>ALP</value>
+		<name>Returnable container reference number</name>
+	</entry>
+	<entry>
+		<value>ALQ</value>
+		<name>Returns notice number</name>
+	</entry>
+	<entry>
+		<value>ALR</value>
+		<name>Sales forecast number</name>
+	</entry>
+	<entry>
+		<value>ALS</value>
+		<name>Sales report number</name>
+	</entry>
+	<entry>
+		<value>ALT</value>
+		<name>Previous tax control number</name>
+	</entry>
+	<entry>
+		<value>ALU</value>
+		<name>AGERD (Aerospace Ground Equipment Requirement Data) number</name>
+	</entry>
+	<entry>
+		<value>ALV</value>
+		<name>Registered capital reference</name>
+	</entry>
+	<entry>
+		<value>ALW</value>
+		<name>Standard number of inspection document</name>
+	</entry>
+	<entry>
+		<value>ALX</value>
+		<name>Model</name>
+	</entry>
+	<entry>
+		<value>ALY</value>
+		<name>Financial management reference</name>
+	</entry>
+	<entry>
+		<value>ALZ</value>
+		<name>NOTIfication for COLlection number (NOTICOL)</name>
+	</entry>
+	<entry>
+		<value>AMA</value>
+		<name>Previous request for metered reading reference number</name>
+	</entry>
+	<entry>
+		<value>AMB</value>
+		<name>Next rental agreement number</name>
+	</entry>
+	<entry>
+		<value>AMC</value>
+		<name>Reference number of a request for metered reading</name>
+	</entry>
+	<entry>
+		<value>AMD</value>
+		<name>Hastening number</name>
+	</entry>
+	<entry>
+		<value>AME</value>
+		<name>Repair data request number</name>
+	</entry>
+	<entry>
+		<value>AMF</value>
+		<name>Consumption data request number</name>
+	</entry>
+	<entry>
+		<value>AMG</value>
+		<name>Profile number</name>
+	</entry>
+	<entry>
+		<value>AMH</value>
+		<name>Case number</name>
+	</entry>
+	<entry>
+		<value>AMI</value>
+		<name>Government quality assurance and control level Number</name>
+	</entry>
+	<entry>
+		<value>AMJ</value>
+		<name>Payment plan reference</name>
+	</entry>
+	<entry>
+		<value>AMK</value>
+		<name>Replaced meter unit number</name>
+	</entry>
+	<entry>
+		<value>AML</value>
+		<name>Replenishment purchase order range end number</name>
+	</entry>
+	<entry>
+		<value>AMM</value>
+		<name>Insurer assigned reference number</name>
+	</entry>
+	<entry>
+		<value>AMN</value>
+		<name>Canadian excise entry number</name>
+	</entry>
+	<entry>
+		<value>AMO</value>
+		<name>Premium rate table</name>
+	</entry>
+	<entry>
+		<value>AMP</value>
+		<name>Advise through bank's reference</name>
+	</entry>
+	<entry>
+		<value>AMQ</value>
+		<name>US, Department of Transportation bond surety code</name>
+	</entry>
+	<entry>
+		<value>AMR</value>
+		<name>US, Food and Drug Administration establishment indicator</name>
+	</entry>
+	<entry>
+		<value>AMS</value>
+		<name>US, Federal Communications Commission (FCC) import</name>
+	</entry>
+	<entry>
+		<value>AMT</value>
+		<name>Goods and Services Tax identification number</name>
+	</entry>
+	<entry>
+		<value>AMU</value>
+		<name>Integrated logistic support cross reference number</name>
+	</entry>
+	<entry>
+		<value>AMV</value>
+		<name>Department number</name>
+	</entry>
+	<entry>
+		<value>AMW</value>
+		<name>Buyer's catalogue number</name>
+	</entry>
+	<entry>
+		<value>AMX</value>
+		<name>Financial settlement party's reference number</name>
+	</entry>
+	<entry>
+		<value>AMY</value>
+		<name>Standard's version number</name>
+	</entry>
+	<entry>
+		<value>AMZ</value>
+		<name>Pipeline number</name>
+	</entry>
+	<entry>
+		<value>ANA</value>
+		<name>Account servicing bank's reference number</name>
+	</entry>
+	<entry>
+		<value>ANB</value>
+		<name>Completed units payment request reference</name>
+	</entry>
+	<entry>
+		<value>ANC</value>
+		<name>Payment in advance request reference</name>
+	</entry>
+	<entry>
+		<value>AND</value>
+		<name>Parent file</name>
+	</entry>
+	<entry>
+		<value>ANE</value>
+		<name>Sub file</name>
+	</entry>
+	<entry>
+		<value>ANF</value>
+		<name>CAD file layer convention</name>
+	</entry>
+	<entry>
+		<value>ANG</value>
+		<name>Technical regulation</name>
+	</entry>
+	<entry>
+		<value>ANH</value>
+		<name>Plot file</name>
+	</entry>
+	<entry>
+		<value>ANI</value>
+		<name>File conversion journal</name>
+	</entry>
+	<entry>
+		<value>ANJ</value>
+		<name>Authorization number</name>
+	</entry>
+	<entry>
+		<value>ANK</value>
+		<name>Reference number assigned by third party</name>
+	</entry>
+	<entry>
+		<value>ANL</value>
+		<name>Deposit reference number</name>
+	</entry>
+	<entry>
+		<value>ANM</value>
+		<name>Named bank's reference</name>
+	</entry>
+	<entry>
+		<value>ANN</value>
+		<name>Drawee's reference</name>
+	</entry>
+	<entry>
+		<value>ANO</value>
+		<name>Case of need party's reference</name>
+	</entry>
+	<entry>
+		<value>ANP</value>
+		<name>Collecting bank's reference</name>
+	</entry>
+	<entry>
+		<value>ANQ</value>
+		<name>Remitting bank's reference</name>
+	</entry>
+	<entry>
+		<value>ANR</value>
+		<name>Principal's bank reference</name>
+	</entry>
+	<entry>
+		<value>ANS</value>
+		<name>Presenting bank's reference</name>
+	</entry>
+	<entry>
+		<value>ANT</value>
+		<name>Consignee's reference</name>
+	</entry>
+	<entry>
+		<value>ANU</value>
+		<name>Financial transaction reference number</name>
+	</entry>
+	<entry>
+		<value>ANV</value>
+		<name>Credit reference number</name>
+	</entry>
+	<entry>
+		<value>ANW</value>
+		<name>Receiving bank's authorization number</name>
+	</entry>
+	<entry>
+		<value>ANX</value>
+		<name>Clearing reference</name>
+	</entry>
+	<entry>
+		<value>ANY</value>
+		<name>Sending bank's reference number</name>
+	</entry>
+	<entry>
+		<value>AOA</value>
+		<name>Documentary payment reference</name>
+	</entry>
+	<entry>
+		<value>AOD</value>
+		<name>Accounting file reference</name>
+	</entry>
+	<entry>
+		<value>AOE</value>
+		<name>Sender's file reference number</name>
+	</entry>
+	<entry>
+		<value>AOF</value>
+		<name>Receiver's file reference number</name>
+	</entry>
+	<entry>
+		<value>AOG</value>
+		<name>Source document internal reference</name>
+	</entry>
+	<entry>
+		<value>AOH</value>
+		<name>Principal's reference</name>
+	</entry>
+	<entry>
+		<value>AOI</value>
+		<name>Debit reference number</name>
+	</entry>
+	<entry>
+		<value>AOJ</value>
+		<name>Calendar</name>
+	</entry>
+	<entry>
+		<value>AOK</value>
+		<name>Work shift</name>
+	</entry>
+	<entry>
+		<value>AOL</value>
+		<name>Work breakdown structure</name>
+	</entry>
+	<entry>
+		<value>AOM</value>
+		<name>Organisation breakdown structure</name>
+	</entry>
+	<entry>
+		<value>AON</value>
+		<name>Work task charge number</name>
+	</entry>
+	<entry>
+		<value>AOO</value>
+		<name>Functional work group</name>
+	</entry>
+	<entry>
+		<value>AOP</value>
+		<name>Work team</name>
+	</entry>
+	<entry>
+		<value>AOQ</value>
+		<name>Department</name>
+	</entry>
+	<entry>
+		<value>AOR</value>
+		<name>Statement of work</name>
+	</entry>
+	<entry>
+		<value>AOS</value>
+		<name>Work package</name>
+	</entry>
+	<entry>
+		<value>AOT</value>
+		<name>Planning package</name>
+	</entry>
+	<entry>
+		<value>AOU</value>
+		<name>Cost account</name>
+	</entry>
+	<entry>
+		<value>AOV</value>
+		<name>Work order</name>
+	</entry>
+	<entry>
+		<value>AOW</value>
+		<name>Transportation Control Number (TCN)</name>
+	</entry>
+	<entry>
+		<value>AOX</value>
+		<name>Constraint notation</name>
+	</entry>
+	<entry>
+		<value>AOY</value>
+		<name>ETERMS reference</name>
+	</entry>
+	<entry>
+		<value>AOZ</value>
+		<name>Implementation version number</name>
+	</entry>
+	<entry>
+		<value>AP</value>
+		<name> Accounts receivable number</name>
+	</entry>
+	<entry>
+		<value>APA</value>
+		<name>Incorporated legal reference</name>
+	</entry>
+	<entry>
+		<value>APB</value>
+		<name>Payment instalment reference number</name>
+	</entry>
+	<entry>
+		<value>APC</value>
+		<name>Equipment owner reference number</name>
+	</entry>
+	<entry>
+		<value>APD</value>
+		<name>Cedent's claim number</name>
+	</entry>
+	<entry>
+		<value>APE</value>
+		<name>Reinsurer's claim number</name>
+	</entry>
+	<entry>
+		<value>APF</value>
+		<name>Price/sales catalogue response reference number</name>
+	</entry>
+	<entry>
+		<value>APG</value>
+		<name>General purpose message reference number</name>
+	</entry>
+	<entry>
+		<value>APH</value>
+		<name>Invoicing data sheet reference number</name>
+	</entry>
+	<entry>
+		<value>API</value>
+		<name>Inventory report reference number</name>
+	</entry>
+	<entry>
+		<value>APJ</value>
+		<name>Ceiling formula reference number</name>
+	</entry>
+	<entry>
+		<value>APK</value>
+		<name>Price variation formula reference number</name>
+	</entry>
+	<entry>
+		<value>APL</value>
+		<name>Reference to account servicing bank's message</name>
+	</entry>
+	<entry>
+		<value>APM</value>
+		<name>Party sequence number</name>
+	</entry>
+	<entry>
+		<value>APN</value>
+		<name>Purchaser's request reference</name>
+	</entry>
+	<entry>
+		<value>APO</value>
+		<name>Contractor request reference</name>
+	</entry>
+	<entry>
+		<value>APP</value>
+		<name>Accident reference number</name>
+	</entry>
+	<entry>
+		<value>APQ</value>
+		<name>Commercial account summary reference number</name>
+	</entry>
+	<entry>
+		<value>APR</value>
+		<name>Contract breakdown reference</name>
+	</entry>
+	<entry>
+		<value>APS</value>
+		<name>Contractor registration number</name>
+	</entry>
+	<entry>
+		<value>APT</value>
+		<name>Applicable coefficient identification number</name>
+	</entry>
+	<entry>
+		<value>APU</value>
+		<name>Special budget account number</name>
+	</entry>
+	<entry>
+		<value>APV</value>
+		<name>Authorisation for repair reference</name>
+	</entry>
+	<entry>
+		<value>APW</value>
+		<name>Manufacturer defined repair rates reference</name>
+	</entry>
+	<entry>
+		<value>APX</value>
+		<name>Original submitter log number</name>
+	</entry>
+	<entry>
+		<value>APY</value>
+		<name>Original submitter, parent Data Maintenance Request (DMR)</name>
+	</entry>
+	<entry>
+		<value>APZ</value>
+		<name>Original submitter, child Data Maintenance Request (DMR)</name>
+	</entry>
+	<entry>
+		<value>AQA</value>
+		<name>Entry point assessment log number</name>
+	</entry>
+	<entry>
+		<value>AQB</value>
+		<name>Entry point assessment log number, parent DMR</name>
+	</entry>
+	<entry>
+		<value>AQC</value>
+		<name>Entry point assessment log number, child DMR</name>
+	</entry>
+	<entry>
+		<value>AQD</value>
+		<name>Data structure tag</name>
+	</entry>
+	<entry>
+		<value>AQE</value>
+		<name>Central secretariat log number</name>
+	</entry>
+	<entry>
+		<value>AQF</value>
+		<name>Central secretariat log number, parent Data Maintenance</name>
+	</entry>
+	<entry>
+		<value>AQG</value>
+		<name>Central secretariat log number, child Data Maintenance</name>
+	</entry>
+	<entry>
+		<value>AQH</value>
+		<name>International assessment log number</name>
+	</entry>
+	<entry>
+		<value>AQI</value>
+		<name>International assessment log number, parent Data</name>
+	</entry>
+	<entry>
+		<value>AQJ</value>
+		<name>International assessment log number, child Data Maintenance</name>
+	</entry>
+	<entry>
+		<value>AQK</value>
+		<name>Status report number</name>
+	</entry>
+	<entry>
+		<value>AQL</value>
+		<name>Message design group number</name>
+	</entry>
+	<entry>
+		<value>AQM</value>
+		<name>US Customs Service (USCS) entry code</name>
+	</entry>
+	<entry>
+		<value>AQN</value>
+		<name>Beginning job sequence number</name>
+	</entry>
+	<entry>
+		<value>AQO</value>
+		<name>Sender's clause number</name>
+	</entry>
+	<entry>
+		<value>AQP</value>
+		<name>Dun and Bradstreet Canada's 8 digit Standard Industrial</name>
+	</entry>
+	<entry>
+		<value>AQQ</value>
+		<name>Activite Principale Exercee (APE) identifier</name>
+	</entry>
+	<entry>
+		<value>AQR</value>
+		<name>Dun and Bradstreet US 8 digit Standard Industrial</name>
+	</entry>
+	<entry>
+		<value>AQS</value>
+		<name>Nomenclature Activity Classification Economy (NACE)</name>
+	</entry>
+	<entry>
+		<value>AQT</value>
+		<name>Norme Activite Francaise (NAF) identifier</name>
+	</entry>
+	<entry>
+		<value>AQU</value>
+		<name>Registered contractor activity type</name>
+	</entry>
+	<entry>
+		<value>AQV</value>
+		<name>Statistic Bundes Amt (SBA) identifier</name>
+	</entry>
+	<entry>
+		<value>AQW</value>
+		<name>State or province assigned entity identification</name>
+	</entry>
+	<entry>
+		<value>AQX</value>
+		<name>Institute of Security and Future Market Development (ISFMD)</name>
+	</entry>
+	<entry>
+		<value>AQY</value>
+		<name>File identification number</name>
+	</entry>
+	<entry>
+		<value>AQZ</value>
+		<name>Bankruptcy procedure number</name>
+	</entry>
+	<entry>
+		<value>ARA</value>
+		<name>National government business identification number</name>
+	</entry>
+	<entry>
+		<value>ARB</value>
+		<name>Prior Data Universal Number System (DUNS) number</name>
+	</entry>
+	<entry>
+		<value>ARC</value>
+		<name>Companies Registry Office (CRO) number</name>
+	</entry>
+	<entry>
+		<value>ARD</value>
+		<name>Costa Rican judicial number</name>
+	</entry>
+	<entry>
+		<value>ARE</value>
+		<name>Numero de Identificacion Tributaria (NIT)</name>
+	</entry>
+	<entry>
+		<value>ARF</value>
+		<name>Patron number</name>
+	</entry>
+	<entry>
+		<value>ARG</value>
+		<name>Registro Informacion Fiscal (RIF) number</name>
+	</entry>
+	<entry>
+		<value>ARH</value>
+		<name>Registro Unico de Contribuyente (RUC) number</name>
+	</entry>
+	<entry>
+		<value>ARI</value>
+		<name>Tokyo SHOKO Research (TSR) business identifier</name>
+	</entry>
+	<entry>
+		<value>ARJ</value>
+		<name>Personal identity card number</name>
+	</entry>
+	<entry>
+		<value>ARK</value>
+		<name>Systeme Informatique pour le Repertoire des ENtreprises</name>
+	</entry>
+	<entry>
+		<value>ARL</value>
+		<name>Systeme Informatique pour le Repertoire des ETablissements</name>
+	</entry>
+	<entry>
+		<value>ARM</value>
+		<name>Publication issue number</name>
+	</entry>
+	<entry>
+		<value>ARN</value>
+		<name>Original filing number</name>
+	</entry>
+	<entry>
+		<value>ARO</value>
+		<name>Document page identifier</name>
+	</entry>
+	<entry>
+		<value>ARP</value>
+		<name>Public filing registration number</name>
+	</entry>
+	<entry>
+		<value>ARQ</value>
+		<name>Regiristo Federal de Contribuyentes</name>
+	</entry>
+	<entry>
+		<value>ARR</value>
+		<name>Social security number</name>
+	</entry>
+	<entry>
+		<value>ARS</value>
+		<name>Document volume number</name>
+	</entry>
+	<entry>
+		<value>ART</value>
+		<name>Book number</name>
+	</entry>
+	<entry>
+		<value>ARU</value>
+		<name>Stock exchange company identifier</name>
+	</entry>
+	<entry>
+		<value>ARV</value>
+		<name>Imputation account</name>
+	</entry>
+	<entry>
+		<value>ARW</value>
+		<name>Financial phase reference</name>
+	</entry>
+	<entry>
+		<value>ARX</value>
+		<name>Technical phase reference</name>
+	</entry>
+	<entry>
+		<value>ARY</value>
+		<name>Prior contractor registration number</name>
+	</entry>
+	<entry>
+		<value>ARZ</value>
+		<name>Stock adjustment number</name>
+	</entry>
+	<entry>
+		<value>ASA</value>
+		<name>Dispensation reference</name>
+	</entry>
+	<entry>
+		<value>ASB</value>
+		<name>Investment reference number</name>
+	</entry>
+	<entry>
+		<value>ASC</value>
+		<name>Assuming company</name>
+	</entry>
+	<entry>
+		<value>ASD</value>
+		<name>Budget chapter</name>
+	</entry>
+	<entry>
+		<value>ASE</value>
+		<name>Duty free products security number</name>
+	</entry>
+	<entry>
+		<value>ASF</value>
+		<name>Duty free products receipt authorisation number</name>
+	</entry>
+	<entry>
+		<value>ASG</value>
+		<name>Party information message reference</name>
+	</entry>
+	<entry>
+		<value>ASH</value>
+		<name>Formal statement reference</name>
+	</entry>
+	<entry>
+		<value>ASI</value>
+		<name>Proof of delivery reference number</name>
+	</entry>
+	<entry>
+		<value>ASJ</value>
+		<name>Supplier's credit claim reference number</name>
+	</entry>
+	<entry>
+		<value>ASK</value>
+		<name>Picture of actual product</name>
+	</entry>
+	<entry>
+		<value>ASL</value>
+		<name>Picture of a generic product</name>
+	</entry>
+	<entry>
+		<value>ASM</value>
+		<name>Trading partner identification number</name>
+	</entry>
+	<entry>
+		<value>ASN</value>
+		<name>Prior trading partner identification number</name>
+	</entry>
+	<entry>
+		<value>ASO</value>
+		<name>Password</name>
+	</entry>
+	<entry>
+		<value>ASP</value>
+		<name>Formal report number</name>
+	</entry>
+	<entry>
+		<value>ASQ</value>
+		<name>Fund account number</name>
+	</entry>
+	<entry>
+		<value>ASR</value>
+		<name>Safe custody number</name>
+	</entry>
+	<entry>
+		<value>ASS</value>
+		<name>Master account number</name>
+	</entry>
+	<entry>
+		<value>AST</value>
+		<name>Group reference number</name>
+	</entry>
+	<entry>
+		<value>ASU</value>
+		<name>Accounting transmission number</name>
+	</entry>
+	<entry>
+		<value>ASV</value>
+		<name>Product data file number</name>
+	</entry>
+	<entry>
+		<value>ASW</value>
+		<name>Cadastro Geral do Contribuinte (CGC)</name>
+	</entry>
+	<entry>
+		<value>ASX</value>
+		<name>Foreign resident identification number</name>
+	</entry>
+	<entry>
+		<value>ASY</value>
+		<name>CD-ROM</name>
+	</entry>
+	<entry>
+		<value>ASZ</value>
+		<name>Physical medium</name>
+	</entry>
+	<entry>
+		<value>ATA</value>
+		<name>Financial cancellation reference number</name>
+	</entry>
+	<entry>
+		<value>ATB</value>
+		<name>Purchase for export Customs agreement number</name>
+	</entry>
+	<entry>
+		<value>ATC</value>
+		<name>Judgment number</name>
+	</entry>
+	<entry>
+		<value>ATD</value>
+		<name>Secretariat number</name>
+	</entry>
+	<entry>
+		<value>ATE</value>
+		<name>Previous banking status message reference</name>
+	</entry>
+	<entry>
+		<value>ATF</value>
+		<name>Last received banking status message reference</name>
+	</entry>
+	<entry>
+		<value>ATG</value>
+		<name>Bank's documentary procedure reference</name>
+	</entry>
+	<entry>
+		<value>ATH</value>
+		<name>Customer's documentary procedure reference</name>
+	</entry>
+	<entry>
+		<value>ATI</value>
+		<name>Safe deposit box number</name>
+	</entry>
+	<entry>
+		<value>ATJ</value>
+		<name>Receiving Bankgiro number</name>
+	</entry>
+	<entry>
+		<value>ATK</value>
+		<name>Sending Bankgiro number</name>
+	</entry>
+	<entry>
+		<value>ATL</value>
+		<name>Bankgiro reference</name>
+	</entry>
+	<entry>
+		<value>ATM</value>
+		<name>Guarantee number</name>
+	</entry>
+	<entry>
+		<value>ATN</value>
+		<name>Collection instrument number</name>
+	</entry>
+	<entry>
+		<value>ATO</value>
+		<name>Converted Postgiro number</name>
+	</entry>
+	<entry>
+		<value>ATP</value>
+		<name>Cost centre alignment number</name>
+	</entry>
+	<entry>
+		<value>ATQ</value>
+		<name>Kamer Van Koophandel (KVK) number</name>
+	</entry>
+	<entry>
+		<value>ATR</value>
+		<name>Institut Belgo-Luxembourgeois de Codification (IBLC) number</name>
+	</entry>
+	<entry>
+		<value>ATS</value>
+		<name>External object reference</name>
+	</entry>
+	<entry>
+		<value>ATT</value>
+		<name>Exceptional transport authorisation number</name>
+	</entry>
+	<entry>
+		<value>ATU</value>
+		<name>Clave Unica de Identificacion Tributaria (CUIT)</name>
+	</entry>
+	<entry>
+		<value>ATV</value>
+		<name>Registro Unico Tributario (RUT)</name>
+	</entry>
+	<entry>
+		<value>ATW</value>
+		<name>Flat rack container bundle identification number</name>
+	</entry>
+	<entry>
+		<value>ATX</value>
+		<name>Transport equipment acceptance order reference</name>
+	</entry>
+	<entry>
+		<value>ATY</value>
+		<name>Transport equipment release order reference</name>
+	</entry>
+	<entry>
+		<value>ATZ</value>
+		<name>Ship's stay reference number</name>
+	</entry>
+	<entry>
+		<value>AU</value>
+		<name> Authorization to meet competition number</name>
+	</entry>
+	<entry>
+		<value>AUA</value>
+		<name>Place of positioning reference</name>
+	</entry>
+	<entry>
+		<value>AUB</value>
+		<name>Party reference</name>
+	</entry>
+	<entry>
+		<value>AUC</value>
+		<name>Issued prescription identification</name>
+	</entry>
+	<entry>
+		<value>AUD</value>
+		<name>Collection reference</name>
+	</entry>
+	<entry>
+		<value>AUE</value>
+		<name>Travel service</name>
+	</entry>
+	<entry>
+		<value>AUF</value>
+		<name>Consignment stock contract</name>
+	</entry>
+	<entry>
+		<value>AUG</value>
+		<name>Importer's letter of credit reference</name>
+	</entry>
+	<entry>
+		<value>AUH</value>
+		<name>Performed prescription identification</name>
+	</entry>
+	<entry>
+		<value>AUI</value>
+		<name>Image reference</name>
+	</entry>
+	<entry>
+		<value>AUJ</value>
+		<name>Proposed purchase order reference number</name>
+	</entry>
+	<entry>
+		<value>AUK</value>
+		<name>Application for financial support reference number</name>
+	</entry>
+	<entry>
+		<value>AUL</value>
+		<name>Manufacturing quality agreement number</name>
+	</entry>
+	<entry>
+		<value>AUM</value>
+		<name>Software editor reference</name>
+	</entry>
+	<entry>
+		<value>AUN</value>
+		<name>Software reference</name>
+	</entry>
+	<entry>
+		<value>AUO</value>
+		<name>Software quality reference</name>
+	</entry>
+	<entry>
+		<value>AUP</value>
+		<name>Consolidated orders' reference</name>
+	</entry>
+	<entry>
+		<value>AUQ</value>
+		<name>Customs binding ruling number</name>
+	</entry>
+	<entry>
+		<value>AUR</value>
+		<name>Customs non-binding ruling number</name>
+	</entry>
+	<entry>
+		<value>AUS</value>
+		<name>Delivery route reference</name>
+	</entry>
+	<entry>
+		<value>AUT</value>
+		<name>Net area supplier reference</name>
+	</entry>
+	<entry>
+		<value>AUU</value>
+		<name>Time series reference</name>
+	</entry>
+	<entry>
+		<value>AUV</value>
+		<name>Connecting point to central grid</name>
+	</entry>
+	<entry>
+		<value>AUW</value>
+		<name>Marketing plan identification number (MPIN)</name>
+	</entry>
+	<entry>
+		<value>AUX</value>
+		<name>Entity reference number, previous</name>
+	</entry>
+	<entry>
+		<value>AUY</value>
+		<name>International Standard Industrial Classification (ISIC)</name>
+	</entry>
+	<entry>
+		<value>AUZ</value>
+		<name>Customs pre-approval ruling number</name>
+	</entry>
+	<entry>
+		<value>AV</value>
+		<name> Account payable number</name>
+	</entry>
+	<entry>
+		<value>AVA</value>
+		<name>First financial institution's transaction reference</name>
+	</entry>
+	<entry>
+		<value>AVB</value>
+		<name>Product characteristics directory</name>
+	</entry>
+	<entry>
+		<value>AVC</value>
+		<name>Supplier's customer reference number</name>
+	</entry>
+	<entry>
+		<value>AVD</value>
+		<name>Inventory report request number</name>
+	</entry>
+	<entry>
+		<value>AVE</value>
+		<name>Metering point</name>
+	</entry>
+	<entry>
+		<value>AVF</value>
+		<name>Passenger reservation number</name>
+	</entry>
+	<entry>
+		<value>AVG</value>
+		<name>Slaughterhouse approval number</name>
+	</entry>
+	<entry>
+		<value>AVH</value>
+		<name>Meat cutting plant approval number</name>
+	</entry>
+	<entry>
+		<value>AVI</value>
+		<name>Customer travel service identifier</name>
+	</entry>
+	<entry>
+		<value>AVJ</value>
+		<name>Export control classification number</name>
+	</entry>
+	<entry>
+		<value>AVK</value>
+		<name>Broker reference 3</name>
+	</entry>
+	<entry>
+		<value>AVL</value>
+		<name>Consignment information</name>
+	</entry>
+	<entry>
+		<value>AVM</value>
+		<name>Goods item information</name>
+	</entry>
+	<entry>
+		<value>AVN</value>
+		<name>Dangerous Goods information</name>
+	</entry>
+	<entry>
+		<value>AVO</value>
+		<name>Pilotage services exemption number</name>
+	</entry>
+	<entry>
+		<value>AVP</value>
+		<name>Person registration number</name>
+	</entry>
+	<entry>
+		<value>AVQ</value>
+		<name>Place of packing approval number</name>
+	</entry>
+	<entry>
+		<value>AVR</value>
+		<name>Original Mandate Reference</name>
+	</entry>
+	<entry>
+		<value>AVS</value>
+		<name>Mandate Reference</name>
+	</entry>
+	<entry>
+		<value>AVT</value>
+		<name>Reservation station indentifier</name>
+	</entry>
+	<entry>
+		<value>AVU</value>
+		<name>Unique goods shipment identifier</name>
+	</entry>
+	<entry>
+		<value>AVV</value>
+		<name>Framework Agreement Number</name>
+	</entry>
+	<entry>
+		<value>AVW</value>
+		<name>Hash value</name>
+	</entry>
+	<entry>
+		<value>AVX</value>
+		<name>Movement reference number</name>
+	</entry>
+	<entry>
+		<value>AVY</value>
+		<name>Economic Operators Registration and Identification Number</name>
+	</entry>
+	<entry>
+		<value>AVZ</value>
+		<name>Local Reference Number</name>
+	</entry>
+	<entry>
+		<value>AWA</value>
+		<name>Rate code number</name>
+	</entry>
+	<entry>
+		<value>AWB</value>
+		<name>Air waybill number</name>
+	</entry>
+	<entry>
+		<value>AWC</value>
+		<name>Documentary credit amendment number</name>
+	</entry>
+	<entry>
+		<value>AWD</value>
+		<name>Advising bank's reference</name>
+	</entry>
+	<entry>
+		<value>AWE</value>
+		<name>Cost centre</name>
+	</entry>
+	<entry>
+		<value>AWF</value>
+		<name>Work item quantity determination</name>
+	</entry>
+	<entry>
+		<value>AWG</value>
+		<name>Internal data process number</name>
+	</entry>
+	<entry>
+		<value>AWH</value>
+		<name>Category of work reference</name>
+	</entry>
+	<entry>
+		<value>AWI</value>
+		<name>Policy form number</name>
+	</entry>
+	<entry>
+		<value>AWJ</value>
+		<name>Net area</name>
+	</entry>
+	<entry>
+		<value>AWK</value>
+		<name>Service provider</name>
+	</entry>
+	<entry>
+		<value>AWL</value>
+		<name>Error position</name>
+	</entry>
+	<entry>
+		<value>AWM</value>
+		<name>Service category reference</name>
+	</entry>
+	<entry>
+		<value>AWN</value>
+		<name>Connected location</name>
+	</entry>
+	<entry>
+		<value>AWO</value>
+		<name>Related party</name>
+	</entry>
+	<entry>
+		<value>AWP</value>
+		<name>Latest accounting entry record reference</name>
+	</entry>
+	<entry>
+		<value>AWQ</value>
+		<name>Accounting entry</name>
+	</entry>
+	<entry>
+		<value>AWR</value>
+		<name>Document reference, original</name>
+	</entry>
+	<entry>
+		<value>AWS</value>
+		<name>Hygienic Certificate number, national</name>
+	</entry>
+	<entry>
+		<value>AWT</value>
+		<name>Administrative Reference Code</name>
+	</entry>
+	<entry>
+		<value>AWU</value>
+		<name>Pick-up sheet number</name>
+	</entry>
+	<entry>
+		<value>AWV</value>
+		<name>Phone number</name>
+	</entry>
+	<entry>
+		<value>AWW</value>
+		<name>Buyer's fund number</name>
+	</entry>
+	<entry>
+		<value>AWX</value>
+		<name>Company trading account number</name>
+	</entry>
+	<entry>
+		<value>AWY</value>
+		<name>Reserved goods identifier</name>
+	</entry>
+	<entry>
+		<value>AWZ</value>
+		<name>Handling and movement reference number</name>
+	</entry>
+	<entry>
+		<value>AXA</value>
+		<name>Instruction to despatch reference number</name>
+	</entry>
+	<entry>
+		<value>AXB</value>
+		<name>Instruction for returns number</name>
+	</entry>
+	<entry>
+		<value>AXC</value>
+		<name>Metered services consumption report number</name>
+	</entry>
+	<entry>
+		<value>AXD</value>
+		<name>Order status enquiry number</name>
+	</entry>
+	<entry>
+		<value>AXE</value>
+		<name>Firm booking reference number</name>
+	</entry>
+	<entry>
+		<value>AXF</value>
+		<name>Product inquiry number</name>
+	</entry>
+	<entry>
+		<value>AXG</value>
+		<name>Split delivery number</name>
+	</entry>
+	<entry>
+		<value>AXH</value>
+		<name>Service relation number</name>
+	</entry>
+	<entry>
+		<value>AXI</value>
+		<name>Serial shipping container code</name>
+	</entry>
+	<entry>
+		<value>AXJ</value>
+		<name>Test specification number</name>
+	</entry>
+	<entry>
+		<value>AXK</value>
+		<name>Transport status report number</name>
+	</entry>
+	<entry>
+		<value>AXL</value>
+		<name>Tooling contract number</name>
+	</entry>
+	<entry>
+		<value>AXM</value>
+		<name>Formula reference number</name>
+	</entry>
+	<entry>
+		<value>AXN</value>
+		<name>Pre-agreement number</name>
+	</entry>
+	<entry>
+		<value>AXO</value>
+		<name>Product certification number</name>
+	</entry>
+	<entry>
+		<value>AXP</value>
+		<name>Consignment contract number</name>
+	</entry>
+	<entry>
+		<value>AXQ</value>
+		<name>Product specification reference number</name>
+	</entry>
+	<entry>
+		<value>AXR</value>
+		<name>Payroll deduction advice reference</name>
+	</entry>
+	<entry>
+		<value>AXS</value>
+		<name>TRACES party identification</name>
+	</entry>
+	<entry>
+		<value>AXU</value>
+		<name>Block Stowage Reference</name>
+	</entry>
+	<entry>
+		<value>BA</value>
+		<name> Beginning meter reading actual</name>
+	</entry>
+	<entry>
+		<value>BC</value>
+		<name> Buyer's contract number</name>
+	</entry>
+	<entry>
+		<value>BD</value>
+		<name> Bid number</name>
+	</entry>
+	<entry>
+		<value>BE</value>
+		<name> Beginning meter reading estimated</name>
+	</entry>
+	<entry>
+		<value>BH</value>
+		<name> House bill of lading number</name>
+	</entry>
+	<entry>
+		<value>BM</value>
+		<name> Bill of lading number</name>
+	</entry>
+	<entry>
+		<value>BN</value>
+		<name> Consignment identifier, carrier assigned</name>
+	</entry>
+	<entry>
+		<value>BO</value>
+		<name> Blanket order number</name>
+	</entry>
+	<entry>
+		<value>BR</value>
+		<name> Broker or sales office number</name>
+	</entry>
+	<entry>
+		<value>BT</value>
+		<name> Batch number/lot number</name>
+	</entry>
+	<entry>
+		<value>BTP</value>
+		<name>Battery and accumulator producer registration number</name>
+	</entry>
+	<entry>
+		<value>BW</value>
+		<name> Blended with number</name>
+	</entry>
+	<entry>
+		<value>CAS</value>
+		<name>IATA Cargo Agent CASS Address number</name>
+	</entry>
+	<entry>
+		<value>CAT</value>
+		<name>Matching of entries, balanced</name>
+	</entry>
+	<entry>
+		<value>CAU</value>
+		<name>Entry flagging</name>
+	</entry>
+	<entry>
+		<value>CAV</value>
+		<name>Matching of entries, unbalanced</name>
+	</entry>
+	<entry>
+		<value>CAW</value>
+		<name>Document reference, internal</name>
+	</entry>
+	<entry>
+		<value>CAX</value>
+		<name>European Value Added Tax identification</name>
+	</entry>
+	<entry>
+		<value>CAY</value>
+		<name>Cost accounting document</name>
+	</entry>
+	<entry>
+		<value>CAZ</value>
+		<name>Grid operator's customer reference number</name>
+	</entry>
+	<entry>
+		<value>CBA</value>
+		<name>Ticket control number</name>
+	</entry>
+	<entry>
+		<value>CBB</value>
+		<name>Order shipment grouping reference</name>
+	</entry>
+	<entry>
+		<value>CD</value>
+		<name> Credit note number</name>
+	</entry>
+	<entry>
+		<value>CEC</value>
+		<name>Ceding company</name>
+	</entry>
+	<entry>
+		<value>CED</value>
+		<name>Debit letter number</name>
+	</entry>
+	<entry>
+		<value>CFE</value>
+		<name>Consignee's further order</name>
+	</entry>
+	<entry>
+		<value>CFF</value>
+		<name>Animal farm licence number</name>
+	</entry>
+	<entry>
+		<value>CFO</value>
+		<name>Consignor's further order</name>
+	</entry>
+	<entry>
+		<value>CG</value>
+		<name> Consignee's order number</name>
+	</entry>
+	<entry>
+		<value>CH</value>
+		<name> Customer catalogue number</name>
+	</entry>
+	<entry>
+		<value>CK</value>
+		<name> Cheque number</name>
+	</entry>
+	<entry>
+		<value>CKN</value>
+		<name>Checking number</name>
+	</entry>
+	<entry>
+		<value>CM</value>
+		<name> Credit memo number</name>
+	</entry>
+	<entry>
+		<value>CMR</value>
+		<name>Road consignment note number</name>
+	</entry>
+	<entry>
+		<value>CN</value>
+		<name> Carrier's reference number</name>
+	</entry>
+	<entry>
+		<value>CNO</value>
+		<name>Charges note document attachment indicator</name>
+	</entry>
+	<entry>
+		<value>COF</value>
+		<name>Call off order number</name>
+	</entry>
+	<entry>
+		<value>CP</value>
+		<name> Condition of purchase document number</name>
+	</entry>
+	<entry>
+		<value>CR</value>
+		<name> Customer reference number</name>
+	</entry>
+	<entry>
+		<value>CRN</value>
+		<name>Transport means journey identifier</name>
+	</entry>
+	<entry>
+		<value>CS</value>
+		<name> Condition of sale document number</name>
+	</entry>
+	<entry>
+		<value>CST</value>
+		<name>Team assignment number</name>
+	</entry>
+	<entry>
+		<value>CT</value>
+		<name> Contract number</name>
+	</entry>
+	<entry>
+		<value>CU</value>
+		<name> Consignment identifier, consignor assigned</name>
+	</entry>
+	<entry>
+		<value>CV</value>
+		<name> Container operators reference number</name>
+	</entry>
+	<entry>
+		<value>CW</value>
+		<name> Package number</name>
+	</entry>
+	<entry>
+		<value>CZ</value>
+		<name> Cooperation contract number</name>
+	</entry>
+	<entry>
+		<value>DA</value>
+		<name> Deferment approval number</name>
+	</entry>
+	<entry>
+		<value>DAN</value>
+		<name>Debit account number</name>
+	</entry>
+	<entry>
+		<value>DB</value>
+		<name> Buyer's debtor number</name>
+	</entry>
+	<entry>
+		<value>DI</value>
+		<name> Distributor invoice number</name>
+	</entry>
+	<entry>
+		<value>DL</value>
+		<name> Debit note number</name>
+	</entry>
+	<entry>
+		<value>DM</value>
+		<name> Document identifier</name>
+	</entry>
+	<entry>
+		<value>DQ</value>
+		<name> Delivery note number</name>
+	</entry>
+	<entry>
+		<value>DR</value>
+		<name> Dock receipt number</name>
+	</entry>
+	<entry>
+		<value>EA</value>
+		<name> Ending meter reading actual</name>
+	</entry>
+	<entry>
+		<value>EB</value>
+		<name> Embargo permit number</name>
+	</entry>
+	<entry>
+		<value>ED</value>
+		<name> Export declaration</name>
+	</entry>
+	<entry>
+		<value>EE</value>
+		<name> Ending meter reading estimated</name>
+	</entry>
+	<entry>
+		<value>EEP</value>
+		<name>Electrical and electronic equipment producer registration</name>
+	</entry>
+	<entry>
+		<value>EI</value>
+		<name> Employer's identification number</name>
+	</entry>
+	<entry>
+		<value>EN</value>
+		<name> Embargo number</name>
+	</entry>
+	<entry>
+		<value>EQ</value>
+		<name> Equipment number</name>
+	</entry>
+	<entry>
+		<value>ER</value>
+		<name> Container/equipment receipt number</name>
+	</entry>
+	<entry>
+		<value>ERN</value>
+		<name>Exporter's reference number</name>
+	</entry>
+	<entry>
+		<value>ET</value>
+		<name> Excess transportation number</name>
+	</entry>
+	<entry>
+		<value>EX</value>
+		<name> Export permit identifier</name>
+	</entry>
+	<entry>
+		<value>FC</value>
+		<name> Fiscal number</name>
+	</entry>
+	<entry>
+		<value>FF</value>
+		<name> Consignment identifier, freight forwarder assigned</name>
+	</entry>
+	<entry>
+		<value>FI</value>
+		<name> File line identifier</name>
+	</entry>
+	<entry>
+		<value>FLW</value>
+		<name>Flow reference number</name>
+	</entry>
+	<entry>
+		<value>FN</value>
+		<name> Freight bill number</name>
+	</entry>
+	<entry>
+		<value>FO</value>
+		<name> Foreign exchange</name>
+	</entry>
+	<entry>
+		<value>FS</value>
+		<name> Final sequence number</name>
+	</entry>
+	<entry>
+		<value>FT</value>
+		<name> Free zone identifier</name>
+	</entry>
+	<entry>
+		<value>FV</value>
+		<name> File version number</name>
+	</entry>
+	<entry>
+		<value>FX</value>
+		<name> Foreign exchange contract number</name>
+	</entry>
+	<entry>
+		<value>GA</value>
+		<name> Standard's number</name>
+	</entry>
+	<entry>
+		<value>GC</value>
+		<name> Government contract number</name>
+	</entry>
+	<entry>
+		<value>GD</value>
+		<name> Standard's code number</name>
+	</entry>
+	<entry>
+		<value>GDN</value>
+		<name>General declaration number</name>
+	</entry>
+	<entry>
+		<value>GN</value>
+		<name> Government reference number</name>
+	</entry>
+	<entry>
+		<value>HS</value>
+		<name> Harmonised system number</name>
+	</entry>
+	<entry>
+		<value>HWB</value>
+		<name>House waybill number</name>
+	</entry>
+	<entry>
+		<value>IA</value>
+		<name> Internal vendor number</name>
+	</entry>
+	<entry>
+		<value>IB</value>
+		<name> In bond number</name>
+	</entry>
+	<entry>
+		<value>ICA</value>
+		<name>IATA cargo agent code number</name>
+	</entry>
+	<entry>
+		<value>ICE</value>
+		<name>Insurance certificate reference number</name>
+	</entry>
+	<entry>
+		<value>ICO</value>
+		<name>Insurance contract reference number</name>
+	</entry>
+	<entry>
+		<value>II</value>
+		<name> Initial sample inspection report number</name>
+	</entry>
+	<entry>
+		<value>IL</value>
+		<name> Internal order number</name>
+	</entry>
+	<entry>
+		<value>INB</value>
+		<name>Intermediary broker</name>
+	</entry>
+	<entry>
+		<value>INN</value>
+		<name>Interchange number new</name>
+	</entry>
+	<entry>
+		<value>INO</value>
+		<name>Interchange number old</name>
+	</entry>
+	<entry>
+		<value>IP</value>
+		<name> Import permit identifier</name>
+	</entry>
+	<entry>
+		<value>IS</value>
+		<name> Invoice number suffix</name>
+	</entry>
+	<entry>
+		<value>IT</value>
+		<name> Internal customer number</name>
+	</entry>
+	<entry>
+		<value>IV</value>
+		<name> Invoice document identifier</name>
+	</entry>
+	<entry>
+		<value>JB</value>
+		<name> Job number</name>
+	</entry>
+	<entry>
+		<value>JE</value>
+		<name> Ending job sequence number</name>
+	</entry>
+	<entry>
+		<value>LA</value>
+		<name> Shipping label serial number</name>
+	</entry>
+	<entry>
+		<value>LAN</value>
+		<name>Loading authorisation identifier</name>
+	</entry>
+	<entry>
+		<value>LAR</value>
+		<name>Lower number in range</name>
+	</entry>
+	<entry>
+		<value>LB</value>
+		<name> Lockbox</name>
+	</entry>
+	<entry>
+		<value>LC</value>
+		<name> Letter of credit number</name>
+	</entry>
+	<entry>
+		<value>LI</value>
+		<name> Document line identifier</name>
+	</entry>
+	<entry>
+		<value>LO</value>
+		<name> Load planning number</name>
+	</entry>
+	<entry>
+		<value>LRC</value>
+		<name>Reservation office identifier</name>
+	</entry>
+	<entry>
+		<value>LS</value>
+		<name> Bar coded label serial number</name>
+	</entry>
+	<entry>
+		<value>MA</value>
+		<name> Ship notice/manifest number</name>
+	</entry>
+	<entry>
+		<value>MB</value>
+		<name> Master bill of lading number</name>
+	</entry>
+	<entry>
+		<value>MF</value>
+		<name> Manufacturer's part number</name>
+	</entry>
+	<entry>
+		<value>MG</value>
+		<name> Meter unit number</name>
+	</entry>
+	<entry>
+		<value>MH</value>
+		<name> Manufacturing order number</name>
+	</entry>
+	<entry>
+		<value>MR</value>
+		<name> Message recipient</name>
+	</entry>
+	<entry>
+		<value>MRN</value>
+		<name>Mailing reference number</name>
+	</entry>
+	<entry>
+		<value>MS</value>
+		<name> Message sender</name>
+	</entry>
+	<entry>
+		<value>MSS</value>
+		<name>Manufacturer's material safety data sheet number</name>
+	</entry>
+	<entry>
+		<value>MWB</value>
+		<name>Master air waybill number</name>
+	</entry>
+	<entry>
+		<value>NA</value>
+		<name> North American hazardous goods classification number</name>
+	</entry>
+	<entry>
+		<value>NF</value>
+		<name> Nota Fiscal</name>
+	</entry>
+	<entry>
+		<value>OH</value>
+		<name> Current invoice number</name>
+	</entry>
+	<entry>
+		<value>OI</value>
+		<name> Previous invoice number</name>
+	</entry>
+	<entry>
+		<value>ON</value>
+		<name> Order document identifier, buyer assigned</name>
+	</entry>
+	<entry>
+		<value>OP</value>
+		<name> Original purchase order</name>
+	</entry>
+	<entry>
+		<value>OR</value>
+		<name> General order number</name>
+	</entry>
+	<entry>
+		<value>PB</value>
+		<name> Payer's financial institution account number</name>
+	</entry>
+	<entry>
+		<value>PC</value>
+		<name> Production code</name>
+	</entry>
+	<entry>
+		<value>PD</value>
+		<name> Promotion deal number</name>
+	</entry>
+	<entry>
+		<value>PE</value>
+		<name> Plant number</name>
+	</entry>
+	<entry>
+		<value>PF</value>
+		<name> Prime contractor contract number</name>
+	</entry>
+	<entry>
+		<value>PI</value>
+		<name> Price list version number</name>
+	</entry>
+	<entry>
+		<value>PK</value>
+		<name> Packing list number</name>
+	</entry>
+	<entry>
+		<value>PL</value>
+		<name> Price list number</name>
+	</entry>
+	<entry>
+		<value>POR</value>
+		<name>Purchase order response number</name>
+	</entry>
+	<entry>
+		<value>PP</value>
+		<name> Purchase order change number</name>
+	</entry>
+	<entry>
+		<value>PQ</value>
+		<name> Payment reference</name>
+	</entry>
+	<entry>
+		<value>PR</value>
+		<name> Price quote number</name>
+	</entry>
+	<entry>
+		<value>PS</value>
+		<name> Purchase order number suffix</name>
+	</entry>
+	<entry>
+		<value>PW</value>
+		<name> Prior purchase order number</name>
+	</entry>
+	<entry>
+		<value>PY</value>
+		<name> Payee's financial institution account number</name>
+	</entry>
+	<entry>
+		<value>RA</value>
+		<name> Remittance advice number</name>
+	</entry>
+	<entry>
+		<value>RC</value>
+		<name> Rail/road routing code</name>
+	</entry>
+	<entry>
+		<value>RCN</value>
+		<name>Railway consignment note number</name>
+	</entry>
+	<entry>
+		<value>RE</value>
+		<name> Release number</name>
+	</entry>
+	<entry>
+		<value>REN</value>
+		<name>Consignment receipt identifier</name>
+	</entry>
+	<entry>
+		<value>RF</value>
+		<name> Export reference number</name>
+	</entry>
+	<entry>
+		<value>RR</value>
+		<name> Payer's financial institution transit routing No.(ACH</name>
+	</entry>
+	<entry>
+		<value>RT</value>
+		<name> Payee's financial institution transit routing No.</name>
+	</entry>
+	<entry>
+		<value>SA</value>
+		<name> Sales person number</name>
+	</entry>
+	<entry>
+		<value>SB</value>
+		<name> Sales region number</name>
+	</entry>
+	<entry>
+		<value>SD</value>
+		<name> Sales department number</name>
+	</entry>
+	<entry>
+		<value>SE</value>
+		<name> Serial number</name>
+	</entry>
+	<entry>
+		<value>SEA</value>
+		<name>Allocated seat</name>
+	</entry>
+	<entry>
+		<value>SF</value>
+		<name> Ship from</name>
+	</entry>
+	<entry>
+		<value>SH</value>
+		<name> Previous highest schedule number</name>
+	</entry>
+	<entry>
+		<value>SI</value>
+		<name> SID (Shipper's identifying number for shipment)</name>
+	</entry>
+	<entry>
+		<value>SM</value>
+		<name> Sales office number</name>
+	</entry>
+	<entry>
+		<value>SN</value>
+		<name> Transport equipment seal identifier</name>
+	</entry>
+	<entry>
+		<value>SP</value>
+		<name> Scan line</name>
+	</entry>
+	<entry>
+		<value>SQ</value>
+		<name> Equipment sequence number</name>
+	</entry>
+	<entry>
+		<value>SRN</value>
+		<name>Shipment reference number</name>
+	</entry>
+	<entry>
+		<value>SS</value>
+		<name> Sellers reference number</name>
+	</entry>
+	<entry>
+		<value>STA</value>
+		<name>Station reference number</name>
+	</entry>
+	<entry>
+		<value>SW</value>
+		<name> Swap order number</name>
+	</entry>
+	<entry>
+		<value>SZ</value>
+		<name> Specification number</name>
+	</entry>
+	<entry>
+		<value>TB</value>
+		<name> Trucker's bill of lading</name>
+	</entry>
+	<entry>
+		<value>TCR</value>
+		<name>Terminal operator's consignment reference</name>
+	</entry>
+	<entry>
+		<value>TE</value>
+		<name> Telex message number</name>
+	</entry>
+	<entry>
+		<value>TF</value>
+		<name> Transfer number</name>
+	</entry>
+	<entry>
+		<value>TI</value>
+		<name> TIR carnet number</name>
+	</entry>
+	<entry>
+		<value>TIN</value>
+		<name>Transport instruction number</name>
+	</entry>
+	<entry>
+		<value>TL</value>
+		<name> Tax exemption licence number</name>
+	</entry>
+	<entry>
+		<value>TN</value>
+		<name> Transaction reference number</name>
+	</entry>
+	<entry>
+		<value>TP</value>
+		<name> Test report number</name>
+	</entry>
+	<entry>
+		<value>UAR</value>
+		<name>Upper number of range</name>
+	</entry>
+	<entry>
+		<value>UC</value>
+		<name> Ultimate customer's reference number</name>
+	</entry>
+	<entry>
+		<value>UCN</value>
+		<name>Unique consignment reference number</name>
+	</entry>
+	<entry>
+		<value>UN</value>
+		<name> United Nations Dangerous Goods identifier</name>
+	</entry>
+	<entry>
+		<value>UO</value>
+		<name> Ultimate customer's order number</name>
+	</entry>
+	<entry>
+		<value>URI</value>
+		<name>Uniform Resource Identifier</name>
+	</entry>
+	<entry>
+		<value>VA</value>
+		<name> VAT registration number</name>
+	</entry>
+	<entry>
+		<value>VC</value>
+		<name> Vendor contract number</name>
+	</entry>
+	<entry>
+		<value>VGR</value>
+		<name>Transport equipment gross mass verification reference</name>
+	</entry>
+	<entry>
+		<value>VM</value>
+		<name> Vessel identifier</name>
+	</entry>
+	<entry>
+		<value>VN</value>
+		<name> Order number (vendor)</name>
+	</entry>
+	<entry>
+		<value>VON</value>
+		<name>Voyage number</name>
+	</entry>
+	<entry>
+		<value>VOR</value>
+		<name>Transport equipment gross mass verification order reference</name>
+	</entry>
+	<entry>
+		<value>VP</value>
+		<name> Vendor product number</name>
+	</entry>
+	<entry>
+		<value>VR</value>
+		<name> Vendor ID number</name>
+	</entry>
+	<entry>
+		<value>VS</value>
+		<name> Vendor order number suffix</name>
+	</entry>
+	<entry>
+		<value>VT</value>
+		<name> Motor vehicle identification number</name>
+	</entry>
+	<entry>
+		<value>VV</value>
+		<name> Voucher number</name>
+	</entry>
+	<entry>
+		<value>WE</value>
+		<name> Warehouse entry number</name>
+	</entry>
+	<entry>
+		<value>WM</value>
+		<name> Weight agreement number</name>
+	</entry>
+	<entry>
+		<value>WN</value>
+		<name> Well number</name>
+	</entry>
+	<entry>
+		<value>WR</value>
+		<name> Warehouse receipt number</name>
+	</entry>
+	<entry>
+		<value>WS</value>
+		<name> Warehouse storage location number</name>
+	</entry>
+	<entry>
+		<value>WY</value>
+		<name> Rail waybill number</name>
+	</entry>
+	<entry>
+		<value>XA</value>
+		<name> Company/place registration number</name>
+	</entry>
+	<entry>
+		<value>XC</value>
+		<name> Cargo control number</name>
+	</entry>
+	<entry>
+		<value>XP</value>
+		<name> Previous cargo control number</name>
+	</entry>
+	<entry>
+		<value>ZZZ</value>
+		<name>Mutually defined reference number</name>
+	</entry>
+</entries>
