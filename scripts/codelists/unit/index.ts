@@ -5,7 +5,7 @@ import { arrayable, generator } from "../generator";
 const source = path.resolve(__dirname, "./source.xml");
 
 export default generator({
-	id: "transport",
+	id: "unit",
 	definition: {
 		key: {
 			type: "string",

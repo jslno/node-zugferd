@@ -3,7 +3,7 @@ import { generator } from "../generator";
 const source = "https://service.unece.org/trade/untdid/d96a/uncl/uncl3139.htm";
 
 export default generator({
-	id: "untdid-3139",
+	id: "untdid-3035",
 	definition: {
 		key: {
 			type: "string",

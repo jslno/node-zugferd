@@ -5,7 +5,7 @@ import { arrayable, generator } from "../generator";
 const source = path.resolve(__dirname, "./source.xml");
 
 export default generator({
-	id: "vat-cat",
+	id: "vatex",
 	definition: {
 		key: {
 			type: "string",

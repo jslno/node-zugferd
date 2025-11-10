@@ -31,9 +31,7 @@ export function createZugferd<const O extends ZugferdOptions>(
 					await context.options.validator?.run(xml, context);
 					return xml;
 				},
-				toPDF: async () => {
-
-				}
+				toPDF: async () => {},
 			};
 		},
 		...actions,
