@@ -238,6 +238,162 @@ importers:
         specifier: 'catalog:'
         version: 0.15.10(typescript@5.9.3)
 
+  packages/codelists/charge:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/country:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/currency:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/date:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/eas:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/fiscal-id:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/icd:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/incoterms:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/item:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/language:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/line-reason:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/line-status:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/mime:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/payment:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/text:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/time:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/transport:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/unit:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/untdid-1001:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/untdid-1153:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/untdid-3035:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/untdid-3139:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/untdid-5305:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/vat-cat:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/vat-id:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/codelists/vatex:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
   packages/core:
     dependencies:
       '@standard-schema/spec':
