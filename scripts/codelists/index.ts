@@ -116,7 +116,11 @@ ${enumDef}
 		});
 
 		await writeFile(dest, content, "utf-8");
+
+		console.info(`Generated codelist: ${codelist.id}`);
 	}
+
+	console.log("Codelists generated successfully.");
 
 	return Promise.resolve();
 }
