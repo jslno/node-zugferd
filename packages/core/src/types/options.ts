@@ -2,12 +2,14 @@ import type {
 	Awaitable,
 	InterpolateSchemaContext,
 	Profile,
+	ZugferdValidator,
 } from "@node-zugferd/core";
 import type { Logger } from "../utils/logger";
 import type { ZugferdPlugin } from "./plugins";
 
 export type ZugferdOptions = {
 	profile: Profile;
+	validator?: ZugferdValidator | undefined;
 	plugins?: ZugferdPlugin[] | undefined;
 	hooks?: ZugferdHooks | undefined;
 	logger?: Logger | undefined;
