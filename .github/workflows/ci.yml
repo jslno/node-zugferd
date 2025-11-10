@@ -6,10 +6,8 @@ on:
       - opened
       - synchronize
   push:
-    # TODO: revert to main only
     branches:
       - main
-      - v1
   merge_group: {}
 
 jobs:
