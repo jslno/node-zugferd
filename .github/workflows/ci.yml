@@ -2,9 +2,11 @@ name: CI
 
 on:
   pull_request:
-    branches: main
+    # TODO: revert to main only
+    branches: [main, v1]
   push:
-    branches: main
+    # TODO: revert to main only
+    branches: [main, v1]
   merge_group: {}
 
 jobs:
