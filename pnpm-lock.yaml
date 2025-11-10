@@ -223,6 +223,9 @@ importers:
       '@node-zugferd/core':
         specifier: workspace:*
         version: link:../core
+      defu:
+        specifier: 'catalog:'
+        version: 6.1.4
     devDependencies:
       tsdown:
         specifier: 'catalog:'

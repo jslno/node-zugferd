@@ -38,6 +38,7 @@
     }
   },
   "dependencies": {
+    "defu": "catalog:",
     "@node-zugferd/core": "workspace:*"
   },
   "devDependencies": {

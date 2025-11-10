@@ -17,27 +17,27 @@
     },
     {
       "path": "./packages/profiles/minimum/tsconfig.json"
-    },
-    {
-      "path": "./packages/profiles/basic-wl/tsconfig.json"
-    },
-    {
-      "path": "./packages/profiles/basic/tsconfig.json"
-    },
-    {
-      "path": "./packages/profiles/en16931/tsconfig.json"
-    },
-    {
-      "path": "./packages/profiles/extended/tsconfig.json"
-    },
-    {
-      "path": "./packages/profiles/xrechnung/tsconfig.json"
-    },
-    {
-      "path": "./packages/validators/mustang/tsconfig.json"
-    },
-    {
-      "path": "./packages/validators/xsd/tsconfig.json"
     }
+    // {
+    //   "path": "./packages/profiles/basic-wl/tsconfig.json"
+    // },
+    // {
+    //   "path": "./packages/profiles/basic/tsconfig.json"
+    // },
+    // {
+    //   "path": "./packages/profiles/en16931/tsconfig.json"
+    // },
+    // {
+    //   "path": "./packages/profiles/extended/tsconfig.json"
+    // },
+    // {
+    //   "path": "./packages/profiles/xrechnung/tsconfig.json"
+    // },
+    // {
+    //   "path": "./packages/validators/mustang/tsconfig.json"
+    // },
+    // {
+    //   "path": "./packages/validators/xsd/tsconfig.json"
+    // }
   ]
 }
