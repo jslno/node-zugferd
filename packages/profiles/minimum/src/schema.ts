@@ -1,3 +1,4 @@
+import { Untdid1001 } from "@node-zugferd/codelist-untdid-1001";
 import type { Schema } from "@node-zugferd/core";
 import { t } from "@node-zugferd/shared";
 
@@ -31,8 +32,7 @@ export const schema = {
 			},
 			typeCode: {
 				key: "BT-3",
-				// TODO: UNTDID 1001 Codelist
-				type: t.Code,
+				type: t.Code("Untdid1001", Object.values(Untdid1001)),
 			},
 			// BT-2-00
 			issueDate: {

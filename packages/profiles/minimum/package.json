@@ -34,6 +34,7 @@
     "@node-zugferd/core": "workspace:*"
   },
   "dependencies": {
+    "@node-zugferd/codelist-untdid-1001": "workspace:*",
     "@node-zugferd/shared": "workspace:*"
   },
   "devDependencies": {

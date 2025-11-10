@@ -428,6 +428,9 @@ importers:
 
   packages/profiles/minimum:
     dependencies:
+      '@node-zugferd/codelist-untdid-1001':
+        specifier: workspace:*
+        version: link:../../codelists/untdid-1001
       '@node-zugferd/shared':
         specifier: workspace:*
         version: link:../../shared

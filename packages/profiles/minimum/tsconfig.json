@@ -9,6 +9,9 @@
     },
     {
       "path": "../../shared/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/untdid-1001/tsconfig.json"
     }
   ]
 }

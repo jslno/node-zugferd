@@ -353,6 +353,42 @@ const $Date: StandardSchemaV1<string | Date, string> = {
 };
 export { $Date as Date };
 
-export const Code = Text;
+export function Code<T extends string>(codelistName: string, enumValues: T[]) {
+	return {
+		"~standard": {
+			version: 1,
+			vendor: "node-zugferd",
+			validate(value) {
+				if (typeof value !== "string") {
+					return {
+						issues: [
+							{
+								message: "Expected value to be a string.",
+							},
+						],
+					};
+				}
+
+				if (!enumValues.includes(value as T)) {
+					return {
+						issues: [
+							{
+								message: `Value "${value}" is not valid for codelist "${codelistName}".`,
+							},
+						],
+					};
+				}
+
+				return {
+					value: value as T,
+				};
+			},
+			types: {
+				input: {} as T,
+				output: {} as T,
+			},
+		},
+	} satisfies StandardSchemaV1<T>;
+}
 
 export const BinaryObject = Text;
