@@ -4,6 +4,9 @@
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
+  "bin": {
+    "node-zugferd-validator-mustang": "./dist/post-install.js"
+  },
   "scripts": {
     "postinstall": "node ./dist/post-install.js",
     "build": "tsdown",

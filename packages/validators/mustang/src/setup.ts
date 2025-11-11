@@ -94,7 +94,7 @@ async function downloadMustang() {
 
 async function cleanup() {
 	const files = await glob(
-		path.join(__dirname, "mustang", "Mustang-CLI-*.jar"),
+		path.join(__dirname, "Mustang-CLI-*.jar"),
 	);
 	await Promise.all(files.map(unlink));
 }
