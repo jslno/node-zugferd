@@ -4,6 +4,15 @@
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://node-zugferd.jsolano.de/docs/codelists/line-status",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jslno/node-zugferd",
+    "directory": "packages/codelists/line-status"
+  },
   "scripts": {
     "build": "tsdown",
     "test": "",

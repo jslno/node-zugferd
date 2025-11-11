@@ -4,6 +4,14 @@
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jslno/node-zugferd",
+    "directory": "packages/core"
+  },
   "scripts": {
     "build": "tsdown",
     "test": "vitest --typecheck",

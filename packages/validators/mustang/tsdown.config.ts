@@ -10,7 +10,7 @@ export default defineConfig([
 	{
 		dts: false,
 		format: "esm",
-		entry: ["./src/post-install.ts"],
+		entry: ["./src/bin.ts"],
 		external: ["./meta.js", "./meta.cjs"],
 	},
 ]);

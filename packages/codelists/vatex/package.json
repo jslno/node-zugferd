@@ -4,6 +4,15 @@
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://node-zugferd.jsolano.de/docs/codelists/vatex",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jslno/node-zugferd",
+    "directory": "packages/codelists/vatex"
+  },
   "scripts": {
     "build": "tsdown",
     "test": "",

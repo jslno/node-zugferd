@@ -436,7 +436,7 @@ importers:
         version: link:../../codelists/untdid-1001
       '@node-zugferd/shared':
         specifier: workspace:*
-        version: link:../../shared
+        version: link:../../test-utils
     devDependencies:
       '@node-zugferd/core':
         specifier: workspace:*
@@ -454,6 +454,12 @@ importers:
       '@node-zugferd/core':
         specifier: workspace:*
         version: link:../core
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
+  packages/test-utils:
+    devDependencies:
       tsdown:
         specifier: 'catalog:'
         version: 0.15.10(typescript@5.9.3)

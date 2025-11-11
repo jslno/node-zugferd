@@ -5,10 +5,18 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "bin": {
-    "node-zugferd-validator-mustang": "./dist/post-install.js"
+    "node-zugferd-validator-mustang": "./dist/bin.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://node-zugferd.jsolano.de/docs/validators/mustang",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jslno/node-zugferd",
+    "directory": "packages/validators/mustang"
   },
   "scripts": {
-    "postinstall": "node ./dist/post-install.js",
     "build": "tsdown",
     "dev": "tsdown --watch",
     "typecheck": "tsc --project tsconfig.json"
