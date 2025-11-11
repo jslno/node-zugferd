@@ -1,0 +1,48 @@
+{
+  "name": "@node-zugferd/validator-mustang",
+  "version": "0.1.1-beta.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "scripts": {
+    "postinstall": "node ./dist/post-install.js",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --project tsconfig.json"
+  },
+  "exports": {
+    ".": {
+      "dev-source": "./src/index.ts",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "dist/index.d.ts"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@node-zugferd/core": "workspace:*"
+  },
+  "dependencies": {
+    "tinyglobby": "catalog:",
+    "which": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/which": "^3.0.4",
+    "@node-zugferd/core": "workspace:*",
+    "tsdown": "catalog:"
+  },
+  "files": [
+    "dist"
+  ]
+}

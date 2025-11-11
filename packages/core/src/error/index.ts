@@ -1,5 +1,5 @@
 export class ZugferdError extends Error {
-	constructor(message: string, cause?: string | undefined) {
+	constructor(message: string, cause?: unknown | undefined) {
 		super(message, {
 			cause,
 		});
