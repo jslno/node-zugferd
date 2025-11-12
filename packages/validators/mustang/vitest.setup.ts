@@ -1,3 +1,5 @@
-import { mustangValidator } from "./src";
+import { setup } from "./src/setup";
 
-export default mustangValidator.setup;
+export default async function globalSetup() {
+	await setup();
+}
