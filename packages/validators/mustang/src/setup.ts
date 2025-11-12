@@ -55,7 +55,12 @@ async function downloadMustang() {
 	}
 
 	logger.debug(`Downloading Mustang-CLI from ${asset.browser_download_url}`);
-	const response = await fetch(asset.browser_download_url);
+	const response = await fetch(asset.browser_download_url, {
+		headers: {
+			"User-Agent": "node-zugferd",
+			Accept: "application/octet-stream",
+		},
+	});
 	logger.debug(`Received response: ${response.status} ${response.statusText}`);
 	if (!response.ok || !response.body) {
 		throw new ZugferdError(
@@ -89,7 +94,12 @@ async function fetchRelease(input: {
 }) {
 	const url = `https://api.github.com/repos/${input.owner}/${input.repo}/releases/${input.release ?? "latest"}`;
 	logger.debug(`Fetching release info from ${url}`);
-	const res = await fetch(url);
+	const res = await fetch(url, {
+		headers: {
+			"User-Agent": "node-zugferd",
+			Accept: "application/vnd.github.v3+json",
+		},
+	});
 	logger.debug(`Received response: ${res.status} ${res.statusText}`);
 	if (!res.ok) {
 		throw new ZugferdError(

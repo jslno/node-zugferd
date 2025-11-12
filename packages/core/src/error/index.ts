@@ -9,3 +9,10 @@ export class ZugferdError extends Error {
 		}
 	}
 }
+
+export class ZugferdValidationError extends ZugferdError {
+	constructor(message: string, cause?: unknown | undefined) {
+		super(message, cause);
+		this.name = "ZugferdValidationError";
+	}
+}
