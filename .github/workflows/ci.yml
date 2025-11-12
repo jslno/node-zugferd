@@ -129,9 +129,6 @@ jobs:
           TURBO_TEAM: ${{ vars.TURBO_TEAM || github.repository_owner }}
           TURBO_CACHE: remote:rw
         run: pnpm build
-      
-      - name: Install Mustang Validator CLI
-        run: pnpm exec node-zugferd-validator-mustang
 
       - name: Test
         run: pnpm test
