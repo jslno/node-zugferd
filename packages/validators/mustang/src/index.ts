@@ -1,11 +1,11 @@
 import { exec } from "node:child_process";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { platform, tmpdir } from "node:os";
-import path from "node:path";
+import path, { join } from "node:path";
 import { promisify } from "node:util";
 import type { ZugferdValidator } from "@node-zugferd/core";
 import { ZugferdError } from "@node-zugferd/core/error";
-import { getMustangCLI } from "./isomorph";
+import { __dirname } from "./isomorph";
 import { setup } from "./setup";
 
 export type MustangValidatorConfig = {
@@ -44,7 +44,7 @@ export function mustangValidator(config?: MustangValidatorConfig | undefined) {
 				);
 				return;
 			}
-			const cli = await getMustangCLI();
+			const cli = join(__dirname, "../runtime", "Mustang-CLI.jar");
 
 			if (platform() === "darwin" && !config?.temporaryDirectory) {
 				ctx.logger.warn(

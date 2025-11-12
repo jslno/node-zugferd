@@ -21,17 +21,30 @@
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       }
+    },
+    "./invoices/*": {
+      "dev-source": "./src/invoices/*.ts",
+      "import": {
+        "types": "./dist/invoices/*.d.ts",
+        "default": "./dist/invoices/*.js"
+      },
+      "require": {
+        "types": "./dist/invoices/*.d.cts",
+        "default": "./dist/invoices/*.cjs"
+      }
     }
   },
   "typesVersions": {
     "*": {
       ".": [
         "dist/index.d.ts"
+      ],
+      "./invoices/*": [
+        "dist/invoices/*.d.ts"
       ]
     }
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "tsdown": "catalog:"
   },

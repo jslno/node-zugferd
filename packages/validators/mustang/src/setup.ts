@@ -1,11 +1,10 @@
-import { createWriteStream, existsSync } from "node:fs";
-import { unlink, writeFile } from "node:fs/promises";
+import { createWriteStream } from "node:fs";
+import { mkdir, rm } from "node:fs/promises";
 import path from "node:path";
 import { Readable } from "node:stream";
 import { pipeline } from "node:stream/promises";
 import { ZugferdError } from "@node-zugferd/core/error";
 import { createLogger } from "@node-zugferd/core/utils";
-import { glob } from "tinyglobby";
 import which from "which";
 import { __dirname } from "./isomorph";
 
@@ -18,7 +17,7 @@ const logger = createLogger({
 export async function setup() {
 	try {
 		logger.debug(`Locating java, JAVA_HOME=${process.env.JAVA_HOME}`);
-		const java = which("java", {
+		const java = await which("java", {
 			path: process.env.JAVA_HOME ? process.env.JAVA_HOME + "/bin" : undefined,
 		}).catch((err) => {
 			throw new ZugferdError(
@@ -36,7 +35,7 @@ export async function setup() {
 		logger.error(`Installation failed: ${(error as Error).message}`);
 		return Promise.reject(error);
 	}
-	return Promise.resolve();
+	return Promise.resolve({ cleanup });
 }
 
 async function downloadMustang() {
@@ -55,48 +54,29 @@ async function downloadMustang() {
 		);
 	}
 
-	if (!existsSync(path.resolve(__dirname, asset.name))) {
-		logger.debug(`Downloading Mustang-CLI from ${asset.browser_download_url}`);
-		const response = await fetch(asset.browser_download_url);
-		logger.debug(
-			`Received response: ${response.status} ${response.statusText}`,
+	logger.debug(`Downloading Mustang-CLI from ${asset.browser_download_url}`);
+	const response = await fetch(asset.browser_download_url);
+	logger.debug(`Received response: ${response.status} ${response.statusText}`);
+	if (!response.ok || !response.body) {
+		throw new ZugferdError(
+			`Failed to download Mustang-CLI from ${asset.browser_download_url}: ${response.status} ${response.statusText}`,
 		);
-		if (!response.ok || !response.body) {
-			throw new ZugferdError(
-				`Failed to download Mustang-CLI from ${asset.browser_download_url}: ${response.status} ${response.statusText}`,
-			);
-		}
-		await cleanup();
-
-		const dest = path.resolve(__dirname, asset.name);
-		logger.debug(`Saving Mustang-CLI to ${dest}`);
-		await pipeline(Readable.fromWeb(response.body), createWriteStream(dest));
-		logger.debug(`Saved Mustang-CLI successfully`);
-	} else {
-		logger.debug(`Latest Mustang-CLI already installed. Skipping download.`);
 	}
-	await Promise.all([
-		writeFile(
-			path.resolve(__dirname, "meta.js"),
-			`export const MUSTANG_CLI_JAR = ${JSON.stringify(asset.name)};`,
-		).catch((err) => {
-			throw new ZugferdError("Failed to write meta.js file", err);
-		}),
-		writeFile(
-			path.resolve(__dirname, "meta.cjs"),
-			`exports.MUSTANG_CLI_JAR = ${JSON.stringify(asset.name)};`,
-		).catch((err) => {
-			throw new ZugferdError("Failed to write meta.cjs file", err);
-		}),
-	]);
-	logger.debug(`Saved Mustang-CLI version successfully`);
+
+	await cleanup();
+	await mkdir(path.resolve(__dirname, "../runtime"), { recursive: true });
+
+	const dest = path.resolve(__dirname, "../runtime", "Mustang-CLI.jar");
+	logger.debug(`Saving Mustang-CLI to ${dest}`);
+	await pipeline(Readable.fromWeb(response.body), createWriteStream(dest));
+	logger.debug(`Saved Mustang-CLI successfully`);
 }
 
 async function cleanup() {
-	const files = await glob(
-		path.join(__dirname, "Mustang-CLI-*.jar"),
-	);
-	await Promise.all(files.map(unlink));
+	await rm(path.resolve(__dirname, "../runtime"), {
+		recursive: true,
+		force: true,
+	});
 }
 
 async function fetchRelease(input: {

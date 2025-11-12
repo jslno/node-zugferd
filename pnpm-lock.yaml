@@ -12,9 +12,6 @@ catalogs:
     fast-xml-parser:
       specifier: ^5.3.0
       version: 5.3.0
-    tinyglobby:
-      specifier: ^0.2.15
-      version: 0.2.15
     tsdown:
       specifier: ^0.15.10
       version: 0.15.10
@@ -66,7 +63,7 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0
       tinyglobby:
-        specifier: 'catalog:'
+        specifier: ^0.2.15
         version: 0.2.15
       tsx:
         specifier: ^4.20.6
@@ -436,7 +433,7 @@ importers:
         version: link:../../codelists/untdid-1001
       '@node-zugferd/shared':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../shared
     devDependencies:
       '@node-zugferd/core':
         specifier: workspace:*
@@ -466,16 +463,16 @@ importers:
 
   packages/validators/mustang:
     dependencies:
-      tinyglobby:
-        specifier: 'catalog:'
-        version: 0.2.15
+      '@node-zugferd/core':
+        specifier: workspace:*
+        version: link:../../core
       which:
         specifier: ^2.0.2
         version: 2.0.2
     devDependencies:
-      '@node-zugferd/core':
+      '@node-zugferd/test-utils':
         specifier: workspace:*
-        version: link:../../core
+        version: link:../../test-utils
       '@types/which':
         specifier: ^3.0.4
         version: 3.0.4

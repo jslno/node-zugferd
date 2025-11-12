@@ -29,7 +29,7 @@
     "cross-env": "^7.0.3",
     "fast-xml-parser": "catalog:",
     "serialize-javascript": "^7.0.0",
-    "tinyglobby": "catalog:",
+    "tinyglobby": "^0.2.15",
     "tsx": "^4.20.6",
     "turbo": "^2.5.8",
     "typescript": "catalog:",
