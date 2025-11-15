@@ -1,4 +1,4 @@
-export type EnvelopeInput = {
+export function createEnvelope(input: {
 	/**
 	 * Message identification block
 	 */
@@ -11,9 +11,7 @@ export type EnvelopeInput = {
 	 * Supply Chain Trade Transaction block
 	 */
 	supplyChainTradeTransaction: Record<string, any>;
-};
-
-export function createEnvelope(input: EnvelopeInput) {
+}) {
 	return {
 		"rsm:CrossIndustryInvoice": {
 			"@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",

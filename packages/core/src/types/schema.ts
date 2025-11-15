@@ -8,7 +8,7 @@ export type FieldType =
 	| LiteralString[];
 
 export type FieldAttributes<T extends FieldType = FieldType> = {
-	key?: LiteralString | undefined;
+	key?: LiteralString | LiteralString[] | undefined;
 	required?: boolean | undefined;
 	shape?: (T extends "object" | "object[]" ? Schema : never) | undefined;
 };

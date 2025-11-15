@@ -1,5 +1,4 @@
 import type { PrettifyDeep, StandardSchemaV1 } from "@node-zugferd/core";
-import { defu } from "defu";
 
 type Constraint<T> = T | [T, string];
 type WrapConstraints<T extends Record<string, any>> = {
@@ -22,16 +21,18 @@ export function optional<T extends StandardSchemaV1>(
 	StandardSchemaV1.InferInput<T> | undefined,
 	StandardSchemaV1.InferOutput<T> | undefined
 > {
-	return defu(type, {
+	return {
+		...type,
 		"~standard": {
+			...type["~standard"],
 			validate(value) {
 				if (value === undefined) {
 					return { value };
 				}
 				return type["~standard"].validate(value);
 			},
-		} satisfies Partial<StandardSchemaV1["~standard"]>,
-	});
+		},
+	};
 }
 
 export function withDefault<T extends StandardSchemaV1>(
@@ -41,16 +42,18 @@ export function withDefault<T extends StandardSchemaV1>(
 	StandardSchemaV1.InferInput<T> | undefined,
 	StandardSchemaV1.InferOutput<T>
 > {
-	return defu(type, {
+	return {
+		...type,
 		"~standard": {
+			...type["~standard"],
 			validate(value) {
 				if (value === undefined) {
 					return { value: defaultValue };
 				}
 				return type["~standard"].validate(value);
 			},
-		} satisfies Partial<StandardSchemaV1["~standard"]>,
-	});
+		},
+	};
 }
 
 export function string(message?: string): StandardSchemaV1<string> {
@@ -89,17 +92,22 @@ type NumberConstraints = WrapConstraints<{
 	pattern: RegExp;
 }>;
 
+type NumberOptions = {
+	decimals?: number | undefined;
+};
+
 export function number(
 	message?: string | undefined,
-): StandardSchemaV1<string | number, number>;
+): StandardSchemaV1<string | number, string>;
 export function number(
-	constraints?: NumberConstraints | undefined,
+	constraints?: (NumberConstraints & NumberOptions) | undefined,
 	message?: string | undefined,
-): StandardSchemaV1<string | number, number>;
+): StandardSchemaV1<string | number, string>;
 export function number(
-	constraints?: NumberConstraints | string | undefined,
+	opts?: (NumberConstraints & NumberOptions) | string | undefined,
 	message?: string | undefined,
-): StandardSchemaV1<string | number, number> {
+): StandardSchemaV1<string | number, string> {
+	const { decimals, ...constraints } = typeof opts === "object" ? opts : {};
 	const constr = typeof constraints === "object" ? constraints : {};
 	let msg = typeof constraints === "string" ? constraints : message;
 
@@ -181,11 +189,20 @@ export function number(
 				if (issues.length > 0) {
 					return { issues };
 				}
-				return { value };
+
+				if (decimals !== undefined) {
+					return {
+						value: value.toLocaleString("en-US", {
+							maximumFractionDigits: 2,
+							minimumFractionDigits: 2,
+						}),
+					};
+				}
+				return { value: `${value}` };
 			},
 			types: {
 				input: {} as string | number,
-				output: {} as number,
+				output: {} as string,
 			},
 		},
 	};
@@ -277,6 +294,7 @@ export function object<Shape extends Record<string, StandardSchemaV1>>(
 export const Amount = number({
 	finite: true,
 	pattern: /^-?\d+(\.\d{1,2})?$/,
+	decimals: 2,
 });
 
 export const UnitPriceAmount = number({

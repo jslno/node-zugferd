@@ -33,9 +33,9 @@
     // {
     //   "path": "./packages/profiles/xrechnung/tsconfig.json"
     // },
-    // {
-    //   "path": "./packages/validators/mustang/tsconfig.json"
-    // },
+    {
+      "path": "./packages/validators/mustang/tsconfig.json"
+    },
     // {
     //   "path": "./packages/validators/xsd/tsconfig.json"
     // },

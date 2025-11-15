@@ -4,12 +4,17 @@ import type { ZugferdContext } from "./types/context";
 import type { InterpolateSchemaContext, ProfileConfig } from "./types/profile";
 import { validateSchema } from "./utils";
 
-export type Profile<O extends ProfileConfig = ProfileConfig> = O & {
+type RuntimeProfile<O extends ProfileConfig> = O & {
 	toXML: (
 		input: InferSchema<O["schema"]>,
 		ctx?: ZugferdContext | undefined,
 	) => Promise<string>;
 };
+export type Profile<O extends ProfileConfig = ProfileConfig> =
+	RuntimeProfile<O> & {
+		$Input: InferSchema<O["schema"]>;
+		$Output: InferSchema<O["schema"], "output">;
+	};
 
 export function createProfile<
 	const S extends Schema,
@@ -22,14 +27,14 @@ export function createProfile<
 	return {
 		...config,
 		toXML: async (input, ctx) => {
-			const { build } = new XMLBuilder({
-				preserveOrder: true,
+			const builder = new XMLBuilder({
 				ignoreAttributes: false,
 				attributeNamePrefix: "@",
 				textNodeName: "#",
 				suppressBooleanAttributes: false,
 				suppressEmptyNode: true,
 				suppressUnpairedNode: false,
+				format: ctx?.options.xml?.format === "pretty",
 			});
 			const { interpolate, ...cfg } = config;
 
@@ -61,7 +66,13 @@ export function createProfile<
 					tree = res.tree;
 				}
 			}
-			let xml = build(tree);
+			let xml = builder.build({
+				"?xml": {
+					"@version": "1.0",
+					"@encoding": "UTF-8",
+				},
+				...tree,
+			});
 			if (ctx?.hooks.xml?.build?.after) {
 				const res = await ctx.hooks.xml.build.after(xml);
 				if (typeof res === "string") {
@@ -71,5 +82,5 @@ export function createProfile<
 
 			return xml;
 		},
-	};
+	} satisfies RuntimeProfile<O> as Profile<O>;
 }

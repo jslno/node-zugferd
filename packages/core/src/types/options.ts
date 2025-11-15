@@ -13,6 +13,14 @@ export type ZugferdOptions = {
 	plugins?: ZugferdPlugin[] | undefined;
 	hooks?: ZugferdHooks | undefined;
 	logger?: Logger | undefined;
+	xml?:
+		| {
+				/**
+				 * @default "compact"
+				 */
+				format?: "compact" | "pretty";
+		  }
+		| undefined;
 };
 
 export type ZugferdHooks = {

@@ -12,6 +12,12 @@
     },
     {
       "path": "../../codelists/untdid-1001/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/country/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/currency/tsconfig.json"
     }
   ]
 }

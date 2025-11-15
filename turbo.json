@@ -25,6 +25,12 @@
     "test": {
       "dependsOn": ["build"],
       "outputs": []
+    },
+    "e2e:integration": {
+      "dependsOn": ["build"]
+    },
+    "e2e:smoke": {
+      "dependsOn": ["build"]
     }
   }
 }

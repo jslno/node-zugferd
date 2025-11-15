@@ -44,7 +44,9 @@
       ]
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "@node-zugferd/minimum": "workspace:*"
+  },
   "devDependencies": {
     "tsdown": "catalog:"
   },

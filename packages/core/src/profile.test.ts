@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 import { createProfile, type Profile } from "./profile";
-import type { InferSchema, ProfileConfig } from "./types";
+import type { ProfileConfig } from "./types";
 
 const mocks = vi.hoisted(() => {
 	return {
@@ -60,14 +60,13 @@ describe("createProfile", () => {
 	test("should create a valid Profile object", ({ profile }) => {
 		expect(profile).toHaveProperty("toXML");
 		expect(profile.toXML).toBeTypeOf("function");
-		// TODO: match snapshot
 	});
 
 	test("should call interpolate and xml builder inside toXML", async ({
 		profile,
 		interpolate,
 	}) => {
-		const input: InferSchema<typeof profile.schema> = {
+		const input: typeof profile.$Input = {
 			foo: "bar",
 		};
 
@@ -77,6 +76,14 @@ describe("createProfile", () => {
 			expect.objectContaining({ input }),
 		);
 		expect(mocks.XMLBuilder.build).toHaveBeenCalledOnce();
-		expect(result).toBe(JSON.stringify(input));
+		expect(result).toBe(
+			JSON.stringify({
+				"?xml": {
+					"@version": "1.0",
+					"@encoding": "UTF-8",
+				},
+				...input,
+			}),
+		);
 	});
 });

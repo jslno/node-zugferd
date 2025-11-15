@@ -44,6 +44,8 @@
   },
   "dependencies": {
     "@node-zugferd/codelist-untdid-1001": "workspace:*",
+    "@node-zugferd/codelist-country": "workspace:*",
+    "@node-zugferd/codelist-currency": "workspace:*",
     "@node-zugferd/shared": "workspace:*"
   },
   "devDependencies": {

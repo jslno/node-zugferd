@@ -1,0 +1,12 @@
+{
+  "name": "smoke",
+  "type": "module",
+  "scripts": {
+    "e2e:smoke": "node --test ./test/*.spec.ts"
+  },
+  "dependencies": {
+    "node-zugferd": "workspace:*",
+    "@node-zugferd/minimum": "workspace:*",
+    "@node-zugferd/test-utils": "workspace:*"
+  }
+}

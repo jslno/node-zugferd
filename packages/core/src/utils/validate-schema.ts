@@ -1,5 +1,6 @@
 import { ZugferdError } from "../error";
 import type { InferSchema, Schema } from "../types";
+import { formatKeys } from "./helper";
 
 function getCurrentPath(
 	currentPath: string,
@@ -12,6 +13,7 @@ function getCurrentPath(
 }
 
 // TODO: Validate concurrently with queue to improve performance
+// FIXME: Treat required fields as optional when their parent is optional & add test
 export async function validateSchema<S extends Schema>(
 	schema: S,
 	input: InferSchema<S>,
@@ -25,13 +27,15 @@ export async function validateSchema<S extends Schema>(
 		for (const [fieldName, field] of Object.entries(schema)) {
 			const value = input[fieldName];
 			if ((value === undefined || value === null) && field.required === false) {
-				continue;
+				if (field.type !== "object" && field.type !== "object[]") {
+					continue;
+				}
 			}
 			if (typeof field.type === "object" && "~standard" in field.type) {
 				const res = await field.type["~standard"].validate(value);
 				if (res.issues) {
 					throw new ZugferdError(
-						`Invalid value for field "${getCurrentPath(currentPath, fieldName)}"${field.key ? ` (${field.key})` : ""}: ${res.issues.map((issue) => issue.message).join(", ")}`,
+						`Invalid value for field "${getCurrentPath(currentPath, fieldName)}"${formatKeys(field.key)}: ${res.issues.map((issue) => issue.message).join(", ")}`,
 					);
 				}
 				result[fieldName] = res.value;
@@ -42,7 +46,7 @@ export async function validateSchema<S extends Schema>(
 				if (field.type === "object[]") {
 					if (!Array.isArray(value)) {
 						throw new ZugferdError(
-							`Expected field "${getCurrentPath(currentPath, fieldName)}" (${field.key}) to be an array.`,
+							`Expected field "${getCurrentPath(currentPath, fieldName)}"${formatKeys(field.key)} to be an array`,
 						);
 					}
 					for (let i = 0; i < value.length; i++) {
@@ -64,13 +68,13 @@ export async function validateSchema<S extends Schema>(
 			} else if (Array.isArray(field.type)) {
 				if (!field.type.includes(value)) {
 					throw new ZugferdError(
-						`Invalid value for field "${getCurrentPath(currentPath, fieldName)}"${field.key ? ` (${field.key})` : ""}: ${JSON.stringify(value)}`,
+						`Invalid value for field "${getCurrentPath(currentPath, fieldName)}"${formatKeys(field.key)}: ${JSON.stringify(value)}`,
 					);
 				}
 				result[fieldName] = value;
 			} else {
 				throw new ZugferdError(
-					`Invalid field type for field "${getCurrentPath(currentPath, fieldName)}"${field.key ? ` (${field.key})` : ""}.`,
+					`Invalid field type for field "${getCurrentPath(currentPath, fieldName)}"${formatKeys(field.key)}`,
 				);
 			}
 		}

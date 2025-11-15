@@ -7,6 +7,7 @@
   "module": "./dist/index.js",
   "scripts": {
     "build": "tsdown",
+    "test": "vitest",
     "dev": "tsdown --watch",
     "typecheck": "tsc --project tsconfig.json"
   },
@@ -30,8 +31,17 @@
       ]
     }
   },
+  "peerDependenciesMeta": {
+    "@node-zugferd/core": {
+      "optional": false
+    },
+    "@node-zugferd/minimum": {
+      "optional": true
+    }
+  },
   "peerDependencies": {
-    "@node-zugferd/core": "workspace:*"
+    "@node-zugferd/core": "workspace:*",
+    "@node-zugferd/minimum": "workspace:*"
   },
   "dependencies": {
     "defu": "catalog:"

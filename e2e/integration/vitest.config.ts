@@ -5,4 +5,9 @@ export default defineConfig({
 		globalSetup: ["./vitest.setup.ts"],
 		testTimeout: 10_000,
 	},
+	ssr: {
+		resolve: {
+			conditions: ["dev-source"],
+		},
+	},
 });

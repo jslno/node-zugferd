@@ -1,0 +1,8 @@
+{
+  "name": "vanilla-node-e2e",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "node-zugferd": "workspace:*"
+  }
+}

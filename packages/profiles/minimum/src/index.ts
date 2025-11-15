@@ -1,4 +1,5 @@
 import { createProfile } from "@node-zugferd/core";
+import { interpolator } from "@node-zugferd/shared";
 import { schema } from "./schema";
 
 export const MINIMUM = createProfile({
@@ -7,8 +8,7 @@ export const MINIMUM = createProfile({
 		conformanceLevel: "MINIMUM",
 	},
 	schema,
-	// TODO:
-	interpolate: {} as any,
+	interpolate: interpolator(),
 	config: {
 		dataRelationship: "Data",
 	},
