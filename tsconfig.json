@@ -33,11 +33,14 @@
     // {
     //   "path": "./packages/profiles/xrechnung/tsconfig.json"
     // },
+    // {
+    //   "path": "./packages/plugins/api/tsconfig.json"
+    // },
     {
-      "path": "./packages/validators/mustang/tsconfig.json"
+      "path": "./packages/plugins/mustang/tsconfig.json"
     },
     // {
-    //   "path": "./packages/validators/xsd/tsconfig.json"
+    //   "path": "./packages/plugins/xsd/tsconfig.json"
     // },
     {
       "path": "./packages/codelists/allowance/tsconfig.json"
