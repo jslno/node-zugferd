@@ -5,4 +5,3 @@ export * from "./options";
 export * from "./plugins";
 export * from "./profile";
 export * from "./schema";
-export * from "./validator";
