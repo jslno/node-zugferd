@@ -1,20 +1,20 @@
 {
-  "name": "@node-zugferd/validator-mustang",
+  "name": "@node-zugferd/mustang",
   "version": "0.1.1-beta.1",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "bin": {
-    "node-zugferd-validator-mustang": "./dist/bin.js"
+    "node-zugferd-mustang": "./dist/bin.js"
   },
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://node-zugferd.jsolano.de/docs/validators/mustang",
+  "homepage": "https://node-zugferd.jsolano.de/docs/plugins/mustang",
   "repository": {
     "type": "git",
     "url": "https://github.com/jslno/node-zugferd",
-    "directory": "packages/validators/mustang"
+    "directory": "packages/plugins/mustang"
   },
   "scripts": {
     "build": "tsdown",

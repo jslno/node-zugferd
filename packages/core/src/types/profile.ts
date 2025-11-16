@@ -1,3 +1,4 @@
+import type { ZugferdContext } from "./context";
 import type { Awaitable, LiteralString } from "./helper";
 import type { InferSchema, Schema } from "./schema";
 
@@ -7,6 +8,7 @@ export type InterpolateSchemaContext<S extends Schema = any> = Omit<
 > & {
 	id: LiteralString;
 	input: InferSchema<S, "output">;
+	context: ZugferdContext;
 };
 
 export type Interpolator<S extends Schema = Schema> = (

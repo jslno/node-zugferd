@@ -1,5 +1,5 @@
-import { mustangValidator } from "@node-zugferd/validator-mustang";
+import { mustang } from "@node-zugferd/mustang";
 
 export default async function globalSetup() {
-	await mustangValidator.setup();
+	await mustang.setup();
 }

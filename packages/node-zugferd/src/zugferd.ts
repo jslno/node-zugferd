@@ -28,7 +28,6 @@ export function createZugferd<const O extends ZugferdOptions>(
 				values: input,
 				toXML: async (): Promise<string> => {
 					const xml = await context.profile.toXML(input, context);
-					await context.options.validator?.run(xml, context);
 					return xml;
 				},
 				toPDF: async () => {},

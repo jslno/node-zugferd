@@ -5,7 +5,7 @@
   },
   "dependencies": {
     "node-zugferd": "workspace:*",
-    "@node-zugferd/validator-mustang": "workspace:*",
+    "@node-zugferd/mustang": "workspace:*",
     "@node-zugferd/minimum": "workspace:*",
     "@node-zugferd/test-utils": "workspace:*"
   }

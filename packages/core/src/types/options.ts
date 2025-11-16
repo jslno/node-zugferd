@@ -2,14 +2,13 @@ import type {
 	Awaitable,
 	InterpolateSchemaContext,
 	Profile,
-	ZugferdValidator,
+	ZugferdContext,
 } from "@node-zugferd/core";
 import type { Logger } from "../utils/logger";
 import type { ZugferdPlugin } from "./plugins";
 
 export type ZugferdOptions = {
 	profile: Profile;
-	validator?: ZugferdValidator | undefined;
 	plugins?: ZugferdPlugin[] | undefined;
 	hooks?: ZugferdHooks | undefined;
 	logger?: Logger | undefined;
@@ -36,6 +35,7 @@ export type ZugferdHooks = {
 							after?:
 								| ((
 										tree: Record<string, any>,
+										ctx: ZugferdContext,
 								  ) => Awaitable<{ tree: Record<string, any> } | void>)
 								| undefined;
 					  }
@@ -44,10 +44,16 @@ export type ZugferdHooks = {
 					| {
 							before?:
 								| ((
-										tree?: Record<string, any>,
+										tree: Record<string, any> | undefined,
+										ctx: ZugferdContext,
 								  ) => Awaitable<{ tree: Record<string, any> } | void>)
 								| undefined;
-							after?: ((xml: string) => Awaitable<string | void>) | undefined;
+							after?:
+								| ((
+										xml: string,
+										ctx: ZugferdContext,
+								  ) => Awaitable<string | void>)
+								| undefined;
 					  }
 					| undefined;
 		  }

@@ -1,13 +1,13 @@
 import { MINIMUM } from "@node-zugferd/minimum";
+import { mustang } from "@node-zugferd/mustang";
 import { MINIMUM_Buchungshilfe } from "@node-zugferd/test-utils/invoices/valid/MINIMUM_Buchungshilfe";
-import { mustangValidator } from "@node-zugferd/validator-mustang";
 import { createZugferd } from "node-zugferd";
 import { describe, expect, it } from "vitest";
 
 describe("vanilla-node", () => {
 	const zugferd = createZugferd({
 		profile: MINIMUM,
-		validator: mustangValidator(),
+		plugins: [mustang()],
 	});
 
 	it("should create a valid minimum invoice", async () => {
