@@ -1,8 +1,7 @@
-import { XMLBuilder } from "fast-xml-parser";
 import type { InferSchema, Schema } from "./types";
 import type { ZugferdContext } from "./types/context";
 import type { InterpolateSchemaContext, ProfileConfig } from "./types/profile";
-import { validateSchema } from "./utils";
+import { formatXML, validateSchema } from "./utils";
 
 type RuntimeProfile<O extends ProfileConfig> = O & {
 	toXML: (
@@ -27,15 +26,6 @@ export function createProfile<
 	return {
 		...config,
 		toXML: async (input, ctx) => {
-			const builder = new XMLBuilder({
-				ignoreAttributes: false,
-				attributeNamePrefix: "@",
-				textNodeName: "#",
-				suppressBooleanAttributes: false,
-				suppressEmptyNode: true,
-				suppressUnpairedNode: false,
-				format: ctx?.options.xml?.format === "pretty",
-			});
 			const { interpolate, ...cfg } = config;
 
 			let context: InterpolateSchemaContext = {
@@ -67,13 +57,18 @@ export function createProfile<
 					tree = res.tree;
 				}
 			}
-			let xml = builder.build({
-				"?xml": {
-					"@version": "1.0",
-					"@encoding": "UTF-8",
+			let xml = formatXML(
+				{
+					"?xml": {
+						"@version": "1.0",
+						"@encoding": "UTF-8",
+					},
+					...tree,
 				},
-				...tree,
-			});
+				{
+					format: ctx?.options.xml?.format === "pretty",
+				},
+			);
 			if (ctx?.hooks.xml?.build?.after) {
 				const res = await ctx.hooks.xml.build.after(xml, ctx);
 				if (typeof res === "string") {

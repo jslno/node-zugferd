@@ -17,6 +17,7 @@
   },
   "scripts": {
     "build": "tsdown",
+    "test": "vitest",
     "dev": "tsdown --watch",
     "typecheck": "tsc --project tsconfig.json"
   },
@@ -31,18 +32,34 @@
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       }
+    },
+    "./pdf": {
+      "dev-source": "./src/pdf/index.ts",
+      "import": {
+        "types": "./dist/pdf/index.d.ts",
+        "default": "./dist/pdf/index.js"
+      },
+      "require": {
+        "types": "./dist/pdf/index.d.cts",
+        "default": "./dist/pdf/index.cjs"
+      }
     }
   },
   "typesVersions": {
     "*": {
       ".": [
         "dist/index.d.ts"
+      ],
+      "./pdfa": [
+        "dist/pdfa/index.d.ts"
       ]
     }
   },
   "dependencies": {
     "defu": "catalog:",
-    "@node-zugferd/core": "workspace:*"
+    "@node-zugferd/core": "workspace:*",
+    "@cantoo/pdf-lib": "catalog:",
+    "uncrypto": "^0.1.3"
   },
   "devDependencies": {
     "tsdown": "catalog:",

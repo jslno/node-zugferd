@@ -50,9 +50,12 @@ export type ProfileConfig<S extends Schema = any> = {
 	 */
 	extensionSchema: ExtensionSchemaFields & {
 		customFieldMap?:
-			| {
-					[K in keyof Omit<ExtensionSchemaFields, "uri">]: string;
-			  }
+			| ({
+					[K in keyof Omit<ExtensionSchemaFields, "uri">]-?: string;
+			  } & {
+					uri?: ExtensionSchemaFields["uri"] | undefined;
+					prefix?: string | undefined;
+			  })
 			| undefined;
 	};
 	config?:
@@ -65,18 +68,20 @@ export type ProfileConfig<S extends Schema = any> = {
 					| "Unspecified"
 					| undefined;
 				supportsPDFA?: boolean | undefined;
+				// TODO: support wildcards?
 				allowedAttachmentFormats?:
 					| (
-							| "PDF"
-							| "TXT"
-							| "GIF"
-							| "TIFF"
-							| "JPG"
-							| "CSV"
-							| "XML"
-							| "JSON"
-							| "XLSX"
-							| "ODS"
+							| "application/pdf"
+							| "text/plain"
+							| "image/gif"
+							| "image/tiff"
+							| "image/jpeg"
+							| "text/csv"
+							| "application/xml"
+							| "text/xml"
+							| "application/json"
+							| "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+							| "application/vnd.oasis.opendocument.spreadsheet"
 							| LiteralString
 					  )[]
 					| "*"

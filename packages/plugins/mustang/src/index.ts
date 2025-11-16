@@ -5,7 +5,7 @@ import path, { join } from "node:path";
 import { promisify } from "node:util";
 import type { ZugferdContext, ZugferdPlugin } from "@node-zugferd/core";
 import { ZugferdError, ZugferdValidationError } from "@node-zugferd/core/error";
-import { XMLParser } from "fast-xml-parser";
+import { parseXML } from "@node-zugferd/core/utils";
 import { __dirname } from "./isomorph";
 import { setup } from "./setup";
 
@@ -111,14 +111,7 @@ export function mustang(config?: MustangValidatorConfig | undefined) {
 mustang.setup = setup;
 
 function parseValidatorResult(output: string) {
-	const parser = new XMLParser({
-		ignoreDeclaration: true,
-		ignoreAttributes: false,
-		attributeNamePrefix: "@",
-		textNodeName: "#",
-	});
-
-	const out = parser.parse(output.trim())?.validation;
+	const out = parseXML(output.trim())?.validation;
 
 	if (!out) {
 		throw new ZugferdError("Failed to parse Mustang validation output.");

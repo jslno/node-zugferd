@@ -1,14 +1,16 @@
+import type { PDFDocument } from "@cantoo/pdf-lib";
 import type {
 	Awaitable,
 	InterpolateSchemaContext,
 	Profile,
+	ToPDFaOptions,
 	ZugferdContext,
-} from "@node-zugferd/core";
+} from "..";
 import type { Logger } from "../utils/logger";
 import type { ZugferdPlugin } from "./plugins";
 
-export type ZugferdOptions = {
-	profile: Profile;
+export type ZugferdOptions<P extends Profile = Profile> = {
+	profile: P;
 	plugins?: ZugferdPlugin[] | undefined;
 	hooks?: ZugferdHooks | undefined;
 	logger?: Logger | undefined;
@@ -18,6 +20,18 @@ export type ZugferdOptions = {
 				 * @default "compact"
 				 */
 				format?: "compact" | "pretty";
+		  }
+		| undefined;
+	pdfa?:
+		| {
+				xmp?:
+					| {
+							/**
+							 * @default "compact"
+							 */
+							format?: "compact" | "pretty";
+					  }
+					| undefined;
 		  }
 		| undefined;
 };
@@ -58,6 +72,30 @@ export type ZugferdHooks = {
 					| undefined;
 		  }
 		| undefined;
-	// TODO:
-	pdfa?: {} | undefined;
+	pdfa?:
+		| {
+				before?:
+					| ((
+							xml: string,
+							ctx: {
+								document: PDFDocument;
+								profile: Profile;
+								context: ZugferdContext;
+							},
+					  ) => Awaitable<{
+							document?: PDFDocument | undefined;
+							options?: ToPDFaOptions | undefined;
+					  } | void>)
+					| undefined;
+				after?:
+					| ((
+							pdfa: PDFDocument,
+							ctx: {
+								profile: Profile;
+								context: ZugferdContext;
+							},
+					  ) => Awaitable<PDFDocument | void>)
+					| undefined;
+		  }
+		| undefined;
 };

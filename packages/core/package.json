@@ -66,6 +66,14 @@
       ]
     }
   },
+  "peerDependenciesMeta": {
+    "@cantoo/pdf-lib": {
+      "optional": true
+    }
+  },
+  "peerDependencies": {
+    "@cantoo/pdf-lib": "catalog:"
+  },
   "devDependencies": {
     "tsdown": "catalog:",
     "zod": "catalog:"

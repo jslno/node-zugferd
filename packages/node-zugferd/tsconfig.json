@@ -8,5 +8,6 @@
     {
       "path": "../core/tsconfig.json"
     }
-  ]
+  ],
+  "include": ["package.json", "./src/**/*"]
 }

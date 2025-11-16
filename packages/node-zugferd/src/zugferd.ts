@@ -1,6 +1,9 @@
+import type { PDFDocument } from "@cantoo/pdf-lib";
 import type {
 	InferPluginActions,
 	InferSchema,
+	PDFaDocument,
+	ToPDFaOptions,
 	UnionToIntersection,
 	ZugferdContext,
 	ZugferdHooks,
@@ -9,10 +12,11 @@ import type {
 } from "@node-zugferd/core";
 import { createLogger } from "@node-zugferd/core/utils";
 import defu from "defu";
+import { toPDFa } from "./pdf";
 
 export function createZugferd<const O extends ZugferdOptions>(
 	options: O,
-): StrictZugferd<O> {
+): Zugferd<O> {
 	const ctx: ZugferdContext = {
 		options,
 		profile: options.profile,
@@ -26,29 +30,44 @@ export function createZugferd<const O extends ZugferdOptions>(
 		create: (input: InferSchema<O["profile"]["schema"]>) => {
 			return {
 				values: input,
-				toXML: async (): Promise<string> => {
+				toXML: async () => {
 					const xml = await context.profile.toXML(input, context);
 					return xml;
 				},
-				toPDF: async () => {},
+				toPDFa: async (pdf, options) => {
+					const pdfA = await toPDFa(
+						pdf,
+						context.profile,
+						input,
+						options,
+						context,
+					);
+
+					return pdfA;
+				},
 			};
 		},
 		...actions,
-	} satisfies Zugferd<O> as unknown as StrictZugferd<O>;
+	} satisfies RuntimeZugferd<O> as unknown as Zugferd<O>;
 }
+export { createZugferd as zugferd };
 
 type Zugferd_base<O extends ZugferdOptions> = {
 	$context: ZugferdContext;
 	create: (input: InferSchema<O["profile"]["schema"]>) => {
 		values: InferSchema<O["profile"]["schema"]>;
 		toXML: () => Promise<string>;
+		toPDFa: (
+			pdf: PDFDocument,
+			options: ToPDFaOptions<O["profile"]>,
+		) => Promise<PDFaDocument>;
 	};
 };
 
-export type Zugferd<O extends ZugferdOptions = ZugferdOptions> =
+type RuntimeZugferd<O extends ZugferdOptions = ZugferdOptions> =
 	Zugferd_base<O> & Record<string, any>;
 
-export type StrictZugferd<O extends ZugferdOptions = ZugferdOptions> =
+export type Zugferd<O extends ZugferdOptions = ZugferdOptions> =
 	Zugferd_base<O> &
 		(O["plugins"] extends ZugferdPlugin[]
 			? UnionToIntersection<InferPluginActions<O["plugins"][number]>>
@@ -131,7 +150,9 @@ function getHooks(options: ZugferdOptions): ZugferdHooks {
 				after: chainHooks(hooks, ({ xml }) => xml?.build?.after),
 			},
 		},
-		// TODO:
-		pdfa: {},
+		pdfa: {
+			before: chainHooks(hooks, ({ pdfa }) => pdfa?.before),
+			after: chainHooks(hooks, ({ pdfa }) => pdfa?.after),
+		},
 	};
 }
