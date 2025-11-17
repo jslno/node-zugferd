@@ -240,9 +240,6 @@ importers:
       '@node-zugferd/test-utils':
         specifier: workspace:*
         version: link:../../packages/test-utils
-      '@node-zugferd/xsd':
-        specifier: workspace:*
-        version: link:../../packages/plugins/xsd
       node-zugferd:
         specifier: workspace:*
         version: link:../../packages/node-zugferd
