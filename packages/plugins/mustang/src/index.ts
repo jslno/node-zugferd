@@ -9,7 +9,7 @@ import { parseXML } from "@node-zugferd/core/utils";
 import { __dirname } from "./isomorph";
 import { setup } from "./setup";
 
-export type MustangValidatorConfig = {
+export type MustangConfig = {
 	/**
 	 * @default os.tmpdir()
 	 */
@@ -24,9 +24,15 @@ export type MustangValidatorConfig = {
 	 * @default 1000 (1 GB)
 	 */
 	maximumHeapSize?: number | "inherit" | undefined;
+	/**
+	 * Automatically run validation after building the XML.
+	 *
+	 * @default true
+	 */
+	autoRun?: boolean | undefined;
 };
 
-export function mustang(config?: MustangValidatorConfig | undefined) {
+export function mustang(config?: MustangConfig | undefined) {
 	const runValidate = async (xml: string, ctx: ZugferdContext) => {
 		if (
 			![
@@ -93,7 +99,7 @@ export function mustang(config?: MustangValidatorConfig | undefined) {
 		init: () => {
 			return {
 				actions: {
-					validate: () => {
+					validateMustang: () => {
 						// TODO:
 					},
 				},
@@ -102,7 +108,7 @@ export function mustang(config?: MustangValidatorConfig | undefined) {
 		hooks: {
 			xml: {
 				build: {
-					after: runValidate,
+					after: config?.autoRun !== false ? runValidate : undefined,
 				},
 			},
 		},

@@ -3,6 +3,6 @@ import { defineConfig } from "tsdown";
 export default defineConfig({
 	dts: { build: true, incremental: true },
 	format: ["esm", "cjs"],
-	entry: ["./src/index.ts", "./src/error/index.ts", "./src/utils/index.ts"],
-	external: ["@cantoo/pdf-lib"],
+	entry: ["./src/index.ts"],
+	external: ["libxml2-wasm"],
 });

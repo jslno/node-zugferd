@@ -4,10 +4,10 @@ import { createLogger } from "@node-zugferd/core/utils";
 import { facturXInvalidXMLEncodingAttribute } from "@node-zugferd/test-utils/invoices/xml/invalid/factur-x-invalid-xml-encoding-attribute.xml";
 import { EN16931_Einfach_cii } from "@node-zugferd/test-utils/invoices/xml/valid/EN16931_Einfach.cii.xml";
 import { describe, expect, it } from "vitest";
-import { mustang } from ".";
+import { xsd } from ".";
 
-describe("mustang validator", () => {
-	const plugin = mustang();
+describe("xsd validator", () => {
+	const plugin = xsd();
 
 	it("should catch validation errors", async () => {
 		await expect(

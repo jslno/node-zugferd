@@ -1,5 +1,5 @@
 {
-  "name": "@node-zugferd/minimum",
+  "name": "@node-zugferd/xsd",
   "version": "0.1.1-beta.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -7,14 +7,15 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://node-zugferd.jsolano.de/docs/profiles/minimum",
+  "homepage": "https://node-zugferd.jsolano.de/docs/plugins/xsd",
   "repository": {
     "type": "git",
     "url": "https://github.com/jslno/node-zugferd",
-    "directory": "packages/profiles/minimum"
+    "directory": "packages/plugins/xsd"
   },
   "scripts": {
     "build": "tsdown",
+    "test": "vitest",
     "dev": "tsdown --watch",
     "typecheck": "tsc --project tsconfig.json"
   },
@@ -38,20 +39,19 @@
       ]
     }
   },
-  "peerDependencies": {
-    "@node-zugferd/core": "workspace:*"
-  },
   "dependencies": {
-    "@node-zugferd/codelist-untdid-1001": "workspace:*",
-    "@node-zugferd/codelist-country": "workspace:*",
-    "@node-zugferd/codelist-currency": "workspace:*",
-    "@node-zugferd/shared": "workspace:*"
+    "@node-zugferd/core": "workspace:*",
+    "libxml2-wasm": "^0.6.0"
   },
   "devDependencies": {
-    "@node-zugferd/core": "workspace:*",
+    "@node-zugferd/test-utils": "workspace:*",
     "tsdown": "catalog:"
   },
   "files": [
+    "schemas",
     "dist"
-  ]
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
