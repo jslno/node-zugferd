@@ -7,7 +7,7 @@ export type AssignOptions = {
 
 export function assign(
 	target: Record<string, any>,
-	key: string,
+	path: string,
 	value: unknown,
 	options?: AssignOptions | undefined,
 ) {
@@ -17,8 +17,7 @@ export function assign(
 	) {
 		return;
 	}
-	const normalizedKey = key.replace(/\[(\d+)\]/g, "");
-	const segments = normalizedKey.split("/");
+	const segments = path.split("/");
 	const last = segments.pop();
 	if (!last) {
 		return;
@@ -32,13 +31,16 @@ export function assign(
 		current = current[segment];
 	}
 
-	if (options?.array && last in current) {
+	if (options?.array === true) {
 		const existing = current[last];
 		if (Array.isArray(existing)) {
 			existing.push(value);
-		} else {
+		} else if (existing) {
 			current[last] = [existing, value];
+		} else {
+			current[last] = [value];
 		}
+		return;
 	} else {
 		if (typeof current[last] === "object" && typeof value === "object") {
 			current[last] = defu(value, current[last]);

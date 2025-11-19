@@ -139,7 +139,7 @@ export const schema = {
 						type: "object",
 						required: false,
 						shape: {
-							purchaseOrderReference: {
+							reference: {
 								key: "BT-13",
 								type: t.DocumentReference,
 								required: false,

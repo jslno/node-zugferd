@@ -1,0 +1,57 @@
+{
+  "name": "@node-zugferd/basic-wl",
+  "version": "0.1.1-beta.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://node-zugferd.jsolano.de/docs/profiles/basic-wl",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jslno/node-zugferd",
+    "directory": "packages/profiles/basic-wl"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --project tsconfig.json"
+  },
+  "exports": {
+    ".": {
+      "dev-source": "./src/index.ts",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "dist/index.d.ts"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@node-zugferd/core": "workspace:*"
+  },
+  "dependencies": {
+    "@node-zugferd/minimum": "workspace:*",
+    "@node-zugferd/codelist-text": "workspace:*",
+    "@node-zugferd/codelist-country": "workspace:*",
+    "@node-zugferd/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@node-zugferd/core": "workspace:*",
+    "tsdown": "catalog:"
+  },
+  "files": [
+    "dist"
+  ]
+}

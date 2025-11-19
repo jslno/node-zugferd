@@ -23,7 +23,7 @@ describe("assign", () => {
 	});
 
 	it("should handle array assignments correctly", () => {
-		const target: Record<string, any> = {};
+		let target: Record<string, any> = {};
 
 		assign(target, "a/b", 1, {
 			array: true,

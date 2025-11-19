@@ -8,7 +8,7 @@ export const MINIMUM = createProfile({
 		conformanceLevel: "MINIMUM",
 	},
 	schema,
-	interpolate: interpolator(),
+	interpolate: interpolator,
 	config: {
 		dataRelationship: "Data",
 	},
