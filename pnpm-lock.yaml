@@ -545,6 +545,28 @@ importers:
         specifier: 'catalog:'
         version: 0.15.10(typescript@5.9.3)
 
+  packages/profiles/basic-wl:
+    dependencies:
+      '@node-zugferd/codelist-country':
+        specifier: workspace:*
+        version: link:../../codelists/country
+      '@node-zugferd/codelist-text':
+        specifier: workspace:*
+        version: link:../../codelists/text
+      '@node-zugferd/minimum':
+        specifier: workspace:*
+        version: link:../minimum
+      '@node-zugferd/shared':
+        specifier: workspace:*
+        version: link:../../shared
+    devDependencies:
+      '@node-zugferd/core':
+        specifier: workspace:*
+        version: link:../../core
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.10(typescript@5.9.3)
+
   packages/profiles/minimum:
     dependencies:
       '@node-zugferd/codelist-country':
