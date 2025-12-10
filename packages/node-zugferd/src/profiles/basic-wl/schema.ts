@@ -2125,6 +2125,21 @@ BR-CO-21: Each Document level allowance (BG-20) shall contain a Document level a
 								required: false,
 								shape: {
 									/**
+									 * Document level allowance VAT type code
+									 *
+									 * Coded identification of the tax type. Fixed value "VAT".
+									 */
+									typeCode: {
+										key: "BT-95-0",
+										type: "string",
+										description: `**Document level allowance VAT type code**
+
+Coded identification of the tax type. Fixed value "VAT".`,
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:CategoryTradeTax/ram:TypeCode",
+										defaultValue: "VAT",
+									},
+									/**
 									 * Document level allowance VAT category code
 									 *
 									 * A coded identification of what VAT category applies to the document level allowance.
@@ -2204,15 +2219,6 @@ The value to enter is the percentage. For example, for 20%, it must be given as 
 										required: false,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:CategoryTradeTax/ram:RateApplicablePercent",
-									},
-								},
-								additionalXml: {
-									typeCode: {
-										key: "BT-95-0",
-										type: "string",
-										xpath:
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[allowances]/ram:CategoryTradeTax/ram:TypeCode",
-										defaultValue: "VAT",
 									},
 								},
 							},
@@ -2381,6 +2387,21 @@ A finite sequence of characters.`,
 								required: false,
 								shape: {
 									/**
+									 * Document level charge VAT type code
+									 *
+									 * Coded identification of the tax type. Fixed value "VAT".
+									 */
+									typeCode: {
+										key: "BT-102-0",
+										type: "string",
+										description: `**Document level charge VAT type code**
+
+Coded identification of the tax type. Fixed value "VAT".`,
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:CategoryTradeTax/ram:TypeCode",
+										defaultValue: "VAT",
+									},
+									/**
 									 * Document level charge VAT category code
 									 *
 									 * A coded identification of what VAT category applies to the document level charge.
@@ -2460,15 +2481,6 @@ The value to enter is the percentage. For example, for 20%, it must be given as 
 										required: false,
 										xpath:
 											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:CategoryTradeTax/ram:RateApplicablePercent",
-									},
-								},
-								additionalXml: {
-									typeCode: {
-										key: "BT-102-0",
-										type: "string",
-										xpath:
-											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[charges]/ram:CategoryTradeTax/ram:TypeCode",
-										defaultValue: "VAT",
 									},
 								},
 							},
