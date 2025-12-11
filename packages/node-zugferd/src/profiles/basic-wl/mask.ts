@@ -217,6 +217,7 @@ export const basicWlMask = {
 							categoryTradeTax: [
 								"BT-95-00",
 								{
+									typeCode: "BT-95-0",
 									categoryCode: "BT-95",
 									vatRate: "BT-96",
 								},
@@ -235,6 +236,7 @@ export const basicWlMask = {
 							categoryTradeTax: [
 								"BT-102-00",
 								{
+									typeCode: "BT-102-0",
 									categoryCode: "BT-102",
 									vatRate: "BT-103",
 								},
