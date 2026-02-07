@@ -43,7 +43,9 @@ export const createDocumentFactory =
 			metadata.modifyDate ??= metadata.createDate;
 
 			let pdfDoc =
-				pdf instanceof PDFDocument ? pdf : await PDFDocument.load(pdf);
+				pdf instanceof PDFDocument
+					? pdf
+					: await PDFDocument.load(pdf, { updateMetadata: false });
 
 			ctx.logger.debug(
 				`[${embedInPdf.name}] Attaching ${colors.bright}${profile.documentFileName}${colors.reset}`,
@@ -122,7 +124,7 @@ export const createDocumentFactory =
 			}
 
 			ctx.logger.debug(`[${embedInPdf.name}] Saving PDF`);
-			return await pdfDoc.save();
+			return await pdfDoc.save({ useObjectStreams: false });
 		};
 
 		return {

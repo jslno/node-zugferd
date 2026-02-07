@@ -72,9 +72,33 @@ export const addPdfMetadata = (
 								"rdf:li": metadata.now.toISOString(),
 							},
 						},
+						...(metadata.title
+							? {
+									"dc:title": {
+										"rdf:Alt": {
+											"rdf:li": {
+												"@xml:lang": "x-default",
+												"#": metadata.title,
+											},
+										},
+									},
+								}
+							: {}),
+						...(metadata.subject
+							? {
+									"dc:description": {
+										"rdf:Alt": {
+											"rdf:li": {
+												"@xml:lang": "x-default",
+												"#": metadata.subject,
+											},
+										},
+									},
+								}
+							: {}),
 						"dc:creator": {
 							"rdf:Seq": {
-								"rdf:li": metadata.creator,
+								"rdf:li": metadata.author || metadata.creator,
 							},
 						},
 					},
@@ -151,7 +175,7 @@ export const addPdfMetadata = (
 					},
 					{
 						"@xmlns:fx": "urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#",
-						"@xmlns:about": "",
+						"@rdf:about": "",
 						"fx:DocumentType": metadata.facturX.documentType,
 						"fx:DocumentFileName": metadata.facturX.documentFileName,
 						"fx:Version": metadata.facturX.version,
@@ -167,10 +191,15 @@ export const addPdfMetadata = (
 		`[${addPdfMetadata.name}] Generated XMP length: ${colors.bright}${xmp.length}${colors.reset}`,
 	);
 
-	const metadataStream = pdfDoc.context.stream(xmp, {
+	// Encode XMP as proper UTF-8 bytes before creating the stream.
+	// The original code passed the JS string directly with Length: xmp.length,
+	// but JS .length counts UTF-16 code units, not bytes. The \uFEFF BOM in
+	// the xpacket header is 1 JS char but 3 UTF-8 bytes, causing Length to
+	// be 2 bytes too short, which made PDF/A validators unable to read the XMP.
+	const xmpBytes = new TextEncoder().encode(xmp);
+	const metadataStream = pdfDoc.context.stream(xmpBytes, {
 		Type: "Metadata",
 		Subtype: "XML",
-		Length: xmp.length,
 	});
 
 	const metadataStreamRef = pdfDoc.context.register(metadataStream);
@@ -274,6 +303,7 @@ export const addPdfICC = (ctx: InternalContext, pdfDoc: PDFDocument) => {
 	ctx.logger.debug(`[${addPdfICC.name}] Adding ICC profile`);
 	const profile = base64ToUint8Array(COLOR_PROFILE);
 	const profileStream = pdfDoc.context.stream(profile, {
+		N: 3, // Number of color components (RGB = 3), required by PDF/A validators
 		Length: profile.length,
 	});
 	const profileStreamRef = pdfDoc.context.register(profileStream);
