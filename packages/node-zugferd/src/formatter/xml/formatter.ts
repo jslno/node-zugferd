@@ -104,7 +104,10 @@ const reorderSchema = (schema: Schema, reference: Schema): Schema => {
 			const field = schema[key];
 			const refField = reference[key];
 			if (field.shape && refField.shape) {
-				result[key] = { ...field, shape: reorderSchema(field.shape, refField.shape) };
+				result[key] = {
+					...field,
+					shape: reorderSchema(field.shape, refField.shape),
+				};
 			} else {
 				result[key] = field;
 			}
@@ -143,7 +146,9 @@ export const mergeSchemas = (profile: Profile): Schema => {
 	// producing invalid CII XML element ordering.
 	const reorderedSchema = reorderSchema(mergedSchema, mergedExtensions);
 
-	return profile.mask ? applyMask(reorderedSchema, profile.mask) : reorderedSchema;
+	return profile.mask
+		? applyMask(reorderedSchema, profile.mask)
+		: reorderedSchema;
 };
 
 export type ParseSchemaOptions = {
