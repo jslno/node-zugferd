@@ -86,6 +86,40 @@ const updateDefaultValues = (base: Schema, override: Schema): Schema => {
 	return result;
 };
 
+/**
+ * Recursively reorder the keys of `schema` to match the key order of
+ * `reference`, appending any keys that only exist in `schema` at the end.
+ *
+ * defu's internal `Object.assign({}, defaults)` gives the *last* source's key
+ * order priority, which can break CII XML element ordering when a higher-level
+ * profile (e.g. EN16931) defines only a subset of keys.  The base profiles
+ * (MINIMUM → BASIC_WL → BASIC) carry the correct element order, so we use
+ * their merged schema as the reference.
+ */
+const reorderSchema = (schema: Schema, reference: Schema): Schema => {
+	const result: Schema = {};
+
+	for (const key of Object.keys(reference)) {
+		if (key in schema) {
+			const field = schema[key];
+			const refField = reference[key];
+			if (field.shape && refField.shape) {
+				result[key] = { ...field, shape: reorderSchema(field.shape, refField.shape) };
+			} else {
+				result[key] = field;
+			}
+		}
+	}
+
+	for (const key of Object.keys(schema)) {
+		if (!(key in result)) {
+			result[key] = schema[key];
+		}
+	}
+
+	return result;
+};
+
 export const mergeSchemas = (profile: Profile): Schema => {
 	if (!profile.extends) {
 		return profile.mask
@@ -103,7 +137,13 @@ export const mergeSchemas = (profile: Profile): Schema => {
 		profile.schema,
 	);
 
-	return profile.mask ? applyMask(mergedSchema, profile.mask) : mergedSchema;
+	// Reorder keys to match the base profiles' element order.
+	// defu gives the last argument's key order priority, so the extending
+	// profile's (incomplete) key set can push base-only keys to the end,
+	// producing invalid CII XML element ordering.
+	const reorderedSchema = reorderSchema(mergedSchema, mergedExtensions);
+
+	return profile.mask ? applyMask(reorderedSchema, profile.mask) : reorderedSchema;
 };
 
 export type ParseSchemaOptions = {
