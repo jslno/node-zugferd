@@ -8,6 +8,7 @@ import type {
 	ZugferdContext,
 	ZugferdPlugin,
 } from "@node-zugferd/core";
+import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
 import { ZugferdError } from "@node-zugferd/core/error";
 import { convert } from "xmlbuilder2";
 import { __dirname } from "./isomorph";
@@ -95,6 +96,7 @@ export const mustang = <ZugferdOptions extends ZFOptions>(
 
 	return {
 		id: "mustang",
+		version: NODE_ZUGFERD_VERSION,
 		init(ctx) {
 			if (opts.autoRun) {
 				return {

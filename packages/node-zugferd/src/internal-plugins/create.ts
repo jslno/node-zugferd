@@ -5,7 +5,8 @@ import type {
 	ZugferdPlugin,
 	ZugferdProfile,
 } from "@node-zugferd/core";
-import { createBuildHelper } from "@node-zugferd/core";
+import { createBuildHelper, NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
+import type { InferInput } from "@node-zugferd/data-types";
 import { parseAsync } from "@node-zugferd/data-types";
 import type { PDFDocument } from "pdf-lib";
 import { create as createDocument } from "xmlbuilder2";
@@ -36,6 +37,7 @@ export const create = <ZugferdOptions extends ZFOptions>(
 ) => {
 	return {
 		id: "~create",
+		version: NODE_ZUGFERD_VERSION,
 		actions: (ctx) => ({
 			async create<ProfileId extends InferProfileIds<ZugferdOptions>>(
 				profileId: ProfileId,
@@ -56,11 +58,6 @@ export const create = <ZugferdOptions extends ZFOptions>(
 					});
 				}
 
-				// const root = createDocument({
-				//   keepNullNodes: false,
-				//   keepNullAttributes: false,
-				//   allowEmptyTags: true,
-				// });
 				const root = createDocument({
 					encoding: "UTF-8",
 				});
@@ -141,7 +138,9 @@ export const create = <ZugferdOptions extends ZFOptions>(
 			Input: {
 				[K in ZugferdOptions["profiles"][number] as PascalCase<
 					K["id"]
-				>]: K["$Infer"]["Input"];
+				>]: K["$Infer"] extends { Input: infer I }
+					? I
+					: InferInput<K["schema"]>;
 			};
 		},
 	} as const satisfies ZugferdPlugin;

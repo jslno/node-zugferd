@@ -1,4 +1,5 @@
 import type { ZugferdProfile } from "@node-zugferd/core";
+import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
 import type { PDFDict } from "pdf-lib";
 import {
 	AFRelationship,
@@ -37,7 +38,7 @@ export async function toPdfA(
 		pdf.setCreator(
 			metadata.creator ||
 				pdf.getCreator() ||
-				`node-zugferd@v${process.env.__NODE_ZUGFERD_VERSION__ || "1.0.0"}`,
+				`node-zugferd@v${NODE_ZUGFERD_VERSION || "1.0.0"} <https://github.com/jslno/node-zugferd>`,
 		);
 		if (metadata.subject) {
 			pdf.setSubject(metadata.subject);

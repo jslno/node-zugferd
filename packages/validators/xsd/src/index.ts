@@ -6,6 +6,7 @@ import type {
 	ZugferdContext,
 	ZugferdPlugin,
 } from "@node-zugferd/core";
+import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
 import { ZugferdError } from "@node-zugferd/core/error";
 import { parseXml, parseXsd, validate as xsdValidate } from "xml-xsd-engine";
 import { __dirname } from "./isomorph";
@@ -88,6 +89,7 @@ export const xsd = <ZugferdOptions extends ZFOptions, Opts extends XSDOptions>(
 
 	return {
 		id: "xsd",
+		version: NODE_ZUGFERD_VERSION,
 		init(ctx) {
 			if (opts.autoRun) {
 				return {
