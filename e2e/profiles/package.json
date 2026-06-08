@@ -1,0 +1,16 @@
+{
+  "name": "@node-zugferd-test/profile-base",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@node-zugferd/validator-mustang": "workspace:*",
+    "@node-zugferd/validator-xsd": "workspace:*",
+    "node-zugferd": "workspace:*"
+  },
+  "scripts": {
+    "postinstall": "node-zugferd-mustang --force"
+  },
+  "exports": {
+    "./factory": "./factory.ts"
+  }
+}

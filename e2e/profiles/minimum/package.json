@@ -1,0 +1,12 @@
+{
+  "name": "@node-zugferd-test/profile-minimum",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@node-zugferd/minimum": "workspace:*",
+    "@node-zugferd-test/profile-base": "workspace:*"
+  },
+  "scripts": {
+    "e2e:integration": "vitest run"
+  }
+}

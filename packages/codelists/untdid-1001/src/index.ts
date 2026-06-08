@@ -1,0 +1,386 @@
+import type { Codelist } from "@node-zugferd/core";
+import { registerCodelist } from "@node-zugferd/data-types";
+
+const untdid1001 = [
+	{
+		value: "71",
+		name: "Request for payment",
+		interpretation: "Invoice",
+		key: "REQUEST_FOR_PAYMENT",
+	},
+	{
+		value: "80",
+		name: "Debit note related to goods or services",
+		interpretation: "Invoice",
+		key: "DEBIT_NOTE_RELATED_TO_GOODS_OR_SERVICES",
+	},
+	{
+		value: "81",
+		name: "Credit note related to goods or services",
+		interpretation: "Credit Note",
+		key: "CREDIT_NOTE_RELATED_TO_GOODS_OR_SERVICES",
+	},
+	{
+		value: "82",
+		name: "Metered services invoice",
+		interpretation: "Invoice",
+		key: "METERED_SERVICES_INVOICE",
+	},
+	{
+		value: "83",
+		name: "Credit note related to financial adjustments",
+		interpretation: "Credit Note",
+		key: "CREDIT_NOTE_RELATED_TO_FINANCIAL_ADJUSTMENTS",
+	},
+	{
+		value: "84",
+		name: "Debit note related to financial adjustments",
+		interpretation: "Invoice",
+		key: "DEBIT_NOTE_RELATED_TO_FINANCIAL_ADJUSTMENTS",
+	},
+	{
+		value: "102",
+		name: "Tax notification",
+		interpretation: "Invoice",
+		key: "TAX_NOTIFICATION",
+	},
+	{
+		value: "130",
+		name: "Invoicing data sheet",
+		interpretation: "Invoice",
+		key: "INVOICING_DATA_SHEET",
+	},
+	{
+		value: "202",
+		name: "Direct payment valuation",
+		interpretation: "Invoice",
+		key: "DIRECT_PAYMENT_VALUATION",
+	},
+	{
+		value: "203",
+		name: "Provisional payment valuation",
+		interpretation: "Invoice",
+		key: "PROVISIONAL_PAYMENT_VALUATION",
+	},
+	{
+		value: "204",
+		name: "Payment valuation",
+		interpretation: "Invoice",
+		key: "PAYMENT_VALUATION",
+	},
+	{
+		value: "211",
+		name: "Interim application for payment",
+		interpretation: "Invoice",
+		key: "INTERIM_APPLICATION_FOR_PAYMENT",
+	},
+	{
+		value: "218",
+		name: "Final payment request based on completion of work",
+		interpretation: "Invoice",
+		key: "FINAL_PAYMENT_REQUEST_BASED_ON_COMPLETION_OF_WORK",
+	},
+	{
+		value: "219",
+		name: "Payment request for completed units",
+		interpretation: "Invoice",
+		key: "PAYMENT_REQUEST_FOR_COMPLETED_UNITS",
+	},
+	{
+		value: "261",
+		name: "Self billed credit note",
+		interpretation: "Credit Note",
+		key: "SELF_BILLED_CREDIT_NOTE",
+	},
+	{
+		value: "262",
+		name: "Consolidated credit note - goods and services",
+		interpretation: "Credit Note",
+		key: "CONSOLIDATED_CREDIT_NOTE_GOODS_AND_SERVICES",
+	},
+	{
+		value: "295",
+		name: "Price variation invoice",
+		interpretation: "Invoice",
+		key: "PRICE_VARIATION_INVOICE",
+	},
+	{
+		value: "296",
+		name: "Credit note for price variation",
+		interpretation: "Credit Note",
+		key: "CREDIT_NOTE_FOR_PRICE_VARIATION",
+	},
+	{
+		value: "308",
+		name: "Delcredere credit note",
+		interpretation: "Credit Note",
+		key: "DELCREDERE_CREDIT_NOTE",
+	},
+	{
+		value: "325",
+		name: "Proforma invoice",
+		interpretation: "Invoice",
+		key: "PROFORMA_INVOICE",
+	},
+	{
+		value: "326",
+		name: "Partial invoice",
+		interpretation: "Invoice",
+		key: "PARTIAL_INVOICE",
+	},
+	{
+		value: "331",
+		name: "Commercial invoice which includes a packing list",
+		interpretation: "Invoice",
+		key: "COMMERCIAL_INVOICE_WHICH_INCLUDES_A_PACKING_LIST",
+	},
+	{
+		value: "380",
+		name: "Commercial invoice",
+		interpretation: "Invoice",
+		key: "COMMERCIAL_INVOICE",
+	},
+	{
+		value: "381",
+		name: "Credit note",
+		interpretation: "Credit Note",
+		key: "CREDIT_NOTE",
+	},
+	{
+		value: "382",
+		name: "Commission note",
+		interpretation: "Invoice",
+		key: "COMMISSION_NOTE",
+	},
+	{
+		value: "383",
+		name: "Debit note",
+		interpretation: "Invoice",
+		key: "DEBIT_NOTE",
+	},
+	{
+		value: "384",
+		name: "Corrected invoice",
+		interpretation: "Invoice",
+		key: "CORRECTED_INVOICE",
+	},
+	{
+		value: "385",
+		name: "Consolidated invoice",
+		interpretation: "Invoice",
+		key: "CONSOLIDATED_INVOICE",
+	},
+	{
+		value: "386",
+		name: "Prepayment invoice",
+		interpretation: "Invoice",
+		key: "PREPAYMENT_INVOICE",
+	},
+	{
+		value: "387",
+		name: "Hire invoice",
+		interpretation: "Invoice",
+		key: "HIRE_INVOICE",
+	},
+	{
+		value: "388",
+		name: "Tax invoice",
+		interpretation: "Invoice",
+		key: "TAX_INVOICE",
+	},
+	{
+		value: "389",
+		name: "Self-billed invoice",
+		interpretation: "Invoice",
+		key: "SELF_BILLED_INVOICE",
+	},
+	{
+		value: "390",
+		name: "Delcredere invoice",
+		interpretation: "Invoice",
+		key: "DELCREDERE_INVOICE",
+	},
+	{
+		value: "393",
+		name: "Factored invoice",
+		interpretation: "Invoice",
+		key: "FACTORED_INVOICE",
+	},
+	{
+		value: "394",
+		name: "Lease invoice",
+		interpretation: "Invoice",
+		key: "LEASE_INVOICE",
+	},
+	{
+		value: "395",
+		name: "Consignment invoice",
+		interpretation: "Invoice",
+		key: "CONSIGNMENT_INVOICE",
+	},
+	{
+		value: "396",
+		name: "Factored credit note",
+		interpretation: "Credit Note",
+		key: "FACTORED_CREDIT_NOTE",
+	},
+	{
+		value: "420",
+		name: "Optical Character Reading (OCR) payment credit note",
+		interpretation: "Credit Note",
+		key: "OPTICAL_CHARACTER_READING_OCR_PAYMENT_CREDIT_NOTE",
+	},
+	{
+		value: "456",
+		name: "Debit advice",
+		interpretation: "Invoice",
+		key: "DEBIT_ADVICE",
+	},
+	{
+		value: "457",
+		name: "Reversal of debit",
+		interpretation: "Invoice",
+		key: "REVERSAL_OF_DEBIT",
+	},
+	{
+		value: "458",
+		name: "Reversal of credit",
+		interpretation: "Credit Note",
+		key: "REVERSAL_OF_CREDIT",
+	},
+	{
+		value: "471",
+		name: " Self-billed corrective invoice, invoice type, Corrected",
+		interpretation: "Invoice",
+		key: "SELF_BILLED_CORRECTIVE_INVOICE_INVOICE_TYPE_CORRECTED",
+	},
+	{
+		value: "472",
+		name: " Factored Corrective Invoice, invoice type, Corrected",
+		interpretation: "Invoice",
+		key: "FACTORED_CORRECTIVE_INVOICE_INVOICE_TYPE_CORRECTED",
+	},
+	{
+		value: "473",
+		name: " Self billed Factored corrective invoice, invoice type, Corrected",
+		interpretation: "Invoice",
+		key: "SELF_BILLED_FACTORED_CORRECTIVE_INVOICE_INVOICE_TYPE_CORRECTED",
+	},
+	{
+		value: "500",
+		name: " Self Prepayment invoice, invoice type, Original",
+		interpretation: "Invoice",
+		key: "SELF_PREPAYMENT_INVOICE_INVOICE_TYPE_ORIGINAL",
+	},
+	{
+		value: "501",
+		name: " Self billed factored invoice, invoice type, Original",
+		interpretation: "Invoice",
+		key: "SELF_BILLED_FACTORED_INVOICE_INVOICE_TYPE_ORIGINAL",
+	},
+	{
+		value: "502",
+		name: " Self billet factored Credit Note, Credit note type, Corrected",
+		interpretation: "Credit Note",
+		key: "SELF_BILLET_FACTORED_CREDIT_NOTE_CREDIT_NOTE_TYPE_CORRECTED",
+	},
+	{
+		value: "503",
+		name: " Prepayment credit note, credit note type, Corrected",
+		interpretation: "Credit Note",
+		key: "PREPAYMENT_CREDIT_NOTE_CREDIT_NOTE_TYPE_CORRECTED",
+	},
+	{
+		value: "527",
+		name: "Self billed debit note",
+		interpretation: "Invoice",
+		key: "SELF_BILLED_DEBIT_NOTE",
+	},
+	{
+		value: "532",
+		name: "Forwarder's credit note",
+		interpretation: "Credit Note",
+		key: "FORWARDER_S_CREDIT_NOTE",
+	},
+	{
+		value: "553",
+		name: "Forwarder's invoice discrepancy report",
+		interpretation: "Invoice",
+		key: "FORWARDER_S_INVOICE_DISCREPANCY_REPORT",
+	},
+	{
+		value: "575",
+		name: "Insurer's invoice",
+		interpretation: "Invoice",
+		key: "INSURER_S_INVOICE",
+	},
+	{
+		value: "623",
+		name: "Forwarder's invoice",
+		interpretation: "Invoice",
+		key: "FORWARDER_S_INVOICE",
+	},
+	{
+		value: "633",
+		name: "Port charges documents",
+		interpretation: "Invoice",
+		key: "PORT_CHARGES_DOCUMENTS",
+	},
+	{
+		value: "751",
+		name: "Invoice information for accounting purposes",
+		interpretation: "Invoice",
+		key: "INVOICE_INFORMATION_FOR_ACCOUNTING_PURPOSES",
+	},
+	{
+		value: "780",
+		name: "Freight invoice",
+		interpretation: "Invoice",
+		key: "FREIGHT_INVOICE",
+	},
+	{
+		value: "817",
+		name: "Claim notification",
+		interpretation: "Invoice",
+		key: "CLAIM_NOTIFICATION",
+	},
+	{
+		value: "870",
+		name: "Consular invoice",
+		interpretation: "Invoice",
+		key: "CONSULAR_INVOICE",
+	},
+	{
+		value: "875",
+		name: "Partial construction invoice",
+		interpretation: "Invoice",
+		key: "PARTIAL_CONSTRUCTION_INVOICE",
+	},
+	{
+		value: "876",
+		name: "Partial final construction invoice",
+		interpretation: "Invoice",
+		key: "PARTIAL_FINAL_CONSTRUCTION_INVOICE",
+	},
+	{
+		value: "877",
+		name: "Final construction invoice",
+		interpretation: "Invoice",
+		key: "FINAL_CONSTRUCTION_INVOICE",
+	},
+	{
+		value: "935",
+		name: "Customs invoice",
+		interpretation: "Invoice",
+		key: "CUSTOMS_INVOICE",
+	},
+] as const satisfies Codelist;
+
+declare module "@node-zugferd/core" {
+	interface ZugferdCodelistRegistry {
+		untdid1001: typeof untdid1001;
+	}
+}
+registerCodelist("untdid1001", untdid1001);
+
+export default untdid1001;

@@ -1,0 +1,12 @@
+{
+  "name": "@node-zugferd-test/smoke",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "node-zugferd": "workspace:*",
+    "@node-zugferd/basic": "workspace:*"
+  },
+  "scripts": {
+    "e2e:smoke": "node --test ./test/*.spec.ts"
+  }
+}

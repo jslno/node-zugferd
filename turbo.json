@@ -1,24 +1,106 @@
 {
-	"$schema": "https://turborepo.org/schema.json",
-	"tasks": {
-		"dev": {
-			"cache": false,
-			"persistent": true
-		},
-		"build": {
-			"dependsOn": ["^build"],
-			"outputs": ["dist/**", ".next/**"]
-		},
-		"clean": {},
-		"format": {},
-		"lint": {},
-		"test": {
-			"dependsOn": ["build"],
-			"outputs": []
-		},
-		"typecheck": {
-			"outputs": [],
-			"cache": true
-		}
-	}
+  "$schema": "./node_modules/turbo/schema.json",
+  "futureFlags": {
+    "globalConfiguration": true,
+    "affectedUsingTaskInputs": true
+  },
+  "global": {
+    "ui": "tui",
+    "inputs": ["tsconfig.json", "tsconfig.base.json", "pnpm-workspace.yaml"]
+  },
+  "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "tsconfig.json", "tsdown.config.*"],
+      "outputs": ["dist/**", "node_modules/.cache/ts/**"]
+    },
+    "format": {
+      "dependsOn": ["//#format"],
+      "cache": false
+    },
+    "//#format": {
+      "cache": false
+    },
+    "lint": {
+      "outputs": []
+    },
+    "lint:types": {
+      "dependsOn": ["^build", "build"],
+      "inputs": ["dist/**", "package.json"],
+      "outputs": []
+    },
+    "lint:package": {
+      "dependsOn": ["^build", "build"],
+      "inputs": ["dist/**", "package.json"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["^build", "build"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "vitest.config.*",
+        "src/**",
+        "test/**",
+        "tests/**",
+        "*.test.*",
+        "*.spec.*",
+        "package.json"
+      ],
+      "outputs": [".vitest/**", "coverage/**", "test-results/**"],
+      "cache": true
+    },
+    "coverage": {
+      "dependsOn": ["^build", "build"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "vitest.config.*",
+        "src/**",
+        "test/**",
+        "tests/**",
+        "*.test.*",
+        "*.spec.*",
+        "package.json"
+      ],
+      "outputs": ["coverage/**", "coverage-final.json", ".nyc_output/**"]
+    },
+    "e2e:smoke": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "vitest.config.*",
+        "test/**",
+        "tests/**",
+        "e2e/**",
+        "*.test.*",
+        "*.spec.*",
+        "package.json"
+      ],
+      "outputs": ["test-results/**"],
+      "cache": false
+    },
+    "e2e:integration": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "vitest.config.*",
+        "test/**",
+        "tests/**",
+        "e2e/**",
+        "*.test.*",
+        "*.spec.*",
+        "package.json"
+      ],
+      "outputs": [
+        "coverage/**",
+        "coverage-final.json",
+        ".nyc_output/**",
+        "test-results/**"
+      ],
+      "cache": false
+    }
+  }
 }

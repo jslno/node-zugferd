@@ -1,19 +1,130 @@
 {
-	"compilerOptions": {
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"target": "ES2022",
-		"allowJs": true,
-		"resolveJsonModule": true,
-		"module": "Preserve",
-		"noEmit": true,
-		"moduleDetection": "force",
-		"isolatedModules": true,
-		"verbatimModuleSyntax": true,
-		"strict": true,
-		"noUncheckedIndexedAccess": true,
-		"noImplicitOverride": true,
-		"noFallthroughCasesInSwitch": true
-	},
-	"exclude": ["**/dist/**", "**/node_modules/**", "**/examples/**"]
+  "extends": "./tsconfig.base.json",
+  "include": [
+    // Only include files that are in the root directory. All other files are included by the references.
+    "./*.ts",
+    "./*.js"
+  ],
+  "references": [
+    {
+      "path": "./packages/codelists/allowance/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/characteristic/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/charge/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/country/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/currency/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/eas/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/icd/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/incoterms/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/item/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/language/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/line-reason/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/line-status/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/payment/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/text/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/time/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/transport/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/unit/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/undid-1001/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/untdid-1153/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/untdid-2005/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/untdid-3035/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/untdid-3139/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/untdid-4053/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/untdid-5305/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/vat-cat/tsconfig.json"
+    },
+    {
+      "path": "./packages/codelists/vatex/tsconfig.json"
+    },
+    {
+      "path": "./packages/core/tsconfig.json"
+    },
+    {
+      "path": "./packages/data-types/tsconfig.json"
+    },
+    {
+      "path": "./packages/node-zugferd/tsconfig.json"
+    },
+    // {
+    //   "path": "./packages/parser/tsconfig.json"
+    // },
+    {
+      "path": "./packages/profiles/basic/tsconfig.json"
+    },
+    {
+      "path": "./packages/profiles/basic-wl/tsconfig.json"
+    },
+    {
+      "path": "./packages/profiles/en-16931/tsconfig.json"
+    },
+    {
+      "path": "./packages/profiles/extended/tsconfig.json"
+    },
+    {
+      "path": "./packages/profiles/minimum/tsconfig.json"
+    },
+    // {
+    //   "path": "./packages/profiles/order-x/tsconfig.json"
+    // },
+    // {
+    //   "path": "./packages/profiles/xrechnung/tsconfig.json"
+    // },
+    {
+      "path": "./packages/utils/tsconfig.json"
+    },
+    {
+      "path": "./packages/validators/mustang/tsconfig.json"
+    },
+    {
+      "path": "./packages/validators/xsd/tsconfig.json"
+    }
+  ]
 }

@@ -1,0 +1,18 @@
+{
+	"$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+	"useGitignore": true,
+	"ignoreRandomStrings": true,
+	"allowCompoundWords": true,
+	"dictionaryDefinitions": [],
+	"dictionaries": [],
+	"ignoreRegExpList": [],
+	"ignorePaths": [
+		"patches",
+		"pnpm-workspace.yaml",
+		"pnpm-lock.yaml",
+		"*.config.js",
+		"*.config.ts",
+		"*.json",
+		".gitignore"
+	]
+}

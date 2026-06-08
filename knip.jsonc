@@ -1,0 +1,29 @@
+{
+	"$schema": "./node_modules/knip/schema-jsonc.json",
+	"ignoreExportsUsedInFile": {
+		"interface": true,
+		"type": true
+	},
+	"tags": ["-lintignore"],
+	"ignore": [".github/scripts/**"],
+	"ignoreBinaries": ["changesets"],
+	"ignoreDependencies": ["@changesets/cli", "@vitest/coverage-istanbul"],
+	"rules": {
+		"optionalPeerDependencies": "off",
+		// catalog entries used by docs/ which is in ignoreWorkspaces
+		"catalog": "off"
+	},
+	"workspaces": {
+		"packages/*": {
+			"entry": ["src/index.ts!"],
+			"project": ["src/**/*.ts!"]
+		},
+		"packages/node-zugferd": {
+			"project": ["src/**/*.ts!"]
+		}
+	},
+	"vitest": {
+		"entry": ["**/*.test.ts", "**/*.spec.ts"]
+	},
+	"ignoreWorkspaces": ["docs/**"]
+}
