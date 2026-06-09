@@ -1,0 +1,13 @@
+{
+  "icon": "Plug",
+  "pages": [
+    "---General---",
+    "parser",
+    "---Validators---",
+    "...validators",
+    "---Utilities---",
+    "magic-bytes",
+    "template",
+    "i18n"
+  ]
+}

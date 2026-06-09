@@ -1,5 +1,5 @@
 import { load as loadHTML } from "cheerio";
-import { convert } from "xmlbuilder2";
+import { parseXML } from "../helper";
 
 export type ParserContext = {
 	parseXML: typeof parseXML;
@@ -26,10 +26,6 @@ export function defineParser<Result extends ParserResult>(
 		};
 		return await cb(ctx);
 	};
-}
-
-function parseXML(xml: string) {
-	return convert(xml, { format: "object" });
 }
 
 async function parseUneceList(url: string) {

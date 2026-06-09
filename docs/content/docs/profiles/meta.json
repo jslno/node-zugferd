@@ -1,0 +1,5 @@
+{
+  "icon": "Blocks",
+  "collapsible": true,
+  "pages": ["minimum", "basic-wl", "basic", "en-16931", "extended"]
+}
