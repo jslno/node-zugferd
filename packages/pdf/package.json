@@ -1,0 +1,76 @@
+{
+	"name": "@node-zugferd/pdf",
+	"version": "0.1.1-beta.1",
+	"description": "Programmatic PDF generation for node-zugferd. Renders invoices from a built-in, customizable template and returns finished PDF/A-3b documents with embedded Factur-X XML.",
+	"type": "module",
+	"scripts": {
+		"build": "tsup --clean --dts",
+		"dev": "tsup --watch --sourcemap",
+		"dev:dts": "tsup --watch --dts",
+		"test": "vitest",
+		"typecheck": "tsc --noEmit"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"keywords": [
+		"zugferd",
+		"factur-x",
+		"invoice",
+		"pdf",
+		"pdfa",
+		"e-invoice",
+		"electronic-invoice",
+		"invoice-generation",
+		"pdf-invoice",
+		"invoice-template"
+	],
+	"author": "Joél de Oliveira Solano da Silva",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jslno/node-zugferd.git",
+		"directory": "packages/pdf"
+	},
+	"homepage": "https://node-zugferd.jsolano.de",
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/node": "^22.10.7",
+		"@types/pdfmake": "^0.2.11",
+		"pdf-lib": "^1.17.1",
+		"tsup": "^8.3.5",
+		"typescript": "^5.7.3",
+		"vitest": "^3.0.4"
+	},
+	"dependencies": {
+		"node-zugferd": "workspace:*",
+		"pdfmake": "^0.2.20"
+	},
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			},
+			"require": {
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
+			}
+		},
+		"./templates": {
+			"import": {
+				"types": "./dist/templates.d.ts",
+				"default": "./dist/templates.js"
+			},
+			"require": {
+				"types": "./dist/templates.d.cts",
+				"default": "./dist/templates.cjs"
+			}
+		}
+	},
+	"files": [
+		"dist"
+	]
+}
