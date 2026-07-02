@@ -1,0 +1,231 @@
+---
+title: PDF
+description: Generate complete e-invoices programmatically — data in, PDF/A-3b out.
+---
+
+## Features
+
+- **One call**: `createPdf(data)` renders the PDF, generates the Factur-X XML, embeds it and returns a finished PDF/A-3b document
+- **Built-in template** for a German business invoice (DIN 5008 inspired) rendering all content required by § 14 Abs. 4 UStG
+- **Lightweight**: pure JavaScript rendering via [pdfmake](https://pdfmake.github.io/docs/) — no headless browser, works on serverless platforms
+- **Customizable**: from a logo and colors over label overrides up to fully custom templates
+- **PDF/A-safe**: fonts are always embedded, the output passes [veraPDF](https://verapdf.org) PDF/A-3b validation
+
+<Callout>Looking for HTML/CSS templates rendered by your favorite frontend
+framework? That's what the [API Plugin](/docs/plugins/api) is for. This plugin
+optimizes for zero-setup programmatic generation instead.</Callout>
+
+## Installation
+
+<Steps>
+
+<Step>
+
+### Install the package
+
+```package-install
+@node-zugferd/pdf
+```
+
+</Step>
+
+<Step>
+
+### Add the plugin
+
+Register the plugin on your zugferd instance and pick a template. The built-in
+`defaultTemplate` works out of the box — all of its options are optional.
+
+```ts title="invoicer.ts"
+import { zugferd } from "node-zugferd";
+import { EN16931 } from "node-zugferd/profile/en16931";
+import { pdf } from "@node-zugferd/pdf";
+import { defaultTemplate } from "@node-zugferd/pdf/templates";
+
+export const invoicer = zugferd({
+  profile: EN16931,
+  plugins: [
+    pdf({
+      template: defaultTemplate(),
+    }),
+  ],
+});
+```
+
+</Step>
+
+<Step>
+
+### &#x1F389; That's it!
+
+Pass your invoice data and get a finished e-invoice back — a PDF/A-3b document
+with the validated Factur-X XML embedded.
+
+```ts
+const data: typeof invoicer.$Infer.Schema = {
+  //... your data
+};
+
+const pdfA = await invoicer.createPdf(data, {
+  metadata: {
+    title: "Rechnung 471102",
+  },
+});
+```
+
+</Step>
+
+</Steps>
+
+<Callout type="warn">The default template requires at least one invoice line
+and therefore the **BASIC profile or higher**. Documents of the MINIMUM and
+BASIC WL profiles are not considered invoices under German fiscal law anyway —
+if you need to render them, provide a [custom template](#fully-custom-templates).</Callout>
+
+## The default template
+
+The built-in template produces a classic German business invoice: sender line
+and recipient address field, a document meta block (invoice number, dates,
+customer number, service period, VAT ID or tax number), the line item table
+with automatic page breaks, a totals block including the VAT breakdown, notes
+and payment terms, and a footer repeated on every page.
+
+Everything is rendered **exclusively from the data you pass to `createPdf`** —
+the same data the XML is generated from, so the visible PDF can never
+contradict the embedded XML.
+
+```ts
+defaultTemplate({
+  // PNG or JPEG, rendered in the top right corner
+  logo: fs.readFileSync("./logo.png"),
+  logoWidth: 140,
+  // color used for table rules and emphasis
+  accentColor: "#1e3a5f",
+  // DIN 5008 sender line, derived from the seller data by default
+  senderLine: "Lieferant GmbH · Lieferantenstraße 20 · 80333 München",
+  // footer columns repeated on every page — use them for the mandatory
+  // German business details
+  footer: {
+    columns: [
+      "Lieferant GmbH\nLieferantenstraße 20\n80333 München",
+      "Geschäftsführer: Hans Muster\nAmtsgericht München HRB 12345",
+      "IBAN: DE02 1203 0000 0000 2020 51\nBIC: BYLADEM1001",
+    ],
+  },
+});
+```
+
+### Labels
+
+All labels ship in German and can be overridden individually — for example to
+generate an English invoice:
+
+```ts
+defaultTemplate({
+  labels: {
+    invoiceTitle: "Invoice No.",
+    invoiceDate: "Invoice date",
+    deliveryDate: "Delivery date",
+    // ...
+  },
+});
+```
+
+Number and date formatting follows the plugin's `intlLocale` option (default
+`"de-DE"`):
+
+```ts
+pdf({
+  template: defaultTemplate(),
+  intlLocale: "en-US",
+});
+```
+
+## Custom fonts
+
+PDF/A-3 requires every font to be embedded, so the plugin never uses the 14
+standard PDF fonts. By default it embeds the Roboto family that ships with
+pdfmake. To use your own font, provide TTF buffers — the first family becomes
+the document's default font:
+
+```ts
+pdf({
+  template: defaultTemplate(),
+  fonts: {
+    Inter: {
+      normal: fs.readFileSync("./fonts/Inter-Regular.ttf"),
+      bold: fs.readFileSync("./fonts/Inter-Bold.ttf"),
+      italics: fs.readFileSync("./fonts/Inter-Italic.ttf"),
+      bolditalics: fs.readFileSync("./fonts/Inter-BoldItalic.ttf"),
+    },
+  },
+});
+```
+
+## Fully custom templates
+
+A template is any function that turns invoice data into a
+[pdfmake document definition](https://pdfmake.github.io/docs/document-definition-object/) —
+`defaultTemplate` is just one implementation. Your template receives the
+invoice data, a logger and locale-aware formatters:
+
+```ts title="my-template.ts"
+import type { InvoiceTemplate } from "@node-zugferd/pdf";
+
+export const myTemplate: InvoiceTemplate = ({ data, formatters }) => ({
+  pageSize: "A4",
+  content: [
+    { text: `Invoice ${data.number}`, fontSize: 16, bold: true },
+    { text: formatters.date(data.issueDate) },
+    // ...
+    {
+      text: formatters.currency(
+        data.transaction.tradeSettlement.monetarySummation.grandTotalAmount,
+        data.transaction.tradeSettlement.currencyCode,
+      ),
+    },
+  ],
+});
+```
+
+```ts title="invoicer.ts"
+pdf({ template: myTemplate });
+```
+
+<Callout type="warn">A Factur-X hybrid document must show the same information
+as its embedded XML. Render your template from the invoice data only, and make
+sure everything the XML contains is visible on the PDF.</Callout>
+
+## Options
+
+### `pdf()`
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `template` | `InvoiceTemplate` | **Required.** Turns invoice data into a pdfmake document definition. |
+| `intlLocale` | `string` | BCP 47 locale for the built-in formatters. Defaults to `"de-DE"`. |
+| `fonts` | `Record<string, PdfFont>` | Custom fonts (TTF buffers), keyed by family name. Defaults to the bundled Roboto family. |
+
+### `createPdf(data, options?)`
+
+`data` must match the schema of your configured profile
+(`typeof invoicer.$Infer.Schema`). The options are passed through to
+[`embedInPdf`](/docs/basic-usage):
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `metadata` | `object` | PDF metadata (title, author, subject, keywords, …). |
+| `additionalFiles` | `array` | Additional attachments to embed alongside the Factur-X XML. |
+
+Returns the finished PDF/A-3b document as a `Uint8Array`.
+
+### `defaultTemplate()`
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `logo` | `Buffer \| Uint8Array \| string` | Logo (PNG/JPEG) for the top right corner. |
+| `logoWidth` | `number` | Logo width in pt. Defaults to `140`. |
+| `accentColor` | `string` | Color for table rules and emphasis. Defaults to `"#333333"`. |
+| `senderLine` | `string` | DIN 5008 sender line above the address field. Derived from the seller by default. |
+| `footer` | `{ columns: string[] }` | Footer columns repeated on every page. |
+| `labels` | `object` | Overrides for the built-in German label set. |
