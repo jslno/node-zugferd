@@ -17,7 +17,7 @@
   "dependencies": {
     "@node-zugferd/core": "workspace:*",
     "@node-zugferd/data-types": "workspace:*",
-    "pdf-lib": "^1.17.1",
+    "pdf-lib": "catalog:",
     "uncrypto": "^0.1.3",
     "xmlbuilder2": "catalog:"
   },

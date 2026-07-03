@@ -5,4 +5,69 @@ title: EN16931
 
 import { en16931 } from "@node-zugferd/en-16931";
 
+This profile includes [BASIC](/docs/profiles/basic), with all the additional data required by the European Semantics Standard, whether optional or conditional. It is fully compliant to EN 16931, focussing on the core elements of an electronic invoice.
+
+## Basic Usage
+
+<Steps>
+    <Step>
+        ### Install the Profile
+        
+        ```package-install tab-group="pm"
+        npm install @node-zugferd/en-16931
+        ```
+    </Step>
+    <Step>
+        ### Setup the Profile
+        
+        Register the profile when creating your zugferd instance:
+        
+        ```ts title="lib/invoicer.ts"
+        import { en16931 } from "@node-zugferd/en-16931"; // [!code highlight]
+        import { zugferd } from "node-zugferd";
+        
+        export const invoicer = zugferd({
+          profiles: [en16931], // [!code highlight]
+        });
+        ```
+    </Step>
+    <Step>
+        ### Define Invoice Data
+        
+        Provide invoice data that satisfies the requirements of this profile.
+        
+        ```ts title="data.ts"
+        import type { invoicer } from "@/lib/invoicer";
+        
+        const data: typeof invoicer.$Infer.Input.En16931 = {
+          exchangedDocument: {
+            invoiceNumber: "471102",
+            // ...
+          },
+          // ...
+        };
+        ```
+    </Step>
+    <Step>
+        ### Generate Invoice
+        
+        Create the invoice and embed it into a PDF/A document or serialize it for further processing.
+        
+        ```ts title="invoice.ts"
+        import { invoicer } from "@/lib/invoicer";
+        import { data } from "./data";
+        import { readFile } from "node:fs/promises";
+        
+        const invoice = await invoicer.create("en-16931", data);
+        
+        const xml = invoice.toXML();
+        const pdfA = await invoice.toPDF(
+          await readFile("./my-invoice.pdf"),
+        );
+        ```
+    </Step>
+</Steps>
+
+## Schema
+
 <ProfileTree profile={en16931} />

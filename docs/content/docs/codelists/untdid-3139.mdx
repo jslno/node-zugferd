@@ -2,15 +2,27 @@
 title: UNTDID 3139
 ---
 
-## Code Block
+import untdid3139 from "@node-zugferd/codelist-untdid-3139";
 
-```js
-console.log("Hello World");
-```
-
-## Cards
-
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
-</Cards>
+<CodelistTable items={untdid3139} fieldMap={{
+  value: {
+    label: "Value",
+    render: (value) => <code>{value}</code>,
+    priority: 0,
+    width: 64,
+  },
+  name: {
+    label: "Name",
+    priority: 1,
+  },
+  description: {
+    label: "Description",
+    priority: 2,
+    width: "45%",
+  },
+  key: {
+    label: "Key",
+    render: (value) => <code>{value}</code>,
+    priority: 3,
+  },
+}} />

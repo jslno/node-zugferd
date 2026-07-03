@@ -14,6 +14,7 @@ import {
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/cn";
 
 export const SIDEBAR_WIDTH = "17.75rem";
@@ -58,6 +59,23 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
 	);
 }
 
+function SidebarScrollArea({
+	className,
+	children,
+}: {
+	className?: string;
+	children: ReactNode;
+}) {
+	return (
+		<ScrollArea
+			scrollbarVisibility="never"
+			className={cn("min-h-0 flex-1 text-sm", className)}
+		>
+			{children}
+		</ScrollArea>
+	);
+}
+
 export function SidebarToggle(props: ComponentProps<"button">) {
 	const { open, setOpen } = use(SidebarContext)!;
 
@@ -91,7 +109,7 @@ export function Sidebar() {
 	return (
 		<>
 			<motion.div
-				className="hidden shrink-0 overflow-hidden md:block"
+				className="hidden h-full shrink-0 overflow-hidden md:block"
 				initial={false}
 				animate={{ width: collapsed ? 0 : SIDEBAR_WIDTH }}
 				transition={SIDEBAR_TRANSITION}
@@ -100,9 +118,11 @@ export function Sidebar() {
 					initial={false}
 					animate={{ x: collapsed ? "-100%" : 0, opacity: collapsed ? 0 : 1 }}
 					transition={SIDEBAR_TRANSITION}
-					className="sticky top-14 z-20 flex h-[calc(100dvh-56px)] w-71 flex-col overflow-y-auto py-4 pl-4 text-sm"
+					className="flex h-full w-71 flex-col"
 				>
-					{children}
+					<SidebarScrollArea>
+						<div className="py-4 pl-4">{children}</div>
+					</SidebarScrollArea>
 				</motion.aside>
 			</motion.div>
 
@@ -120,13 +140,15 @@ export function Sidebar() {
 							onClick={() => setOpen(false)}
 						/>
 						<motion.aside
-							className="fixed inset-x-0 bottom-0 top-14 z-40 flex flex-col overflow-y-auto bg-fd-background rounded-t-lg border-t p-4 text-sm md:hidden"
+							className="fixed inset-x-0 bottom-0 top-14 z-40 flex flex-col bg-fd-background rounded-t-lg border-t md:hidden"
 							initial={{ y: "100%" }}
 							animate={{ y: 0 }}
 							exit={{ y: "100%" }}
 							transition={SIDEBAR_TRANSITION}
 						>
-							{children}
+							<SidebarScrollArea>
+								<div className="p-4">{children}</div>
+							</SidebarScrollArea>
 						</motion.aside>
 					</>
 				)}
@@ -219,6 +241,14 @@ export function SidebarItem({
 					>
 						{item.index.icon}
 						{item.index.name}
+						{collapsible && (
+							<CollapsibleTrigger
+								onClick={(e) => e.preventDefault()}
+								className="group/collapsible-trigger ms-auto"
+							>
+								<ChevronDownIcon className="text-muted-foreground group-aria-expanded/collapsible-trigger:rotate-180 transition-transform duration-200" />
+							</CollapsibleTrigger>
+						)}
 					</Link>
 				) : (
 					<CollapsibleTrigger

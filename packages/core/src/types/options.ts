@@ -16,4 +16,17 @@ export interface ZugferdOptions {
 			  }) => Promise<void> | void)
 			| undefined;
 	};
+	advanced?:
+		| {
+				handleBinaryObject?: (ctx: {
+					data: {
+						content: Uint8Array;
+						mimeType: string;
+						filename: string;
+					};
+					context: ZugferdContext;
+					profile: ZugferdProfile;
+				}) => Promise<void> | void;
+		  }
+		| undefined;
 }

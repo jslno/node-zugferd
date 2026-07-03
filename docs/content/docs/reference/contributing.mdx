@@ -1,18 +1,118 @@
 ---
 icon: GitPullRequestCreateArrow
 title: Contributing
-description: Components
+description: A guide to contributing to node-zugferd.
 ---
 
-## Code Block
+## Development Setup
 
-```js
-console.log("Hello World");
+<Callout type="warn">
+    Make sure you have [NodeJS](https://nodejs.org/en/download) installed, preferably on LTS.
+</Callout>
+
+<Steps>
+    <Step>
+        ### Fork the repository
+        
+        Visit the [node-zugferd repository](https://github.com/jslno/node-zugferd) and click on the "Fork" button in the top right corner to create a copy of the repository under your GitHub account.
+    </Step>
+    <Step>
+        ### Clone your fork
+        
+        Clone the forked repository to your local machine using the following command:
+        
+        ```bash
+        # Replace YOUR-USERNAME with your GitHub username
+        git clone https://github.com/YOUR-USERNAME/node-zugferd.git
+        cd node-zugferd
+        ```
+    </Step>
+    <Step>
+        ### Install dependencies
+        
+        Make sure you have [pnpm](https://pnpm.io/installation) installed!
+        
+        ```bash
+        pnpm install
+        ```
+    </Step>
+</Steps>
+
+## Making Changes
+
+Once you have an idea of what you want to contribute, you can start making changes. Here are some steps to get started:
+
+<Steps>
+    <Step>
+        ### Create a new branch
+        
+        ```bash
+        # Add upstream remote (if not already added)
+        git remote add upstream https://github.com/jslno/node-zugferd.git
+        
+        # Make sure you're on main
+        git checkout main
+        
+        # Pull latest changes
+        git pull upstream main
+        
+        # Create and switch to a new branch
+        git checkout -b feat/your-feature-name
+        ```
+    </Step>
+    <Step>
+        ### Start development server
+        
+        ```bash
+        pnpm dev
+        ```
+        
+        To start the docs server:
+        
+        ```bash
+        pnpm -F docs dev
+        ```
+    </Step>
+    <Step>
+        ### Make your changes
+        
+        - Make your changes to the codebase.
+        - Write tests if needed. (Read more about [testing](#testing))
+        - Update documentation. (Read more about [documenting](#documentation))
+    </Step>
+</Steps>
+
+## Documentation
+
+- Fix typos and errors
+- Add examples and clarify existing content
+- Ensure documentation is up to date with code changes
+
+## Testing
+
+We use Vitest for testing. Place test files next to the source files they test:
+
+```ts
+import { describe, it, expect } from "vitest";
+
+describe("Feature", () => {
+    it("should work as expected", async () => {
+        // Test code here
+        expect(result).toBeDefined();
+    });
+});
 ```
 
-## Cards
+## Best Practices
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
-</Cards>
+- Write clear commit messages
+- Update documentation to reflect your changes
+- Add tests for new features
+- Follow our coding standards
+- Keep pull requests focused on a single change
+
+## Need Help?
+
+Feel free to ask for help! You can always open an [issue](https://github.com/jslno/node-zugferd/issues) with questions.
+
+Thank you for contributing to node-zugferd!

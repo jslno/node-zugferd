@@ -14,7 +14,14 @@
     "test": "vitest",
     "coverage": "vitest run --coverage --coverage.provider=istanbul"
   },
-  "dependencies": {},
+  "peerDependencies": {
+    "@node-zugferd/core": "workspace:*"
+  },
+  "dependencies": {
+    "@node-zugferd/data-types": "workspace:*",
+    "pdf-lib": "catalog:",
+    "xmlbuilder2": "catalog:"
+  },
   "devDependencies": {
     "tsdown": "catalog:"
   },
@@ -25,5 +32,7 @@
       "default": "./dist/index.mjs"
     }
   },
-  "files": ["dist"]
+  "files": [
+    "dist"
+  ]
 }

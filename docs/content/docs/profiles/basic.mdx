@@ -5,4 +5,69 @@ title: Basic
 
 import { basic } from "@node-zugferd/basic";
 
+This profile includes [BASIC WL](/docs/profiles/basic-wl) with some details at line level. It is a subset of EN 16931, which contains all mandatory fields including those on which business rules from the EN 16931 may apply. It is a compliant CIUS (Core Invoice Usage Specification), which means that all business rules of the EN 16931 apply.
+
+## Basic Usage
+
+<Steps>
+    <Step>
+        ### Install the Profile
+        
+        ```package-install tab-group="pm"
+        npm install @node-zugferd/basic
+        ```
+    </Step>
+    <Step>
+        ### Setup the Profile
+        
+        Register the profile when creating your zugferd instance:
+        
+        ```ts title="lib/invoicer.ts"
+        import { basic } from "@node-zugferd/basic"; // [!code highlight]
+        import { zugferd } from "node-zugferd";
+        
+        export const invoicer = zugferd({
+          profiles: [basic], // [!code highlight]
+        });
+        ```
+    </Step>
+    <Step>
+        ### Define Invoice Data
+        
+        Provide invoice data that satisfies the requirements of this profile.
+        
+        ```ts title="data.ts"
+        import type { invoicer } from "@/lib/invoicer";
+        
+        const data: typeof invoicer.$Infer.Input.Basic = {
+          exchangedDocument: {
+            invoiceNumber: "471102",
+            // ...
+          },
+          // ...
+        };
+        ```
+    </Step>
+    <Step>
+        ### Generate Invoice
+        
+        Create the invoice and embed it into a PDF/A document or serialize it for further processing.
+        
+        ```ts title="invoice.ts"
+        import { invoicer } from "@/lib/invoicer";
+        import { data } from "./data";
+        import { readFile } from "node:fs/promises";
+        
+        const invoice = await invoicer.create("basic", data);
+        
+        const xml = invoice.toXML();
+        const pdfA = await invoice.toPDF(
+          await readFile("./my-invoice.pdf"),
+        );
+        ```
+    </Step>
+</Steps>
+
+## Schema
+
 <ProfileTree profile={basic} />

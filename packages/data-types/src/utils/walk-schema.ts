@@ -3,6 +3,7 @@ import type {
 	BaseSchema,
 	BaseSchemaAsync,
 } from "@node-zugferd/core/data-types";
+import { getMetadata } from "../methods";
 import type { ObjectEntries, ObjectEntriesAsync } from "../schemas/object";
 
 type AnySchema =
@@ -64,7 +65,7 @@ export function getArrayItemSchema(schema: AnySchema): AnySchema | undefined {
 	const unwrapped = unwrapSchema(schema);
 
 	if (unwrapped.type === "array" || unwrapped.type === "as_array") {
-		return (unwrapped as { readonly item: AnySchema }).item;
+		return (unwrapped as any).item;
 	}
 
 	return undefined;
@@ -87,11 +88,89 @@ export type FieldSchemaEntry = {
 	readonly schema: AnySchema;
 };
 
-function isIntersectSchema(schema: AnySchema): schema is AnySchema & {
+export function isIntersectSchema(schema: AnySchema): schema is AnySchema & {
 	readonly options: readonly AnySchema[];
 } {
 	const unwrapped = unwrapSchema(schema);
-	return unwrapped.type === "intersect" && "options" in unwrapped;
+	return (
+		unwrapped.type === "intersect" &&
+		"options" in unwrapped &&
+		Array.isArray(unwrapped.options)
+	);
+}
+
+export type WalkSchemaOptions = {
+	resolveArrayLength?: (
+		arrayPath: readonly string[],
+		indexes: readonly number[],
+	) => number;
+};
+
+function walkSchemaFields(
+	schema: AnySchema,
+	basePath: readonly string[],
+	indexes: readonly number[],
+	cb: (ctx: {
+		path: readonly string[];
+		schema: AnySchema;
+		metadata: Record<string, any>;
+		indexes: readonly number[];
+	}) => void,
+	resolveArrayLength?: WalkSchemaOptions["resolveArrayLength"],
+) {
+	if (isIntersectSchema(schema)) {
+		for (const option of schema.options) {
+			walkSchemaFields(option, basePath, indexes, cb, resolveArrayLength);
+		}
+
+		return;
+	}
+
+	const entries = getObjectEntries(schema);
+
+	if (!entries) {
+		return;
+	}
+
+	for (const key in entries) {
+		const entrySchema = entries[key]!;
+		const path = [...basePath, key];
+
+		cb({
+			path,
+			schema: entrySchema,
+			metadata: getMetadata(entrySchema),
+			indexes,
+		});
+
+		if (isObjectLikeSchema(entrySchema)) {
+			walkSchemaFields(entrySchema, path, indexes, cb, resolveArrayLength);
+		} else if (isArrayLikeSchema(entrySchema)) {
+			const itemSchema = getArrayItemSchema(entrySchema);
+
+			if (!itemSchema) {
+				continue;
+			}
+
+			const itemPath = [...path, ARRAY_PATH_WILDCARD];
+
+			if (resolveArrayLength) {
+				const length = resolveArrayLength(path, indexes);
+
+				for (let index = 0; index < length; index++) {
+					walkSchemaFields(
+						itemSchema,
+						itemPath,
+						[...indexes, index],
+						cb,
+						resolveArrayLength,
+					);
+				}
+			} else {
+				walkSchemaFields(itemSchema, itemPath, indexes, cb, resolveArrayLength);
+			}
+		}
+	}
 }
 
 export function collectFieldSchemas(
@@ -148,4 +227,34 @@ export function collectFieldSchemas(
 	}
 
 	return result;
+}
+
+export function walkSchema(
+	schema: AnySchema,
+	cb: (ctx: {
+		path: readonly string[];
+		schema: AnySchema;
+		metadata: Record<string, any>;
+		indexes: readonly number[];
+	}) => void,
+	options?: WalkSchemaOptions,
+) {
+	const seen = new Set<string>();
+
+	walkSchemaFields(
+		schema,
+		[],
+		[],
+		(ctx) => {
+			const key = `${ctx.path.join(".")}:${ctx.indexes.join(",")}`;
+
+			if (seen.has(key)) {
+				return;
+			}
+
+			seen.add(key);
+			cb(ctx);
+		},
+		options?.resolveArrayLength,
+	);
 }

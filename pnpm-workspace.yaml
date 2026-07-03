@@ -3,12 +3,17 @@ packages:
   - docs
   - e2e/**
 
+allowBuilds:
+  esbuild: true
+  sharp: true
+
 blockExoticSubdeps: true
 
 catalog:
   tsdown: ^0.22.1
   typescript: ^5.9.3
   xmlbuilder2: ^4.0.3
+  pdf-lib: ^1.17.1
 
 catalogs:
   vitest:

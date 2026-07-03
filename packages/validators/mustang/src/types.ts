@@ -14,7 +14,7 @@ export type MustangOptions = {
 	 */
 	maximumHeapSize?: number | "inherit" | undefined;
 	/**
-	 * Whether to automatically run validation after generating the XML.
+	 * Whether to automatically run validation after processing the document.
 	 *
 	 * @default true
 	 */

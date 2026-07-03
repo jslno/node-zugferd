@@ -3,11 +3,10 @@
   "pages": [
     "---General---",
     "parser",
+    "templates",
     "---Validators---",
     "...validators",
     "---Utilities---",
-    "magic-bytes",
-    "template",
-    "i18n"
+    "magic-bytes"
   ]
 }

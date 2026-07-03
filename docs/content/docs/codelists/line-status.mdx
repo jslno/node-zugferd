@@ -2,15 +2,26 @@
 title: Line Status
 ---
 
-## Code Block
+import lineStatus from "@node-zugferd/codelist-line-status";
 
-```js
-console.log("Hello World");
-```
-
-## Cards
-
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
-</Cards>
+<CodelistTable items={lineStatus} fieldMap={{
+  value: {
+    label: "Value",
+    render: (value) => <code>{value}</code>,
+    priority: 0,
+    width: 64,
+  },
+  name: {
+    label: "Name",
+    priority: 1,
+  },
+  description: {
+    label: "Description",
+    priority: 2,
+  },
+  key: {
+    label: "Key",
+    render: (value) => <code>{value}</code>,
+    priority: 3,
+  },
+}} />

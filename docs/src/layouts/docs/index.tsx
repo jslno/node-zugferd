@@ -4,18 +4,16 @@ import { useSearchContext } from "@fumadocs/base-ui/contexts/search";
 import { TreeContextProvider } from "@fumadocs/base-ui/contexts/tree";
 import Link from "fumadocs-core/link";
 import type * as PageTree from "fumadocs-core/page-tree";
-import {
-	MoonIcon,
-	SearchIcon,
-	SidebarCloseIcon,
-	SidebarOpenIcon,
-} from "lucide-react";
+import { SearchIcon, SidebarCloseIcon, SidebarOpenIcon } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
+import { useEffect, useRef } from "react";
 import { GitHubIcon } from "@/components/icons/github";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { gitConfig } from "@/lib/shared";
 import { cn } from "../../lib/cn";
+import { handleGlobalWheel } from "../../lib/global-scroll";
 import { Sidebar, SidebarProvider, SidebarToggle, useSidebar } from "./sidebar";
 
 export interface DocsLayoutProps {
@@ -40,11 +38,27 @@ function SidebarCollapseToggle() {
 }
 
 export function DocsLayout({ tree, children }: DocsLayoutProps) {
+	const shellRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		const shell = shellRef.current;
+		if (!shell) return;
+
+		shell.addEventListener("wheel", handleGlobalWheel, { passive: false });
+
+		return () => {
+			shell.removeEventListener("wheel", handleGlobalWheel);
+		};
+	}, []);
+
 	return (
 		<TreeContextProvider tree={tree}>
 			<SidebarProvider>
-				<div className="bg-fd-muted/30 flex-1 flex flex-col">
-					<header className="h-14">
+				<div
+					ref={shellRef}
+					className="bg-fd-muted/30 flex h-dvh flex-col overflow-hidden"
+				>
+					<header className="h-14 shrink-0">
 						<nav className="flex flex-row h-full items-center gap-x-4 px-4">
 							<div className="flex items-center gap-4 w-full">
 								<Link href="/" className="font-medium whitespace-nowra">
@@ -56,9 +70,7 @@ export function DocsLayout({ tree, children }: DocsLayoutProps) {
 							<SearchToggle />
 							<div className="flex items-center justify-end gap-2 w-full">
 								<SidebarToggle className="md:hidden" />
-								<Button size="icon-lg" variant="ghost">
-									<MoonIcon />
-								</Button>
+								<ThemeToggle />
 								<Button
 									size="icon-lg"
 									variant="ghost"
@@ -77,10 +89,10 @@ export function DocsLayout({ tree, children }: DocsLayoutProps) {
 					</header>
 					<main
 						id="nd-docs-layout"
-						className="flex flex-1 flex-row [--fd-nav-height:56px]"
+						className="flex min-h-0 flex-1 flex-row [--fd-nav-height:56px]"
 					>
 						<Sidebar />
-						{children}
+						<div className="flex h-full min-h-0 min-w-0 flex-1">{children}</div>
 					</main>
 				</div>
 			</SidebarProvider>

@@ -1,18 +1,119 @@
 ---
 icon: BookOpenText
 title: Options
-description: Components
+description: node-zugferd confiuguration options reference.
 ---
 
-## Code Block
+List of all the available options for configuring node-zugferd. See [node-zugferd Options](https://github.com/jslno/node-zugferd/blob/main/packages/core/src/types/options.ts).
 
-```js
-console.log("Hello World");
+### `profiles`
+
+List of node-zugferd profiles.
+
+```ts
+import { zugferd } from "node-zugferd";
+import { en16931 } from "@node-zugferd/en-16931";
+
+const invoicer = zugferd({
+  profiles: [
+    en16931(),
+  ],
+  // ...
+});
 ```
 
-## Cards
+### `plugins`
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
-</Cards>
+List of node-zugferd plugins.
+
+```ts
+import { zugferd } from "node-zugferd";
+import { xsd } from "@node-zugferd/validator-xsd";
+
+const invoicer = zugferd({
+  plugins: [
+    xsd(),
+  ],
+  // ...
+});
+```
+
+### `logger`
+
+Logger configuration for node-zugferd.
+
+```ts
+import { zugferd } from "node-zugferd";
+
+export const invoicer = zugferd({
+	logger: {
+		disabled: false,
+		level: "warn",
+		log: (level, message, ...args) => {
+			// Custom logging implementation
+			console.log(`[${level}] ${message}`, ...args);
+		},
+	},
+	// ...
+});
+```
+
+The logger configuration allows you to customize how node-zugferd handles logging. It supports the following options:
+
+- #### `disabled`
+  Disable all logging when set to `true` (default: `false`)
+- #### `level`
+  Set the minimum log level to display (default: `"warn"`)
+  - `"debug"`: Show all logs including debug information
+  - `"info"`: Show all logs except debug information
+  - `"warn"`: Show warnings and errors
+  - `"error"`: Show only errors
+- #### `log`
+  Custom logging function that receives:
+  - `level`: The log level
+  - `message`: The log message
+  - `...args`: Additional arguments to the logger
+
+Example with custom logging:
+
+```ts
+import { zugferd } from "node-zugferd";
+
+export const invoicer = zugferd({
+	logger: {
+		level: "info",
+		log: (level, message, ...args) => {
+			// Send logs to a custom logging service
+			myLoggingService.log({
+				level,
+				message,
+				metadata: args,
+				timestamp: new Date().toISOString()
+			});
+		},
+	},
+	// ...
+});
+```
+
+### `hooks`
+
+Invoice lifecycle hooks.
+
+- #### `afterXMLBuild`
+
+Called after the XML document has been built.
+
+```ts
+import { zugferd } from "node-zugferd";
+
+export const invoicer = zugferd({
+  hooks: {
+    afterXMLBuild: ({ xml, profile, context }) => {
+      // Custom logic to execute after XML is built
+      validate(profile.id, xml);
+    },
+  },
+  // ...
+});
+```

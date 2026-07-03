@@ -1,14 +1,91 @@
 ---
 icon: MustangProject
 title: Mustang
-description: Your first document
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+## Installation
 
-## What is Next?
+<Steps>
+    <Step>
+        ### Install the plugin
+        
+        Make sure the Java JRE is installed on your system, as the Mustang validator relies on it to run. You can download it from the [official Java website](https://www.java.com/en/download/).
+        
+        ```package-install
+        @node-zugferd/validator-mustang
+        ```
+    </Step>
+    <Step>
+        ### Add the plugin to your instance
+        
+        ```ts title="invoicer.ts"
+        import { zugferd } from "node-zugferd";
+        import { en16931 } from "@node-zugferd/en-16931";
+        import { mustang } from "@node-zugferd/validator-mustang"; // [!code highlight]
+        
+        export const invoicer = zugferd({
+          profiles: [en16931],
+          plugins: [
+            mustang(), // [!code highlight]
+          ],
+          // ...
+        });
+        ```
+    </Step>
+</Steps>
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
-</Cards>
+## Usage
+
+### Manual validation
+
+```ts
+import { readFile } from "node:fs/promises";
+import { invoicer } from "@/lib/invoicer";
+
+try {
+  await invoicer.mustang.validate("en-16931", await readFile("factur-x.xml", "utf-8")); // [!code highlight]
+  await invoicer.mustang.validate("en-16931", await readFile("invoice.pdf")); // [!code highlight]
+} catch (error) {
+  if (error instanceof ZugferdValidationError) {
+    console.log(error.issues);
+  } else {
+    throw error;
+  }
+}
+```
+
+## Options
+
+<TypeTable
+  type={{
+    tempDir: {
+      type: "string",
+      description: "The temporary directory to use for validation.",
+      default: "os.tmpdir()",
+      required: false,
+    },
+    initialHeapSize: {
+      type: "number",
+      description: "Initial heap size for the Java Virtual Machine in megabytes.",
+      required: false,
+    },
+    maximumHeapSize: {
+      type: "number",
+      description: "Maximum heap size for the Java Virtual Machine in megabytes.",
+      default: "1024 (1GB)",
+      required: false,
+    },
+    autoRun: {
+      type: "boolean",
+      description: "Whether to automatically run validation after processing the document.",
+      default: "true",
+      required: false,
+    },
+    language: {
+      type: '"en" | "de" | "fr"',
+      description: "Language for messages returned by the Mustang validator.",
+      default: "en",
+      required: false,
+    },
+  }}
+/>

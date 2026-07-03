@@ -16,7 +16,7 @@ import { addIssue } from "../utils/add-issue";
 import {
 	adaptInputForOption,
 	buildCardinalityPlan,
-} from "../utils/cardinality-plan";
+} from "../utils/cardinality";
 import { joinExpects } from "../utils/join-expects";
 import { getStandardProps } from "../utils/standard-props";
 

@@ -8,7 +8,7 @@ import {
 	collectFieldSchemas,
 	isArrayLikeSchema,
 	isObjectLikeSchema,
-} from "./schema-shape";
+} from "./walk-schema";
 
 type AnySchema =
 	| BaseSchema<unknown, unknown, BaseIssue<unknown>>
@@ -128,7 +128,7 @@ function mutateAtPath(
 		return;
 	}
 
-	if (!value || typeof value !== "object") {
+	if (!head || !value || typeof value !== "object") {
 		return;
 	}
 

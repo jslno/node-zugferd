@@ -120,7 +120,7 @@ export function ProfileTree({
 				)}
 				<Collapsible
 					defaultOpen={!cfg.key}
-					disabled={!cfg.key}
+					disabled={!cfg.key || !id}
 					className="w-full"
 				>
 					<CollapsibleTrigger
@@ -148,70 +148,76 @@ export function ProfileTree({
 										)}
 									</div>
 									<div className="w-full flex max-w-1/4">
-										<TruncatedText className="ms-auto text-xs text-muted-foreground font-mono text-right">
-											/{meta?.xpath.split("/").at(-1)}
-										</TruncatedText>
+										{meta?.xpath && (
+											<TruncatedText className="ms-auto text-xs text-muted-foreground font-mono text-right">
+												/{meta?.xpath.split("/").at(-1)}
+											</TruncatedText>
+										)}
 									</div>
 								</div>
-								<ChevronDownIcon className="text-muted-foreground group-aria-expanded/collapsible-trigger:rotate-180 transition-transform duration-200" />
+								{!!id && (
+									<ChevronDownIcon className="text-muted-foreground group-aria-expanded/collapsible-trigger:rotate-180 transition-transform duration-200" />
+								)}
 							</>
 						)}
 					</CollapsibleTrigger>
 					<CollapsibleContent className="flex flex-col h-(--collapsible-panel-height) overflow-hidden transition-all duration-200 data-ending-style:h-0 data-starting-style:h-0">
-						<div
-							className={cn(
-								"border rounded-md p-1.5",
-								hasChildren && "rounded-bl-none",
-							)}
-						>
-							<div className="@container/field-meta flex rounded-md rounded-bl-sm bg-card border border-border/60 flex-col gap-1 p-3">
-								<span className="text-xs font-medium -mb-1 text-muted-foreground">
-									{`${id}`}
-								</span>
-								<p className="text-lg font-semibold">{meta?.businessTerm}</p>
-								{meta?.description && (
-									<p className="text-sm text-muted-foreground">
-										{meta?.description}
-									</p>
+						{!!id && (
+							<div
+								className={cn(
+									"border rounded-md p-1.5",
+									hasChildren && "rounded-bl-none",
 								)}
-								<p className="text-xs text-muted-foreground italic">
-									{cardinality}
-								</p>
-								{meta?.usageNote || meta?.cius || meta?.businessRule ? (
-									<>
-										<hr className="my-2" />
-										<div className="grid @md/field-meta:grid-cols-2 gap-4">
-											{meta?.usageNote && (
-												<div className="flex flex-col gap-0.5">
-													<h4 className="font-medium">Usage Note</h4>
-													<p className="text-sm text-muted-foreground">
-														{meta.usageNote}
-													</p>
-												</div>
-											)}
-											{meta?.cius && (
-												<div className="flex flex-col gap-0.5">
-													<h4 className="font-medium">
-														CIUS (Core Invoice Usage Specification)
-													</h4>
-													<p className="text-sm text-muted-foreground">
-														{meta.cius}
-													</p>
-												</div>
-											)}
-											{meta?.businessRule && (
-												<div className="flex flex-col gap-0.5">
-													<h4 className="font-medium">Business Rule</h4>
-													<p className="text-sm text-muted-foreground">
-														{meta.businessRule}
-													</p>
-												</div>
-											)}
-										</div>
-									</>
-								) : null}
+							>
+								<div className="@container/field-meta flex rounded-md rounded-bl-sm bg-card border border-border/60 flex-col gap-1 p-3">
+									<span className="text-xs font-medium -mb-1 text-muted-foreground">
+										{`${id}`}
+									</span>
+									<p className="text-lg font-semibold">{meta?.businessTerm}</p>
+									{meta?.description && (
+										<p className="text-sm text-muted-foreground">
+											{meta?.description}
+										</p>
+									)}
+									<p className="text-xs text-muted-foreground italic">
+										{cardinality}
+									</p>
+									{meta?.usageNote || meta?.cius || meta?.businessRule ? (
+										<>
+											<hr className="my-2" />
+											<div className="grid @md/field-meta:grid-cols-2 gap-4">
+												{meta?.usageNote && (
+													<div className="flex flex-col gap-0.5">
+														<h4 className="font-medium">Usage Note</h4>
+														<p className="text-sm text-muted-foreground">
+															{meta.usageNote}
+														</p>
+													</div>
+												)}
+												{meta?.cius && (
+													<div className="flex flex-col gap-0.5">
+														<h4 className="font-medium">
+															CIUS (Core Invoice Usage Specification)
+														</h4>
+														<p className="text-sm text-muted-foreground">
+															{meta.cius}
+														</p>
+													</div>
+												)}
+												{meta?.businessRule && (
+													<div className="flex flex-col gap-0.5">
+														<h4 className="font-medium">Business Rule</h4>
+														<p className="text-sm text-muted-foreground">
+															{meta.businessRule}
+														</p>
+													</div>
+												)}
+											</div>
+										</>
+									) : null}
+								</div>
 							</div>
-						</div>
+						)}
 						{hasChildren && (
 							<ul className="list-none pl-0">
 								{Object.entries(childEntries).map(([key, value], i, arr) => {

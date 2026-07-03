@@ -1,6 +1,6 @@
 export type XSDOptions = {
 	/**
-	 * Whether to automatically run validation after generating the XML.
+	 * Whether to automatically run validation after processing the document.
 	 *
 	 * @default true
 	 */

@@ -1,12 +1,15 @@
 import { createRelativeLink } from "@fumadocs/base-ui/mdx";
+import { getGithubLastEdit } from "fumadocs-core/content/github";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
 	MarkdownCopyButton,
 	ViewOptionsPopover,
 } from "@/components/ai/page-actions";
+import { CodelistTable } from "@/components/codelist-table";
 import { getMDXComponents } from "@/components/mdx";
 import { ProfileTree } from "@/components/profile-tree";
+import { Step, Steps } from "@/components/steps";
 import {
 	DocsBody,
 	DocsDescription,
@@ -24,8 +27,23 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 	const MDX = page.data.body;
 	const markdownUrl = getPageMarkdownUrl(page).url;
 
+	const gitPath = `docs/content/docs/${page.path}`;
+	const lastEditedAt = await getGithubLastEdit({
+		owner: gitConfig.user,
+		repo: gitConfig.repo,
+		sha: gitConfig.branch,
+		path: gitPath,
+	});
+
 	return (
-		<DocsPage toc={page.data.toc} full={page.data.full}>
+		<DocsPage
+			toc={page.data.toc}
+			editOnGithub={{
+				path: gitPath,
+			}}
+			lastEditedAt={lastEditedAt ?? undefined}
+			full={page.data.full}
+		>
 			<div className="flex flex-col gap-2.5">
 				<DocsTitle>{page.data.title}</DocsTitle>
 				<DocsDescription className="mb-0">
@@ -44,7 +62,10 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 					components={getMDXComponents({
 						// this allows you to link to other pages with relative file paths
 						a: createRelativeLink(source, page),
+						Steps,
+						Step,
 						ProfileTree,
+						CodelistTable,
 					})}
 				/>
 			</DocsBody>

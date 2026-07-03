@@ -100,7 +100,8 @@ export function serializeProfileSchema(
 		const type = getTypeLabel(unwrapped);
 		if (type) entry.type = type;
 
-		if ("id" in metadata && metadata.id) entry.id = metadata.id;
+		if ("id" in metadata && metadata.id)
+			entry.id = metadata.id as string | string[];
 		if (meta?.businessTerm) entry.businessTerm = meta.businessTerm;
 		if (meta?.description) entry.description = meta.description;
 		if (meta?.usageNote) entry.usageNote = meta.usageNote;

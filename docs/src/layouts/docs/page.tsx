@@ -8,42 +8,84 @@ import type * as PageTree from "fumadocs-core/page-tree";
 import type { TOCItemType } from "fumadocs-core/toc";
 import { EditIcon, ExternalLinkIcon, TableOfContentsIcon } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { gitConfig } from "@/lib/shared";
 import { cn } from "../../lib/cn";
+
+interface EditOnGitHubOptions {
+	owner?: string;
+	repo?: string;
+
+	/**
+	 * SHA or ref (branch or tag) name.
+	 *
+	 * @defaultValue main
+	 */
+	sha?: string;
+
+	/**
+	 * File path in the repo
+	 */
+	path: string;
+}
 
 export interface DocsPageProps {
 	toc?: TOCItemType[];
-
 	children: ReactNode;
+	editOnGithub?: EditOnGitHubOptions;
+	lastEditedAt?: Date;
 }
 
-export function DocsPage({ toc = [], ...props }: DocsPageProps) {
+export function DocsPage({
+	toc = [],
+	editOnGithub,
+	lastEditedAt,
+	...props
+}: DocsPageProps) {
+	if (editOnGithub) {
+		editOnGithub.owner ??= gitConfig.user;
+		editOnGithub.repo ??= gitConfig.repo;
+		editOnGithub.sha ??= gitConfig.branch;
+	}
 	return (
 		<TOCProvider toc={toc}>
-			<main className="flex w-full min-w-0 px-4 pb-4 flex-col">
-				<div className="bg-fd-background border border-fd-border rounded-2xl shadow-lg flex-1">
-					<article className="flex flex-1 h-full flex-col justify-between w-full max-w-[860px] gap-6 px-4 py-8 md:px-6 md:mx-auto">
-						<div className="flex flex-col w-full gap-6">{props.children}</div>
-						<Footer />
-					</article>
-				</div>
-			</main>
-			{toc.length > 0 && (
-				<div className="sticky top-(--fd-nav-height) w-[286px] shrink-0 h-[calc(100dvh-var(--fd-nav-height))] p-4 overflow-auto max-xl:hidden">
-					<div className="flex flex-row items-center gap-2.5 mb-2">
-						<TableOfContentsIcon className="text-fd-muted-foreground size-4.5" />
-						<p className="text-sm text-fd-muted-foreground">On this page</p>
+			<div className="flex h-full min-h-0 flex-1 w-full min-w-0">
+				<div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden px-4 pb-4">
+					<div className="bg-fd-background border border-fd-border min-h-0 flex-1 overflow-hidden rounded-2xl shadow-lg">
+						<ScrollArea global className="h-full rounded-2xl">
+							<article className="mx-auto flex min-h-full w-full max-w-[860px] flex-col justify-between gap-6 px-4 py-8 md:px-6">
+								<div className="flex w-full flex-col gap-6">
+									{props.children}
+								</div>
+								<Footer
+									editOnGithub={editOnGithub}
+									lastEditedAt={lastEditedAt}
+								/>
+							</article>
+						</ScrollArea>
 					</div>
-					<TOCScrollArea>
-						<TOCItems>
-							{toc.map((item) => (
-								<TOCItem key={item.url} item={item} />
-							))}
-						</TOCItems>
-					</TOCScrollArea>
 				</div>
-			)}
+				{toc.length > 0 && (
+					<aside
+						data-scroll-region
+						className="flex h-full w-[286px] shrink-0 flex-col py-4 pr-4 max-xl:hidden"
+					>
+						<div className="flex flex-row items-center gap-2.5 mb-2 shrink-0">
+							<TableOfContentsIcon className="text-fd-muted-foreground size-4.5" />
+							<p className="text-sm text-fd-muted-foreground">On this page</p>
+						</div>
+						<TOCScrollArea className="min-h-0 flex-1">
+							<TOCItems>
+								{toc.map((item) => (
+									<TOCItem key={item.url} item={item} />
+								))}
+							</TOCItems>
+						</TOCScrollArea>
+					</aside>
+				)}
+			</div>
 		</TOCProvider>
 	);
 }
@@ -78,7 +120,13 @@ export function DocsTitle(props: ComponentProps<"h1">) {
 	);
 }
 
-function Footer() {
+function Footer({
+	editOnGithub,
+	lastEditedAt,
+}: {
+	editOnGithub?: EditOnGitHubOptions;
+	lastEditedAt?: Date;
+}) {
 	const { root } = useTreeContext();
 	const pathname = usePathname();
 	const flatten = useMemo(() => {
@@ -111,6 +159,7 @@ function Footer() {
 	return (
 		<div className="flex flex-col gap-4">
 			<hr />
+			{lastEditedAt && <LastEditedAt date={lastEditedAt} />}
 			<div className="grid grid-cols-2 gap-4 font-medium">
 				{previous ? (
 					<Link
@@ -122,7 +171,7 @@ function Footer() {
 						) : null}
 						<div className="flex flex-col">
 							<span>{previous.name}</span>
-							<p className="text-sm text-fd-muted-foreground">
+							<p className="text-sm text-fd-muted-foreground line-clamp-2">
 								{previous.description}
 							</p>
 						</div>
@@ -143,7 +192,7 @@ function Footer() {
 						) : null}
 						<div className="flex flex-col">
 							<span>{next.name}</span>
-							<p className="text-sm text-fd-muted-foreground">
+							<p className="text-sm text-fd-muted-foreground line-clamp-2">
 								{next.description}
 							</p>
 						</div>
@@ -156,20 +205,29 @@ function Footer() {
 				)}
 			</div>
 			<div className="flex">
-				<Button
-					variant="secondary"
-					render={<Link href="" />}
-					className="me-auto"
-					nativeButton={false}
-				>
-					<EditIcon className="-ms-0.5" />
-					Edit on GitHub
-				</Button>
+				{editOnGithub &&
+				editOnGithub.owner &&
+				editOnGithub.repo &&
+				editOnGithub.path ? (
+					<Button
+						variant="secondary"
+						render={
+							<Link
+								href={`https://github.com/${editOnGithub.owner}/${editOnGithub.repo}/blob/${editOnGithub.sha}/${editOnGithub.path.startsWith("/") ? editOnGithub.path.slice(1) : editOnGithub.path}`}
+							/>
+						}
+						className="me-auto"
+						nativeButton={false}
+					>
+						<EditIcon className="-ms-0.5" />
+						Edit on GitHub
+					</Button>
+				) : null}
 				<Button
 					variant="link"
 					size="lg"
 					className="text-muted-foreground underline"
-					render={<Link href="" />}
+					render={<Link href="/llms.txt" />}
 					nativeButton={false}
 				>
 					llms.txt
@@ -178,12 +236,30 @@ function Footer() {
 					variant="link"
 					size="lg"
 					className="text-muted-foreground underline"
-					render={<Link href="" />}
+					render={<Link href="/llms-full.txt" />}
 					nativeButton={false}
 				>
 					llms-full.txt
 				</Button>
 			</div>
 		</div>
+	);
+}
+
+function LastEditedAt({ date }: { date: Date }) {
+	const [mounted, setMounted] = useState(false);
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	if (!mounted) return <p className="text-sm">&nbsp;</p>;
+
+	return (
+		<p className="text-sm text-fd-muted-foreground">
+			Last edited at{" "}
+			{new Intl.DateTimeFormat(undefined, {
+				dateStyle: "medium",
+			}).format(date)}
+		</p>
 	);
 }

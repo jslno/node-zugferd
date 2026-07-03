@@ -1,18 +1,96 @@
 ---
-icon: ChartNoAxesCombined
+icon: Rocket
 title: Basic Usage
-description: Components
+description: Getting started with node-zugferd
 ---
 
-## Code Block
+## Installation
 
-```js
-console.log("Hello World");
-```
+<Steps>
+    <Step>
+        ### Install the package
+        
+        Let's start by adding node-zugferd to your project.
+        
+        ```package-install tab-group="pm"
+        node-zugferd
+        ```
+    </Step>
+    <Step>
+        ### Install a profile
+        
+        You'll also need to install at least one of the available profiles:
+        
+        - [Minimum](/docs/profiles/minimum)
+        - [Basic WL](/docs/profiles/basic-wl)
+        - [Basic](/docs/profiles/basic)
+        - [EN16931](/docs/profiles/en-16931)
+        - [Extended](/docs/profiles/extended)
+        
+        ```package-install
+        @node-zugferd/en-16931
+        ```
+    </Step>
+    <Step>
+        ### Create a zugferd instance
+        
+        Create a zugferd instance and configure it with the installed profile.
+        
+        ```ts title="lib/invoicer.ts"
+        import { zugferd } from "node-zugferd";
+        import { en16931 } from "@node-zugferd/en-16931";
+        
+        export const invoicer = zugferd({
+          profiles: [
+            en16931(),
+          ],
+        });
+        ```
+    </Step>
+</Steps>
 
-## Cards
+## Getting started
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
-</Cards>
+### Generating an invoice
+
+<Steps>
+    <Step>
+        #### Define invoice data
+        
+        ```ts title="data.ts"
+        import type { invoicer } from "@/lib/invoicer";
+        
+        export const data: typeof invoicer.$Infer.Input.En16931 = {
+          exchangedDocument: {
+            invoiceNumber: "471102",
+            // ...
+          },
+          // ...
+        };
+        ```
+    </Step>
+    <Step>
+        #### Create the invoice
+        
+        ```ts title="invoice.ts"
+        import { invoicer } from "@/lib/invoicer";
+        import { data } from "./data";
+        
+        export const invoice = invoicer.create("en-16931", data);
+        ```
+    </Step>
+    <Step>
+        #### Save as PDF/A-3b
+        
+        ```ts
+        import { readFile } from "node:fs/promises";
+        import { invoice } from "./invoice";
+        
+        const pdfA = await invoice.toPDF(
+          await readFile("invoice.pdf"),
+        );
+        
+        // further process the document, e.g save in object storage, send via email, etc.
+        ```
+    </Step>
+</Steps>
