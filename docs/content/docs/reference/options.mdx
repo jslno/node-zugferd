@@ -1,58 +1,44 @@
 ---
+icon: BookOpenText
 title: Options
-description: node-zugferd configuration options reference.
-priority: 0.3
+description: node-zugferd confiuguration options reference.
 ---
 
-import { X } from "lucide-react";
+List of all the available options for configuring node-zugferd. See [node-zugferd Options](https://github.com/jslno/node-zugferd/blob/main/packages/core/src/types/options.ts).
 
-List of all the available options for configuring node-zugferd. See [node-zugferd Options](https://github.com/jslno/node-zugferd/blob/main/packages/node-zugferd/src/types/options.ts)
+### `profiles`
 
-## `profile`
-
-Specifies the ZUGFeRD profile, defining the structure and required field of the document.
+List of node-zugferd profiles.
 
 ```ts
 import { zugferd } from "node-zugferd";
-import { BASIC } from "node-zugferd/profile/basic";
+import { en16931 } from "@node-zugferd/en-16931";
 
-export const invoicer = zugferd({
-  profile: BASIC,
+const invoicer = zugferd({
+  profiles: [
+    en16931(),
+  ],
+  // ...
 });
 ```
 
-## `strict?`
-
-Determines whether to skip validation checks.
-Defaults to `true`
-
-```ts
-import { zugferd } from "node-zugferd";
-
-export const invoicer = zugferd({
-  strict: false,
-});
-```
-
-If set to false `xsd-schema-validator` will not be used.
-
-## `plugins?`
+### `plugins`
 
 List of node-zugferd plugins.
 
 ```ts
 import { zugferd } from "node-zugferd";
+import { xsd } from "@node-zugferd/validator-xsd";
 
-export const invoicer = zugferd({
-  profile: BASIC,
+const invoicer = zugferd({
   plugins: [
-    api<typeof BASIC>()(),
-    // or `api(BASIC)()`
+    xsd(),
   ],
+  // ...
 });
 ```
 
-## `logger?`
+### `logger`
 
 Logger configuration for node-zugferd.
 
@@ -60,27 +46,74 @@ Logger configuration for node-zugferd.
 import { zugferd } from "node-zugferd";
 
 export const invoicer = zugferd({
-  logger: {
-    disabled: false,
-    level: "error",
-    log: (level, message, ...args) => {
-      // Custom logging implementation
-      console.log(`[${level}] ${message}`, ...args);
-    },
-  },
+	logger: {
+		disabled: false,
+		level: "warn",
+		log: (level, message, ...args) => {
+			// Custom logging implementation
+			console.log(`[${level}] ${message}`, ...args);
+		},
+	},
+	// ...
 });
 ```
 
-The logger configuration allows you to customize how node-zugferd handles logging.
-It supports the following options:
+The logger configuration allows you to customize how node-zugferd handles logging. It supports the following options:
 
-- `disabled`: Disable all logging when set to `true` (default: `false`)
-- `level`: Set the minimum log level to display. Available levels are:
-  - `"info"`: Show all logs
+- #### `disabled`
+  Disable all logging when set to `true` (default: `false`)
+- #### `level`
+  Set the minimum log level to display (default: `"warn"`)
+  - `"debug"`: Show all logs including debug information
+  - `"info"`: Show all logs except debug information
   - `"warn"`: Show warnings and errors
   - `"error"`: Show only errors
-  - `"debug"`: Show all logs including debug information
-- `log`: Custom logging function that receives:
-  - `level`: The log level (`"info"`, `"warn"`, `"error"`, or `"debug"`)
+- #### `log`
+  Custom logging function that receives:
+  - `level`: The log level
   - `message`: The log message
-  - `...args`: Additional arguments passed to the logger
+  - `...args`: Additional arguments to the logger
+
+Example with custom logging:
+
+```ts
+import { zugferd } from "node-zugferd";
+
+export const invoicer = zugferd({
+	logger: {
+		level: "info",
+		log: (level, message, ...args) => {
+			// Send logs to a custom logging service
+			myLoggingService.log({
+				level,
+				message,
+				metadata: args,
+				timestamp: new Date().toISOString()
+			});
+		},
+	},
+	// ...
+});
+```
+
+### `hooks`
+
+Invoice lifecycle hooks.
+
+- #### `afterXMLBuild`
+
+Called after the XML document has been built.
+
+```ts
+import { zugferd } from "node-zugferd";
+
+export const invoicer = zugferd({
+  hooks: {
+    afterXMLBuild: ({ xml, profile, context }) => {
+      // Custom logic to execute after XML is built
+      validate(profile.id, xml);
+    },
+  },
+  // ...
+});
+```

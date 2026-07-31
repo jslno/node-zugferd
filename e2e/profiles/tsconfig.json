@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["node", "bun"]
+  },
+  "references": [
+    {
+      "path": "../../packages/node-zugferd/tsconfig.json"
+    },
+    {
+      "path": "../../packages/validators/mustang/tsconfig.json"
+    }
+  ]
+}

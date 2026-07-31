@@ -1,44 +1,33 @@
-import { NavBar } from "@/components/nav-bar";
+import { RootProvider } from "@fumadocs/base-ui/provider/next";
 import "./global.css";
-import { RootProvider } from "fumadocs-ui/provider";
-import type { ReactNode } from "react";
-
-import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { NavProvider } from "@/components/nav-mobile";
-import { createMetadata } from "@/lib/metadata";
+import { GeistPixelSquare } from "geist/font/pixel";
+import { GeistSans } from "geist/font/sans";
+import { Inter } from "next/font/google";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
-export const metadata = createMetadata({
-	title: {
-		template: "%s | node-zugferd",
-		default: "node-zugferd",
-	},
-	description: "Integrate seamless electronic invoicing in Node.js",
-	metadataBase:
-		process.env.NODE_ENV === "development"
-			? new URL("http://localhost:3000")
-			: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
+const inter = Inter({
+	subsets: ["latin"],
 });
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout({ children }: LayoutProps<"/">) {
 	return (
-		<html lang="en" suppressHydrationWarning>
-			<head>
-				<link rel="icon" href="/favicon/favicon.ico" sizes="any" />
-			</head>
-			<body
-				className={`min-h-dvh flex flex-col ${GeistSans.variable} ${GeistMono.variable} font-sans relative`}
-			>
-				<RootProvider
-					theme={{
-						enableSystem: true,
-					}}
-				>
-					<NavProvider>
-						<NavBar />
-						{children}
-					</NavProvider>
-				</RootProvider>
+		<html
+			lang="en"
+			className={cn(
+				inter.className,
+				"font-sans",
+				GeistSans.variable,
+				GeistMono.variable,
+				GeistPixelSquare.variable,
+			)}
+			suppressHydrationWarning
+		>
+			<body className="flex flex-col min-h-screen">
+				<TooltipProvider>
+					<RootProvider>{children}</RootProvider>
+				</TooltipProvider>
 			</body>
 		</html>
 	);

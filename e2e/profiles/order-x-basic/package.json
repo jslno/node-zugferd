@@ -1,0 +1,15 @@
+{
+  "name": "@node-zugferd-test/profile-order-x-basic",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@node-zugferd/order-x-basic": "workspace:*",
+    "@node-zugferd/order-x-schema-definition": "workspace:*",
+    "@node-zugferd/utils": "workspace:*",
+    "@node-zugferd-test/test-utils": "workspace:*",
+    "@node-zugferd-test/profile-base": "workspace:*"
+  },
+  "scripts": {
+    "e2e:integration": "vitest run"
+  }
+}

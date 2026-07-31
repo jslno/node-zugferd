@@ -1,0 +1,13 @@
+{
+  "name": "@node-zugferd-test/profile-basic",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@node-zugferd/basic": "workspace:*",
+    "@node-zugferd-test/test-utils": "workspace:*",
+    "@node-zugferd-test/profile-base": "workspace:*"
+  },
+  "scripts": {
+    "e2e:integration": "vitest run"
+  }
+}

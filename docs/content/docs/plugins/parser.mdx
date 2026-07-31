@@ -1,0 +1,46 @@
+---
+icon: BookSearch
+title: Parser
+description: Your first document
+---
+
+## Installation
+
+<Steps>
+    <Step>
+        ### Install the plugin
+
+        ```package-install
+        @node-zugferd/parser
+        ```
+    </Step>
+    <Step>
+        ### Add the plugin to your instance
+
+        ```ts title="invoicer.ts"
+        import { zugferd } from "node-zugferd";
+        import { en16931 } from "@node-zugferd/en-16931";
+        import { parser } from "@node-zugferd/parser"; // [!code highlight]
+
+        export const invoicer = zugferd({
+          profiles: [en16931],
+          plugins: [
+            parser(), // [!code highlight]
+          ],
+          // ...
+        });
+        ```
+    </Step>
+
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    profileMap: {
+      type: "Record<string, >",
+      required: false,
+    },
+  }}
+/>

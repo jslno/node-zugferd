@@ -1,0 +1,57 @@
+{
+  "name": "@node-zugferd-test/test-utils",
+  "private": true,
+  "type": "module",
+  "peerDependenciesMeta": {
+    "@node-zugferd/minimum": {
+      "optional": true
+    },
+    "@node-zugferd/basic-wl": {
+      "optional": true
+    },
+    "@node-zugferd/basic": {
+      "optional": true
+    },
+    "@node-zugferd/en-16931": {
+      "optional": true
+    },
+    "@node-zugferd/extended": {
+      "optional": true
+    },
+    "@node-zugferd/xrechnung": {
+      "optional": true
+    },
+    "@node-zugferd/order-x-basic": {
+      "optional": true
+    },
+    "@node-zugferd/order-x": {
+      "optional": true
+    }
+  },
+  "peerDependencies": {
+    "@node-zugferd/minimum": "workspace:*",
+    "@node-zugferd/basic-wl": "workspace:*",
+    "@node-zugferd/basic": "workspace:*",
+    "@node-zugferd/en-16931": "workspace:*",
+    "@node-zugferd/extended": "workspace:*",
+    "@node-zugferd/xrechnung": "workspace:*",
+    "@node-zugferd/order-x-basic": "workspace:*",
+    "@node-zugferd/order-x": "workspace:*"
+  },
+  "dependencies": {
+    "@node-zugferd/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@node-zugferd/minimum": "workspace:*",
+    "@node-zugferd/basic-wl": "workspace:*",
+    "@node-zugferd/basic": "workspace:*",
+    "@node-zugferd/en-16931": "workspace:*",
+    "@node-zugferd/extended": "workspace:*",
+    "@node-zugferd/xrechnung": "workspace:*",
+    "@node-zugferd/order-x-basic": "workspace:*",
+    "@node-zugferd/order-x": "workspace:*"
+  },
+  "exports": {
+    "./*": "./src/*"
+  }
+}

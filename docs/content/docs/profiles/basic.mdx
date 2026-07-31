@@ -1,92 +1,73 @@
 ---
+icon: dot-[#22c55e]
 title: Basic
-description: Includes BASIC WL with line-level details and EN 16931 compliance.
-priority: 0.7
 ---
 
-import { BASIC } from "node-zugferd/profile/basic";
+import { basic } from "@node-zugferd/basic";
 
-This profile includes [BASIC WL](/docs/profiles/basic-wl) with some details at line level. It is a subset
-of EN 16931, which contains all mandatory fields including those on which business rules from the
-EN 16931 may apply. It is a compliant CIUS (Core Invoice Usage Specification), which means that all
-business rules of the EN 16931 apply.
-
-```ts
-import { BASIC, type ProfileBasic } from "node-zugferd/profile/basic";
-```
+This profile includes [BASIC WL](/docs/profiles/basic-wl) with some details at line level. It is a subset of EN 16931, which contains all mandatory fields including those on which business rules from the EN 16931 may apply. It is a compliant CIUS (Core Invoice Usage Specification), which means that all business rules of the EN 16931 apply.
 
 ## Basic Usage
 
 <Steps>
-
-<Step>
-### Setup the Profile
-
-First configure the zugferd instance (`invoicer`) to use the Basic profile.
-This defines the standard and complexity level of the invoice.
-
-```ts title="invoicer.ts"
-import { BASIC } from "node-zugferd/profile/basic"; // [!code highlight]
-
-export const invoicer = zugferd({
-  profile: BASIC, // [!code highlight]
-});
-```
-
-</Step>
-
-<Step>
-### Define Invoice Data
-
-Now define the actual invoice content, including all required fields of the
-profile, using the `ProfileBasic` type for type safety.
-
-```ts
-import { ProfileBasic } from "node-zugferd/profile/basic";
-
-const data: ProfileBasic = {
-  number: "INV-001",
-  // ...
-};
-```
-
-</Step>
-
-<Step>
-### Create Invoice
-
-Use the previously created instance (`invoicer`) to generate the invoice from your data. You can either:
-
-- Generate standalone XML
-- Embed the XML inside a PDF/A-3b compliant file.
-
-```ts
-import fs from "fs";
-import { invoicer } from "./invoicer";
-
-const invoice = invoicer.create(data);
-
-// Only generate xml
-const xml = await invoice.toXML();
-
-// Or embed xml in a PDF-A/3b
-const pdf = fs.readFileSync("./your/invoice.pdf");
-const pdfA = await invoicer.embedInPdf(pdf); // [!code highlight]
-```
-
-</Step>
-
-<Step>
-### 🎉 That's it [#thats-it]
-
-Your invoice is now ready! You've successfully created a ZUGFeRD invoice using the Basic profile.
-
-</Step>
-
+    <Step>
+        ### Install the Profile
+        
+        ```package-install tab-group="pm"
+        npm install @node-zugferd/basic
+        ```
+    </Step>
+    <Step>
+        ### Setup the Profile
+        
+        Register the profile when creating your zugferd instance:
+        
+        ```ts title="lib/invoicer.ts"
+        import { basic } from "@node-zugferd/basic"; // [!code highlight]
+        import { zugferd } from "node-zugferd";
+        
+        export const invoicer = zugferd({
+          profiles: [basic], // [!code highlight]
+        });
+        ```
+    </Step>
+    <Step>
+        ### Define Invoice Data
+        
+        Provide invoice data that satisfies the requirements of this profile.
+        
+        ```ts title="data.ts"
+        import type { invoicer } from "@/lib/invoicer";
+        
+        const data: typeof invoicer.$Infer.Input.Basic = {
+          exchangedDocument: {
+            invoiceNumber: "471102",
+            // ...
+          },
+          // ...
+        };
+        ```
+    </Step>
+    <Step>
+        ### Generate Invoice
+        
+        Create the invoice and embed it into a PDF/A document or serialize it for further processing.
+        
+        ```ts title="invoice.ts"
+        import { invoicer } from "@/lib/invoicer";
+        import { data } from "./data";
+        import { readFile } from "node:fs/promises";
+        
+        const invoice = await invoicer.create("basic", data);
+        
+        const xml = invoice.toXML();
+        const pdfA = await invoice.toPDF(
+          await readFile("./my-invoice.pdf"),
+        );
+        ```
+    </Step>
 </Steps>
 
 ## Schema
 
-Extends [BASIC WL](/docs/profiles/basic-wl)
-
-<ProfileTree schema={BASIC.schema} />
+<ProfileTree profile={basic} />

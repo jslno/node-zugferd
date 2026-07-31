@@ -1,0 +1,87 @@
+---
+icon: dot-[#eab308]
+title: Comfort
+---
+
+import { orderX } from "@node-zugferd/order-x";
+
+The COMFORT Profile is the [BASIC](./order-x-basic) profile with more information available optionnally, allowing
+multiple delivery, Buyer Requisitioner Party, Invoicee Party, VAT information except VAT
+breakdown, Allowances and Charges on line and document levels and more details:
+
+- <u>on Line level</u>: item Characteristics, additional referenced product
+  documents, line reference ID of Quotation and Catalog Reference Documents,
+  Additional Referenced Documents, Gross Price and price discount, Allowances
+  and Charges, Delivery or Pick-up Date or period for each item (allowing
+  multiple delivery on the same location), VAT codes on line.
+- <u>on Document level</u>: with Buyer Requisitioner Party, Invoicee Party,
+  Sales Order Reference (issued by the Seller), Tender or Lot Reference, Catalog
+  Reference Document, Additional Referenced Documents, Ordered Object
+  Identifier, Project Reference, Delivery Terms Location, Ship To and Ship From
+  legal and VAT IDs, Payment means, Charges and Allowances on Document level
+  with VAT codes.
+
+## Basic Usage
+
+<Steps>
+    <Step>
+        ### Install the Profile
+        
+        ```package-install tab-group="pm"
+        npm install @node-zugferd/order-x
+        ```
+    </Step>
+    <Step>
+        ### Setup the Profile
+        
+        Register the profile when creating your zugferd instance:
+        
+        ```ts title="lib/invoicer.ts"
+        import { orderX } from "@node-zugferd/order-x"; // [!code highlight]
+        import { zugferd } from "node-zugferd";
+        
+        export const invoicer = zugferd({
+          profiles: [orderX], // [!code highlight]
+        });
+        ```
+    </Step>
+    <Step>
+        ### Define Order Data
+        
+        Provide order data that satisfies the requirements of this profile.
+        
+        ```ts title="data.ts"
+        import type { invoicer } from "@/lib/invoicer";
+        
+        const data: typeof invoicer.$Infer.Input.OrderX = {
+          exchangedDocument: {
+            orderId: "471102",
+            // ...
+          },
+          // ...
+        };
+        ```
+    </Step>
+    <Step>
+        ### Generate Order
+        
+        Create the order and embed it into a PDF/A document or serialize it for further processing.
+        
+        ```ts title="order.ts"
+        import { invoicer } from "@/lib/invoicer";
+        import { data } from "./data";
+        import { readFile } from "node:fs/promises";
+        
+        const order = await invoicer.create("order-x", data);
+        
+        const xml = order.toXML();
+        const pdfA = await order.toPDF(
+          await readFile("./my-order.pdf"),
+        );
+        ```
+    </Step>
+</Steps>
+
+## Schema
+
+<ProfileTree profile={orderX} />

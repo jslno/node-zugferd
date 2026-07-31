@@ -1,0 +1,64 @@
+{
+  "name": "@node-zugferd/cli",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "executableFiles": [
+      "./dist/index.mjs"
+    ]
+  },
+  "bin": {
+    "node-zugferd": "./dist/index.mjs",
+    "zugferd": "./dist/index.mjs"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsx ./src/index.ts",
+    "start": "node ./dist/index.mjs",
+    "lint:package": "publint run --strict --pack false",
+    "lint:types": "attw --profile esm-only --pack .",
+    "typecheck": "tsc --project tsconfig.json",
+    "test": "vitest",
+    "coverage": "vitest run --coverage --coverage.provider=istanbul"
+  },
+  "dependencies": {
+    "@node-zugferd/minimum": "workspace:*",
+    "@node-zugferd/basic-wl": "workspace:*",
+    "@node-zugferd/basic": "workspace:*",
+    "@node-zugferd/en-16931": "workspace:*",
+    "@node-zugferd/extended": "workspace:*",
+    "@babel/core": "^8.0.1",
+    "@babel/preset-react": "^8.0.1",
+    "@babel/preset-typescript": "^8.0.1",
+    "@clack/prompts": "^1.7.0",
+    "@node-zugferd/core": "workspace:*",
+    "node-zugferd": "workspace:*",
+    "c12": "4.0.0-beta.5",
+    "chalk": "^5.6.2",
+    "commander": "^15.0.0",
+    "get-tsconfig": "^4.14.0",
+    "semver": "^7.8.5",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@node-zugferd/parser": "workspace:*",
+    "@node-zugferd/validator-mustang": "workspace:*",
+    "@node-zugferd/validator-xsd": "workspace:*",
+    "@types/semver": "^7.7.1",
+    "jiti": "^2.7.0",
+    "tsdown": "catalog:",
+    "tsx": "^4.22.4"
+  },
+  "exports": {
+    ".": {
+      "dev-source": "./src/index.ts",
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ]
+}

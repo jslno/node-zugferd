@@ -2,38 +2,168 @@ name: CI
 
 on:
   pull_request:
-    branches: main
+    types: [opened, synchronize]
   push:
-    branches: main
-  merge_group: {}
+    branches: [main, canary]
+  merge_group:
+
+permissions: {}
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM || github.repository_owner }}
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  lint:
+    runs-on: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == 'jslno/node-zugferd' || github.event_name != 'pull_request' && github.repository == 'jslno/node-zugferd') && 'starsling-ubuntu-24.04' || 'ubuntu-24.04'}}
+    permissions:
+      contents: read
+    concurrency:
+      group: ${{ github.workflow }}-lint-${{ github.event.pull_request.number || github.event.merge_group.head_ref || github.ref }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
 
-      - uses: pnpm/action-setup@v4
-
-      - uses: actions/setup-node@v4
+      - name: Cache turbo build setup
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
         with:
-          node-version: 20.x
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - uses: pnpm/action-setup@0e279bb959325dab635dd2c09392533439d90093 # v6.0.8
+
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version-file: ".nvmrc"
           registry-url: "https://registry.npmjs.org"
           cache: pnpm
 
       - name: Install
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM || github.repository_owner }}
+        run: pnpm build
+
+      - name: Lint
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM || github.repository_owner }}
+        run: pnpm lint
+
+      - name: Lint Dependencies
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM || github.repository_owner }}
+        run: pnpm lint:dependencies
+
+      - name: Lint Packages
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM || github.repository_owner }}
+        run: pnpm lint:packages
+
+      - name: Lint Spell
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM || github.repository_owner }}
+        run: pnpm lint:spell
+
+      - name: Lint Types
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM || github.repository_owner }}
+        run: pnpm lint:types
+
+  typecheck:
+    runs-on: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == 'jslno/node-zugferd' || github.event_name != 'pull_request' && github.repository == 'jslno/node-zugferd') && 'starsling-ubuntu-24.04' || 'ubuntu-24.04'}}
+    permissions:
+      contents: read
+    concurrency:
+      group: ${{ github.workflow }}-typecheck-${{ github.event.pull_request.number || github.event.merge_group.head_ref || github.ref }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Cache turbo build setup
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - uses: pnpm/action-setup@0e279bb959325dab635dd2c09392533439d90093 # v6.0.8
+
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version-file: ".nvmrc"
+          registry-url: "https://registry.npmjs.org"
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm build
 
-      - name: Lint
-        run: pnpm lint
-
-      - name: Test
-        run: pnpm test
-
       - name: Typecheck
         run: pnpm typecheck
+
+  test:
+    runs-on: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == 'jslno/node-zugferd' || github.event_name != 'pull_request' && github.repository == 'jslno/node-zugferd') && 'starsling-ubuntu-24.04' || 'ubuntu-24.04'}}
+    permissions:
+      contents: read
+    concurrency:
+      group: ${{ github.workflow }}-test-${{ github.event.pull_request.number || github.event.merge_group.head_ref || github.ref }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22.x, 24.x]
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Cache turbo build setup
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - uses: pnpm/action-setup@0e279bb959325dab635dd2c09392533439d90093 # v6.0.8
+
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: "https://registry.npmjs.org"
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Test
+        run: pnpm coverage
+
+  ci:
+    runs-on: ubuntu-latest
+    needs: [lint, typecheck, test]
+    if: always()
+    steps:
+      - uses: re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe # v1.2.2
+        with:
+          jobs: ${{ toJSON(needs) }}

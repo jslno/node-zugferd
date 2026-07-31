@@ -1,0 +1,12 @@
+{
+  "name": "@node-zugferd-test/fixtures-tsconfig-verbatim-module-syntax-node10",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --project tsconfig.json"
+  },
+  "dependencies": {
+    "@node-zugferd/basic": "workspace:*",
+    "node-zugferd": "workspace:*"
+  }
+}

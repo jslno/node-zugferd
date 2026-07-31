@@ -1,0 +1,42 @@
+---
+icon: WandSparkles
+title: Magic Bytes
+description: Your first document
+---
+
+## Installation
+
+<Steps>
+    <Step>
+        ### Install the plugin
+        
+        ```package-install
+        @node-zugferd/magic-bytes
+        ```
+    </Step>
+    <Step>
+        ### Add the plugin to your instance
+        
+        ```ts title="invoicer.ts"
+        import { zugferd } from "node-zugferd";
+        import { en16931 } from "@node-zugferd/en-16931";
+        import { magicBytes } from "@node-zugferd/magic-bytes"; // [!code highlight]
+        
+        export const invoicer = zugferd({
+          profiles: [en16931],
+          plugins: [
+            magicBytes(), // [!code highlight]
+          ],
+          // ...
+        });
+        ```
+    </Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    
+  }}
+/>

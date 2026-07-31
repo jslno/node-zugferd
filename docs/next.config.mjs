@@ -5,32 +5,20 @@ const withMDX = createMDX();
 /** @type {import('next').NextConfig} */
 const config = {
 	reactStrictMode: true,
-	redirects: async () => {
-		return [
-			{
-				source: "/docs",
-				destination: "/docs/introduction",
-				permanent: true,
-			},
-		];
-	},
-	rewrites: async () => {
-		return [
-			{
-				source: "/docs/:path*.mdx",
-				destination: "/llms.txt/:path*",
-			},
-		];
-	},
-	serverExternalPackages: [
-		"@ts-morph",
-		"typescript",
-		"oxc-transform",
-		"@shikijs/twoslash",
+	serverExternalPackages: ["@takumi-rs/core"],
+	rewrites: async () => [
+		{
+			source: "/docs/:path*.md",
+			destination: "/llms.mdx/docs/:path*",
+		},
 	],
-	typescript: {
-		ignoreBuildErrors: true,
-	},
+	redirects: async () => [
+		{
+			source: "/docs",
+			destination: "/docs/introduction",
+			permanent: true,
+		},
+	],
 };
 
 export default withMDX(config);

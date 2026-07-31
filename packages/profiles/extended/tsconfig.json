@@ -1,0 +1,78 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "include": ["./src", "./package.json"],
+  "references": [
+    {
+      "path": "../en-16931/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/currency/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/country/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/vatex/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/charge/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/allowance/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/unit/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/text/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/untdid-2005/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/untdid-1001/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/characteristic/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/language/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/line-status/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/incoterms/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/vat-cat/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/untdid-3035/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/untdid-3139/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/untdid-4053/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/untdid-5305/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/untdid-5153/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/untdid-1153/tsconfig.json"
+    },
+    {
+      "path": "../../utils/tsconfig.json"
+    },
+    {
+      "path": "../../core/tsconfig.json"
+    },
+    {
+      "path": "../../data-types/tsconfig.json"
+    }
+  ]
+}

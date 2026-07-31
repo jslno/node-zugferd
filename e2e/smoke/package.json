@@ -1,0 +1,13 @@
+{
+  "name": "@node-zugferd-test/smoke",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "node-zugferd": "workspace:*",
+    "@node-zugferd/basic": "workspace:*",
+    "@node-zugferd-test/test-utils": "workspace:*"
+  },
+  "scripts": {
+    "e2e:smoke": "vitest run"
+  }
+}

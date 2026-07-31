@@ -1,0 +1,13 @@
+import type { Codelist } from "@node-zugferd/core";
+import { registerCodelist } from "@node-zugferd/data-types";
+
+const {{codelist}} = {{{content}}} as const satisfies Codelist;
+
+declare module "@node-zugferd/core" {
+    interface ZugferdCodelistRegistry {
+        {{codelist}}: typeof {{codelist}};
+    }
+}
+registerCodelist("{{codelist}}", {{codelist}});
+
+export default {{codelist}};

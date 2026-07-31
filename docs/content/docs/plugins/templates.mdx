@@ -1,0 +1,34 @@
+---
+icon: Form
+title: Templates
+description: Your first document
+---
+
+## Installation
+
+<Steps>
+    <Step>
+        ### Install the plugin
+        
+        ```package-install
+        @node-zugferd/templates
+        ```
+    </Step>
+    <Step>
+        ### Add the plugin to your instance
+        
+        ```ts title="invoicer.ts"
+        import { zugferd } from "node-zugferd";
+        import { en16931 } from "@node-zugferd/en-16931";
+        import { templates } from "@node-zugferd/templates"; // [!code highlight]
+        
+        export const invoicer = zugferd({
+          profiles: [en16931],
+          plugins: [
+            templates(), // [!code highlight]
+          ],
+          // ...
+        });
+        ```
+    </Step>
+</Steps>

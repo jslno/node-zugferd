@@ -1,0 +1,70 @@
+---
+icon: FileCodeCorner
+title: XSD
+---
+
+## Installation
+
+<Steps>
+    <Step>
+        ### Install the plugin
+        
+        ```package-install
+        @node-zugferd/validator-xsd
+        ```
+    </Step>
+    <Step>
+        ### Add the plugin to your instance
+        
+        ```ts title="invoicer.ts"
+        import { zugferd } from "node-zugferd";
+        import { en16931 } from "@node-zugferd/en-16931";
+        import { xsd } from "@node-zugferd/validator-xsd"; // [!code highlight]
+        
+        export const invoicer = zugferd({
+          profiles: [en16931],
+          plugins: [
+            xsd(), // [!code highlight]
+          ],
+          // ...
+        });
+        ```
+    </Step>
+</Steps>
+
+## Usage
+
+### Manual validation
+
+```ts
+import { readFile } from "node:fs/promises";
+import { invoicer } from "@/lib/invoicer";
+
+try {
+  await invoicer.xsd.validate("en-16931", await readFile("factur-x.xml", "utf-8")); // [!code highlight]
+} catch (error) {
+  if (error instanceof ZugferdValidationError) {
+    console.log(error.issues);
+  } else {
+    throw error;
+  }
+}
+```
+
+## Options
+
+<TypeTable
+  type={{
+    autoRun: {
+      type: "boolean",
+      default: "true",
+      description: "Whether to automatically run validation after processing the document.",
+      required: false,
+    },
+    xsdPathMap: {
+      type: "Record<string, string>",
+      description: "A mapping of profile identifiers to their corresponding XSD file paths.",
+      required: false,
+    },
+  }}
+/>

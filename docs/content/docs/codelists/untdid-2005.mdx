@@ -1,0 +1,27 @@
+---
+title: UNTDID 2005
+---
+
+import untdid2005 from "@node-zugferd/codelist-untdid-2005";
+
+<CodelistTable items={untdid2005} fieldMap={{
+  value: {
+    label: "Value",
+    render: (value) => <code>{value}</code>,
+    priority: 0,
+    width: 64,
+  },
+  name: {
+    label: "Name",
+    priority: 1,
+  },
+  description: {
+    label: "Description",
+    priority: 2,
+  },
+  key: {
+    label: "Key",
+    render: (value) => <code>{value}</code>,
+    priority: 3,
+  },
+}} />
