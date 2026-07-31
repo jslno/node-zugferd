@@ -1,9 +1,11 @@
-import { load as loadHTML } from "cheerio";
 import { parseXML } from "../helper";
+import { readFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 export type ParserContext = {
 	parseXML: typeof parseXML;
-	parseUneceList: typeof parseUneceList;
+	parseUnclList: typeof parseUnclList;
 	toScreamingSnakeCase: typeof toScreamingSnakeCase;
 };
 
@@ -21,51 +23,76 @@ export function defineParser<Result extends ParserResult>(
 	return async (): Promise<Result> => {
 		const ctx: ParserContext = {
 			parseXML,
-			parseUneceList,
+			parseUnclList,
 			toScreamingSnakeCase,
 		};
 		return await cb(ctx);
 	};
 }
 
-async function parseUneceList(url: string) {
-	const response = await fetch(url);
-	const html = await response.text();
+let uncl: string | null = null;
 
-	const $ = loadHTML(html);
-	const lines = $("pre").text().split(/\r?\n/);
+async function getUnclSource() {
+	if (!uncl) {
+		uncl = await readFile(
+			join(dirname(fileURLToPath(import.meta.url)), "./UNCL.22A"),
+			"utf-8",
+		);
+	}
+	return uncl;
+}
 
-	const data: {
+async function parseUnclList(id: `${number}`) {
+	const source = await getUnclSource();
+	const codelists = source
+		.split("-".repeat(70))
+		.slice(1)
+		.map((v) => v.trim());
+
+	const codelist = codelists.find((c) =>
+		(c.startsWith("*") ? c.slice(1).trim() : c).startsWith(id),
+	);
+
+	if (!codelist) {
+		throw new Error(`Codelist "${id}" not found`);
+	}
+
+	const lines = codelist.replace(/\r\n/g, "\n").split("\n");
+
+	type Entry = {
 		name: string;
 		value: string;
 		description?: string | undefined;
-	}[] = [];
-	let current: (typeof data)[number] | null = null;
+	};
+	const data: Entry[] = [];
+
+	let current: Entry | null = null;
 
 	for (const line of lines) {
-		const match = line.match(/^\s*([A-Z0-9]{1,3})\s{2,}(.+)/);
-		if (match && match[1] && match[2]) {
-			if (current) {
-				data.push(current);
+		const match = line.match(/^\s{5}([A-Z0-9]{1,3})\s{2,}(.+)$/);
+		if (match) {
+			if (!current && typeof match[1] === "string" && match[1].endsWith(":")) {
+				current = null;
+				continue;
 			}
-			const name = match[2].trim();
-			const value = match[1].trim();
 
 			current = {
-				name,
-				value,
+				value: match[1],
+				name: match[2].trim(),
 			};
-		} else if (current) {
-			const descLine = line.trim();
-			if (descLine) {
-				current.description ||= "";
-				current.description += (current.description ? " " : "") + descLine;
-			}
+
+			data.push(current);
+		}
+
+		if (current && !match && line.trim() !== "") {
+			current.description = current.description
+				? `${current.description} ${line.trim()}`
+				: line.trim();
 		}
 	}
 
-	if (current) {
-		data.push(current);
+	if (data.length === 0) {
+		throw new Error("Failed to parse codelist");
 	}
 
 	return data;

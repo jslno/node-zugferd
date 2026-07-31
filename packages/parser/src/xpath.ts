@@ -130,7 +130,7 @@ export const createXPath = (
 		let current = "";
 		let bracketDepth = 0;
 
-		for (const char of selector) {
+		for (const char of selector.replace(/^\//, "")) {
 			if (char === "[") bracketDepth++;
 			if (char === "]") bracketDepth--;
 

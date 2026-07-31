@@ -1,0 +1,39 @@
+{
+  "name": "@node-zugferd/pdf-template",
+  "type": "module",
+  "license": "MIT",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint:package": "publint run --strict --pack false",
+    "lint:types": "attw --profile esm-only --pack .",
+    "typecheck": "tsc --project tsconfig.json",
+    "test": "vitest",
+    "coverage": "vitest run --coverage --coverage.provider=istanbul"
+  },
+  "peerDependencies": {
+    "@node-zugferd/templates": "workspace:*"
+  },
+  "dependencies": {
+    "intl-messageformat": "^11.2.11",
+    "@node-zugferd/core": "workspace:*",
+    "boxpdf": "^1.9.0",
+    "pdf-lib": "catalog:"
+  },
+  "devDependencies": {
+    "tsdown": "catalog:"
+  },
+  "exports": {
+    ".": {
+      "dev-source": "./src/index.ts",
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ]
+}

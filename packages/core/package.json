@@ -48,6 +48,11 @@
       "dev-source": "./src/data-types/index.ts",
       "types": "./dist/data-types/index.d.mts",
       "default": "./dist/data-types/index.mjs"
+    },
+    "./async_hooks": {
+      "dev-source": "./src/async_hooks/index.ts",
+      "types": "./dist/async_hooks/index.d.mts",
+      "default": "./dist/async_hooks/index.mjs"
     }
   },
   "files": [

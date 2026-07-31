@@ -33,22 +33,15 @@ export type InferIdentifierInput<Id, Cfg extends IdentifierConfig> = Prettify<
 	}
 		? string
 		:
-				| (Cfg extends
-						| {}
-						| {
-								requireSchemeId?: "optional" | undefined;
-								requireSchemeVersion?: "never" | "optional" | undefined;
-						  }
-						? string
-						: never)
-				| ({ value: string } & (Cfg extends { requireSchemeId: "always" }
+				| (Cfg extends { requireSchemeId: "always" } ? never : string)
+				| ({
+						value: string;
+				  } & (Cfg extends { requireSchemeId: "always" }
 						? {
 								schemeId: InferIdentifierInputValue<Id>;
 							}
 						: Cfg extends { requireSchemeId: "never" }
-							? {
-									// schemeId?: never;
-								}
+							? {}
 							: {
 									schemeId?: InferIdentifierInputValue<Id> | undefined;
 								}) &
@@ -60,9 +53,7 @@ export type InferIdentifierInput<Id, Cfg extends IdentifierConfig> = Prettify<
 								? {
 										schemeVersion?: string;
 									}
-								: {
-										// schemeVersion?: never;
-									}))
+								: {}))
 >;
 
 export type InferIdentifierOutput<Id, Cfg extends IdentifierConfig> = Prettify<
@@ -122,6 +113,7 @@ export interface IdentifierSchema<
 	readonly registryId: [Id] extends [IdentifierRegistryId]
 		? Id
 		: string | undefined;
+	readonly config: Cfg | undefined;
 	// readonly message: Message;
 }
 
@@ -169,6 +161,7 @@ export function identifier(
 		reference: identifier,
 		// TODO: better expects message
 		expects: "(string | object)",
+		config,
 		registryId: id,
 		get "~standard"() {
 			return getStandardProps(this);

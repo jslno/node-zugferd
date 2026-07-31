@@ -1,4 +1,5 @@
 import type { ZugferdProfile } from "@node-zugferd/core";
+import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
 import type { PDFDocument } from "pdf-lib";
 
 const escapeXml = (value: string) => {
@@ -25,6 +26,11 @@ export const buildXmp = (
 			...extensionSchema
 		},
 	}: ZugferdProfile,
+	config?:
+		| {
+				type?: string | undefined;
+		  }
+		| undefined,
 ) => {
 	const xmp = `<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
     <x:xmpmeta xmlns:x="adobe:ns:meta/">
@@ -61,10 +67,7 @@ export const buildXmp = (
 
         <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/" rdf:about="">
           <xmp:CreatorTool>
-            ${
-							/*escapeXml(doc.getCreator() || `node-zugferd@v${process.env.__NODE_ZUGFERD_VERSION__}`) */
-							escapeXml(doc.getCreator() || "node-zugferd")
-						}
+            ${escapeXml(doc.getCreator() || `node-zugferd@v${NODE_ZUGFERD_VERSION || "1.0.0"} <https://github.com/jslno/node-zugferd>`)}
           </xmp:CreatorTool>
           <xmp:CreateDate>
             ${(doc.getCreationDate() ?? new Date()).toISOString().split(".")[0] + "Z"}
@@ -75,13 +78,16 @@ export const buildXmp = (
         </rdf:Description>
 
         <rdf:Description xmlns:${escapeXml(namespace)}="${escapeXml(uri)}" rdf:about="">
-          ${Object.entries(fieldNameMap).map(([key, nodeName]) => {
-						const value = extensionSchema[key as keyof typeof extensionSchema];
-						if (!value) return "";
-						return `<${escapeXml(namespace)}:${escapeXml(nodeName)}>
-              ${escapeXml(value)}
-            </${escapeXml(namespace)}:${escapeXml(nodeName)}>`;
-					})}
+          ${Object.entries(fieldNameMap)
+						.map(([key, nodeName]) => {
+							let value = extensionSchema[key as keyof typeof extensionSchema];
+							if (!value) return "";
+							if (key === "type" && Array.isArray(value)) {
+								value = (config?.type ?? value[0]) as any;
+							}
+							return `<${escapeXml(namespace)}:${escapeXml(nodeName)}>${escapeXml(`${value}`)}</${escapeXml(namespace)}:${escapeXml(nodeName)}>`;
+						})
+						.join("\n")}
         </rdf:Description>
       </rdf:RDF>
     </x:xmpmeta>

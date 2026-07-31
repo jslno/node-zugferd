@@ -7,6 +7,7 @@
     "---Validators---",
     "...validators",
     "---Utilities---",
-    "magic-bytes"
+    "magic-bytes",
+    "instrumentation"
   ]
 }

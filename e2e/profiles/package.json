@@ -7,7 +7,6 @@
     "@node-zugferd/validator-xsd": "workspace:*",
     "node-zugferd": "workspace:*"
   },
-  "scripts": {},
   "exports": {
     "./factory": "./factory.ts"
   }

@@ -47,7 +47,7 @@ export const basicWL = defineProfile({
 					const note = exchangedDocument.ele("ram:IncludedNote");
 					note.ele("ram:Content").txt(invoiceNote.content);
 					if (invoiceNote.subjectCode) {
-						note.ele("ram:SubjectCode").txt(invoiceNote.subjectCode);
+						note.ele("ram:SubjectCode").txt(invoiceNote.subjectCode.value);
 					}
 				}
 			}
@@ -354,7 +354,8 @@ export const basicWL = defineProfile({
 								)
 							)?.node ?? null;
 						const ids = Array.isArray(data.transaction.contract.buyer.id)
-							? data.transaction.contract.buyer.id
+							? (data.transaction.contract.buyer
+									.id as (typeof data.transaction.contract.buyer.id)[])
 							: [data.transaction.contract.buyer.id];
 						for (const value of ids) {
 							const id = fragment().ele("ram:ID");
@@ -421,7 +422,9 @@ export const basicWL = defineProfile({
 
 					postalTradeAddress
 						.ele("ram:CountryID")
-						.txt(data.transaction.contract.buyer.postalAddress.countryCode);
+						.txt(
+							data.transaction.contract.buyer.postalAddress.countryCode.value,
+						);
 
 					if (
 						data.transaction.contract.buyer.postalAddress.countrySubdivision
@@ -546,7 +549,7 @@ export const basicWL = defineProfile({
 						.ele("ram:CountryID")
 						.txt(
 							data.transaction.contract.sellerTaxRepresentative.postalAddress
-								.countryCode,
+								.countryCode.value,
 						);
 					if (
 						data.transaction.contract.sellerTaxRepresentative.postalAddress
@@ -676,7 +679,8 @@ export const basicWL = defineProfile({
 						postalTradeAddress
 							.ele("ram:CountryID")
 							.txt(
-								data.transaction.delivery.recipient.postalAddress.countryCode,
+								data.transaction.delivery.recipient.postalAddress.countryCode
+									.value,
 							);
 						if (
 							data.transaction.delivery.recipient.postalAddress
@@ -697,11 +701,16 @@ export const basicWL = defineProfile({
 						applicableHeaderTradeDelivery.ele(
 							"ram:ActualDeliverySupplyChainEvent",
 						);
-					actualDeliverySupplyChainEvent
-						.ele("ram:OccurrenceDateTime")
-						.ele("udt:DateTimeString")
-						.txt(data.transaction.delivery.actualDelivery.date)
-						.att("format", "102");
+					if (data.transaction.delivery.actualDelivery.date) {
+						actualDeliverySupplyChainEvent
+							.ele("ram:OccurrenceDateTime")
+							.ele("udt:DateTimeString")
+							.txt(data.transaction.delivery.actualDelivery.date.value)
+							.att(
+								"format",
+								data.transaction.delivery.actualDelivery.date.format,
+							);
+					}
 				}
 
 				if (data.transaction.delivery.despatchAdvice) {
@@ -763,7 +772,7 @@ export const basicWL = defineProfile({
 
 				if (data.transaction.debit.taxCurrencyCode) {
 					const taxCurrencyCode = fragment().ele("ram:TaxCurrencyCode");
-					taxCurrencyCode.txt(data.transaction.debit.taxCurrencyCode);
+					taxCurrencyCode.txt(data.transaction.debit.taxCurrencyCode.value);
 					const refNode =
 						findNode(
 							"BT-5",
@@ -795,9 +804,12 @@ export const basicWL = defineProfile({
 					})();
 
 					if (data.transaction.debit.payee.id) {
-						payeeTradeParty
+						const id = payeeTradeParty
 							.ele("ram:ID")
 							.txt(data.transaction.debit.payee.id.identifier);
+						if (data.transaction.debit.payee.id.schemeId) {
+							id.att("schemeID", data.transaction.debit.payee.id.schemeId);
+						}
 					}
 					if (data.transaction.debit.payee.globalId) {
 						const globalId = payeeTradeParty
@@ -855,7 +867,7 @@ export const basicWL = defineProfile({
 
 					specifiedTradeSettlementPaymentMeans
 						.ele("ram:TypeCode")
-						.txt(data.transaction.debit.paymentMeans.typeCode);
+						.txt(data.transaction.debit.paymentMeans.typeCode.value);
 
 					if (data.transaction.debit.paymentMeans.buyerBankDetails) {
 						const payerPartyDebtorFinancialAccount =
@@ -920,16 +932,16 @@ export const basicWL = defineProfile({
 							.txt(vatBreakdown.basisAmount.value.toString());
 						applicableTradeTax
 							.ele("ram:CategoryCode")
-							.txt(vatBreakdown.categoryCode);
+							.txt(vatBreakdown.categoryCode.value);
 						if (vatBreakdown.exemptionReasonCode) {
 							applicableTradeTax
 								.ele("ram:ExemptionReasonCode")
-								.txt(vatBreakdown.exemptionReasonCode);
+								.txt(vatBreakdown.exemptionReasonCode.value);
 						}
 						if (vatBreakdown.dueDateTypeCode) {
 							applicableTradeTax
 								.ele("ram:DueDateTypeCode")
-								.txt(vatBreakdown.dueDateTypeCode);
+								.txt(vatBreakdown.dueDateTypeCode.value);
 						}
 						if (typeof vatBreakdown.rateApplicablePercent === "number") {
 							applicableTradeTax
@@ -967,16 +979,22 @@ export const basicWL = defineProfile({
 						billingSpecifiedPeriod
 							.ele("ram:StartDateTime")
 							.ele("udt:DateTimeString")
-							.txt(data.transaction.debit.invoicingPeriod.startDate)
-							.att("format", "102");
+							.txt(data.transaction.debit.invoicingPeriod.startDate.value)
+							.att(
+								"format",
+								data.transaction.debit.invoicingPeriod.startDate.format,
+							);
 					}
 
 					if (data.transaction.debit.invoicingPeriod.endDate) {
 						billingSpecifiedPeriod
 							.ele("ram:EndDateTime")
 							.ele("udt:DateTimeString")
-							.txt(data.transaction.debit.invoicingPeriod.endDate)
-							.att("format", "102");
+							.txt(data.transaction.debit.invoicingPeriod.endDate.value)
+							.att(
+								"format",
+								data.transaction.debit.invoicingPeriod.endDate.format,
+							);
 					}
 				}
 
@@ -1017,7 +1035,7 @@ export const basicWL = defineProfile({
 						if (allowance.reasonCode) {
 							specifiedTradeAllowanceCharge
 								.ele("ram:ReasonCode")
-								.txt(allowance.reasonCode);
+								.txt(allowance.reasonCode.value);
 						}
 						if (allowance.reason) {
 							specifiedTradeAllowanceCharge
@@ -1031,7 +1049,7 @@ export const basicWL = defineProfile({
 							categoryTradeTax.ele("ram:TypeCode").txt("VAT");
 							categoryTradeTax
 								.ele("ram:CategoryCode")
-								.txt(allowance.categoryTradeTax.categoryCode);
+								.txt(allowance.categoryTradeTax.categoryCode.value);
 							if (
 								typeof allowance.categoryTradeTax.rateApplicablePercent ===
 								"number"
@@ -1086,9 +1104,12 @@ export const basicWL = defineProfile({
 							.ele("ram:ActualAmount")
 							.txt(charge.actualAmount.value.toString());
 						if (charge.reasonCode) {
-							specifiedTradeAllowanceCharge
+							const reasonCode = specifiedTradeAllowanceCharge
 								.ele("ram:ReasonCode")
-								.txt(charge.reasonCode);
+								.txt(charge.reasonCode.value);
+							if ((charge.reasonCode.codelist as string) === "untdid5153") {
+								reasonCode.att("listID", "5153");
+							}
 						}
 						if (charge.reason) {
 							specifiedTradeAllowanceCharge
@@ -1102,7 +1123,7 @@ export const basicWL = defineProfile({
 							categoryTradeTax.ele("ram:TypeCode").txt("VAT");
 							categoryTradeTax
 								.ele("ram:CategoryCode")
-								.txt(charge.categoryTradeTax.categoryCode);
+								.txt(charge.categoryTradeTax.categoryCode.value);
 							if (
 								typeof charge.categoryTradeTax.rateApplicablePercent ===
 								"number"
@@ -1133,7 +1154,8 @@ export const basicWL = defineProfile({
 					for (const paymentTerms of Array.isArray(
 						data.transaction.debit.paymentTerms,
 					)
-						? data.transaction.debit.paymentTerms
+						? (data.transaction.debit
+								.paymentTerms as (typeof data.transaction.debit.paymentTerms)[])
 						: [data.transaction.debit.paymentTerms]) {
 						const specifiedTradePaymentTerms = fragment().ele(
 							"ram:SpecifiedTradePaymentTerms",
@@ -1153,8 +1175,8 @@ export const basicWL = defineProfile({
 							specifiedTradePaymentTerms
 								.ele("ram:DueDateDateTime")
 								.ele("udt:DateTimeString")
-								.txt(paymentTerms.dueDate)
-								.att("format", "102");
+								.txt(paymentTerms.dueDate.value)
+								.att("format", paymentTerms.dueDate.format);
 						}
 
 						if (paymentTerms.mandateId) {
@@ -1294,8 +1316,8 @@ export const basicWL = defineProfile({
 							invoiceReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(precendingInvoice.issueDate)
-								.att("format", "102");
+								.txt(precendingInvoice.issueDate.value)
+								.att("format", precendingInvoice.issueDate.format);
 						}
 					}
 				}

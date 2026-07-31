@@ -6,6 +6,8 @@ import type {
 } from "@node-zugferd/core/data-types";
 import type { InferIssue, InferOutput } from "../types";
 import { DEFAULT_CONFIG } from "../utils/config";
+import type { DataTypeContext } from "../context";
+import { withContext } from "../context";
 
 export type SafeParseResult<
 	Schema extends
@@ -57,12 +59,20 @@ export async function safeParseAsync<
 >(
 	schema: Schema,
 	input: unknown,
-	config?: Config<InferIssue<Schema>> | undefined,
+	config?:
+		| (Config<InferIssue<Schema>> & {
+				context?: DataTypeContext | undefined;
+		  })
+		| undefined,
 ): Promise<SafeParseResult<Schema>> {
-	const dataset = await schema["~run"](
-		{ value: input },
-		config ?? (DEFAULT_CONFIG as Config<InferIssue<Schema>>),
-	);
+	let { context, ...cfg } = config ?? {};
+	if (Object.keys(cfg).length === 0) {
+		cfg = DEFAULT_CONFIG as Config<InferIssue<Schema>>;
+	}
+
+	const run = () => schema["~run"]({ value: input }, cfg);
+
+	const dataset = await (!context ? run() : withContext(context, run));
 	return {
 		typed: dataset.typed,
 		success: !dataset.issues,

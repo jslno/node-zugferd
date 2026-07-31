@@ -1,6 +1,6 @@
-import type { LiteralString } from "@node-zugferd/core";
+import type { MimeTypeDefinition } from "./types";
 
-export const mimeTypes = [
+export const defaultMimeTypes = [
 	{
 		id: "pdf",
 		mimeType: ["application/pdf"],
@@ -197,6 +197,7 @@ export const mimeTypes = [
 		extensions: ["xlsx", "ods"],
 		magicBytes: [0x50, 0x4b, 0x07, 0x08],
 	},
+	// Heuristic
 	{
 		id: "json",
 		mimeType: ["application/json"],
@@ -215,12 +216,7 @@ export const mimeTypes = [
 		extensions: ["csv"],
 		magicBytes: null,
 	},
-] as const satisfies {
-	id: LiteralString;
-	mimeType: string[];
-	extensions: string[];
-	magicBytes: (number | "*")[] | null;
-}[];
+] as const satisfies MimeTypeDefinition[];
 
 function matchesMimeType(input: string, mimeTypes: string[]): boolean {
 	for (const mimeType of mimeTypes) {
@@ -240,12 +236,15 @@ function matchesMimeType(input: string, mimeTypes: string[]): boolean {
 	return false;
 }
 
-export function verifyMagicBytes(data: {
-	filename: string;
-	content: Uint8Array;
-	mimeType: string;
-}) {
-	outer: for (const { mimeType, extensions, magicBytes } of mimeTypes) {
+export function verifyMagicBytes(
+	data: {
+		filename: string;
+		content: Uint8Array;
+		mimeType: string;
+	},
+	definitions: readonly MimeTypeDefinition[] = defaultMimeTypes,
+) {
+	outer: for (const { mimeType, extensions, magicBytes } of definitions) {
 		if (!matchesMimeType(data.mimeType, mimeType)) {
 			continue;
 		}

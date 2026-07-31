@@ -1,9 +1,7 @@
 import { defineParser } from "../utils";
 
 export const untdid3139 = defineParser(async (ctx) => {
-	const data = await ctx.parseUneceList(
-		"https://service.unece.org/trade/untdid/d22a/tred/tred3139.htm",
-	);
+	const data = await ctx.parseUnclList("3139");
 
 	return {
 		packageRoot: "./packages/codelists/untdid-3139",

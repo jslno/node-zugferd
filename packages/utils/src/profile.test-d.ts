@@ -216,3 +216,78 @@ type _invoiceNotesIsOptional = AssertTrue<
 		? true
 		: false
 >;
+
+const nullishParent = defineProfile({
+	id: "nullish-parent",
+	dataRelationship: "Alternative",
+	extensionSchema: {
+		type: "INVOICE",
+		conformanceLevel: "BASIC WL",
+		fileName: "factur-x.xml",
+		version: "1.0",
+	},
+	schema: object({
+		transaction: object({
+			debit: object({
+				paymentTerms: nullish(
+					object({
+						description: text(),
+					}),
+				),
+			}),
+		}),
+	}),
+	build() {},
+});
+
+const requiredChild = defineProfile({
+	id: "required-child",
+	dataRelationship: "Alternative",
+	extensionSchema: {
+		type: "INVOICE",
+		conformanceLevel: "EXTENDED",
+		fileName: "factur-x.xml",
+		version: "1.0",
+	},
+	use: [nullishParent],
+	schema: object({
+		transaction: object({
+			debit: object({
+				paymentTerms: object({
+					description: text(),
+					dueDate: text(),
+				}),
+			}),
+		}),
+	}),
+	build() {},
+});
+
+type RequiredChildInput = typeof requiredChild.$Infer.Input;
+
+type _paymentTermsIsRequired = AssertTrue<
+	{} extends Pick<RequiredChildInput["transaction"]["debit"], "paymentTerms">
+		? false
+		: true
+>;
+
+type _paymentTermsRejectsNull = AssertTrue<
+	null extends RequiredChildInput["transaction"]["debit"]["paymentTerms"]
+		? false
+		: true
+>;
+
+type _paymentTermsRejectsUndefined = AssertTrue<
+	undefined extends RequiredChildInput["transaction"]["debit"]["paymentTerms"]
+		? false
+		: true
+>;
+
+type _paymentTermsKeepsFields = AssertTrue<
+	RequiredChildInput["transaction"]["debit"]["paymentTerms"] extends {
+		description: string;
+		dueDate: string;
+	}
+		? true
+		: false
+>;

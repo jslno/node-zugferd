@@ -1,7 +1,7 @@
 import { validInvoiceTestFactory } from "@node-zugferd-test/profile-base/factory";
 import { describe } from "vitest";
-import { bookingGuideData } from "./data/valid/booking-guide.js";
-import { invoiceData } from "./data/valid/invoice.js";
+import { bookingGuideData } from "@node-zugferd-test/test-utils/minimum/valid/booking-guide.js";
+import { invoiceData } from "@node-zugferd-test/test-utils/minimum/valid/invoice.js";
 import { invoicer } from "./invoicer.js";
 
 describe("minimum profile", () => {

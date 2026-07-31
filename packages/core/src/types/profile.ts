@@ -13,13 +13,19 @@ type SchemaOutput<
 	? Output
 	: NonNullable<S["~types"]>["output"];
 
+type ExtensionSchemaType =
+	| "INVOICE"
+	| "ORDER"
+	| "ORDER_RESPONSE"
+	| "ORDER_CHANGE";
 type ExtensionSchema = {
-	type: "INVOICE" | "ORDER" | "ORDER_RESPONSE" | "ORDER_CHANGE";
+	type: ExtensionSchemaType | ExtensionSchemaType[];
 	conformanceLevel:
 		| "MINIMUM"
 		| "BASIC WL"
 		| "BASIC"
 		| "EN 16931"
+		| "COMFORT"
 		| "EXTENDED"
 		| "XRECHNUNG";
 	fileName: "factur-x.xml" | "xrechnung.xml" | "order-x.xml";
@@ -49,10 +55,8 @@ export type ZugferdProfileBuildContext = {
 	profile: Omit<ZugferdProfile, "schema" | "rules">;
 } & BuildHelper;
 
-export type InferProfileIds<Opts extends ZugferdOptions> =
-	Opts["profiles"] extends Array<infer R extends ZugferdProfile>
-		? R["id"]
-		: never;
+export type InferProfileIds<Opts> =
+	Opts extends ZugferdOptions<infer Profiles> ? Profiles[number]["id"] : never;
 
 export interface ZugferdProfile<
 	Schema extends

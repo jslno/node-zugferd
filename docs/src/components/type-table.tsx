@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "@fumadocs/base-ui/contexts/i18n";
+import { useTranslations } from "@fuma-translate/react";
 import { cva } from "class-variance-authority";
 import Link from "fumadocs-core/link";
 import { ChevronDown } from "lucide-react";
@@ -60,7 +60,7 @@ export function TypeTable({
 	className,
 	...props
 }: { type: Record<string, TypeNode> } & ComponentProps<"div">) {
-	const t = useTranslations();
+	const t = useTranslations({ note: "type table" });
 
 	return (
 		<div
@@ -72,8 +72,8 @@ export function TypeTable({
 			{...props}
 		>
 			<div className="flex font-medium items-center px-3 py-1 not-prose text-fd-muted-foreground">
-				<p className="w-1/4">{t.typeTableProp}</p>
-				<p className="@max-xl:hidden">{t.typeTableType}</p>
+				<p className="w-1/4">{t("Prop")}</p>
+				<p className="@max-xl:hidden">{t("Type")}</p>
 			</div>
 			{Object.entries(type).map(([key, value]) => (
 				<Item key={key} parentId={id} name={key} item={value} />
@@ -101,7 +101,7 @@ function Item({
 	name: string;
 	item: TypeNode;
 }) {
-	const t = useTranslations();
+	const t = useTranslations({ note: "type table" });
 	const [open, setOpen] = useState(false);
 	const id = parentId ? `${parentId}-${name}` : undefined;
 
@@ -154,19 +154,19 @@ function Item({
 					</div>
 					{typeDescription && (
 						<>
-							<p className={cn(fieldVariants())}>{t.typeTableType}</p>
+							<p className={cn(fieldVariants())}>{t("Type")}</p>
 							<p className="my-auto not-prose">{typeDescription}</p>
 						</>
 					)}
 					{defaultValue && (
 						<>
-							<p className={cn(fieldVariants())}>{t.typeTableDefault}</p>
+							<p className={cn(fieldVariants())}>{t("Default")}</p>
 							<p className="my-auto not-prose">{defaultValue}</p>
 						</>
 					)}
 					{parameters.length > 0 && (
 						<>
-							<p className={cn(fieldVariants())}>{t.typeTableParameters}</p>
+							<p className={cn(fieldVariants())}>{t("Parameters")}</p>
 							<div className="flex flex-col gap-2">
 								{parameters.map((param) => (
 									<div
@@ -186,7 +186,7 @@ function Item({
 					)}
 					{returns && (
 						<>
-							<p className={cn(fieldVariants())}>{t.typeTableReturns}</p>
+							<p className={cn(fieldVariants())}>{t("Returns")}</p>
 							<div className="my-auto text-sm prose prose-no-margin">
 								{returns}
 							</div>

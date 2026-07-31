@@ -1,6 +1,7 @@
 import {
 	array,
 	metadata,
+	nullish,
 	object,
 	pipe,
 	text,
@@ -101,6 +102,80 @@ describe("parse-from-schema", () => {
 
 		expect(result.section?.[0]?.book?.[1]?.pages).toBe("210");
 		expect(result.section?.[1]?.book?.[0]?.rating).toBe("5.0");
+	});
+});
+
+const invoiceNotesXml = `
+  <rsm:CrossIndustryInvoice>
+    <rsm:ExchangedDocument>
+      <ram:IncludedNote>
+        <ram:Content>Note 1</ram:Content>
+      </ram:IncludedNote>
+      <ram:IncludedNote>
+        <ram:Content>Note 2</ram:Content>
+        <ram:SubjectCode>ABC</ram:SubjectCode>
+      </ram:IncludedNote>
+    </rsm:ExchangedDocument>
+  </rsm:CrossIndustryInvoice>
+`;
+
+const invoiceNotesSchema = object({
+	exchangedDocument: pipe(
+		nullish(
+			object({
+				invoiceNotes: pipe(
+					nullish(
+						array(
+							object({
+								content: pipe(
+									text(),
+									metadata({
+										id: "BT-22",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IncludedNote/ram:Content",
+									}),
+								),
+								subjectCode: pipe(
+									nullish(text()),
+									metadata({
+										id: "BT-21",
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IncludedNote/ram:SubjectCode",
+									}),
+								),
+							}),
+						),
+					),
+					metadata({
+						id: "BG-1",
+						xpath:
+							"/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IncludedNote",
+					}),
+				),
+			}),
+		),
+		metadata({
+			id: "BT-1-00",
+		}),
+	),
+});
+
+describe("parse-from-schema invoice notes", () => {
+	it("parses repeated IncludedNote elements when schema field names differ from xml tags", () => {
+		const xpath = createXPath(invoiceNotesXml);
+		const profile = { schema: invoiceNotesSchema } as never;
+
+		const result = parseFromSchema({
+			profile,
+			xml: xpath.querySelector("rsm:CrossIndustryInvoice")!.original as never,
+			xpath,
+			context: {} as never,
+		});
+
+		expect(result.exchangedDocument?.invoiceNotes).toEqual([
+			{ content: "Note 1" },
+			{ content: "Note 2", subjectCode: "ABC" },
+		]);
 	});
 });
 

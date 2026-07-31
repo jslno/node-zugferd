@@ -18,6 +18,7 @@
     "@node-zugferd/core": "workspace:*"
   },
   "devDependencies": {
+    "@node-zugferd/core": "workspace:*",
     "tsdown": "catalog:"
   },
   "exports": {

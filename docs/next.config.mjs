@@ -5,6 +5,7 @@ const withMDX = createMDX();
 /** @type {import('next').NextConfig} */
 const config = {
 	reactStrictMode: true,
+	serverExternalPackages: ["@takumi-rs/core"],
 	rewrites: async () => [
 		{
 			source: "/docs/:path*.md",

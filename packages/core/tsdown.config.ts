@@ -14,6 +14,7 @@ export default defineConfig({
 		"./src/error/index.ts",
 		"./src/types/index.ts",
 		"./src/data-types/index.ts",
+		"./src/async_hooks/index.ts",
 	],
 	env: {
 		NODE_ZUGFERD_VERSION: packageJson.version,

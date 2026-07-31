@@ -4,10 +4,14 @@ import { ZugferdError } from "@node-zugferd/core/error";
 import { createLogger } from "@node-zugferd/core/utils";
 import which from "which";
 import { __dirname } from "./isomorph";
+import { pipeline } from "node:stream/promises";
+import { Readable } from "node:stream";
+import { createWriteStream } from "node:fs";
 
 const logger = createLogger({
 	// Add more detailed logging in CI environments
-	level: process.env.CI || process.env.DEBUG ? "debug" : undefined,
+	level: "debug",
+	// level: process.env.CI || process.env.DEBUG ? "debug" : undefined,
 });
 
 export async function setup(args?: string[]) {
@@ -71,6 +75,8 @@ async function downloadMustang() {
 			Accept: "application/octet-stream",
 		},
 	});
+	logger.debug(`GitHub status: ${response.status}`);
+	logger.debug(response.headers.get("x-ratelimit-remaining") ?? "");
 	if (!response.ok || !response.body) {
 		throw new ZugferdError(
 			`Failed to download Mustang CLI: ${response.statusText} (${response.status})`,
@@ -83,9 +89,15 @@ async function downloadMustang() {
 	await cleanup();
 	await mkdir(path.resolve(__dirname, "../runtime"), { recursive: true });
 	const dest = path.resolve(__dirname, "../runtime/Mustang-CLI.jar");
-	const content = new Uint8Array(await response.arrayBuffer());
 	logger.debug(`Download completed, writing to ${dest}...`);
-	await writeFile(dest, content);
+	const stream = Readable.fromWeb(response.body as any);
+
+	stream.on("end", () => logger.debug("stream end"));
+	stream.on("close", () => logger.debug("stream close"));
+	stream.on("error", (e) => logger.error(String(e)));
+	stream.on("data", (chunk) => logger.debug("chunk", chunk));
+
+	await pipeline(stream, createWriteStream(dest));
 	logger.debug(`Mustang CLI downloaded successfully`);
 }
 

@@ -62,6 +62,7 @@ export interface AmountSchema<Cfg extends AmountConfig>
 	readonly type: "amount";
 	readonly reference: typeof amount;
 	readonly expects: "(string | number)";
+	readonly config: Omit<AmountConfig, "message">;
 	readonly message: Cfg["message"];
 }
 
@@ -71,16 +72,20 @@ export function amount<
 >(
 	cfg?: (Cfg & { message?: Message | undefined }) | undefined,
 ): AmountSchema<Cfg>;
-export function amount(
-	cfg?: AmountConfig,
-): AmountSchema<AmountConfig<ErrorMessage<AmountIssue> | undefined>> {
+export function amount({
+	message,
+	...cfg
+}: AmountConfig = {}): AmountSchema<
+	AmountConfig<ErrorMessage<AmountIssue> | undefined>
+> {
 	return {
 		kind: "schema",
 		type: "amount",
 		reference: amount,
 		expects: "(string | number)",
 		async: false,
-		message: cfg?.message,
+		config: cfg,
+		message,
 		get "~standard"() {
 			return getStandardProps(this);
 		},

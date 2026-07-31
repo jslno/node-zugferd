@@ -13,23 +13,24 @@ export const minimum = defineProfile({
 	schema,
 	build: (data, { root, setCachedNode, profile }) => {
 		const crossIndustryInvoice = root.ele("rsm:CrossIndustryInvoice");
-		crossIndustryInvoice.att(
-			"xmlns:rsm",
-			"urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
-		);
-		crossIndustryInvoice.att(
-			"xmlns:qdt",
-			"urn:un:unece:uncefact:data:standard:QualifiedDataType:100",
-		);
-		crossIndustryInvoice.att(
-			"xmlns:ram",
-			"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100",
-		);
-		crossIndustryInvoice.att("xmlns:xs", "http://www.w3.org/2001/XMLSchema");
-		crossIndustryInvoice.att(
-			"xmlns:udt",
-			"urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100",
-		);
+		crossIndustryInvoice
+			.att(
+				"xmlns:rsm",
+				"urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
+			)
+			.att(
+				"xmlns:qdt",
+				"urn:un:unece:uncefact:data:standard:QualifiedDataType:100",
+			)
+			.att(
+				"xmlns:ram",
+				"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100",
+			)
+			.att("xmlns:xs", "http://www.w3.org/2001/XMLSchema")
+			.att(
+				"xmlns:udt",
+				"urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100",
+			);
 		const exchangedDocumentContext = crossIndustryInvoice.ele(
 			"rsm:ExchangedDocumentContext",
 		);
@@ -56,6 +57,8 @@ export const minimum = defineProfile({
 				?.specificationIdentifier?.identifier ??
 				(() => {
 					switch (profile.id) {
+						case "xrechnung":
+							return "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0";
 						case "extended":
 							return "urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended";
 						case "en-16931":
@@ -80,12 +83,12 @@ export const minimum = defineProfile({
 				.txt(data.exchangedDocument.invoiceNumber.identifier);
 			exchangedDocument
 				.ele("ram:TypeCode")
-				.txt(data.exchangedDocument.invoiceTypeCode);
+				.txt(data.exchangedDocument.invoiceTypeCode.value);
 			exchangedDocument
 				.ele("ram:IssueDateTime")
 				.ele("udt:DateTimeString")
-				.txt(data.exchangedDocument.invoiceIssueDate)
-				.att("format", "102");
+				.txt(data.exchangedDocument.invoiceIssueDate.value)
+				.att("format", data.exchangedDocument.invoiceIssueDate.format);
 		}
 
 		if (data.transaction) {
@@ -138,7 +141,7 @@ export const minimum = defineProfile({
 						sellerTradeParty.ele("ram:PostalTradeAddress"),
 					);
 					setCachedNode("BT-40", postalTradeAddress.ele("ram:CountryID")).txt(
-						data.transaction.contract.seller.postalAddress.countryCode,
+						data.transaction.contract.seller.postalAddress.countryCode.value,
 					);
 
 					if (data.transaction.contract.seller.taxRegistration?.vat) {
@@ -232,7 +235,7 @@ export const minimum = defineProfile({
 				setCachedNode(
 					"BT-5",
 					applicableHeaderTradeSettlement.ele("ram:InvoiceCurrencyCode"),
-				).txt(data.transaction.debit.invoiceCurrencyCode);
+				).txt(data.transaction.debit.invoiceCurrencyCode.value);
 
 				const specifiedTradeSettlementHeaderMonetarySummation = setCachedNode(
 					"BG-22",

@@ -1,5 +1,7 @@
 export type LiteralString = "" | (string & Record<never, never>);
 
+export type Awaitable<T> = T | Promise<T>;
+
 export type MaybeReadonly<TValue> = TValue | Readonly<TValue>;
 
 export type DeepReadonly<TValue> = TValue extends

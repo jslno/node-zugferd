@@ -98,31 +98,52 @@ type MergeIntersectProperty<A, B> = [A] extends [never]
 						Exclude<A, null | undefined>,
 						Exclude<B, null | undefined>
 				  >
-				| Extract<A, null | undefined>
-				| Extract<B, null | undefined>;
+				// Keep nullish only when both sides still allow it.
+				| (Extract<A, null | undefined> & Extract<B, null | undefined>);
 
-type IsOptionalKey<T, K extends keyof T> = {} extends Pick<T, K> ? true : false;
-
-type IsNullishKey<T, K extends keyof T> = undefined extends T[K]
-	? true
-	: null extends T[K]
+type IsOptionalKey<T, K extends PropertyKey> = K extends keyof T
+	? {} extends Pick<T, K>
 		? true
-		: false;
+		: false
+	: false;
+
+type IsNullishKey<T, K extends PropertyKey> = K extends keyof T
+	? undefined extends T[K]
+		? true
+		: null extends T[K]
+			? true
+			: false
+	: false;
+
+type IsOptionalAfterMerge<Parent, Local, K extends keyof Local> =
+	undefined extends MergeProfileProperty<
+		K extends keyof Parent ? Parent[K] : never,
+		Local[K]
+	>
+		? true
+		: null extends MergeProfileProperty<
+					K extends keyof Parent ? Parent[K] : never,
+					Local[K]
+				>
+			? true
+			: false;
 
 type OptionalProfileMergeKeys<Parent, Local> = {
-	[K in keyof Local]: IsOptionalKey<Parent, K> extends true
-		? K
+	[K in keyof Local]-?: IsOptionalKey<Parent, K> extends true
+		? IsOptionalKey<Local, K> extends true
+			? K
+			: never
 		: IsOptionalKey<Local, K> extends true
 			? K
 			: K extends keyof Parent
-				? IsNullishKey<Parent, K> extends true
+				? IsOptionalAfterMerge<Parent, Local, K> extends true
 					? K
 					: never
 				: never;
 }[keyof Local];
 
 type OptionalMergeKeys<A, B> = {
-	[K in keyof A | keyof B]: K extends keyof B
+	[K in keyof A | keyof B]-?: K extends keyof B
 		? K extends keyof A
 			? IsOptionalKey<B, K> extends true
 				? IsOptionalKey<A, K> extends true
@@ -159,7 +180,7 @@ type MergeLocalProperties<Parent, Local> = {
 export type MergeLocalIntoParent<Parent, Local> = Omit<Parent, keyof Local> &
 	MarkOptional<
 		MergeLocalProperties<Parent, Local>,
-		OptionalMergeKeys<Parent, Local>
+		Extract<OptionalMergeKeys<Parent, Local>, keyof Local>
 	>;
 
 type NeedsStructuralMergeCore<A, B> =
@@ -186,13 +207,18 @@ type MergeProfileProperty<A, B> = [A] extends [never]
 	: [B] extends [never]
 		? A
 		: NeedsStructuralMerge<A, B> extends true
-			? MergeIntersectProperty<A, B>
+			?
+					| MergeIntersectPropertyCore<
+							Exclude<A, null | undefined>,
+							Exclude<B, null | undefined>
+					  >
+					// Local wins: parent nullish is dropped unless local keeps it.
+					| Extract<B, null | undefined>
 			:
 					| MergeProfilePropertyCore<
 							Exclude<A, null | undefined>,
 							Exclude<B, null | undefined>
 					  >
-					| Extract<A, null | undefined>
 					| Extract<B, null | undefined>;
 
 type MergeProfileProperties<Parent, Local> = {

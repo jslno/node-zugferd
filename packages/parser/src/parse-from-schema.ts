@@ -3,11 +3,15 @@ import {
 	collectFieldSchemas,
 	getMetadata,
 	isArrayLikeSchema,
-	isObjectLikeSchema,
 	walkSchema,
 } from "@node-zugferd/data-types";
 import type { ParseContext } from "./types";
 import type { XPathMethods, XPathNode } from "./xpath";
+import { unwrapSchema } from "@node-zugferd/data-types";
+import type { IdentifierSchema } from "@node-zugferd/data-types";
+import { base64 } from "@node-zugferd/utils";
+import type { QuantitySchema } from "@node-zugferd/data-types";
+import type { AmountSchema } from "@node-zugferd/data-types";
 
 function getSelector(metadata: Record<string, unknown>): string | undefined {
 	const id = metadata.xpath ?? metadata.id;
@@ -41,7 +45,7 @@ function stripSelectorToPath(selector: string, pathKey: string): string {
 	const segmentIndex = xpathParts.indexOf(lastSchemaSegment);
 
 	if (segmentIndex === -1) {
-		return xpathParts.slice(0, schemaSegments.length).join("/");
+		return xpathParts.slice(0, schemaSegments.length + 1).join("/");
 	}
 
 	return xpathParts.slice(0, segmentIndex + 1).join("/");
@@ -57,7 +61,7 @@ function getAbsoluteSelector(
 		const direct = getSelector(getMetadata(entry.schema as never));
 
 		if (direct) {
-			return stripSelectorToPath(direct, pathKey);
+			return direct;
 		}
 	}
 
@@ -217,6 +221,73 @@ function resolveFieldNode(
 	return parentNode.querySelector(selector.slice(parentSelector.length + 1));
 }
 
+type InferAssertedType<T> = T extends "string"
+	? string
+	: T extends "number"
+		? number
+		: T extends "bigint"
+			? bigint
+			: T extends "boolean"
+				? boolean
+				: T extends "symbol"
+					? symbol
+					: T extends "undefined"
+						? undefined
+						: T extends "object"
+							? object
+							: T extends "function"
+								? Function
+								: T;
+
+const assertType = <
+	T extends
+		| "string"
+		| "number"
+		| "bigint"
+		| "boolean"
+		| "symbol"
+		| "undefined"
+		| "object"
+		| "function"
+		| (new (
+				...args: any[]
+		  ) => any),
+>(
+	value: unknown,
+	type: T,
+	path?: string | undefined,
+	cfg?:
+		| {
+				received?: string | undefined;
+				expected?: string | undefined;
+		  }
+		| undefined,
+): value is InferAssertedType<T> => {
+	let expected: string = typeof type === "string" ? type : type.name;
+	let received: string = typeof value;
+
+	let valid = false;
+	if (typeof type === "string") {
+		if (type === "number" && Number.isNaN(Number(value))) {
+			received = "NaN";
+			valid = false;
+		} else {
+			valid = typeof value === type;
+		}
+	} else if (value instanceof (type as any)) {
+		valid = true;
+	}
+	if (!valid) {
+		expected = cfg?.expected ?? expected;
+		received = cfg?.received ?? received;
+
+		throw new TypeError(
+			`Expected value of type "${expected}", but got "${received}"${path ? ` at "${path}"` : ""}`,
+		);
+	}
+	return true;
+};
+
 export function parseFromSchema<R = Record<string, unknown>>({
 	profile,
 	xml,
@@ -230,6 +301,7 @@ export function parseFromSchema<R = Record<string, unknown>>({
 		path: readonly string[],
 		value: unknown,
 		indexes: readonly number[],
+		transformValue?: ((value: any) => any) | undefined,
 	) => {
 		let current: Record<string, unknown> | unknown[] = result;
 		let cursor = 0;
@@ -246,7 +318,9 @@ export function parseFromSchema<R = Record<string, unknown>>({
 				}
 
 				if (!Array.isArray(current)) {
-					throw new Error(`Expected array at "${path.slice(0, i).join(".")}"`);
+					throw new Error(
+						`Expected array at "${path.slice(0, i).join(".")}" instead got ${typeof current}`,
+					);
 				}
 
 				current[index] ??= {};
@@ -259,7 +333,7 @@ export function parseFromSchema<R = Record<string, unknown>>({
 			const currentObject = current as Record<string, unknown>;
 
 			if (isLeaf) {
-				currentObject[segment] = value;
+				currentObject[segment] = transformValue ? transformValue(value) : value;
 				return;
 			}
 
@@ -276,26 +350,162 @@ export function parseFromSchema<R = Record<string, unknown>>({
 	walkSchema(
 		profile.schema,
 		({ schema, metadata, path, indexes }) => {
-			if (
-				isArrayLikeSchema(schema) ||
-				(isObjectLikeSchema(schema) && !("entries" in schema.entries))
-			) {
-				return;
-			}
+			if (isArrayLikeSchema(schema)) return;
 
 			const selector = getSelector(metadata);
 
-			if (!selector) {
-				return;
-			}
+			if (!selector) return;
 
 			const node = resolveFieldNode(xpath, fields, path, indexes, selector);
 
-			if (!node) {
-				return;
-			}
+			if (!node) return;
 
-			assignByPath(path, node.original, indexes);
+			const unwrappedSchema = unwrapSchema(schema);
+			const isSchemaType = (type: string) =>
+				unwrappedSchema.kind === "schema" && unwrappedSchema.type === type;
+
+			assignByPath(path, node.original, indexes, (value) => {
+				if (
+					isSchemaType("text") ||
+					isSchemaType("code") ||
+					isSchemaType("literal")
+				) {
+					const result = value["#"] ?? value;
+					assertType(result, "string");
+					return result;
+				}
+				if (isSchemaType("quantity")) {
+					const result: Record<string, any> = {
+						value: Number(value["#"] ?? value),
+						unitCode: value["@unitCode"],
+					};
+					const quantitySchema = unwrappedSchema as QuantitySchema<any>;
+					assertType(result.value, "number");
+					if (quantitySchema.config?.requireUnitCode !== "never") {
+						if (quantitySchema.config?.requireUnitCode === "always") {
+							assertType(result.unitCode, "string");
+						} else if (result.unitCode !== undefined) {
+							assertType(result.unitCode, "string", undefined, {
+								expected: "string | undefined",
+							});
+						} else {
+							delete result.unitCode;
+						}
+					} else {
+						assertType(result.unitCode, "undefined");
+						delete result.unitCode;
+					}
+					return result;
+				}
+				if (isSchemaType("unit-price-amount") || isSchemaType("percentage")) {
+					const result = Number(value["#"] ?? value);
+					assertType(result, "number");
+					if (isSchemaType("percentage") && (result < 0 || result > 100)) {
+						throw new TypeError(
+							`Expected value of type "percentage" to be between 0 and 100, but got "${result}".`,
+						);
+					}
+					return result;
+				}
+				if (isSchemaType("amount")) {
+					const result: Record<string, any> = {
+						value: Number(value["#"] ?? value),
+						currency: value["@currencyID"],
+					};
+					const amountSchema = unwrappedSchema as AmountSchema<any>;
+					assertType(result.value, "number");
+					if (amountSchema.config.requireCurrency !== "never") {
+						if (amountSchema.config.requireCurrency === "always") {
+							assertType(result.currency, "string");
+						} else if (result.currency !== undefined) {
+							assertType(result.currency, "string", undefined, {
+								expected: "string | undefined",
+							});
+						} else {
+							delete result.currency;
+						}
+					} else {
+						assertType(result.currency, "undefined");
+						delete result.currency;
+					}
+					return result;
+				}
+				if (isSchemaType("boolean")) {
+					const val = value["#"] ?? value;
+					if (val === "true" || val === true) {
+						return true;
+					} else if (val === "false" || val === false) {
+						return false;
+					}
+					throw new TypeError(
+						`Expected value of type "boolean", but got "${val}".`,
+					);
+				}
+				if (isSchemaType("identifier")) {
+					const result: Record<string, string> = {
+						value: value["#"] ?? value,
+					};
+					const identifierSchema = unwrappedSchema as IdentifierSchema<
+						any,
+						any
+					>;
+
+					if (
+						value["@schemeID"] &&
+						identifierSchema.config?.requireSchemeId !== "never"
+					) {
+						assertType(value["@schemeID"], "string");
+						result["schemeId"] = value["@schemeID"];
+					}
+					if (
+						value["@schemeVersion"] &&
+						identifierSchema.config?.requireSchemeVersion !== "never"
+					) {
+						assertType(value["@schemeVersion"], "string");
+						result["schemeVersion"] = value["@schemeVersion"];
+					}
+
+					assertType(result.value, "string");
+					if (Object.keys(result).length === 1) {
+						return result.value;
+					}
+					return result;
+				}
+				if (isSchemaType("date")) {
+					const str = value["#"];
+					const format = value["@format"];
+					assertType(str, "string");
+
+					let hour = 0;
+					let minute = 0;
+					const year = Number(str.slice(0, 4));
+					const month = Number(str.slice(4, 6)) - 1;
+					const day = Number(str.slice(6, 8)) + 1;
+					if (format === "204") {
+						hour = Number(str.slice(8, 10));
+						minute = Number(str.slice(10, 12));
+					}
+					return new Date(year, month, day, hour, minute);
+				}
+				if (isSchemaType("binary_object")) {
+					const mimeType = value["@mimeCode"];
+					const filename = value["@filename"];
+					const content = value["#"];
+					assertType(mimeType, "string");
+					assertType(filename, "string");
+					assertType(content, "string");
+					const file = new File([base64.decode(content)], filename, {
+						type: mimeType,
+					});
+					(file as any).toJSON = () => ({
+						filename: file.name,
+						mimeType: file.type,
+						size: file.size,
+					});
+					return file;
+				}
+				return value;
+			});
 		},
 		{
 			resolveArrayLength: (arrayPath, indexes) =>

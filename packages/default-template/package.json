@@ -1,0 +1,41 @@
+{
+  "name": "@node-zugferd/default-template",
+  "type": "module",
+  "license": "MIT",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint:package": "publint run --strict --pack false",
+    "lint:types": "attw --profile esm-only --pack .",
+    "typecheck": "tsc --project tsconfig.json",
+    "test": "vitest",
+    "coverage": "vitest run --coverage --coverage.provider=istanbul"
+  },
+  "peerDependencies": {
+    "@node-zugferd/templates": "workspace:*"
+  },
+  "dependencies": {
+    "@node-zugferd/core": "workspace:*",
+    "@node-zugferd/codelist-untdid-1001": "workspace:*",
+    "@node-zugferd/pdf-template": "workspace:*"
+  },
+  "devDependencies": {
+    "node-zugferd": "workspace:*",
+    "@node-zugferd/en-16931": "workspace:*",
+    "@node-zugferd/templates": "workspace:*",
+    "tsdown": "catalog:"
+  },
+  "exports": {
+    ".": {
+      "dev-source": "./src/index.ts",
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ]
+}

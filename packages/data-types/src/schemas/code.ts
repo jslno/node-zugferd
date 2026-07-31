@@ -17,10 +17,15 @@ export type InferCodeValue<Id extends ZugferdCodelistRegistryIdentifier> =
 		? R[number]["value"]
 		: null;
 
+export type InferCodeOutput<Id extends ZugferdCodelistRegistryIdentifier> = {
+	value: InferCodeValue<Id>;
+	codelist: Id;
+};
+
 export interface CodeSchema<Id extends ZugferdCodelistRegistryIdentifier>
 	extends BaseSchema<
 		InferCodeValue<Id>,
-		InferCodeValue<Id>,
+		InferCodeOutput<Id>,
 		BaseIssue<unknown>
 	> {
 	readonly type: "code";
@@ -51,6 +56,10 @@ export function code<const Id extends ZugferdCodelistRegistryIdentifier>(
 				if (codelist.some((code) => code.value === dataset.value)) {
 					// @ts-expect-error
 					dataset.typed = true;
+					dataset.value = {
+						value: dataset.value,
+						codelist: id,
+					};
 				} else {
 					addIssue(this, "codelist", dataset, config, {
 						received: id,
@@ -62,7 +71,7 @@ export function code<const Id extends ZugferdCodelistRegistryIdentifier>(
 			}
 
 			return dataset as unknown as OutputDataset<
-				InferCodeValue<Id>,
+				InferCodeOutput<Id>,
 				BaseIssue<unknown>
 			>;
 		},

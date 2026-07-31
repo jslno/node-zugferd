@@ -2,14 +2,14 @@
   "name": "@node-zugferd/root",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@11.9.0",
+  "packageManager": "pnpm@11.17.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jslno/node-zugferd.git"
   },
   "scripts": {
-    "build": "turbo build --filter=./packages/**/*",
-    "dev": "turbo dev --filter=./packages/**/*",
+    "build": "turbo build --filter=./packages/**/* --concurrency=2",
+    "dev": "turbo dev --filter=./packages/**/* --filter=!./packages/cli",
     "gen": "cross-env NODE_OPTIONS=\"$NODE_OPTIONS --import tsx\" plop --plopfile=./scripts/generators/config.ts",
     "format": "biome format . --write",
     "clean": "turbo clean --filter=./packages/* && rm -rf node_modules",
@@ -46,7 +46,6 @@
     "@types/serialize-javascript": "^5.0.4",
     "@vitest/coverage-istanbul": "catalog:vitest",
     "@vitest/ui": "catalog:vitest",
-    "cheerio": "^1.2.0",
     "cross-env": "^10.1.0",
     "cspell": "^10.0.0",
     "knip": "^6.6.0",

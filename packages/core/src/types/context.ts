@@ -90,6 +90,15 @@ export type ZugferdContext<Options extends ZugferdOptions = ZugferdOptions> =
 	PluginContext<Options> &
 		ProfileContext<Options> & {
 			options: Options;
-		} & {
 			logger: ReturnType<typeof createLogger>;
+			withSpan<T>(
+				name: string,
+				attr: Record<string, string | number | boolean>,
+				fn: () => T,
+			): T;
+			withSpan<T>(
+				name: string,
+				attr: Record<string, string | number | boolean>,
+				fn: () => Promise<T>,
+			): Promise<T>;
 		};

@@ -10,6 +10,7 @@ import {
 	text,
 } from "../index";
 
+type AssertTrue<T extends true> = T;
 describe("intersect cardinality upgrade", () => {
 	const baseType = object({
 		foo: text(),
@@ -283,6 +284,47 @@ describe("intersect cardinality upgrade", () => {
 		};
 
 		expect(parse(paymentTermsSchema, input)).toEqual(input);
+	});
+
+	it("strips parent nullish when child makes the field required", () => {
+		const schema = intersect([
+			object({
+				paymentTerms: nullish(
+					object({
+						description: text(),
+					}),
+				),
+			}),
+			object({
+				paymentTerms: object({
+					description: text(),
+					dueDate: text(),
+				}),
+			}),
+		]);
+
+		type Input = InferInput<typeof schema>;
+
+		type _isRequired = AssertTrue<
+			{} extends Pick<Input, "paymentTerms"> ? false : true
+		>;
+		type _rejectsNull = AssertTrue<
+			null extends Input["paymentTerms"] ? false : true
+		>;
+		type _rejectsUndefined = AssertTrue<
+			undefined extends Input["paymentTerms"] ? false : true
+		>;
+
+		const input: Input = {
+			paymentTerms: {
+				description: "terms",
+				dueDate: "2025-12-31",
+			},
+		};
+
+		expect(parse(schema, input)).toEqual(input);
+		expect(() => parse(schema, { paymentTerms: null })).toThrow();
+		expect(() => parse(schema, {})).toThrow();
 	});
 
 	it("adapts object-to-array upgrades inside array items", () => {

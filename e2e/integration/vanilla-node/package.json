@@ -1,0 +1,5 @@
+{
+  "name": "@node-zugferd-test/fixtures-vanilla-node",
+  "private": true,
+  "type": "module"
+}

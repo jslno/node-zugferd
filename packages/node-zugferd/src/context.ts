@@ -11,6 +11,20 @@ export function createContext<Opts extends ZugferdOptions>(
 			plugins: [...getInternalPlugins(opts), ...(opts.plugins ?? [])],
 		},
 		logger: createLogger(opts.logger),
+		withSpan<T>(
+			name: string,
+			attr: Record<string, string | number | boolean>,
+			fn: () => T | Promise<T>,
+		): T | Promise<T> {
+			const span =
+				this.options.advanced?.instrumentation?.span ??
+				(<T>(
+					_name: string,
+					_attr: Record<string, string | number | boolean>,
+					fn: () => T | Promise<T>,
+				): T | Promise<T> => fn());
+			return span(name, attr, fn);
+		},
 		getProfile(id, cfg) {
 			const profile = this.options.profiles.find((p) => p.id === id);
 			if (cfg?.throw === true && !profile) {

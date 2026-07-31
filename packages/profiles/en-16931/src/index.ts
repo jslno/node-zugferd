@@ -107,12 +107,16 @@ export const en16931 = defineProfile({
 									specifiedTradeProduct.ele(
 										"ram:ApplicableProductCharacteristic",
 									);
-								applicableProductCharacteristic
-									.ele("ram:Description")
-									.txt(attr.description);
-								applicableProductCharacteristic
-									.ele("ram:Value")
-									.txt(attr.value);
+								if (attr.description) {
+									applicableProductCharacteristic
+										.ele("ram:Description")
+										.txt(attr.description);
+								}
+								if (attr.value) {
+									applicableProductCharacteristic
+										.ele("ram:Value")
+										.txt(attr.value);
+								}
 							}
 						}
 
@@ -147,7 +151,7 @@ export const en16931 = defineProfile({
 							specifiedTradeProduct
 								.ele("ram:OriginTradeCountry")
 								.ele("ram:ID")
-								.txt(line.item.originTradeCountry);
+								.txt(line.item.originTradeCountry.value);
 						}
 					})();
 
@@ -326,7 +330,8 @@ export const en16931 = defineProfile({
 							for (const accountingReference of Array.isArray(
 								line.billing.accountingReference,
 							)
-								? line.billing.accountingReference
+								? (line.billing
+										.accountingReference as (typeof line.billing.accountingReference)[])
 								: [line.billing.accountingReference]) {
 								const receivableSpecifiedTradeAccountingAccount =
 									specifiedLineTradeSettlement.ele(
@@ -421,7 +426,8 @@ export const en16931 = defineProfile({
 						for (const contact of Array.isArray(
 							data.transaction.contract.seller.contact,
 						)
-							? data.transaction.contract.seller.contact
+							? (data.transaction.contract.seller
+									.contact as (typeof data.transaction.contract.seller.contact)[])
 							: [data.transaction.contract.seller.contact]) {
 							const definedTradeContact = fragment().ele(
 								"ram:DefinedTradeContact",
@@ -535,7 +541,8 @@ export const en16931 = defineProfile({
 						for (const contact of Array.isArray(
 							data.transaction.contract.buyer.contact,
 						)
-							? data.transaction.contract.buyer.contact
+							? (data.transaction.contract.buyer
+									.contact as (typeof data.transaction.contract.buyer.contact)[])
 							: [data.transaction.contract.buyer.contact]) {
 							const definedTradeContact = fragment().ele(
 								"ram:DefinedTradeContact",
@@ -666,7 +673,8 @@ export const en16931 = defineProfile({
 					const invoicedObjectIdentifiers = Array.isArray(
 						data.transaction.contract.invoicedObjectIdentifier,
 					)
-						? data.transaction.contract.invoicedObjectIdentifier
+						? (data.transaction.contract
+								.invoicedObjectIdentifier as (typeof data.transaction.contract.invoicedObjectIdentifier)[])
 						: [data.transaction.contract.invoicedObjectIdentifier];
 					for (const invoicedObjectIdentifier of invoicedObjectIdentifiers) {
 						const additionalReferencedDocument =
@@ -779,7 +787,9 @@ export const en16931 = defineProfile({
 					);
 
 					if (data.transaction.debit.paymentMeans.information) {
-						const information = fragment().ele("ram:Information");
+						const information = fragment()
+							.ele("ram:Information")
+							.txt(data.transaction.debit.paymentMeans.information);
 						const refNode =
 							(
 								getCachedNode("BT-91-00") ||
@@ -905,8 +915,8 @@ export const en16931 = defineProfile({
 						const taxPointDate = fragment().ele("ram:TaxPointDate");
 						taxPointDate
 							.ele("udt:DateString")
-							.txt(vatBreakdown.taxDueDate)
-							.att("format", "102");
+							.txt(vatBreakdown.taxDueDate.value)
+							.att("format", vatBreakdown.taxDueDate.format);
 						const refNode =
 							(
 								getCachedNode(`BT-8[${i}]`) ||

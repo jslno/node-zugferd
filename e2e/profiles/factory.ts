@@ -1,29 +1,52 @@
 import type { Zugferd, ZugferdOptions } from "node-zugferd";
-import { expect, it } from "vitest";
+import { describe, expect, test } from "vitest";
 
 type Entry = {
 	label: string;
 	data: Record<string, any>;
+	config?:
+		| {
+				type: string;
+		  }
+		| undefined;
 };
 
 export const validInvoiceTestFactory = <const Opts extends ZugferdOptions>(
 	zugferd: Zugferd<Opts>,
 	profile: Opts["profiles"][number]["id"],
 	input: Entry[],
-	fn?: (entry: Entry & { xml: string }) => void | Promise<void>,
+	cfg?: {
+		skipXSDValidation?: boolean | undefined;
+		skipMustangValidation?: boolean | undefined;
+	},
 ) => {
 	const invoicer: any = zugferd;
 
-	const test = it.concurrent.each(input);
-	test("should generate valid $label", async ({ label, data }) => {
-		const invoice = await invoicer.create(profile, data);
+	describe.each(input)("should generate valid $label", async ({
+		data,
+		config,
+	}) => {
+		const invoice = await invoicer.create(profile, data, config);
 		const xml = invoice.toXML();
 
-		await fn?.({ label, data, xml });
-		expect(xml).not.toContain("[object Object]");
-		expect(() => invoicer.xsd.validate(profile, xml)).not.toThrow();
-		await expect(
-			invoicer.mustang.validate(profile, xml),
-		).resolves.not.toThrow();
+		test("should not contain object string representation", () => {
+			expect(xml).not.toContain("[object Object]");
+		});
+
+		test
+			.skipIf(cfg?.skipXSDValidation === true)
+			.concurrent("should validate against XSD schema", async () => {
+				await expect(
+					invoicer.xsd.validate(profile, xml),
+				).resolves.not.toThrow();
+			});
+
+		test
+			.skipIf(cfg?.skipMustangValidation === true)
+			.concurrent("should validate against Mustang validator", async () => {
+				await expect(
+					invoicer.mustang.validate(profile, xml),
+				).resolves.not.toThrow();
+			});
 	});
 };

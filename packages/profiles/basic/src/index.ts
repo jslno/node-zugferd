@@ -129,7 +129,8 @@ export const basic = defineProfile({
 								const discounts = Array.isArray(
 									line.priceDetails.grossPrice.discount,
 								)
-									? line.priceDetails.grossPrice.discount
+									? (line.priceDetails.grossPrice
+											.discount as (typeof line.priceDetails.grossPrice.discount)[])
 									: [line.priceDetails.grossPrice.discount];
 								for (const discount of discounts) {
 									const appliedTradeAllowanceCharge =
@@ -188,12 +189,10 @@ export const basic = defineProfile({
 							const billedQuantity = specifiedLineTradeDelivery
 								.ele("ram:BilledQuantity")
 								.txt(line.delivery.billedQuantity.value.toString());
-							if (line.delivery.billedQuantity.unitCode) {
-								billedQuantity.att(
-									"unitCode",
-									line.delivery.billedQuantity.unitCode,
-								);
-							}
+							billedQuantity.att(
+								"unitCode",
+								line.delivery.billedQuantity.unitCode,
+							);
 						}
 					}
 
@@ -211,7 +210,8 @@ export const basic = defineProfile({
 							for (const vatBreakdown of Array.isArray(
 								line.billing.vatBreakdown,
 							)
-								? line.billing.vatBreakdown
+								? (line.billing
+										.vatBreakdown as (typeof line.billing.vatBreakdown)[])
 								: [line.billing.vatBreakdown]) {
 								const applicableTradeTax = specifiedLineTradeSettlement.ele(
 									"ram:ApplicableTradeTax",
@@ -222,7 +222,7 @@ export const basic = defineProfile({
 									.txt(vatBreakdown.typeCode);
 								applicableTradeTax
 									.ele("ram:CategoryCode")
-									.txt(vatBreakdown.categoryCode);
+									.txt(vatBreakdown.categoryCode.value);
 								if (typeof vatBreakdown.rateApplicablePercent === "number") {
 									applicableTradeTax
 										.ele("ram:RateApplicablePercent")
@@ -239,16 +239,16 @@ export const basic = defineProfile({
 								billingSpecifiedPeriod
 									.ele("ram:StartDateTime")
 									.ele("udt:DateTimeString")
-									.txt(line.billing.invoicePeriod.startDate)
-									.att("format", "102");
+									.txt(line.billing.invoicePeriod.startDate.value)
+									.att("format", line.billing.invoicePeriod.startDate.format);
 							}
 
 							if (line.billing.invoicePeriod.endDate) {
 								billingSpecifiedPeriod
 									.ele("ram:EndDateTime")
 									.ele("udt:DateTimeString")
-									.txt(line.billing.invoicePeriod.endDate)
-									.att("format", "102");
+									.txt(line.billing.invoicePeriod.endDate.value)
+									.att("format", line.billing.invoicePeriod.endDate.format);
 							}
 						}
 
@@ -272,7 +272,7 @@ export const basic = defineProfile({
 								if (allowance.reasonCode) {
 									specifiedTradeAllowanceCharge
 										.ele("ram:ReasonCode")
-										.txt(allowance.reasonCode);
+										.txt(allowance.reasonCode.value);
 								}
 								if (allowance.reason) {
 									specifiedTradeAllowanceCharge
@@ -300,9 +300,12 @@ export const basic = defineProfile({
 									.ele("ram:ActualAmount")
 									.txt(charge.actualAmount.value.toString());
 								if (charge.reasonCode) {
-									specifiedTradeAllowanceCharge
+									const reasonCode = specifiedTradeAllowanceCharge
 										.ele("ram:ReasonCode")
-										.txt(charge.reasonCode);
+										.txt(charge.reasonCode.value);
+									if ((charge.reasonCode.codelist as string) === "untdid5153") {
+										reasonCode.att("listID", "5153");
+									}
 								}
 								if (charge.reason) {
 									specifiedTradeAllowanceCharge
@@ -317,9 +320,13 @@ export const basic = defineProfile({
 								specifiedLineTradeSettlement.ele(
 									"ram:SpecifiedTradeSettlementLineMonetarySummation",
 								);
-							specifiedTradeSettlementLineMonetarySummation
-								.ele("ram:LineTotalAmount")
-								.txt(line.billing.itemTotals.lineTotalAmount.value.toString());
+							if (line.billing.itemTotals.lineTotalAmount) {
+								specifiedTradeSettlementLineMonetarySummation
+									.ele("ram:LineTotalAmount")
+									.txt(
+										line.billing.itemTotals.lineTotalAmount.value.toString(),
+									);
+							}
 						}
 					}
 				}

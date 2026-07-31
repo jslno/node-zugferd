@@ -30,6 +30,7 @@ import { en16931 } from "@node-zugferd/en-16931";
 import { extended } from "@node-zugferd/extended";
 import { minimum } from "@node-zugferd/minimum";
 import { metaSchema, pageSchema } from "fumadocs-core/source/schema";
+import type { PostprocessOptions } from "fumadocs-mdx/config";
 import { defineConfig, defineDocs } from "fumadocs-mdx/config";
 import { remarkCodelistTable } from "@/lib/remark-codelist-table";
 import {
@@ -74,56 +75,75 @@ const codelists = {
 	vatex,
 };
 
+const postprocess: Partial<PostprocessOptions> = {
+	includeProcessedMarkdown: {
+		stringify: (node) => {
+			if (node.type === "mdxJsxFlowElement" && node.name === "ProfileTree") {
+				const profileKey = getProfileKeyFromMdxNode(node);
+				if (profileKey && profileKey in profiles) {
+					return stringifyProfileSchemaForLlm(
+						profiles[profileKey as keyof typeof profiles].schema,
+						profileKey,
+					);
+				}
+			}
+
+			if (node.type === "mdxJsxFlowElement" && node.name === "CodelistTable") {
+				let codelistKey: string | undefined = undefined;
+				for (const attr of node.attributes) {
+					if (attr.type === "mdxJsxAttribute" && attr.name === "items") {
+						if (
+							typeof attr.value === "object" &&
+							attr.value !== null &&
+							attr.value.type === "mdxJsxAttributeValueExpression"
+						) {
+							codelistKey = attr.value.value;
+						}
+					}
+				}
+
+				const codelist =
+					codelistKey && codelistKey in codelists
+						? codelists[codelistKey as keyof typeof codelists]
+						: null;
+				if (codelist) {
+					return `\`\`\`json\n${JSON.stringify(codelist)}\n\`\`\``;
+				}
+			}
+		},
+	},
+};
+
 // You can customize Zod schemas for frontmatter and `meta.json` here
 // see https://fumadocs.dev/docs/mdx/collections
 export const docs = defineDocs({
 	dir: "content/docs",
 	docs: {
 		schema: pageSchema,
-		postprocess: {
-			includeProcessedMarkdown: {
-				stringify: (node) => {
-					if (
-						node.type === "mdxJsxFlowElement" &&
-						node.name === "ProfileTree"
-					) {
-						const profileKey = getProfileKeyFromMdxNode(node);
-						if (profileKey && profileKey in profiles) {
-							return stringifyProfileSchemaForLlm(
-								profiles[profileKey as keyof typeof profiles].schema,
-								profileKey,
-							);
-						}
-					}
+		postprocess,
+	},
+	meta: {
+		schema: metaSchema,
+	},
+});
 
-					if (
-						node.type === "mdxJsxFlowElement" &&
-						node.name === "CodelistTable"
-					) {
-						let codelistKey: string | undefined = undefined;
-						for (const attr of node.attributes) {
-							if (attr.type === "mdxJsxAttribute" && attr.name === "items") {
-								if (
-									typeof attr.value === "object" &&
-									attr.value !== null &&
-									attr.value.type === "mdxJsxAttributeValueExpression"
-								) {
-									codelistKey = attr.value.value;
-								}
-							}
-						}
+export const examples = defineDocs({
+	dir: "content/examples",
+	docs: {
+		schema: pageSchema,
+		postprocess,
+	},
+	meta: {
+		schema: metaSchema,
+	},
+});
 
-						const codelist =
-							codelistKey && codelistKey in codelists
-								? codelists[codelistKey as keyof typeof codelists]
-								: null;
-						if (codelist) {
-							return `\`\`\`json\n${JSON.stringify(codelist)}\n\`\`\``;
-						}
-					}
-				},
-			},
-		},
+export const apiReference = defineDocs({
+	dir: "content/api-reference",
+	docs: {
+		schema: pageSchema,
+		postprocess,
+		dynamic: true,
 	},
 	meta: {
 		schema: metaSchema,
@@ -133,5 +153,12 @@ export const docs = defineDocs({
 export default defineConfig({
 	mdxOptions: {
 		remarkPlugins: [[remarkCodelistTable, codelists]],
+		rehypeCodeOptions: {
+			themes: {
+				dark: "vitesse-dark",
+				light: "vitesse-light",
+			},
+			defaultColor: false,
+		},
 	},
 });

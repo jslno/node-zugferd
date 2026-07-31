@@ -5,11 +5,13 @@ import type {
 } from "@node-zugferd/core/data-types";
 import { addIssue } from "../utils/add-issue";
 import { getStandardProps } from "../utils/standard-props";
+import { getContext } from "../context";
 
 export interface BinaryObjectSchema
 	extends BaseSchemaAsync<
 		| File
 		| {
+				// TODO: Support string
 				content: Uint8Array | ArrayBuffer | Blob;
 				mimeType: string;
 				filename: string;
@@ -38,6 +40,7 @@ export function binaryObject(): BinaryObjectSchema {
 			return getStandardProps(this);
 		},
 		async "~run"(dataset, config) {
+			const ctx = await getContext();
 			if (
 				dataset.value instanceof File ||
 				(typeof dataset.value === "object" &&
@@ -73,6 +76,18 @@ export function binaryObject(): BinaryObjectSchema {
 						mimeType: dataset.value.mimeType as string,
 						filename: dataset.value.filename as string,
 					};
+				}
+
+				if (ctx !== null) {
+					await ctx.context.options.advanced?.handleBinaryObject?.({
+						context: ctx.context,
+						profile: ctx.profile,
+						data: value,
+					});
+
+					if (ctx.pdf.autoAttachBinaryObjects) {
+						ctx.pdf.embedFile(value);
+					}
 				}
 
 				// @ts-expect-error

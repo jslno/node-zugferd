@@ -4,6 +4,7 @@
   "type": "module",
   "dependencies": {
     "@node-zugferd/minimum": "workspace:*",
+    "@node-zugferd-test/test-utils": "workspace:*",
     "@node-zugferd-test/profile-base": "workspace:*"
   },
   "scripts": {

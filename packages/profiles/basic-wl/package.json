@@ -26,6 +26,8 @@
     "@node-zugferd/codelist-untdid-5305": "workspace:*",
     "@node-zugferd/codelist-vatex": "workspace:*",
     "@node-zugferd/codelist-payment": "workspace:*",
+    "@node-zugferd/codelist-untdid-1001": "workspace:*",
+    "@node-zugferd/codelist-currency": "workspace:*",
     "@node-zugferd/minimum": "workspace:*",
     "@node-zugferd/utils": "workspace:*",
     "@node-zugferd/core": "workspace:*",

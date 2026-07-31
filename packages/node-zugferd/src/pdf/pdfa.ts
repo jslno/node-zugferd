@@ -19,6 +19,11 @@ export async function toPdfA(
 	profile: ZugferdProfile,
 	doc: PDFDocument | string | Uint8Array | ArrayBuffer,
 	options: PDFOptions = {},
+	config?:
+		| {
+				type?: string | undefined;
+		  }
+		| undefined,
 ) {
 	const pdf =
 		doc instanceof PDFDocument
@@ -46,7 +51,7 @@ export async function toPdfA(
 		pdf.setModificationDate(modifiedAt);
 		pdf.setCreationDate(createdAt);
 
-		const xmp = buildXmp(pdf, profile);
+		const xmp = buildXmp(pdf, profile, config);
 		const stream = pdf.context.stream(xmp, {
 			Type: "Metadata",
 			Subtype: "XML",
@@ -60,16 +65,22 @@ export async function toPdfA(
 		if (options.attachments?.length && options.attachments.length > 0) {
 			await Promise.all(
 				options.attachments.map(async (attachment) => {
-					return pdf.attach(attachment.data, attachment.filename, {
-						afRelationship:
-							AFRelationship[
-								attachment.dataRelationship as keyof typeof AFRelationship
-							] || AFRelationship.Unspecified,
-						description: attachment.description,
-						mimeType: attachment.mimeType,
-						creationDate: attachment.createdAt,
-						modificationDate: attachment.modifiedAt,
-					});
+					return pdf.attach(
+						typeof attachment.data === "string"
+							? new TextEncoder().encode(attachment.data)
+							: attachment.data,
+						attachment.filename,
+						{
+							afRelationship:
+								AFRelationship[
+									attachment.dataRelationship as keyof typeof AFRelationship
+								] || AFRelationship.Unspecified,
+							description: attachment.description,
+							mimeType: attachment.mimeType,
+							creationDate: attachment.createdAt,
+							modificationDate: attachment.modifiedAt,
+						},
+					);
 				}),
 			);
 		}

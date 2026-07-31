@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@node-zugferd/data-types": "workspace:*",
+    "@node-zugferd/utils": "workspace:*",
     "pdf-lib": "catalog:",
     "xmlbuilder2": "catalog:"
   },

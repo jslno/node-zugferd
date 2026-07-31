@@ -1,0 +1,85 @@
+---
+icon: dot-[#22c55e]
+title: Basic
+---
+
+import { orderXBasic } from "@node-zugferd/order-x-basic";
+
+The Order-X BASIC profile has been built to addres a “standard” purchase order process, with no
+VAT information, except optionally on Totals, allowing single delivery or pick up mode in a single
+location with:
+
+- <u>on Line level</u>: Product description, Substituted Product for Order
+  Response type message only, Line Note, Net Unit Price, Reference to Blanket
+  Order line ID, potential partial delivery, requested quantity, and line total,
+- <u>on Document level</u>: Seller, Buyer, Ship From, Ship To Parties, with IDs,
+  Name, Postal and electronic Addresses, Legal and VAT ID optionnally (only for
+  Seller and Buyer), Delivery terms, references to ther business documents
+  (Quotation, Contract, Blanket Order, Previous Order, Previous Order Change or
+  previous Order Response), Requested delivery or pick-up date or period,
+  Payment Terms, Totals and Buyer accounting reference.
+
+## Basic Usage
+
+<Steps>
+    <Step>
+        ### Install the Profile
+        
+        ```package-install tab-group="pm"
+        npm install @node-zugferd/order-x-basic
+        ```
+    </Step>
+    <Step>
+        ### Setup the Profile
+        
+        Register the profile when creating your zugferd instance:
+        
+        ```ts title="lib/invoicer.ts"
+        import { orderXBasic } from "@node-zugferd/order-x-basic"; // [!code highlight]
+        import { zugferd } from "node-zugferd";
+        
+        export const invoicer = zugferd({
+          profiles: [orderXBasic], // [!code highlight]
+        });
+        ```
+    </Step>
+    <Step>
+        ### Define Order Data
+        
+        Provide order data that satisfies the requirements of this profile.
+        
+        ```ts title="data.ts"
+        import type { invoicer } from "@/lib/invoicer";
+        
+        const data: typeof invoicer.$Infer.Input.OrderXBasic = {
+          exchangedDocument: {
+            orderId: "471102",
+            // ...
+          },
+          // ...
+        };
+        ```
+    </Step>
+    <Step>
+        ### Generate Order
+        
+        Create the order and embed it into a PDF/A document or serialize it for further processing.
+        
+        ```ts title="order.ts"
+        import { invoicer } from "@/lib/invoicer";
+        import { data } from "./data";
+        import { readFile } from "node:fs/promises";
+        
+        const order = await invoicer.create("order-x-basic", data);
+        
+        const xml = order.toXML();
+        const pdfA = await order.toPDF(
+          await readFile("./my-order.pdf"),
+        );
+        ```
+    </Step>
+</Steps>
+
+## Schema
+
+<ProfileTree profile={orderXBasic} />

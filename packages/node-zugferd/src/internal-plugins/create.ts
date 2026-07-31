@@ -1,4 +1,5 @@
 import type {
+	Awaitable,
 	DataRelationship,
 	InferProfileIds,
 	ZugferdOptions as ZFOptions,
@@ -12,6 +13,7 @@ import type { PDFDocument } from "pdf-lib";
 import { create as createDocument } from "xmlbuilder2";
 import { toPdfA } from "../pdf";
 import type { PDFOptions } from "../pdf/types";
+import type { ZugferdContext } from "@node-zugferd/core";
 
 declare module "@node-zugferd/core" {
 	interface ZugferdPluginRegistry<ZugferdOptions, Options> {
@@ -22,17 +24,16 @@ declare module "@node-zugferd/core" {
 		};
 	}
 }
+
 type InferProfileFromId<
 	ZugferdOptions extends ZFOptions,
 	ProfileId extends InferProfileIds<ZugferdOptions>,
 > =
-	NonNullable<
-		Extract<ZugferdOptions["profiles"][number], { id: ProfileId }>
-	> extends infer R extends ZugferdProfile
-		? R
+	ZugferdOptions extends ZFOptions<infer Profiles>
+		? Extract<Profiles[number], { id: ProfileId }>
 		: never;
 
-export const create = <ZugferdOptions extends ZFOptions>(
+export const create = <const ZugferdOptions extends ZFOptions>(
 	options: ZugferdOptions,
 ) => {
 	return {
@@ -44,9 +45,39 @@ export const create = <ZugferdOptions extends ZFOptions>(
 				input: NonNullable<
 					InferProfileFromId<ZugferdOptions, ProfileId>["$Infer"]
 				>["Input"],
+				config?:
+					| {
+							type?: InferProfileFromId<
+								ZugferdOptions,
+								ProfileId
+							>["extensionSchema"]["type"] extends (infer T)[]
+								? T & string
+								: never;
+							autoAttachBinaryObjects?: boolean | undefined;
+					  }
+					| undefined,
 			) {
 				const profile = ctx.getProfile(profileId, { throw: true });
-				const data = await parseAsync(profile.schema, input);
+				const filesToAttach = new Map<
+					string,
+					{
+						filename: string;
+						mimeType: string;
+						content: Uint8Array;
+					}
+				>();
+				const data = await parseAsync(profile.schema, input, {
+					context: {
+						context: ctx,
+						profile,
+						pdf: {
+							autoAttachBinaryObjects: config?.autoAttachBinaryObjects ?? false,
+							embedFile: (data) => {
+								filesToAttach.set(data.filename, data);
+							},
+						},
+					},
+				});
 
 				if (profile.rules) {
 					const { schema, rules, ...p } = profile;
@@ -71,6 +102,7 @@ export const create = <ZugferdOptions extends ZFOptions>(
 				const xml = root.end({
 					format: "xml",
 					allowEmptyTags: true,
+					prettyPrint: ctx.options.prettyPrint ?? false,
 				});
 				await ctx.options.hooks?.afterXMLBuild?.({
 					profile,
@@ -80,7 +112,19 @@ export const create = <ZugferdOptions extends ZFOptions>(
 
 				const methods = {
 					async toPDF(
-						pdf: PDFDocument | string | Uint8Array | ArrayBuffer,
+						pdf:
+							| PDFDocument
+							| string
+							| Uint8Array
+							| ArrayBuffer
+							| ((ctx: {
+									data: Record<string, any>;
+									xml: string;
+									profile: ZugferdProfile;
+									context: ZugferdContext;
+							  }) => Awaitable<
+									PDFDocument | string | Uint8Array | ArrayBuffer
+							  >),
 						options?:
 							| (PDFOptions & {
 									dataRelationship?: InferProfileFromId<
@@ -107,19 +151,40 @@ export const create = <ZugferdOptions extends ZFOptions>(
 								? profile.dataRelationship[0]
 								: profile.dataRelationship) as DataRelationship,
 						};
-						const doc = await toPdfA(profile, pdf, {
-							metadata: opts.metadata,
-							attachments: [
-								{
-									filename: profile.extensionSchema.fileName,
-									data: xml,
-									mimeType: "application/xml",
-									createdAt: new Date(),
-									dataRelationship: opts.dataRelationship,
-								},
-								...(opts.attachments ?? []),
-							],
-						});
+						const pdfDoc =
+							typeof pdf === "function"
+								? await pdf({
+										data,
+										xml,
+										profile,
+										context: ctx,
+									})
+								: pdf;
+
+						const doc = await toPdfA(
+							profile,
+							pdfDoc,
+							{
+								metadata: opts.metadata,
+								attachments: [
+									...[...filesToAttach.values()].map((data) => ({
+										filename: data.filename,
+										data: data.content,
+										mimeType: data.mimeType,
+										dataRelationship: "Supplement" as const,
+									})),
+									...(opts.attachments ?? []),
+									{
+										filename: profile.extensionSchema.fileName,
+										data: xml,
+										mimeType: "application/xml",
+										createdAt: new Date(),
+										dataRelationship: opts.dataRelationship,
+									},
+								],
+							},
+							config,
+						);
 
 						return doc;
 					},

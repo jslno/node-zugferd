@@ -128,7 +128,7 @@ export const extended = defineProfile({
 
 			if (data.exchangedDocument.language) {
 				const languageId = fragment().ele("ram:LanguageID");
-				languageId.txt(data.exchangedDocument.language);
+				languageId.txt(data.exchangedDocument.language.value);
 				const refNode =
 					findNode(
 						"BG-1[0]",
@@ -172,8 +172,8 @@ export const extended = defineProfile({
 				effectiveSpecifiedPeriod
 					.ele("ram:CompleteDateTime")
 					.ele("udt:DateTimeString")
-					.txt(data.exchangedDocument.contractualDueDate)
-					.att("format", "102");
+					.txt(data.exchangedDocument.contractualDueDate.value)
+					.att("format", data.exchangedDocument.contractualDueDate.format);
 			}
 		}
 
@@ -235,7 +235,7 @@ export const extended = defineProfile({
 
 					if (line.position.lineStatusCode) {
 						const lineStatusCode = fragment().ele("ram:LineStatusCode");
-						lineStatusCode.txt(line.position.lineStatusCode);
+						lineStatusCode.txt(line.position.lineStatusCode.value);
 						const refNode =
 							findNode(
 								`BT-127-00[${i}][0]`,
@@ -291,7 +291,7 @@ export const extended = defineProfile({
 							}
 
 							if (note.subjectCode) {
-								includedNote.ele("ram:SubjectCode").txt(note.subjectCode);
+								includedNote.ele("ram:SubjectCode").txt(note.subjectCode.value);
 							}
 						}
 					}
@@ -473,7 +473,7 @@ export const extended = defineProfile({
 
 							if (attribute.typeCode) {
 								const typeCode = fragment().ele("ram:TypeCode");
-								typeCode.txt(attribute.typeCode);
+								typeCode.txt(attribute.typeCode.value);
 								const refNode =
 									findNode(
 										`BT-160[${i}][${j}]`,
@@ -567,6 +567,178 @@ export const extended = defineProfile({
 									.ele("ram:SupplierAssignedSerialID")
 									.txt(instance.supplierAssignedSerialId.identifier);
 							}
+						}
+					}
+
+					if (line.item.manufacturer) {
+						const manufacturerTradeParty = specifiedTradeProduct.ele(
+							"ram:ManufacturerTradeParty",
+						);
+
+						if (
+							line.item.manufacturer.id?.length &&
+							line.item.manufacturer.id.length > 0
+						) {
+							for (const id of line.item.manufacturer.id) {
+								manufacturerTradeParty.ele("ram:ID").txt(id.identifier);
+							}
+						}
+
+						if (
+							line.item.manufacturer.globalId?.length &&
+							line.item.manufacturer.globalId.length > 0
+						) {
+							for (const globalId of line.item.manufacturer.globalId) {
+								manufacturerTradeParty
+									.ele("ram:GlobalID")
+									.txt(globalId.identifier)
+									.att("schemeID", globalId.schemeId);
+							}
+						}
+
+						if (line.item.manufacturer.name) {
+							manufacturerTradeParty
+								.ele("ram:Name")
+								.txt(line.item.manufacturer.name);
+						}
+
+						if (line.item.manufacturer.roleCode) {
+							manufacturerTradeParty
+								.ele("ram:RoleCode")
+								.txt(line.item.manufacturer.roleCode.value);
+						}
+
+						if (line.item.manufacturer.description) {
+							manufacturerTradeParty
+								.ele("ram:Description")
+								.txt(line.item.manufacturer.description);
+						}
+
+						if (line.item.manufacturer.organization) {
+							const specifiedLegalOrganization = manufacturerTradeParty.ele(
+								"ram:SpecifiedLegalOrganization",
+							);
+							if (line.item.manufacturer.organization.id) {
+								const id = specifiedLegalOrganization
+									.ele("ram:ID")
+									.txt(line.item.manufacturer.organization.id.identifier);
+								if (line.item.manufacturer.organization.id.schemeId) {
+									id.att(
+										"schemeID",
+										line.item.manufacturer.organization.id.schemeId,
+									);
+								}
+							}
+							if (line.item.manufacturer.organization.tradingName) {
+								specifiedLegalOrganization
+									.ele("ram:TradingBusinessName")
+									.txt(line.item.manufacturer.organization.tradingName);
+							}
+						}
+
+						if (line.item.manufacturer.contact) {
+							const definedTradeContact = manufacturerTradeParty.ele(
+								"ram:DefinedTradeContact",
+							);
+
+							if (line.item.manufacturer.contact.personName) {
+								definedTradeContact
+									.ele("ram:PersonName")
+									.txt(line.item.manufacturer.contact.personName);
+							}
+							if (line.item.manufacturer.contact.departmentName) {
+								definedTradeContact
+									.ele("ram:DepartmentName")
+									.txt(line.item.manufacturer.contact.departmentName);
+							}
+							if (line.item.manufacturer.contact.typeCode) {
+								definedTradeContact
+									.ele("ram:TypeCode")
+									.txt(line.item.manufacturer.contact.typeCode.value);
+							}
+							if (line.item.manufacturer.contact.phoneNumber) {
+								definedTradeContact
+									.ele("ram:TelephoneUniversalCommunication")
+									.ele("ram:CompleteNumber")
+									.txt(line.item.manufacturer.contact.phoneNumber);
+							}
+							if (line.item.manufacturer.contact.faxNumber) {
+								definedTradeContact
+									.ele("ram:FaxUniversalCommunication")
+									.ele("ram:CompleteNumber")
+									.txt(line.item.manufacturer.contact.faxNumber);
+							}
+							if (line.item.manufacturer.contact.emailAddress) {
+								definedTradeContact
+									.ele("ram:EmailURIUniversalCommunication")
+									.ele("ram:URIID")
+									.txt(line.item.manufacturer.contact.emailAddress);
+							}
+						}
+
+						const postalTradeAddress = manufacturerTradeParty.ele(
+							"ram:PostalTradeAddress",
+						);
+
+						if (line.item.manufacturer.postalAddress.postCode) {
+							postalTradeAddress
+								.ele("ram:PostcodeCode")
+								.txt(line.item.manufacturer.postalAddress.postCode);
+						}
+						if (line.item.manufacturer.postalAddress.line1) {
+							postalTradeAddress
+								.ele("ram:LineOne")
+								.txt(line.item.manufacturer.postalAddress.line1);
+						}
+						if (line.item.manufacturer.postalAddress.line2) {
+							postalTradeAddress
+								.ele("ram:LineTwo")
+								.txt(line.item.manufacturer.postalAddress.line2);
+						}
+						if (line.item.manufacturer.postalAddress.line3) {
+							postalTradeAddress
+								.ele("ram:LineThree")
+								.txt(line.item.manufacturer.postalAddress.line3);
+						}
+						if (line.item.manufacturer.postalAddress.city) {
+							postalTradeAddress
+								.ele("ram:CityName")
+								.txt(line.item.manufacturer.postalAddress.city);
+						}
+						postalTradeAddress
+							.ele("ram:CountryID")
+							.txt(line.item.manufacturer.postalAddress.countryCode.value);
+						if (line.item.manufacturer.postalAddress.countrySubdivision) {
+							postalTradeAddress
+								.ele("ram:CountrySubDivisionName")
+								.txt(line.item.manufacturer.postalAddress.countrySubdivision);
+						}
+
+						if (line.item.manufacturer.electronicAddress) {
+							manufacturerTradeParty
+								.ele("ram:URIUniversalCommunication")
+								.ele("ram:URIID")
+								.txt(line.item.manufacturer.electronicAddress.identifier)
+								.att(
+									"schemeID",
+									line.item.manufacturer.electronicAddress.schemeId,
+								);
+						}
+
+						if (line.item.manufacturer.taxRegistration?.vat?.id) {
+							manufacturerTradeParty
+								.ele("ram:SpecifiedTaxRegistration")
+								.ele("ram:ID")
+								.txt(line.item.manufacturer.taxRegistration.vat.id.identifier)
+								.att("schemeID", "VA");
+						}
+
+						if (line.item.manufacturer.taxRegistration?.local?.id) {
+							manufacturerTradeParty
+								.ele("ram:SpecifiedTaxRegistration")
+								.ele("ram:ID")
+								.txt(line.item.manufacturer.taxRegistration.local.id.identifier)
+								.att("schemeID", "FC");
 						}
 					}
 
@@ -709,7 +881,7 @@ export const extended = defineProfile({
 						if (line.priceDetails.deliveryTerms.typeCode) {
 							applicableTradeDeliveryTerms
 								.ele("ram:DeliveryTypeCode")
-								.txt(line.priceDetails.deliveryTerms.typeCode);
+								.txt(line.priceDetails.deliveryTerms.typeCode.value);
 						}
 
 						if (line.priceDetails.deliveryTerms.location) {
@@ -718,7 +890,9 @@ export const extended = defineProfile({
 							);
 							relevantTradeLocation
 								.ele("ram:CountryID")
-								.txt(line.priceDetails.deliveryTerms.location.countryCode);
+								.txt(
+									line.priceDetails.deliveryTerms.location.countryCode.value,
+								);
 							relevantTradeLocation
 								.ele("ram:Name")
 								.txt(line.priceDetails.deliveryTerms.location.name);
@@ -772,8 +946,11 @@ export const extended = defineProfile({
 							sellerOrderReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(line.priceDetails.sellerOrderReferencedDocument.date)
-								.att("format", "102");
+								.txt(line.priceDetails.sellerOrderReferencedDocument.date.value)
+								.att(
+									"format",
+									line.priceDetails.sellerOrderReferencedDocument.date.format,
+								);
 						}
 					}
 
@@ -833,8 +1010,8 @@ export const extended = defineProfile({
 							buyerOrderReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(line.priceDetails.associatedOrder.date)
-								.att("format", "102");
+								.txt(line.priceDetails.associatedOrder.date.value)
+								.att("format", line.priceDetails.associatedOrder.date.format);
 						}
 					}
 
@@ -878,8 +1055,11 @@ export const extended = defineProfile({
 							quotationReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(line.priceDetails.quotationReferencedDocument.date)
-								.att("format", "102");
+								.txt(line.priceDetails.quotationReferencedDocument.date.value)
+								.att(
+									"format",
+									line.priceDetails.quotationReferencedDocument.date.format,
+								);
 						}
 					}
 
@@ -927,8 +1107,11 @@ export const extended = defineProfile({
 							contractReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(line.priceDetails.contractReferencedDocument.date)
-								.att("format", "102");
+								.txt(line.priceDetails.contractReferencedDocument.date.value)
+								.att(
+									"format",
+									line.priceDetails.contractReferencedDocument.date.format,
+								);
 						}
 					}
 
@@ -1001,8 +1184,8 @@ export const extended = defineProfile({
 								additionalReferencedDocument
 									.ele("ram:FormattedIssueDateTime")
 									.ele("qdt:DateTimeString")
-									.txt(doc.date)
-									.att("format", "102");
+									.txt(doc.date.value)
+									.att("format", doc.date.format);
 							}
 						}
 					}
@@ -1097,7 +1280,7 @@ export const extended = defineProfile({
 								if (discount.reasonCode) {
 									appliedTradeAllowanceCharge
 										.ele("ram:ReasonCode")
-										.txt(discount.reasonCode);
+										.txt(discount.reasonCode.value);
 								}
 
 								if (discount.reason) {
@@ -1150,7 +1333,7 @@ export const extended = defineProfile({
 								if (surcharge.reasonCode) {
 									appliedTradeAllowanceCharge
 										.ele("ram:ReasonCode")
-										.txt(surcharge.reasonCode);
+										.txt(surcharge.reasonCode.value);
 								}
 
 								if (surcharge.reason) {
@@ -1191,12 +1374,13 @@ export const extended = defineProfile({
 							}
 							includedTradeTax
 								.ele("ram:CategoryCode")
-								.txt(line.priceDetails.netPrice.includedTax.categoryCode);
+								.txt(line.priceDetails.netPrice.includedTax.categoryCode.value);
 							if (line.priceDetails.netPrice.includedTax.exemptionReasonCode) {
 								includedTradeTax
 									.ele("ram:ExemptionReasonCode")
 									.txt(
-										line.priceDetails.netPrice.includedTax.exemptionReasonCode,
+										line.priceDetails.netPrice.includedTax.exemptionReasonCode
+											.value,
 									);
 							}
 							includedTradeTax
@@ -1241,7 +1425,7 @@ export const extended = defineProfile({
 						if (line.priceDetails.itemSeller.roleCode) {
 							itemSellerTradeParty
 								.ele("ram:RoleCode")
-								.txt(line.priceDetails.itemSeller.roleCode);
+								.txt(line.priceDetails.itemSeller.roleCode.value);
 						}
 
 						if (line.priceDetails.itemSeller.description) {
@@ -1295,7 +1479,9 @@ export const extended = defineProfile({
 								}
 
 								if (contact.typeCode) {
-									definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+									definedTradeContact
+										.ele("ram:TypeCode")
+										.txt(contact.typeCode.value);
 								}
 
 								if (contact.phoneNumber) {
@@ -1350,7 +1536,9 @@ export const extended = defineProfile({
 							}
 							postalTradeAddress
 								.ele("ram:CountryID")
-								.txt(line.priceDetails.itemSeller.postalAddress.countryCode);
+								.txt(
+									line.priceDetails.itemSeller.postalAddress.countryCode.value,
+								);
 							if (
 								line.priceDetails.itemSeller.postalAddress.countrySubdivison
 							) {
@@ -1423,8 +1611,13 @@ export const extended = defineProfile({
 							ultimateCustomerOrderReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(line.priceDetails.customerOrderReferencedDocument.date)
-								.att("format", "102");
+								.txt(
+									line.priceDetails.customerOrderReferencedDocument.date.value,
+								)
+								.att(
+									"format",
+									line.priceDetails.customerOrderReferencedDocument.date.format,
+								);
 						}
 					}
 				}
@@ -1503,7 +1696,7 @@ export const extended = defineProfile({
 						if (line.delivery.recipient.roleCode) {
 							shipToTradeParty
 								.ele("ram:RoleCode")
-								.txt(line.delivery.recipient.roleCode);
+								.txt(line.delivery.recipient.roleCode.value);
 						}
 
 						if (line.delivery.recipient.organization) {
@@ -1551,7 +1744,9 @@ export const extended = defineProfile({
 								}
 
 								if (contact.typeCode) {
-									definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+									definedTradeContact
+										.ele("ram:TypeCode")
+										.txt(contact.typeCode.value);
 								}
 
 								if (contact.phoneNumber) {
@@ -1609,7 +1804,7 @@ export const extended = defineProfile({
 							}
 							postalTradeAddress
 								.ele("ram:CountryID")
-								.txt(line.delivery.recipient.postalAddress.countryCode);
+								.txt(line.delivery.recipient.postalAddress.countryCode.value);
 							if (line.delivery.recipient.postalAddress.countrySubdivision) {
 								postalTradeAddress
 									.ele("ram:CountrySubDivisionName")
@@ -1672,7 +1867,7 @@ export const extended = defineProfile({
 						if (line.delivery.deviatingFinalRecipient.roleCode) {
 							ultimateShipToTradeParty
 								.ele("ram:RoleCode")
-								.txt(line.delivery.deviatingFinalRecipient.roleCode);
+								.txt(line.delivery.deviatingFinalRecipient.roleCode.value);
 						}
 
 						if (line.delivery.deviatingFinalRecipient.organization) {
@@ -1732,7 +1927,9 @@ export const extended = defineProfile({
 								}
 
 								if (contact.typeCode) {
-									definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+									definedTradeContact
+										.ele("ram:TypeCode")
+										.txt(contact.typeCode.value);
 								}
 
 								if (contact.phoneNumber) {
@@ -1805,7 +2002,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									line.delivery.deviatingFinalRecipient.postalAddress
-										.countryCode,
+										.countryCode.value,
 								);
 							if (
 								line.delivery.deviatingFinalRecipient.postalAddress
@@ -1861,8 +2058,11 @@ export const extended = defineProfile({
 							actualDeliverySupplyChainEvent
 								.ele("ram:OccurrenceDateTime")
 								.ele("udt:DateTimeString")
-								.txt(line.delivery.actualDelivery.deliveryTime)
-								.att("format", "102");
+								.txt(line.delivery.actualDelivery.deliveryTime.value)
+								.att(
+									"format",
+									line.delivery.actualDelivery.deliveryTime.format,
+								);
 						}
 					}
 
@@ -1887,8 +2087,11 @@ export const extended = defineProfile({
 							despatchAdviceReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(line.delivery.despatchAdviceReferencedDocument.date)
-								.att("format", "102");
+								.txt(line.delivery.despatchAdviceReferencedDocument.date.value)
+								.att(
+									"format",
+									line.delivery.despatchAdviceReferencedDocument.date.format,
+								);
 						}
 					}
 
@@ -1914,8 +2117,11 @@ export const extended = defineProfile({
 							receivingAdviceReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(line.delivery.receivingAdviceReferencedDocument.date)
-								.att("format", "102");
+								.txt(line.delivery.receivingAdviceReferencedDocument.date.value)
+								.att(
+									"format",
+									line.delivery.receivingAdviceReferencedDocument.date.format,
+								);
 						}
 					}
 
@@ -1940,8 +2146,11 @@ export const extended = defineProfile({
 							deliveryNoteReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(line.delivery.deliveryNoteReferencedDocument.date)
-								.att("format", "102");
+								.txt(line.delivery.deliveryNoteReferencedDocument.date.value)
+								.att(
+									"format",
+									line.delivery.deliveryNoteReferencedDocument.date.format,
+								);
 						}
 					}
 				}
@@ -2004,7 +2213,7 @@ export const extended = defineProfile({
 								const exemptionReasonCode = fragment().ele(
 									"ram:ExemptionReasonCode",
 								);
-								exemptionReasonCode.txt(vatBreakdown.exemptionReasonCode);
+								exemptionReasonCode.txt(vatBreakdown.exemptionReasonCode.value);
 								const refNode =
 									findNode(
 										`BT-152[${i}][${j}]`,
@@ -2020,7 +2229,7 @@ export const extended = defineProfile({
 
 							if (vatBreakdown.dueDateTypeCode) {
 								const dueDateTypeCode = fragment().ele("ram:DueDateTypeCode");
-								dueDateTypeCode.txt(vatBreakdown.dueDateTypeCode);
+								dueDateTypeCode.txt(vatBreakdown.dueDateTypeCode.value);
 								const refNode =
 									findNode(
 										`BT-152[${i}][${j}]`,
@@ -2035,69 +2244,6 @@ export const extended = defineProfile({
 							}
 						}
 					}
-					// (() => {
-					//   const applicableTradeTax = findNode(`BG-30[${i}]`, specifiedLineTradeSettlement, (node) => node.node.nodeName === "ram:ApplicableTradeTax", (fragment) => {
-					//     const applicableTradeTax = fragment.ele("ram:ApplicableTradeTax");
-					//     const refNode = (getCachedNode(`BG-26[${i}]`) || getCachedNode(`BG-27[${i}][0]`) || getCachedNode(`BG-28[${i}][0]`) || getCachedNode(`BT-131-00[${i}]`) || getCachedNode(`BT-128-00[${i}]`) || getCachedNode(`BT-133-00[${i}]`) || setCachedNode(
-					//       (node) => node.node.nodeName === "ram:BillingSpecifiedPeriod"
-					//         ? `BG-26[${i}]`
-					//         : node.node.nodeName === "ram:SpecifiedTradeAllowanceCharge"
-					//           ? ([...node.node.childNodes].some(
-					//               child =>
-					//                 child.nodeName === "ram:ChargeIndicator" &&
-					//                 [...child.childNodes].some(
-					//                   c =>
-					//                     c.nodeName === "udt:Indicator" &&
-					//                     c.textContent?.trim() === "false"
-					//                 )
-					//             )
-					//             ? `BG-27[${i}][0]`
-					//             : `BG-28[${i}][0]`)
-					//           : node.node.nodeName === "ram:SpecifiedTradeSettlementLineMonetarySummation"
-					//             ? `BT-131-00[${i}]`
-					//             : node.node.nodeName === "ram:AdditionalReferencedDocument"
-					//               ? `BT-128-00[${i}]`
-					//               : `BT-133-00[${i}]`,
-					//       specifiedLineTradeSettlement.find((node) => [
-					//         "ram:BillingSpecifiedPeriod",
-					//         "ram:SpecifiedTradeAllowanceCharge",
-					//         "ram:SpecifiedTradeSettlementLineMonetarySummation",
-					//         "ram:AdditionalReferencedDocument",
-					//         "ram:ReceivableSpecifiedTradeAccountingAccount"
-					//       ].includes(node.node.nodeName))
-					//     ))?.node ?? null;
-					//     specifiedLineTradeSettlement.node.insertBefore(applicableTradeTax.node, refNode);
-					//     return applicableTradeTax;
-					//   });
-
-					//   if (line.billing.vatBreakdown.calculatedAmount) {
-					//     const calculatedAmount = fragment().ele("ram:CalculatedAmount");
-					//     calculatedAmount.txt(line.billing.vatBreakdown.calculatedAmount.value.toString());
-					//     const refNode = findNode(`BT-151-0[${i}]`, applicableTradeTax, (node) => node.node.nodeName === "ram:TypeCode")?.node ?? null;
-					//     applicableTradeTax.node.insertNode(calculatedAmount.node, refNode);
-					//   }
-
-					//   if (line.billing.vatBreakdown.exemptionReason) {
-					//     const exemptionReason = fragment().ele("ram:ExemptionReason");
-					//     exemptionReason.txt(line.billing.vatBreakdown.exemptionReason);
-					//     const refNode = findNode(`BT-151[${i}]`, applicableTradeTax, (node) => node.node.nodeName === "ram:CategoryCode")?.node ?? null;
-					//     applicableTradeTax.node.insertBefore(exemptionReason.node, refNode);
-					//   }
-
-					//   if (line.billing.vatBreakdown.exemptionReasonCode) {
-					//     const exemptionReasonCode = fragment().ele("ram:ExemptionReasonCode");
-					//     exemptionReasonCode.txt(line.billing.vatBreakdown.exemptionReasonCode);
-					//     const refNode = findNode(`BT-152[${i}]`, applicableTradeTax, (node) => node.node.nodeName === "ram:RateApplicablePercent")?.node ?? null;
-					//     applicableTradeTax.node.insertBefore(exemptionReasonCode.node, refNode);
-					//   }
-
-					//   if (line.billing.vatBreakdown.dueDateTypeCode) {
-					//     const dueDateTypeCode = fragment().ele("ram:DueDateTypeCode");
-					//     dueDateTypeCode.txt(line.billing.vatBreakdown.dueDateTypeCode);
-					//     const refNode = findNode(`BT-152[${i}]`, applicableTradeTax, (node) => node.node.nodeName === "ram:RateApplicablePercent")?.node ?? null;
-					//     applicableTradeTax.node.insertBefore(dueDateTypeCode.node, refNode);
-					//   }
-					// })();
 
 					if (line.billing.itemTotals) {
 						const specifiedTradeSettlementLineMonetarySummation = findNode(
@@ -2244,15 +2390,15 @@ export const extended = defineProfile({
 							if (precendingInvoice.typeCode) {
 								invoiceReferencedDocument
 									.ele("ram:TypeCode")
-									.txt(precendingInvoice.typeCode);
+									.txt(precendingInvoice.typeCode.value);
 							}
 
 							if (precendingInvoice.date) {
 								invoiceReferencedDocument
 									.ele("ram:FormattedIssueDateTime")
 									.ele("qdt:DateTimeString")
-									.txt(precendingInvoice.date)
-									.att("format", "102");
+									.txt(precendingInvoice.date.value)
+									.att("format", precendingInvoice.date.format);
 							}
 						}
 					}
@@ -2341,7 +2487,7 @@ export const extended = defineProfile({
 
 					if (data.transaction.contract.seller.roleCode) {
 						const roleCode = fragment().ele("ram:RoleCode");
-						roleCode.txt(data.transaction.contract.seller.roleCode);
+						roleCode.txt(data.transaction.contract.seller.roleCode.value);
 						const refNode =
 							(
 								getCachedNode("BT-33") ||
@@ -2467,7 +2613,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.contract.seller.organization.postalAddress
-										.countryCode,
+										.countryCode.value,
 								);
 							if (
 								data.transaction.contract.seller.organization.postalAddress
@@ -2502,7 +2648,7 @@ export const extended = defineProfile({
 
 							if (contact.typeCode) {
 								const typeCode = fragment().ele("ram:TypeCode");
-								typeCode.txt(contact.typeCode);
+								typeCode.txt(contact.typeCode.value);
 								const refNode =
 									(
 										getCachedNode("BT-42-00") ||
@@ -2635,7 +2781,7 @@ export const extended = defineProfile({
 
 					if (data.transaction.contract.buyer.roleCode) {
 						const roleCode = fragment().ele("ram:RoleCode");
-						roleCode.txt(data.transaction.contract.buyer.roleCode);
+						roleCode.txt(data.transaction.contract.buyer.roleCode.value);
 						const refNode =
 							(
 								getCachedNode("BT-47-00") ||
@@ -2781,7 +2927,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.contract.buyer.organization.postalAddress
-										.countryCode,
+										.countryCode.value,
 								);
 							if (
 								data.transaction.contract.buyer.organization.postalAddress
@@ -2816,7 +2962,7 @@ export const extended = defineProfile({
 
 							if (contact.typeCode) {
 								const typeCode = fragment().ele("ram:TypeCode");
-								typeCode.txt(contact.typeCode);
+								typeCode.txt(contact.typeCode.value);
 								const refNode =
 									(
 										getCachedNode("BT-57-00") ||
@@ -2955,7 +3101,7 @@ export const extended = defineProfile({
 					if (data.transaction.contract.salesAgent.roleCode) {
 						salesAgentTradeParty
 							.ele("ram:RoleCode")
-							.txt(data.transaction.contract.salesAgent.roleCode);
+							.txt(data.transaction.contract.salesAgent.roleCode.value);
 					}
 					if (data.transaction.contract.salesAgent.organization) {
 						const specifiedLegalOrganization = salesAgentTradeParty.ele(
@@ -3051,7 +3197,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.contract.salesAgent.organization
-										.postalAddress.countryCode,
+										.postalAddress.countryCode.value,
 								);
 							if (
 								data.transaction.contract.salesAgent.organization.postalAddress
@@ -3086,7 +3232,9 @@ export const extended = defineProfile({
 									.txt(contact.departmentName);
 							}
 							if (contact.typeCode) {
-								definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+								definedTradeContact
+									.ele("ram:TypeCode")
+									.txt(contact.typeCode.value);
 							}
 							if (contact.phoneNumber) {
 								definedTradeContact
@@ -3141,7 +3289,8 @@ export const extended = defineProfile({
 					postalTradeAddress
 						.ele("ram:CountryID")
 						.txt(
-							data.transaction.contract.salesAgent.postalAddress.countryCode,
+							data.transaction.contract.salesAgent.postalAddress.countryCode
+								.value,
 						);
 					if (
 						data.transaction.contract.salesAgent.postalAddress
@@ -3276,7 +3425,9 @@ export const extended = defineProfile({
 					if (data.transaction.contract.buyerTaxRepresentative.roleCode) {
 						buyerTaxRepresentativeParty
 							.ele("ram:RoleCode")
-							.txt(data.transaction.contract.buyerTaxRepresentative.roleCode);
+							.txt(
+								data.transaction.contract.buyerTaxRepresentative.roleCode.value,
+							);
 					}
 					if (data.transaction.contract.buyerTaxRepresentative.organization) {
 						const specifiedLegalOrganization = buyerTaxRepresentativeParty.ele(
@@ -3381,7 +3532,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.contract.buyerTaxRepresentative.organization
-										.postalAddress.countryCode,
+										.postalAddress.countryCode.value,
 								);
 							if (
 								data.transaction.contract.buyerTaxRepresentative.organization
@@ -3417,7 +3568,9 @@ export const extended = defineProfile({
 									.txt(contact.departmentName);
 							}
 							if (contact.typeCode) {
-								definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+								definedTradeContact
+									.ele("ram:TypeCode")
+									.txt(contact.typeCode.value);
 							}
 							if (contact.phoneNumber) {
 								definedTradeContact
@@ -3497,7 +3650,7 @@ export const extended = defineProfile({
 						.ele("ram:CountryID")
 						.txt(
 							data.transaction.contract.buyerTaxRepresentative.postalAddress
-								.countryCode,
+								.countryCode.value,
 						);
 					if (
 						data.transaction.contract.buyerTaxRepresentative.postalAddress
@@ -3668,7 +3821,7 @@ export const extended = defineProfile({
 					if (data.transaction.contract.sellerTaxRepresentative.roleCode) {
 						const roleCode = fragment().ele("ram:RoleCode");
 						roleCode.txt(
-							data.transaction.contract.sellerTaxRepresentative.roleCode,
+							data.transaction.contract.sellerTaxRepresentative.roleCode.value,
 						);
 						const refNode =
 							findNode(
@@ -3796,7 +3949,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.contract.sellerTaxRepresentative.organization
-										.postalAddress.countryCode,
+										.postalAddress.countryCode.value,
 								);
 							if (
 								data.transaction.contract.sellerTaxRepresentative.organization
@@ -3843,7 +3996,9 @@ export const extended = defineProfile({
 									.txt(contact.departmentName);
 							}
 							if (contact.typeCode) {
-								definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+								definedTradeContact
+									.ele("ram:TypeCode")
+									.txt(contact.typeCode.value);
 							}
 							if (contact.phoneNumber) {
 								definedTradeContact
@@ -3984,7 +4139,7 @@ export const extended = defineProfile({
 					if (data.transaction.contract.deviatingEndUser.roleCode) {
 						productEndUserTradeParty
 							.ele("ram:RoleCode")
-							.txt(data.transaction.contract.deviatingEndUser.roleCode);
+							.txt(data.transaction.contract.deviatingEndUser.roleCode.value);
 					}
 
 					if (data.transaction.contract.deviatingEndUser.organization) {
@@ -4089,7 +4244,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.contract.deviatingEndUser.organization
-										.postalAddress.countryCode,
+										.postalAddress.countryCode.value,
 								);
 							if (
 								data.transaction.contract.deviatingEndUser.organization
@@ -4126,7 +4281,9 @@ export const extended = defineProfile({
 									.txt(contact.departmentName);
 							}
 							if (contact.typeCode) {
-								definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+								definedTradeContact
+									.ele("ram:TypeCode")
+									.txt(contact.typeCode.value);
 							}
 							if (contact.phoneNumber) {
 								definedTradeContact
@@ -4195,7 +4352,7 @@ export const extended = defineProfile({
 						.ele("ram:CountryID")
 						.txt(
 							data.transaction.contract.deviatingEndUser.postalAddress
-								.countryCode,
+								.countryCode.value,
 						);
 					if (
 						data.transaction.contract.deviatingEndUser.postalAddress
@@ -4305,7 +4462,7 @@ export const extended = defineProfile({
 					if (data.transaction.contract.deliveryTerms.typeCode) {
 						applicableTradeDeliveryTerms
 							.ele("ram:DeliveryTypeCode")
-							.txt(data.transaction.contract.deliveryTerms.typeCode);
+							.txt(data.transaction.contract.deliveryTerms.typeCode.value);
 					}
 
 					if (data.transaction.contract.deliveryTerms.location) {
@@ -4315,7 +4472,8 @@ export const extended = defineProfile({
 						relevantTradeLocation
 							.ele("ram:CountryID")
 							.txt(
-								data.transaction.contract.deliveryTerms.location.countryCode,
+								data.transaction.contract.deliveryTerms.location.countryCode
+									.value,
 							);
 						relevantTradeLocation
 							.ele("ram:Name")
@@ -4397,8 +4555,15 @@ export const extended = defineProfile({
 					sellerOrderReferencedDocument
 						.ele("ram:FormattedIssueDateTime")
 						.ele("qdt:DateTimeString")
-						.txt(data.transaction.contract.sellerOrderReferencedDocument.date)
-						.att("format", "102");
+						.txt(
+							data.transaction.contract.sellerOrderReferencedDocument.date
+								.value,
+						)
+						.att(
+							"format",
+							data.transaction.contract.sellerOrderReferencedDocument.date
+								.format,
+						);
 				}
 
 				if (data.transaction.contract.associatedOrder?.date) {
@@ -4466,8 +4631,11 @@ export const extended = defineProfile({
 					buyerOrderReferencedDocument
 						.ele("ram:FormattedIssueDateTime")
 						.ele("qdt:DateTimeString")
-						.txt(data.transaction.contract.associatedOrder.date)
-						.att("format", "102");
+						.txt(data.transaction.contract.associatedOrder.date.value)
+						.att(
+							"format",
+							data.transaction.contract.associatedOrder.date.format,
+						);
 				}
 
 				if (
@@ -4532,8 +4700,8 @@ export const extended = defineProfile({
 							quotationReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(doc.date)
-								.att("format", "102");
+								.txt(doc.date.value)
+								.att("format", doc.date.format);
 						}
 					}
 				}
@@ -4597,7 +4765,8 @@ export const extended = defineProfile({
 						contractReferencedDocument
 							.ele("ram:ReferenceTypeCode")
 							.txt(
-								data.transaction.contract.associatedContract.referenceTypeCode,
+								data.transaction.contract.associatedContract.referenceTypeCode
+									.value,
 							);
 					}
 
@@ -4605,8 +4774,11 @@ export const extended = defineProfile({
 						contractReferencedDocument
 							.ele("ram:FormattedIssueDateTime")
 							.ele("qdt:DateTimeString")
-							.txt(data.transaction.contract.associatedContract.date)
-							.att("format", "102");
+							.txt(data.transaction.contract.associatedContract.date.value)
+							.att(
+								"format",
+								data.transaction.contract.associatedContract.date.format,
+							);
 					}
 				}
 
@@ -4639,8 +4811,8 @@ export const extended = defineProfile({
 							additionalReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(doc.date)
-								.att("format", "102");
+								.txt(doc.date.value)
+								.att("format", doc.date.format);
 						}
 					}
 				}
@@ -4675,8 +4847,8 @@ export const extended = defineProfile({
 							additionalReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(tenderOrLotReference.date)
-								.att("format", "102");
+								.txt(tenderOrLotReference.date.value)
+								.att("format", tenderOrLotReference.date.format);
 						}
 					}
 				}
@@ -4711,8 +4883,8 @@ export const extended = defineProfile({
 							additionalReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(invoicedObjectIdentifier.date)
-								.att("format", "102");
+								.txt(invoicedObjectIdentifier.date.value)
+								.att("format", invoicedObjectIdentifier.date.format);
 						}
 					}
 				}
@@ -4757,7 +4929,7 @@ export const extended = defineProfile({
 					if (data.transaction.contract.buyerAgent.roleCode) {
 						buyerAgentTradeParty
 							.ele("ram:RoleCode")
-							.txt(data.transaction.contract.buyerAgent.roleCode);
+							.txt(data.transaction.contract.buyerAgent.roleCode.value);
 					}
 
 					if (data.transaction.contract.buyerAgent.organization) {
@@ -4854,7 +5026,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.contract.buyerAgent.organization
-										.postalAddress.countryCode,
+										.postalAddress.countryCode.value,
 								);
 							if (
 								data.transaction.contract.buyerAgent.organization.postalAddress
@@ -4891,7 +5063,9 @@ export const extended = defineProfile({
 									.txt(contact.departmentName);
 							}
 							if (contact.typeCode) {
-								definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+								definedTradeContact
+									.ele("ram:TypeCode")
+									.txt(contact.typeCode.value);
 							}
 							if (contact.phoneNumber) {
 								definedTradeContact
@@ -4946,7 +5120,8 @@ export const extended = defineProfile({
 					postalTradeAddress
 						.ele("ram:CountryID")
 						.txt(
-							data.transaction.contract.buyerAgent.postalAddress.countryCode,
+							data.transaction.contract.buyerAgent.postalAddress.countryCode
+								.value,
 						);
 					if (
 						data.transaction.contract.buyerAgent.postalAddress
@@ -5003,8 +5178,8 @@ export const extended = defineProfile({
 							ultimateCustomerOrderReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(doc.date)
-								.att("format", "102");
+								.txt(doc.date.value)
+								.att("format", doc.date.format);
 						}
 					}
 				}
@@ -5237,7 +5412,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.delivery.recipient.organization.postalAddress
-										.countryCode,
+										.countryCode.value,
 								);
 							if (
 								data.transaction.delivery.recipient.organization.postalAddress
@@ -5284,7 +5459,9 @@ export const extended = defineProfile({
 									.txt(contact.departmentName);
 							}
 							if (contact.typeCode) {
-								definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+								definedTradeContact
+									.ele("ram:TypeCode")
+									.txt(contact.typeCode.value);
 							}
 							if (contact.phoneNumber) {
 								definedTradeContact
@@ -5390,7 +5567,7 @@ export const extended = defineProfile({
 					if (data.transaction.delivery.finalRecipient.roleCode) {
 						ultimateShipToTradeParty
 							.ele("ram:RoleCode")
-							.txt(data.transaction.delivery.finalRecipient.roleCode);
+							.txt(data.transaction.delivery.finalRecipient.roleCode.value);
 					}
 
 					if (data.transaction.delivery.finalRecipient.organization) {
@@ -5494,7 +5671,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.delivery.finalRecipient.organization
-										.postalAddress.countryCode,
+										.postalAddress.countryCode.value,
 								);
 							if (
 								data.transaction.delivery.finalRecipient.organization
@@ -5531,7 +5708,9 @@ export const extended = defineProfile({
 									.txt(contact.departmentName);
 							}
 							if (contact.typeCode) {
-								definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+								definedTradeContact
+									.ele("ram:TypeCode")
+									.txt(contact.typeCode.value);
 							}
 							if (contact.phoneNumber) {
 								definedTradeContact
@@ -5594,8 +5773,8 @@ export const extended = defineProfile({
 					postalTradeAddress
 						.ele("ram:CountryID")
 						.txt(
-							data.transaction.delivery.finalRecipient.postalAddress
-								.countryCode,
+							data.transaction.delivery.finalRecipient.postalAddress.countryCode
+								.value,
 						);
 					if (
 						data.transaction.delivery.finalRecipient.postalAddress
@@ -5691,7 +5870,7 @@ export const extended = defineProfile({
 					if (data.transaction.delivery.deviatingSender.roleCode) {
 						shipFromTradeParty
 							.ele("ram:RoleCode")
-							.txt(data.transaction.delivery.deviatingSender.roleCode);
+							.txt(data.transaction.delivery.deviatingSender.roleCode.value);
 					}
 
 					if (data.transaction.delivery.deviatingSender.organization) {
@@ -5795,7 +5974,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.delivery.deviatingSender.organization
-										.postalAddress.countryCode,
+										.postalAddress.countryCode.value,
 								);
 							if (
 								data.transaction.delivery.deviatingSender.organization
@@ -5832,7 +6011,9 @@ export const extended = defineProfile({
 									.txt(contact.departmentName);
 							}
 							if (contact.typeCode) {
-								definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+								definedTradeContact
+									.ele("ram:TypeCode")
+									.txt(contact.typeCode.value);
 							}
 							if (contact.phoneNumber) {
 								definedTradeContact
@@ -5901,7 +6082,7 @@ export const extended = defineProfile({
 						.ele("ram:CountryID")
 						.txt(
 							data.transaction.delivery.deviatingSender.postalAddress
-								.countryCode,
+								.countryCode.value,
 						);
 					if (
 						data.transaction.delivery.deviatingSender.postalAddress
@@ -5972,8 +6153,11 @@ export const extended = defineProfile({
 					despatchAdviceReferencedDocument
 						.ele("ram:FormattedIssueDateTime")
 						.ele("qdt:DateTimeString")
-						.txt(data.transaction.delivery.despatchAdvice.date)
-						.att("format", "102");
+						.txt(data.transaction.delivery.despatchAdvice.date.value)
+						.att(
+							"format",
+							data.transaction.delivery.despatchAdvice.date.format,
+						);
 				}
 
 				if (data.transaction.delivery.associatedGoodsReceipt?.date) {
@@ -5990,8 +6174,11 @@ export const extended = defineProfile({
 					receivingAdviceReferencedDocument
 						.ele("ram:FormattedIssueDateTime")
 						.ele("qdt:DateTimeString")
-						.txt(data.transaction.delivery.associatedGoodsReceipt.date)
-						.att("format", "102");
+						.txt(data.transaction.delivery.associatedGoodsReceipt.date.value)
+						.att(
+							"format",
+							data.transaction.delivery.associatedGoodsReceipt.date.format,
+						);
 				}
 
 				if (
@@ -6011,8 +6198,8 @@ export const extended = defineProfile({
 							deliveryNoteReferencedDocument
 								.ele("ram:FormattedIssueDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(doc.date)
-								.att("format", "102");
+								.txt(doc.date.value)
+								.att("format", doc.date.format);
 						}
 					}
 				}
@@ -6116,7 +6303,7 @@ export const extended = defineProfile({
 					if (data.transaction.debit.invoicer.roleCode) {
 						invoicerTradeParty
 							.ele("ram:RoleCode")
-							.txt(data.transaction.debit.invoicer.roleCode);
+							.txt(data.transaction.debit.invoicer.roleCode.value);
 					}
 
 					if (data.transaction.debit.invoicer.organization) {
@@ -6203,7 +6390,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.debit.invoicer.organization.postalAddress
-										.countryCode,
+										.countryCode.value,
 								);
 							if (
 								data.transaction.debit.invoicer.organization.postalAddress
@@ -6239,7 +6426,9 @@ export const extended = defineProfile({
 									.txt(contact.departmentName);
 							}
 							if (contact.typeCode) {
-								definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+								definedTradeContact
+									.ele("ram:TypeCode")
+									.txt(contact.typeCode.value);
 							}
 							if (contact.phoneNumber) {
 								definedTradeContact
@@ -6293,7 +6482,9 @@ export const extended = defineProfile({
 					}
 					postalTradeAddress
 						.ele("ram:CountryID")
-						.txt(data.transaction.debit.invoicer.postalAddress.countryCode);
+						.txt(
+							data.transaction.debit.invoicer.postalAddress.countryCode.value,
+						);
 					if (
 						data.transaction.debit.invoicer.postalAddress.countrySubdivision
 					) {
@@ -6383,7 +6574,7 @@ export const extended = defineProfile({
 					if (data.transaction.debit.invoicee.roleCode) {
 						invoiceeTradeParty
 							.ele("ram:RoleCode")
-							.txt(data.transaction.debit.invoicee.roleCode);
+							.txt(data.transaction.debit.invoicee.roleCode.value);
 					}
 
 					if (data.transaction.debit.invoicee.organization) {
@@ -6470,7 +6661,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.debit.invoicee.organization.postalAddress
-										.countryCode,
+										.countryCode.value,
 								);
 							if (
 								data.transaction.debit.invoicee.organization.postalAddress
@@ -6508,7 +6699,9 @@ export const extended = defineProfile({
 							}
 
 							if (contact.typeCode) {
-								definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+								definedTradeContact
+									.ele("ram:TypeCode")
+									.txt(contact.typeCode.value);
 							}
 
 							if (contact.phoneNumber) {
@@ -6565,7 +6758,9 @@ export const extended = defineProfile({
 					}
 					postalTradeAddress
 						.ele("ram:CountryID")
-						.txt(data.transaction.debit.invoicee.postalAddress.countryCode);
+						.txt(
+							data.transaction.debit.invoicee.postalAddress.countryCode.value,
+						);
 					if (
 						data.transaction.debit.invoicee.postalAddress.countrySubdivision
 					) {
@@ -6635,7 +6830,7 @@ export const extended = defineProfile({
 
 					if (data.transaction.debit.payee.roleCode) {
 						const roleCode = fragment().ele("ram:RoleCode");
-						roleCode.txt(data.transaction.debit.payee.roleCode);
+						roleCode.txt(data.transaction.debit.payee.roleCode.value);
 						const refNode =
 							findNode(
 								"BT-61-00",
@@ -6719,7 +6914,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.debit.payee.organization.postalAddress
-										.countryCode,
+										.countryCode.value,
 								);
 							if (
 								data.transaction.debit.payee.organization.postalAddress
@@ -6755,7 +6950,9 @@ export const extended = defineProfile({
 									.txt(contact.departmentName);
 							}
 							if (contact.typeCode) {
-								definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+								definedTradeContact
+									.ele("ram:TypeCode")
+									.txt(contact.typeCode.value);
 							}
 							if (contact.phoneNumber) {
 								definedTradeContact
@@ -6810,7 +7007,9 @@ export const extended = defineProfile({
 						}
 						postalTradeAddress
 							.ele("ram:CountryID")
-							.txt(data.transaction.debit.payee.postalAddress.countryCode);
+							.txt(
+								data.transaction.debit.payee.postalAddress.countryCode.value,
+							);
 						if (data.transaction.debit.payee.postalAddress.countrySubdivision) {
 							postalTradeAddress
 								.ele("ram:CountrySubDivisionName")
@@ -6892,7 +7091,7 @@ export const extended = defineProfile({
 					if (data.transaction.debit.payer.roleCode) {
 						payerTradeParty
 							.ele("ram:RoleCode")
-							.txt(data.transaction.debit.payer.roleCode);
+							.txt(data.transaction.debit.payer.roleCode.value);
 					}
 
 					if (data.transaction.debit.payer.organization) {
@@ -6976,7 +7175,7 @@ export const extended = defineProfile({
 								.ele("ram:CountryID")
 								.txt(
 									data.transaction.debit.payer.organization.postalAddress
-										.countryCode,
+										.countryCode.value,
 								);
 							if (
 								data.transaction.debit.payer.organization.postalAddress
@@ -7012,7 +7211,9 @@ export const extended = defineProfile({
 									.txt(contact.departmentName);
 							}
 							if (contact.typeCode) {
-								definedTradeContact.ele("ram:TypeCode").txt(contact.typeCode);
+								definedTradeContact
+									.ele("ram:TypeCode")
+									.txt(contact.typeCode.value);
 							}
 							if (contact.phoneNumber) {
 								definedTradeContact
@@ -7066,7 +7267,7 @@ export const extended = defineProfile({
 					}
 					postalTradeAddress
 						.ele("ram:CountryID")
-						.txt(data.transaction.debit.payer.postalAddress.countryCode);
+						.txt(data.transaction.debit.payer.postalAddress.countryCode.value);
 					if (data.transaction.debit.payer.postalAddress.countrySubdivision) {
 						postalTradeAddress
 							.ele("ram:CountrySubDivisionName")
@@ -7126,10 +7327,10 @@ export const extended = defineProfile({
 
 					taxApplicableTradeCurrencyExchange
 						.ele("ram:SourceCurrencyCode")
-						.txt(data.transaction.debit.currencyExchange.invoiceCurrency);
+						.txt(data.transaction.debit.currencyExchange.invoiceCurrency.value);
 					taxApplicableTradeCurrencyExchange
 						.ele("ram:TargetCurrencyCode")
-						.txt(data.transaction.debit.currencyExchange.localCurrency);
+						.txt(data.transaction.debit.currencyExchange.localCurrency.value);
 					taxApplicableTradeCurrencyExchange
 						.ele("ram:ConversionRate")
 						.txt(
@@ -7140,8 +7341,107 @@ export const extended = defineProfile({
 						taxApplicableTradeCurrencyExchange
 							.ele("ram:ConversionRateDateTime")
 							.ele("udt:DateTimeString")
-							.txt(data.transaction.debit.currencyExchange.exchangeRateDate)
-							.att("format", "102");
+							.txt(
+								data.transaction.debit.currencyExchange.exchangeRateDate.value,
+							)
+							.att(
+								"format",
+								data.transaction.debit.currencyExchange.exchangeRateDate.format,
+							);
+					}
+				}
+
+				if (data.transaction.debit.paymentMeans) {
+					const specifiedTradeSettlementPaymentMeans = findNode(
+						"BG-16",
+						applicableHeaderTradeSettlement,
+						(node) =>
+							node.node.nodeName === "ram:SpecifiedTradeSettlementPaymentMeans",
+						(fragment) => {
+							const specifiedTradeSettlementPaymentMeans = fragment.ele(
+								"ram:SpecifiedTradeSettlementPaymentMeans",
+							);
+							const refNode =
+								findNode(
+									"BG-23[0]",
+									applicableHeaderTradeSettlement,
+									(node) => node.node.nodeName === "ram:ApplicableTradeTax",
+								)?.node ?? null;
+							applicableHeaderTradeSettlement.node.insertBefore(
+								specifiedTradeSettlementPaymentMeans.node,
+								refNode,
+							);
+							return specifiedTradeSettlementPaymentMeans;
+						},
+					);
+
+					if (
+						data.transaction.debit.paymentMeans.buyerBankDetails?.accountName
+					) {
+						const payerPartyDebtorFinancialAccount = findNode(
+							"BT-91-00",
+							specifiedTradeSettlementPaymentMeans,
+							(node) =>
+								node.node.nodeName === "ram:PayerPartyDebtorFinancialAccount",
+							(fragment) => {
+								const payerPartyDebtorFinancialAccount = fragment.ele(
+									"ram:PayerPartyDebtorFinancialAccount",
+								);
+								const refNode =
+									findNode(
+										"BG-17[0]",
+										specifiedTradeSettlementPaymentMeans,
+										(node) =>
+											node.node.nodeName ===
+											"ram:PayeePartyCreditorFinancialAccount",
+									)?.node ??
+									findNode(
+										"BT-86-00",
+										specifiedTradeSettlementPaymentMeans,
+										(node) =>
+											node.node.nodeName ===
+											"ram:PayeeSpecifiedCreditorFinancialInstitution",
+									)?.node ??
+									null;
+								specifiedTradeSettlementPaymentMeans.node.insertBefore(
+									payerPartyDebtorFinancialAccount.node,
+									refNode,
+								);
+								return payerPartyDebtorFinancialAccount;
+							},
+						);
+
+						payerPartyDebtorFinancialAccount
+							.ele("ram:AccountName")
+							.txt(
+								data.transaction.debit.paymentMeans.buyerBankDetails
+									.accountName,
+							);
+					}
+
+					if (data.transaction.debit.paymentMeans.paymentServiceProvider?.bic) {
+						const payerSpecifiedDebtorFinancialInstitution = fragment().ele(
+							"ram:PayerSpecifiedDebtorFinancialInstitution",
+						);
+						const refNode =
+							findNode(
+								"BT-86-00",
+								specifiedTradeSettlementPaymentMeans,
+								(node) =>
+									node.node.nodeName ===
+									"ram:PayeeSpecifiedCreditorFinancialInstitution",
+							)?.node ?? null;
+						specifiedTradeSettlementPaymentMeans.node.insertBefore(
+							payerSpecifiedDebtorFinancialInstitution.node,
+							refNode,
+						);
+
+						payerSpecifiedDebtorFinancialInstitution
+							.ele("ram:BICID")
+							.txt(
+								data.transaction.debit.paymentMeans.paymentServiceProvider.bic
+									.identifier,
+							);
 					}
 				}
 
@@ -7355,6 +7655,42 @@ export const extended = defineProfile({
 								refNode,
 							);
 						}
+
+						const categoryTradeTax = findNode(
+							`BT-95-00[${i}]`,
+							specifiedTradeAllowanceCharge,
+							(node) => node.node.nodeName === "ram:CategoryTradeTax",
+							() => specifiedTradeAllowanceCharge.ele("ram:CategoryTradeTax"),
+						);
+
+						if (allowance.categoryTradeTax.exemptionReason) {
+							const exemptionReason = fragment()
+								.ele("ram:ExemptionReason")
+								.txt(allowance.categoryTradeTax.exemptionReason);
+							const refNode =
+								findNode(
+									`BT-95[${i}]`,
+									categoryTradeTax,
+									(node) => node.node.nodeName === "ram:CategoryCode",
+								)?.node ?? null;
+							categoryTradeTax.node.insertBefore(exemptionReason.node, refNode);
+						}
+
+						if (allowance.categoryTradeTax.exemptionReasonCode) {
+							const exemptionReasonCode = fragment()
+								.ele("ram:ExemptionReasonCode")
+								.txt(allowance.categoryTradeTax.exemptionReasonCode.value);
+							const refNode =
+								findNode(
+									`BT-96[${i}]`,
+									categoryTradeTax,
+									(node) => node.node.nodeName === "ram:RateApplicablePercent",
+								)?.node ?? null;
+							categoryTradeTax.node.insertBefore(
+								exemptionReasonCode.node,
+								refNode,
+							);
+						}
 					}
 				}
 
@@ -7437,6 +7773,42 @@ export const extended = defineProfile({
 								refNode,
 							);
 						}
+
+						const categoryTradeTax = findNode(
+							`BT-95-00[${i}]`,
+							specifiedTradeAllowanceCharge,
+							(node) => node.node.nodeName === "ram:CategoryTradeTax",
+							() => specifiedTradeAllowanceCharge.ele("ram:CategoryTradeTax"),
+						);
+
+						if (charge.categoryTradeTax.exemptionReason) {
+							const exemptionReason = fragment()
+								.ele("ram:ExemptionReason")
+								.txt(charge.categoryTradeTax.exemptionReason);
+							const refNode =
+								findNode(
+									`BT-102[${i}]`,
+									categoryTradeTax,
+									(node) => node.node.nodeName === "ram:CategoryCode",
+								)?.node ?? null;
+							categoryTradeTax.node.insertBefore(exemptionReason.node, refNode);
+						}
+
+						if (charge.categoryTradeTax.exemptionReasonCode) {
+							const exemptionReasonCode = fragment()
+								.ele("ram:ExemptionReasonCode")
+								.txt(charge.categoryTradeTax.exemptionReasonCode.value);
+							const refNode =
+								findNode(
+									`BT-103[${i}]`,
+									categoryTradeTax,
+									(node) => node.node.nodeName === "ram:RateApplicablePercent",
+								)?.node ?? null;
+							categoryTradeTax.node.insertBefore(
+								exemptionReasonCode.node,
+								refNode,
+							);
+						}
 					}
 				}
 
@@ -7447,7 +7819,6 @@ export const extended = defineProfile({
 					const refNode =
 						(
 							getCachedNode("BT-20-00[0]") ||
-							// || getCachedNode("BG-22")
 							setCachedNode(
 								(node) =>
 									node.node.nodeName === "ram:SpecifiedTradePaymentTerms"
@@ -7487,7 +7858,19 @@ export const extended = defineProfile({
 									"ram:AppliedTradeTax",
 								);
 								appliedTradeTax.ele("ram:TypeCode").txt("VAT");
-								appliedTradeTax.ele("ram:CategoryCode").txt(tax.categoryCode);
+								if (tax.exemptionReason) {
+									appliedTradeTax
+										.ele("ram:ExemptionReason")
+										.txt(tax.exemptionReason);
+								}
+								appliedTradeTax
+									.ele("ram:CategoryCode")
+									.txt(tax.categoryCode.value);
+								if (tax.exemptionReasonCode) {
+									appliedTradeTax
+										.ele("ram:ExemptionReasonCode")
+										.txt(tax.exemptionReasonCode.value);
+								}
 								appliedTradeTax
 									.ele("ram:RateApplicablePercent")
 									.txt(tax.rateApplicablePercent.toString());
@@ -7530,8 +7913,8 @@ export const extended = defineProfile({
 									applicableTradePaymentPenaltyTerms
 										.ele("ram:BasisDateTime")
 										.ele("udt:DateTimeString")
-										.txt(penaltyTerms.maturityReferenceDate)
-										.att("format", "102");
+										.txt(penaltyTerms.maturityReferenceDate.value)
+										.att("format", penaltyTerms.maturityReferenceDate.format);
 								}
 
 								if (penaltyTerms.dueDatePeriodBasis) {
@@ -7590,8 +7973,8 @@ export const extended = defineProfile({
 									applicableTradePaymentDiscountTerms
 										.ele("ram:BasisDateTime")
 										.ele("udt:DateTimeString")
-										.txt(discountTerms.maturityReferenceDate)
-										.att("format", "102");
+										.txt(discountTerms.maturityReferenceDate.value)
+										.att("format", discountTerms.maturityReferenceDate.format);
 								}
 
 								if (discountTerms.dueDatePeriodBasis) {
@@ -7662,7 +8045,7 @@ export const extended = defineProfile({
 								payeeTradeParty.ele("ram:Name").txt(payee.name);
 
 								if (payee.roleCode) {
-									payeeTradeParty.ele("ram:RoleCode").txt(payee.roleCode);
+									payeeTradeParty.ele("ram:RoleCode").txt(payee.roleCode.value);
 								}
 
 								if (payee.organization) {
@@ -7716,7 +8099,7 @@ export const extended = defineProfile({
 										}
 										postalTradeAddress
 											.ele("ram:CountryID")
-											.txt(payee.organization.postalAddress.countryCode);
+											.txt(payee.organization.postalAddress.countryCode.value);
 										if (payee.organization.postalAddress.countrySubdivision) {
 											postalTradeAddress
 												.ele("ram:CountrySubDivisionName")
@@ -7746,7 +8129,7 @@ export const extended = defineProfile({
 										if (contact.typeCode) {
 											definedTradeContact
 												.ele("ram:TypeCode")
-												.txt(contact.typeCode);
+												.txt(contact.typeCode.value);
 										}
 										if (contact.phoneNumber) {
 											definedTradeContact
@@ -7800,7 +8183,7 @@ export const extended = defineProfile({
 								}
 								postalTradeAddress
 									.ele("ram:CountryID")
-									.txt(payee.postalAddress.countryCode);
+									.txt(payee.postalAddress.countryCode.value);
 								if (payee.postalAddress.countrySubdivision) {
 									postalTradeAddress
 										.ele("ram:CountrySubDivisionName")
@@ -7824,6 +8207,43 @@ export const extended = defineProfile({
 								}
 							}
 						}
+					}
+				}
+
+				if (
+					data.transaction.debit.financialAdjustments?.length &&
+					data.transaction.debit.financialAdjustments.length > 0
+				) {
+					const refNode =
+						findNode(
+							"BG-3[0]",
+							applicableHeaderTradeSettlement,
+							(node) => node.node.nodeName === "ram:InvoiceReferencedDocument",
+						)?.node ??
+						findNode(
+							"BT-19-00",
+							applicableHeaderTradeSettlement,
+							(node) =>
+								node.node.nodeName ===
+								"ram:ReceivableSpecifiedTradeAccountingAccount",
+						)?.node ??
+						null;
+					for (const financialAdjustment of data.transaction.debit
+						.financialAdjustments) {
+						const specifiedFinancialAdjustment = fragment().ele(
+							"ram:SpecifiedFinancialAdjustment",
+						);
+						applicableHeaderTradeSettlement.node.insertBefore(
+							specifiedFinancialAdjustment.node,
+							refNode,
+						);
+
+						specifiedFinancialAdjustment
+							.ele("ram:Reason")
+							.txt(financialAdjustment.reason);
+						specifiedFinancialAdjustment
+							.ele("ram:ActualAmount")
+							.txt(financialAdjustment.actualAmount.value.toString());
 					}
 				}
 
@@ -7895,8 +8315,8 @@ export const extended = defineProfile({
 							specifiedAdvancePayment
 								.ele("ram:FormattedReceivedDateTime")
 								.ele("qdt:DateTimeString")
-								.txt(advancePayment.date)
-								.att("format", "102");
+								.txt(advancePayment.date.value)
+								.att("format", advancePayment.date.format);
 						}
 
 						for (const includedTax of advancePayment.includedTax) {
@@ -7915,12 +8335,12 @@ export const extended = defineProfile({
 							if (includedTax.categoryCode) {
 								includedTradeTax
 									.ele("ram:CategoryCode")
-									.txt(includedTax.categoryCode);
+									.txt(includedTax.categoryCode.value);
 							}
 							if (includedTax.exemptionReasonCode) {
 								includedTradeTax
 									.ele("ram:ExemptionReasonCode")
-									.txt(includedTax.exemptionReasonCode);
+									.txt(includedTax.exemptionReasonCode.value);
 							}
 							includedTradeTax
 								.ele("ram:RateApplicablePercent")
@@ -7946,8 +8366,8 @@ export const extended = defineProfile({
 								invoiceSpecifiedReferencedDocument
 									.ele("ram:FormattedIssueDateTime")
 									.ele("qdt:DateTimeString")
-									.txt(advancePayment.precendingInvoice.date)
-									.att("format", "102");
+									.txt(advancePayment.precendingInvoice.date.value)
+									.att("format", advancePayment.precendingInvoice.date.format);
 							}
 						}
 					}

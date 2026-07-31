@@ -4,6 +4,7 @@ import type {
 	ZugferdContext,
 	ZugferdOptions,
 	ZugferdPlugin,
+	ZugferdProfile,
 } from "@node-zugferd/core";
 import { createContext } from "./context";
 import type {
@@ -32,14 +33,51 @@ type InferPluginActions<Opts extends ZugferdOptions> = Prettify<
 	UnionToIntersection<CreatePluginActions<Opts> | UserPluginActions<Opts>>
 >;
 
+const spanActions = <Opts extends ZugferdOptions>(
+	ctx: ZugferdContext<Opts>,
+	plugin: ZugferdPlugin,
+	actions: Record<string, unknown>,
+) => {
+	const wrap = (value: object, path: string[] = []): object => {
+		if (typeof value === "function") {
+			return (...args: any[]) => {
+				const name = path.join(".");
+				return ctx.withSpan(
+					name,
+					{
+						"node-zugferd.type": "action",
+						"node-zugferd.context": `plugin:${plugin.id}`,
+					},
+					() => (value as Function)(...args),
+				);
+			};
+		}
+
+		if (Array.isArray(value)) {
+			return value.map((v, i) => wrap(v, [...path, `${i}`]));
+		}
+
+		if (value && typeof value === "object") {
+			const result: any = {};
+			for (const key in value) {
+				result[key] = wrap((value as any)[key], [...path, key]);
+			}
+			return result;
+		}
+
+		return value;
+	};
+
+	return wrap(actions);
+};
+
 const getActions = <Opts extends ZugferdOptions>(
 	ctx: ZugferdContext<Opts>,
-	options: Opts,
 ): InferPluginActions<Opts> => {
 	return (ctx.options.plugins ?? []).reduce((acc, plugin) => {
 		const actions = plugin.actions?.(ctx);
 		if (actions) {
-			return deepmerge(acc, actions);
+			return deepmerge(acc, spanActions(ctx, plugin, actions));
 		}
 		return acc;
 	}, {}) as InferPluginActions<Opts>;
@@ -81,12 +119,15 @@ export type ZugferdWithInfer<Opts extends ZugferdOptions> = Zugferd<Opts> & {
 	>;
 };
 
-export const zugferd = <Opts extends ZugferdOptions>(
-	options: Opts,
+export const zugferd = <
+	const Profiles extends ZugferdProfile[],
+	const Opts extends ZugferdOptions<Profiles>,
+>(
+	options: Opts & { profiles: Profiles },
 ): ZugferdWithInfer<Opts> => {
 	const ctx = runPluginInit(createContext(options));
 	const result = {
-		...getActions(ctx, options),
+		...getActions(ctx),
 		$context: ctx,
 	} satisfies Zugferd<Opts>;
 

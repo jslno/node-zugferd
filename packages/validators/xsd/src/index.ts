@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { join, resolve } from "node:path";
 import type {
 	InferProfileIds,
 	ZugferdOptions as ZFOptions,
@@ -8,9 +8,10 @@ import type {
 } from "@node-zugferd/core";
 import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
 import { ZugferdError } from "@node-zugferd/core/error";
-import { parseXml, parseXsd, validate as xsdValidate } from "xml-xsd-engine";
 import { __dirname } from "./isomorph";
-import type { ResolvedXSDOptions, XSDOptions } from "./types";
+import type { ResolvedXSDOptions, SchemaMapEntry, XSDOptions } from "./types";
+
+import { XsdValidator } from "@jslno/xsd-validator";
 
 declare module "@node-zugferd/core" {
 	interface ZugferdPluginRegistry<ZugferdOptions, Options> {
@@ -23,16 +24,36 @@ declare module "@node-zugferd/core" {
 	}
 }
 
-const getBundledXsdPath = (fileName: string) =>
-	resolve(__dirname, "../schemas", fileName);
+const getBundledXsdPath = (fileName?: string | undefined) =>
+	resolve(
+		__dirname,
+		...["../schemas", fileName].filter(
+			(val): val is string => typeof val === "string",
+		),
+	);
 
+const SCHEMA_DIR = getBundledXsdPath();
 const bundledXsdPaths = {
-	minimum: getBundledXsdPath("FACTUR-X_MINIMUM.xsd"),
-	"basic-wl": getBundledXsdPath("FACTUR-X_BASIC-WL.xsd"),
-	basic: getBundledXsdPath("FACTUR-X_BASIC.xsd"),
-	"en-16931": getBundledXsdPath("FACTUR-X_EN16931.xsd"),
-	extended: getBundledXsdPath("FACTUR-X_EXTENDED.xsd"),
-	xrechnung: getBundledXsdPath("CrossIndustryInvoice_100pD22B.xsd"),
+	minimum: {
+		path: getBundledXsdPath("FACTUR-X_MINIMUM.xsd"),
+		dir: SCHEMA_DIR,
+	},
+	"basic-wl": {
+		path: getBundledXsdPath("FACTUR-X_BASICWL.xsd"),
+		dir: SCHEMA_DIR,
+	},
+	basic: {
+		path: getBundledXsdPath("FACTUR-X_BASIC.xsd"),
+		dir: SCHEMA_DIR,
+	},
+	"en-16931": {
+		path: getBundledXsdPath("FACTUR-X_EN16931.xsd"),
+		dir: SCHEMA_DIR,
+	},
+	extended: {
+		path: getBundledXsdPath("FACTUR-X_EXTENDED.xsd"),
+		dir: SCHEMA_DIR,
+	},
 } as const;
 
 type BundledXsdPaths = typeof bundledXsdPaths;
@@ -43,9 +64,9 @@ const resolveOptions = <Opts extends XSDOptions>(
 	return {
 		autoRun: true,
 		...(options ?? {}),
-		xsdPathMap: {
+		schemaMap: {
 			...bundledXsdPaths,
-			...(options?.xsdPathMap ?? {}),
+			...(options?.schemaMap ?? {}),
 		},
 	} as ResolvedXSDOptions<Opts, BundledXsdPaths>;
 };
@@ -57,33 +78,44 @@ export const xsd = <ZugferdOptions extends ZFOptions, Opts extends XSDOptions>(
 
 	type SupportedProfileId =
 		InferProfileIds<ZugferdOptions> extends infer R
-			? R extends keyof ResolvedXSDOptions<Opts, BundledXsdPaths>["xsdPathMap"]
+			? R extends keyof ResolvedXSDOptions<Opts, BundledXsdPaths>["schemaMap"]
 				? R extends string
 					? R
 					: never
 				: never
 			: never;
 
-	const getXsdPath = (profileId: string) => {
-		return opts.xsdPathMap[profileId as SupportedProfileId];
+	const getSchema = (profileId: string): SchemaMapEntry => {
+		return opts.schemaMap[profileId as SupportedProfileId];
 	};
 
-	const validate = (profileId: string, input: string, ctx: ZugferdContext) => {
-		const xsdPath = getXsdPath(profileId);
-		if (!xsdPath) {
+	const validate = async (
+		profileId: string,
+		input: string,
+		ctx: ZugferdContext,
+	) => {
+		const schema = getSchema(profileId);
+		if (!schema) {
 			throw new ZugferdError(
 				`No XSD schema found for profile "${profileId}". Please provide a custom schema file name in the plugin options.`,
 			);
 		}
-		const xsdContent = readFileSync(xsdPath, "utf-8");
-		const schema = parseXsd(xsdContent);
-		const xml = parseXml(input);
-		const result = xsdValidate(xml, schema);
+		const xsdContent = readFileSync(schema.path, "utf-8");
+		const validator = await XsdValidator.create(
+			xsdContent,
+			schema.dir
+				? (filename) => readFileSync(join(schema.dir!, filename), "utf-8")
+				: undefined,
+		);
 
-		if (!result.valid) {
-			throw new ZugferdError(
-				result.errors.map((err) => err.message).join("\n\n"),
-			);
+		try {
+			validator.validateOrThrow(input);
+		} catch (err) {
+			if (err instanceof Error) {
+				throw new ZugferdError(err.message);
+			}
+
+			throw err;
 		}
 	};
 
@@ -96,8 +128,8 @@ export const xsd = <ZugferdOptions extends ZFOptions, Opts extends XSDOptions>(
 					options: {
 						hooks: {
 							async afterXMLBuild({ profile, xml, context }) {
-								if (getXsdPath(profile.id)) {
-									validate(profile.id, xml, context);
+								if (getSchema(profile.id)) {
+									await validate(profile.id, xml, context);
 								}
 								await ctx.options.hooks?.afterXMLBuild?.({
 									profile,
@@ -113,13 +145,13 @@ export const xsd = <ZugferdOptions extends ZFOptions, Opts extends XSDOptions>(
 		actions(ctx) {
 			return {
 				xsd: {
-					validate<
+					async validate<
 						const ProfileID extends
 							| SupportedProfileId
 							| { id: SupportedProfileId },
 					>(profileId: ProfileID, xml: string) {
 						const id = typeof profileId === "string" ? profileId : profileId.id;
-						return validate(id, xml, ctx);
+						return await validate(id, xml, ctx);
 					},
 				},
 			};

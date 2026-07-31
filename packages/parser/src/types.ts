@@ -16,7 +16,9 @@ interface BaseContext {
 export interface MatchContext extends BaseContext {
 	matchesExtensionSchemaProfile: () => boolean;
 	matchesSpecificationIdentifier: (identifier: string | string[]) => boolean;
-	isPdfAConformant: () => boolean;
+	isPdfA3Conformant: (
+		levels?: "B" | "U" | "A" | ("B" | "U" | "A")[],
+	) => boolean;
 }
 
 export interface ParseContext extends BaseContext {

@@ -1,8 +1,8 @@
 import { validInvoiceTestFactory } from "@node-zugferd-test/profile-base/factory";
 import { describe } from "vitest";
-import { invoiceCorrectionData } from "./data/valid/invoice-correction.js";
-import { simpleData } from "./data/valid/simple.js";
-import { taxiRideData } from "./data/valid/taxi-ride.js";
+import { invoiceCorrectionData } from "@node-zugferd-test/test-utils/basic/valid/invoice-correction.js";
+import { simpleData } from "@node-zugferd-test/test-utils/basic/valid/simple.js";
+import { taxiRideData } from "@node-zugferd-test/test-utils/basic/valid/taxi-ride.js";
 import { invoicer } from "./invoicer.js";
 
 describe("basic profile", () => {

@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@node-zugferd/core": "workspace:*",
-    "xml-xsd-engine": "^1.7.3"
+    "@jslno/xsd-validator": "file:../../../../xsd-validator"
   },
   "devDependencies": {
     "tsdown": "catalog:"

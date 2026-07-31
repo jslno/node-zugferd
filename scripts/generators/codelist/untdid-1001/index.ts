@@ -13,15 +13,34 @@ export const untdid1001 = defineParser(async (ctx) => {
 		throw new Error("Unexpected XML structure");
 	}
 
-	const entries = (result.entries as XMLSerializedAsObject).entry as {
-		value: string;
-		name: string;
-		interpretation: string;
-	}[];
+	const entries: Map<
+		string,
+		{
+			value: string;
+			name: string;
+			description?: string | undefined;
+			interpretation?: string | undefined;
+		}
+	> = new Map(
+		(
+			(result.entries as XMLSerializedAsObject).entry as {
+				value: string;
+				name: string;
+				interpretation: string;
+			}[]
+		).map((entry) => [entry.value, entry]),
+	);
+
+	for (const entry of await ctx.parseUnclList("1001")) {
+		entries.set(entry.value, {
+			...entry,
+			...(entries.get(entry.value) ?? {}),
+		});
+	}
 
 	return {
 		packageRoot: "./packages/codelists/untdid-1001",
-		data: entries.map((entry) => ({
+		data: [...entries.values()].map((entry) => ({
 			...entry,
 			key: ctx.toScreamingSnakeCase(entry.name),
 		})),

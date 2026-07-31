@@ -3,7 +3,14 @@
 import { useTreeContext } from "@fumadocs/base-ui/contexts/tree";
 import { cva } from "class-variance-authority";
 import type * as PageTree from "fumadocs-core/page-tree";
-import { ChevronDownIcon } from "lucide-react";
+import {
+	BookTextIcon,
+	BracesIcon,
+	ChevronDownIcon,
+	ChevronsUpDownIcon,
+	LightbulbIcon,
+	ScrollTextIcon,
+} from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,6 +23,12 @@ import {
 } from "@/components/ui/collapsible";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/cn";
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 
 export const SIDEBAR_WIDTH = "17.75rem";
 const SIDEBAR_TRANSITION = { duration: 0.25, ease: [0.4, 0, 0.2, 1] as const };
@@ -25,6 +38,8 @@ interface SidebarContext {
 	setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	currentTabId: SidebarTabId;
+	currentTab: SidebarTab;
 }
 
 const SidebarContext = createContext<SidebarContext | null>(null);
@@ -37,10 +52,56 @@ export const useSidebar = () => {
 	return context;
 };
 
+type SidebarTabId = "docs" | "examples" | "api-reference" | "changelog";
+type SidebarTab = {
+	icon: React.ElementType;
+	title: string;
+	description: string;
+	href: string;
+};
+
+export const SIDEBAR_TABS = new Map<SidebarTabId, SidebarTab>()
+	.set("docs", {
+		icon: BookTextIcon,
+		title: "Documentation",
+		description: "get started, profiles and more",
+		href: "/docs",
+	})
+	.set("examples", {
+		icon: LightbulbIcon,
+		title: "Examples",
+		description: "examples and guides",
+		href: "/examples",
+	})
+	.set("api-reference", {
+		icon: BracesIcon,
+		title: "API Reference",
+		description: "reference and type docs",
+		href: "/api-reference",
+	})
+	.set("changelog", {
+		icon: ScrollTextIcon,
+		title: "Changelog",
+		description: "release notes and updates",
+		href: "/changelog",
+	});
+
 export function SidebarProvider({ children }: { children: ReactNode }) {
 	const [open, setOpen] = useState(false);
 	// TODO: Store in cookie/local storage
 	const [collapsed, setCollapsed] = useState(false);
+
+	const pathname = usePathname();
+	const currentTabId = useMemo(() => {
+		if (pathname.startsWith("/examples")) return "examples";
+		if (pathname.startsWith("/api-reference")) return "api-reference";
+		return "docs";
+	}, [pathname]);
+
+	const currentTab = useMemo(
+		() => SIDEBAR_TABS.get(currentTabId)!,
+		[currentTabId],
+	);
 
 	return (
 		<SidebarContext
@@ -50,8 +111,10 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
 					setOpen,
 					collapsed,
 					setCollapsed,
+					currentTabId,
+					currentTab,
 				}),
-				[open, collapsed],
+				[open, collapsed, currentTabId, currentTab],
 			)}
 		>
 			{children}
@@ -92,19 +155,41 @@ export function SidebarToggle(props: ComponentProps<"button">) {
 
 export function Sidebar() {
 	const { root } = useTreeContext();
-	const { open, setOpen, collapsed } = use(SidebarContext)!;
+	const { open, setOpen, collapsed, currentTabId, currentTab } =
+		use(SidebarContext)!;
 
 	const children = useMemo(() => {
-		function renderItems(items: PageTree.Node[]) {
-			return items.map((item) => (
-				<SidebarItem key={item.$id} item={item}>
-					{item.type === "folder" ? renderItems(item.children) : null}
-				</SidebarItem>
-			));
+		const sort =
+			(dir: "asc" | "desc" = "asc") =>
+			(a: PageTree.Node, b: PageTree.Node) => {
+				if (!a.name || !b.name) return 0;
+				return dir === "asc"
+					? a.name.toString().localeCompare(b.name.toString())
+					: b.name.toString().localeCompare(a.name.toString());
+			};
+
+		const renderItems = (items: PageTree.Node[]) => {
+			return items.map((item) => {
+				const children =
+					item.type === "folder" ? [...item.children] : undefined;
+				if (currentTabId === "api-reference" && children) {
+					children.sort(sort());
+				}
+				return (
+					<SidebarItem key={item.$id} item={item}>
+						{children?.length ? renderItems(children) : null}
+					</SidebarItem>
+				);
+			});
+		};
+
+		const children = [...root.children];
+		if (currentTabId === "api-reference") {
+			children.sort(sort("desc"));
 		}
 
-		return renderItems(root.children);
-	}, [root]);
+		return renderItems(children);
+	}, [root, currentTabId]);
 
 	return (
 		<>
@@ -120,6 +205,54 @@ export function Sidebar() {
 					transition={SIDEBAR_TRANSITION}
 					className="flex h-full w-71 flex-col"
 				>
+					<div className="pl-4">
+						<Popover>
+							<PopoverTrigger
+								render={
+									<Button
+										variant="outline"
+										size="lg"
+										className="w-full py-1.5 gap-2.5 h-auto justify-start text-start"
+									/>
+								}
+							>
+								<currentTab.icon className="size-5" />
+								<div className="flex flex-col">
+									<span>{currentTab.title}</span>
+									<span className="text-muted-foreground text-xs">
+										{currentTab.description}
+									</span>
+								</div>
+								<ChevronsUpDownIcon className="ms-auto size-4! text-muted-foreground" />
+							</PopoverTrigger>
+							<PopoverContent
+								align="start"
+								side="right"
+								className="p-1 gap-0.5"
+							>
+								{[...SIDEBAR_TABS.entries()].map(
+									([id, { title, icon: Icon, href, description }]) => (
+										<Button
+											key={id}
+											variant="ghost"
+											className="w-full py-1 gap-2.5 [&_svg]:size-5! h-auto justify-start text-start data-active:bg-muted"
+											render={<Link href={href} />}
+											nativeButton={false}
+											data-active={currentTabId === id}
+										>
+											<Icon />
+											<div className="flex flex-col">
+												<span>{title}</span>
+												<span className="text-muted-foreground text-xs">
+													{description}
+												</span>
+											</div>
+										</Button>
+									),
+								)}
+							</PopoverContent>
+						</Popover>
+					</div>
 					<SidebarScrollArea>
 						<div className="py-4 pl-4">{children}</div>
 					</SidebarScrollArea>

@@ -44,6 +44,9 @@ export const mustang = <ZugferdOptions extends ZFOptions>(
 			"en-16931",
 			"extended",
 			"xrechnung",
+			"order-x-basic",
+			"order-x",
+			"order-x-extended",
 		].includes(profileId);
 
 	const validate = async (
@@ -153,20 +156,14 @@ function parseValidatorResult(ctx: ZugferdContext, output: string) {
 		throw new ZugferdError("Failed to parse Mustang validation output.");
 	}
 
-	const valid = out?.summary?.["@status"] === "valid";
-	if (valid) {
-		return;
-	}
+	// TODO: remove
+	console.dir(out, { depth: null, colors: true });
 
 	const messages: string[] = [];
 
+	// TODO: Fix flaky parsing
 	const parse = (type: "xml" | "pdf") => {
 		const section = out[type] ?? out;
-		const invalid = section.summary?.["@status"] === "invalid";
-
-		if (!invalid) {
-			return;
-		}
 		if (!section?.messages) {
 			return;
 		}
@@ -178,26 +175,30 @@ function parseValidatorResult(ctx: ZugferdContext, output: string) {
 			if ("error" in msg) {
 				messages.push(...arrayable(msg.error).map(({ "#": m }) => m));
 			}
+			if ("exception" in msg) {
+				messages.push(...arrayable(msg.exception).map(({ "#": m }) => m));
+			}
 			if ("warning" in msg) {
 				const message = arrayable(msg.warning)
 					.map(({ "#": m }) => m)
 					.join("\n\n");
-				if (message) {
+				if (message !== "") {
 					ctx.logger.warn(message);
 				}
-				// TODO: opts.hooks.onWarning();
 			}
 		}
 	};
 
-	if ("pdf" in out) {
-		parse("pdf" in out ? "pdf" : "xml");
+	parse("pdf" in out ? "pdf" : "xml");
+
+	const valid = out?.summary?.["@status"] === "valid";
+	if (valid) {
+		return;
 	}
 
 	if (messages.length === 0 && out.summary["@status"] !== "invalid") return;
 
 	throw new ZugferdError(messages.join("\n\n") || "Validation failed");
-	// throw new ZugferdValidationError(messages.join("\n\n"), cause);
 }
 
 function run(cmd: [string, ...string[]], opts?: { cwd?: string }) {

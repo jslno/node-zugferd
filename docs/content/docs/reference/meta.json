@@ -1,4 +1,9 @@
 {
   "icon": "Library",
-  "pages": ["options", "resources", "contributing"]
+  "pages": [
+    "options",
+    "resources",
+    "contributing",
+    "[Braces][API Reference](../../api-reference)"
+  ]
 }

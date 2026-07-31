@@ -105,6 +105,7 @@ export type DefinedProfile<
 	DataRelationship extends ZugferdProfile["dataRelationship"],
 	Input,
 	Output,
+	ExtensionSchema extends ZugferdProfile["extensionSchema"],
 > = {
 	readonly id: Id;
 	readonly dataRelationship: DataRelationship;
@@ -118,9 +119,14 @@ export type DefinedProfile<
 		ctx: ZugferdProfileRulesContext,
 	) => void | Promise<void>;
 	readonly schema: CompactProfileSchema<Input, Output>;
-	readonly extensionSchema: Required<
-		MarkOptional<ZugferdProfile["extensionSchema"], "uri" | "fieldNameMap">
-	>;
+	readonly extensionSchema: Omit<
+		Required<MarkOptional<ExtensionSchema, "uri" | "fieldNameMap">>,
+		"uri" | "namespace" | "fieldNameMap"
+	> & {
+		uri?: string;
+		namespace?: string;
+		fieldNameMap?: Record<keyof ExtensionSchema, string>;
+	};
 	readonly $Infer: {
 		readonly Input: Input;
 		readonly Output: Output;
@@ -175,21 +181,24 @@ export function defineProfile<
 	const Id extends string,
 	const DataRelationship extends ZugferdProfile["dataRelationship"],
 	const Schema extends ProfileSchemaType,
+	const ExtensionSchema extends ZugferdProfile["extensionSchema"],
 	const Input extends InferInput<Schema> = InferInput<Schema>,
 	const Output extends InferOutput<Schema> = InferOutput<Schema>,
 >(
 	profile: ZugferdProfileInput<Schema, undefined> & {
 		id: Id;
 		dataRelationship: DataRelationship;
+		extensionSchema: ExtensionSchema;
 		schema: Schema;
 		use?: undefined;
 	},
-): DefinedProfile<Id, DataRelationship, Input, Output>;
+): DefinedProfile<Id, DataRelationship, Input, Output, ExtensionSchema>;
 
 export function defineProfile<
 	const Id extends string,
 	const DataRelationship extends ZugferdProfile["dataRelationship"],
 	const Schema extends ProfileSchemaType,
+	const ExtensionSchema extends ZugferdProfile["extensionSchema"],
 	const Use extends readonly ParentProfile[],
 	const Input extends MergedProfileInput<Use, Schema> = MergedProfileInput<
 		Use,
@@ -203,15 +212,17 @@ export function defineProfile<
 	profile: ZugferdProfileInput<Schema, Use> & {
 		id: Id;
 		dataRelationship: DataRelationship;
+		extensionSchema: ExtensionSchema;
 		schema: Schema;
 		use: Use;
 	},
-): DefinedProfile<Id, DataRelationship, Input, Output>;
+): DefinedProfile<Id, DataRelationship, Input, Output, ExtensionSchema>;
 
 export function defineProfile<
 	const Id extends string,
 	const DataRelationship extends ZugferdProfile["dataRelationship"],
 	const Schema extends ProfileSchemaType,
+	const ExtensionSchema extends ZugferdProfile["extensionSchema"],
 	const Use extends readonly ParentProfile[] | undefined,
 	const Input,
 	const Output,
@@ -219,10 +230,11 @@ export function defineProfile<
 	profile: DefineProfileImpl & {
 		id: Id;
 		dataRelationship: DataRelationship;
+		extensionSchema: ExtensionSchema;
 		schema: Schema;
 		use?: Use;
 	},
-): DefinedProfile<Id, DataRelationship, Input, Output> {
+): DefinedProfile<Id, DataRelationship, Input, Output, ExtensionSchema> {
 	const { extensionSchema, use, schema, build, rules, ...input } = profile;
 
 	const mergedSchemas = use ? [...use.map((p) => p.schema), schema] : undefined;
@@ -275,7 +287,13 @@ export function defineProfile<
 			Input: Input;
 			Output: Output;
 		},
-	} as DefinedProfile<Id, DataRelationship, Input, Output>;
+	} as unknown as DefinedProfile<
+		Id,
+		DataRelationship,
+		Input,
+		Output,
+		ExtensionSchema
+	>;
 }
 
 export type { XMLBuilder };
