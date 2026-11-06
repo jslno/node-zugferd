@@ -644,7 +644,9 @@ export const documentParser = async (
 									"ASCII85Decode",
 									"FlateDecode",
 									"RunLengthDecode",
+									/* cSpell:disable-next-line */
 									"CCITTFaxDecode",
+									/* cSpell:disable-next-line */
 									"JBIG2Decode",
 									"DCTDecode",
 									"JPXDecode",
@@ -1020,6 +1022,7 @@ export const documentParser = async (
 									"Fl",
 									"RunLengthDecode",
 									"RL",
+									/* cSpell:disable-next-line */
 									"CCITTFaxDecode",
 									"CCF",
 									"DCTDecode",
@@ -1802,7 +1805,6 @@ export const documentParser = async (
 								let hasInvalidOperator = false;
 								let failedOperatorName = "";
 
-								// 1. Offizielle Liste aller gültigen Operatoren aus ISO 32000-1:2008
 								const validOperators = new Set([
 									"b",
 									"B",
@@ -2019,8 +2021,10 @@ export const documentParser = async (
 								clause: "6.2.3",
 							},
 							description:
+								/* cSpell:disable-next-line */
 								'The profile stream that is the value of the DestOutputProfile key shall either be an output profile (Device Class = "prtr") or a monitor profile (Device Class = "mntr"). The profiles shall have a colour space of either "GRAY", "RGB", or "CMYK"',
 							getArgs: () => {
+								/* cSpell:disable-next-line */
 								let deviceClass = "prtr";
 								let colorSpace = "RGB ";
 								let version = 4.0;
@@ -2082,6 +2086,7 @@ export const documentParser = async (
 								};
 							},
 							test: ({ deviceClass, colorSpace, version }) =>
+								/* cSpell:disable-next-line */
 								(deviceClass === "prtr" || deviceClass === "mntr") &&
 								(colorSpace === "RGB " ||
 									colorSpace === "CMYK" ||

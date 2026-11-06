@@ -25,6 +25,7 @@ export function definePdfTemplate<
 				try {
 					const january = new Date(9e8);
 					const spanish = new Intl.DateTimeFormat("es", { month: "long" });
+					/** cSpell:disable-next-line */
 					return spanish.format(january) === "enero";
 				} catch (_err) {
 					return false;

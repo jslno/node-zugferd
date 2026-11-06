@@ -21,12 +21,14 @@ const URL_RE = /[?&]url(?:&|$)/;
 const RAW_RE = /[?&]raw(?:&|$)/;
 const INLINE_RE = /[?&]inline(?:&|$)/;
 const WASM_INIT_RE = /\.wasm\?init\b/;
+/* cSpell:disable */
 const CSS_MODULE_RE =
 	/\.module\.(?:css|less|sass|scss|styl|stylus|pcss|postcss|sss)(?:$|\?)/;
 const CSS_LANGS_RE =
 	/\.(?:css|less|sass|scss|styl|stylus|pcss|postcss|sss)(?:$|\?)/;
 const KNOWN_ASSET_RE =
 	/\.(?:apng|bmp|png|jpe?g|jfif|pjpeg|pjp|gif|svg|ico|webp|avif|cur|jxl|mp4|webm|ogg|mp3|wav|flac|aac|opus|mov|m4a|vtt|woff2?|eot|ttf|otf|webmanifest|pdf|txt)(?:\?.*)?$/i;
+/* cSpell:enable */
 
 // The Babel plugin sets this as an import specifier directly, so it is imported
 // natively and needs none of the alias-resolution marker that the SvelteKit

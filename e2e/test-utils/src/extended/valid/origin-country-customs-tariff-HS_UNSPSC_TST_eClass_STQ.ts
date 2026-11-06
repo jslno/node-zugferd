@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { extended } from "@node-zugferd/extended";
 
 export const originCountryCustomsTariffHS_UNSPSC_TST_eClass_STQData: typeof extended.$Infer.Input =

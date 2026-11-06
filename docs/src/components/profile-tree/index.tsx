@@ -1,7 +1,6 @@
 import type { ZugferdProfile } from "@node-zugferd/core";
 import { ChevronDownIcon } from "lucide-react";
 import { useMemo } from "react";
-import { cn } from "@/lib/cn";
 import { profileFieldMetaMap } from "@/lib/profile-field-meta";
 import type { AnySchema, FieldCardinality } from "@/lib/profile-field-utils";
 import {
@@ -12,6 +11,7 @@ import {
 	resolveFieldMeta,
 	unwrapSchema,
 } from "@/lib/profile-field-utils";
+import { cn } from "@/lib/utils";
 import { TruncatedText } from "../truncated-text";
 import { Badge } from "../ui/badge";
 import {

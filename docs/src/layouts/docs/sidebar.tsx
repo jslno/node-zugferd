@@ -28,7 +28,7 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 
 export const SIDEBAR_WIDTH = "17.75rem";
 const SIDEBAR_TRANSITION = { duration: 0.25, ease: [0.4, 0, 0.2, 1] as const };

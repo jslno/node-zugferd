@@ -25,3 +25,5 @@ einvoicing
 pdfa
 PDFA
 poacc
+SCRDMCCBDACIO
+skonto

@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { SVGProps } from "react";
 
 const Pnpm = (props: SVGProps<SVGSVGElement>) => (

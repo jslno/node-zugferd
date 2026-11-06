@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { minimum } from "@node-zugferd/minimum";
 
 export const bookingGuideData: typeof minimum.$Infer.Input = {

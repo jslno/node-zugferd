@@ -56,6 +56,7 @@ export function addIssue<const Ctx extends Context>(
 		input,
 		expected,
 		received,
+		/* cSpell:disable-next-line */
 		message: `Invalid ${label}: ${expected ? `Expected ${expected} but r` : "R"}eceived ${received}`,
 		requirement: context.requirement,
 		path: other?.path,

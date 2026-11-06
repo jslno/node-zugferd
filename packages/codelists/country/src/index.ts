@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { Codelist } from "@node-zugferd/core";
 import { registerCodelist } from "@node-zugferd/data-types";
 

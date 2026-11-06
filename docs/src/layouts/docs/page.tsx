@@ -12,7 +12,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { gitConfig } from "@/lib/shared";
-import { cn } from "../../lib/cn";
+import { cn } from "@/lib/utils";
 
 interface EditOnGitHubOptions {
 	owner?: string;

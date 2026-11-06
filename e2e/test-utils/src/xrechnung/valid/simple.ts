@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { xrechnung } from "@node-zugferd/xrechnung";
 
 export const simpleData: typeof xrechnung.$Infer.Input = {

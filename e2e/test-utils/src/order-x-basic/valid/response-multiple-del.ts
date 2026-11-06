@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { orderXBasic } from "@node-zugferd/order-x-basic";
 
 export const responseMultipleDelData: typeof orderXBasic.$Infer.Input = {

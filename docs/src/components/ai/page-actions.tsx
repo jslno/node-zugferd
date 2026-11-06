@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import type { ComponentProps } from "react";
 import { useMemo, useState } from "react";
-import { cn } from "../../lib/cn";
+import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 

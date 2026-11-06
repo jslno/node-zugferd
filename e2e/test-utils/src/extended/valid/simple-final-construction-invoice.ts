@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { extended } from "@node-zugferd/extended";
 import { base64 } from "@node-zugferd/utils";
 

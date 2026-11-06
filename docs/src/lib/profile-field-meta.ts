@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { FieldMeta } from "./profile-field-utils";
 
 export const profileFieldMetaMap = new Map([

@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { basic } from "@node-zugferd/basic";
 
 export const simpleData: typeof basic.$Infer.Input = {

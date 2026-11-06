@@ -14,7 +14,9 @@ export const highlight = async (
 	const out = await codeToHast(code, {
 		lang,
 		themes: {
+			/* cSpell:disable-next-line */
 			dark: "vitesse-dark",
+			/* cSpell:disable-next-line */
 			light: "vitesse-light",
 		},
 		...cfg,

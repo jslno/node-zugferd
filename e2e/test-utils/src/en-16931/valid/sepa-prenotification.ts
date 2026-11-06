@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { en16931 } from "@node-zugferd/en-16931";
 
 export const sepaPrenotificationData: typeof en16931.$Infer.Input = {

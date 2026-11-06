@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { extended } from "@node-zugferd/extended";
 
 export const foreignCurrencyData: typeof extended.$Infer.Input = {

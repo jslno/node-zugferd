@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import { base64 } from "@node-zugferd/utils";
 import type { xrechnung } from "@node-zugferd/xrechnung";
 

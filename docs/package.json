@@ -52,7 +52,7 @@
     "@node-zugferd/xrechnung": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "cnfast": "^0.2.0",
+    "cn": "^0.5.2",
     "fumadocs-core": "16.17.10",
     "fumadocs-mdx": "15.4.10",
     "fumadocs-ui": "npm:@fumadocs/base-ui@^16.17.10",

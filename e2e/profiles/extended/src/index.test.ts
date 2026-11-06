@@ -55,6 +55,7 @@ const invoices = [
 		data: smallBusinessOwnerWithoutVATData,
 	},
 	{
+		/** cSpell:disable-next-line */
 		label: "Origin country customs tariff no. HS_UNSPSC_TST_eClass_STQ",
 		data: foreignCurrencyData,
 	},

@@ -3,19 +3,10 @@
 	"useGitignore": true,
 	"ignoreRandomStrings": true,
 	"allowCompoundWords": true,
-	"import": [
-		"@cspell/dict-en-gb/cspell-ext.json",
-		"@cspell/dict-de-de/cspell-ext.json",
-		"@cspell/dict-fr-fr/cspell-ext.json",
-		"@cspell/dict-it-it/cspell-ext.json",
-		"@cspell/dict-nl-nl/cspell-ext.json",
-		"@cspell/dict-pl_pl/cspell-ext.json"
-	],
-	"language": "en,en-gb,de,fr,it,nl,pl",
 	"dictionaryDefinitions": [
 		{
-			"name": "codes",
-			"path": "./.cspell/codes.txt",
+			"name": "alt-language",
+			"path": "./.cspell/alt-language.txt",
 			"addWords": true
 		},
 		{
@@ -45,7 +36,7 @@
 		}
 	],
 	"dictionaries": [
-		"codes",
+		"alt-language",
 		"names",
 		"standards",
 		"tech",

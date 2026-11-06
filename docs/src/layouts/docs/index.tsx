@@ -24,7 +24,7 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { gitConfig } from "@/lib/shared";
-import { cn } from "../../lib/cn";
+import { cn } from "@/lib/utils";
 import { handleGlobalWheel } from "../../lib/global-scroll";
 import { SIDEBAR_TABS, Sidebar, SidebarToggle, useSidebar } from "./sidebar";
 

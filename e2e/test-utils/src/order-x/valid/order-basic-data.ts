@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { orderX } from "@node-zugferd/order-x";
 
 export const orderBasicData: typeof orderX.$Infer.Input = {

@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { basic } from "@node-zugferd/basic";
 
 export const invoiceCorrectionData: typeof basic.$Infer.Input = {

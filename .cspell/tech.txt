@@ -11,3 +11,15 @@ spreadsheetml
 vstack
 hstack
 pdfaid
+URIID
+oklch
+stringifier
+xpaths
+Dedupe
+llms
+nvmrc
+glsl
+reinit
+jsxs
+Annots
+rcompare

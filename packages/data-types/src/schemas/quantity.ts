@@ -80,7 +80,7 @@ export function quantity(
 		type: "quantity",
 		async: false,
 		reference: quantity,
-		// TOOD: better expects message
+		// TODO: better expects message
 		expects: "(number | object)",
 		config,
 		get "~standard"() {

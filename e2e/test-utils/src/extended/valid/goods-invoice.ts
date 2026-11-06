@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { extended } from "@node-zugferd/extended";
 
 export const goodsInvoiceData: typeof extended.$Infer.Input = {

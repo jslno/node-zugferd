@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { orderX } from "@node-zugferd/order-x";
 
 export const responseNokData: typeof orderX.$Infer.Input = {

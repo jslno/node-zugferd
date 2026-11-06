@@ -1,3 +1,5 @@
+/* cSpell:disable */
+
 import type { basicWL } from "@node-zugferd/basic-wl";
 
 export const bookingGuideData: typeof basicWL.$Infer.Input = {
