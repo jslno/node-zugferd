@@ -1,0 +1,25 @@
+diff --git a/dist/cjs/easy-template-x.cjs b/dist/cjs/easy-template-x.cjs
+index 6295c7c4d94f2d4d3d35281a729c04dddad79a9f..acb04db98eaf738bece9827d788ff556501fa1b0 100644
+--- a/dist/cjs/easy-template-x.cjs
++++ b/dist/cjs/easy-template-x.cjs
+@@ -2,7 +2,7 @@
+ 
+ var JSZip = require('jszip');
+ var JSON5 = require('json5');
+-var getProp = require('lodash.get');
++var { get: getProp } = require('lodash.get');
+ 
+ class InternalError extends Error {
+   constructor(message) {
+diff --git a/dist/es/easy-template-x.mjs b/dist/es/easy-template-x.mjs
+index b0b4b95620ab2237329fe12ef96d3b32aa498df5..32a697016dfa68df29f46e2cd7337b8c841f7373 100644
+--- a/dist/es/easy-template-x.mjs
++++ b/dist/es/easy-template-x.mjs
+@@ -1,6 +1,6 @@
+ import JSZip from 'jszip';
+ import JSON5 from 'json5';
+-import getProp from 'lodash.get';
++import { get as getProp } from 'lodash.get';
+ 
+ class InternalError extends Error {
+   constructor(message) {

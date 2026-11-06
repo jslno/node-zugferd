@@ -35,7 +35,7 @@ const initOptionsSchema = z.object({
 	dryRun: z.boolean().default(false),
 });
 
-export async function initAction(opts: z.infer<typeof initOptionsSchema>) {
+async function initAction(opts: z.infer<typeof initOptionsSchema>) {
 	const { cwd, ...options } = await initOptionsSchema.parseAsync(opts);
 
 	// Check if package.json exists (not an empty project)

@@ -5,25 +5,56 @@
 		"type": true
 	},
 	"tags": ["-lintignore"],
-	"ignore": [".github/scripts/**"],
+	"ignore": ["scripts/**", "**/*.test-d.ts"],
 	"ignoreBinaries": ["changesets"],
-	"ignoreDependencies": ["@changesets/cli", "@vitest/coverage-istanbul"],
+	// keep these: scripts that reference them aren't in the graph once scripts/** is ignored;
+	// knip may hint to remove them — leave if --production still flags them
+	"ignoreDependencies": [
+		"@changesets/cli",
+		"@vitest/coverage-istanbul",
+		// root tooling only used from ignored scripts/**
+		"@biomejs/js-api",
+		"@biomejs/wasm-nodejs",
+		"@changesets/changelog-github",
+		"@turbo/gen",
+		"@types/serialize-javascript",
+		"serialize-javascript",
+		"xmlbuilder2"
+	],
 	"rules": {
 		"optionalPeerDependencies": "off",
-		// catalog entries used by docs/ which is in ignoreWorkspaces
 		"catalog": "off"
 	},
 	"workspaces": {
 		"packages/*": {
-			"entry": ["src/index.ts!"],
+			// entry via package exports — drop redundant src/index.ts! (knip hint)
 			"project": ["src/**/*.ts!"]
+		},
+		"packages/profiles/*": {
+			"project": ["src/**/*.ts!"],
+			"ignoreDependencies": ["@node-zugferd/core", "@node-zugferd/codelist-*"]
 		},
 		"packages/node-zugferd": {
 			"project": ["src/**/*.ts!"]
+		},
+		"packages/cli": {
+			"project": ["src/**/*.ts!"],
+			// profile packages referenced as install-name strings, not imports
+			"ignoreDependencies": [
+				"@node-zugferd/basic",
+				"@node-zugferd/basic-wl",
+				"@node-zugferd/en-16931",
+				"@node-zugferd/extended",
+				"@node-zugferd/minimum"
+			]
+		},
+		"packages/default-template": {
+			"project": ["src/**/*.ts!"],
+			"ignoreDependencies": ["node-zugferd", "@node-zugferd/en-16931"]
 		}
 	},
 	"vitest": {
 		"entry": ["**/*.test.ts", "**/*.spec.ts"]
 	},
-	"ignoreWorkspaces": ["docs/**"]
+	"ignoreWorkspaces": ["docs/**", "e2e/**", "benchmark/**"]
 }
