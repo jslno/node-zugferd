@@ -3,13 +3,13 @@ import type {
 	BaseSchema,
 	OutputDataset,
 } from "@node-zugferd/core/data-types";
-import { getStandardProps } from "../utils/standard-props";
 import type {
 	Codelist,
 	ZugferdCodelistRegistryValue,
 } from "@node-zugferd/core/types";
 import { getCodelist } from "../storages";
 import { addIssue } from "../utils/add-issue";
+import { getStandardProps } from "../utils/standard-props";
 
 type UnitCode =
 	ZugferdCodelistRegistryValue<"code"> extends infer R extends Codelist

@@ -3,6 +3,7 @@ import type {
 	DataRelationship,
 	InferProfileIds,
 	ZugferdOptions as ZFOptions,
+	ZugferdContext,
 	ZugferdPlugin,
 	ZugferdProfile,
 } from "@node-zugferd/core";
@@ -13,7 +14,6 @@ import type { PDFDocument } from "pdf-lib";
 import { create as createDocument } from "xmlbuilder2";
 import { toPdfA } from "../pdf";
 import type { PDFOptions } from "../pdf/types";
-import type { ZugferdContext } from "@node-zugferd/core";
 
 declare module "@node-zugferd/core" {
 	interface ZugferdPluginRegistry<ZugferdOptions, Options> {

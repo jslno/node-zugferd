@@ -244,6 +244,45 @@ describe("intersect cardinality upgrade", () => {
 		});
 	});
 
+	it("does not overwrite later asArray items with the object-side first item", () => {
+		const paymentTermsSchema = intersect([
+			object({
+				paymentTerms: nullish(
+					object({
+						description: text(),
+						dueDate: text(),
+					}),
+				),
+			}),
+			object({
+				paymentTerms: nullish(
+					asArray(
+						object({
+							partialPaymentAmount: nullish(text()),
+							dueDate: text(),
+						}),
+					),
+				),
+			}),
+		]);
+
+		const input = {
+			paymentTerms: [
+				{
+					description: "with skonto",
+					dueDate: "2026-06-06",
+					partialPaymentAmount: "100",
+				},
+				{
+					description: "without deduction",
+					dueDate: "2026-06-13",
+				},
+			],
+		};
+
+		expect(parse(paymentTermsSchema, input)).toEqual(input);
+	});
+
 	it("preserves array type across three profile-like folds", () => {
 		const paymentTermsSchema = intersect([
 			object({

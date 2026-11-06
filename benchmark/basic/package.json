@@ -1,0 +1,11 @@
+{
+  "name": "@node-zugferd-test/benchmark-profile-basic",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bench": "vitest bench"
+  },
+  "dependencies": {
+    "@node-zugferd/basic": "workspace:*"
+  }
+}

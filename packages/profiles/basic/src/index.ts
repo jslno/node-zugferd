@@ -66,12 +66,16 @@ export const basic = defineProfile({
 							.txt(line.position.lineId.identifier);
 
 						if (line.position.includedNote) {
-							const includedNote =
-								associatedDocumentLineDocument.ele("ram:IncludedNote");
-							if (line.position.includedNote.content) {
-								includedNote
-									.ele("ram:Content")
-									.txt(line.position.includedNote.content);
+							const notes = Array.isArray(line.position.includedNote)
+								? line.position.includedNote
+								: [line.position.includedNote];
+
+							for (const note of notes) {
+								const includedNote =
+									associatedDocumentLineDocument.ele("ram:IncludedNote");
+								if (note?.content) {
+									includedNote.ele("ram:Content").txt(note.content);
+								}
 							}
 						}
 					}

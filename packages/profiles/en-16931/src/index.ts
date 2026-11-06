@@ -218,8 +218,7 @@ export const en16931 = defineProfile({
 							const allowanceNodes = findAllNodes(
 								specifiedLineTradeSettlement,
 								(node) =>
-									node.node.nodeName ===
-										"ram:SpecifiedLineTradeAllowanceCharge" &&
+									node.node.nodeName === "ram:SpecifiedTradeAllowanceCharge" &&
 									[...node.node.childNodes].some(
 										(child) =>
 											child.nodeName === "ram:ChargeIndicator" &&
@@ -235,10 +234,35 @@ export const en16931 = defineProfile({
 								const allowanceNode = allowanceNodes[j];
 								if (!allowanceNode || !allowance) continue;
 
-								if (allowance.calculationPercent) {
+								if (typeof allowance.calculationPercent === "number") {
+									const calculationPercent = fragment().ele(
+										"ram:CalculationPercent",
+									);
+									calculationPercent.txt(
+										allowance.calculationPercent.toString(),
+									);
+									const refNode =
+										findNode(
+											`BT-136[${i}][${j}]`,
+											allowanceNode,
+											(node) => node.node.nodeName === "ram:ActualAmount",
+										)?.node ?? null;
+									allowanceNode.node.insertBefore(
+										calculationPercent.node,
+										refNode,
+									);
 								}
 
 								if (allowance.basisAmount) {
+									const basisAmount = fragment().ele("ram:BasisAmount");
+									basisAmount.txt(allowance.basisAmount.value.toString());
+									const refNode =
+										findNode(
+											`BT-136[${i}][${j}]`,
+											allowanceNode,
+											(node) => node.node.nodeName === "ram:ActualAmount",
+										)?.node ?? null;
+									allowanceNode.node.insertBefore(basisAmount.node, refNode);
 								}
 							}
 						}

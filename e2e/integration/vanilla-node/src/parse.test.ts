@@ -1,8 +1,8 @@
 import { en16931 } from "@node-zugferd/en-16931";
+import { parser } from "@node-zugferd/parser";
+import { simpleData } from "@node-zugferd-test/test-utils/en-16931/valid/simple.js";
 import { zugferd } from "node-zugferd";
 import { describe, expect, test } from "vitest";
-import { simpleData } from "@node-zugferd-test/test-utils/en-16931/valid/simple.js";
-import { parser } from "@node-zugferd/parser";
 import { blankPdf } from "./utils";
 
 function testSimpleData(parsed: any) {

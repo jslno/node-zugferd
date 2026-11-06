@@ -195,7 +195,7 @@ export const extended = defineProfile({
 				if (!line || !lineNode) continue;
 
 				if (line.position) {
-					const associatedDocumentLineDoucment = findNode(
+					const associatedDocumentLineDocument = findNode(
 						`BT-126-00[${i}]`,
 						lineNode,
 						(node) =>
@@ -224,10 +224,10 @@ export const extended = defineProfile({
 						const refNode =
 							findNode(
 								`BT-127-00[${i}][0]`,
-								associatedDocumentLineDoucment,
+								associatedDocumentLineDocument,
 								(node) => node.node.nodeName === "ram:IncludedNote",
 							)?.node ?? null;
-						associatedDocumentLineDoucment.node.insertBefore(
+						associatedDocumentLineDocument.node.insertBefore(
 							parentLineId.node,
 							refNode,
 						);
@@ -239,10 +239,10 @@ export const extended = defineProfile({
 						const refNode =
 							findNode(
 								`BT-127-00[${i}][0]`,
-								associatedDocumentLineDoucment,
+								associatedDocumentLineDocument,
 								(node) => node.node.nodeName === "ram:IncludedNote",
 							)?.node ?? null;
-						associatedDocumentLineDoucment.node.insertBefore(
+						associatedDocumentLineDocument.node.insertBefore(
 							lineStatusCode.node,
 							refNode,
 						);
@@ -256,10 +256,10 @@ export const extended = defineProfile({
 						const refNode =
 							findNode(
 								`BT-127-00[${i}][0]`,
-								associatedDocumentLineDoucment,
+								associatedDocumentLineDocument,
 								(node) => node.node.nodeName === "ram:IncludedNote",
 							)?.node ?? null;
-						associatedDocumentLineDoucment.node.insertBefore(
+						associatedDocumentLineDocument.node.insertBefore(
 							lineStatusReasonCode.node,
 							refNode,
 						);
@@ -270,7 +270,7 @@ export const extended = defineProfile({
 						line.position.includedNote.length > 0
 					) {
 						const includedNoteNodes = findAllNodes(
-							associatedDocumentLineDoucment,
+							associatedDocumentLineDocument,
 							(node) => node.node.nodeName === "ram:IncludedNote",
 						);
 						for (let j = 0; j < line.position.includedNote.length; j++) {
@@ -1540,13 +1540,13 @@ export const extended = defineProfile({
 									line.priceDetails.itemSeller.postalAddress.countryCode.value,
 								);
 							if (
-								line.priceDetails.itemSeller.postalAddress.countrySubdivison
+								line.priceDetails.itemSeller.postalAddress.countrySubdivision
 							) {
 								postalTradeAddress
 									.ele("ram:CountrySubDivisionName")
 									.txt(
 										line.priceDetails.itemSeller.postalAddress
-											.countrySubdivison,
+											.countrySubdivision,
 									);
 							}
 						}
@@ -2306,7 +2306,7 @@ export const extended = defineProfile({
 								line.billing.itemTotals.taxTotalAmount.value.toString(),
 							);
 							if (line.billing.itemTotals.taxTotalAmount.currency) {
-								// TODO: set currency to invocie currency code by default
+								// TODO: set currency to invoice currency code by default
 								taxTotalAmount.att(
 									"currencyID",
 									line.billing.itemTotals.taxTotalAmount.currency,

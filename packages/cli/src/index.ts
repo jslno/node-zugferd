@@ -2,8 +2,8 @@
 
 import { Command } from "commander";
 import { init } from "./commands/init";
-import { upgrade } from "./commands/upgrade";
 import { parse } from "./commands/parse";
+import { upgrade } from "./commands/upgrade";
 
 // handle exit
 process.on("SIGINT", () => process.exit(0));

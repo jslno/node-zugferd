@@ -3,6 +3,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { docsContentRoute, docsRoute } from "@/lib/shared";
 
+// TODO: update rewrites to support examples & api-reference
 const { rewrite: rewriteDocs } = rewritePath(
 	`${docsRoute}{/*path}`,
 	`${docsContentRoute}{/*path}/content.md`,

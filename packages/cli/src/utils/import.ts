@@ -1,9 +1,9 @@
+import { fileURLToPath } from "node:url";
 import type { ZugferdPlugin, ZugferdProfile } from "@node-zugferd/core";
-import type { Result } from "./helper";
-import { tryCatch } from "./helper";
 import { PLUGINS } from "../commands/init/utils/plugins";
 import { PROFILES } from "../commands/init/utils/profiles";
-import { fileURLToPath } from "node:url";
+import type { Result } from "./helper";
+import { tryCatch } from "./helper";
 
 export type ImportPackageConfig = {
 	optional?: boolean | undefined;
@@ -16,7 +16,7 @@ export const importPackage = <R>(
 	cfg?: ImportPackageConfig,
 ): Promise<Result<R>> => {
 	const cached = promises.get(path);
-	if (cached) {
+	if (!!cached) {
 		return cached as Promise<Result<R>>;
 	}
 

@@ -31,14 +31,14 @@ import { untdid3139 } from "./untdid-3139";
 import { untdid4053 } from "./untdid-4053";
 import { untdid4055 } from "./untdid-4055";
 import { untdid4451 } from "./untdid-4451";
+import { untdid4461 } from "./untdid-4461";
+import { untdid5153 } from "./untdid-5153";
+import { untdid5189 } from "./untdid-5189";
 import { untdid5305 } from "./untdid-5305";
-import { vatCat } from "./vat-cat";
-import { vatex } from "./vatex";
 import { untdid7143 } from "./untdid-7143";
 import { untdid7161 } from "./untdid-7161";
-import { untdid4461 } from "./untdid-4461";
-import { untdid5189 } from "./untdid-5189";
-import { untdid5153 } from "./untdid-5153";
+import { vatCat } from "./vat-cat";
+import { vatex } from "./vatex";
 
 const codelistGeneratorMap = {
 	allowance,

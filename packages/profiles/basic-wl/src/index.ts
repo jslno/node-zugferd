@@ -257,9 +257,9 @@ export const basicWL = defineProfile({
 							countryId?.node ?? null,
 						);
 					}
-					if (data.transaction.contract.seller.postalAddress.line2) {
+					if (data.transaction.contract.seller.postalAddress.line3) {
 						const line = fragment().ele("ram:LineThree");
-						line.txt(data.transaction.contract.seller.postalAddress.line2);
+						line.txt(data.transaction.contract.seller.postalAddress.line3);
 						postalTradeAddress.node.insertBefore(
 							line.node,
 							countryId?.node ?? null,

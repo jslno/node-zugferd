@@ -1,7 +1,7 @@
-import { parseXML } from "../helper";
 import { readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { parseXML } from "../helper";
 
 export type ParserContext = {
 	parseXML: typeof parseXML;

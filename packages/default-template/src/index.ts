@@ -1,3 +1,4 @@
+import untdid1001 from "@node-zugferd/codelist-untdid-1001";
 import type { Awaitable } from "@node-zugferd/core";
 import { ZugferdError } from "@node-zugferd/core/error";
 import type {
@@ -8,19 +9,16 @@ import type {
 } from "@node-zugferd/pdf-template";
 import {
 	definePdfTemplate,
-	renderFlow,
-	vstack,
-	hstack,
-	text,
-	spacer,
-	stripeTheme,
-	StandardFonts,
-	PageSizes,
-	link,
-	table,
 	formatCurrency,
+	hstack,
+	PageSizes,
+	renderFlow,
+	StandardFonts,
+	stripeTheme,
+	table,
+	text,
+	vstack,
 } from "@node-zugferd/pdf-template";
-import untdid1001 from "@node-zugferd/codelist-untdid-1001";
 import { createT } from "./i18n";
 import * as defaultTranslations from "./i18n/translations";
 

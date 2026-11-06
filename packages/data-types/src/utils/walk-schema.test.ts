@@ -1,8 +1,16 @@
 import { describe, expect, it } from "vitest";
 import { metadata } from "../actions";
 import { pipe } from "../methods";
-import { array, intersect, nullish, object, quantity, text } from "../schemas";
-import { walkSchema } from "./walk-schema";
+import {
+	array,
+	asArray,
+	intersect,
+	nullish,
+	object,
+	quantity,
+	text,
+} from "../schemas";
+import { collectFieldSchemas, walkSchema } from "./walk-schema";
 
 describe("walk-schema", () => {
 	it("walks top-level fields", () => {
@@ -101,6 +109,55 @@ describe("walk-schema", () => {
 		expect(new Set(paths).size).toBe(paths.length);
 	});
 
+	it("upgrades object fields to asArray paths when a later intersect option uses asArray", () => {
+		const schema = intersect([
+			object({
+				contact: nullish(
+					object({
+						personName: pipe(
+							text(),
+							metadata({
+								xpath: "/root/Contact/PersonName",
+							}),
+						),
+						phoneNumber: text(),
+					}),
+				),
+			}),
+			object({
+				contact: pipe(
+					nullish(
+						asArray(
+							object({
+								typeCode: text(),
+							}),
+						),
+					),
+					metadata({
+						xpath: "/root/Contact",
+					}),
+				),
+			}),
+		]);
+
+		const paths: string[] = [];
+		walkSchema(schema, ({ path }) => {
+			paths.push(path.join("."));
+		});
+
+		expect(paths).toEqual([
+			"contact",
+			"contact.*.personName",
+			"contact.*.phoneNumber",
+			"contact.*.typeCode",
+		]);
+
+		const fields = collectFieldSchemas(schema);
+		expect(fields.has("contact.*.personName")).toBe(true);
+		expect(fields.has("contact.personName")).toBe(false);
+		expect(fields.get("contact")?.schema).toBeTruthy();
+	});
+
 	it("passes metadata to the callback", () => {
 		const schema = object({
 			name: pipe(
@@ -129,5 +186,58 @@ describe("walk-schema", () => {
 				label: "Full Name",
 			},
 		});
+	});
+
+	it("merges nested object-to-asArray upgrades (seller.contact)", () => {
+		const schema = intersect([
+			object({
+				transaction: object({
+					contract: object({
+						seller: object({
+							contact: nullish(
+								object({
+									personName: text(),
+									phoneNumber: text(),
+								}),
+							),
+						}),
+					}),
+				}),
+			}),
+			object({
+				transaction: object({
+					contract: object({
+						seller: object({
+							contact: pipe(
+								nullish(
+									asArray(
+										object({
+											typeCode: text(),
+										}),
+									),
+								),
+								metadata({ xpath: "/Contact" }),
+							),
+						}),
+					}),
+				}),
+			}),
+		]);
+
+		const paths: string[] = [];
+		walkSchema(schema, ({ path }) => {
+			if (path.join(".").includes("contact")) paths.push(path.join("."));
+		});
+		expect(paths).toEqual([
+			"transaction.contract.seller.contact",
+			"transaction.contract.seller.contact.*.personName",
+			"transaction.contract.seller.contact.*.phoneNumber",
+			"transaction.contract.seller.contact.*.typeCode",
+		]);
+
+		const fields = collectFieldSchemas(schema);
+		expect(fields.has("transaction.contract.seller.contact.*.personName")).toBe(
+			true,
+		);
 	});
 });

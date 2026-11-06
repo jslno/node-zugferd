@@ -84,7 +84,7 @@ export const originCountryCustomsTariffHS_UNSPSC_TST_eClass_STQData: typeof exte
 						},
 						recipient: {
 							id: "0009876543",
-							name: "Musterkunde GmbH & Co Name 2 Musterkunde",
+							name: "Musterkunde GmbH &amp; Co Name 2 Musterkunde",
 							postalAddress: {
 								postCode: "40789",
 								line1: "Musterstrasse 44",

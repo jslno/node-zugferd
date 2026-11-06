@@ -1,6 +1,7 @@
 {
   "icon": "Library",
   "pages": [
+    "cli",
     "options",
     "resources",
     "contributing",

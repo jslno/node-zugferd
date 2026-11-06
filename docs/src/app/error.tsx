@@ -1,20 +1,25 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { HomeBackground } from "./(home)/background";
 import { RefreshCcwIcon } from "lucide-react";
-import { ErrorInfo } from "next/error";
+import type { ErrorInfo } from "next/error";
 import Link from "next/link";
-import { SearchToggle } from "@/layouts/docs";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { GitHubIcon } from "@/components/icons/github";
+import { NodeZugferd } from "@/components/icons/node-zugferd";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { SearchToggle } from "@/layouts/docs";
 import { gitConfig } from "@/lib/shared";
+import { HomeBackground } from "./(home)/background";
 
 export default function Error({ error, unstable_retry }: ErrorInfo) {
 	return (
 		<>
 			<div className="h-14 px-4 gap-x-4 flex items-center justify-between">
-				<Link href="/" className="font-medium whitespace-nowrap">
+				<Link
+					href="/"
+					className="flex items-center gap-2 font-medium whitespace-nowrap"
+				>
+					<NodeZugferd />
 					node-zugferd
 				</Link>
 				<div className="w-full max-w-xl">

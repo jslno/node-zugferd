@@ -1,8 +1,8 @@
-import { Command } from "commander";
-import { cancel, isCancel, path as pathPrompt } from "@clack/prompts";
-import * as z from "zod";
-import path from "node:path";
 import fs from "node:fs/promises";
+import path from "node:path";
+import { cancel, isCancel, path as pathPrompt } from "@clack/prompts";
+import { Command } from "commander";
+import * as z from "zod";
 import { tryCatch } from "../utils/helper";
 import { importPackage } from "../utils/import";
 import { getInvoicerInstance } from "../utils/invoicer";
@@ -136,6 +136,6 @@ export const parse = new Command("parse")
 	)
 	.option("-i, --input <file>", "The invoice file to parse.")
 	.option("-o, --output <file>", "The output file to write the JSON to.")
-	.option("--minify", "Minify the output JSON.")
-	.description("Parses an ZUGFeRD invoice and outputs it as JSON.")
+	.option("--minify", "Minify the output.")
+	.description("Parses a ZUGFeRD invoice and outputs it as JSON.")
 	.action(parseAction);

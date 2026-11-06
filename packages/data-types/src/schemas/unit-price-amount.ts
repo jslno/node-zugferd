@@ -3,8 +3,8 @@ import type {
 	BaseSchema,
 	OutputDataset,
 } from "@node-zugferd/core/data-types";
-import { getStandardProps } from "../utils/standard-props";
 import { addIssue } from "../utils/add-issue";
+import { getStandardProps } from "../utils/standard-props";
 
 export interface UnitPriceAmountIssue extends BaseIssue<unknown> {
 	readonly kind: "schema";

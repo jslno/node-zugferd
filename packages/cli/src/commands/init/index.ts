@@ -1,14 +1,5 @@
-import { Command } from "commander";
 import fs from "node:fs/promises";
 import path from "node:path";
-import * as z from "zod";
-import {
-	detectPackageManager,
-	PACKAGE_MANAGER,
-} from "../../utils/package-manager";
-import { getPackageInfo, hasDependency } from "../../utils/get-package-info";
-import chalk from "chalk";
-import type { Dependency } from "../../utils/install-dependencies";
 import {
 	cancel,
 	confirm,
@@ -17,8 +8,17 @@ import {
 	multiselect,
 	text,
 } from "@clack/prompts";
+import chalk from "chalk";
+import { Command } from "commander";
+import * as z from "zod";
 import { possibleConfigPaths } from "../../utils/get-config";
+import { getPackageInfo, hasDependency } from "../../utils/get-package-info";
 import { tryCatch } from "../../utils/helper";
+import type { Dependency } from "../../utils/install-dependencies";
+import {
+	detectPackageManager,
+	PACKAGE_MANAGER,
+} from "../../utils/package-manager";
 import { generateConfig } from "./utils/config";
 import type { Import } from "./utils/imports";
 import type { Plugin } from "./utils/plugins";
@@ -61,7 +61,7 @@ export async function initAction(opts: z.infer<typeof initOptionsSchema>) {
 	}
 
 	let currentStep = 0;
-	const additionalSteps: (() => Promise<void>)[] = [];
+	const _additionalSteps: (() => Promise<void>)[] = [];
 
 	const nextStep = async (msg: string) => {
 		currentStep++;

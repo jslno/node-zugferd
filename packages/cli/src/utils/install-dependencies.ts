@@ -1,7 +1,7 @@
 import { exec } from "node:child_process";
 import type { LiteralString } from "@node-zugferd/core";
-import type { PackageManager } from "./package-manager";
 import { rcompare } from "semver";
+import type { PackageManager } from "./package-manager";
 
 const flagsMap = {
 	npm: {

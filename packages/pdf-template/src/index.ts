@@ -1,10 +1,9 @@
 import type { Awaitable } from "@node-zugferd/core";
-import type { Template } from "@node-zugferd/templates";
-import { PDFDocument } from "pdf-lib";
-import { text as text_ } from "boxpdf";
+import type { Template, TemplateContext } from "@node-zugferd/templates";
 import type { TextOptions } from "boxpdf";
-import type { TemplateContext } from "@node-zugferd/templates";
+import { text as text_ } from "boxpdf";
 import { IntlMessageFormat } from "intl-messageformat";
+import { PDFDocument } from "pdf-lib";
 
 export function definePdfTemplate<
 	const Input extends Record<string, any>,
@@ -27,7 +26,7 @@ export function definePdfTemplate<
 					const january = new Date(9e8);
 					const spanish = new Intl.DateTimeFormat("es", { month: "long" });
 					return spanish.format(january) === "enero";
-				} catch (err) {
+				} catch (_err) {
 					return false;
 				}
 			})();

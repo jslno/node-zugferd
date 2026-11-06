@@ -156,9 +156,6 @@ function parseValidatorResult(ctx: ZugferdContext, output: string) {
 		throw new ZugferdError("Failed to parse Mustang validation output.");
 	}
 
-	// TODO: remove
-	console.dir(out, { depth: null, colors: true });
-
 	const messages: string[] = [];
 
 	// TODO: Fix flaky parsing

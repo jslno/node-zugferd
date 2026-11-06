@@ -1,19 +1,24 @@
 "use client";
 
+import Link from "next/link";
 import { GitHubIcon } from "@/components/icons";
+import { NodeZugferd } from "@/components/icons/node-zugferd";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { SearchToggle } from "@/layouts/docs";
 import { SIDEBAR_TABS } from "@/layouts/docs/sidebar";
 import { gitConfig } from "@/lib/shared";
-import Link from "next/link";
 import { HomeBackground } from "./(home)/background";
 
 export default function NotFound() {
 	return (
 		<>
 			<div className="h-14 px-4 gap-x-4 flex items-center justify-between">
-				<Link href="/" className="font-medium whitespace-nowrap">
+				<Link
+					href="/"
+					className="flex items-center gap-2 font-medium whitespace-nowrap"
+				>
+					<NodeZugferd />
 					node-zugferd
 				</Link>
 				<div className="w-full max-w-xl">

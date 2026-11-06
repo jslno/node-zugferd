@@ -23,6 +23,8 @@ export interface MatchContext extends BaseContext {
 
 export interface ParseContext extends BaseContext {
 	xpath: ReturnType<typeof createXPath>;
+	/** When true, decode XML entities in string values (`&amp;` → `&`). Default false. */
+	decodeEntities?: boolean | undefined;
 }
 
 export type ProfileMapEntry = {
@@ -32,16 +34,21 @@ export type ProfileMapEntry = {
 	) => Record<string, any> | Promise<Record<string, any>>;
 };
 
+export type ParserHooks = {
+	beforeParse?: ((ctx: ParseContext) => void | Promise<void>) | undefined;
+	afterParse?:
+		| ((
+				ctx: ParseContext & { data: Record<string, unknown> },
+		  ) => void | Promise<void>)
+		| undefined;
+};
+
 export interface ParserOptions {
 	profileMap?: Record<string, ProfileMapEntry> | undefined;
-	hooks?:
-		| {
-				beforeParse?: ((ctx: ParseContext) => void | Promise<void>) | undefined;
-				afterParse?:
-					| ((
-							ctx: ParseContext & { data: Record<string, unknown> },
-					  ) => void | Promise<void>)
-					| undefined;
-		  }
-		| undefined;
+	/**
+	 * Decode XML entities in parsed string/identifier values (`&amp;` → `&`).
+	 * Defaults to `false`.
+	 */
+	decodeEntities?: boolean | undefined;
+	hooks?: ParserHooks | undefined;
 }

@@ -1,7 +1,6 @@
 ---
 icon: Form
 title: Templates
-description: Your first document
 ---
 
 ## Installation
@@ -10,7 +9,7 @@ description: Your first document
     <Step>
         ### Install the plugin
         
-        ```package-install
+        ```package-install tab-group="pm"
         @node-zugferd/templates
         ```
     </Step>
@@ -25,10 +24,49 @@ description: Your first document
         export const invoicer = zugferd({
           profiles: [en16931],
           plugins: [
-            templates(), // [!code highlight]
+            templates({ // [!code highlight]
+              templates: { // [!code highlight]
+                // ... // [!code highlight]
+              }, // [!code highlight]
+            }), // [!code highlight]
           ],
           // ...
         });
         ```
     </Step>
 </Steps>
+
+## Default Template
+
+```package-install
+@node-zugferd/default-template
+```
+
+## PDF Templates
+
+```package-install
+@node-zugferd/pdf-template
+```
+
+## DOCX Templates
+
+```package-install
+@node-zugferd/docx-template
+```
+
+## Basic Usage
+
+## Options
+
+<TypeTable
+  type={{
+    templates: {
+      type: "Templates",
+      required: true,
+    },
+    defaultTemplate: {
+      type: "string",
+      required: false,
+    },
+  }}
+/>

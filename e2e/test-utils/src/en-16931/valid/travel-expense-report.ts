@@ -1,5 +1,5 @@
-import { base64 } from "@node-zugferd/utils";
 import type { en16931 } from "@node-zugferd/en-16931";
+import { base64 } from "@node-zugferd/utils";
 
 export const travelExpenseReportData: typeof en16931.$Infer.Input = {
 	exchangedDocument: {

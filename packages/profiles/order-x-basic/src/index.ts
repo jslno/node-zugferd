@@ -3,6 +3,7 @@ import { schema } from "./schema";
 
 export const orderXBasic = defineProfile({
 	id: "order-x-basic",
+	version: "1.0",
 	dataRelationship: ["Data", "Source", "Alternative"],
 	extensionSchema: {
 		type: ["ORDER", "ORDER_RESPONSE", "ORDER_CHANGE"],

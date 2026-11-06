@@ -178,4 +178,52 @@ describe("XPath", () => {
 
 		expect(pages.length).toBe(3);
 	});
+
+	it("supports parent axis (..) in predicate path comparisons", () => {
+		const invoiceXml = `
+			<rsm:CrossIndustryInvoice>
+				<rsm:SupplyChainTradeTransaction>
+					<ram:ApplicableHeaderTradeSettlement>
+						<ram:InvoiceCurrencyCode>EUR</ram:InvoiceCurrencyCode>
+						<ram:SpecifiedTradeSettlementHeaderMonetarySummation>
+							<ram:TaxTotalAmount currencyID="EUR">37.62</ram:TaxTotalAmount>
+							<ram:TaxTotalAmount currencyID="USD">40.00</ram:TaxTotalAmount>
+						</ram:SpecifiedTradeSettlementHeaderMonetarySummation>
+					</ram:ApplicableHeaderTradeSettlement>
+				</rsm:SupplyChainTradeTransaction>
+			</rsm:CrossIndustryInvoice>
+		`;
+		const xp = createXPath(invoiceXml);
+
+		const matched = xp.querySelectorAll(
+			"rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyID=../../ram:InvoiceCurrencyCode]",
+		);
+
+		expect(matched.length).toBe(1);
+		expect((matched[0]!.original as any)["#"]).toBe("37.62");
+		expect((matched[0]!.original as any)["@currencyID"]).toBe("EUR");
+	});
+
+	it("supports absolute paths in predicate comparisons", () => {
+		const invoiceXml = `
+			<rsm:CrossIndustryInvoice>
+				<rsm:SupplyChainTradeTransaction>
+					<ram:ApplicableHeaderTradeSettlement>
+						<ram:InvoiceCurrencyCode>EUR</ram:InvoiceCurrencyCode>
+						<ram:SpecifiedTradeSettlementHeaderMonetarySummation>
+							<ram:TaxTotalAmount currencyID="EUR">37.62</ram:TaxTotalAmount>
+						</ram:SpecifiedTradeSettlementHeaderMonetarySummation>
+					</ram:ApplicableHeaderTradeSettlement>
+				</rsm:SupplyChainTradeTransaction>
+			</rsm:CrossIndustryInvoice>
+		`;
+		const xp = createXPath(invoiceXml);
+
+		const matched = xp.querySelectorAll(
+			"rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyID=/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode]",
+		);
+
+		expect(matched.length).toBe(1);
+		expect((matched[0]!.original as any)["#"]).toBe("37.62");
+	});
 });

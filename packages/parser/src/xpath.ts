@@ -147,29 +147,53 @@ export const createXPath = (
 		return parts;
 	};
 
-	const evalPath = (node: unknown, path: string): unknown => {
-		let cur = node;
+	const evalPath = (
+		node: unknown,
+		path: string,
+		ancestors: unknown[] = [],
+	): unknown => {
+		let cur: unknown;
+		const stack: unknown[] = [];
 
-		const parts = path.split("/");
+		if (path.startsWith("/")) {
+			cur = xml;
+			path = path.replace(/^\//, "");
+		} else {
+			cur = node;
+			stack.push(...ancestors);
+		}
+
+		const parts = path.split("/").filter((part) => part.length > 0);
 
 		for (const p of parts) {
-			if (!cur || typeof cur !== "object") return undefined;
+			if (p === ".") continue;
+			if (p === "..") {
+				cur = stack.pop();
+				continue;
+			}
+			if (cur == null || typeof cur !== "object") return undefined;
+			stack.push(cur);
 			cur = (cur as Record<string, unknown>)[p];
 		}
 
 		return cur;
 	};
 
+	type ResolveFrame = {
+		node: unknown;
+		ancestors: unknown[];
+	};
+
 	const resolve = (node: unknown, parts: string[]): unknown[] => {
-		let current: unknown[] = [node];
+		let current: ResolveFrame[] = [{ node, ancestors: [] }];
 
 		for (const raw of parts) {
 			const { tag, predicate } = parseSegment(raw);
-			const next: unknown[] = [];
+			const next: ResolveFrame[] = [];
 
 			if (!tag) throw new Error(`Invalid tag in segment: ${raw}`);
 
-			for (const item of current) {
+			for (const { node: item, ancestors } of current) {
 				if (!item || typeof item !== "object") continue;
 
 				const obj = item as Record<string, unknown>;
@@ -180,18 +204,28 @@ export const createXPath = (
 				for (const c of candidates) {
 					if (c == null) continue;
 
+					const candidateAncestors = [...ancestors, item];
+
 					if (!predicate) {
-						next.push(c);
+						next.push({ node: c, ancestors: candidateAncestors });
 						continue;
 					}
 
-					const left = getValue(evalPath(c, predicate.left));
+					const left = getValue(
+						evalPath(c, predicate.left, candidateAncestors),
+					);
 
 					if (predicate.type === "equals-literal") {
-						if (valuesEqual(left, predicate.right)) next.push(c);
+						if (valuesEqual(left, predicate.right)) {
+							next.push({ node: c, ancestors: candidateAncestors });
+						}
 					} else {
-						const right = getValue(evalPath(c, predicate.right));
-						if (valuesEqual(left, right)) next.push(c);
+						const right = getValue(
+							evalPath(c, predicate.right, candidateAncestors),
+						);
+						if (valuesEqual(left, right)) {
+							next.push({ node: c, ancestors: candidateAncestors });
+						}
 					}
 				}
 			}
@@ -199,7 +233,7 @@ export const createXPath = (
 			current = next;
 		}
 
-		return current;
+		return current.map((frame) => frame.node);
 	};
 
 	return {

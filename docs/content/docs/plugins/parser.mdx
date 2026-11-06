@@ -1,8 +1,12 @@
 ---
 icon: BookSearch
 title: Parser
-description: Your first document
 ---
+
+<Callout title="Experimental" type="warn">
+Parsing is currently experimental, and the API may subject to change.
+XRechnung and Order-X profiles are not supported yet.
+</Callout>
 
 ## Installation
 
@@ -34,13 +38,24 @@ description: Your first document
 
 </Steps>
 
+## Basic Usage
+
 ## Options
 
 <TypeTable
   type={{
     profileMap: {
-      type: "Record<string, >",
+      type: "Record<string, ProfileMapEntry>",
       required: false,
     },
+    decodeEntities: {
+      type: "boolean",
+      default: "false",
+      required: false,
+    },
+    hooks: {
+      type: "ParserHooks",
+      required: false,
+    }
   }}
 />

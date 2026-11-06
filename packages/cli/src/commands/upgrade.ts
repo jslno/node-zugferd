@@ -1,15 +1,15 @@
-import { Command } from "commander";
 import { existsSync } from "node:fs";
 import path from "node:path";
+import { cancel, confirm, isCancel, spinner } from "@clack/prompts";
+import chalk from "chalk";
+import { Command } from "commander";
+import semver from "semver";
 import type { PackageJson } from "type-fest";
 import * as z from "zod";
 import { getPackageInfo } from "../utils/get-package-info";
 import type { DependencyType } from "../utils/install-dependencies";
 import { installDependencies } from "../utils/install-dependencies";
-import { cancel, confirm, isCancel, spinner } from "@clack/prompts";
 import { fetchDistTags } from "../utils/npm";
-import semver from "semver";
-import chalk from "chalk";
 import { detectPackageManager } from "../utils/package-manager";
 
 const upgradeOptionsSchema = z.object({

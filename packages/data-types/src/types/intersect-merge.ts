@@ -107,14 +107,6 @@ type IsOptionalKey<T, K extends PropertyKey> = K extends keyof T
 		: false
 	: false;
 
-type IsNullishKey<T, K extends PropertyKey> = K extends keyof T
-	? undefined extends T[K]
-		? true
-		: null extends T[K]
-			? true
-			: false
-	: false;
-
 type IsOptionalAfterMerge<Parent, Local, K extends keyof Local> =
 	undefined extends MergeProfileProperty<
 		K extends keyof Parent ? Parent[K] : never,

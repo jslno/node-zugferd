@@ -1,26 +1,63 @@
+import type {
+	AmountSchema,
+	IdentifierSchema,
+	QuantitySchema,
+} from "@node-zugferd/data-types";
 import {
 	ARRAY_PATH_WILDCARD,
 	collectFieldSchemas,
 	getMetadata,
 	isArrayLikeSchema,
+	unwrapSchema,
 	walkSchema,
 } from "@node-zugferd/data-types";
+import { base64 } from "@node-zugferd/utils";
 import type { ParseContext } from "./types";
 import type { XPathMethods, XPathNode } from "./xpath";
-import { unwrapSchema } from "@node-zugferd/data-types";
-import type { IdentifierSchema } from "@node-zugferd/data-types";
-import { base64 } from "@node-zugferd/utils";
-import type { QuantitySchema } from "@node-zugferd/data-types";
-import type { AmountSchema } from "@node-zugferd/data-types";
 
 function getSelector(metadata: Record<string, unknown>): string | undefined {
-	const id = metadata.xpath ?? metadata.id;
+	const xpath = metadata.xpath;
 
-	if (!id) {
+	if (!xpath) {
 		return undefined;
 	}
 
-	return Array.isArray(id) ? id[0] : String(id);
+	return Array.isArray(xpath) ? xpath[0] : String(xpath);
+}
+
+/** xmlbuilder2 object mode keeps entity escapes in text nodes. */
+function decodeXmlEntities(value: string): string {
+	return value
+		.replace(/&lt;/g, "<")
+		.replace(/&gt;/g, ">")
+		.replace(/&quot;/g, '"')
+		.replace(/&apos;/g, "'")
+		.replace(/&amp;/g, "&");
+}
+
+/**
+ * xmlbuilder2 represents empty elements as `{}` and text+attrs as
+ * `{ "#": "…", "@attr": "…" }`. Plain strings are returned as-is.
+ */
+function readXmlText(value: unknown): unknown {
+	if (typeof value === "string" || value == null) {
+		return value;
+	}
+
+	if (typeof value === "object" && !Array.isArray(value)) {
+		const record = value as Record<string, unknown>;
+
+		if ("#" in record) {
+			return record["#"] ?? "";
+		}
+
+		const keys = Object.keys(record);
+		if (keys.length === 0 || keys.every((key) => key.startsWith("@"))) {
+			return "";
+		}
+	}
+
+	return value;
 }
 
 function pathKey(path: readonly string[]): string {
@@ -82,7 +119,7 @@ function getAbsoluteSelector(
 	return undefined;
 }
 
-function parentPathKey(pathKey: string): string | undefined {
+function _parentPathKey(pathKey: string): string | undefined {
 	const wildcardIndex = pathKey.lastIndexOf(`.${ARRAY_PATH_WILDCARD}`);
 
 	if (wildcardIndex === -1) {
@@ -108,6 +145,7 @@ function navigateToPath(
 ): XPathNode | null {
 	let current: XPathMethods = xpath;
 	let cursor = 0;
+	let previousAbsolute: string | undefined;
 	const segments = pathKey.split(".");
 	const builtPath: string[] = [];
 
@@ -129,10 +167,26 @@ function navigateToPath(
 		}
 
 		const partialKey = builtPath.join(".");
-		const selector =
-			cursor === 0
-				? (getAbsoluteSelector(fields, partialKey) ?? segment)
-				: segment;
+		const absolute = getAbsoluteSelector(fields, partialKey);
+		let selector = segment;
+
+		if (absolute) {
+			if (previousAbsolute && absolute.startsWith(`${previousAbsolute}/`)) {
+				selector = absolute.slice(previousAbsolute.length + 1);
+			} else if (cursor === 0) {
+				selector = absolute;
+			} else {
+				// Nested array whose absolute path is not under the previous
+				// absolute — try stripping known ancestor prefixes from fields.
+				const ancestor = previousAbsolute;
+				selector = absolute.replace(/^\//, "");
+				if (ancestor && absolute.startsWith(`${ancestor}/`)) {
+					selector = absolute.slice(ancestor.length + 1);
+				}
+			}
+			previousAbsolute = absolute;
+		}
+
 		const nodes = current.querySelectorAll(selector);
 		const index = indexes[cursor++];
 
@@ -140,11 +194,13 @@ function navigateToPath(
 			return null;
 		}
 
-		current = nodes[index] ?? xpath;
+		const next = nodes[index];
 
-		if (!current) {
+		if (!next) {
 			return null;
 		}
+
+		current = next;
 
 		if (nextSegment === ARRAY_PATH_WILDCARD) {
 			builtPath.push(ARRAY_PATH_WILDCARD);
@@ -163,6 +219,24 @@ function navigationPathKey(pathKey: string): string {
 	return pathKey;
 }
 
+/**
+ * `navigateToPath` only descends through array segments. For a nested array
+ * like `line.*.priceDetails.grossPrice.discount`, the navigable ancestor is
+ * `line` (not `grossPrice`), and relative xpaths must be rooted there.
+ */
+function nearestNavigableAncestorKey(
+	arrayPath: readonly string[],
+): string | undefined {
+	const parentSegments = arrayPath.slice(0, -1);
+	const wildcardIndex = parentSegments.lastIndexOf(ARRAY_PATH_WILDCARD);
+
+	if (wildcardIndex === -1) {
+		return parentSegments.length > 0 ? pathKey(parentSegments) : undefined;
+	}
+
+	return pathKey(parentSegments.slice(0, wildcardIndex));
+}
+
 function resolveArrayLength(
 	xpath: XPathMethods,
 	fields: Map<string, { path: readonly string[]; schema: unknown }>,
@@ -170,19 +244,36 @@ function resolveArrayLength(
 	indexes: readonly number[],
 ): number {
 	const key = pathKey(arrayPath);
-	const parentKey = parentPathKey(key);
 	const segment = arrayFieldSegment(key);
+	const absoluteSelector = getAbsoluteSelector(fields, key) ?? segment;
+	const parentSegments = arrayPath.slice(0, -1);
 
-	if (!parentKey) {
-		const selector = getAbsoluteSelector(fields, key) ?? segment;
-
-		return xpath.querySelectorAll(selector).length;
+	// Arrays not nested under another array can be counted from the document root.
+	if (
+		parentSegments.length === 0 ||
+		!parentSegments.includes(ARRAY_PATH_WILDCARD)
+	) {
+		return xpath.querySelectorAll(absoluteSelector).length;
 	}
 
-	const parentNode = navigateToPath(xpath, fields, parentKey, indexes);
+	const ancestorKey = nearestNavigableAncestorKey(arrayPath);
+
+	if (!ancestorKey) {
+		return xpath.querySelectorAll(absoluteSelector).length;
+	}
+
+	const parentNode = navigateToPath(xpath, fields, ancestorKey, indexes);
 
 	if (!parentNode) {
 		return 0;
+	}
+
+	const ancestorSelector = getAbsoluteSelector(fields, ancestorKey);
+
+	if (ancestorSelector && absoluteSelector.startsWith(`${ancestorSelector}/`)) {
+		return parentNode.querySelectorAll(
+			absoluteSelector.slice(ancestorSelector.length + 1),
+		).length;
 	}
 
 	return parentNode.querySelectorAll(segment).length;
@@ -212,6 +303,12 @@ function resolveFieldNode(
 		return null;
 	}
 
+	// asArray/array of scalars: the leaf path ends at `*` and the array
+	// element node is the field value itself.
+	if (lastWildcardIndex === path.length - 1) {
+		return parentNode;
+	}
+
 	const parentSelector = getAbsoluteSelector(fields, parentKey);
 
 	if (!parentSelector || !selector.startsWith(`${parentSelector}/`)) {
@@ -239,7 +336,7 @@ type InferAssertedType<T> = T extends "string"
 								? Function
 								: T;
 
-const assertType = <
+function assertType<
 	T extends
 		| "string"
 		| "number"
@@ -262,7 +359,7 @@ const assertType = <
 				expected?: string | undefined;
 		  }
 		| undefined,
-): value is InferAssertedType<T> => {
+): asserts value is InferAssertedType<T> {
 	let expected: string = typeof type === "string" ? type : type.name;
 	let received: string = typeof value;
 
@@ -285,17 +382,19 @@ const assertType = <
 			`Expected value of type "${expected}", but got "${received}"${path ? ` at "${path}"` : ""}`,
 		);
 	}
-	return true;
-};
+}
 
 export function parseFromSchema<R = Record<string, unknown>>({
 	profile,
 	xml,
 	xpath,
 	context,
+	decodeEntities = false,
 }: Omit<ParseContext, "pdf">): R {
 	const fields = collectFieldSchemas(profile.schema);
 	const result: Record<string, unknown> = {};
+	const maybeDecode = (value: string) =>
+		decodeEntities ? decodeXmlEntities(value) : value;
 
 	const assignByPath = (
 		path: readonly string[],
@@ -321,6 +420,12 @@ export function parseFromSchema<R = Record<string, unknown>>({
 					throw new Error(
 						`Expected array at "${path.slice(0, i).join(".")}" instead got ${typeof current}`,
 					);
+				}
+
+				// asArray/array of scalars: path ends at `*` and the item IS the value.
+				if (isLeaf) {
+					current[index] = transformValue ? transformValue(value) : value;
+					return;
 				}
 
 				current[index] ??= {};
@@ -352,7 +457,12 @@ export function parseFromSchema<R = Record<string, unknown>>({
 		({ schema, metadata, path, indexes }) => {
 			if (isArrayLikeSchema(schema)) return;
 
-			const selector = getSelector(metadata);
+			// Scalar asArray/array items often inherit xpath from the array field.
+			const selector =
+				getSelector(metadata) ??
+				(path.at(-1) === ARRAY_PATH_WILDCARD
+					? getAbsoluteSelector(fields, navigationPathKey(pathKey(path)))
+					: undefined);
 
 			if (!selector) return;
 
@@ -365,40 +475,46 @@ export function parseFromSchema<R = Record<string, unknown>>({
 				unwrappedSchema.kind === "schema" && unwrappedSchema.type === type;
 
 			assignByPath(path, node.original, indexes, (value) => {
+				const fieldPath = pathKey(path);
+				// `text()` / `documentReference()` are typed as "string" with a subType.
 				if (
-					isSchemaType("text") ||
+					isSchemaType("string") ||
 					isSchemaType("code") ||
 					isSchemaType("literal")
 				) {
-					const result = value["#"] ?? value;
-					assertType(result, "string");
-					return result;
+					const result = readXmlText(value);
+					assertType(result, "string", fieldPath, {
+						received:
+							result && typeof result === "object"
+								? `object(${Object.keys(result as object).join(",")})`
+								: undefined,
+					});
+					return maybeDecode(result);
 				}
 				if (isSchemaType("quantity")) {
 					const result: Record<string, any> = {
-						value: Number(value["#"] ?? value),
-						unitCode: value["@unitCode"],
+						value: Number(readXmlText(value)),
 					};
 					const quantitySchema = unwrappedSchema as QuantitySchema<any>;
 					assertType(result.value, "number");
+					const unitCode = value["@unitCode"];
 					if (quantitySchema.config?.requireUnitCode !== "never") {
 						if (quantitySchema.config?.requireUnitCode === "always") {
-							assertType(result.unitCode, "string");
-						} else if (result.unitCode !== undefined) {
-							assertType(result.unitCode, "string", undefined, {
+							assertType(unitCode, "string");
+							result.unitCode = unitCode;
+						} else if (unitCode !== undefined) {
+							assertType(unitCode, "string", undefined, {
 								expected: "string | undefined",
 							});
-						} else {
-							delete result.unitCode;
+							result.unitCode = unitCode;
 						}
 					} else {
-						assertType(result.unitCode, "undefined");
-						delete result.unitCode;
+						assertType(unitCode, "undefined");
 					}
 					return result;
 				}
 				if (isSchemaType("unit-price-amount") || isSchemaType("percentage")) {
-					const result = Number(value["#"] ?? value);
+					const result = Number(readXmlText(value));
 					assertType(result, "number");
 					if (isSchemaType("percentage") && (result < 0 || result > 100)) {
 						throw new TypeError(
@@ -409,29 +525,28 @@ export function parseFromSchema<R = Record<string, unknown>>({
 				}
 				if (isSchemaType("amount")) {
 					const result: Record<string, any> = {
-						value: Number(value["#"] ?? value),
-						currency: value["@currencyID"],
+						value: Number(readXmlText(value)),
 					};
 					const amountSchema = unwrappedSchema as AmountSchema<any>;
 					assertType(result.value, "number");
+					const currency = value["@currencyID"];
 					if (amountSchema.config.requireCurrency !== "never") {
 						if (amountSchema.config.requireCurrency === "always") {
-							assertType(result.currency, "string");
-						} else if (result.currency !== undefined) {
-							assertType(result.currency, "string", undefined, {
+							assertType(currency, "string");
+							result.currency = currency;
+						} else if (currency !== undefined) {
+							assertType(currency, "string", undefined, {
 								expected: "string | undefined",
 							});
-						} else {
-							delete result.currency;
+							result.currency = currency;
 						}
 					} else {
-						assertType(result.currency, "undefined");
-						delete result.currency;
+						assertType(currency, "undefined");
 					}
 					return result;
 				}
 				if (isSchemaType("boolean")) {
-					const val = value["#"] ?? value;
+					const val = readXmlText(value);
 					if (val === "true" || val === true) {
 						return true;
 					} else if (val === "false" || val === false) {
@@ -442,8 +557,15 @@ export function parseFromSchema<R = Record<string, unknown>>({
 					);
 				}
 				if (isSchemaType("identifier")) {
+					const rawValue = readXmlText(value);
+					assertType(rawValue, "string", fieldPath, {
+						received:
+							rawValue && typeof rawValue === "object"
+								? `object(${Object.keys(rawValue as object).join(",")})`
+								: undefined,
+					});
 					const result: Record<string, string> = {
-						value: value["#"] ?? value,
+						value: maybeDecode(rawValue),
 					};
 					const identifierSchema = unwrappedSchema as IdentifierSchema<
 						any,
@@ -465,25 +587,30 @@ export function parseFromSchema<R = Record<string, unknown>>({
 						result["schemeVersion"] = value["@schemeVersion"];
 					}
 
-					assertType(result.value, "string");
 					if (Object.keys(result).length === 1) {
 						return result.value;
 					}
 					return result;
 				}
 				if (isSchemaType("date")) {
-					const str = value["#"];
-					const format = value["@format"];
-					assertType(str, "string");
+					const str = readXmlText(value);
+					const format =
+						value && typeof value === "object"
+							? (value as Record<string, unknown>)["@format"]
+							: undefined;
+					assertType(str, "string", fieldPath);
 
 					let hour = 0;
 					let minute = 0;
 					const year = Number(str.slice(0, 4));
 					const month = Number(str.slice(4, 6)) - 1;
-					const day = Number(str.slice(6, 8)) + 1;
+					const day = Number(str.slice(6, 8));
 					if (format === "204") {
 						hour = Number(str.slice(8, 10));
 						minute = Number(str.slice(10, 12));
+					}
+					if (format === "102" || (hour === 0 && minute === 0 && !format)) {
+						return new Date(Date.UTC(year, month, day));
 					}
 					return new Date(year, month, day, hour, minute);
 				}

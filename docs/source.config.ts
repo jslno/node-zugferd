@@ -153,6 +153,11 @@ export const apiReference = defineDocs({
 export default defineConfig({
 	mdxOptions: {
 		remarkPlugins: [[remarkCodelistTable, codelists]],
+		remarkNpmOptions: {
+			persist: {
+				id: "pm",
+			},
+		},
 		rehypeCodeOptions: {
 			themes: {
 				dark: "vitesse-dark",

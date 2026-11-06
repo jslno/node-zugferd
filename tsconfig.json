@@ -58,9 +58,6 @@
       "path": "./packages/codelists/unit/tsconfig.json"
     },
     {
-      "path": "./packages/codelists/undid-1001/tsconfig.json"
-    },
-    {
       "path": "./packages/codelists/untdid-1153/tsconfig.json"
     },
     {
@@ -93,9 +90,9 @@
     {
       "path": "./packages/node-zugferd/tsconfig.json"
     },
-    // {
-    //   "path": "./packages/parser/tsconfig.json"
-    // },
+    {
+      "path": "./packages/parser/tsconfig.json"
+    },
     {
       "path": "./packages/profiles/basic/tsconfig.json"
     },
@@ -111,12 +108,18 @@
     {
       "path": "./packages/profiles/minimum/tsconfig.json"
     },
-    // {
-    //   "path": "./packages/profiles/order-x/tsconfig.json"
-    // },
-    // {
-    //   "path": "./packages/profiles/xrechnung/tsconfig.json"
-    // },
+    {
+      "path": "./packages/profiles/order-x/tsconfig.json"
+    },
+    {
+      "path": "./packages/profiles/order-x-basic/tsconfig.json"
+    },
+    {
+      "path": "./packages/profiles/order-x-extended/tsconfig.json"
+    },
+    {
+      "path": "./packages/profiles/xrechnung/tsconfig.json"
+    },
     {
       "path": "./packages/utils/tsconfig.json"
     },

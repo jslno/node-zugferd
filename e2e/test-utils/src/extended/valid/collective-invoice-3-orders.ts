@@ -14,7 +14,7 @@ export const collectiveInvoice3OrdersData: typeof extended.$Infer.Input = {
 			},
 			{
 				content:
-					"Lieferant GmbH & Co. KG - 98765 Lieferantenstadt - T +49 (0)7891 11-0 - F +49(0)7891 11-1000 - info@lieferant.com - www.lieferant.com Hausanschrift: Lieferanten-Strasse 12-17 - 98765 Lieferantenstadt - Sitz Lieferantenstadt, Amtsgericht Stuttgart HRA 123456 Geschäftsführer:",
+					"Lieferant GmbH &amp; Co. KG - 98765 Lieferantenstadt - T +49 (0)7891 11-0 - F +49(0)7891 11-1000 - info@lieferant.com - www.lieferant.com Hausanschrift: Lieferanten-Strasse 12-17 - 98765 Lieferantenstadt - Sitz Lieferantenstadt, Amtsgericht Stuttgart HRA 123456 Geschäftsführer:",
 				subjectCode: "REG",
 			},
 			{
@@ -84,7 +84,7 @@ export const collectiveInvoice3OrdersData: typeof extended.$Infer.Input = {
 					},
 					recipient: {
 						id: "9900880077",
-						name: "Musterkunde GmbH & Co Name 2 Musterkunde",
+						name: "Musterkunde GmbH &amp; Co Name 2 Musterkunde",
 						postalAddress: {
 							postCode: "40789",
 							line1: "Musterstrasse 44",
@@ -227,7 +227,7 @@ export const collectiveInvoice3OrdersData: typeof extended.$Infer.Input = {
 					},
 					recipient: {
 						id: "9900880077",
-						name: "Musterkunde GmbH & Co Name 2 Musterkunde",
+						name: "Musterkunde GmbH &amp; Co Name 2 Musterkunde",
 						postalAddress: {
 							postCode: "40789",
 							line1: "Muster-Chaussee 77",
@@ -443,7 +443,7 @@ export const collectiveInvoice3OrdersData: typeof extended.$Infer.Input = {
 					},
 					recipient: {
 						id: "9900880077",
-						name: "Musterkunde GmbH & Co Name 2 Musterkunde",
+						name: "Musterkunde GmbH &amp; Co Name 2 Musterkunde",
 						postalAddress: {
 							postCode: "40789",
 							line1: "Musterstrasse 44",
@@ -554,7 +554,7 @@ export const collectiveInvoice3OrdersData: typeof extended.$Infer.Input = {
 					value: "0001231000000",
 					schemeId: "0088",
 				},
-				name: "Lieferant GmbH & Co. KG",
+				name: "Lieferant GmbH &amp; Co. KG",
 				contact: [
 					{
 						personName: "Tim Kleine",
@@ -583,7 +583,7 @@ export const collectiveInvoice3OrdersData: typeof extended.$Infer.Input = {
 			},
 			buyer: {
 				id: "9900880077",
-				name: "Musterkunde GmbH & Co Name 2 Musterkunde",
+				name: "Musterkunde GmbH &amp; Co Name 2 Musterkunde",
 				contact: [
 					{
 						personName: "Herr Test Monteur",
@@ -606,7 +606,7 @@ export const collectiveInvoice3OrdersData: typeof extended.$Infer.Input = {
 		},
 		delivery: {
 			recipient: {
-				name: "Musterkunde GmbH & Co Name 2 Musterkunde",
+				name: "Musterkunde GmbH &amp; Co Name 2 Musterkunde",
 				postalAddress: {
 					postCode: "40789",
 					line1: "Musterstrasse 44",

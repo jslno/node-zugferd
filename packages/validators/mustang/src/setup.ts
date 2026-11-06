@@ -1,12 +1,12 @@
-import { mkdir, rm, writeFile } from "node:fs/promises";
+import { createWriteStream } from "node:fs";
+import { mkdir, rm } from "node:fs/promises";
 import path from "node:path";
+import { Readable } from "node:stream";
+import { pipeline } from "node:stream/promises";
 import { ZugferdError } from "@node-zugferd/core/error";
 import { createLogger } from "@node-zugferd/core/utils";
 import which from "which";
 import { __dirname } from "./isomorph";
-import { pipeline } from "node:stream/promises";
-import { Readable } from "node:stream";
-import { createWriteStream } from "node:fs";
 
 const logger = createLogger({
 	// Add more detailed logging in CI environments

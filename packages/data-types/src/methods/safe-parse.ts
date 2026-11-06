@@ -4,10 +4,10 @@ import type {
 	BaseSchemaAsync,
 	Config,
 } from "@node-zugferd/core/data-types";
-import type { InferIssue, InferOutput } from "../types";
-import { DEFAULT_CONFIG } from "../utils/config";
 import type { DataTypeContext } from "../context";
 import { withContext } from "../context";
+import type { InferIssue, InferOutput } from "../types";
+import { DEFAULT_CONFIG } from "../utils/config";
 
 export type SafeParseResult<
 	Schema extends

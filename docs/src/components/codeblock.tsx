@@ -1,4 +1,6 @@
 "use client";
+import { useTranslations } from "@fuma-translate/react";
+import { useCopyButton } from "@fumadocs/base-ui/utils/use-copy-button";
 import { Check, Clipboard } from "lucide-react";
 import type {
 	ComponentProps,
@@ -8,11 +10,9 @@ import type {
 } from "react";
 import { createContext, use, useMemo, useRef } from "react";
 import { cn } from "../lib/cn";
-import { useCopyButton } from "@fumadocs/base-ui/utils/use-copy-button";
-import { buttonVariants } from "./ui/button";
-import { useTranslations } from "@fuma-translate/react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { mergeRefs } from "../lib/merge-refs";
+import { buttonVariants } from "./ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
 export interface CodeBlockProps
 	extends Omit<ComponentProps<"figure">, "title"> {

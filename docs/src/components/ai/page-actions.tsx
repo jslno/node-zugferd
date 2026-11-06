@@ -1,6 +1,7 @@
 "use client";
-import type { ComponentProps } from "react";
-import { useMemo, useState } from "react";
+import { useTranslations } from "@fuma-translate/react";
+import { useCopyButton } from "@fumadocs/base-ui/utils/use-copy-button";
+import { usePathname } from "fumadocs-core/framework";
 import {
 	Check,
 	ChevronDown,
@@ -8,12 +9,11 @@ import {
 	ExternalLinkIcon,
 	TextIcon,
 } from "lucide-react";
+import type { ComponentProps } from "react";
+import { useMemo, useState } from "react";
 import { cn } from "../../lib/cn";
-import { useCopyButton } from "@fumadocs/base-ui/utils/use-copy-button";
-import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
 import { buttonVariants } from "../ui/button";
-import { usePathname } from "fumadocs-core/framework";
-import { useTranslations } from "@fuma-translate/react";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 const cache = new Map<string, Promise<string>>();
 
@@ -33,7 +33,7 @@ export function MarkdownCopyButton({
 	const [isLoading, setLoading] = useState(false);
 	const [checked, onClick] = useCopyButton(async () => {
 		const cached = cache.get(markdownUrl);
-		if (cached) return navigator.clipboard.writeText(await cached);
+		if (await cached) return navigator.clipboard.writeText(await cached);
 
 		setLoading(true);
 

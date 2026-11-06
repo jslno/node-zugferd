@@ -2,6 +2,7 @@ packages:
   - packages/**
   - docs
   - e2e/**
+  - benchmark/**
 
 allowBuilds:
   esbuild: true
@@ -11,17 +12,18 @@ allowBuilds:
 blockExoticSubdeps: true
 
 catalog:
-  tsdown: ^0.22.1
-  typescript: ^5.9.3
+  tsdown: ^0.23.5
+  typescript: ^7.0.2
   xmlbuilder2: ^4.0.3
   pdf-lib: ^1.17.1
 
 catalogs:
   vitest:
-    "@vitest/coverage-istanbul": ^4.1.5
-    "@vitest/ui": ^4.1.5
-    vitest: ^4.1.5
+    "@vitest/coverage-istanbul": ^5.1.0
+    "@vitest/ui": ^5.1.0
+    vitest: ^5.1.0
 
 minimumReleaseAgeExclude:
   - miniflare@5.20260730.0-alpha
   - wrangler@4.118.0
+  - tsx@4.23.8

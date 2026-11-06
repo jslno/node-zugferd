@@ -3,9 +3,9 @@ import type {
 	BaseSchemaAsync,
 	OutputDataset,
 } from "@node-zugferd/core/data-types";
+import { getContext } from "../context";
 import { addIssue } from "../utils/add-issue";
 import { getStandardProps } from "../utils/standard-props";
-import { getContext } from "../context";
 
 export interface BinaryObjectSchema
 	extends BaseSchemaAsync<

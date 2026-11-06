@@ -10,22 +10,23 @@ import {
 	SidebarCloseIcon,
 	SidebarOpenIcon,
 } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import type { ComponentProps, ReactNode } from "react";
 import { useEffect, useRef } from "react";
 import { GitHubIcon } from "@/components/icons/github";
+import { NodeZugferd } from "@/components/icons/node-zugferd";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
-import { gitConfig } from "@/lib/shared";
-import { cn } from "../../lib/cn";
-import { handleGlobalWheel } from "../../lib/global-scroll";
-import { Sidebar, SIDEBAR_TABS, SidebarToggle, useSidebar } from "./sidebar";
 import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
-import { AnimatePresence, motion } from "motion/react";
+import { gitConfig } from "@/lib/shared";
+import { cn } from "../../lib/cn";
+import { handleGlobalWheel } from "../../lib/global-scroll";
+import { SIDEBAR_TABS, Sidebar, SidebarToggle, useSidebar } from "./sidebar";
 
 export interface DocsLayoutProps {
 	tree: PageTree.Root;
@@ -72,7 +73,11 @@ export function DocsLayout({ tree, children }: DocsLayoutProps) {
 				<header className="h-14 shrink-0">
 					<nav className="flex flex-row h-full items-center gap-x-4 px-4">
 						<div className="flex items-center gap-4 w-full">
-							<Link href="/" className="font-medium whitespace-nowrap">
+							<Link
+								href="/"
+								className="flex items-center gap-2 font-medium whitespace-nowrap"
+							>
+								<NodeZugferd />
 								node-zugferd
 							</Link>
 							<SidebarCollapseToggle />

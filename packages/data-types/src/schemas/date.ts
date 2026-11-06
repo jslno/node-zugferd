@@ -34,7 +34,14 @@ const dateFormats = {
 			`${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, "0")}${String(date.getDate()).padStart(2, "0")}`,
 		parse(value: string) {
 			if (!this.matches(value)) return null;
-			return null;
+
+			const year = Number(value.slice(0, 4));
+			const month = Number(value.slice(4, 6)) - 1;
+			const day = Number(value.slice(6, 8));
+			// Calendar dates have no timezone; parse as UTC midnight so ISO date
+			// inputs like `new Date("2020-03-05")` round-trip cleanly.
+			const date = new Date(Date.UTC(year, month, day));
+			return !isNaN(+date) ? date : null;
 		},
 	},
 	"203": {

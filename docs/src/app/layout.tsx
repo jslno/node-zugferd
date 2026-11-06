@@ -32,3 +32,19 @@ export default function Layout({ children }: LayoutProps<"/">) {
 		</html>
 	);
 }
+
+export const metadata = {
+	title: "node-zugferd",
+	icons: [
+		{
+			rel: "icon",
+			url: "/icon/light.png",
+			media: "(prefers-color-scheme: light)",
+		},
+		{
+			rel: "icon",
+			url: "/icon/dark.png",
+			media: "(prefers-color-scheme: dark)",
+		},
+	],
+};

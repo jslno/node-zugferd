@@ -9,18 +9,23 @@ import "@node-zugferd/codelist-untdid-1373";
 import "@node-zugferd/codelist-untdid-4053";
 import "@node-zugferd/codelist-untdid-4055";
 import "@node-zugferd/codelist-untdid-4451";
-import { amount, code, metadata, nullish } from "@node-zugferd/data-types";
-import { date } from "@node-zugferd/data-types";
-import { literal } from "@node-zugferd/data-types";
-import { identifier } from "@node-zugferd/data-types";
-import { quantity } from "@node-zugferd/data-types";
-import { unitPriceAmount } from "@node-zugferd/data-types";
-import { array } from "@node-zugferd/data-types";
-import { union } from "@node-zugferd/data-types";
-import { boolean } from "@node-zugferd/data-types";
-import { text } from "@node-zugferd/data-types";
-import { object } from "@node-zugferd/data-types";
-import { pipe } from "@node-zugferd/data-types";
+import {
+	amount,
+	array,
+	boolean,
+	code,
+	date,
+	identifier,
+	literal,
+	metadata,
+	nullish,
+	object,
+	pipe,
+	quantity,
+	text,
+	union,
+	unitPriceAmount,
+} from "@node-zugferd/data-types";
 
 export const schema = object({
 	processControl: nullish(

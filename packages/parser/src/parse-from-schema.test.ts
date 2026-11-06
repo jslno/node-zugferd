@@ -1,5 +1,6 @@
 import {
 	array,
+	date,
 	metadata,
 	nullish,
 	object,
@@ -176,6 +177,268 @@ describe("parse-from-schema invoice notes", () => {
 			{ content: "Note 1" },
 			{ content: "Note 2", subjectCode: "ABC" },
 		]);
+	});
+});
+
+describe("parse-from-schema entities", () => {
+	it("preserves XML entities by default", () => {
+		const xml = `<root><name>Metallbau Leipzig GmbH &amp; Co. KG</name></root>`;
+		const xpath = createXPath(xml);
+		const schema = object({
+			name: pipe(text(), metadata({ xpath: "/root/name" })),
+		});
+		const result: any = parseFromSchema({
+			profile: { schema } as never,
+			xml: xpath.querySelector("root")!.original as never,
+			xpath,
+			context: {} as never,
+		});
+
+		expect(result.name).toBe("Metallbau Leipzig GmbH &amp; Co. KG");
+	});
+
+	it("decodes XML entities when decodeEntities is enabled", () => {
+		const xml = `<root><name>Metallbau Leipzig GmbH &amp; Co. KG</name></root>`;
+		const xpath = createXPath(xml);
+		const schema = object({
+			name: pipe(text(), metadata({ xpath: "/root/name" })),
+		});
+		const result: any = parseFromSchema({
+			profile: { schema } as never,
+			xml: xpath.querySelector("root")!.original as never,
+			xpath,
+			context: {} as never,
+			decodeEntities: true,
+		});
+
+		expect(result.name).toBe("Metallbau Leipzig GmbH & Co. KG");
+	});
+});
+
+describe("parse-from-schema nested arrays", () => {
+	it("resolves nested array length when parent object has business-term id but no xpath", () => {
+		const xml = `
+			<rsm:CrossIndustryInvoice>
+				<rsm:SupplyChainTradeTransaction>
+					<ram:IncludedSupplyChainTradeLineItem>
+						<ram:SpecifiedTradeProduct>
+							<ram:Name>Miettage</ram:Name>
+							<ram:ApplicableProductCharacteristic>
+								<ram:Description>Fahrzeug-Kennzeichen</ram:Description>
+								<ram:Value>M-MM 0000</ram:Value>
+							</ram:ApplicableProductCharacteristic>
+						</ram:SpecifiedTradeProduct>
+					</ram:IncludedSupplyChainTradeLineItem>
+				</rsm:SupplyChainTradeTransaction>
+			</rsm:CrossIndustryInvoice>
+		`;
+		const schema = object({
+			transaction: object({
+				line: pipe(
+					array(
+						object({
+							item: pipe(
+								object({
+									name: pipe(
+										text(),
+										metadata({
+											xpath:
+												"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:Name",
+										}),
+									),
+									attributes: pipe(
+										nullish(
+											array(
+												object({
+													description: pipe(
+														text(),
+														metadata({
+															xpath:
+																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic/ram:Description",
+														}),
+													),
+													value: pipe(
+														text(),
+														metadata({
+															xpath:
+																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic/ram:Value",
+														}),
+													),
+												}),
+											),
+										),
+										metadata({
+											xpath:
+												"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic",
+										}),
+									),
+								}),
+								metadata({
+									id: "BG-31",
+								}),
+							),
+						}),
+					),
+					metadata({
+						xpath:
+							"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem",
+					}),
+				),
+			}),
+		});
+		const xpath = createXPath(xml);
+		const result: any = parseFromSchema({
+			profile: { schema } as never,
+			xml: xpath.querySelector("rsm:CrossIndustryInvoice")!.original as never,
+			xpath,
+			context: {} as never,
+		});
+
+		expect(result).toEqual({
+			transaction: {
+				line: [
+					{
+						item: {
+							name: "Miettage",
+							attributes: [
+								{
+									description: "Fahrzeug-Kennzeichen",
+									value: "M-MM 0000",
+								},
+							],
+						},
+					},
+				],
+			},
+		});
+	});
+
+	it("resolves nested array length from xpath when schema key differs from xml tag", () => {
+		const xml = `
+			<rsm:CrossIndustryInvoice>
+				<rsm:SupplyChainTradeTransaction>
+					<ram:IncludedSupplyChainTradeLineItem>
+						<ram:SpecifiedTradeProduct>
+							<ram:Name>Miettage</ram:Name>
+							<ram:ApplicableProductCharacteristic>
+								<ram:Description>Fahrzeug-Kennzeichen</ram:Description>
+								<ram:Value>M-MM 0000</ram:Value>
+							</ram:ApplicableProductCharacteristic>
+						</ram:SpecifiedTradeProduct>
+					</ram:IncludedSupplyChainTradeLineItem>
+				</rsm:SupplyChainTradeTransaction>
+			</rsm:CrossIndustryInvoice>
+		`;
+		const schema = object({
+			transaction: object({
+				line: pipe(
+					array(
+						object({
+							item: object({
+								name: pipe(
+									text(),
+									metadata({
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:Name",
+									}),
+								),
+								attributes: pipe(
+									nullish(
+										array(
+											object({
+												description: pipe(
+													text(),
+													metadata({
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic/ram:Description",
+													}),
+												),
+												value: pipe(
+													text(),
+													metadata({
+														xpath:
+															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic/ram:Value",
+													}),
+												),
+											}),
+										),
+									),
+									metadata({
+										xpath:
+											"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic",
+									}),
+								),
+							}),
+						}),
+					),
+					metadata({
+						xpath:
+							"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem",
+					}),
+				),
+			}),
+		});
+		const xpath = createXPath(xml);
+		const result: any = parseFromSchema({
+			profile: { schema } as never,
+			xml: xpath.querySelector("rsm:CrossIndustryInvoice")!.original as never,
+			xpath,
+			context: {} as never,
+		});
+
+		expect(result).toEqual({
+			transaction: {
+				line: [
+					{
+						item: {
+							name: "Miettage",
+							attributes: [
+								{
+									description: "Fahrzeug-Kennzeichen",
+									value: "M-MM 0000",
+								},
+							],
+						},
+					},
+				],
+			},
+		});
+	});
+});
+
+describe("parse-from-schema dates", () => {
+	it("parses format 102 dates without an off-by-one day shift", () => {
+		const xml = `
+			<rsm:CrossIndustryInvoice>
+				<rsm:ExchangedDocument>
+					<ram:IssueDateTime>
+						<udt:DateTimeString format="102">20200305</udt:DateTimeString>
+					</ram:IssueDateTime>
+				</rsm:ExchangedDocument>
+			</rsm:CrossIndustryInvoice>
+		`;
+		const schema = object({
+			exchangedDocument: object({
+				invoiceIssueDate: pipe(
+					date(),
+					metadata({
+						xpath:
+							"/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTimeString",
+					}),
+				),
+			}),
+		});
+		const xpath = createXPath(xml);
+		const result: any = parseFromSchema({
+			profile: { schema } as never,
+			xml: xpath.querySelector("rsm:CrossIndustryInvoice")!.original as never,
+			xpath,
+			context: {} as never,
+		});
+
+		expect(result.exchangedDocument.invoiceIssueDate).toEqual(
+			new Date("2020-03-05"),
+		);
 	});
 });
 

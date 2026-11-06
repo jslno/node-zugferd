@@ -79,7 +79,6 @@ export const schema = defineProfileSchema(
 													id: "BT-29",
 													xpath:
 														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:ID",
-													description: "An identification of the Seller.",
 												}),
 											),
 											globalId: pipe(
@@ -99,8 +98,6 @@ export const schema = defineProfileSchema(
 																id: "BT-28",
 																xpath:
 																	"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName",
-																description:
-																	"A name by which the Seller is known, other than Seller name (also known as Business name).",
 															}),
 														),
 													}),
@@ -117,8 +114,6 @@ export const schema = defineProfileSchema(
 															id: "BT-38",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode",
-															description:
-																"The identifier for an addressable group of properties according to the relevant postal service.",
 														}),
 													),
 													line1: pipe(
@@ -127,8 +122,6 @@ export const schema = defineProfileSchema(
 															id: "BT-35",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineOne",
-															description:
-																"The main address line in an address.",
 														}),
 													),
 													line2: pipe(
@@ -137,8 +130,6 @@ export const schema = defineProfileSchema(
 															id: "BT-36",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineTwo",
-															description:
-																"An additional address line in an address that can be used to give further details supplementing the main line.",
 														}),
 													),
 													line3: pipe(
@@ -147,8 +138,6 @@ export const schema = defineProfileSchema(
 															id: "BT-162",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineThree",
-															description:
-																"An additional address line in an address that can be used to give further details supplementing the main line.",
 														}),
 													),
 													city: pipe(
@@ -157,8 +146,6 @@ export const schema = defineProfileSchema(
 															id: "BT-37",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CityName",
-															description:
-																"The common name of the city, town or village, where the Seller address is located.",
 														}),
 													),
 													countrySubdivision: pipe(
@@ -167,14 +154,11 @@ export const schema = defineProfileSchema(
 															id: "BT-39",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
-															description: "The subdivision of a country.",
 														}),
 													),
 												}),
 												metadata({
 													id: "BG-5",
-													description:
-														"A group of business terms providing information about the address of the Seller.",
 												}),
 											),
 											electronicAddress: pipe(
@@ -183,15 +167,11 @@ export const schema = defineProfileSchema(
 													id: ["BT-34", "BT-34-1"],
 													xpath:
 														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID",
-													description:
-														"Identifies the Seller's electronic address to which a business document may be delivered.",
 												}),
 											),
 										}),
 										metadata({
 											id: "BG-4",
-											description:
-												"A group of business terms providing information about the Seller.",
 										}),
 									),
 									buyer: pipe(
@@ -202,7 +182,6 @@ export const schema = defineProfileSchema(
 													id: "BT-46",
 													xpath:
 														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:ID",
-													description: "An identifier of the Buyer.",
 												}),
 											),
 											globalId: pipe(
@@ -211,8 +190,6 @@ export const schema = defineProfileSchema(
 													id: ["BT-46-0", "BT-46-1"],
 													xpath:
 														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:GlobalID",
-													description:
-														"The identification scheme identifier of the seller is a specific identifier given to the seller by a global registration authority.",
 												}),
 											),
 											postalAddress: pipe(
@@ -223,8 +200,6 @@ export const schema = defineProfileSchema(
 															id: "BT-53",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode",
-															description:
-																"The identifier for an addressable group of properties according to the relevant postal service.",
 														}),
 													),
 													line1: pipe(
@@ -233,8 +208,6 @@ export const schema = defineProfileSchema(
 															id: "BT-50",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:LineOne",
-															description:
-																"The main address line in an address.",
 														}),
 													),
 													line2: pipe(
@@ -243,8 +216,6 @@ export const schema = defineProfileSchema(
 															id: "BT-51",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:LineTwo",
-															description:
-																"An additional address line in an address that can be used to give further details supplementing the main line.",
 														}),
 													),
 													line3: pipe(
@@ -253,8 +224,6 @@ export const schema = defineProfileSchema(
 															id: "BT-163",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:LineThree",
-															description:
-																"An additional address line in an address that can be used to give further details supplementing the main line.",
 														}),
 													),
 													city: pipe(
@@ -263,8 +232,6 @@ export const schema = defineProfileSchema(
 															id: "BT-52",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CityName",
-															description:
-																"The common name of the city, town or village, where the Seller address is located.",
 														}),
 													),
 													countryCode: pipe(
@@ -273,8 +240,6 @@ export const schema = defineProfileSchema(
 															id: "BT-55",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CountryID",
-															description:
-																"A code that identifies the country.",
 														}),
 													),
 													countrySubdivision: pipe(
@@ -283,24 +248,19 @@ export const schema = defineProfileSchema(
 															id: "BT-54",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
-															description: "The subdivison of a country.",
 														}),
 													),
 												}),
 												metadata({
 													id: "BG-8",
-													description:
-														"A group of business terms providing information about the postal address for the Buyer.",
 												}),
 											),
 											electronicAddress: pipe(
 												nullish(identifier({ requireSchemeId: "always" })),
 												metadata({
-													id: ["BT-34", "BT-34-1"],
+													id: ["BT-49", "BT-49-1"],
 													xpath:
-														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID",
-													description:
-														"Identifies the Buyer's electronic address to which a business document should be delivered.",
+														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID",
 												}),
 											),
 											taxRegistration: nullish(
@@ -322,8 +282,6 @@ export const schema = defineProfileSchema(
 														),
 														metadata({
 															id: "BT-48-00",
-															description:
-																"Detailed information on buyer tax information.",
 														}),
 													),
 												}),
@@ -331,8 +289,6 @@ export const schema = defineProfileSchema(
 										}),
 										metadata({
 											id: "BG-7",
-											description:
-												"A group of business terms providing information about the Buyer.",
 										}),
 									),
 									sellerTaxRepresentative: pipe(
@@ -344,8 +300,6 @@ export const schema = defineProfileSchema(
 														id: "BT-62",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:Name",
-														description:
-															"The full name of the Seller's tax representative party.",
 													}),
 												),
 												postalAddress: pipe(
@@ -356,8 +310,6 @@ export const schema = defineProfileSchema(
 																id: "BT-67",
 																xpath:
 																	"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:PostcodeCode",
-																description:
-																	"The identifier for an addressable group of properties according to the relevant postal service.",
 															}),
 														),
 														line1: pipe(
@@ -366,8 +318,6 @@ export const schema = defineProfileSchema(
 																id: "BT-64",
 																xpath:
 																	"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:LineOne",
-																description:
-																	"The main address line in an address.",
 															}),
 														),
 														line2: pipe(
@@ -376,8 +326,6 @@ export const schema = defineProfileSchema(
 																id: "BT-65",
 																xpath:
 																	"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:LineTwo",
-																description:
-																	"An additional address line in an address that can be used to give further details supplementing the main line.",
 															}),
 														),
 														line3: pipe(
@@ -386,8 +334,6 @@ export const schema = defineProfileSchema(
 																id: "BT-164",
 																xpath:
 																	"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:LineThree",
-																description:
-																	"An additional address line in an address that can be used to give further details supplementing the main line.",
 															}),
 														),
 														city: pipe(
@@ -396,8 +342,6 @@ export const schema = defineProfileSchema(
 																id: "BT-66",
 																xpath:
 																	"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:CityName",
-																description:
-																	"The common name of the city, town or village, where the tax representative address is located.",
 															}),
 														),
 														countryCode: pipe(
@@ -406,8 +350,6 @@ export const schema = defineProfileSchema(
 																id: "BT-69",
 																xpath:
 																	"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:CountryID",
-																description:
-																	"A code that identifies the country.",
 															}),
 														),
 														countrySubdivision: pipe(
@@ -416,14 +358,11 @@ export const schema = defineProfileSchema(
 																id: "BT-68",
 																xpath:
 																	"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
-																description: "The subdivison of a country.",
 															}),
 														),
 													}),
 													metadata({
 														id: "BG-12",
-														description:
-															"A group of business terms providing information about the postal address for the tax representative party.",
 													}),
 												),
 												taxRegistration: nullish(
@@ -451,8 +390,6 @@ export const schema = defineProfileSchema(
 										),
 										metadata({
 											id: "BG-11",
-											description:
-												"A group of business terms providing information about the Seller's tax representative.",
 										}),
 									),
 									associatedContract: pipe(
@@ -476,7 +413,6 @@ export const schema = defineProfileSchema(
 							),
 							metadata({
 								id: "BT-10-00",
-								description: "Grouping of contract information",
 							}),
 						),
 						delivery: pipe(
@@ -518,8 +454,6 @@ export const schema = defineProfileSchema(
 																	id: "BT-78",
 																	xpath:
 																		"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:PostcodeCode",
-																	description:
-																		"The identifier for an addressable group of properties according to the relevant postal service.",
 																}),
 															),
 															line1: pipe(
@@ -528,8 +462,6 @@ export const schema = defineProfileSchema(
 																	id: "BT-75",
 																	xpath:
 																		"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:LineOne",
-																	description:
-																		"The main address line in an address.",
 																}),
 															),
 															line2: pipe(
@@ -538,8 +470,6 @@ export const schema = defineProfileSchema(
 																	id: "BT-76",
 																	xpath:
 																		"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:LineTwo",
-																	description:
-																		"An additional address line in an address that can be used to give further details supplementing the main line.",
 																}),
 															),
 															line3: pipe(
@@ -548,8 +478,6 @@ export const schema = defineProfileSchema(
 																	id: "BT-165",
 																	xpath:
 																		"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:LineThree",
-																	description:
-																		"An additional address line in an address that can be used to give further details supplementing the main line.",
 																}),
 															),
 															city: pipe(
@@ -558,8 +486,6 @@ export const schema = defineProfileSchema(
 																	id: "BT-77",
 																	xpath:
 																		"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:CityName",
-																	description:
-																		"The common name of the city, town or village, where the deliver to address is located.",
 																}),
 															),
 															countryCode: pipe(
@@ -568,8 +494,6 @@ export const schema = defineProfileSchema(
 																	id: "BT-80",
 																	xpath:
 																		"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:CountryID",
-																	description:
-																		"A code that identifies the country.",
 																}),
 															),
 															countrySubdivision: pipe(
@@ -578,15 +502,12 @@ export const schema = defineProfileSchema(
 																	id: "BT-79",
 																	xpath:
 																		"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName",
-																	description: "The subdivision of a country.",
 																}),
 															),
 														}),
 													),
 													metadata({
 														id: "BG-15",
-														description:
-															"A group of business terms providing information about the address to which goods and services invoiced were or are delivered.",
 													}),
 												),
 											}),
@@ -604,8 +525,6 @@ export const schema = defineProfileSchema(
 														id: ["BT-72", "BT-72-00", "BT-72-0"],
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString",
-														description:
-															"The date on which the supply of goods or services was made or completed.",
 													}),
 												),
 											}),
@@ -623,8 +542,6 @@ export const schema = defineProfileSchema(
 														id: "BT-16",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument/ram:IssuerAssignedID",
-														description:
-															"An identifier of a referenced despatch advice.",
 													}),
 												),
 											}),
@@ -648,8 +565,6 @@ export const schema = defineProfileSchema(
 											id: "BT-90",
 											xpath:
 												"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceID",
-											description:
-												"Unique banking reference identifier of the Payee or Seller assigned by the Payee or Seller bank.",
 										}),
 									),
 									paymentReference: pipe(
@@ -658,8 +573,6 @@ export const schema = defineProfileSchema(
 											id: "BT-83",
 											xpath:
 												"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentReference",
-											description:
-												"A textual value used to establish a link between the payment and the Invoice, issued by the Seller.",
 										}),
 									),
 									taxCurrencyCode: pipe(
@@ -668,8 +581,6 @@ export const schema = defineProfileSchema(
 											id: "BT-6",
 											xpath:
 												"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxCurrencyCode",
-											description:
-												"The currency used for VAT accounting and reporting purposes as accepted or required in the country of the Seller.",
 										}),
 									),
 									payee: pipe(
@@ -722,8 +633,6 @@ export const schema = defineProfileSchema(
 										),
 										metadata({
 											id: "BG-10",
-											description:
-												"A group of business terms providing information about the Payee, i.e. the role that receives the payment.",
 										}),
 									),
 									paymentMeans: pipe(
@@ -735,8 +644,6 @@ export const schema = defineProfileSchema(
 														id: "BT-81",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:TypeCode",
-														description:
-															"The means, expressed as code, for how a payment is expected to be or has been settled.",
 													}),
 												),
 												buyerBankDetails: pipe(
@@ -750,8 +657,6 @@ export const schema = defineProfileSchema(
 																	id: "BT-91",
 																	xpath:
 																		"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:PayerPartyDebtorFinancialAccount/ram:IBANID",
-																	description:
-																		"The account to be debited by the direct debit.",
 																}),
 															),
 														}),
@@ -770,8 +675,6 @@ export const schema = defineProfileSchema(
 																		id: "BT-84",
 																		xpath:
 																			"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:PayeePartyCreditorFinancialAccount/ram:IBANID",
-																		description:
-																			"A unique identifier of the financial payment account, at a payment service provider, to which payment should be made.",
 																	}),
 																),
 																proprietaryId: pipe(
@@ -791,8 +694,6 @@ export const schema = defineProfileSchema(
 														id: "BG-17",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:PayeePartyCreditorFinancialAccount",
-														description:
-															"A group of business terms to specify credit transfer payments.",
 													}),
 												),
 											}),
@@ -810,8 +711,6 @@ export const schema = defineProfileSchema(
 														id: "BT-117",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax/ram:CalculatedAmount",
-														description:
-															"The total VAT amount for a given VAT category.",
 													}),
 												),
 												typeCode: pipe(
@@ -830,8 +729,6 @@ export const schema = defineProfileSchema(
 														id: "BT-120",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax/ram:ExemptionReason",
-														description:
-															"A textual statement of the reason why the amount is exempted from VAT or why no VAT is being charged",
 													}),
 												),
 												basisAmount: pipe(
@@ -840,8 +737,6 @@ export const schema = defineProfileSchema(
 														id: "BT-116",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax/ram:BasisAmount",
-														description:
-															"Sum of all taxable amounts subject to a specific VAT category code and VAT category rate (if the VAT category rate is applicable).",
 													}),
 												),
 												categoryCode: pipe(
@@ -860,8 +755,6 @@ export const schema = defineProfileSchema(
 														id: "BT-121",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax/ram:ExemptionReasonCode",
-														description:
-															"A coded statement of the reason for why the amount is exempted from VAT.",
 													}),
 												),
 												dueDateTypeCode: pipe(
@@ -870,8 +763,6 @@ export const schema = defineProfileSchema(
 														id: "BT-8",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax/ram:DueDateTypeCode",
-														description:
-															"The code of the date when the VAT becomes accountable for the Seller and for the Buyer.",
 													}),
 												),
 												rateApplicablePercent: pipe(
@@ -880,8 +771,6 @@ export const schema = defineProfileSchema(
 														id: "BT-119",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax/ram:RateApplicablePercent",
-														description:
-															"The VAT rate, represented as percentage that applies for the relevant VAT category.",
 													}),
 												),
 											}),
@@ -891,8 +780,6 @@ export const schema = defineProfileSchema(
 											id: "BG-23",
 											xpath:
 												"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax",
-											description:
-												"A group of business terms providing information about VAT breakdown by different categories, rates and exemption reasons",
 										}),
 									),
 									invoicingPeriod: pipe(
@@ -904,8 +791,6 @@ export const schema = defineProfileSchema(
 														id: ["BT-73", "BT-73-00", "BT-73-0"],
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString",
-														description:
-															"The date when the Invoice period starts.",
 													}),
 												),
 												endDate: pipe(
@@ -914,16 +799,12 @@ export const schema = defineProfileSchema(
 														id: ["BT-74", "BT-74-00", "BT-74-0"],
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString",
-														description:
-															"The date when the Invoice period ends.",
 													}),
 												),
 											}),
 										),
 										metadata({
 											id: "BG-14",
-											description:
-												"A group of business terms providing information on the invoice period.",
 										}),
 									),
 									allowances: pipe(
@@ -936,8 +817,6 @@ export const schema = defineProfileSchema(
 															id: "BT-94",
 															xpath:
 																'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="false"]/ram:CalculationPercent',
-															description:
-																"The percentage that may be used, in conjunction with the document level allowance base amount, to calculate the document level allowance amount.",
 														}),
 													),
 													basisAmount: pipe(
@@ -946,8 +825,6 @@ export const schema = defineProfileSchema(
 															id: "BT-93",
 															xpath:
 																'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="false"]/ram:BasisAmount',
-															description:
-																"The base amount that may be used, in conjunction with the document level allowance percentage, to calculate the document level allowance amount.",
 														}),
 													),
 													actualAmount: pipe(
@@ -956,8 +833,6 @@ export const schema = defineProfileSchema(
 															id: "BT-92",
 															xpath:
 																'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="false"]/ram:ActualAmount',
-															description:
-																"The amount of an allowance, without VAT.",
 														}),
 													),
 													reasonCode: pipe(
@@ -966,8 +841,6 @@ export const schema = defineProfileSchema(
 															id: "BT-98",
 															xpath:
 																'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="false"]/ram:ReasonCode',
-															description:
-																"The reason for the document level allowance, expressed as a code.",
 														}),
 													),
 													reason: pipe(
@@ -976,8 +849,6 @@ export const schema = defineProfileSchema(
 															id: "BT-97",
 															xpath:
 																'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="false"]/ram:Reason',
-															description:
-																"The reason for the document level allowance, expressed as text.",
 														}),
 													),
 													categoryTradeTax: pipe(
@@ -989,8 +860,6 @@ export const schema = defineProfileSchema(
 																		id: ["BT-95", "BT-95-0"],
 																		xpath:
 																			'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="false"]/ram:CategoryTradeTax/ram:CategoryCode',
-																		description:
-																			"A coded identification of what VAT category applies to the document level allowance.",
 																	}),
 																),
 																rateApplicablePercent: pipe(
@@ -999,15 +868,12 @@ export const schema = defineProfileSchema(
 																		id: "BT-96",
 																		xpath:
 																			'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="false"]/ram:CategoryTradeTax/ram:RateApplicablePercent',
-																		description:
-																			"The VAT rate, represented as percentage that applies to the document level allowance.",
 																	}),
 																),
 															}),
 														),
 														metadata({
 															id: "BT-95-00",
-															description: "A finite sequence of characters.",
 														}),
 													),
 												}),
@@ -1017,8 +883,6 @@ export const schema = defineProfileSchema(
 											id: "BG-20",
 											xpath:
 												'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="false"]',
-											description:
-												"A group of business terms providing information about allowances applicable to the Invoice as a whole.",
 										}),
 									),
 									charges: pipe(
@@ -1031,8 +895,6 @@ export const schema = defineProfileSchema(
 															id: "BT-101",
 															xpath:
 																'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="true"]/ram:CalculationPercent',
-															description:
-																"The percentage that may be used, in conjunction with the document level charge base amount, to calculate the document level charge amount.",
 														}),
 													),
 													basisAmount: pipe(
@@ -1041,8 +903,6 @@ export const schema = defineProfileSchema(
 															id: "BT-100",
 															xpath:
 																'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="true"]/ram:BasisAmount',
-															description:
-																"The base amount that may be used, in conjunction with the document level charge percentage, to calculate the document level charge amount.",
 														}),
 													),
 													actualAmount: pipe(
@@ -1051,8 +911,6 @@ export const schema = defineProfileSchema(
 															id: "BT-99",
 															xpath:
 																'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="true"]/ram:ActualAmount',
-															description:
-																"The amount of a charge, without VAT.",
 														}),
 													),
 													reasonCode: pipe(
@@ -1061,8 +919,6 @@ export const schema = defineProfileSchema(
 															id: "BT-105",
 															xpath:
 																'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="true"]/ram:ReasonCode',
-															description:
-																"The reason for the document level charge, expressed as a code.",
 														}),
 													),
 													reason: pipe(
@@ -1071,8 +927,6 @@ export const schema = defineProfileSchema(
 															id: "BT-104",
 															xpath:
 																'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="true"]/ram:Reason',
-															description:
-																"The reason for the document level charge, expressed as text.",
 														}),
 													),
 													categoryTradeTax: pipe(
@@ -1084,8 +938,6 @@ export const schema = defineProfileSchema(
 																		id: "BT-102",
 																		xpath:
 																			'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="true"]/ram:CategoryTradeTax/ram:CategoryCode',
-																		description:
-																			"A coded identification of what VAT category applies to the document level charge.",
 																	}),
 																),
 																rateApplicablePercent: pipe(
@@ -1094,15 +946,12 @@ export const schema = defineProfileSchema(
 																		id: "BT-103",
 																		xpath:
 																			'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="true"]/ram:CategoryTradeTax/ram:RateApplicablePercent',
-																		description:
-																			"The VAT rate, represented as percentage that applies to the document level charge.",
 																	}),
 																),
 															}),
 														),
 														metadata({
 															id: "BT-102-00",
-															description: "A finite sequence of characters.",
 														}),
 													),
 												}),
@@ -1112,8 +961,6 @@ export const schema = defineProfileSchema(
 											id: "BG-21",
 											xpath:
 												'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="true"]',
-											description:
-												"A group of business terms providing information about charges and taxes other than VAT, applicable to the Invoice as a whole.",
 										}),
 									),
 									paymentTerms: pipe(
@@ -1125,8 +972,6 @@ export const schema = defineProfileSchema(
 														id: "BT-20",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:Description",
-														description:
-															"A textual description of the payment terms that apply to the amount due for payment (Including description of possible penalties).",
 													}),
 												),
 												dueDate: pipe(
@@ -1135,7 +980,6 @@ export const schema = defineProfileSchema(
 														id: ["BT-9", "BT-9-00", "BT-9-0"],
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:DueDateDateTime/udt:DateTimeString",
-														description: "The date when the payment is due.",
 													}),
 												),
 												mandateId: pipe(
@@ -1144,8 +988,6 @@ export const schema = defineProfileSchema(
 														id: "BT-89",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:DirectDebitMandateID",
-														description:
-															"Unique identifier assigned by the Payee for referencing the direct debit mandate.",
 													}),
 												),
 											}),
@@ -1162,8 +1004,6 @@ export const schema = defineProfileSchema(
 													id: "BT-106",
 													xpath:
 														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:LineTotalAmount",
-													description:
-														"Sum of all Invoice line net amounts in the Invoice.",
 												}),
 											),
 											chargeTotalAmount: pipe(
@@ -1172,8 +1012,6 @@ export const schema = defineProfileSchema(
 													id: "BT-108",
 													xpath:
 														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:ChargeTotalAmount",
-													description:
-														"Sum of all charges on document level in the Invoice.",
 												}),
 											),
 											allowanceTotalAmount: pipe(
@@ -1182,8 +1020,6 @@ export const schema = defineProfileSchema(
 													id: "BT-107",
 													xpath:
 														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:AllowanceTotalAmount",
-													description:
-														"Sum of all allowances on document level in the Invoice.",
 												}),
 											),
 											taxTotalAmountAccountingCurrency: pipe(
@@ -1192,8 +1028,6 @@ export const schema = defineProfileSchema(
 													id: ["BT-111", "BT-111-0"],
 													xpath:
 														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyID=../../ram:TaxCurrencyCode]",
-													description:
-														"The VAT total amount expressed in the accounting currency accepted or required in the country of the Seller.",
 												}),
 											),
 											prepaidAmount: pipe(
@@ -1202,15 +1036,11 @@ export const schema = defineProfileSchema(
 													id: "BT-113",
 													xpath:
 														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalPrepaidAmount",
-													description:
-														"The sum of amounts which have been paid in advance.",
 												}),
 											),
 										}),
 										metadata({
 											id: "BG-22",
-											description:
-												"A group of business terms providing the monetary totals for the Invoice.",
 										}),
 									),
 									precendingInvoices: pipe(
@@ -1223,8 +1053,6 @@ export const schema = defineProfileSchema(
 															id: "BT-25",
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument/ram:IssuerAssignedID",
-															description:
-																"The identification of an Invoice that was previously sent by the Seller.",
 														}),
 													),
 													issueDate: pipe(
@@ -1233,8 +1061,6 @@ export const schema = defineProfileSchema(
 															id: ["BT-26", "BT-26-00", "BT-26-0"],
 															xpath:
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString",
-															description:
-																"The date when the Preceding Invoice was issued.",
 														}),
 													),
 												}),
@@ -1244,8 +1070,6 @@ export const schema = defineProfileSchema(
 											id: "BG-3",
 											xpath:
 												"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument",
-											description:
-												"A group of business terms providing information on one or more preceding Invoices.",
 										}),
 									),
 									accounting: pipe(
@@ -1257,8 +1081,6 @@ export const schema = defineProfileSchema(
 														id: "BT-19",
 														xpath:
 															"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ReceivableSpecifiedTradeAccountingAccount/ram:ID",
-														description:
-															"A textual value that specifies where to book the relevant data into the Buyer's financial accounts.",
 													}),
 												),
 											}),
@@ -1271,8 +1093,6 @@ export const schema = defineProfileSchema(
 							),
 							metadata({
 								id: "BG-19",
-								description:
-									"A group of business terms to specify a direct debit.",
 							}),
 						),
 					}),

@@ -64,6 +64,7 @@ export interface ZugferdProfile<
 		| BaseSchemaAsync<unknown, unknown, BaseIssue<unknown>> = any,
 > {
 	id: string;
+	version?: string | undefined;
 	schema:
 		| Schema
 		| (<Ctx extends { profile: Omit<ZugferdProfile, "schema" | "rules"> }>(

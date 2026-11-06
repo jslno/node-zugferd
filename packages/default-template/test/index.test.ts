@@ -1,9 +1,9 @@
-import { describe, test } from "vitest";
-import { invoicer } from "./invoicer";
-import { data } from "./data";
 import { writeFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { describe, test } from "vitest";
+import { data } from "./data";
+import { invoicer } from "./invoicer";
 
 describe("default-template", () => {
 	test("generate invoice", async () => {

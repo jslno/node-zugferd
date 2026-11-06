@@ -1,7 +1,7 @@
 "use client";
 
-import { PixelBlast } from "@/components/pixel-blast";
 import { useTheme } from "@fumadocs/base-ui/provider/base";
+import { PixelBlast } from "@/components/pixel-blast";
 
 export function HomeBackground() {
 	const { resolvedTheme } = useTheme();

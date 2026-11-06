@@ -24,32 +24,32 @@
     "coverage": "vitest run --coverage --coverage.provider=istanbul"
   },
   "dependencies": {
-    "@node-zugferd/minimum": "workspace:*",
-    "@node-zugferd/basic-wl": "workspace:*",
+    "@babel/core": "^8.1.0",
+    "@babel/preset-react": "^8.0.1",
+    "@babel/preset-typescript": "^8.0.7",
+    "@clack/prompts": "^1.8.1",
     "@node-zugferd/basic": "workspace:*",
+    "@node-zugferd/basic-wl": "workspace:*",
+    "@node-zugferd/core": "workspace:*",
     "@node-zugferd/en-16931": "workspace:*",
     "@node-zugferd/extended": "workspace:*",
-    "@babel/core": "^8.0.1",
-    "@babel/preset-react": "^8.0.1",
-    "@babel/preset-typescript": "^8.0.1",
-    "@clack/prompts": "^1.7.0",
-    "@node-zugferd/core": "workspace:*",
-    "node-zugferd": "workspace:*",
-    "c12": "4.0.0-beta.5",
-    "chalk": "^5.6.2",
+    "@node-zugferd/minimum": "workspace:*",
+    "c12": "4.0.0-rc.4",
+    "chalk": "^6.0.1",
     "commander": "^15.0.0",
-    "get-tsconfig": "^4.14.0",
-    "semver": "^7.8.5",
-    "zod": "^4.4.3"
+    "get-tsconfig": "^4.14.3",
+    "node-zugferd": "workspace:*",
+    "semver": "^7.8.6",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@node-zugferd/parser": "workspace:*",
     "@node-zugferd/validator-mustang": "workspace:*",
     "@node-zugferd/validator-xsd": "workspace:*",
-    "@types/semver": "^7.7.1",
+    "@types/semver": "^7.8.0",
     "jiti": "^2.7.0",
     "tsdown": "catalog:",
-    "tsx": "^4.22.4"
+    "tsx": "^4.23.15"
   },
   "exports": {
     ".": {

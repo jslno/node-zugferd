@@ -1,14 +1,10 @@
+import { Card, Cards } from "@fumadocs/base-ui/components/card";
+import type { Folder } from "fumadocs-core/page-tree";
 import { DocsBody, DocsPage, DocsTitle } from "@/layouts/docs/page";
 import { apiReferenceSource } from "@/lib/source";
-import { Card, Cards } from "@fumadocs/base-ui/components/card";
-import {
-	findSiblings,
-	Folder,
-	getPageTreePeers,
-} from "fumadocs-core/page-tree";
 
 export default function Page() {
-	const pages = apiReferenceSource
+	const _pages = apiReferenceSource
 		.getPageTree()
 		.children.reduce((acc, folder) => {
 			if (folder.type !== "folder" || !folder.index) return acc;

@@ -1,5 +1,5 @@
-import { base64 } from "@node-zugferd/utils";
 import type { en16931 } from "@node-zugferd/en-16931";
+import { base64 } from "@node-zugferd/utils";
 
 export const serviceChargeStatementData: typeof en16931.$Infer.Input = {
 	exchangedDocument: {
@@ -75,7 +75,7 @@ export const serviceChargeStatementData: typeof en16931.$Infer.Input = {
 		],
 		contract: {
 			seller: {
-				name: "Grundbesitz GmbH & Co.",
+				name: "Grundbesitz GmbH &amp; Co.",
 				postalAddress: {
 					postCode: "75645",
 					line1: "Musterstraße 42",

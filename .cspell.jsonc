@@ -3,16 +3,67 @@
 	"useGitignore": true,
 	"ignoreRandomStrings": true,
 	"allowCompoundWords": true,
-	"dictionaryDefinitions": [],
-	"dictionaries": [],
+	"import": [
+		"@cspell/dict-en-gb/cspell-ext.json",
+		"@cspell/dict-de-de/cspell-ext.json",
+		"@cspell/dict-fr-fr/cspell-ext.json",
+		"@cspell/dict-it-it/cspell-ext.json",
+		"@cspell/dict-nl-nl/cspell-ext.json",
+		"@cspell/dict-pl_pl/cspell-ext.json"
+	],
+	"language": "en,en-gb,de,fr,it,nl,pl",
+	"dictionaryDefinitions": [
+		{
+			"name": "codes",
+			"path": "./.cspell/codes.txt",
+			"addWords": true
+		},
+		{
+			"name": "names",
+			"path": "./.cspell/names.txt",
+			"addWords": true
+		},
+		{
+			"name": "standards",
+			"path": "./.cspell/standards.txt",
+			"addWords": true
+		},
+		{
+			"name": "tech",
+			"path": "./.cspell/tech.txt",
+			"addWords": true
+		},
+		{
+			"name": "third-party",
+			"path": "./.cspell/third-party.txt",
+			"addWords": true
+		},
+		{
+			"name": "zugferd",
+			"path": "./.cspell/zugferd.txt",
+			"addWords": true
+		}
+	],
+	"dictionaries": [
+		"codes",
+		"names",
+		"standards",
+		"tech",
+		"third-party",
+		"zugferd"
+	],
 	"ignoreRegExpList": [],
 	"ignorePaths": [
 		"patches",
 		"pnpm-workspace.yaml",
 		"pnpm-lock.yaml",
+		"e2e/smoke/test/fixtures/cloudflare/worker-configuration.d.ts",
+		"scripts/generators/**/*.xml",
+		"scripts/generators/**/*.22A",
 		"*.config.js",
 		"*.config.ts",
 		"*.json",
+		"*.xsd",
 		".gitignore"
 	]
 }

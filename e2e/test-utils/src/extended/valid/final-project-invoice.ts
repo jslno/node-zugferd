@@ -75,7 +75,7 @@ export const finalProjectInvoiceData: typeof extended.$Infer.Input = {
 					value: "GLN4000000000",
 					schemeId: "0088",
 				},
-				name: "Lieferant GmbH & Co. KG",
+				name: "Lieferant GmbH &amp; Co. KG",
 				contact: [
 					{
 						personName: "Georg Verkäufer",
@@ -140,7 +140,7 @@ export const finalProjectInvoiceData: typeof extended.$Infer.Input = {
 				creditTransfers: [
 					{
 						iban: "DE77 3707 0060 0321 9870 00",
-						accountName: "Lieferant GmbH & Co. KG",
+						accountName: "Lieferant GmbH &amp; Co. KG",
 					},
 				],
 			},

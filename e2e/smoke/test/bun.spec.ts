@@ -1,7 +1,7 @@
 import { spawnSync } from "node:child_process";
 import { join } from "node:path";
-import { test, expect } from "vitest";
 import { fileURLToPath } from "node:url";
+import { expect, test } from "vitest";
 
 const fixturesDir = fileURLToPath(new URL("./fixtures", import.meta.url));
 

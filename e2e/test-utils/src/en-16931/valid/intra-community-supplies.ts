@@ -138,7 +138,7 @@ export const intraCommunitySuppliesData: typeof en16931.$Infer.Input = {
 			},
 			buyer: {
 				id: "75969813",
-				name: "Metallbau Leipzig GmbH & Co. KG",
+				name: "Metallbau Leipzig GmbH &amp; Co. KG",
 				postalAddress: {
 					postCode: "12345",
 					line1: "Pappelallee 15",
@@ -170,7 +170,7 @@ export const intraCommunitySuppliesData: typeof en16931.$Infer.Input = {
 		delivery: {
 			recipient: {
 				locationId: "75969815",
-				name: "Metallbau Leipzig GmbH & Co. KG",
+				name: "Metallbau Leipzig GmbH &amp; Co. KG",
 				postalAddress: {
 					postCode: "12347",
 					line1: "Eichenpromenade 37",

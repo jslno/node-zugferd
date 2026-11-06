@@ -4,6 +4,14 @@ title: UNTDID 1001
 
 import untdid1001 from "@node-zugferd/codelist-untdid-1001";
 
+## Installation
+
+```package-install
+@node-zugferd/codelist-untdid-1001
+```
+
+## Codelist [!toc]
+
 <CodelistTable items={untdid1001} fieldMap={{
   value: {
     label: "Value",
@@ -14,16 +22,17 @@ import untdid1001 from "@node-zugferd/codelist-untdid-1001";
   name: {
     label: "Name",
     priority: 1,
-    width: "50%",
+    width: "20%",
   },
   key: {
     label: "Key",
     render: (value) => <code>{value}</code>,
     priority: 2,
-    width: "30%",
+    width: "25%",
   },
   interpretation: {
     label: "Interpretation",
     priority: 3,
+    width: "15%"
   },
 }} />

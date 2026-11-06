@@ -1,11 +1,8 @@
 "use client";
+import { useSearchContext } from "@fumadocs/base-ui/contexts/search";
 import { HomeLayout } from "@fumadocs/base-ui/layouts/home";
-import Link from "next/link";
-import { GitHubIcon } from "@/components/icons";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { Button } from "@/components/ui/button";
-import { baseOptions } from "@/lib/layout.shared";
-import { gitConfig } from "@/lib/shared";
+import type { LenisRef } from "lenis/react";
+import { ReactLenis } from "lenis/react";
 import {
 	BookTextIcon,
 	BracesIcon,
@@ -13,12 +10,16 @@ import {
 	ScrollTextIcon,
 	SearchIcon,
 } from "lucide-react";
-import { useSearchContext } from "@fumadocs/base-ui/contexts/search";
-import { Kbd, KbdGroup } from "@/components/ui/kbd";
-import { useEffect, useRef } from "react";
 import { cancelFrame, frame } from "motion/react";
-import { ReactLenis } from "lenis/react";
-import type { LenisRef } from "lenis/react";
+import Link from "next/link";
+import { useEffect, useRef } from "react";
+import { GitHubIcon } from "@/components/icons";
+import { NodeZugferd } from "@/components/icons/node-zugferd";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { Kbd, KbdGroup } from "@/components/ui/kbd";
+import { baseOptions } from "@/lib/layout.shared";
+import { gitConfig } from "@/lib/shared";
 
 export default function Layout({ children }: LayoutProps<"/">) {
 	const baseOpts = baseOptions();
@@ -46,7 +47,11 @@ export default function Layout({ children }: LayoutProps<"/">) {
 					header: () => (
 						<nav className="after:absolute after:content-[''] after:w-full after:inset-0 after:h-14 after:top-full after:bg-background after:mask-b-from-5% after:pointer-events-none flex flex-row sticky top-0 z-50 bg-background h-14 items-center gap-x-4 px-4">
 							<div className="flex items-center gap-4 w-full">
-								<Link href="/" className="font-medium whitespace-nowrap">
+								<Link
+									href="/"
+									className="flex items-center gap-2 font-medium whitespace-nowrap"
+								>
+									<NodeZugferd />
 									node-zugferd
 								</Link>
 							</div>

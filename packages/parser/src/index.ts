@@ -1,5 +1,6 @@
 import type {
 	ZugferdOptions as ZFOptions,
+	ZugferdContext,
 	ZugferdPlugin,
 	ZugferdProfile,
 } from "@node-zugferd/core";
@@ -24,7 +25,6 @@ import { getAttachments, getMetadata } from "./helper";
 import { defaultProfileMap } from "./profiles";
 import type { MatchContext, ParserOptions } from "./types";
 import { createXPath } from "./xpath";
-import type { ZugferdContext } from "@node-zugferd/core";
 
 declare module "@node-zugferd/core" {
 	interface ZugferdPluginRegistry<ZugferdOptions, Options> {
@@ -39,6 +39,7 @@ declare module "@node-zugferd/core" {
 const normalizeOptions = (options: ParserOptions | undefined) => {
 	return {
 		...(options ?? {}),
+		decodeEntities: options?.decodeEntities ?? false,
 		profileMap: {
 			...defaultProfileMap,
 			...(options?.profileMap ?? {}),
@@ -272,7 +273,7 @@ export const documentParser = async (
 					async isPdfA3Conformant(
 						levels_: "B" | "U" | "A" | ("B" | "U" | "A")[] = ["B", "U", "A"],
 					) {
-						const levels = new Set(
+						const _levels = new Set(
 							Array.isArray(levels_) ? [...levels_] : [levels_],
 						);
 						if (!pdfDoc) return true;
@@ -300,8 +301,8 @@ export const documentParser = async (
 							A: [],
 						};
 
-						const loadLazyObject = {};
-						const lazyRuleObjects = {};
+						const _loadLazyObject = {};
+						const _lazyRuleObjects = {};
 
 						addRule("B", {
 							id: {
@@ -595,7 +596,7 @@ export const documentParser = async (
 								const indirectObjects =
 									pdfDoc.context.enumerateIndirectObjects();
 
-								for (const [ref, pdfObject] of indirectObjects) {
+								for (const [_ref, pdfObject] of indirectObjects) {
 									if (pdfObject instanceof PDFStream) {
 										const dict = pdfObject.dict;
 
@@ -768,7 +769,7 @@ export const documentParser = async (
 										const decoder = new TextDecoder("utf-8", { fatal: true });
 										decoder.decode(new Uint8Array(bytes));
 										return true;
-									} catch (e) {
+									} catch (_e) {
 										failedValue = rawString;
 										return false;
 									}
@@ -1056,7 +1057,7 @@ export const documentParser = async (
 
 											const filterRegex =
 												/\/(?:Filter|F)\s+([^\s/\[\]]+|\[[^\]]+\])/g;
-											let filterMatch;
+											let filterMatch: RegExpExecArray | null;
 
 											while (
 												(filterMatch = filterRegex.exec(dictSection)) !==
@@ -1613,7 +1614,7 @@ export const documentParser = async (
 
 									const tokenRegex = /\b([qQ])\b/g;
 									let currentLevel = 0;
-									let match;
+									let match: RegExpExecArray | null;
 
 									while ((match = tokenRegex.exec(streamText)) !== null) {
 										const operator = match[1];
@@ -1972,7 +1973,7 @@ export const documentParser = async (
 									streamText = streamText.replace(/%[^\r\n]*/g, " ");
 
 									const resourceRegex = /\/([a-zA-Z0-9_.-]+)/g;
-									let match;
+									let match: RegExpExecArray | null;
 
 									while (
 										(match = resourceRegex.exec(streamText)) !== null &&
@@ -2375,6 +2376,7 @@ export const documentParser = async (
 			const parseCtx = {
 				...createBaseContext(profile, pdf, xml),
 				xpath: createXPath(xml),
+				decodeEntities: opts.decodeEntities,
 			};
 
 			await opts.hooks?.beforeParse?.(parseCtx);

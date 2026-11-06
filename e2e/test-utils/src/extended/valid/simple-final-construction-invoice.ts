@@ -1,5 +1,5 @@
-import { base64 } from "@node-zugferd/utils";
 import type { extended } from "@node-zugferd/extended";
+import { base64 } from "@node-zugferd/utils";
 
 export const simpleFinalConstructionInvoiceData: typeof extended.$Infer.Input =
 	{

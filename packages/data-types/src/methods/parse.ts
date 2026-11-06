@@ -5,10 +5,10 @@ import type {
 	Config,
 } from "@node-zugferd/core/data-types";
 import { ZugferdValidationError } from "@node-zugferd/core/error";
-import type { InferIssue, InferOutput } from "../types";
-import { DEFAULT_CONFIG } from "../utils/config";
 import type { DataTypeContext } from "../context";
 import { withContext } from "../context";
+import type { InferIssue, InferOutput } from "../types";
+import { DEFAULT_CONFIG } from "../utils/config";
 
 export function parse<
 	const Schema extends BaseSchema<unknown, unknown, BaseIssue<unknown>>,

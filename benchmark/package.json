@@ -1,0 +1,11 @@
+{
+  "name": "@node-zugferd-test/benchmark",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "node-zugferd": "workspace:*",
+    "@node-zugferd/core": "workspace:*",
+    "@node-zugferd-test/test-utils": "workspace:*",
+    "pdf-lib": "catalog:"
+  }
+}

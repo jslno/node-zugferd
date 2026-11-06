@@ -1,13 +1,13 @@
 import type { Awaitable, ZugferdPlugin } from "@node-zugferd/core";
+import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
+import { ZugferdError, ZugferdValidationError } from "@node-zugferd/core/error";
+import type { PDFDocument } from "pdf-lib";
 import type {
 	Template,
 	TemplateContext,
 	Templates,
 	TemplatesOptions,
 } from "./types";
-import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
-import { ZugferdError, ZugferdValidationError } from "@node-zugferd/core/error";
-import type { PDFDocument } from "pdf-lib";
 
 declare module "@node-zugferd/core" {
 	interface ZugferdPluginRegistry<ZugferdOptions, Options> {

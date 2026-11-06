@@ -14,8 +14,11 @@ import type {
 } from "../types/intersect-merge";
 import { addIssue } from "../utils/add-issue";
 import {
-	adaptInputForOption,
+	assembleObjectOptionOutput,
 	buildCardinalityPlan,
+	expandObjectOptionInput,
+	rehydrateNestedObjectArrays,
+	rehydrateNestedObjectArraysAsync,
 } from "../utils/cardinality";
 import { joinExpects } from "../utils/join-expects";
 import { getStandardProps } from "../utils/standard-props";
@@ -72,22 +75,35 @@ function merge(a: unknown, b: unknown): MergeDataset {
 			}
 		}
 
+		// Object↔array merges come from profile cardinality upgrades (object →
+		// asArray). The object side was validated against array[0] only, so it
+		// must enrich just the first element — never overwrite every item.
 		if (a && b && a.constructor === Object && Array.isArray(b)) {
-			const nextValue = b.map((item) => {
-				const dataset = merge(a, item);
-				return dataset.issue ? item : dataset.value;
-			});
+			if (b.length === 0) {
+				return { value: [a] };
+			}
 
-			return { value: nextValue };
+			const first = merge(a, b[0]);
+
+			if (first.issue) {
+				return first;
+			}
+
+			return { value: [first.value, ...b.slice(1)] };
 		}
 
 		if (Array.isArray(a) && b && b.constructor === Object) {
-			const nextValue = a.map((item) => {
-				const dataset = merge(item, b);
-				return dataset.issue ? item : dataset.value;
-			});
+			if (a.length === 0) {
+				return { value: [b] };
+			}
 
-			return { value: nextValue };
+			const first = merge(a[0], b);
+
+			if (first.issue) {
+				return first;
+			}
+
+			return { value: [first.value, ...a.slice(1)] };
 		}
 	}
 
@@ -215,40 +231,63 @@ export function intersect(
 				dataset.typed = true;
 
 				for (const [optionIndex, schema] of this.options.entries()) {
-					const adaptedInput = adaptInputForOption(
+					const expandedInputs = expandObjectOptionInput(
 						input,
 						optionIndex,
 						cardinalityRules,
 					);
-					const optionDataset = schema["~run"]({ value: adaptedInput }, config);
+					const itemDatasets = expandedInputs.map((adaptedInput) =>
+						schema["~run"]({ value: adaptedInput }, config),
+					);
 
-					if (optionDataset.issues) {
-						if (dataset.issues) {
-							for (const issue of optionDataset.issues) {
+					for (const optionDataset of itemDatasets) {
+						if (optionDataset.issues) {
+							if (dataset.issues) {
+								for (const issue of optionDataset.issues) {
+									// @ts-expect-error
+									dataset.issues.push(issue);
+								}
+							} else {
 								// @ts-expect-error
-								dataset.issues.push(issue);
+								dataset.issues = optionDataset.issues;
 							}
-						} else {
-							// @ts-expect-error
-							dataset.issues = optionDataset.issues;
+
+							if (config.abortEarly) {
+								dataset.typed = false;
+								break;
+							}
 						}
 
-						if (config.abortEarly) {
+						if (!optionDataset.typed) {
 							dataset.typed = false;
+						}
+					}
+
+					if (!dataset.typed) {
+						if (config.abortEarly) {
 							break;
 						}
+						continue;
 					}
 
-					if (!optionDataset.typed) {
-						dataset.typed = false;
-					}
+					const optionValue = rehydrateNestedObjectArrays(
+						input,
+						assembleObjectOptionOutput(
+							input,
+							itemDatasets.map((item) => item.value),
+							optionIndex,
+							cardinalityRules,
+						),
+						optionIndex,
+						cardinalityRules,
+						(adaptedInput) =>
+							schema["~run"]({ value: adaptedInput }, config).value,
+					);
 
-					if (dataset.typed) {
-						if (outputs) {
-							outputs.push(optionDataset.value);
-						} else {
-							outputs = [optionDataset.value];
-						}
+					if (outputs) {
+						outputs.push(optionValue);
+					} else {
+						outputs = [optionValue];
 					}
 				}
 
@@ -337,44 +376,81 @@ export function intersectAsync(
 				dataset.typed = true;
 
 				const optionDatasets = await Promise.all(
-					this.options.map((schema, optionIndex) => {
-						const adaptedInput = adaptInputForOption(
+					this.options.map(async (schema, optionIndex) => {
+						const expandedInputs = expandObjectOptionInput(
 							input,
 							optionIndex,
 							cardinalityRules,
 						);
-						return schema["~run"]({ value: adaptedInput }, config);
+						const itemDatasets = await Promise.all(
+							expandedInputs.map((adaptedInput) =>
+								schema["~run"]({ value: adaptedInput }, config),
+							),
+						);
+
+						const assembled = assembleObjectOptionOutput(
+							input,
+							itemDatasets.map((item) => item.value),
+							optionIndex,
+							cardinalityRules,
+						);
+
+						const value = await rehydrateNestedObjectArraysAsync(
+							input,
+							assembled,
+							optionIndex,
+							cardinalityRules,
+							async (adaptedInput) => {
+								const dataset = await schema["~run"](
+									{ value: adaptedInput },
+									config,
+								);
+								return dataset.value;
+							},
+						);
+
+						return {
+							itemDatasets,
+							value,
+						};
 					}),
 				);
 
-				for (const optionDataset of optionDatasets) {
-					if (optionDataset.issues) {
-						if (dataset.issues) {
-							for (const issue of optionDataset.issues) {
+				for (const { itemDatasets, value } of optionDatasets) {
+					for (const optionDataset of itemDatasets) {
+						if (optionDataset.issues) {
+							if (dataset.issues) {
+								for (const issue of optionDataset.issues) {
+									// @ts-expect-error
+									dataset.issues.push(issue);
+								}
+							} else {
 								// @ts-expect-error
-								dataset.issues.push(issue);
+								dataset.issues = optionDataset.issues;
 							}
-						} else {
-							// @ts-expect-error
-							dataset.issues = optionDataset.issues;
+
+							if (config.abortEarly) {
+								dataset.typed = false;
+								break;
+							}
 						}
 
-						if (config.abortEarly) {
+						if (!optionDataset.typed) {
 							dataset.typed = false;
+						}
+					}
+
+					if (!dataset.typed) {
+						if (config.abortEarly) {
 							break;
 						}
+						continue;
 					}
 
-					if (!optionDataset.typed) {
-						dataset.typed = false;
-					}
-
-					if (dataset.typed) {
-						if (outputs) {
-							outputs.push(optionDataset.value);
-						} else {
-							outputs = [optionDataset.value];
-						}
+					if (outputs) {
+						outputs.push(value);
+					} else {
+						outputs = [value];
 					}
 				}
 

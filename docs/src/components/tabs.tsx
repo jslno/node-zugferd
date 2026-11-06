@@ -1,10 +1,9 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
+import type { ComponentProps, ReactNode } from "react";
 import {
-	type ComponentProps,
 	createContext,
-	type ReactNode,
 	useContext,
 	useEffect,
 	useId,

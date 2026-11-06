@@ -53,6 +53,19 @@
       "outputs": [".vitest/**", "coverage/**", "test-results/**"],
       "cache": true
     },
+    "bench": {
+      "dependsOn": ["^build", "build"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "vitest.config.*",
+        "src/**",
+        "bench/**",
+        "*.bench.*",
+        "package.json"
+      ],
+      "outputs": [".vitest/**"],
+      "cache": true
+    },
     "coverage": {
       "dependsOn": ["^build", "build"],
       "inputs": [

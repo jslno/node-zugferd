@@ -5,7 +5,10 @@
   "dependencies": {
     "@node-zugferd/validator-mustang": "workspace:*",
     "@node-zugferd/validator-xsd": "workspace:*",
-    "node-zugferd": "workspace:*"
+    "@node-zugferd/parser": "workspace:*",
+    "@node-zugferd/data-types": "workspace:*",
+    "node-zugferd": "workspace:*",
+    "pdf-lib": "catalog:"
   },
   "exports": {
     "./factory": "./factory.ts"

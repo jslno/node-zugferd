@@ -18,10 +18,10 @@
     "@node-zugferd/templates": "workspace:*"
   },
   "dependencies": {
+    "@matbee/libreoffice-converter": "^2.7.2",
     "@node-zugferd/core": "workspace:*",
-    "@matbee/libreoffice-converter": "^2.6.0",
-    "easy-template-x": "^7.2.5",
-    "easy-template-x-angular-expressions": "^0.2.2"
+    "easy-template-x": "^8.0.1",
+    "easy-template-x-angular-expressions": "^0.3.0"
   },
   "devDependencies": {
     "tsdown": "catalog:"

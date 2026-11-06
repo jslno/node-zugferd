@@ -26,7 +26,7 @@
         "noRestrictedTypes": "off",
         "noRestrictedGlobals": "off"
       },
-      "recommended": false,
+      "preset": "none",
       "suspicious": {
         "noImplicitAnyLet": "warn",
         "noDuplicateObjectKeys": "warn",

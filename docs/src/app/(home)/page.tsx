@@ -1,17 +1,5 @@
 "use client";
 
-import type { JSX } from "react";
-import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
-import type { BundledLanguage } from "shiki";
-import { highlight } from "@/lib/highlight";
-import { HomeBackground } from "./background";
-import {
-	CodeBlockTab,
-	CodeBlockTabs,
-	CodeBlockTabsList,
-	CodeBlockTabsTrigger,
-} from "@/components/codeblock";
-import { Button } from "@/components/ui/button";
 import {
 	ArrowRightIcon,
 	CheckIcon,
@@ -25,28 +13,40 @@ import {
 	XIcon,
 } from "lucide-react";
 import {
-	Tooltip,
-	TooltipContent,
-	TooltipProvider,
-	TooltipTrigger,
-} from "@/components/ui/tooltip";
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from "@/components/ui/popover";
-import { BUN, NPM, Pnpm, Yarn } from "@/components/icons";
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import {
 	animate,
 	motion,
 	stagger,
 	useMotionValue,
 	useTransform,
 } from "motion/react";
-import useMeasure from "react-use-measure";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
+import type { JSX } from "react";
+import { Fragment, useEffect, useLayoutEffect, useState } from "react";
+import useMeasure from "react-use-measure";
+import type { BundledLanguage } from "shiki";
+import {
+	CodeBlockTab,
+	CodeBlockTabs,
+	CodeBlockTabsList,
+	CodeBlockTabsTrigger,
+} from "@/components/codeblock";
+import { BUN, NPM, Pnpm, Yarn } from "@/components/icons";
+import { Button } from "@/components/ui/button";
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import { highlight } from "@/lib/highlight";
+import { cn } from "@/lib/utils";
+import { HomeBackground } from "./background";
 
 const CodeBlock = ({
 	children,
@@ -357,7 +357,7 @@ export default function HomePage() {
 							className: "col-span-3",
 							Visual: () => {
 								const index = useMotionValue(0);
-								const cmds = ["init", "parse"];
+								const cmds = ["init", "parse", "validate"];
 
 								const baseText = useTransform(
 									index,

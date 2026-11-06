@@ -1276,7 +1276,7 @@ const transaction = pipeAsync(
 																"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:ItemSellerTradeParty/ram:PostalTradeAddress/ram:CountryID",
 														}),
 													),
-													countrySubdivison: pipe(
+													countrySubdivision: pipe(
 														nullish(text()),
 														metadata({
 															id: "BT-X-585",

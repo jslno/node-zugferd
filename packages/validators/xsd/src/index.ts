@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
+import { XsdValidator } from "@jslno/xsd-validator";
 import type {
 	InferProfileIds,
 	ZugferdOptions as ZFOptions,
@@ -10,8 +11,6 @@ import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
 import { ZugferdError } from "@node-zugferd/core/error";
 import { __dirname } from "./isomorph";
 import type { ResolvedXSDOptions, SchemaMapEntry, XSDOptions } from "./types";
-
-import { XsdValidator } from "@jslno/xsd-validator";
 
 declare module "@node-zugferd/core" {
 	interface ZugferdPluginRegistry<ZugferdOptions, Options> {

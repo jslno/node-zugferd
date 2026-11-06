@@ -5,6 +5,7 @@ import { schema } from "./schema";
 
 export const orderX = defineProfile({
 	id: "order-x",
+	version: "1.0",
 	dataRelationship: ["Data", "Source", "Alternative"],
 	extensionSchema: {
 		type: ["ORDER", "ORDER_RESPONSE", "ORDER_CHANGE"],

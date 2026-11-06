@@ -1,7 +1,7 @@
 import type { ZugferdPlugin } from "@node-zugferd/core";
 import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
-import { SpanStatusCode, trace } from "@opentelemetry/api";
 import type { Span } from "@opentelemetry/api";
+import { SpanStatusCode, trace } from "@opentelemetry/api";
 
 declare module "@node-zugferd/core" {
 	interface ZugferdPluginRegistry<ZugferdOptions, Options> {

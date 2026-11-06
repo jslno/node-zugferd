@@ -18,9 +18,9 @@
     "@node-zugferd/templates": "workspace:*"
   },
   "dependencies": {
-    "intl-messageformat": "^11.2.11",
     "@node-zugferd/core": "workspace:*",
-    "boxpdf": "^1.9.0",
+    "boxpdf": "^1.13.0",
+    "intl-messageformat": "^12.1.4",
     "pdf-lib": "catalog:"
   },
   "devDependencies": {
