@@ -50,7 +50,7 @@ jobs:
           cache: pnpm
 
       - name: Install
-        run: pnpm install
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Build
         run: pnpm build
@@ -93,7 +93,7 @@ jobs:
           cache: pnpm
 
       - name: Install
-        run: pnpm install
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Integration
         run: pnpm e2e:integration --filter=./e2e/integration
@@ -142,7 +142,13 @@ jobs:
           java-version: "25"
 
       - name: Install
-        run: pnpm install
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Build
+        run: pnpm build
+
+      - name: Setup Mustang
+        run: pnpm --filter=@node-zugferd/validator-mustang run postinstall
 
       - name: Profiles Integration
         env:
