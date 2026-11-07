@@ -100,14 +100,58 @@ Use this when adding documentation for entirely new features.
 
 ### Step 1: Determine the doc type
 
-| Feature Type | Doc Location |
-| ------------ | ------------ |
+| Feature Type         | Doc Location                                         |
+| -------------------- | ---------------------------------------------------- |
+| New plugin           | `docs/content/docs/plugins/<name>.mdx`               |
+| New validator        | `docs/content/docs/plugins/validators/<name>.mdx`    |
+| New profile          | `docs/content/docs/profiles/<name>.mdx`              |
+| New codelist         | `docs/content/docs/codelists/<name>.mdx`             |
+| New CLI command      | Section in `docs/content/docs/reference/cli.mdx`     |
+| New config option    | Section in `docs/content/docs/reference/options.mdx` |
+| New concept or guide | Existing top-level page in `docs/content/docs/`      |
+
+Do not hand-write pages under `docs/content/api-reference/`. That tree is generated from package exports and TSDoc comments with `pnpm gen`.
 
 ### Step 2: Create the file with proper naming
 
 - Use kebab-case: `my-new-plugin.mdx`
 - Place in the correct directory based on feature type
+- Use one page per profile, codelist, and validator; this project does not use numeric prefixes
+- Register the page in the matching `meta.json` when that directory has an explicit `pages` list (plugins, profiles). Codelists and validators are picked up automatically
 
 ### Step 3: Analyze sibling docs for patterns
 
+Read at least one sibling page in the target directory before writing. This project has no doc templates, so the siblings are the source of truth. Note:
+
+- Frontmatter fields in use (`title`, `description`, `icon`)
+- Section order, usually `## Installation` → `## Basic Usage` / `## Usage` → `## Options`
+- Which MDX components the page uses and whether it imports package data
+
 ### Step 4: Write the doc
+
+Start with frontmatter. `title` is required; `description` and `icon` are recommended. Profile pages use a `dot-[#hex]` icon, other pages use a Lucide icon name.
+
+```mdx
+---
+title: Feature Name
+description: One or two sentences describing the feature.
+icon: WandSparkles
+---
+```
+
+Build the body from the components already used across the docs:
+
+- `<Steps>` and `<Step>` for install and setup flows
+- `<Callout>` for warnings, experimental notices, and tips
+- `<TypeTable type={{ ... }} />` for plugin and option tables
+- `<ProfileTree profile={profile} />` for profile schemas
+- `<CodelistTable items={codelist} fieldMap={{ ... }} />` for codelists
+
+Import only the package data a page renders; the MDX components are registered globally. Follow `references/DOC-CONVENTIONS.md` for code blocks (`title`, `tab`, `tab-group`, `package-install`) and Shiki transformers.
+
+When done, add the page to navigation if needed, then validate:
+
+```bash
+pnpm lint
+pnpm --filter=docs dev
+```
