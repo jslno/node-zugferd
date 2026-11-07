@@ -18,7 +18,7 @@
     "lint:fix": "biome check . --fix --unsafe",
     "lint:spell": "git ls-files | cspell --file-list stdin --color",
     "lint:types": "turbo lint:types --filter=./packages/**/*",
-    "lint:packages": "turbo lint:packages --filter=./packages/**/*",
+    "lint:packages": "turbo lint:package --filter=./packages/**/*",
     "changeset": "changeset",
     "ci:version": "changeset version && pnpm install --no-frozen-lockfile",
     "ci:release": "turbo clean --filter=./packages/**/* && turbo build --filter=./packages/**/* && changeset publish",
