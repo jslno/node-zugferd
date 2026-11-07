@@ -32,7 +32,7 @@ minimumReleaseAgeExclude:
   - miniflare@5.20260730.0-alpha
   - wrangler@4.118.0
   - tsx@4.23.8
-  - '@node-zugferd/*'
+  - "@node-zugferd/*"
   - "@zugferd/xsd-validator-darwin-arm64@0.1.0"
   - "@zugferd/xsd-validator-darwin-x64@0.1.0"
   - "@zugferd/xsd-validator-linux-arm64-gnu@0.1.0"

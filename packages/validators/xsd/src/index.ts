@@ -1,6 +1,5 @@
 import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { XsdValidator } from "@zugferd/xsd-validator";
 import type {
 	InferProfileIds,
 	ZugferdOptions as ZFOptions,
@@ -9,6 +8,7 @@ import type {
 } from "@node-zugferd/core";
 import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
 import { ZugferdError } from "@node-zugferd/core/error";
+import { XsdValidator } from "@zugferd/xsd-validator";
 import { __dirname } from "./isomorph";
 import type { ResolvedXSDOptions, SchemaMapEntry, XSDOptions } from "./types";
 
