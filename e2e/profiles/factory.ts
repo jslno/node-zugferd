@@ -1,5 +1,7 @@
+import type { DateFormat } from "@node-zugferd/data-types";
 import {
 	ARRAY_PATH_WILDCARD,
+	formatDate,
 	unwrapSchema,
 	walkSchema,
 } from "@node-zugferd/data-types";
@@ -135,6 +137,7 @@ function getAtPath(
  * - amounts: bare number/string → `{ value: number }`
  * - quantities: `{ value: "20.0000", unitCode }` → `{ value: 20, unitCode }`
  * - unit-price-amount / percentage: string → number
+ * - dates: `Date` → `{ format, value: Date }`
  */
 function normalizeParsedLeaves(schema: unknown, data: Record<string, any>) {
 	const result = structuredClone(data);
@@ -180,6 +183,26 @@ function normalizeParsedLeaves(schema: unknown, data: Record<string, any>) {
 				(typeof current === "number" || typeof current === "string")
 			) {
 				setAtPath(result, path, indexes, Number(current));
+				return;
+			}
+
+			if (unwrapped.type === "date" && current instanceof Date) {
+				const config = (
+					unwrapped as {
+						config?: {
+							outputFormat?: string;
+							inputFormats?: readonly string[];
+						};
+					}
+				).config;
+				const format = (config?.outputFormat ??
+					config?.inputFormats?.[0] ??
+					"102") as DateFormat;
+				setAtPath(result, path, indexes, {
+					format,
+					value: current,
+					raw: formatDate(current, format),
+				});
 				return;
 			}
 

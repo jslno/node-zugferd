@@ -436,9 +436,10 @@ describe("parse-from-schema dates", () => {
 			context: {} as never,
 		});
 
-		expect(result.exchangedDocument.invoiceIssueDate).toEqual(
-			new Date("2020-03-05"),
-		);
+		expect(result.exchangedDocument.invoiceIssueDate).toEqual({
+			format: "102",
+			value: new Date("2020-03-05"),
+		});
 	});
 });
 

@@ -70,7 +70,7 @@ const dateFormats = {
 	}
 >;
 
-function detectFormat(value: string): DateFormat | null {
+export function detectDateFormat(value: string): DateFormat | null {
 	for (const [format, { matches }] of Object.entries(dateFormats)) {
 		if (matches(value)) {
 			return format as DateFormat;
@@ -78,6 +78,10 @@ function detectFormat(value: string): DateFormat | null {
 	}
 
 	return null;
+}
+
+export function formatDate(value: Date, format: DateFormat): string {
+	return dateFormats[format].format(value);
 }
 
 export type DateFormat = keyof typeof dateFormats;
@@ -118,7 +122,7 @@ export function date<
 			) {
 				let date = new Date(dataset.value);
 				if (typeof dataset.value === "string" && isNaN(+date)) {
-					const format = detectFormat(dataset.value);
+					const format = detectDateFormat(dataset.value);
 					if (format && config.inputFormats.includes(format as any)) {
 						const { parse } = dateFormats[format];
 						date = parse(dataset.value) ?? new Date(Number.NaN);

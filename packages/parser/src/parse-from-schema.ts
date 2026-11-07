@@ -609,10 +609,15 @@ export function parseFromSchema<R = Record<string, unknown>>({
 						hour = Number(str.slice(8, 10));
 						minute = Number(str.slice(10, 12));
 					}
-					if (format === "102" || (hour === 0 && minute === 0 && !format)) {
-						return new Date(Date.UTC(year, month, day));
-					}
-					return new Date(year, month, day, hour, minute);
+					const date =
+						format === "102" || (hour === 0 && minute === 0 && !format)
+							? new Date(Date.UTC(year, month, day))
+							: new Date(year, month, day, hour, minute);
+					return {
+						format: typeof format === "string" ? format : "102",
+						value: date,
+						raw: str,
+					};
 				}
 				if (isSchemaType("binary_object")) {
 					const mimeType = value["@mimeCode"];
