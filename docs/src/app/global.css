@@ -10,6 +10,10 @@ html {
 	scrollbar-gutter: auto;
 }
 
+body {
+	position: relative;
+}
+
 html > body[data-scroll-locked] {
 	margin-right: 0px !important;
 	--removed-body-scroll-bar-size: 0px !important;
@@ -148,4 +152,42 @@ html > body[data-scroll-locked] {
 		font-weight: var(--shiki-dark-font-weight) !important;
 		text-decoration: var(--shiki-dark-text-decoration) !important;
 	}*/
+}
+
+@keyframes dash-flow {
+	to {
+		background-position-x: 8px;
+	}
+}
+
+.animate-dash-flow {
+	background-image: repeating-linear-gradient(
+		to right,
+		var(--border) 0 3px,
+		transparent 3px 8px
+	);
+	background-repeat: repeat-x;
+	background-position: 0 50%;
+	background-size: 8px 1px;
+	animation: dash-flow 0.7s linear infinite;
+}
+
+@keyframes dash-border {
+	to {
+		stroke-dashoffset: -8px;
+	}
+}
+
+.animate-dash-border {
+	animation: dash-border 0.7s linear infinite;
+}
+
+@keyframes dash-border-reverse {
+	to {
+		stroke-dashoffset: 8px;
+	}
+}
+
+.animate-dash-border-reverse {
+	animation: dash-border-reverse 0.7s linear infinite;
 }

@@ -159,8 +159,26 @@ function Footer({
 	return (
 		<div className="flex flex-col gap-4">
 			<hr />
-			{lastEditedAt && <LastEditedAt date={lastEditedAt} />}
-			<div className="grid grid-cols-2 gap-4 font-medium">
+			<div className="flex items-center gap-2">
+				{lastEditedAt && <LastEditedAt date={lastEditedAt} />}
+				<Button
+					variant="link"
+					className="ms-auto text-muted-foreground underline"
+					render={<Link href="/llms.txt" />}
+					nativeButton={false}
+				>
+					llms.txt
+				</Button>
+				<Button
+					variant="link"
+					className="text-muted-foreground underline"
+					render={<Link href="/llms-full.txt" />}
+					nativeButton={false}
+				>
+					llms-full.txt
+				</Button>
+			</div>
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-medium">
 				{previous ? (
 					<Link
 						href={previous.url}
@@ -227,19 +245,19 @@ function Footer({
 					variant="link"
 					size="lg"
 					className="text-muted-foreground underline"
-					render={<Link href="/llms.txt" />}
+					render={<Link href="/legal/privacy" />}
 					nativeButton={false}
 				>
-					llms.txt
+					Privacy
 				</Button>
 				<Button
 					variant="link"
 					size="lg"
 					className="text-muted-foreground underline"
-					render={<Link href="/llms-full.txt" />}
+					render={<Link href="/legal/imprint" />}
 					nativeButton={false}
 				>
-					llms-full.txt
+					Imprint
 				</Button>
 			</div>
 		</div>

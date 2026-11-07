@@ -4,6 +4,7 @@ import { useSearchContext } from "@fumadocs/base-ui/contexts/search";
 import { TreeContextProvider } from "@fumadocs/base-ui/contexts/tree";
 import Link from "fumadocs-core/link";
 import type * as PageTree from "fumadocs-core/page-tree";
+import { useMediaQuery } from "fumadocs-core/utils/use-media-query";
 import {
 	ChevronsUpDownIcon,
 	SearchIcon,
@@ -39,7 +40,7 @@ function SidebarCollapseToggle() {
 		<Button
 			variant="ghost"
 			size="icon-lg"
-			className="max-md:hidden"
+			className="max-lg:hidden"
 			onClick={() => {
 				setCollapsed((prev) => !prev);
 			}}
@@ -52,6 +53,7 @@ function SidebarCollapseToggle() {
 export function DocsLayout({ tree, children }: DocsLayoutProps) {
 	const shellRef = useRef<HTMLDivElement>(null);
 	const { collapsed, currentTab, currentTabId } = useSidebar();
+	const _isMobile = useMediaQuery("(max-width: 640px)");
 
 	useEffect(() => {
 		const shell = shellRef.current;
@@ -73,6 +75,7 @@ export function DocsLayout({ tree, children }: DocsLayoutProps) {
 				<header className="h-14 shrink-0">
 					<nav className="flex flex-row h-full items-center gap-x-4 px-4">
 						<div className="flex items-center gap-4 w-full">
+							<SidebarToggle className="lg:hidden" />
 							<Link
 								href="/"
 								className="flex items-center gap-2 font-medium whitespace-nowrap"
@@ -95,11 +98,12 @@ export function DocsLayout({ tree, children }: DocsLayoutProps) {
 											duration: 0.15,
 											ease: [0.4, 0, 0.2, 1],
 										}}
+										className="max-lg:hidden"
 									>
 										<Popover>
 											<PopoverTrigger render={<Button variant="outline" />}>
 												<currentTab.icon data-icon="inline-start" />
-												<span className="mr-1">{currentTab.title}</span>
+												<span className="mr-1">{currentTab.label}</span>
 												<ChevronsUpDownIcon
 													data-icon="inline-end"
 													className="ms-auto text-muted-foreground"
@@ -107,7 +111,7 @@ export function DocsLayout({ tree, children }: DocsLayoutProps) {
 											</PopoverTrigger>
 											<PopoverContent align="start" className="p-1 gap-0.5">
 												{[...SIDEBAR_TABS.entries()].map(
-													([id, { icon: Icon, title, description, href }]) => (
+													([id, { icon: Icon, label, description, href }]) => (
 														<Button
 															key={id}
 															variant="ghost"
@@ -118,7 +122,7 @@ export function DocsLayout({ tree, children }: DocsLayoutProps) {
 														>
 															<Icon />
 															<div className="flex flex-col">
-																<span>{title}</span>
+																<span>{label}</span>
 																<span className="text-muted-foreground text-xs">
 																	{description}
 																</span>
@@ -135,7 +139,6 @@ export function DocsLayout({ tree, children }: DocsLayoutProps) {
 
 						<SearchToggle />
 						<div className="flex items-center justify-end gap-2 w-full">
-							<SidebarToggle className="md:hidden" />
 							<ThemeToggle />
 							<Button
 								size="icon-lg"

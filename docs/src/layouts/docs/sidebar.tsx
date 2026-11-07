@@ -3,31 +3,38 @@
 import { useTreeContext } from "@fumadocs/base-ui/contexts/tree";
 import { cva } from "class-variance-authority";
 import type * as PageTree from "fumadocs-core/page-tree";
-import {
-	BookTextIcon,
-	BracesIcon,
-	ChevronDownIcon,
-	ChevronsUpDownIcon,
-	LightbulbIcon,
-	ScrollTextIcon,
-} from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { useMediaQuery } from "fumadocs-core/utils/use-media-query";
+import { ChevronDownIcon, ChevronsUpDownIcon, MenuIcon } from "lucide-react";
+import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ComponentProps, ReactNode } from "react";
-import { createContext, use, useEffect, useMemo, useState } from "react";
+import {
+	createContext,
+	use,
+	useCallback,
+	useEffect,
+	useMemo,
+	useState,
+} from "react";
 import { Button } from "@/components/ui/button";
 import {
 	Collapsible,
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { navItems } from "@/lib/nav-items";
+import {
+	SIDEBAR_COOKIE_MAX_AGE,
+	SIDEBAR_COOKIE_NAME,
+} from "@/lib/sidebar-cookie";
 import { cn } from "@/lib/utils";
 
 export const SIDEBAR_WIDTH = "17.75rem";
@@ -52,44 +59,29 @@ export const useSidebar = () => {
 	return context;
 };
 
-type SidebarTabId = "docs" | "examples" | "api-reference" | "changelog";
-type SidebarTab = {
-	icon: React.ElementType;
-	title: string;
-	description: string;
-	href: string;
-};
+type SidebarTab = (typeof navItems)[number];
+type SidebarTabId = SidebarTab["id"];
 
-export const SIDEBAR_TABS = new Map<SidebarTabId, SidebarTab>()
-	.set("docs", {
-		icon: BookTextIcon,
-		title: "Documentation",
-		description: "get started, profiles and more",
-		href: "/docs",
-	})
-	.set("examples", {
-		icon: LightbulbIcon,
-		title: "Examples",
-		description: "examples and guides",
-		href: "/examples",
-	})
-	.set("api-reference", {
-		icon: BracesIcon,
-		title: "API Reference",
-		description: "reference and type docs",
-		href: "/api-reference",
-	})
-	.set("changelog", {
-		icon: ScrollTextIcon,
-		title: "Changelog",
-		description: "release notes and updates",
-		href: "/changelog",
-	});
+export const SIDEBAR_TABS = new Map(navItems.map((item) => [item.id, item]));
 
-export function SidebarProvider({ children }: { children: ReactNode }) {
+export function SidebarProvider({
+	children,
+	defaultCollapsed = false,
+}: {
+	children: ReactNode;
+	defaultCollapsed?: boolean;
+}) {
 	const [open, setOpen] = useState(false);
-	// TODO: Store in cookie/local storage
-	const [collapsed, setCollapsed] = useState(false);
+	const [collapsed, setCollapsed_] = useState(defaultCollapsed);
+
+	const setCollapsed = useCallback(
+		(value: React.SetStateAction<boolean>) => {
+			const next = typeof value === "function" ? value(collapsed) : value;
+			setCollapsed_(next);
+			document.cookie = `${SIDEBAR_COOKIE_NAME}=${next}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+		},
+		[collapsed],
+	);
 
 	const pathname = usePathname();
 	const currentTabId = useMemo(() => {
@@ -103,6 +95,10 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
 		[currentTabId],
 	);
 
+	useEffect(() => {
+		setOpen(false);
+	}, [pathname]);
+
 	return (
 		<SidebarContext
 			value={useMemo(
@@ -114,7 +110,7 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
 					currentTabId,
 					currentTab,
 				}),
-				[open, collapsed, currentTabId, currentTab],
+				[open, setOpen, collapsed, setCollapsed, currentTabId, currentTab],
 			)}
 		>
 			{children}
@@ -143,13 +139,15 @@ export function SidebarToggle(props: ComponentProps<"button">) {
 	const { open, setOpen } = use(SidebarContext)!;
 
 	return (
-		<button
+		<Button
+			variant="ghost"
+			size="icon"
+			aria-label="Toggle menu"
 			{...props}
-			className={cn("text-sm", props.className)}
 			onClick={() => setOpen(!open)}
 		>
-			Sidebar
-		</button>
+			<MenuIcon />
+		</Button>
 	);
 }
 
@@ -157,6 +155,12 @@ export function Sidebar() {
 	const { root } = useTreeContext();
 	const { open, setOpen, collapsed, currentTabId, currentTab } =
 		use(SidebarContext)!;
+	const isMobile = useMediaQuery("(max-width: 640px)");
+	const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+	useEffect(() => {
+		if (isDesktop) setOpen(false);
+	}, [isDesktop, setOpen]);
 
 	const children = useMemo(() => {
 		const sort =
@@ -194,7 +198,7 @@ export function Sidebar() {
 	return (
 		<>
 			<motion.div
-				className="hidden h-full shrink-0 overflow-hidden md:block"
+				className="max-lg:hidden h-full shrink-0 overflow-hidden"
 				initial={false}
 				animate={{ width: collapsed ? 0 : SIDEBAR_WIDTH }}
 				transition={SIDEBAR_TRANSITION}
@@ -218,7 +222,7 @@ export function Sidebar() {
 							>
 								<currentTab.icon className="size-5" />
 								<div className="flex flex-col">
-									<span>{currentTab.title}</span>
+									<span>{currentTab.label}</span>
 									<span className="text-muted-foreground text-xs">
 										{currentTab.description}
 									</span>
@@ -231,7 +235,7 @@ export function Sidebar() {
 								className="p-1 gap-0.5"
 							>
 								{[...SIDEBAR_TABS.entries()].map(
-									([id, { title, icon: Icon, href, description }]) => (
+									([id, { label, icon: Icon, href, description }]) => (
 										<Button
 											key={id}
 											variant="ghost"
@@ -242,7 +246,7 @@ export function Sidebar() {
 										>
 											<Icon />
 											<div className="flex flex-col">
-												<span>{title}</span>
+												<span>{label}</span>
 												<span className="text-muted-foreground text-xs">
 													{description}
 												</span>
@@ -259,33 +263,69 @@ export function Sidebar() {
 				</motion.aside>
 			</motion.div>
 
-			<AnimatePresence>
-				{open && (
-					<>
-						<motion.button
-							type="button"
-							aria-label="Close sidebar"
-							className="fixed inset-0 z-30 bg-black/20 md:hidden"
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							transition={SIDEBAR_TRANSITION}
-							onClick={() => setOpen(false)}
-						/>
-						<motion.aside
-							className="fixed inset-x-0 bottom-0 top-14 z-40 flex flex-col bg-fd-background rounded-t-lg border-t md:hidden"
-							initial={{ y: "100%" }}
-							animate={{ y: 0 }}
-							exit={{ y: "100%" }}
-							transition={SIDEBAR_TRANSITION}
-						>
-							<SidebarScrollArea>
-								<div className="p-4">{children}</div>
-							</SidebarScrollArea>
-						</motion.aside>
-					</>
-				)}
-			</AnimatePresence>
+			<Drawer
+				open={Boolean(open && !isDesktop)}
+				onOpenChange={setOpen}
+				swipeDirection={isMobile ? "down" : "left"}
+				showSwipeHandle={Boolean(isMobile)}
+			>
+				<DrawerContent className="max-sm:[--drawer-content-height:calc(100dvh-3.5rem)] max-sm:[--drawer-content-max-height:calc(100dvh-3.5rem)]">
+					<div className="flex min-h-0 flex-1 flex-col">
+						<div className="px-4 pt-2 sm:pt-4">
+							<Popover>
+								<PopoverTrigger
+									render={
+										<Button
+											variant="outline"
+											size="lg"
+											className="mb-6 h-auto w-full justify-start gap-2.5 py-1.5 text-start"
+										/>
+									}
+								>
+									<currentTab.icon className="size-5" />
+									<div className="flex flex-col">
+										<span>{currentTab.label}</span>
+										<span className="text-muted-foreground text-xs">
+											{currentTab.description}
+										</span>
+									</div>
+									<ChevronsUpDownIcon className="ms-auto size-4! text-muted-foreground" />
+								</PopoverTrigger>
+								<PopoverContent
+									align="start"
+									side="bottom"
+									className="w-(--anchor-width) gap-0.5 p-1"
+								>
+									{[...SIDEBAR_TABS.entries()].map(
+										([id, { label, icon: Icon, href, description }]) => (
+											<Button
+												key={id}
+												variant="ghost"
+												className="h-auto w-full justify-start gap-2.5 py-1 text-start data-active:bg-muted [&_svg]:size-5!"
+												render={<Link href={href} />}
+												nativeButton={false}
+												data-active={currentTabId === id}
+												onClick={() => setOpen(false)}
+											>
+												<Icon />
+												<div className="flex flex-col">
+													<span>{label}</span>
+													<span className="text-muted-foreground text-xs">
+														{description}
+													</span>
+												</div>
+											</Button>
+										),
+									)}
+								</PopoverContent>
+							</Popover>
+						</div>
+						<SidebarScrollArea>
+							<div className="px-4 pb-4">{children}</div>
+						</SidebarScrollArea>
+					</div>
+				</DrawerContent>
+			</Drawer>
 		</>
 	);
 }
@@ -397,8 +437,8 @@ export function SidebarItem({
 						)}
 					</CollapsibleTrigger>
 				)}
-				<CollapsibleContent className="pl-4 pt-1 pb-4 flex flex-col h-(--collapsible-panel-height) overflow-hidden transition-all duration-200 data-ending-style:h-0 data-starting-style:h-0">
-					{children}
+				<CollapsibleContent className="h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-200 ease-out data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0">
+					<div className="flex flex-col pt-1 pb-4 pl-4">{children}</div>
 				</CollapsibleContent>
 			</Collapsible>
 		</div>
