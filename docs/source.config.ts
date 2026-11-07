@@ -29,6 +29,7 @@ import vatex from "@node-zugferd/codelist-vatex";
 import { en16931 } from "@node-zugferd/en-16931";
 import { extended } from "@node-zugferd/extended";
 import { minimum } from "@node-zugferd/minimum";
+import { remarkSteps } from "fumadocs-core/mdx-plugins/remark-steps";
 import { metaSchema, pageSchema } from "fumadocs-core/source/schema";
 import type { PostprocessOptions } from "fumadocs-mdx/config";
 import { defineConfig, defineDocs } from "fumadocs-mdx/config";
@@ -152,7 +153,7 @@ export const apiReference = defineDocs({
 
 export default defineConfig({
 	mdxOptions: {
-		remarkPlugins: [[remarkCodelistTable, codelists]],
+		remarkPlugins: [remarkSteps, [remarkCodelistTable, codelists]],
 		remarkNpmOptions: {
 			persist: {
 				id: "pm",
