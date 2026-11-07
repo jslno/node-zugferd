@@ -10,3 +10,5 @@ denoland
 temurin
 shadcn
 Scira
+zizmor
+zizmorcore

@@ -1,5 +1,7 @@
 "use client";
 
+/* cSpell:disable */
+
 import type { CSSProperties } from "react";
 import { useEffect, useRef } from "react";
 

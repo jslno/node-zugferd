@@ -15,7 +15,7 @@ env:
 
 jobs:
   lint:
-    runs-on: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == 'jslno/node-zugferd' || github.event_name != 'pull_request' && github.repository == 'jslno/node-zugferd') && 'starsling-ubuntu-24.04' || 'ubuntu-24.04'}}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
     concurrency:
@@ -83,7 +83,7 @@ jobs:
         run: pnpm lint:types
 
   typecheck:
-    runs-on: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == 'jslno/node-zugferd' || github.event_name != 'pull_request' && github.repository == 'jslno/node-zugferd') && 'starsling-ubuntu-24.04' || 'ubuntu-24.04'}}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
     concurrency:
@@ -121,7 +121,7 @@ jobs:
         run: pnpm typecheck
 
   test:
-    runs-on: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == 'jslno/node-zugferd' || github.event_name != 'pull_request' && github.repository == 'jslno/node-zugferd') && 'starsling-ubuntu-24.04' || 'ubuntu-24.04'}}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
     concurrency:
