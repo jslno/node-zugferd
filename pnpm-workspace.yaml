@@ -33,6 +33,13 @@ minimumReleaseAgeExclude:
   - wrangler@4.118.0
   - tsx@4.23.8
   - '@node-zugferd/*'
+  - "@zugferd/xsd-validator-darwin-arm64@0.1.0"
+  - "@zugferd/xsd-validator-darwin-x64@0.1.0"
+  - "@zugferd/xsd-validator-linux-arm64-gnu@0.1.0"
+  - "@zugferd/xsd-validator-linux-x64-gnu@0.1.0"
+  - "@zugferd/xsd-validator-win32-arm64-msvc@0.1.0"
+  - "@zugferd/xsd-validator-win32-x64-msvc@0.1.0"
+  - "@zugferd/xsd-validator@0.1.0"
 
 trustPolicy: no-downgrade
 

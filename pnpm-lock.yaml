@@ -2094,12 +2094,12 @@ importers:
 
   packages/validators/xsd:
     dependencies:
-      '@jslno/xsd-validator':
-        specifier: file:../../../../xsd-validator
-        version: file:../xsd-validator
       '@node-zugferd/core':
         specifier: workspace:*
         version: link:../../core
+      '@zugferd/xsd-validator':
+        specifier: ^0.1.0
+        version: 0.1.0
     devDependencies:
       tsdown:
         specifier: 'catalog:'
@@ -3436,10 +3436,6 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@jslno/xsd-validator@file:../xsd-validator':
-    resolution: {directory: ../xsd-validator, type: directory}
-    engines: {node: '>= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0'}
-
   '@loaderkit/resolve@1.0.6':
     resolution: {integrity: sha512-G8FdIoF5CypfwmD9rl8BXod5HDn8JqB0CCNBXDTaRZ+yRYhARrrSToX1zg1zy9jX3zLqigsELwhT4gNtkdQAUg==}
 
@@ -4660,6 +4656,48 @@ packages:
     resolution: {integrity: sha512-drLnLlLtqLni1UPZJ1pKl6PPsdGJoaFGaQsJa1khtjJT+OK5Z71rb+md9fO6KP9eJXjIOJKtW7OgnVlLf91WIw==}
     cpu: [x64]
     os: [win32]
+
+  '@zugferd/xsd-validator-darwin-arm64@0.1.0':
+    resolution: {integrity: sha512-QTZ8GIo//ZOssOJIaLExRpeJ+/SI9lDStJov0qU36DTbj5ANUWHMYiU5uPh9yPj6thFL5MsrG0WgtIKoVsWarg==}
+    engines: {node: '>= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@zugferd/xsd-validator-darwin-x64@0.1.0':
+    resolution: {integrity: sha512-xcm9Wp9iItD/7pqv4z3lECEIS5Ywoq5bxhzJuSUmiEBzfY12+KT7r1l5CJOLIQ1HOeAsG2ERk4kwyE4o91LPMg==}
+    engines: {node: '>= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@zugferd/xsd-validator-linux-arm64-gnu@0.1.0':
+    resolution: {integrity: sha512-vBzg2cl+zyxG5Favv9RXJJgu46XanJpUBOoL41gNwzNxl/wBGR5JeP5+8Ltfke6vnksCCSONcsvoYK6KTMmpyQ==}
+    engines: {node: '>= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@zugferd/xsd-validator-linux-x64-gnu@0.1.0':
+    resolution: {integrity: sha512-AFS9hJwQiHk63UneNJKNpIuq3jSge49pthDZYLxymU0MrAbG28VXvqWYDRe3+zkLKSuPAda326ghyih46j7gDw==}
+    engines: {node: '>= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0'}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@zugferd/xsd-validator-win32-arm64-msvc@0.1.0':
+    resolution: {integrity: sha512-EhY/mJcaxWIzjqwipC06hIQgziiuv48GVVCINFwwQ/bJaQ7AeWso22NmRZJX9jTJJPC5879J/ZMoLi8UCrAz/w==}
+    engines: {node: '>= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@zugferd/xsd-validator-win32-x64-msvc@0.1.0':
+    resolution: {integrity: sha512-GTe50cmoC5/0sqqVPCnM2WjHm/Q8HLgnL/JmINi8fdeQc8jFJ44cuJgv5aYMRm9wacd2epOfiMfmSxHm+Vr5Gw==}
+    engines: {node: '>= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0'}
+    cpu: [x64]
+    os: [win32]
+
+  '@zugferd/xsd-validator@0.1.0':
+    resolution: {integrity: sha512-ygitfAo8zAhnjkfF1C4DLj3olVxMACADJFH2E3mPHpCJcNwAeQvJIGfNoFP26tqRMwL1oCeIBfkDuregO9tIIg==}
+    engines: {node: '>= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0'}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -8974,8 +9012,6 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@jslno/xsd-validator@file:../xsd-validator': {}
-
   '@loaderkit/resolve@1.0.6':
     dependencies:
       '@braidai/lang': 1.1.2
@@ -9872,6 +9908,33 @@ snapshots:
 
   '@yuku-toolchain/win32-x64@0.25.0':
     optional: true
+
+  '@zugferd/xsd-validator-darwin-arm64@0.1.0':
+    optional: true
+
+  '@zugferd/xsd-validator-darwin-x64@0.1.0':
+    optional: true
+
+  '@zugferd/xsd-validator-linux-arm64-gnu@0.1.0':
+    optional: true
+
+  '@zugferd/xsd-validator-linux-x64-gnu@0.1.0':
+    optional: true
+
+  '@zugferd/xsd-validator-win32-arm64-msvc@0.1.0':
+    optional: true
+
+  '@zugferd/xsd-validator-win32-x64-msvc@0.1.0':
+    optional: true
+
+  '@zugferd/xsd-validator@0.1.0':
+    optionalDependencies:
+      '@zugferd/xsd-validator-darwin-arm64': 0.1.0
+      '@zugferd/xsd-validator-darwin-x64': 0.1.0
+      '@zugferd/xsd-validator-linux-arm64-gnu': 0.1.0
+      '@zugferd/xsd-validator-linux-x64-gnu': 0.1.0
+      '@zugferd/xsd-validator-win32-arm64-msvc': 0.1.0
+      '@zugferd/xsd-validator-win32-x64-msvc': 0.1.0
 
   acorn-jsx@5.3.2(acorn@8.19.0):
     dependencies:
