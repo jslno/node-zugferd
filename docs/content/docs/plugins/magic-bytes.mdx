@@ -1,49 +1,196 @@
 ---
 icon: WandSparkles
 title: Magic Bytes
-description: Your first document
+description: Check binary attachments against file signatures before an invoice is created.
 ---
+
+The magic bytes plugin checks each binary attachment while `create` validates the invoice. The media type, the filename extension, and the leading bytes of the file have to agree with one known definition. A match keeps the attachment. Anything else throws [`ZugferdError`](#rejected-files) with the message `Unsupported file type`, and `create` stops before that file is written into the invoice.
+
+Those leading bytes are the signature of a format. A PDF begins with the characters `%PDF-`. The plugin compares that signature with the type declared on the attachment, so a renamed or mislabeled file is rejected. The check covers the attachment. The profile schema still checks the invoice, and so does a validator plugin such as [XSD](/docs/plugins/validators/xsd).
 
 ## Installation
 
 <Steps>
-    <Step>
-        ### Install the plugin
-        
-        ```package-install
-        @node-zugferd/magic-bytes
-        ```
-    </Step>
-    <Step>
-        ### Add the plugin to your instance
-        
-        ```ts title="invoicer.ts"
-        import { zugferd } from "node-zugferd";
-        import { en16931 } from "@node-zugferd/en-16931";
-        import { magicBytes } from "@node-zugferd/magic-bytes"; // [!code highlight]
-        
-        export const invoicer = zugferd({
-          profiles: [en16931],
-          plugins: [
-            magicBytes(), // [!code highlight]
-          ],
-          // ...
-        });
-        ```
-    </Step>
+	<Step>
+		### Install the plugin
+
+		```package-install
+		@node-zugferd/magic-bytes
+		```
+
+	</Step>
+	<Step>
+		### Add the plugin to your instance
+
+		Register the plugin on the `zugferd()` instance that creates the invoice. Every binary field on a registered profile is checked.
+
+		```ts title="invoicer.ts"
+		import { zugferd } from "node-zugferd";
+		import { en16931 } from "@node-zugferd/en-16931";
+		import { magicBytes } from "@node-zugferd/magic-bytes"; // [!code highlight]
+
+		export const invoicer = zugferd({
+		  profiles: [en16931],
+		  plugins: [
+		    magicBytes(), // [!code highlight]
+		  ],
+		  // ...
+		});
+		```
+
+	</Step>
 </Steps>
+
+## Attaching a file
+
+A binary field accepts a `File`, or an object with `content`, `mimeType`, and `filename`. On a `File`, `name` is the filename and `type` is the media type. `content` is a `Uint8Array`, an `ArrayBuffer`, or a `Blob`.
+
+On [EN 16931](/docs/profiles/en-16931), a supporting file is `transaction.contract.additionalSupportingDocuments[].attachedDocument` (BG-24, BT-125). [Extended](/docs/profiles/extended) and [Order-X](/docs/profiles/order-x) include binary attachment fields as well.
+
+```ts title="invoice.ts"
+import { readFile } from "node:fs/promises";
+import { invoicer } from "./invoicer";
+import { data } from "./data";
+
+await invoicer.create("en-16931", {
+  ...data,
+  transaction: {
+    ...data.transaction,
+    contract: {
+      ...data.transaction?.contract,
+      additionalSupportingDocuments: [
+        {
+          issuerAssignedId: "13130162",
+          name: "Measurement",
+          attachedDocument: {
+            filename: "measurement.pdf",
+            mimeType: "application/pdf",
+            content: await readFile("measurement.pdf"),
+          },
+        },
+      ],
+    },
+  },
+});
+```
+
+`measurement.pdf` passes when the bytes start with `%PDF-`, the name ends in `.pdf`, and the media type is `application/pdf`. Change any one of those three and `create` rejects the invoice.
+
+## How a match is decided
+
+Definitions are tried in order. The first definition that matches all three checks below is enough.
+
+- The attachment media type equals one entry in `mimeType`. An entry that contains `*` is a pattern, so `application/*+xml` matches `application/xhtml+xml`.
+- The extension after the last `.` in the filename is listed in `extensions`. The comparison ignores case. A name with no `.` fails this check.
+- The file begins with `magicBytes`. Each entry is a byte from `0` to `255`, or `"*"`, which matches any byte at that position. `null` accepts any content. CSV is defined that way.
+
+The file has to be at least as long as the signature. A shorter file fails that definition and the plugin tries the next one.
+
+Built-in definitions run first. `customMimeTypes` is appended, so a custom definition accepts a format the built-in list omits. A file the built-in list already accepts still matches that built-in definition. Set [`overrideDefaults`](#options) when the check should use your list alone.
+
+## Built-in types
+
+| Format | Media type | Extensions | Signature |
+| --- | --- | --- | --- |
+| PDF | `application/pdf` | `.pdf` | `%PDF-` |
+| Text | `text/plain` | `.txt` | UTF-8, UTF-16, or UTF-32 byte-order mark, or the bytes `0E FE FF` |
+| GIF | `image/gif` | `.gif` | `GIF87a` or `GIF89a` |
+| TIFF | `image/tiff` | `.tif`, `.tiff` | TIFF or BigTIFF, either byte order |
+| JPEG | `image/jpeg` | `.jpg`, `.jpeg` | JPEG, JFIF, or EXIF |
+| XML | `application/xml`, `text/xml`, `application/*+xml` | `.xml` | `<?xml `, including UTF-16, UTF-32, and EBCDIC |
+| Spreadsheet | `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`, `application/vnd.oasis.opendocument.spreadsheet` | `.xlsx`, `.ods` | ZIP header `PK` |
+| JSON | `application/json` | `.json` | `{` or `[` |
+| CSV | `text/csv` | `.csv` | Any content |
+
+One format can have several signatures. Any one of them is enough, and the media type and extension still have to belong to that same signature.
+
+<Callout title="Text files">
+	A `.txt` attachment matches when it starts with a UTF-8, UTF-16, or UTF-32 byte-order mark, or with the bytes `0E FE FF`. Plain UTF-8 text has no marker in this list, so give the file a byte-order mark or describe it as another type.
+</Callout>
+
+<Callout title="Coarse signatures" type="warn">
+	CSV is accepted from `text/csv` and a `.csv` name, whatever the bytes are. JSON matches when the first byte is `{` or `[`. `.xlsx` and `.ods` both use the ZIP header `PK`, and both media types are listed on those signatures, so a ZIP payload passes once the name and media type are one of those spreadsheet values. The plugin compares those header bytes and leaves the rest of the file unread.
+</Callout>
+
+## Custom types
+
+Add a definition for a format the built-in list omits. PNG is one of those formats. The attachment then needs the media type `image/png`, a `.png` name, and the PNG header.
+
+```ts title="invoicer.ts"
+import { magicBytes } from "@node-zugferd/magic-bytes";
+
+magicBytes({
+  customMimeTypes: [
+    {
+      id: "png",
+      mimeType: ["image/png"],
+      extensions: ["png"],
+      magicBytes: [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a],
+    },
+  ],
+});
+```
+
+`id` names the definition. The check reads `mimeType`, `extensions`, and `magicBytes`. Repeat an `id` when one format has more than one signature. The built-in JPEG list does this: one signature is `FF D8 FF DB`, and the EXIF signature uses `"*"` for the two length bytes that change between files.
+
+```ts title="EXIF signature"
+[0xff, 0xd8, 0xff, 0xe1, "*", "*", 0x45, 0x78, 0x69, 0x66, 0x00, 0x00]
+```
+
+`overrideDefaults` drops the built-in list when `customMimeTypes` contains at least one definition. An empty list leaves the built-in types in place.
+
+```ts title="invoicer.ts"
+import { magicBytes } from "@node-zugferd/magic-bytes";
+
+magicBytes({
+  overrideDefaults: true,
+  customMimeTypes: [
+    {
+      id: "pdf",
+      mimeType: ["application/pdf"],
+      extensions: ["pdf"],
+      magicBytes: [0x25, 0x50, 0x44, 0x46, 0x2d], // %PDF-
+    },
+  ],
+});
+```
+
+With that configuration, an attachment has to be a PDF that starts with `%PDF-`.
+
+## Rejected files
+
+```ts title="invoice.ts"
+import { ZugferdError } from "@node-zugferd/core/error";
+import { invoicer } from "./invoicer";
+import { data } from "./data";
+
+try {
+  await invoicer.create("en-16931", data);
+} catch (error) {
+  if (error instanceof ZugferdError) {
+    error.message; // "Unsupported file type"
+  }
+}
+```
+
+The same message is used when the content is shorter than the signature, when the filename has no extension, and when the media type, extension, and bytes come from different definitions. `scan.pdf` with media type `image/png` is rejected. `scan.txt` with media type `application/pdf` is rejected too.
 
 ## Options
 
 <TypeTable
-  type={{
-    customMimeTypes: {
-      type: "MimeTypeDefinition[]",
-      required: false,
-    },
-    overrideDefaults: {
-      type: "boolean",
-      required: false,
-    },
-  }}
+	type={{
+		customMimeTypes: {
+			type: "MimeTypeDefinition[]",
+			description:
+				"Extra definitions. Appended after the built-in list. With overrideDefaults, used on its own when the array contains at least one definition. Each definition has id, mimeType, extensions, and magicBytes.",
+			required: false,
+		},
+		overrideDefaults: {
+			type: "boolean",
+			description:
+				"Check customMimeTypes alone. Applies when that array is non-empty. Otherwise the built-in types stay, with any custom definitions appended.",
+			default: "false",
+			required: false,
+		},
+	}}
 />

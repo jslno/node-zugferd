@@ -1,61 +1,235 @@
 ---
 icon: BookSearch
 title: Parser
+description: Read Factur-X and ZUGFeRD invoices from XML or PDF/A-3.
 ---
 
 <Callout title="Experimental" type="warn">
-Parsing is currently experimental, and the API may subject to change.
-XRechnung and Order-X profiles are not supported yet.
+	Parsing is currently experimental, and the API is subject to change. XRechnung
+	and Order-X profiles are not supported yet.
 </Callout>
+
+The parser plugin reads an invoice and returns the data described by a [profile](/docs/profiles/en-16931) schema. Pass the XML as a string or as UTF-8 bytes, or pass a PDF/A-3 file. For a PDF, the plugin reads the embedded `factur-x.xml` attachment.
+
+Detection uses the specification identifier in the XML. On a PDF it also checks that the Factur-X extension metadata names the same conformance level as the profile. Only profiles registered on your `zugferd()` instance are considered, and the first match is the one that gets parsed.
 
 ## Installation
 
 <Steps>
-    <Step>
-        ### Install the plugin
+	<Step>
+		### Install the plugin
 
-        ```package-install
-        @node-zugferd/parser
-        ```
-    </Step>
-    <Step>
-        ### Add the plugin to your instance
+		```package-install
+		@node-zugferd/parser
+		```
 
-        ```ts title="invoicer.ts"
-        import { zugferd } from "node-zugferd";
-        import { en16931 } from "@node-zugferd/en-16931";
-        import { parser } from "@node-zugferd/parser"; // [!code highlight]
+	</Step>
+	<Step>
+		### Add the plugin to your instance
 
-        export const invoicer = zugferd({
-          profiles: [en16931],
-          plugins: [
-            parser(), // [!code highlight]
-          ],
-          // ...
-        });
-        ```
-    </Step>
+		Register the plugin next to every profile you want to parse. Detection considers the profiles in this list.
 
+		```ts title="invoicer.ts"
+		import { zugferd } from "node-zugferd";
+		import { en16931 } from "@node-zugferd/en-16931";
+		import { parser } from "@node-zugferd/parser"; // [!code highlight]
+
+		export const invoicer = zugferd({
+		  profiles: [en16931],
+		  plugins: [
+		    parser(), // [!code highlight]
+		  ],
+		  // ...
+		});
+		```
+
+	</Step>
 </Steps>
 
 ## Basic Usage
 
+`parser()` adds `parse` to the invoicer instance. Call it with the file contents. Omit the profile id to detect it, or pass an id when you already know which profile the document uses.
+
+### From XML
+
+```ts title="parse.ts"
+import { readFile } from "node:fs/promises";
+import { invoicer } from "./invoicer";
+
+const xml = await readFile("factur-x.xml", "utf-8");
+const invoice = await invoicer.parse(xml);
+
+invoice.exchangedDocument.invoiceNumber;
+```
+
+A `Uint8Array` or `ArrayBuffer` of UTF-8 XML works the same way as a string.
+
+### From a PDF
+
+```ts title="parse.ts"
+import { readFile } from "node:fs/promises";
+import { invoicer } from "./invoicer";
+
+const pdf = await readFile("invoice.pdf");
+const invoice = await invoicer.parse(pdf);
+```
+
+The attachment name comes from the profile. Factur-X profiles embed `factur-x.xml`. Parsing throws when that file is missing.
+
+### With explicit profile
+
+Pass the profile id first when you want to skip detection. The document is still checked against that profile, and parsing throws when it does not match.
+
+```ts title="parse.ts"
+import { readFile } from "node:fs/promises";
+import { invoicer } from "./invoicer";
+
+const xml = await readFile("factur-x.xml", "utf-8");
+const invoice = await invoicer.parse("en-16931", xml);
+```
+
+The id has to be one of the profiles registered on the instance. `parse` throws when the id is unknown, when no registered profile matches, or when the named profile rejects the document.
+
+## Supported profiles
+
+| Profile | Id | Specification identifier |
+| --- | --- | --- |
+| [Minimum](/docs/profiles/minimum) | `minimum` | `urn:factur-x.eu:1p0:minimum` |
+| [Basic WL](/docs/profiles/basic-wl) | `basic-wl` | `urn:factur-x.eu:1p0:basicwl` |
+| [Basic](/docs/profiles/basic) | `basic` | `urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic` |
+| [EN 16931](/docs/profiles/en-16931) | `en-16931` | `urn:cen.eu:en16931:2017` |
+| [Extended](/docs/profiles/extended) | `extended` | `urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended` |
+
+Field names on the result follow that profile's schema, the same names you use with [`create`](/docs/basic-usage).
+
+## Parsed values
+
+Each schema field is read from the XML. Absent fields are left off the object. Some values come back wrapped, including fields that [`create`](/docs/basic-usage) accepts as a plain number or `Date`.
+
+| Schema type | Parsed value |
+| --- | --- |
+| String, code, literal | `string` |
+| Amount | `{value: number, currency?: string}` |
+| Quantity | `{value: number, unitCode?: string}` |
+| Percentage, unit price | `number` |
+| Identifier | `string`, or `{value, schemeId?, schemeVersion?}` when a scheme attribute is present |
+| Date | `{format: string, value: Date, raw: string}` |
+| Boolean | `boolean` |
+| Binary object | `File` |
+
+```ts title="parse.ts"
+const lineTotal =
+  invoice.transaction.line[0]?.billing?.itemTotals?.lineTotalAmount?.value;
+```
+
+Dates use the UN/EDIFACT format code stored on the XML element. When the code is missing, the parser reports `102`. Format `102` is a calendar date at UTC midnight, and `raw` keeps the original text such as `20240305`.
+
+Text and identifier values keep XML entities as they appear in the file. `&amp;` stays `&amp;` until you set [`decodeEntities`](#options) to `true`, which decodes `&`, `<`, `>`, `"`, and `'`.
+
+## Validation
+
+When the [XSD](/docs/plugins/validators/xsd) or [Mustang](/docs/plugins/validators/mustang) plugin is registered on the same instance, the parser validates the XML before it maps fields. XSD runs first, then Mustang. A validation error stops parsing. Set `autoRun: false` on a validator to keep it available for manual checks without running it on every `parse` call.
+
+```ts title="invoicer.ts"
+import { zugferd } from "node-zugferd";
+import { en16931 } from "@node-zugferd/en-16931";
+import { parser } from "@node-zugferd/parser";
+import { xsd } from "@node-zugferd/validator-xsd";
+
+export const invoicer = zugferd({
+  profiles: [en16931],
+  plugins: [
+    parser(),
+    xsd(),
+  ],
+});
+```
+
+## Hooks
+
+`hooks` run around the profile parser. `beforeParse` runs after validation and before fields are read. `afterParse` runs once the data object exists and receives it as `data`. Both may be async.
+
+The parse context also includes:
+
+- `profile`, the profile selected for this document
+- `xml`, the invoice XML as an object
+- `pdf`, the loaded PDF when the input was a PDF
+- `context`, the zugferd context
+- `xpath`, with `querySelector` and `querySelectorAll` for path queries against the XML object
+- `decodeEntities`, whether entity decoding is enabled
+
+```ts title="invoicer.ts"
+import { parser } from "@node-zugferd/parser";
+
+parser({
+  hooks: {
+    beforeParse: async ({ profile }) => {
+      console.log(profile.id);
+    },
+    afterParse: async ({ data }) => {
+      console.log(data);
+    },
+  },
+});
+```
+
+## Custom profiles
+
+`profileMap` replaces the built-in `match` and `parse` functions for the profile ids you list. Other built-in profiles stay in place. Each entry needs both functions. `match` should return `true` when the document belongs to that profile. `parse` should return the data object.
+
+`match` receives two helpers. `matchesSpecificationIdentifier` compares the specification id in the XML and accepts one id or a list. `matchesExtensionSchemaProfile` checks the Factur-X extension metadata on a PDF, and returns `true` for XML input.
+
+```ts title="invoicer.ts"
+import { parser } from "@node-zugferd/parser";
+
+parser({
+  profileMap: {
+    "en-16931": {
+      match: (ctx) =>
+        ctx.matchesExtensionSchemaProfile() &&
+        ctx.matchesSpecificationIdentifier("urn:cen.eu:en16931:2017"),
+      parse: (ctx) => {
+        return {
+          // Map ctx.xml into the profile data shape.
+        };
+      },
+    },
+  },
+});
+```
+
+A custom entry is the full `match` and `parse` implementation for that profile. A new profile id is checked after the built-in profiles, and that profile still has to be registered on the instance.
+
 ## Options
 
 <TypeTable
-  type={{
-    profileMap: {
-      type: "Record<string, ProfileMapEntry>",
-      required: false,
-    },
-    decodeEntities: {
-      type: "boolean",
-      default: "false",
-      required: false,
-    },
-    hooks: {
-      type: "ParserHooks",
-      required: false,
-    }
-  }}
+	type={{
+		profileMap: {
+			type: "Record<string, ProfileMapEntry>",
+			description:
+				"Match and parse functions keyed by profile id. Merged over the built-in Factur-X profiles, and a listed id replaces the built-in entry.",
+			required: false,
+		},
+		decodeEntities: {
+			type: "boolean",
+			description:
+				"Decode XML entities in text and identifier values. With the default, those characters stay escaped.",
+			default: "false",
+			required: false,
+		},
+		hooks: {
+			type: "ParserHooks",
+			description:
+				"beforeParse runs after validation and before field mapping. afterParse receives the parsed data.",
+			required: false,
+		},
+	}}
 />
+
+## From the CLI
+
+The CLI reads an invoice file and prints the parsed data as JSON. It uses `@node-zugferd/parser`, and runs Mustang or XSD when those packages are installed. See the [CLI reference](/docs/reference/cli) for the flags.
+
+```package-install
+npx @node-zugferd/cli parse
+```

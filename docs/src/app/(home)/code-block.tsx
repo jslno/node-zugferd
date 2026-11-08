@@ -5,13 +5,17 @@ import { useLayoutEffect, useState } from "react";
 import type { BundledLanguage } from "shiki";
 import { highlight } from "@/lib/highlight";
 
+// Stable default: a fresh `[]` per render changes the effect deps below, which
+// re-runs the highlight, sets new nodes, re-renders, and loops forever.
+const NO_HIGHLIGHTED_LINES: number[] = [];
+
 export function CodeBlock({
 	children,
 	lang,
 	initial,
 	keepBackground = false,
 	showLineNumbers = false,
-	highlightedLineNumbers = [],
+	highlightedLineNumbers = NO_HIGHLIGHTED_LINES,
 	className,
 }: {
 	children: string;

@@ -9,6 +9,7 @@ import {
 	XIcon,
 } from "lucide-react";
 import { animate, motion, useMotionValue, useTransform } from "motion/react";
+import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 import { cn } from "@/lib/utils";
 import { CodeBlock } from "./code-block";
@@ -675,11 +676,13 @@ const FEATURES = [
 		label: "Generate",
 		description:
 			"Create ZUGFeRD/Factur-X compliant electronic invoices from structured data with a simple, developer-friendly API.",
+		href: "/docs/basic-usage",
 		className: "sm:col-span-2 lg:col-span-5 lg:row-span-2",
 		Visual: GenerateVisual,
 	},
 	{
 		label: "Validate",
+		href: "/docs/plugins/validators/mustang",
 		description:
 			"Verify invoices against the ZUGFeRD specification to catch structural and compliance issues before delivery.",
 		className: "lg:order-3 lg:col-span-4",
@@ -687,6 +690,7 @@ const FEATURES = [
 	},
 	{
 		label: "Parse",
+		href: "/docs/plugins/parser",
 		description:
 			"Extract invoice data from existing ZUGFeRD/Factur-X documents into structured data for processing and automation.",
 		className: "lg:order-4 lg:col-span-4",
@@ -694,6 +698,7 @@ const FEATURES = [
 	},
 	{
 		label: "Templates",
+		href: "/docs/plugins/templates",
 		description:
 			"Build invoices faster with reusable templates for layouts, branding, and recurring invoice structures.",
 		className: "lg:col-span-3",
@@ -701,12 +706,15 @@ const FEATURES = [
 	},
 	{
 		label: "CLI",
+		href: "/docs/reference/cli",
 		description:
 			"Scaffold projects, parse documents, and validate invoices from the terminal with a single package.",
 		className: "lg:col-span-3",
 		Visual: CliVisual,
 	},
 ] as const;
+
+const MotionLink = motion.create(Link);
 
 export function FeaturesBento() {
 	return (
@@ -731,9 +739,10 @@ export function FeaturesBento() {
 			</motion.div>
 
 			<div className="grid grid-cols-1 gap-4 pb-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-8 lg:gap-8">
-				{FEATURES.map(({ label, description, className, Visual }, i) => (
-					<motion.div
+				{FEATURES.map(({ label, description, href, className, Visual }, i) => (
+					<MotionLink
 						key={label}
+						href={href}
 						initial="hidden"
 						whileInView="visible"
 						viewport={{ once: true, amount: 0.3 }}
@@ -753,7 +762,7 @@ export function FeaturesBento() {
 							<p className="text-lg font-semibold">{label}</p>
 							<p className="text-muted-foreground">{description}</p>
 						</div>
-					</motion.div>
+					</MotionLink>
 				))}
 			</div>
 		</section>

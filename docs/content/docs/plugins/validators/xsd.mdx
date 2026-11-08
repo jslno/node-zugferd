@@ -1,70 +1,204 @@
 ---
 icon: FileCodeCorner
 title: XSD
+description: Validate invoice XML against an XML Schema in-process.
 ---
+
+The XSD plugin checks invoice XML against an XML Schema. Validation runs inside the Node.js process, with no Java runtime. A valid document resolves with no value. An invalid document throws [`ZugferdError`](#findings).
 
 ## Installation
 
 <Steps>
-    <Step>
-        ### Install the plugin
-        
-        ```package-install
-        @node-zugferd/validator-xsd
-        ```
-    </Step>
-    <Step>
-        ### Add the plugin to your instance
-        
-        ```ts title="invoicer.ts"
-        import { zugferd } from "node-zugferd";
-        import { en16931 } from "@node-zugferd/en-16931";
-        import { xsd } from "@node-zugferd/validator-xsd"; // [!code highlight]
-        
-        export const invoicer = zugferd({
-          profiles: [en16931],
-          plugins: [
-            xsd(), // [!code highlight]
-          ],
-          // ...
-        });
-        ```
-    </Step>
+	<Step>
+		### Install the plugin
+
+		```package-install
+		@node-zugferd/validator-xsd
+		```
+
+	</Step>
+	<Step>
+		### Add the plugin to your instance
+
+		Register the plugin in your zugferd instance. The package includes schemas for the Factur-X profiles.
+
+		```ts title="invoicer.ts"
+		import { zugferd } from "node-zugferd";
+		import { en16931 } from "@node-zugferd/en-16931";
+		import { xsd } from "@node-zugferd/validator-xsd"; // [!code highlight]
+
+		export const invoicer = zugferd({
+		  profiles: [en16931],
+		  plugins: [
+		    xsd(), // [!code highlight]
+		  ],
+		  // ...
+		});
+		```
+
+	</Step>
 </Steps>
 
-## Usage
+## Automatic validation
 
-### Manual validation
+`autoRun` defaults to `true`. `create` then validates the XML it just built, and a schema failure rejects that call. An `afterXMLBuild` hook on your `zugferd()` options still runs after this check.
 
-```ts
+```ts title="invoice.ts"
+import { invoicer } from "./invoicer";
+import { data } from "./data";
+
+await invoicer.create("en-16931", data);
+```
+
+With the [parser](/docs/plugins/parser) plugin on the same instance, `parse` also runs XSD on the XML before it maps fields. Set `autoRun: false` to keep `invoicer.xsd.validate` available and skip both of those automatic checks.
+
+```ts title="invoicer.ts"
+import { zugferd } from "node-zugferd";
+import { en16931 } from "@node-zugferd/en-16931";
+import { parser } from "@node-zugferd/parser";
+import { xsd } from "@node-zugferd/validator-xsd";
+
+export const invoicer = zugferd({
+  profiles: [en16931],
+  plugins: [
+    parser(),
+    xsd({
+      autoRun: false,
+    }),
+  ],
+});
+```
+
+## Manual validation
+
+`invoicer.xsd.validate` takes a profile id and the invoice XML as a string. The id may also be an object with an `id` field. Pass XML from disk, or the string returned by `toXML()`.
+
+```ts title="validate.ts"
 import { readFile } from "node:fs/promises";
-import { invoicer } from "@/lib/invoicer";
+import { ZugferdError } from "@node-zugferd/core/error";
+import { invoicer } from "./invoicer";
 
 try {
-  await invoicer.xsd.validate("en-16931", await readFile("factur-x.xml", "utf-8")); // [!code highlight]
+  await invoicer.xsd.validate(
+    "en-16931",
+    await readFile("factur-x.xml", "utf-8"),
+  );
 } catch (error) {
-  if (error instanceof ZugferdValidationError) {
-    console.log(error.issues);
+  if (error instanceof ZugferdError) {
+    console.error(error.message);
   } else {
     throw error;
   }
 }
 ```
 
+## Supported profiles
+
+These profiles ship with a schema:
+
+- [Minimum](/docs/profiles/minimum)
+- [Basic WL](/docs/profiles/basic-wl)
+- [Basic](/docs/profiles/basic)
+- [EN 16931](/docs/profiles/en-16931)
+- [Extended](/docs/profiles/extended)
+
+`validate` throws when the profile id has no schema entry. With `autoRun`, `create` skips a profile that has no schema. `parse` calls `validate`, so a missing schema rejects the parse.
+
+[XRechnung](/docs/profiles/xrechnung) and the [Order-X](/docs/profiles/order-x) profiles need a [`schemaMap`](#custom-schemas) entry.
+
+## Custom schemas
+
+`schemaMap` is merged over the bundled Factur-X schemas. An entry you list replaces the bundled schema for that id. Each entry has the schema file and, when that file imports other schemas, the directory those files are loaded from.
+
+```ts title="invoicer.ts"
+import { xsd } from "@node-zugferd/validator-xsd";
+
+xsd({
+  schemaMap: {
+    "en-16931": {
+      path: "./schemas/FACTUR-X_EN16931.xsd",
+      dir: "./schemas",
+    },
+  },
+});
+```
+
+`path` is the main XSD file. `dir` is the folder used to read imported schema files by name. The bundled Factur-X schemas set `dir` because each profile schema imports the data-type schemas next to it.
+
+### XRechnung
+
+```package-install
+@node-zugferd/xrechnung-schema-definition
+```
+
+```ts title="invoicer.ts"
+import { zugferd } from "node-zugferd";
+import { xsd } from "@node-zugferd/validator-xsd";
+import { xrechnung } from "@node-zugferd/xrechnung";
+import { xrechnungSchemaDefinitions } from "@node-zugferd/xrechnung-schema-definition";
+
+export const invoicer = zugferd({
+  profiles: [xrechnung],
+  plugins: [
+    xsd({
+      schemaMap: xrechnungSchemaDefinitions,
+    }),
+  ],
+});
+```
+
+### Order-X
+
+`orderXSchemaDefinitions` covers `order-x-basic`, `order-x`, and `order-x-extended`.
+
+```package-install
+@node-zugferd/order-x-schema-definition
+```
+
+```ts title="invoicer.ts"
+import { zugferd } from "node-zugferd";
+import { orderX } from "@node-zugferd/order-x";
+import { orderXSchemaDefinitions } from "@node-zugferd/order-x-schema-definition";
+import { xsd } from "@node-zugferd/validator-xsd";
+
+export const invoicer = zugferd({
+  profiles: [orderX],
+  plugins: [
+    xsd({
+      schemaMap: orderXSchemaDefinitions,
+    }),
+  ],
+});
+```
+
+## Findings
+
+A schema violation throws `ZugferdError`. `error.message` is the message from the XSD validator.
+
+A call to `validate` for a profile id with no schema throws `ZugferdError` with the message `No XSD schema found for profile "<id>". Please provide a custom schema file name in the plugin options.` Add a [`schemaMap`](#custom-schemas) entry for that id.
+
+## Compared to Mustang
+
+XSD runs inside the Node.js process and needs no Java runtime. That makes it faster than [Mustang](/docs/plugins/validators/mustang), which starts a Java process for every check.
+
+XSD checks the document against its XML Schema: which elements are present, how often they appear, and which types they use. Profile business rules are covered by Mustang.
+
 ## Options
 
 <TypeTable
-  type={{
-    autoRun: {
-      type: "boolean",
-      default: "true",
-      description: "Whether to automatically run validation after processing the document.",
-      required: false,
-    },
-    xsdPathMap: {
-      type: "Record<string, string>",
-      description: "A mapping of profile identifiers to their corresponding XSD file paths.",
-      required: false,
-    },
-  }}
+	type={{
+		autoRun: {
+			type: "boolean",
+			description:
+				"Validate XML produced by create, and XML read by the parser plugin. Set to false to validate only through xsd.validate.",
+			default: "true",
+			required: false,
+		},
+		schemaMap: {
+			type: "Record<string, { path: string, dir?: string }>",
+			description:
+				"Schemas keyed by profile id, merged over the bundled Factur-X schemas. path is the XSD file. dir is the folder imported schema files are loaded from. A listed id replaces the bundled schema.",
+			required: false,
+		},
+	}}
 />

@@ -24,3 +24,5 @@ jsxs
 Annots
 rcompare
 bento
+EXIF
+JFIF

@@ -1,38 +1,92 @@
 ---
 icon: Opentelemetry
 title: Instrumentation
-description: Your first document
+description: Record OpenTelemetry spans around invoice actions.
 ---
+
+The instrumentation plugin records an [OpenTelemetry](https://opentelemetry.io/docs/languages/js/) span for every plugin action on the instance. Each span is named after the action it wraps. The tracer scope is `node_zugferd`, and its version is the version of node-zugferd.
+
+The plugin talks to `@opentelemetry/api`. Exporting those spans is the application's job. Register a tracer provider before the first invoice call. With no provider, the API discards the spans.
 
 ## Installation
 
 <Steps>
-    <Step>
-        ### Install the plugin
-        
-        ```package-install
-        @node-zugferd/instrumentation @opentelemetry/api
-        ```
-    </Step>
-    <Step>
-        ### Add the plugin to your instance
-        
-        ```ts title="invoicer.ts"
-        import { zugferd } from "node-zugferd";
-        import { en16931 } from "@node-zugferd/en-16931";
-        import { instrumentation } from "@node-zugferd/instrumentation"; // [!code highlight]
-        
-        export const invoicer = zugferd({
-          profiles: [en16931],
-          plugins: [
-            instrumentation(), // [!code highlight]
-          ],
-          // ...
-        });
-        ```
-    </Step>
+	<Step>
+		### Install the plugin
+
+		`@opentelemetry/api` is a peer dependency. The plugin reads the tracer from that package, so the application has to depend on it directly.
+
+		```package-install
+		@node-zugferd/instrumentation @opentelemetry/api
+		```
+
+	</Step>
+	<Step>
+		### Add the plugin to your instance
+
+		Register the plugin on the `zugferd()` instance. `instrumentation()` takes no arguments. It spans every plugin on the instance, so each action those plugins expose is traced.
+
+		```ts title="invoicer.ts"
+		import { zugferd } from "node-zugferd";
+		import { en16931 } from "@node-zugferd/en-16931";
+		import { instrumentation } from "@node-zugferd/instrumentation"; // [!code highlight]
+
+		export const invoicer = zugferd({
+		  profiles: [en16931],
+		  plugins: [
+		    instrumentation(), // [!code highlight]
+		  ],
+		  // ...
+		});
+		```
+
+	</Step>
 </Steps>
+
+## Exporting spans
+
+Start a tracer provider before the invoicer runs. A console exporter prints each span while you check the setup. The [OpenTelemetry Node.js guide](https://opentelemetry.io/docs/languages/js/getting-started/nodejs/) shows how to send the same spans to a collector.
+
+```package-install
+@opentelemetry/sdk-node @opentelemetry/sdk-trace-node
+```
+
+```ts title="instrumentation.ts"
+import { NodeSDK } from "@opentelemetry/sdk-node";
+import { ConsoleSpanExporter } from "@opentelemetry/sdk-trace-node";
+
+const sdk = new NodeSDK({
+  traceExporter: new ConsoleSpanExporter(),
+});
+
+sdk.start();
+```
+
+Load that file before the application. Node's `--import` flag does this:
+
+```bash
+node --import ./instrumentation.ts ./app.ts
+```
+
+<Callout>
+	The tracer is read when an action runs. Start the SDK before that call. A provider registered afterwards leaves the earlier actions unrecorded.
+</Callout>
+
+## Spans
+
+The span name is the path of the action. A nested action uses a dot, so an action called `validate` inside the `xsd` namespace is named `xsd.validate`. Every span sets two attributes:
+
+- `node-zugferd.type` is always `action`.
+- `node-zugferd.context` is `plugin:<id>`, where `<id>` is the id of the plugin that owns the action.
+
+The action is the active span for the length of the call. Other OpenTelemetry instrumentation that runs during it, such as HTTP, is recorded as a child of that action.
+
+A span covers the whole promise. Values an action returns are not spanned on their own. Methods on the invoice that `create` resolves, such as `toXML()` or `toPDF()`, run outside the span.
+
+## Errors
+
+A thrown error or a rejected promise is recorded on the span. The span status is set to error, the span ends, and the same error is thrown again. A successful action ends the span with no status code.
 
 ## Options
 
-<TypeTable type={{}} />
+`instrumentation()` takes no arguments. The tracer name, the version, and the span attributes are fixed.
