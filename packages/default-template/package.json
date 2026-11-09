@@ -11,21 +11,25 @@
     "lint:package": "publint run --strict --pack false",
     "lint:types": "attw --profile esm-only --pack .",
     "typecheck": "tsc --project tsconfig.json",
-    "test": "vitest",
+    "test": "vitest --browser",
     "coverage": "vitest run --coverage --coverage.provider=istanbul"
   },
   "peerDependencies": {
     "@node-zugferd/templates": "workspace:*"
   },
   "dependencies": {
-    "@node-zugferd/core": "workspace:*",
     "@node-zugferd/codelist-untdid-1001": "workspace:*",
+    "@node-zugferd/core": "workspace:*",
     "@node-zugferd/pdf-template": "workspace:*"
   },
   "devDependencies": {
-    "node-zugferd": "workspace:*",
+    "@node-zugferd-test/test-utils": "workspace:*",
+    "@node-zugferd/basic-wl": "workspace:*",
     "@node-zugferd/en-16931": "workspace:*",
+    "@node-zugferd/minimum": "workspace:*",
     "@node-zugferd/templates": "workspace:*",
+    "node-zugferd": "workspace:*",
+    "pdf-parse": "^2.4.5",
     "tsdown": "catalog:"
   },
   "exports": {

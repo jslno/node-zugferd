@@ -14,7 +14,7 @@ node-zugferd is built to follow the published specifications, but it does not gu
 
 Electronic invoicing is no longer optional. Public-sector buyers and a growing share of private ones already require ZUGFeRD, Factur-X, or EN 16931 compliant invoices, and regulation keeps pushing the rest of the market the same way. If your product issues invoices, compliance has become part of the job.
 
-The difficulty is that the standard is not a single format. It is a family of profiles, a large XML schema, a set of business rules, and a PDF/A-3 container that has to carry the XML and metadata correctly. Most teams reach for a Java microservice built on libraries like Mustang or Konik. That means standing up, deploying, and operating another service just to produce a document, then bridging it back into a TypeScript codebase.
+The difficulty is that the standard is not a single format. It is a family of profiles, a large XML schema, a set of business rules, and a PDF/A-3 container that has to carry the XML and metadata correctly. Most teams reach for a Java microservice built on libraries like Mustang. That means standing up, deploying, and operating another service just to produce a document, then bridging it back into a TypeScript codebase.
 
 node-zugferd exists so you don't have to. It treats e-invoicing as one typed workflow rather than a pile of formats: a single API covers the whole document lifecycle, one data model spans the profiles, and the specification details stay out of your application code. You get compliance without needing an in-house e-invoicing specialist, and you stay free to self-host, extend, and deploy wherever your app already runs.
 

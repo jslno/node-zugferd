@@ -71,7 +71,7 @@ echo "Hello, world!"
 // [!code word:Fumadocs]
 <div>Fumadocs</div>
 // diff styles
-console.log('hewwo'); // [!code --]
+console.log('helo'); // [!code --]
 console.log('hello'); // [!code ++]
 // focus
 return new ResizeObserver(() => {}) // [!code focus]

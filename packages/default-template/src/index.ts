@@ -1,15 +1,15 @@
-import untdid1001 from "@node-zugferd/codelist-untdid-1001";
 import type { Awaitable } from "@node-zugferd/core";
 import { ZugferdError } from "@node-zugferd/core/error";
 import type {
 	Node,
 	PageSize,
+	RGB,
 	Theme,
 	ThemeFonts,
 } from "@node-zugferd/pdf-template";
 import {
 	definePdfTemplate,
-	formatCurrency,
+	hline,
 	hstack,
 	PageSizes,
 	renderFlow,
@@ -21,6 +21,13 @@ import {
 } from "@node-zugferd/pdf-template";
 import { createT } from "./i18n";
 import * as defaultTranslations from "./i18n/translations";
+import type {
+	AdjustmentView,
+	LabeledValue,
+	LineView,
+	Section,
+} from "./view-model";
+import { invoiceView } from "./view-model";
 
 type Font = StandardFonts | string | Uint8Array | ArrayBuffer;
 
@@ -31,11 +38,11 @@ const mapAsync = async <T extends Record<PropertyKey, any>, R>(
 	const entries = await Promise.all(
 		Object.entries(obj).map(async ([k, v]) => [
 			k,
-			await fn(v as any, k as any),
+			await fn(v as T[keyof T], k as keyof T),
 		]),
 	);
 
-	return Object.fromEntries(entries) as any;
+	return Object.fromEntries(entries) as { [K in keyof T]: Awaited<R> };
 };
 
 const supportedProfiles = [
@@ -50,14 +57,8 @@ type SupportedProfile = (typeof supportedProfiles)[number];
 const isSupportedProfile = (id: string): id is SupportedProfile =>
 	supportedProfiles.includes(id as SupportedProfile);
 
-const isCreditNote = (invoiceTypeCode: string) => {
-	const entry = untdid1001.find((entry) => entry.value === invoiceTypeCode);
-	if (!entry || !("interpretation" in entry)) return false;
-	return entry.interpretation === "Credit Note";
-};
-
-const filterNodes = (arr: (Node | false | 0 | undefined | null)[]): Node[] =>
-	arr.filter((val): val is Node => !!val);
+const present = (nodes: Array<Node | undefined>): Node[] =>
+	nodes.filter((node): node is Node => !!node);
 
 type InferLocale<T extends Record<string, defaultTranslations.Translations>> =
 	keyof typeof defaultTranslations & keyof T;
@@ -103,767 +104,558 @@ export const defaultTemplate = <
 					`Unsupported profile "${ctx.profile.id}". Supported profiles are: ${supportedProfiles.join(", ")}`,
 				);
 			}
-			const profile = ctx.profile.id;
-			// TODO
-			if (!["basic", "en-16931", "extended", "xrechnung"].includes(profile)) {
-				ctx.context.logger.warn(
-					"Fiscal mandatory information may not be applicable for this profile.",
+
+			const translations = {
+				...defaultTranslations,
+				...cfg.translations,
+			};
+			const locale = (props.locale ?? cfg.defaultLocale) as InferLocale<T>;
+			if (!translations[locale]) {
+				throw new ZugferdError(
+					`Unsupported locale "${String(locale)}". Supported locales are: ${Object.keys(translations).join(", ")}`,
 				);
 			}
-
-			const t = createT({
-				locale: props.locale ?? cfg.defaultLocale,
-				translations: {
-					...defaultTranslations,
-					...cfg.translations,
-				},
-			});
+			const t = createT({ locale, translations });
+			const view = invoiceView(ctx.data, t, locale);
 
 			const theme = (props.theme ?? stripeTheme)(fonts);
-
 			const pageSize = props.pageSize ?? cfg.defaultPageSize;
-			const PAGE_INNER = pageSize.width - theme.spacing.xxl * 2;
+			const pageInner = pageSize.width - theme.spacing.xxl * 2;
+			const column = (pageInner - theme.spacing.lg) / 2;
 
-			const heading = () => {
+			type Align = "left" | "right";
+
+			const prose = (
+				value: string,
+				width?: number,
+				align: Align = "left",
+				color?: RGB,
+			) => {
+				const parts = value.split("\n").filter((line) => line.length > 0);
+				const line = (content: string) =>
+					text(content, {
+						...theme.type.body,
+						wrap: true,
+						...(color ? { color } : {}),
+						...(width ? { width } : {}),
+						...(align === "right" ? { align: "right" as const } : {}),
+					});
+				const [first, ...rest] = parts;
+				if (!first) return text(" ", theme.type.body);
+				if (rest.length === 0) return line(first);
+				return vstack(
+					{
+						gap: 1,
+						...(width ? { width } : {}),
+						align: align === "right" ? "end" : "start",
+					},
+					line(first),
+					...rest.map(line),
+				);
+			};
+
+			const field = (
+				row: LabeledValue,
+				width: number,
+				align: Align = "left",
+			) => {
+				const [head, ...rest] = row.value
+					.split("\n")
+					.filter((line) => line.length > 0);
+				return prose(
+					[`${row.label}: ${head ?? ""}`, ...rest].join("\n"),
+					width,
+					align,
+				);
+			};
+
+			const findRow = (section: Section | undefined, label: string) =>
+				section?.rows.find((row) => row.label === label);
+
+			const omitRows = (
+				section: Section | undefined,
+				labels: string[],
+			): Section | undefined => {
+				if (!section) return undefined;
+				const hidden = new Set(labels);
+				const rows = section.rows.filter((row) => !hidden.has(row.label));
+				return rows.length > 0 ? { ...section, rows } : undefined;
+			};
+
+			const sectionBlock = (
+				section: Section,
+				width: number,
+				align: Align = "left",
+			) =>
+				vstack(
+					{
+						width,
+						gap: 2,
+						align: align === "right" ? "end" : "start",
+					},
+					text(section.title, {
+						...theme.type.body,
+						font: theme.bold,
+						width,
+						wrap: true,
+						...(align === "right" ? { align: "right" as const } : {}),
+					}),
+					...section.rows.map((row) => field(row, width, align)),
+				);
+
+			const plainSellerLabels = [t.email, t.phone, t.contactEmail];
+			const letterheadLabels = [
+				t.registeredName,
+				t.name,
+				t.tradeName,
+				t.address,
+				t.contactName,
+				t.department,
+				...plainSellerLabels,
+			];
+
+			const number = findRow(view.document, t.invoiceNumber);
+			const issueDate = findRow(view.document, t.issueDate);
+			const documentMeta = view.document.rows.filter(
+				(row) => row !== number && row !== issueDate,
+			);
+			const periodValue = [
+				findRow(view.invoicing, t.invoicingPeriodStart)?.value,
+				findRow(view.invoicing, t.invoicingPeriodEnd)?.value,
+			]
+				.filter((value): value is string => !!value)
+				.join(" - ");
+			const dates = [
+				issueDate,
+				view.dueDate,
+				periodValue
+					? { label: t.servicePeriod, value: periodValue }
+					: undefined,
+				findRow(view.delivery, t.deliveryDate),
+			].filter((row): row is LabeledValue => !!row);
+
+			const sellerName =
+				findRow(view.seller, t.registeredName) ?? findRow(view.seller, t.name);
+			const sellerTrade = findRow(view.seller, t.tradeName);
+			const sellerAddress = findRow(view.seller, t.address);
+			const sellerPlain = plainSellerLabels
+				.map((label) => findRow(view.seller, label))
+				.filter((row): row is LabeledValue => !!row);
+			const sellerContact = [t.contactName, t.department]
+				.map((label) => findRow(view.seller, label))
+				.filter((row): row is LabeledValue => !!row);
+			const sellerIds = omitRows(view.seller, letterheadLabels);
+
+			const buyerName =
+				findRow(view.buyer, t.registeredName) ?? findRow(view.buyer, t.name);
+			const buyerTrade = findRow(view.buyer, t.tradeName);
+			const buyerAddress = findRow(view.buyer, t.address);
+			const buyerRows = [
+				...(view.buyer?.rows.filter(
+					(row) =>
+						row !== buyerName && row !== buyerTrade && row !== buyerAddress,
+				) ?? []),
+				...(view.buyerIdentifiers?.rows ?? []),
+			];
+
+			const sellerLetterhead = present([
+				sellerName
+					? text(sellerName.value, {
+							...theme.type.h3,
+							font: theme.bold,
+							width: column,
+							wrap: true,
+							align: "right",
+						})
+					: undefined,
+				sellerTrade ? prose(sellerTrade.value, column, "right") : undefined,
+				sellerAddress
+					? prose(sellerAddress.value, column, "right", theme.colors.muted)
+					: undefined,
+				...sellerPlain.map((row) =>
+					prose(row.value, column, "right", theme.colors.muted),
+				),
+				...sellerContact.map((row) => field(row, column, "right")),
+			]);
+
+			const buyerBlock = present([
+				buyerName
+					? text(buyerName.value, {
+							...theme.type.body,
+							font: theme.bold,
+							width: column,
+							wrap: true,
+						})
+					: undefined,
+				buyerTrade ? prose(buyerTrade.value, column) : undefined,
+				buyerAddress ? prose(buyerAddress.value, column) : undefined,
+				...buyerRows.map((row) => field(row, column)),
+			]);
+
+			const dateWidth =
+				dates.length > 0
+					? Math.min(
+							column,
+							(pageInner - theme.spacing.lg * (dates.length - 1)) /
+								dates.length,
+						)
+					: column;
+
+			const adjustmentRow = (kind: string, item: AdjustmentView): LineView => ({
+				articleId: "",
+				description: item.reason ? `${kind}: ${item.reason}` : kind,
+				quantity: item.percent,
+				unitPrice: item.basis,
+				totalNet: item.amount,
+				vat: item.vat,
+			});
+			const itemRows = [
+				...view.lines,
+				...view.allowances.map((item) =>
+					adjustmentRow(view.allowanceTitle, item),
+				),
+				...view.charges.map((item) => adjustmentRow(view.chargeTitle, item)),
+			];
+
+			const rightCell = (value: string) => ({
+				content: text(value || " ", {
+					...theme.type.body,
+					wrap: true,
+				}),
+				align: "right" as const,
+			});
+			const descriptionCell = (primary: string, secondary: string) => {
+				const details = secondary
+					.split("\n")
+					.filter((line) => line.length > 0)
+					.map((line) =>
+						text(line, {
+							...theme.type.caption,
+							color: theme.colors.muted,
+							wrap: true,
+						}),
+					);
+				return vstack(
+					{ gap: 1 },
+					...present([primary ? prose(primary) : undefined, ...details]),
+				);
+			};
+
+			const summaryWidth = Math.round(pageInner * 0.46);
+			const vatLines = view.vatRows.filter(
+				(row) =>
+					row.amount ||
+					row.base ||
+					row.rate ||
+					row.category ||
+					row.exemptionReason ||
+					row.exemptionReasonCode ||
+					row.vatPoint,
+			);
+			const skipTotalVat = vatLines.length === 1 && !!vatLines[0]?.amount;
+			const summaryRows = [
+				...view.totals
+					.filter((row) => !row.emphasize && row.label === t.totalNet)
+					.map((row) => ({ ...row, detail: "" })),
+				...vatLines.map((row) => ({
+					label: [
+						t.vatAmount,
+						[row.rate, row.category].filter(Boolean).join(" "),
+					]
+						.filter(Boolean)
+						.join(" "),
+					value: row.amount || row.base,
+					detail: [
+						row.exemptionReason,
+						row.exemptionReasonCode,
+						row.base ? `${t.vatBase}: ${row.base}` : "",
+						row.vatPoint ? `${t.vatPointDate}: ${row.vatPoint}` : "",
+					]
+						.filter(Boolean)
+						.join("\n"),
+					emphasize: false,
+				})),
+				...view.totals
+					.filter(
+						(row) =>
+							!row.emphasize &&
+							row.label !== t.totalNet &&
+							!(skipTotalVat && row.label === t.totalVat),
+					)
+					.map((row) => ({ ...row, detail: "" })),
+			];
+			const amountDue = view.totals.find((row) => row.emphasize);
+
+			const summaryLine = (
+				label: string,
+				value: string,
+				detail: string,
+				emphasize = false,
+			) =>
+				hstack(
+					{
+						width: summaryWidth,
+						justify: "between",
+						gap: theme.spacing.md,
+						align: "start",
+					},
+					vstack(
+						{ gap: 1, align: "start" },
+						text(label, {
+							...(emphasize ? theme.type.h3 : theme.type.body),
+							font: emphasize ? theme.bold : theme.type.body.font,
+						}),
+						...detail
+							.split("\n")
+							.filter((line) => line.length > 0)
+							.map((line) =>
+								text(line, {
+									...theme.type.caption,
+									color: theme.colors.muted,
+								}),
+							),
+					),
+					text(value, {
+						...(emphasize ? theme.type.h3 : theme.type.body),
+						font: emphasize ? theme.bold : theme.type.body.font,
+					}),
+				);
+
+			const summaryBlock = () => {
+				if (summaryRows.length === 0 && !amountDue) return undefined;
+				return vstack(
+					{ width: pageInner, gap: theme.spacing.xs, align: "end" },
+					...summaryRows.map((row) =>
+						summaryLine(row.label, row.value, row.detail),
+					),
+					...(amountDue
+						? [
+								hline({
+									color: theme.colors.ink,
+									thickness: 0.8,
+									width: summaryWidth,
+								}),
+								summaryLine(amountDue.label, amountDue.value, "", true),
+							]
+						: []),
+				);
+			};
+
+			const cardInner = pageInner - theme.spacing.lg * 2;
+			const termsCard = () => {
+				const notes = view.notes?.rows ?? [];
+				if (!view.paymentTerms && notes.length === 0) return undefined;
+				return vstack(
+					{
+						...theme.card,
+						width: pageInner,
+						gap: theme.spacing.xs,
+					},
+					...present([
+						view.paymentTerms
+							? text(view.paymentTerms.label, {
+									...theme.type.body,
+									font: theme.bold,
+								})
+							: undefined,
+						view.paymentTerms
+							? prose(view.paymentTerms.value, cardInner)
+							: undefined,
+						view.notes
+							? text(view.notes.title, {
+									...theme.type.body,
+									font: theme.bold,
+								})
+							: undefined,
+						...notes.map((row) => prose(row.value, cardInner)),
+					]),
+				);
+			};
+
+			const paymentColumn = present([
+				view.payee ? sectionBlock(view.payee, column) : undefined,
+				view.payment ? sectionBlock(view.payment, column) : undefined,
+			]);
+			const footer = () => {
+				const left =
+					paymentColumn.length > 0
+						? vstack({ width: column, gap: theme.spacing.md }, ...paymentColumn)
+						: undefined;
+				const right = sellerIds
+					? vstack(
+							{ width: column, gap: 2, align: "end" },
+							...sellerIds.rows.map((row) => field(row, column, "right")),
+						)
+					: undefined;
+				if (!left && !right) return undefined;
 				return hstack(
 					{
-						gap: theme.spacing.lg,
+						width: pageInner,
+						align: "start",
+						justify: left && right ? "between" : right ? "end" : "start",
 					},
-					vstack({
-						padding: theme.spacing.md,
-						width: (PAGE_INNER - theme.spacing.lg) / 2,
-						gap: theme.spacing.md,
-					}),
-					vstack(
-						{
-							padding: theme.spacing.md,
-							width: (PAGE_INNER - theme.spacing.lg) / 2,
-							gap: theme.spacing.md,
-							alignSelf: "end",
-						},
-						text(
-							`${
-								isCreditNote(ctx.data.exchangedDocument.invoiceTypeCode.value)
-									? t.creditNote
-									: t.invoice
-							} #${ctx.data.exchangedDocument.invoiceNumber.identifier}`,
-							{
-								...theme.type.h1,
-								alignSelf: "end",
-							},
-						),
-						text(
-							ctx.data.exchangedDocument.invoiceIssueDate.date.toLocaleDateString(
-								props.locale,
-								{
-									year: "numeric",
-									month: "2-digit",
-									day: "2-digit",
-								},
-							),
-							{
-								...theme.type.body,
-								color: theme.colors.muted,
-								alignSelf: "end",
-							},
-						),
-					),
+					...present([left, right]),
 				);
 			};
 
-			const vendorDetails = () => {
-				const seller = () => {
-					const nodes: Node[] = [];
-					const seller = ctx.data.transaction.contract.seller;
-
-					if (seller.name) {
-						nodes.push(
-							text(seller.name, {
-								...theme.type.body,
-							}),
-						);
-					}
-					if (seller.organization?.tradingName) {
-						nodes.push(
-							text(seller.organization.tradingName, {
-								...theme.type.body,
-							}),
-						);
-					}
-					if (seller.postalAddress.line1) {
-						nodes.push(
-							text(seller.postalAddress.line1, {
-								...theme.type.body,
-							}),
-						);
-					}
-					if (seller.postalAddress.line2) {
-						nodes.push(
-							text(seller.postalAddress.line2, {
-								...theme.type.body,
-							}),
-						);
-					}
-					if (seller.postalAddress.line3) {
-						nodes.push(
-							text(seller.postalAddress.line3, {
-								...theme.type.body,
-							}),
-						);
-					}
-					if (seller.postalAddress.postCode || seller.postalAddress.city) {
-						nodes.push(
-							text(
-								filterNodes([
-									seller.postalAddress.postCode,
-									seller.postalAddress.city,
-								]).join(" "),
-								{
-									...theme.type.body,
-								},
-							),
-						);
-					}
-					if (
-						seller.postalAddress.countrySubdivision ||
-						seller.postalAddress.countryCode
-					) {
-						nodes.push(
-							text(
-								filterNodes([
-									seller.postalAddress.countrySubdivision,
-									seller.postalAddress.countryCode.value,
-								]).join(", "),
-								{
-									...theme.type.body,
-								},
-							),
-						);
-					}
-					if (
-						seller.electronicAddress?.schemeId === "EM" &&
-						seller.electronicAddress.value
-					) {
-						nodes.push(
-							text(seller.electronicAddress.value, {
-								...theme.type.body,
-							}),
-						);
-					}
-
-					return vstack({}, ...nodes);
-				};
-
-				const sellerContact = () => {
-					const nodes: Node[] = [];
-					const contact = ctx.data.transaction.contract.seller.contact;
-					if (!contact || Object.keys(contact).length === 0) return;
-
-					if (contact.personName) {
-						nodes.push(
-							text(contact.personName, {
-								...theme.type.body,
-							}),
-						);
-					}
-					if (contact.phoneNumber) {
-						nodes.push(
-							text(contact.phoneNumber, {
-								...theme.type.body,
-							}),
-						);
-					}
-					if (contact.faxNumber) {
-						nodes.push(
-							text(contact.faxNumber, {
-								...theme.type.body,
-							}),
-						);
-					}
-					if (contact.emailAddress) {
-						nodes.push(
-							text(contact.emailAddress, {
-								...theme.type.body,
-							}),
-						);
-					}
-
-					return vstack({}, ...nodes);
-				};
-
-				return vstack(
-					{
-						padding: theme.spacing.md,
-						width: (PAGE_INNER - theme.spacing.lg) / 2,
-						gap: theme.spacing.md,
-					},
-					...filterNodes([seller(), sellerContact()]),
-				);
-			};
-
-			const clientDetails = () => {
-				const buyer = () => {
-					const nodes: Node[] = [];
-					const buyer = ctx.data.transaction.contract.buyer;
-
-					if (buyer.name) {
-						nodes.push(
-							text(buyer.name, {
-								...theme.type.body,
-								alignSelf: "end",
-							}),
-						);
-					}
-					if (buyer.organization?.tradingName) {
-						nodes.push(
-							text(buyer.organization?.tradingName, {
-								...theme.type.body,
-								alignSelf: "end",
-							}),
-						);
-					}
-					if (buyer.postalAddress.line1) {
-						nodes.push(
-							text(buyer.postalAddress.line1, {
-								...theme.type.body,
-								alignSelf: "end",
-							}),
-						);
-					}
-					if (buyer.postalAddress.line2) {
-						nodes.push(
-							text(buyer.postalAddress.line2, {
-								...theme.type.body,
-								alignSelf: "end",
-							}),
-						);
-					}
-					if (buyer.postalAddress.line3) {
-						nodes.push(
-							text(buyer.postalAddress.line3, {
-								...theme.type.body,
-								alignSelf: "end",
-							}),
-						);
-					}
-					if (buyer.postalAddress.postCode || buyer.postalAddress.city) {
-						nodes.push(
-							text(
-								filterNodes([
-									buyer.postalAddress.postCode,
-									buyer.postalAddress.city,
-								]).join(" "),
-								{
-									...theme.type.body,
-									alignSelf: "end",
-								},
-							),
-						);
-					}
-					if (
-						buyer.postalAddress.countrySubdivision ||
-						buyer.postalAddress.countryCode
-					) {
-						nodes.push(
-							text(
-								filterNodes([
-									buyer.postalAddress.countrySubdivision,
-									buyer.postalAddress.countryCode.value,
-								]).join(", "),
-								{
-									...theme.type.body,
-									alignSelf: "end",
-								},
-							),
-						);
-					}
-					if (
-						buyer.electronicAddress?.schemeId === "EM" &&
-						buyer.electronicAddress.value
-					) {
-						nodes.push(
-							text(buyer.electronicAddress.value, {
-								...theme.type.body,
-								alignSelf: "end",
-							}),
-						);
-					}
-
-					return vstack(
-						{
-							alignSelf: "end",
-						},
-						...nodes,
-					);
-				};
-
-				const buyerContact = () => {
-					const nodes: Node[] = [];
-					const contact = ctx.data.transaction.contract.buyer.contact;
-					if (!contact || Object.keys(contact).length === 0) return;
-
-					if (contact.personName) {
-						nodes.push(
-							text(contact.personName, {
-								...theme.type.body,
-								alignSelf: "end",
-							}),
-						);
-					}
-					if (contact.phoneNumber) {
-						nodes.push(
-							text(contact.phoneNumber, {
-								...theme.type.body,
-								alignSelf: "end",
-							}),
-						);
-					}
-					if (contact.faxNumber) {
-						nodes.push(
-							text(contact.faxNumber, {
-								...theme.type.body,
-								alignSelf: "end",
-							}),
-						);
-					}
-					if (contact.emailAddress) {
-						nodes.push(
-							text(contact.emailAddress, {
-								...theme.type.body,
-								alignSelf: "end",
-							}),
-						);
-					}
-
-					return vstack(
-						{
-							alignSelf: "end",
-						},
-						...nodes,
-					);
-				};
-
-				return vstack(
-					{
-						padding: theme.spacing.md,
-						width: (PAGE_INNER - theme.spacing.lg) / 2,
-						gap: theme.spacing.md,
-					},
-					...filterNodes([buyer(), buyerContact()]),
-				);
-			};
-
-			const itemsTable = () => {
-				const lines = ctx.data.transaction.line ?? [];
-				return vstack(
-					{
-						gap: theme.spacing.md,
-					},
-					table({
-						width: PAGE_INNER,
-						columns: [
-							{ width: "1fr" },
-							{ width: "2fr" },
-							{ width: "1fr" },
-							{ width: "1fr", align: "right" },
-							{ width: "1fr", align: "right" },
-							{ width: "1fr", align: "right" },
-						],
-						header: [
-							text("#", { ...theme.type.label }),
-							text("Description", { ...theme.type.label }),
-							text("Quantity", { ...theme.type.label }),
-							text("Unit Price", { ...theme.type.label, alignSelf: "end" }),
-							text("Total Net", { ...theme.type.label, alignSelf: "end" }),
-							text("VAT", { ...theme.type.label, alignSelf: "end" }),
-						],
-						rows: lines.map((line: any, i: number) => [
-							text(line.position.lineId.value ?? `${i + 1}`, {
-								...theme.type.body,
-							}),
-							text(line.item.name ?? line.item.description ?? "", {
-								...theme.type.body,
-								maxLines: 1,
-							}),
-							text(
-								[
-									`${line.delivery.billedQuantity.value ?? 1}`,
-									line.delivery.billedQuantity.unitCode,
-								]
-									.filter(Boolean)
-									.join(" "),
-								{
-									...theme.type.body,
-								},
-							),
-							text(
-								formatCurrency(line.priceDetails.netPrice.chargeAmount ?? 0, {
-									currency:
-										ctx.data.transaction.debit.invoiceCurrencyCode.value,
-									locale: props.locale ?? cfg.defaultLocale,
-								}),
-								{
-									...theme.type.body,
-									alignSelf: "end",
-								},
-							),
-							text(
-								formatCurrency(
-									line.billing.itemTotals.lineTotalAmount.value ?? 0,
-									{
-										currency:
-											ctx.data.transaction.debit.invoiceCurrencyCode.value,
-										locale: props.locale ?? cfg.defaultLocale,
-									},
-								),
-								{
-									...theme.type.body,
-									alignSelf: "end",
-								},
-							),
-							text(line.billing.vatBreakdown?.categoryCode?.value ?? "", {
-								...theme.type.body,
-								alignSelf: "end",
-							}),
-						]),
-						rowDivider: theme.hr,
-						headerDivider: { color: theme.colors.ink, thickness: 0.8 },
-					}),
-					table({
-						width: PAGE_INNER,
-						columns: [
-							{ width: "1fr" },
-							{ width: "2fr" },
-							{ width: "1fr" },
-							{ width: "1fr", align: "right" },
-							{ width: "1fr", align: "right" },
-							{ width: "1fr", align: "right" },
-						],
-						rows: [
-							...(ctx.data.transaction.debit.allowances ?? []).map(
-								(allowance: any) => [
-									text("", { ...theme.type.body }),
-									text(allowance.reason ?? "", {
-										...theme.type.body,
-										maxLines: 1,
-									}),
-									text(
-										typeof allowance.calculationPercent === "number"
-											? `${allowance.calculationPercent}%`
-											: "",
-										{ ...theme.type.body },
-									),
-									text(
-										formatCurrency(
-											allowance.basisAmount?.value?.toString() ?? "",
-											{
-												currency:
-													ctx.data.transaction.debit.invoiceCurrencyCode.value,
-												locale: props.locale ?? cfg.defaultLocale,
-											},
-										),
-										{
-											...theme.type.body,
-											alignSelf: "end",
-										},
-									),
-									text(
-										formatCurrency(
-											-Math.abs(allowance.actualAmount.value ?? 0),
-											{
-												currency:
-													ctx.data.transaction.debit.invoiceCurrencyCode.value,
-												locale: props.locale ?? cfg.defaultLocale,
-											},
-										),
-										{ ...theme.type.body, alignSelf: "end" },
-									),
-									text(allowance.categoryTradeTax?.categoryCode?.value ?? "", {
-										...theme.type.body,
-										alignSelf: "end",
-									}),
-								],
-							),
-							...(ctx.data.transaction.debit.charges ?? []).map(
-								(charge: any) => [
-									text("", { ...theme.type.body }),
-									text(charge.reason ?? "", {
-										...theme.type.body,
-										maxLines: 1,
-									}),
-									text(
-										typeof charge.calculationPercent === "number"
-											? `${charge.calculationPercent}%`
-											: "",
-										{ ...theme.type.body },
-									),
-									text(
-										charge.basisAmount
-											? formatCurrency(charge.basisAmount.value, {
-													currency:
-														ctx.data.transaction.debit.invoiceCurrencyCode
-															.value,
-													locale: props.locale ?? cfg.defaultLocale,
-												})
-											: "",
-										{
-											...theme.type.body,
-											alignSelf: "end",
-										},
-									),
-									text(
-										formatCurrency(charge.actualAmount.value ?? 0, {
-											currency:
-												ctx.data.transaction.debit.invoiceCurrencyCode.value,
-											locale: props.locale ?? cfg.defaultLocale,
-										}),
-										{ ...theme.type.body, alignSelf: "end" },
-									),
-									text(charge.categoryTradeTax?.categoryCode?.value ?? "", {
-										...theme.type.body,
-										alignSelf: "end",
-									}),
-								],
-							),
-						],
-						borderSides: {
-							top: {
-								color: theme.hr.color,
-								width: theme.hr.thickness,
-							},
-						},
-						rowDivider: theme.hr,
-					}),
-					table({
-						width: PAGE_INNER,
-						header: [
-							text("VAT breakdown", { ...theme.type.label }),
-							text("VAT code", { ...theme.type.label, alignSelf: "end" }),
-							text("VAT rate", { ...theme.type.label, alignSelf: "end" }),
-							text("VAT base", { ...theme.type.label, alignSelf: "end" }),
-							text("VAT amount", { ...theme.type.label, alignSelf: "end" }),
-						],
-						columns: [
-							{ width: "2fr" },
-							{ width: "1fr", align: "right" },
-							{ width: "1fr", align: "right" },
-							{ width: "1fr", align: "right" },
-							{ width: "1fr", align: "right" },
-						],
-						rows: ctx.data.transaction.debit.vatBreakdown.map(
-							(vatBreakdown: any) => [
-								text(vatBreakdown.exemptionReason ?? "", {
-									...theme.type.body,
-									maxLines: 1,
-								}),
-								text(vatBreakdown.categoryCode.value, {
-									...theme.type.body,
-									alignSelf: "end",
-								}),
-								text(
-									typeof vatBreakdown.rateApplicablePercent === "number"
-										? `${vatBreakdown.rateApplicablePercent}%`
-										: "",
-									{
-										...theme.type.body,
-										alignSelf: "end",
-									},
-								),
-								text(
-									formatCurrency(vatBreakdown.basisAmount.value, {
-										currency:
-											ctx.data.transaction.debit.invoiceCurrencyCode.value,
-										locale: props.locale ?? cfg.defaultLocale,
-									}),
-									{
-										...theme.type.body,
-										alignSelf: "end",
-									},
-								),
-								text(
-									formatCurrency(vatBreakdown.calculatedAmount.value, {
-										currency:
-											ctx.data.transaction.debit.invoiceCurrencyCode.value,
-										locale: props.locale ?? cfg.defaultLocale,
-									}),
-									{
-										...theme.type.body,
-										alignSelf: "end",
-									},
-								),
-							],
+			const regulatory = view.regulatoryNotes
+				? vstack(
+						{ width: pageInner, gap: 2 },
+						text(view.regulatoryNotes.title, {
+							...theme.type.caption,
+							font: theme.bold,
+							color: theme.colors.muted,
+						}),
+						...view.regulatoryNotes.rows.map((row) =>
+							prose(row.value, pageInner, "left", theme.colors.muted),
 						),
-						rowDivider: theme.hr,
-						headerDivider: { color: theme.colors.ink, thickness: 0.8 },
-					}),
-					hstack(
-						{ gap: theme.spacing.lg, align: "stretch" },
-						vstack(
-							{
-								width: (PAGE_INNER - theme.spacing.lg) / 2,
-								justify: "between",
-							},
-							vstack(
-								{},
-								text("BT-8", { ...theme.type.body }),
-								text(
-									ctx.data.transaction.debit.paymentTerms?.description ?? "",
-									{ ...theme.type.body },
-								),
-							),
-							text(
-								ctx.data.transaction.debit.paymentTerms?.dueDate
-									? `Due date: ${ctx.data.transaction.debit.paymentTerms.dueDate.date.toLocaleDateString(
-											props.locale ?? cfg.defaultLocale,
-											{
-												year: "numeric",
-												month: "2-digit",
-												day: "2-digit",
-											},
-										)}`
-									: "",
-								{ ...theme.type.body },
-							),
-						),
-						vstack(
-							{
-								width: (PAGE_INNER - theme.spacing.lg) / 2,
-							},
-							table({
-								width: (PAGE_INNER - theme.spacing.lg) / 2,
-								header: [
-									text("Total Net", { ...theme.type.label, alignSelf: "end" }),
-									text("Total VAT", { ...theme.type.label, alignSelf: "end" }),
-									text("Total Gross", {
-										...theme.type.label,
-										alignSelf: "end",
-									}),
-								],
-								columns: [
-									{ width: "1fr", align: "right" },
-									{ width: "1fr", align: "right" },
-									{ width: "1fr", align: "right" },
-								],
-								rows: [
-									[
-										text(
-											formatCurrency(
-												ctx.data.transaction.debit.documentTotals
-													.taxBasisTotalAmount.value,
-												{
-													currency:
-														ctx.data.transaction.debit.invoiceCurrencyCode
-															.value,
-													locale: props.locale ?? cfg.defaultLocale,
-												},
-											),
-											{ ...theme.type.body, alignSelf: "end" },
-										),
-										text(
-											formatCurrency(
-												ctx.data.transaction.debit.documentTotals.taxTotalAmount
-													.value,
-												{
-													currency:
-														ctx.data.transaction.debit.documentTotals
-															.taxTotalAmount.currency,
-													locale: props.locale ?? cfg.defaultLocale,
-												},
-											),
-											{ ...theme.type.body, alignSelf: "end" },
-										),
-										text(
-											formatCurrency(
-												ctx.data.transaction.debit.documentTotals
-													.grandTotalAmount.value,
-												{
-													currency:
-														ctx.data.transaction.debit.invoiceCurrencyCode
-															.value,
-													locale: props.locale ?? cfg.defaultLocale,
-												},
-											),
-											{ ...theme.type.body, alignSelf: "end" },
-										),
-									],
-								],
-								rowDivider: theme.hr,
-								headerDivider: { color: theme.colors.ink, thickness: 0.8 },
-							}),
-							table({
-								width: (PAGE_INNER - theme.spacing.lg) / 2,
-								columns: [
-									{
-										width: "2fr",
-									},
-									{
-										width: "1fr",
-										align: "right",
-									},
-								],
-								rows: [
-									[
-										text("Prepaid Amount", { ...theme.type.label }),
-										text(
-											formatCurrency(
-												ctx.data.transaction.debit.documentTotals.prepaidAmount
-													?.value ?? 0,
-												{
-													currency:
-														ctx.data.transaction.debit.invoiceCurrencyCode
-															.value,
-													locale: props.locale ?? cfg.defaultLocale,
-												},
-											),
-											{ ...theme.type.body, alignSelf: "end" },
-										),
-									],
-									[
-										text("Due for payment", { ...theme.type.label }),
-										text(
-											formatCurrency(
-												ctx.data.transaction.debit.documentTotals
-													.duePayableAmount.value,
-												{
-													currency:
-														ctx.data.transaction.debit.invoiceCurrencyCode
-															.value,
-													locale: props.locale ?? cfg.defaultLocale,
-												},
-											),
-											{
-												...theme.type.body,
-												font: theme.bold,
-												alignSelf: "end",
-											},
-										),
-									],
-								],
-								borderSides: {
-									top: {
-										color: theme.hr.color,
-										width: theme.hr.thickness,
-									},
-								},
-								rowDivider: theme.hr,
-							}),
-						),
-					),
-				);
-			};
+					)
+				: undefined;
+
+			const invoicingRest = omitRows(view.invoicing, [
+				t.invoicingPeriodStart,
+				t.invoicingPeriodEnd,
+			]);
+			const deliveryRest = omitRows(view.delivery, [t.deliveryDate]);
 
 			await renderFlow(
 				pdf,
 				[
-					heading(),
-					hstack(
-						{
-							gap: theme.spacing.lg,
-							wrap: true,
-						},
-						vendorDetails(),
-						clientDetails(),
-						itemsTable(),
+					vstack(
+						{ gap: theme.spacing.xl, width: pageInner },
+						...present([
+							hstack(
+								{
+									width: pageInner,
+									justify: "between",
+									align: "start",
+									gap: theme.spacing.lg,
+								},
+								...present([
+									vstack(
+										{ width: column, gap: theme.spacing.xs },
+										text(view.document.title, {
+											...theme.type.h1,
+											width: column,
+											wrap: true,
+										}),
+										...(number
+											? [
+													text(number.value, {
+														...theme.type.body,
+														color: theme.colors.muted,
+														width: column,
+														wrap: true,
+													}),
+												]
+											: []),
+										...documentMeta.map((row) => field(row, column)),
+									),
+									sellerLetterhead.length > 0
+										? vstack(
+												{ width: column, gap: 2, align: "end" },
+												...sellerLetterhead,
+											)
+										: undefined,
+								]),
+							),
+							buyerBlock.length > 0
+								? vstack({ width: column, gap: 2 }, ...buyerBlock)
+								: undefined,
+							dates.length > 0
+								? hstack(
+										{
+											width: pageInner,
+											gap: theme.spacing.lg,
+											align: "start",
+										},
+										...dates.map((row) =>
+											vstack(
+												{ width: dateWidth, gap: 2 },
+												text(row.label, {
+													...theme.type.body,
+													font: theme.bold,
+													width: dateWidth,
+													wrap: true,
+												}),
+												prose(row.value, dateWidth),
+											),
+										),
+									)
+								: undefined,
+							view.references
+								? sectionBlock(view.references, pageInner)
+								: undefined,
+							invoicingRest
+								? sectionBlock(invoicingRest, pageInner)
+								: undefined,
+							deliveryRest ? sectionBlock(deliveryRest, pageInner) : undefined,
+							view.taxRepresentative
+								? sectionBlock(view.taxRepresentative, pageInner)
+								: undefined,
+							itemRows.length > 0
+								? table({
+										width: pageInner,
+										columns: [
+											{ width: "2.4fr" },
+											{ width: "0.8fr", align: "right" },
+											{ width: "1.1fr", align: "right" },
+											{ width: "0.7fr", align: "right" },
+											{ width: "1.1fr", align: "right" },
+										],
+										header: [
+											text(view.lineHeaders.description, {
+												...theme.type.label,
+												font: theme.bold,
+											}),
+											{
+												content: text(view.lineHeaders.quantity, {
+													...theme.type.label,
+													font: theme.bold,
+												}),
+												align: "right" as const,
+											},
+											{
+												content: text(view.lineHeaders.unitPrice, {
+													...theme.type.label,
+													font: theme.bold,
+												}),
+												align: "right" as const,
+											},
+											{
+												content: text(view.lineHeaders.vat, {
+													...theme.type.label,
+													font: theme.bold,
+												}),
+												align: "right" as const,
+											},
+											{
+												content: text(view.lineHeaders.totalNet, {
+													...theme.type.label,
+													font: theme.bold,
+												}),
+												align: "right" as const,
+											},
+										],
+										rows: itemRows.map((line) => [
+											descriptionCell(line.description, line.articleId),
+											rightCell(line.quantity),
+											rightCell(line.unitPrice),
+											rightCell(line.vat),
+											rightCell(line.totalNet),
+										]),
+										rowDivider: theme.hr,
+										headerDivider: {
+											color: theme.colors.ink,
+											thickness: 0.8,
+										},
+									})
+								: undefined,
+							summaryBlock(),
+							termsCard(),
+							footer(),
+							regulatory,
+						]),
 					),
 				],
 				{

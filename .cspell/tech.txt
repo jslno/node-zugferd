@@ -26,3 +26,5 @@ rcompare
 bento
 EXIF
 JFIF
+hline
+Flate

@@ -10,6 +10,11 @@
 			"addWords": true
 		},
 		{
+			"name": "misspelled",
+			"path": "./.cspell/misspelled.txt",
+			"addWords": true
+		},
+		{
 			"name": "names",
 			"path": "./.cspell/names.txt",
 			"addWords": true
@@ -37,6 +42,7 @@
 	],
 	"dictionaries": [
 		"alt-language",
+		"misspelled",
 		"names",
 		"standards",
 		"tech",
