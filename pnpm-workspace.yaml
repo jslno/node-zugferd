@@ -23,6 +23,10 @@ catalog:
   pdf-lib: ^1.17.1
 
 catalogs:
+  biome:
+    "@biomejs/biome": ^2.6.5
+    "@biomejs/js-api": ^6.1.0
+    "@biomejs/wasm-nodejs": ^2.6.5
   vitest:
     "@vitest/coverage-istanbul": ^5.1.0
     "@vitest/ui": ^5.1.0

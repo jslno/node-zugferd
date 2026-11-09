@@ -163,6 +163,16 @@ settings:
   excludeLinksFromLockfile: false
 
 catalogs:
+  biome:
+    '@biomejs/biome':
+      specifier: ^2.6.5
+      version: 2.6.5
+    '@biomejs/js-api':
+      specifier: ^6.1.0
+      version: 6.1.0
+    '@biomejs/wasm-nodejs':
+      specifier: ^2.6.5
+      version: 2.6.5
   default:
     pdf-lib:
       specifier: ^1.17.1
@@ -204,13 +214,13 @@ importers:
         specifier: ^0.18.5
         version: 0.18.5
       '@biomejs/biome':
-        specifier: ^2.6.5
+        specifier: catalog:biome
         version: 2.6.5
       '@biomejs/js-api':
-        specifier: ^6.1.0
-        version: 6.1.0(@biomejs/wasm-nodejs@2.6.5)
+        specifier: catalog:biome
+        version: 6.1.0(@biomejs/wasm-bundler@2.6.6)(@biomejs/wasm-nodejs@2.6.5)
       '@biomejs/wasm-nodejs':
-        specifier: ^2.6.5
+        specifier: catalog:biome
         version: 2.6.5
       '@changesets/changelog-github':
         specifier: ^1.0.1
@@ -813,6 +823,12 @@ importers:
       '@babel/preset-typescript':
         specifier: ^8.0.7
         version: 8.0.7(@babel/core@8.1.0)
+      '@biomejs/js-api':
+        specifier: catalog:biome
+        version: 6.1.0(@biomejs/wasm-bundler@2.6.6)(@biomejs/wasm-nodejs@2.6.5)
+      '@biomejs/wasm-nodejs':
+        specifier: catalog:biome
+        version: 2.6.5
       '@clack/prompts':
         specifier: ^1.8.1
         version: 1.8.1
@@ -2537,6 +2553,9 @@ packages:
         optional: true
       '@biomejs/wasm-web':
         optional: true
+
+  '@biomejs/wasm-bundler@2.6.6':
+    resolution: {integrity: sha512-vSKXL5ybZ+1hEvo/6YqSIJKUlULVA/KX4h41JW/fep4jZr9semPiUnaM2+8B3/4zLP1i5f3Wb9zihlVjnijHBw==}
 
   '@biomejs/wasm-nodejs@2.6.5':
     resolution: {integrity: sha512-leb8CQFzNxxNnr0aBTuCDjxj+jPv4I3viPypVdA99OkP9ljrBUG+GczOZBYVukynLnGULm64+1lf5BdS+PFzUQ==}
@@ -8293,9 +8312,13 @@ snapshots:
   '@biomejs/cli-win32-x64@2.6.5':
     optional: true
 
-  '@biomejs/js-api@6.1.0(@biomejs/wasm-nodejs@2.6.5)':
+  '@biomejs/js-api@6.1.0(@biomejs/wasm-bundler@2.6.6)(@biomejs/wasm-nodejs@2.6.5)':
     optionalDependencies:
+      '@biomejs/wasm-bundler': 2.6.6
       '@biomejs/wasm-nodejs': 2.6.5
+
+  '@biomejs/wasm-bundler@2.6.6':
+    optional: true
 
   '@biomejs/wasm-nodejs@2.6.5': {}
 

@@ -1,6 +1,11 @@
+import { cancel, confirm, isCancel } from "@clack/prompts";
 import type { Dependency } from "../../../utils/install-dependencies";
 import type { Import } from "./imports";
 import { createImport } from "./imports";
+
+export type PluginOptionsOutput = {
+	code: string;
+};
 
 export type Plugin = {
 	id: string;
@@ -8,8 +13,14 @@ export type Plugin = {
 	description?: string | undefined;
 	imports?: Import[] | undefined;
 	dependencies?: Dependency[] | undefined;
-	// TODO:
-	arguments?: never;
+	options?: PluginOptionsOutput | undefined;
+	prompt?: (ctx: {
+		hasDependency: (name: string) => boolean;
+		depsToInstall: Dependency[];
+		filesToWrite: (() => Promise<void>)[];
+		imports: Import[];
+		options: PluginOptionsOutput;
+	}) => Promise<void> | void;
 };
 
 export const PLUGINS = new Map<string, Plugin>();
@@ -107,6 +118,40 @@ addPlugin("templates", {
 			],
 		}),
 	],
+	prompt: async ({ options, depsToInstall, hasDependency, imports }) => {
+		if (!hasDependency("@node-zugferd/default-template")) {
+			const answer = await confirm({
+				message: "Would you like to install the default template?",
+				initialValue: true,
+			});
+			if (isCancel(answer)) {
+				cancel("✋ Operation cancelled.");
+				process.exit(0);
+			}
+			if (answer) {
+				depsToInstall.push({
+					name: "@node-zugferd/default-template",
+				});
+				imports.push(
+					createImport({
+						path: "@node-zugferd/default-template",
+						imports: [
+							{
+								name: "defaultTemplate",
+							},
+						],
+					}),
+				);
+
+				options.code = `{
+					templates: {
+						default: defaultTemplate(),
+					},
+					defaultTemplate: "default",
+				}`;
+			}
+		}
+	},
 });
 addPlugin("instrumentation", {
 	label: "Instrumentation",

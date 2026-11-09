@@ -261,6 +261,28 @@ const jitiOptions = (cwd: string): JitiOptions => {
 	};
 };
 
+type OptionsCarrier = {
+	options?: ZugferdOptions | undefined;
+	$context?: { options?: ZugferdOptions | undefined } | undefined;
+};
+
+export function readZugferdOptions(config: unknown): ZugferdOptions | null {
+	if (!config || typeof config !== "object") return null;
+	const record = config as Record<string, unknown>;
+	const candidates = [record.invoicer, record.zugferd, record.default, config];
+	for (const candidate of candidates) {
+		const options = readInstanceOptions(candidate);
+		if (options && Array.isArray(options.profiles)) return options;
+	}
+	return null;
+}
+
+function readInstanceOptions(value: unknown): ZugferdOptions | null {
+	if (!value || typeof value !== "object") return null;
+	const record = value as OptionsCarrier;
+	return record.$context?.options ?? record.options ?? null;
+}
+
 export async function getConfig({
 	cwd,
 	configPath,
@@ -290,11 +312,7 @@ export async function getConfig({
 		});
 		return {
 			hasConfig: Object.keys(config).length > 0,
-			config:
-				config.invoicer?.options ||
-				config.zugferd?.options ||
-				config?.options ||
-				null,
+			config: readZugferdOptions(config),
 		};
 	};
 

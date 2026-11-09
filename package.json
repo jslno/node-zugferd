@@ -36,9 +36,9 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
-    "@biomejs/biome": "^2.6.5",
-    "@biomejs/js-api": "^6.1.0",
-    "@biomejs/wasm-nodejs": "^2.6.5",
+    "@biomejs/biome": "catalog:biome",
+    "@biomejs/js-api": "catalog:biome",
+    "@biomejs/wasm-nodejs": "catalog:biome",
     "@changesets/changelog-github": "^1.0.1",
     "@changesets/cli": "^3.0.3",
     "@turbo/gen": "^2.11.10",

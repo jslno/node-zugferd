@@ -1,3 +1,4 @@
+import { formatContent } from "../../../utils/format";
 import type { Import } from "./imports";
 import { createImport, processImports } from "./imports";
 import type { Plugin } from "./plugins";
@@ -7,10 +8,14 @@ export async function generateConfig({
 	imports: imports_ = [],
 	plugins = [],
 	profiles = [],
+	cwd = process.cwd(),
+	filePath = "invoicer.ts",
 }: {
 	imports?: Import[] | undefined;
 	plugins?: Plugin[] | undefined;
 	profiles?: Profile[] | undefined;
+	cwd?: string | undefined;
+	filePath?: string | undefined;
 }) {
 	const imports = processImports([
 		createImport({
@@ -24,12 +29,15 @@ export async function generateConfig({
 		...imports_,
 	]);
 
-	return `${imports.join("\n")}
+	return formatContent(
+		`${imports.join("\n")}
 
 export const invoicer = zugferd({
 ${generateInnerConfig({ plugins, profiles })}
 });
-`;
+`,
+		{ cwd, filePath },
+	);
 }
 
 function generateInnerConfig({
@@ -67,14 +75,14 @@ function getProfilesCode(profiles: Profile[]) {
 		.join("\n")}\n  ]`;
 }
 
-// TODO: Implement plugin args code generation
 function getPluginsCode(plugins: Plugin[]) {
 	return `[\n${plugins
 		.map((plugin) => {
 			const imp = plugin.imports?.[0]?.imports?.[0];
 			const name = imp?.alias || imp?.name;
 			if (!name) return;
-			return `    ${name}(),`;
+			const args = plugin.options?.code.trim() ?? "";
+			return args.length > 0 ? `    ${name}(${args}),` : `    ${name}(),`;
 		})
 		.filter(Boolean)
 		.join("\n")}\n  ]`;

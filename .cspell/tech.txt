@@ -28,3 +28,4 @@ EXIF
 JFIF
 hline
 Flate
+unparseable
