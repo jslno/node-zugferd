@@ -51,7 +51,7 @@ export const mustang = <ZugferdOptions extends ZFOptions>(
 
 	const validate = async (
 		profileId: string,
-		xml: string,
+		input: string | Uint8Array | ArrayBuffer,
 		ctx: ZugferdContext,
 	) => {
 		if (!isSupportedProfile(profileId)) {
@@ -69,9 +69,17 @@ export const mustang = <ZugferdOptions extends ZFOptions>(
 		}
 
 		const tempDir = await mkdtemp(join(opts.tempDir, "node-zugferd_mustang-"));
-		// TODO: support pdf validation
-		const tmpFile = join(tempDir, "input.xml");
-		await writeFile(tmpFile, xml, "utf-8");
+		const pdf = isPdf(input);
+		const tmpFile = join(tempDir, pdf ? "input.pdf" : "input.xml");
+		await writeFile(
+			tmpFile,
+			typeof input === "string"
+				? input
+				: input instanceof Uint8Array
+					? input
+					: new Uint8Array(input),
+			typeof input === "string" ? (pdf ? "latin1" : "utf-8") : undefined,
+		);
 
 		const args = [
 			opts.initialHeapSize !== undefined && `-Xms${opts.initialHeapSize}m`,
@@ -127,9 +135,9 @@ export const mustang = <ZugferdOptions extends ZFOptions>(
 						ProfileID extends
 							| InferProfileIds<ZugferdOptions>
 							| { id: InferProfileIds<ZugferdOptions> },
-					>(profileId: ProfileID, xml: string) {
+					>(profileId: ProfileID, input: string | Uint8Array | ArrayBuffer) {
 						const id = typeof profileId === "string" ? profileId : profileId.id;
-						return validate(id, xml, ctx);
+						return validate(id, input, ctx);
 					},
 				},
 			};
@@ -139,12 +147,42 @@ export const mustang = <ZugferdOptions extends ZFOptions>(
 };
 mustang.setup = setup;
 
+function isPdf(input: string | Uint8Array | ArrayBuffer) {
+	if (typeof input === "string") {
+		return input.startsWith("%PDF");
+	}
+
+	const bytes = input instanceof Uint8Array ? input : new Uint8Array(input);
+	return (
+		bytes.length >= 4 &&
+		bytes[0] === 0x25 &&
+		bytes[1] === 0x50 &&
+		bytes[2] === 0x44 &&
+		bytes[3] === 0x46
+	);
+}
+
 function arrayable<T>(value: T | T[] | undefined): T[] {
 	if (!value) {
 		return [];
 	}
 
 	return Array.isArray(value) ? value : [value];
+}
+
+function textOf(value: unknown) {
+	return arrayable(value)
+		.map((entry) => {
+			if (typeof entry === "string") {
+				return entry;
+			}
+			if (entry && typeof entry === "object" && "#" in entry) {
+				const text = entry["#"];
+				return typeof text === "string" ? text : "";
+			}
+			return "";
+		})
+		.filter((entry) => entry !== "");
 }
 
 function parseValidatorResult(ctx: ZugferdContext, output: string) {
@@ -158,7 +196,6 @@ function parseValidatorResult(ctx: ZugferdContext, output: string) {
 
 	const messages: string[] = [];
 
-	// TODO: Fix flaky parsing
 	const parse = (type: "xml" | "pdf") => {
 		const section = out[type] ?? out;
 		if (!section?.messages) {
@@ -170,15 +207,13 @@ function parseValidatorResult(ctx: ZugferdContext, output: string) {
 		);
 		for (const msg of msgs) {
 			if ("error" in msg) {
-				messages.push(...arrayable(msg.error).map(({ "#": m }) => m));
+				messages.push(...textOf(msg.error));
 			}
 			if ("exception" in msg) {
-				messages.push(...arrayable(msg.exception).map(({ "#": m }) => m));
+				messages.push(...textOf(msg.exception));
 			}
 			if ("warning" in msg) {
-				const message = arrayable(msg.warning)
-					.map(({ "#": m }) => m)
-					.join("\n\n");
+				const message = textOf(msg.warning).join("\n\n");
 				if (message !== "") {
 					ctx.logger.warn(message);
 				}

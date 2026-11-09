@@ -60,7 +60,10 @@
       }
     },
     {
-      "includes": ["packages/**/src/**"],
+      "includes": [
+        "packages/**/src/**",
+        "!packages/**/src/**/*.test.ts"
+      ],
       "linter": {
         "rules": {
           "style": {
