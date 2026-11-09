@@ -10,7 +10,16 @@ import {
 	quantity,
 	text,
 } from "../schemas";
-import { collectFieldSchemas, walkSchema } from "./walk-schema";
+import {
+	collectFieldSchemas,
+	getArrayItemSchema,
+	getObjectEntries,
+	isArrayLikeSchema,
+	isIntersectSchema,
+	isObjectLikeSchema,
+	unwrapSchema,
+	walkSchema,
+} from "./walk-schema";
 
 describe("walk-schema", () => {
 	it("walks top-level fields", () => {
@@ -239,5 +248,39 @@ describe("walk-schema", () => {
 		expect(fields.has("transaction.contract.seller.contact.*.personName")).toBe(
 			true,
 		);
+	});
+});
+
+describe("walk-schema helpers", () => {
+	it("unwraps pipes and nullish schemas", () => {
+		const inner = text();
+
+		expect(unwrapSchema(pipe(nullish(inner)))).toBe(inner);
+		expect(unwrapSchema(inner)).toBe(inner);
+	});
+
+	it("recognizes objects, arrays, and intersections", () => {
+		const item = object({ name: text() });
+		const items = array(item);
+		const repeated = asArray(item);
+		const combined = intersect([
+			object({ id: text() }),
+			object({ name: text() }),
+		]);
+
+		expect(isObjectLikeSchema(nullish(item))).toBe(true);
+		expect(isObjectLikeSchema(text())).toBe(false);
+		expect(isArrayLikeSchema(pipe(items))).toBe(true);
+		expect(isArrayLikeSchema(repeated)).toBe(true);
+		expect(isArrayLikeSchema(item)).toBe(false);
+		expect(getArrayItemSchema(items)).toBe(item);
+		expect(getArrayItemSchema(repeated)).toBe(item);
+		expect(getArrayItemSchema(text())).toBeUndefined();
+		expect(getObjectEntries(nullish(item))).toEqual({
+			name: expect.anything(),
+		});
+		expect(getObjectEntries(text())).toBeUndefined();
+		expect(isIntersectSchema(pipe(combined))).toBe(true);
+		expect(isIntersectSchema(item)).toBe(false);
 	});
 });

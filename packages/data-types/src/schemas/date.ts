@@ -124,8 +124,8 @@ export function date<
 				if (typeof dataset.value === "string" && isNaN(+date)) {
 					const format = detectDateFormat(dataset.value);
 					if (format && config.inputFormats.includes(format as any)) {
-						const { parse } = dateFormats[format];
-						date = parse(dataset.value) ?? new Date(Number.NaN);
+						date =
+							dateFormats[format].parse(dataset.value) ?? new Date(Number.NaN);
 					}
 				}
 				if (!isNaN(+date)) {
