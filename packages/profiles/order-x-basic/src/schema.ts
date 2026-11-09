@@ -8,7 +8,7 @@ import "@node-zugferd/codelist-untdid-1229";
 import "@node-zugferd/codelist-untdid-1373";
 import "@node-zugferd/codelist-untdid-4053";
 import "@node-zugferd/codelist-untdid-4055";
-import "@node-zugferd/codelist-untdid-4451";
+import "@node-zugferd/codelist-text";
 import {
 	amount,
 	array,
@@ -129,7 +129,7 @@ export const schema = object({
 							}),
 						),
 						subjectCode: pipe(
-							nullish(code("untdid4451")),
+							nullish(code("text")),
 							metadata({
 								xpath:
 									"/rsm:SCRDMCCBDACIOMessageStructure/rsm:ExchangedDocument/ram:IncludedNote/ram:SubjectCode",
@@ -176,7 +176,7 @@ export const schema = object({
 												}),
 											),
 											subjectCode: pipe(
-												nullish(code("untdid4451")),
+												nullish(code("text")),
 												metadata({
 													xpath:
 														"/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:AssociatedDocumentLineDocument/ram:IncludedNote/ram:SubjectCode",

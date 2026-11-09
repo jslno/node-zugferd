@@ -30,9 +30,7 @@ import { untdid3035 } from "./untdid-3035";
 import { untdid3139 } from "./untdid-3139";
 import { untdid4053 } from "./untdid-4053";
 import { untdid4055 } from "./untdid-4055";
-import { untdid4451 } from "./untdid-4451";
 import { untdid4461 } from "./untdid-4461";
-import { untdid5153 } from "./untdid-5153";
 import { untdid5189 } from "./untdid-5189";
 import { untdid5305 } from "./untdid-5305";
 import { untdid7143 } from "./untdid-7143";
@@ -68,9 +66,7 @@ const codelistGeneratorMap = {
 	untdid3139,
 	untdid4053,
 	untdid4055,
-	untdid4451,
 	untdid4461,
-	untdid5153,
 	untdid5189,
 	untdid5305,
 	untdid7143,

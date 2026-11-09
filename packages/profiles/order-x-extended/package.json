@@ -30,8 +30,8 @@
     "@node-zugferd/codelist-untdid-1373": "workspace:*",
     "@node-zugferd/codelist-untdid-4053": "workspace:*",
     "@node-zugferd/codelist-untdid-4055": "workspace:*",
-    "@node-zugferd/codelist-untdid-4451": "workspace:*",
-    "@node-zugferd/codelist-untdid-5153": "workspace:*",
+    "@node-zugferd/codelist-text": "workspace:*",
+    "@node-zugferd/codelist-vat-cat": "workspace:*",
     "@node-zugferd/utils": "workspace:*",
     "@node-zugferd/core": "workspace:*",
     "@node-zugferd/data-types": "workspace:*"

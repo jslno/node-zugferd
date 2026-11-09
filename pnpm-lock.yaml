@@ -405,6 +405,15 @@ importers:
       '@node-zugferd/codelist-untdid-1153':
         specifier: workspace:*
         version: link:../packages/codelists/untdid-1153
+      '@node-zugferd/codelist-untdid-1225':
+        specifier: workspace:*
+        version: link:../packages/codelists/untdid-1225
+      '@node-zugferd/codelist-untdid-1229':
+        specifier: workspace:*
+        version: link:../packages/codelists/untdid-1229
+      '@node-zugferd/codelist-untdid-1373':
+        specifier: workspace:*
+        version: link:../packages/codelists/untdid-1373
       '@node-zugferd/codelist-untdid-2005':
         specifier: workspace:*
         version: link:../packages/codelists/untdid-2005
@@ -417,9 +426,24 @@ importers:
       '@node-zugferd/codelist-untdid-4053':
         specifier: workspace:*
         version: link:../packages/codelists/untdid-4053
+      '@node-zugferd/codelist-untdid-4055':
+        specifier: workspace:*
+        version: link:../packages/codelists/untdid-4055
+      '@node-zugferd/codelist-untdid-4461':
+        specifier: workspace:*
+        version: link:../packages/codelists/untdid-4461
+      '@node-zugferd/codelist-untdid-5189':
+        specifier: workspace:*
+        version: link:../packages/codelists/untdid-5189
       '@node-zugferd/codelist-untdid-5305':
         specifier: workspace:*
         version: link:../packages/codelists/untdid-5305
+      '@node-zugferd/codelist-untdid-7143':
+        specifier: workspace:*
+        version: link:../packages/codelists/untdid-7143
+      '@node-zugferd/codelist-untdid-7161':
+        specifier: workspace:*
+        version: link:../packages/codelists/untdid-7161
       '@node-zugferd/codelist-vat-cat':
         specifier: workspace:*
         version: link:../packages/codelists/vat-cat
@@ -1248,33 +1272,7 @@ importers:
         specifier: 'catalog:'
         version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
 
-  packages/codelists/untdid-4451:
-    dependencies:
-      '@node-zugferd/core':
-        specifier: workspace:*
-        version: link:../../core
-      '@node-zugferd/data-types':
-        specifier: workspace:*
-        version: link:../../data-types
-    devDependencies:
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
-
   packages/codelists/untdid-4461:
-    dependencies:
-      '@node-zugferd/core':
-        specifier: workspace:*
-        version: link:../../core
-      '@node-zugferd/data-types':
-        specifier: workspace:*
-        version: link:../../data-types
-    devDependencies:
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
-
-  packages/codelists/untdid-5153:
     dependencies:
       '@node-zugferd/core':
         specifier: workspace:*
@@ -1753,9 +1751,6 @@ importers:
       '@node-zugferd/codelist-untdid-4053':
         specifier: workspace:*
         version: link:../../codelists/untdid-4053
-      '@node-zugferd/codelist-untdid-5153':
-        specifier: workspace:*
-        version: link:../../codelists/untdid-5153
       '@node-zugferd/codelist-untdid-5305':
         specifier: workspace:*
         version: link:../../codelists/untdid-5305
@@ -1824,6 +1819,9 @@ importers:
       '@node-zugferd/codelist-incoterms':
         specifier: workspace:*
         version: link:../../codelists/incoterms
+      '@node-zugferd/codelist-text':
+        specifier: workspace:*
+        version: link:../../codelists/text
       '@node-zugferd/codelist-unit':
         specifier: workspace:*
         version: link:../../codelists/unit
@@ -1851,9 +1849,6 @@ importers:
       '@node-zugferd/codelist-untdid-4055':
         specifier: workspace:*
         version: link:../../codelists/untdid-4055
-      '@node-zugferd/codelist-untdid-4451':
-        specifier: workspace:*
-        version: link:../../codelists/untdid-4451
       '@node-zugferd/codelist-untdid-4461':
         specifier: workspace:*
         version: link:../../codelists/untdid-4461
@@ -1900,6 +1895,9 @@ importers:
       '@node-zugferd/codelist-incoterms':
         specifier: workspace:*
         version: link:../../codelists/incoterms
+      '@node-zugferd/codelist-text':
+        specifier: workspace:*
+        version: link:../../codelists/text
       '@node-zugferd/codelist-unit':
         specifier: workspace:*
         version: link:../../codelists/unit
@@ -1921,9 +1919,6 @@ importers:
       '@node-zugferd/codelist-untdid-4055':
         specifier: workspace:*
         version: link:../../codelists/untdid-4055
-      '@node-zugferd/codelist-untdid-4451':
-        specifier: workspace:*
-        version: link:../../codelists/untdid-4451
       '@node-zugferd/core':
         specifier: workspace:*
         version: link:../../core
@@ -1955,6 +1950,9 @@ importers:
       '@node-zugferd/codelist-language':
         specifier: workspace:*
         version: link:../../codelists/language
+      '@node-zugferd/codelist-text':
+        specifier: workspace:*
+        version: link:../../codelists/text
       '@node-zugferd/codelist-unit':
         specifier: workspace:*
         version: link:../../codelists/unit
@@ -1976,12 +1974,9 @@ importers:
       '@node-zugferd/codelist-untdid-4055':
         specifier: workspace:*
         version: link:../../codelists/untdid-4055
-      '@node-zugferd/codelist-untdid-4451':
+      '@node-zugferd/codelist-vat-cat':
         specifier: workspace:*
-        version: link:../../codelists/untdid-4451
-      '@node-zugferd/codelist-untdid-5153':
-        specifier: workspace:*
-        version: link:../../codelists/untdid-5153
+        version: link:../../codelists/vat-cat
       '@node-zugferd/core':
         specifier: workspace:*
         version: link:../../core

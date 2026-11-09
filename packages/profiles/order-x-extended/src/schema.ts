@@ -1,6 +1,6 @@
 import "@node-zugferd/codelist-language";
 import "@node-zugferd/codelist-untdid-2005";
-import "@node-zugferd/codelist-untdid-5153";
+import "@node-zugferd/codelist-vat-cat";
 import {
 	amount,
 	array,
