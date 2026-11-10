@@ -5,11 +5,8 @@ import {
 	object,
 	text,
 } from "@node-zugferd/data-types";
+import { expectTypeOf, test } from "vitest";
 import { defineProfile } from "./profile.js";
-
-type AssertTrue<T extends true> = T;
-type AssertArray<_T extends readonly unknown[]> = true;
-type IsAny<T> = 0 extends 1 & T ? true : false;
 
 const root = defineProfile({
 	id: "root",
@@ -82,26 +79,6 @@ const leaf = defineProfile({
 	build() {},
 });
 
-type LeafInput = typeof leaf.$Infer.Input;
-
-type _prepaidAmountIsOptional = AssertTrue<
-	{} extends Pick<
-		LeafInput["transaction"]["debit"]["documentTotals"],
-		"prepaidAmount"
-	>
-		? true
-		: false
->;
-
-type _chargeTotalAmountIsOptional = AssertTrue<
-	{} extends Pick<
-		LeafInput["transaction"]["debit"]["documentTotals"],
-		"chargeTotalAmount"
-	>
-		? true
-		: false
->;
-
 const parent = defineProfile({
 	id: "parent",
 	dataRelationship: "Alternative",
@@ -166,57 +143,6 @@ const child = defineProfile({
 	build() {},
 });
 
-type ChildInput = typeof child.$Infer.Input;
-
-type _childInputIsNotAny = AssertTrue<
-	IsAny<ChildInput> extends true ? false : true
->;
-
-type PaymentTerms = Exclude<
-	ChildInput["transaction"]["debit"]["paymentTerms"],
-	null | undefined
->;
-
-type _paymentTermsIsArray = AssertTrue<AssertArray<PaymentTerms>>;
-
-type PaymentTerm = PaymentTerms[number];
-
-type _paymentTermShape = AssertTrue<
-	PaymentTerm extends {
-		description: string;
-		dueDate: string;
-		partialPaymentAmount: string;
-	}
-		? true
-		: false
->;
-
-type InvoiceNotes = Exclude<
-	ChildInput["exchangedDocument"]["invoiceNotes"],
-	null | undefined
->;
-
-type _invoiceNotesKeepsParentFields = AssertTrue<
-	InvoiceNotes extends {
-		content: string;
-		contentCode: string;
-	}
-		? true
-		: false
->;
-
-type _paymentTermsIsOptional = AssertTrue<
-	{} extends Pick<ChildInput["transaction"]["debit"], "paymentTerms">
-		? true
-		: false
->;
-
-type _invoiceNotesIsOptional = AssertTrue<
-	{} extends Pick<ChildInput["exchangedDocument"], "invoiceNotes">
-		? true
-		: false
->;
-
 const nullishParent = defineProfile({
 	id: "nullish-parent",
 	dataRelationship: "Alternative",
@@ -263,31 +189,59 @@ const requiredChild = defineProfile({
 	build() {},
 });
 
-type RequiredChildInput = typeof requiredChild.$Infer.Input;
+test("keeps inherited nullish amount fields optional", () => {
+	type Totals =
+		(typeof leaf)["$Infer"]["Input"]["transaction"]["debit"]["documentTotals"];
 
-type _paymentTermsIsRequired = AssertTrue<
-	{} extends Pick<RequiredChildInput["transaction"]["debit"], "paymentTerms">
-		? false
-		: true
->;
+	expectTypeOf<{}>().toExtend<Pick<Totals, "prepaidAmount">>();
+	expectTypeOf<{}>().toExtend<Pick<Totals, "chargeTotalAmount">>();
+});
 
-type _paymentTermsRejectsNull = AssertTrue<
-	null extends RequiredChildInput["transaction"]["debit"]["paymentTerms"]
-		? false
-		: true
->;
+test("merges a parent object into a child array and keeps both fields optional", () => {
+	type ChildInput = (typeof child)["$Infer"]["Input"];
 
-type _paymentTermsRejectsUndefined = AssertTrue<
-	undefined extends RequiredChildInput["transaction"]["debit"]["paymentTerms"]
-		? false
-		: true
->;
+	expectTypeOf<ChildInput>().not.toBeAny();
 
-type _paymentTermsKeepsFields = AssertTrue<
-	RequiredChildInput["transaction"]["debit"]["paymentTerms"] extends {
+	expectTypeOf<ChildInput["transaction"]["debit"]["paymentTerms"]>()
+		.exclude<null | undefined>()
+		.toExtend<readonly unknown[]>();
+	expectTypeOf<ChildInput["transaction"]["debit"]["paymentTerms"]>()
+		.exclude<null | undefined>()
+		.items.toExtend<{
+			description: string;
+			dueDate: string;
+			partialPaymentAmount: string;
+		}>();
+
+	expectTypeOf<ChildInput["exchangedDocument"]["invoiceNotes"]>()
+		.exclude<null | undefined>()
+		.toExtend<{
+			content: string;
+			contentCode: string;
+		}>();
+
+	expectTypeOf<{}>().toExtend<
+		Pick<ChildInput["transaction"]["debit"], "paymentTerms">
+	>();
+	expectTypeOf<{}>().toExtend<
+		Pick<ChildInput["exchangedDocument"], "invoiceNotes">
+	>();
+});
+
+test("lets a child replace a nullish parent field with a required object", () => {
+	type PaymentTerms =
+		(typeof requiredChild)["$Infer"]["Input"]["transaction"]["debit"]["paymentTerms"];
+
+	expectTypeOf<{}>().not.toExtend<
+		Pick<
+			(typeof requiredChild)["$Infer"]["Input"]["transaction"]["debit"],
+			"paymentTerms"
+		>
+	>();
+	expectTypeOf<null>().not.toExtend<PaymentTerms>();
+	expectTypeOf<undefined>().not.toExtend<PaymentTerms>();
+	expectTypeOf<PaymentTerms>().toExtend<{
 		description: string;
 		dueDate: string;
-	}
-		? true
-		: false
->;
+	}>();
+});
