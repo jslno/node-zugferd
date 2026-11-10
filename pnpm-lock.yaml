@@ -181,8 +181,8 @@ catalogs:
       specifier: ^0.23.5
       version: 0.23.5
     typescript:
-      specifier: ^7.0.2
-      version: 7.0.2
+      specifier: ^6.0.3
+      version: 6.0.3
     xmlbuilder2:
       specifier: ^4.0.3
       version: 4.0.3
@@ -276,9 +276,12 @@ importers:
       turbo:
         specifier: ^2.11.10
         version: 2.11.10
+      typedoc:
+        specifier: 0.28.20
+        version: 0.28.20(typescript@6.0.3)
       typescript:
         specifier: 'catalog:'
-        version: 7.0.2
+        version: 6.0.3
       vitest:
         specifier: catalog:vitest
         version: 5.1.0(@opentelemetry/api@1.10.0)(@types/node@26.6.6)(@vitest/browser-playwright@5.1.0)(@vitest/coverage-istanbul@5.1.0)(@vitest/ui@5.1.0)(vite@8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
@@ -584,8 +587,8 @@ importers:
         specifier: ^4.3.4
         version: 4.3.4
       typescript:
-        specifier: ^7.0.2
-        version: 7.0.2
+        specifier: ^6.0.3
+        version: 6.0.3
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -913,7 +916,7 @@ importers:
         version: 2.7.0
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
       tsx:
         specifier: ^4.23.15
         version: 4.23.15
@@ -932,7 +935,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/characteristic:
     dependencies:
@@ -945,7 +948,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/charge:
     dependencies:
@@ -958,7 +961,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/country:
     dependencies:
@@ -971,7 +974,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/currency:
     dependencies:
@@ -984,7 +987,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/eas:
     dependencies:
@@ -997,7 +1000,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/icd:
     dependencies:
@@ -1010,7 +1013,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/incoterms:
     dependencies:
@@ -1023,7 +1026,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/item:
     dependencies:
@@ -1036,7 +1039,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/language:
     dependencies:
@@ -1049,7 +1052,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/line-reason:
     dependencies:
@@ -1062,7 +1065,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/line-status:
     dependencies:
@@ -1075,7 +1078,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/payment:
     dependencies:
@@ -1088,7 +1091,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/text:
     dependencies:
@@ -1101,7 +1104,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/time:
     dependencies:
@@ -1114,7 +1117,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/transport:
     dependencies:
@@ -1127,7 +1130,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/unit:
     dependencies:
@@ -1140,7 +1143,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-1001:
     dependencies:
@@ -1153,7 +1156,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-1153:
     dependencies:
@@ -1166,7 +1169,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-1225:
     dependencies:
@@ -1179,7 +1182,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-1229:
     dependencies:
@@ -1192,7 +1195,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-1373:
     dependencies:
@@ -1205,7 +1208,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-2005:
     dependencies:
@@ -1218,7 +1221,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-3035:
     dependencies:
@@ -1231,7 +1234,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-3139:
     dependencies:
@@ -1244,7 +1247,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-4053:
     dependencies:
@@ -1257,7 +1260,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-4055:
     dependencies:
@@ -1270,7 +1273,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-4461:
     dependencies:
@@ -1283,7 +1286,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-5189:
     dependencies:
@@ -1296,7 +1299,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-5305:
     dependencies:
@@ -1309,7 +1312,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-7143:
     dependencies:
@@ -1322,7 +1325,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/untdid-7161:
     dependencies:
@@ -1335,7 +1338,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/vat-cat:
     dependencies:
@@ -1348,7 +1351,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/codelists/vatex:
     dependencies:
@@ -1361,7 +1364,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/core:
     dependencies:
@@ -1374,7 +1377,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/data-types:
     dependencies:
@@ -1387,7 +1390,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/default-template:
     dependencies:
@@ -1424,7 +1427,7 @@ importers:
         version: 2.4.5
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/docx-template:
     dependencies:
@@ -1446,7 +1449,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/instrumentation:
     dependencies:
@@ -1459,7 +1462,7 @@ importers:
         version: 1.10.0
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/magic-bytes:
     devDependencies:
@@ -1468,7 +1471,7 @@ importers:
         version: link:../core
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/node-zugferd:
     dependencies:
@@ -1490,7 +1493,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/parser:
     dependencies:
@@ -1512,7 +1515,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/pdf-template:
     dependencies:
@@ -1534,7 +1537,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/profiles/basic:
     dependencies:
@@ -1589,7 +1592,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/profiles/basic-wl:
     dependencies:
@@ -1641,7 +1644,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/profiles/en-16931:
     dependencies:
@@ -1696,7 +1699,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/profiles/extended:
     dependencies:
@@ -1778,7 +1781,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/profiles/minimum:
     dependencies:
@@ -1806,7 +1809,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/profiles/order-x:
     dependencies:
@@ -1882,7 +1885,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/profiles/order-x-basic:
     dependencies:
@@ -1934,7 +1937,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/profiles/order-x-extended:
     dependencies:
@@ -1995,7 +1998,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/profiles/xrechnung:
     dependencies:
@@ -2050,7 +2053,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/templates:
     dependencies:
@@ -2063,7 +2066,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/utils:
     dependencies:
@@ -2076,7 +2079,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/validators/mustang:
     dependencies:
@@ -2095,7 +2098,7 @@ importers:
         version: 3.0.4
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/validators/order-x-schema-definition:
     devDependencies:
@@ -2104,7 +2107,7 @@ importers:
         version: link:../xsd
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/validators/xrechnung-schema-definition:
     devDependencies:
@@ -2113,7 +2116,7 @@ importers:
         version: link:../xsd
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
   packages/validators/xsd:
     dependencies:
@@ -2126,7 +2129,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2)
+        version: 0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3)
 
 packages:
 
@@ -3139,6 +3142,9 @@ packages:
   '@fumari/image-size@0.1.1':
     resolution: {integrity: sha512-iaiV2wyzJ4mW358NX4CX3yGit+WjKYzpaQ+rldK9BjL/5jFpeV6ruWnZVq7MEyMn3Gd0DLi8g/79NZAAQaGscw==}
 
+  '@gerrit0/mini-shiki@3.23.0':
+    resolution: {integrity: sha512-bEMORlG0cqdjVyCEuU0cDQbORWX+kYCeo0kV1lbxF5bt4r7SID2l9bqsxJEM0zndaxpOUT7riCyIVEuqq/Ynxg==}
+
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
     engines: {node: '>=18'}
@@ -4145,9 +4151,15 @@ packages:
     resolution: {integrity: sha512-K0oqxFoL+kEMdz89mHLFO15Tsbv3kFZ6WR1cXZKMvLSc+oqaM00A6pyga1qSeXB22dP0tTiSApRcGBaKWsEccg==}
     engines: {node: '>=20'}
 
+  '@shikijs/engine-oniguruma@3.23.0':
+    resolution: {integrity: sha512-1nWINwKXxKKLqPibT5f4pAFLej9oZzQTsby8942OTlsJzOBZ0MWKiwzMsd+jhzu8YPCHAswGnnN1YtQfirL35g==}
+
   '@shikijs/engine-oniguruma@4.6.0':
     resolution: {integrity: sha512-aggd6Q7SuJOXNnsUbfG2XesxBJKBMAw/PDTUo9PyRjMaaJJ2dNrI+q0C+25ARXAK9yLHAlwxc9oRT2u68YKZ7w==}
     engines: {node: '>=20'}
+
+  '@shikijs/langs@3.23.0':
+    resolution: {integrity: sha512-2Ep4W3Re5aB1/62RSYQInK9mM3HsLeB91cHqznAJMuylqjzNVAVCMnNWRHFtcNHXsoNRayP9z1qj4Sq3nMqYXg==}
 
   '@shikijs/langs@4.6.0':
     resolution: {integrity: sha512-1yMEX3oCVV54LUq/ovfpRkDQoYDkcvjSWFFa/YLUDMiSoRzMi2uxLJYbv41ahT8Lu9lFMaa7hecd3Q39trqUyg==}
@@ -4157,9 +4169,15 @@ packages:
     resolution: {integrity: sha512-c54+TQEo9ToqgfL/AU8FpjnV09+GA9Oa7M5ROkkXteZfp5XzpAJGXjjvZQFQioJOwm/w/6Z3lIzQstAkl8coag==}
     engines: {node: '>=20'}
 
+  '@shikijs/themes@3.23.0':
+    resolution: {integrity: sha512-5qySYa1ZgAT18HR/ypENL9cUSGOeI2x+4IvYJu4JgVJdizn6kG4ia5Q1jDEOi7gTbN4RbuYtmHh0W3eccOrjMA==}
+
   '@shikijs/themes@4.6.0':
     resolution: {integrity: sha512-qHAVAs80RiGD+IRuH9G+JPDOEc9A/kHsng4EzCUCwB9bLzW6Z0y9WETh2YyCcADJBmfrIaJ1Jp7KBNP6FHkgtQ==}
     engines: {node: '>=20'}
+
+  '@shikijs/types@3.23.0':
+    resolution: {integrity: sha512-3JZ5HXOZfYjsYSk0yPwBrkupyYSLpAE26Qc0HLghhZNGTZg/SKxXIIgoxOpmmeQP0RRSDJTk1/vPfw9tbw+jSQ==}
 
   '@shikijs/types@4.6.0':
     resolution: {integrity: sha512-+ENG1adsKt/X7cRYw1Nl7BEpBmPOjmQ7bR/eGmHuMlT8gtOFf3KEi5l31DJYyAWhW6Y6bjP1plU7FmaxWGENFw==}
@@ -4486,126 +4504,6 @@ packages:
 
   '@types/which@3.0.4':
     resolution: {integrity: sha512-liyfuo/106JdlgSchJzXEQCVArk0CvevqPote8F8HgWgJ3dRCcTHgJIsLDuee0kxk/mhbInzIZk3QWSZJ8R+2w==}
-
-  '@typescript/typescript-aix-ppc64@7.0.2':
-    resolution: {integrity: sha512-MTKKkWB7p/0E9xi1d1tHtZ5PiLkGEMIq88pK2CubZjOsLtYTLqhgIgi6zepFa+9GHZ6h05NMCkQxGKiPXMxXtQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [ppc64]
-    os: [aix]
-
-  '@typescript/typescript-darwin-arm64@7.0.2':
-    resolution: {integrity: sha512-gowzar9MwS/aRWp6f3a4KUqzRjAZjOsmGNCM6LcTgXum+dBfgsBVMN+AgvOCCbguXyick6LJhpBszxMebJ8syA==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@typescript/typescript-darwin-x64@7.0.2':
-    resolution: {integrity: sha512-SZ9xZInqApNlNGc9s0W1VSsktYSOe9cFqNOIqmN1Gs8SmkjKZYFt017G4VwPxASInODuAdbTW7sXiFUf893RgA==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [darwin]
-
-  '@typescript/typescript-freebsd-arm64@7.0.2':
-    resolution: {integrity: sha512-W5NH4y/J0plIIS5b2xvTEkU7JFxyqdMAOgf+Ilhl0vHQXKO5dZoxd+C/jEtq56c4F3wk71RB4BMRQ2XdI+bwYQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm64]
-    os: [freebsd]
-
-  '@typescript/typescript-freebsd-x64@7.0.2':
-    resolution: {integrity: sha512-UMGDx5sTpzNw3WiPebH7l90IWfJggEd+egHt/q6p7/Cm3zqoV7VxkGXt+3DxPIw8CcmvAB0j3sVVfbhX+M4Tpw==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [freebsd]
-
-  '@typescript/typescript-linux-arm64@7.0.2':
-    resolution: {integrity: sha512-Qh4eU4/y3yDjnfjjyPYihMj5/ODIlmt+Bzu17OI+fiSRDW57QmU5SiN63exPRNJPKUzcc1INa1NXdrJ+MqHjUQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm64]
-    os: [linux]
-
-  '@typescript/typescript-linux-arm@7.0.2':
-    resolution: {integrity: sha512-gffT3xPz9sR7j/YJExkyPntrI0P2EP9XbOyWzth2/Gs0RstK+90RBcO0ncXoXy/beYll1SXw846Nf2zdnEz0QQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm]
-    os: [linux]
-
-  '@typescript/typescript-linux-loong64@7.0.2':
-    resolution: {integrity: sha512-uEHck9i8hoAzXPiYRib1O7miOnz23SxIeVl6F4LXox+qov1K35jHcEW6VHKvZI+pyvl7fZEP4MCU5LYvIq1GuQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [loong64]
-    os: [linux]
-
-  '@typescript/typescript-linux-mips64el@7.0.2':
-    resolution: {integrity: sha512-R4KvAMnE43W5Qeqb0Ly56O3mWMWIAgsMyz36DCaycd5nbg/9kzm0liw3JocfRqyJY0KPmzFjbswozXyW0DnIYA==}
-    engines: {node: '>=16.20.0'}
-    cpu: [mips64el]
-    os: [linux]
-
-  '@typescript/typescript-linux-ppc64@7.0.2':
-    resolution: {integrity: sha512-DORx5b3sd/4S7eayxm4FQv+A7CrkUIGRaHiwI8oiHTAI1fAPWhF4J0vAlkC8biAlHSVVwxMQ3tjZ2/DVbnQiiA==}
-    engines: {node: '>=16.20.0'}
-    cpu: [ppc64]
-    os: [linux]
-
-  '@typescript/typescript-linux-riscv64@7.0.2':
-    resolution: {integrity: sha512-wf0jqEDOjrPRnKwYRyyJDRo11KMbvMFrU+q4zqKyChODBzvlkbhNQfKvLxQCcwTpdDaXSHZTVuh0JoCrKCUMHQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [riscv64]
-    os: [linux]
-
-  '@typescript/typescript-linux-s390x@7.0.2':
-    resolution: {integrity: sha512-IkwJc3L7yhytWd/ewjyxNDfOmswCm9GWMJT/ue/dU4aZNbwZeYAetq42VyLmsmSjvoX7z74X6ZaYCtzAr0EuGw==}
-    engines: {node: '>=16.20.0'}
-    cpu: [s390x]
-    os: [linux]
-
-  '@typescript/typescript-linux-x64@7.0.2':
-    resolution: {integrity: sha512-EYdf2cNg7rgCWJnxCdJ+F3V39O8ihb37eHAu1LK8oAFizgTQbPOK7zHHXbPt8rX24COqODXeI3sIf0fCXG7H/A==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [linux]
-
-  '@typescript/typescript-netbsd-arm64@7.0.2':
-    resolution: {integrity: sha512-+polYF4MF04aPpO5FTkHran9yUQDSXqy5GiSDKpsll5jy3l3+g9QLhpf39T+ePtefhXLOGrLl0QIjkQP6VnelA==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm64]
-    os: [netbsd]
-
-  '@typescript/typescript-netbsd-x64@7.0.2':
-    resolution: {integrity: sha512-8YIT0EHM/3dq10ZOVF/A7pc/YSMtbcecct4rWtexrnSCHOPcpC2KTLXfTCR6vDpnSiY12heNb1GiN/wu+T/FyA==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [netbsd]
-
-  '@typescript/typescript-openbsd-arm64@7.0.2':
-    resolution: {integrity: sha512-APT8+ClYnuYm1u9+kgGXoMj2VzWzcymwh2gNSQVySHfkRDGOTVkoWLjCmOQSaO+PoqQ57B0flRp9SA+7GnnkzQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm64]
-    os: [openbsd]
-
-  '@typescript/typescript-openbsd-x64@7.0.2':
-    resolution: {integrity: sha512-yX7s+Q0Dln0Dt9tEzZsAjXXR/+ytBM7AlglaqyeMPxQszJ1JhlJdZ6jLA+IzldHtflX81em7lDao1xXu+aRRkg==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [openbsd]
-
-  '@typescript/typescript-sunos-x64@7.0.2':
-    resolution: {integrity: sha512-dLJDGaLZ1D4HPQn62u1n8mBDkJREwMsAkCdkwd4Ieqw+x3TUyTsqY0YiBCtE6H6OzzgGk3iuZ3vFWRS+E8/d1g==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [sunos]
-
-  '@typescript/typescript-win32-arm64@7.0.2':
-    resolution: {integrity: sha512-Gyl1Vy6OsWesLzmq+EP0Fb7b4Nid5232AvcA2SFcdYreldpNtYFFofPjnt62y9hQy7VTaZp65ICJjuAQRaVcIQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm64]
-    os: [win32]
-
-  '@typescript/typescript-win32-x64@7.0.2':
-    resolution: {integrity: sha512-0BQ3HkAHHlKLSp1qRvf3SUhGpGsDuhB/jgFw75guyqbxJqEaS0Cw/VFO8i2nHglJUzQCRtMMR/IBAKE3ETMC4g==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [win32]
 
   '@ungap/structured-clone@1.4.0':
     resolution: {integrity: sha512-1mEZtMKPM09vDmQt5y7YvmN2+DFTP7Tg0EWXdic8/C6VRnpb33e4ghisCIE3WZjsE2N8mf+QV1Zqh7ZFYLWInQ==}
@@ -5349,6 +5247,10 @@ packages:
   enquirer@2.4.1:
     resolution: {integrity: sha512-rRqJg/6gd538VHvR3PSrdRBb/1Vy2YfzHqzvbhGIQpDRKIa4FgV/54b5Q1xYSxOOwKvjXweS26E0Q+nAMwp2pQ==}
     engines: {node: '>=8.6'}
+
+  entities@4.5.0:
+    resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
+    engines: {node: '>=0.12'}
 
   env-paths@2.2.1:
     resolution: {integrity: sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==}
@@ -6234,6 +6136,9 @@ packages:
     resolution: {integrity: sha512-WkUDrojuJs0xkgGf2udWxa3yGBRxPtxUkB79i6aCZLRgc7PM8fZe9TosfPDcvEpQZbuFASnHYmRLBLUbmLOIIA==}
     engines: {node: '>= 12.0.0'}
 
+  linkify-it@5.0.2:
+    resolution: {integrity: sha512-ONTm2jCMAVZjgQa/Fy1kScXsuOoF5NPTsoFBdE1KVIZ2vAh/r9+Bqo+0jINCBYnavTPQZz38QzFTme79ENoN3Q==}
+
   locate-path@3.0.0:
     resolution: {integrity: sha512-7AO748wWnIhNqAuaty2ZWHkQHRSNfPVIsPIfwEOWO22AmaoVrWavlOcMR5nzTLNYvp36X220/maaRsrec1G65A==}
     engines: {node: '>=6'}
@@ -6275,6 +6180,9 @@ packages:
       '@types/react':
         optional: true
 
+  lunr@2.3.9:
+    resolution: {integrity: sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow==}
+
   magic-string@1.4.5:
     resolution: {integrity: sha512-oLLC2+YvQUfAa+vxoufE/yc1icb87M9iXIRqAoR/2EhE/8cb3SF/+Gi0c2By1B+5Vz2e2vQtUvHiu1+63Znh+w==}
 
@@ -6296,6 +6204,10 @@ packages:
   markdown-extensions@2.0.0:
     resolution: {integrity: sha512-o5vL7aDWatOTX8LzaS1WMoaoxIiLRQJuIKKe2wAw6IeULDHaqbiqiggmx+pKvZDb1Sj+pE46Sn1T7lCqfFtg1Q==}
     engines: {node: '>=16'}
+
+  markdown-it@14.3.3:
+    resolution: {integrity: sha512-L//tDAkjTjJCU6pBUSBTgs3Kg4InVaZuUZog/b6V12UKhcDQ7S78877ibbCanRExwPuYP1CZD7Gd2dxSy1GXRg==}
+    hasBin: true
 
   markdown-table@3.1.0:
     resolution: {integrity: sha512-xpeSCdM+B+6P3ncfgaB7FoDbtJ30xAe6Z18TGT7AgXJsHqCElCICZovQqdRMm7kHgpTyYv36EupqewoFFSB8vw==}
@@ -6358,6 +6270,9 @@ packages:
 
   mdast-util-to-string@4.0.0:
     resolution: {integrity: sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==}
+
+  mdurl@2.1.0:
+    resolution: {integrity: sha512-1+HBaOx0zi/dQWht8rNv9MYf9qqpqL/kxI0hXImU6Y547zM6Sni8BQibt7ifgMcYtQg41ao3Ivd6cnSM86inpg==}
 
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -6872,6 +6787,10 @@ packages:
     resolution: {integrity: sha512-WMMbn/d7JqRlfXQL/JUI4n5skC8cJ5WVr8/wT5mmiYWkUdENkZr1I5rgs2+dQPVRgoJd+JRYtB46MTsuDylw9g==}
     engines: {node: '>=18'}
     hasBin: true
+
+  punycode.js@2.3.1:
+    resolution: {integrity: sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==}
+    engines: {node: '>=6'}
 
   quansync@1.0.0:
     resolution: {integrity: sha512-5xZacEEufv3HSTPQuchrvV6soaiACMFnq1H8wkVioctoH3TRha9Sz66lOxRwPK/qZj7HPiSveih9yAyh98gvqA==}
@@ -7455,15 +7374,25 @@ packages:
   typedarray-to-buffer@3.1.5:
     resolution: {integrity: sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==}
 
+  typedoc@0.28.20:
+    resolution: {integrity: sha512-uSKqkh8Cr48vllnEy+jdaAgOeR6Y+QCBW7usgUsKj7gJEfR7stw9U/fE49LBnj2tPRKPY0c0EBJSWe9Appmplg==}
+    engines: {node: '>= 18', pnpm: '>= 10'}
+    hasBin: true
+    peerDependencies:
+      typescript: 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x || 5.8.x || 5.9.x || 6.0.x
+
   typescript@5.6.1-rc:
     resolution: {integrity: sha512-E3b2+1zEFu84jB0YQi9BORDjz9+jGbwwy1Zi3G0LUNw7a7cePUrHMRNy8aPh53nXpkFGVHSxIZo5vKTfYaFiBQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typescript@7.0.2:
-    resolution: {integrity: sha512-8FYau96o3NKOhbjKi/qNvG/W5jhzxkbdm5sj9AbZ/5T5sWqn3hJgLfGx27sRKZWTvyzCP8dLRBTf5tBTSRVUNA==}
-    engines: {node: '>=16.20.0'}
+  typescript@6.0.3:
+    resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
+    engines: {node: '>=14.17'}
     hasBin: true
+
+  uc.micro@2.1.0:
+    resolution: {integrity: sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A==}
 
   uglify-js@3.19.3:
     resolution: {integrity: sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ==}
@@ -8895,6 +8824,14 @@ snapshots:
 
   '@fumari/image-size@0.1.1': {}
 
+  '@gerrit0/mini-shiki@3.23.0':
+    dependencies:
+      '@shikijs/engine-oniguruma': 3.23.0
+      '@shikijs/langs': 3.23.0
+      '@shikijs/themes': 3.23.0
+      '@shikijs/types': 3.23.0
+      '@shikijs/vscode-textmate': 10.1.0
+
   '@img/colour@1.1.0':
     optional: true
 
@@ -9633,10 +9570,19 @@ snapshots:
       '@shikijs/vscode-textmate': 10.1.0
       oniguruma-to-es: 4.3.6
 
+  '@shikijs/engine-oniguruma@3.23.0':
+    dependencies:
+      '@shikijs/types': 3.23.0
+      '@shikijs/vscode-textmate': 10.1.0
+
   '@shikijs/engine-oniguruma@4.6.0':
     dependencies:
       '@shikijs/types': 4.6.0
       '@shikijs/vscode-textmate': 10.1.0
+
+  '@shikijs/langs@3.23.0':
+    dependencies:
+      '@shikijs/types': 3.23.0
 
   '@shikijs/langs@4.6.0':
     dependencies:
@@ -9648,9 +9594,18 @@ snapshots:
       '@shikijs/vscode-textmate': 10.1.0
       '@types/hast': 3.0.5
 
+  '@shikijs/themes@3.23.0':
+    dependencies:
+      '@shikijs/types': 3.23.0
+
   '@shikijs/themes@4.6.0':
     dependencies:
       '@shikijs/types': 4.6.0
+
+  '@shikijs/types@3.23.0':
+    dependencies:
+      '@shikijs/vscode-textmate': 10.1.0
+      '@types/hast': 3.0.5
 
   '@shikijs/types@4.6.0':
     dependencies:
@@ -9921,66 +9876,6 @@ snapshots:
   '@types/webxr@0.5.24': {}
 
   '@types/which@3.0.4': {}
-
-  '@typescript/typescript-aix-ppc64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-darwin-arm64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-darwin-x64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-freebsd-arm64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-freebsd-x64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-arm64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-arm@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-loong64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-mips64el@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-ppc64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-riscv64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-s390x@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-x64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-netbsd-arm64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-netbsd-x64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-openbsd-arm64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-openbsd-x64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-sunos-x64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-win32-arm64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-win32-x64@7.0.2':
-    optional: true
 
   '@ungap/structured-clone@1.4.0': {}
 
@@ -10658,6 +10553,8 @@ snapshots:
     dependencies:
       ansi-colors: 4.1.3
       strip-ansi: 6.0.1
+
+  entities@4.5.0: {}
 
   env-paths@2.2.1: {}
 
@@ -11516,6 +11413,10 @@ snapshots:
       lightningcss-win32-arm64-msvc: 1.33.0
       lightningcss-win32-x64-msvc: 1.33.0
 
+  linkify-it@5.0.2:
+    dependencies:
+      uc.micro: 2.1.0
+
   locate-path@3.0.0:
     dependencies:
       p-locate: 3.0.0
@@ -11553,6 +11454,8 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.3.0
 
+  lunr@2.3.9: {}
+
   magic-string@1.4.5:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.6.0
@@ -11574,6 +11477,15 @@ snapshots:
   map-cache@0.2.2: {}
 
   markdown-extensions@2.0.0: {}
+
+  markdown-it@14.3.3:
+    dependencies:
+      argparse: 2.0.1
+      entities: 4.5.0
+      linkify-it: 5.0.2
+      mdurl: 2.1.0
+      punycode.js: 2.3.1
+      uc.micro: 2.1.0
 
   markdown-table@3.1.0: {}
 
@@ -11756,6 +11668,8 @@ snapshots:
   mdast-util-to-string@4.0.0:
     dependencies:
       '@types/mdast': 4.0.4
+
+  mdurl@2.1.0: {}
 
   merge-stream@2.0.0: {}
 
@@ -12510,6 +12424,8 @@ snapshots:
       picocolors: 1.1.1
       sade: 1.8.1
 
+  punycode.js@2.3.1: {}
+
   quansync@1.0.0: {}
 
   queue-microtask@1.2.3: {}
@@ -12731,7 +12647,7 @@ snapshots:
       glob: 14.0.3
       package-json-from-dist: 1.0.1
 
-  rolldown-plugin-dts@0.29.0(oxc-resolver@11.24.2)(rolldown@1.2.16)(typescript@7.0.2):
+  rolldown-plugin-dts@0.29.0(oxc-resolver@11.24.2)(rolldown@1.2.16)(typescript@6.0.3):
     dependencies:
       dts-resolver: 3.0.0(oxc-resolver@11.24.2)
       get-tsconfig: 5.0.0-beta.6
@@ -12739,7 +12655,7 @@ snapshots:
       rolldown: 1.2.16
       yuku: 0.25.0
     optionalDependencies:
-      typescript: 7.0.2
+      typescript: 6.0.3
     transitivePeerDependencies:
       - '@yuku-toolchain/wasm'
       - oxc-resolver
@@ -13118,7 +13034,7 @@ snapshots:
       minimist: 1.2.8
       strip-bom: 3.0.0
 
-  tsdown@0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@7.0.2):
+  tsdown@0.23.5(@arethetypeswrong/core@0.18.5)(oxc-resolver@11.24.2)(publint@0.3.25)(tsx@4.23.15)(typescript@6.0.3):
     dependencies:
       cac: 7.1.0
       defu: 6.1.7
@@ -13128,7 +13044,7 @@ snapshots:
       obug: 3.0.0
       picomatch: 4.0.7
       rolldown: 1.2.16
-      rolldown-plugin-dts: 0.29.0(oxc-resolver@11.24.2)(rolldown@1.2.16)(typescript@7.0.2)
+      rolldown-plugin-dts: 0.29.0(oxc-resolver@11.24.2)(rolldown@1.2.16)(typescript@6.0.3)
       tinyexec: 1.3.1
       tinyglobby: 0.2.17
       tinyps: 0.5.1
@@ -13138,7 +13054,7 @@ snapshots:
       '@arethetypeswrong/core': 0.18.5
       publint: 0.3.25
       tsx: 4.23.15
-      typescript: 7.0.2
+      typescript: 6.0.3
     transitivePeerDependencies:
       - '@volar/typescript'
       - '@vue/language-core'
@@ -13182,30 +13098,20 @@ snapshots:
     dependencies:
       is-typedarray: 1.0.0
 
+  typedoc@0.28.20(typescript@6.0.3):
+    dependencies:
+      '@gerrit0/mini-shiki': 3.23.0
+      lunr: 2.3.9
+      markdown-it: 14.3.3
+      minimatch: 10.2.6
+      typescript: 6.0.3
+      yaml: 2.9.1
+
   typescript@5.6.1-rc: {}
 
-  typescript@7.0.2:
-    optionalDependencies:
-      '@typescript/typescript-aix-ppc64': 7.0.2
-      '@typescript/typescript-darwin-arm64': 7.0.2
-      '@typescript/typescript-darwin-x64': 7.0.2
-      '@typescript/typescript-freebsd-arm64': 7.0.2
-      '@typescript/typescript-freebsd-x64': 7.0.2
-      '@typescript/typescript-linux-arm': 7.0.2
-      '@typescript/typescript-linux-arm64': 7.0.2
-      '@typescript/typescript-linux-loong64': 7.0.2
-      '@typescript/typescript-linux-mips64el': 7.0.2
-      '@typescript/typescript-linux-ppc64': 7.0.2
-      '@typescript/typescript-linux-riscv64': 7.0.2
-      '@typescript/typescript-linux-s390x': 7.0.2
-      '@typescript/typescript-linux-x64': 7.0.2
-      '@typescript/typescript-netbsd-arm64': 7.0.2
-      '@typescript/typescript-netbsd-x64': 7.0.2
-      '@typescript/typescript-openbsd-arm64': 7.0.2
-      '@typescript/typescript-openbsd-x64': 7.0.2
-      '@typescript/typescript-sunos-x64': 7.0.2
-      '@typescript/typescript-win32-arm64': 7.0.2
-      '@typescript/typescript-win32-x64': 7.0.2
+  typescript@6.0.3: {}
+
+  uc.micro@2.1.0: {}
 
   uglify-js@3.19.3:
     optional: true

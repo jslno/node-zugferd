@@ -18,7 +18,7 @@ overrides:
 
 catalog:
   tsdown: ^0.23.5
-  typescript: ^7.0.2
+  typescript: ^6.0.3
   xmlbuilder2: ^4.0.3
   pdf-lib: ^1.17.1
 

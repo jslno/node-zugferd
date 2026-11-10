@@ -57,6 +57,7 @@
     "serialize-javascript": "^7.1.4",
     "tsx": "^4.23.15",
     "turbo": "^2.11.10",
+    "typedoc": "0.28.20",
     "typescript": "catalog:",
     "vitest": "catalog:vitest",
     "xmlbuilder2": "catalog:"

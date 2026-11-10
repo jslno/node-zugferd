@@ -19,6 +19,7 @@
 		"@turbo/gen",
 		"@types/serialize-javascript",
 		"serialize-javascript",
+		"typedoc",
 		"xmlbuilder2"
 	],
 	"rules": {
