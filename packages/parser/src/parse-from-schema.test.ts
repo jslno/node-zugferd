@@ -173,7 +173,7 @@ describe("parse-from-schema invoice notes", () => {
 			context: {} as never,
 		});
 
-		expect(result.exchangedDocument?.invoiceNotes).toEqual([
+		expect((result.exchangedDocument as any)?.invoiceNotes).toEqual([
 			{ content: "Note 1" },
 			{ content: "Note 2", subjectCode: "ABC" },
 		]);
@@ -438,6 +438,7 @@ describe("parse-from-schema dates", () => {
 
 		expect(result.exchangedDocument.invoiceIssueDate).toEqual({
 			format: "102",
+			raw: "20200305",
 			value: new Date("2020-03-05"),
 		});
 	});

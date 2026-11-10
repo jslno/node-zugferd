@@ -1,6 +1,3 @@
-import { readFile, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
 import { inflateSync } from "node:zlib";
 import { minimum } from "@node-zugferd/minimum";
 import {
@@ -14,40 +11,51 @@ import { simpleData as en16931Data } from "@node-zugferd-test/test-utils/en-1693
 import { invoiceData as minimumData } from "@node-zugferd-test/test-utils/minimum/valid/invoice.js";
 import { zugferd } from "node-zugferd";
 import { PDFParse } from "pdf-parse";
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 import { defaultTemplate } from "../src";
 import { invoicer } from "./invoicer";
 
+const invoices = [
+	{
+		profile: "minimum",
+		data: minimumData,
+	},
+	{
+		profile: "basic-wl",
+		data: basicWlData,
+	},
+	{
+		profile: "en-16931",
+		data: en16931Data,
+	},
+] as const;
+
+type Profile = (typeof invoices)[number]["profile"];
+type Invoice = Awaited<ReturnType<typeof invoicer.create>>;
+
+const created = {} as Record<Profile, Invoice>;
+const rendered = {} as Record<Profile, Uint8Array>;
+
 describe("default-template", () => {
-	const baseDir = dirname(fileURLToPath(import.meta.url));
+	beforeAll(async () => {
+		for (const { profile, data } of invoices) {
+			const invoice = await invoicer.create(profile, data);
+			created[profile] = invoice;
+			rendered[profile] = await (
+				await invoice.toPDF(invoicer.template())
+			).save();
+		}
+	});
 
 	it("should generate invoice", async () => {
-		for (const { profile, data } of [
-			{
-				profile: "minimum",
-				data: minimumData,
-			},
-			{
-				profile: "basic-wl",
-				data: basicWlData,
-			},
-			{
-				profile: "en-16931",
-				data: en16931Data,
-			},
-		] as const) {
-			const invoice = await invoicer.create(profile, data);
-
-			const pdf = await (await invoice.toPDF(invoicer.template())).save();
-			expect(pdf.byteLength).toBeGreaterThan(0);
-			await writeFile(join(baseDir, `invoice.${profile}.pdf`), pdf);
+		for (const { profile } of invoices) {
+			expect(rendered[profile].byteLength).toBeGreaterThan(0);
 		}
 	});
 
 	it("should apply custom fonts", async () => {
-		const invoice = await invoicer.create("minimum", minimumData);
 		const custom = await (
-			await invoice.toPDF(
+			await created.minimum.toPDF(
 				invoicer.template({
 					fonts: {
 						font: StandardFonts.TimesRoman,
@@ -65,9 +73,8 @@ describe("default-template", () => {
 	});
 
 	it("should apply custom page size", async () => {
-		const invoice = await invoicer.create("minimum", minimumData);
 		const custom = await (
-			await invoice.toPDF(
+			await created.minimum.toPDF(
 				invoicer.template({
 					pageSize: PageSizes.A5,
 				}),
@@ -97,9 +104,8 @@ describe("default-template", () => {
 	});
 
 	it("should reject an unknown locale", async () => {
-		const invoice = await invoicer.create("en-16931", en16931Data);
 		await expect(
-			invoice.toPDF(
+			created["en-16931"].toPDF(
 				invoicer.template({
 					locale: "xx" as "en",
 				}),
@@ -253,10 +259,8 @@ describe("default-template", () => {
 			),
 		};
 
-		for (const profile of ["minimum", "basic-wl", "en-16931"] as const) {
-			const text = await pdfText(
-				await readFile(join(baseDir, `invoice.${profile}.pdf`)),
-			);
+		for (const { profile } of invoices) {
+			const text = await pdfText(rendered[profile]);
 			for (const value of expected[profile]) {
 				expect(text, `${profile} should show ${value}`).toContain(
 					normalize(value),
