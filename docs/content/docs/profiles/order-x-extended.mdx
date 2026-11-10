@@ -1,0 +1,77 @@
+---
+icon: dot-[#f97316]
+title: Extended
+---
+
+import { orderXExtended } from "@node-zugferd/order-x-extended";
+
+The EXTENDED Profile is the [COMFORT](./order-x) profile, with more information on line level, allowing for
+instance multiple delivery location, Buyer Requisitioner on line level, minimum and maximum
+requested quantities, Seller and Buyer legal Address (if different of Address), VAT Breakdown, …
+and all information on EXTENDED profile for Factur-X/ZUGFeRD that can be present at the Order
+step of the global supply chain.
+
+## Basic Usage
+
+<Steps>
+    <Step>
+        ### Install the Profile
+        
+        ```package-install tab-group="pm"
+        npm install @node-zugferd/order-x-extended
+        ```
+    </Step>
+    <Step>
+        ### Setup the Profile
+        
+        Register the profile when creating your zugferd instance:
+        
+        ```ts title="lib/invoicer.ts"
+        import { orderXExtended } from "@node-zugferd/order-x-extended"; // [!code highlight]
+        import { zugferd } from "node-zugferd";
+        
+        export const invoicer = zugferd({
+          profiles: [orderXExtended], // [!code highlight]
+        });
+        ```
+    </Step>
+    <Step>
+        ### Define Order Data
+        
+        Provide order data that satisfies the requirements of this profile.
+        
+        ```ts title="data.ts"
+        import type { invoicer } from "@/lib/invoicer";
+        
+        const data: typeof invoicer.$Infer.Input.OrderXExtended = {
+          exchangedDocument: {
+            orderId: "471102",
+            // ...
+          },
+          // ...
+        };
+        ```
+    </Step>
+    <Step>
+        ### Generate Order
+        
+        Create the order and embed it into a PDF/A document or serialize it for further processing.
+        
+        ```ts title="order.ts"
+        import { invoicer } from "@/lib/invoicer";
+        import { data } from "./data";
+        import { readFile } from "node:fs/promises";
+        
+        const order = await invoicer.create("order-x-extended", data);
+        
+        const xml = order.toXML();
+        const pdfA = await order.toPDF(
+          await readFile("./my-order.pdf"),
+        );
+        ```
+    </Step>
+</Steps>
+
+## Schema
+
+<ProfileTree profile={orderXExtended} />

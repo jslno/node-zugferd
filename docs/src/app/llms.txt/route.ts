@@ -1,11 +1,8 @@
-import { getLLMText } from "../docs/lib/get-llm-text";
-import { source } from "../source";
+import { llms } from "fumadocs-core/source";
+import { source } from "@/lib/source";
 
 export const revalidate = false;
 
-export async function GET() {
-	const scan = source.getPages().map(getLLMText);
-	const scanned = await Promise.all(scan);
-
-	return new Response(scanned.join("\n\n"));
+export function GET() {
+	return new Response(llms(source).index());
 }

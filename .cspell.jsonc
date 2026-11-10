@@ -1,0 +1,66 @@
+{
+	"$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+	"useGitignore": true,
+	"ignoreRandomStrings": true,
+	"allowCompoundWords": true,
+	"dictionaryDefinitions": [
+		{
+			"name": "alt-language",
+			"path": "./.cspell/alt-language.txt",
+			"addWords": true
+		},
+		{
+			"name": "misspelled",
+			"path": "./.cspell/misspelled.txt",
+			"addWords": true
+		},
+		{
+			"name": "names",
+			"path": "./.cspell/names.txt",
+			"addWords": true
+		},
+		{
+			"name": "standards",
+			"path": "./.cspell/standards.txt",
+			"addWords": true
+		},
+		{
+			"name": "tech",
+			"path": "./.cspell/tech.txt",
+			"addWords": true
+		},
+		{
+			"name": "third-party",
+			"path": "./.cspell/third-party.txt",
+			"addWords": true
+		},
+		{
+			"name": "zugferd",
+			"path": "./.cspell/zugferd.txt",
+			"addWords": true
+		}
+	],
+	"dictionaries": [
+		"alt-language",
+		"misspelled",
+		"names",
+		"standards",
+		"tech",
+		"third-party",
+		"zugferd"
+	],
+	"ignoreRegExpList": [],
+	"ignorePaths": [
+		"patches",
+		"pnpm-workspace.yaml",
+		"pnpm-lock.yaml",
+		"e2e/smoke/test/fixtures/cloudflare/worker-configuration.d.ts",
+		"scripts/generators/**/*.xml",
+		"scripts/generators/**/*.22A",
+		"*.config.js",
+		"*.config.ts",
+		"*.json",
+		"*.xsd",
+		".gitignore"
+	]
+}

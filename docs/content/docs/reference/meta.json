@@ -1,0 +1,10 @@
+{
+  "icon": "Library",
+  "pages": [
+    "cli",
+    "options",
+    "resources",
+    "contributing",
+    "[Braces][API Reference](../../api-reference)"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "icon": "Blocks",
+  "collapsible": true,
+  "pages": [
+    "---ZUGFeRD---",
+    "minimum",
+    "basic-wl",
+    "basic",
+    "en-16931",
+    "extended",
+    "xrechnung",
+    "---Order-X---",
+    "order-x-basic",
+    "order-x",
+    "order-x-extended"
+  ]
+}

@@ -1,0 +1,11 @@
+/* cSpell:disable */
+
+import type { FieldMeta } from "./profile-field-utils";
+
+export const profileFieldMetaMap = new Map(
+	{{{content}}} satisfies [
+		string,
+		Omit<FieldMeta, "id" | "cardinality" | "dataType"> &
+			Partial<Pick<FieldMeta, "id">>
+	][],
+);

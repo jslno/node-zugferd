@@ -1,149 +1,92 @@
 ---
-title: Contributing to node-zugferd
-description: A short guide to contributing to node-zugferd
-priority: 0.3
+icon: GitPullRequestCreateArrow
+title: Contributing
+description: A guide to contributing to node-zugferd.
 ---
-
-Thank you for considering contributing to node-zugferd! Your potential involvement is greatly appreciated.
-
-## Getting Started
-
-Before diving in, take a look at existing:
-
-- <Link href="https://github.com/jslno/node-zugferd/issues">Issues</Link>
-- <Link href="https://github.com/jslno/node-zugferd/pulls">Pull Requests</Link>
 
 ## Development Setup
 
-<Callout type="warn">Make sure you have <Link href="https://nodejs.org/en/download">Node.js</Link>{" "}
-installed, preferably on LTS.</Callout>
+<Callout type="warn">
+    Make sure you have [NodeJS](https://nodejs.org/en/download) installed, preferably on LTS.
+</Callout>
 
 <Steps>
-
     <Step>
-
-        ### 1. Fork the repository
-
-        Visit https://github.com/jslno/node-zugferd
-
-        Click the "Fork" button in the top right.
-
+        ### Fork the repository
+        
+        Visit the [node-zugferd repository](https://github.com/jslno/node-zugferd) and click on the "Fork" button in the top right corner to create a copy of the repository under your GitHub account.
     </Step>
-
     <Step>
-
-        ### 2. Clone your fork
-
+        ### Clone your fork
+        
+        Clone the forked repository to your local machine using the following command:
+        
         ```bash
         # Replace YOUR-USERNAME with your GitHub username
         git clone https://github.com/YOUR-USERNAME/node-zugferd.git
         cd node-zugferd
         ```
-
     </Step>
-
     <Step>
-
-        ### 3. Install dependencies
-
-        Make sure you have <Link href="https://pnpm.io/installation">pnpm</Link> installed!
-
+        ### Install dependencies
+        
+        Make sure you have [pnpm](https://pnpm.io/installation) installed!
+        
         ```bash
         pnpm install
         ```
-
     </Step>
-
-    <Step>
-
-        ### 4. Prepare ENV files
-
-        Copy the example env file to create your new `.env` file.
-
-        ```bash
-        cp -n ./docs/.env.example ./docs/.env
-        ```
-
-    </Step>
-
 </Steps>
 
-## Making changes
+## Making Changes
 
-Once you have an idea on what you want to contribute, you can start making changes. Here are some steps to get started:
+Once you have an idea of what you want to contribute, you can start making changes. Here are some steps to get started:
 
 <Steps>
-
     <Step>
-
-        ### 1. Create a new branch
-
+        ### Create a new branch
+        
         ```bash
+        # Add upstream remote (if not already added)
+        git remote add upstream https://github.com/jslno/node-zugferd.git
+        
         # Make sure you're on main
         git checkout main
-
+        
         # Pull latest changes
         git pull upstream main
-
+        
         # Create and switch to a new branch
         git checkout -b feat/your-feature-name
         ```
-
     </Step>
-
     <Step>
-
-        ### 2. Start development server
-
-        Start the development server:
-
+        ### Start development server
+        
         ```bash
         pnpm dev
         ```
-
+        
         To start the docs server:
-
+        
         ```bash
         pnpm -F docs dev
         ```
-
-        To start the bun server:
-
-        ```bash
-        pnpm -F @dev/bun dev
-        ```
-        To start the node server:
-
-        ```bash
-        pnpm -F @dev/node dev
-        ```
     </Step>
-
     <Step>
-
-        ### 3. Make your changes
-
-        * Make your changes to the codebase.
-
-        * Write tests if needed.
-
-        * Update documentation.
-
+        ### Make your changes
+        
+        - Make your changes to the codebase.
+        - Write tests if needed. (Read more about [testing](#testing))
+        - Update documentation. (Read more about [documenting](#documentation))
     </Step>
-
 </Steps>
 
-### Issues and Bug Fixes
-
-- Check our [GitHub issues](https://github.com/jslno/node-zugferd/issues) for tasks labeled `good first issue`
-- When reporting bugs, include steps to reproduce and expected behavior
-- Comment on issues you'd like to work on to avoid duplicate efforts
-
-### Documentation
+## Documentation
 
 - Fix typos and errors
 - Add examples and clarify existing content
-- Ensure documentation is up-to-date with code changes
+- Ensure documentation is up to date with code changes
 
 ## Testing
 
@@ -153,10 +96,10 @@ We use Vitest for testing. Place test files next to the source files they test:
 import { describe, it, expect } from "vitest";
 
 describe("Feature", () => {
-  it("should work as expected", async () => {
-    // Test code here
-    expect(result).toBeDefined();
-  });
+    it("should work as expected", async () => {
+        // Test code here
+        expect(result).toBeDefined();
+    });
 });
 ```
 
@@ -168,6 +111,8 @@ describe("Feature", () => {
 - Follow our coding standards
 - Keep pull requests focused on a single change
 
-Thank you for contributing to node-zugferd!
+## Need Help?
 
-<NeedHelp />
+Feel free to ask for help! You can always open an [issue](https://github.com/jslno/node-zugferd/issues) with questions.
+
+Thank you for contributing to node-zugferd!

@@ -1,0 +1,25 @@
+diff --git a/dist/cjs/easy-template-x-angular-expressions.cjs b/dist/cjs/easy-template-x-angular-expressions.cjs
+index b19a183b2aca9e6e4a8da7c31e480f86298e4cbb..619d0f01d82dabc762591c375b9ae1472ca278cc 100644
+--- a/dist/cjs/easy-template-x-angular-expressions.cjs
++++ b/dist/cjs/easy-template-x-angular-expressions.cjs
+@@ -2,7 +2,7 @@
+ 
+ var easyTemplateX = require('easy-template-x');
+ var expressions = require('angular-expressions');
+-var getProp = require('lodash.get');
++var { get: getProp } = require('lodash.get');
+ 
+ function isNumber(value) {
+   return Number.isFinite(value);
+diff --git a/dist/es/easy-template-x-angular-expressions.mjs b/dist/es/easy-template-x-angular-expressions.mjs
+index 235cb5427350d17a918e14510819cf3588676a6d..f467adb3c190bfca829089decd48ffcc0103f998 100644
+--- a/dist/es/easy-template-x-angular-expressions.mjs
++++ b/dist/es/easy-template-x-angular-expressions.mjs
+@@ -1,6 +1,6 @@
+ import { ScopeData } from 'easy-template-x';
+ import expressions from 'angular-expressions';
+-import getProp from 'lodash.get';
++import { get as getProp } from 'lodash.get';
+ 
+ function isNumber(value) {
+   return Number.isFinite(value);

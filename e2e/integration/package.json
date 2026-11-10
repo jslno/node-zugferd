@@ -1,0 +1,17 @@
+{
+  "name": "@node-zugferd-test/integration",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "pdf-lib": "catalog:",
+    "node-zugferd": "workspace:*",
+    "@node-zugferd/en-16931": "workspace:*",
+    "@node-zugferd/default-template": "workspace:*",
+    "@node-zugferd/templates": "workspace:*",
+    "@node-zugferd/parser": "workspace:*",
+    "@node-zugferd-test/test-utils": "workspace:*"
+  },
+  "scripts": {
+    "e2e:integration": "vitest run"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "include": ["./src", "./package.json"],
+  "references": [
+    {
+      "path": "../basic-wl/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/charge/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/untdid-5305/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/unit/tsconfig.json"
+    },
+    {
+      "path": "../../utils/tsconfig.json"
+    },
+    {
+      "path": "../../core/tsconfig.json"
+    },
+    {
+      "path": "../../data-types/tsconfig.json"
+    }
+  ]
+}

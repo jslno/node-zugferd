@@ -1,0 +1,77 @@
+---
+icon: dot-[#f43f5e]
+title: XRechnung
+---
+
+import { xrechnung } from "@node-zugferd/xrechnung";
+
+This profile has been included specifically to include invoices
+for Germany. The validity of the structure is based on and is under the sole responsibility of KoSIT,
+Germany's central coordination agency for IT's e-invoice CIUS "XRechnung". It is defined as the
+standard for electronic invoices issued to public administrations and may include specific business
+rules to EN 16931 in order to comply with national laws and regulations.
+
+## Basic Usage
+
+<Steps>
+    <Step>
+        ### Install the Profile
+        
+        ```package-install tab-group="pm"
+        npm install @node-zugferd/xrechnung
+        ```
+    </Step>
+    <Step>
+        ### Setup the Profile
+        
+        Register the profile when creating your zugferd instance:
+        
+        ```ts title="lib/invoicer.ts"
+        import { xrechnung } from "@node-zugferd/xrechnung"; // [!code highlight]
+        import { zugferd } from "node-zugferd";
+        
+        export const invoicer = zugferd({
+          profiles: [xrechnung], // [!code highlight]
+        });
+        ```
+    </Step>
+    <Step>
+        ### Define Invoice Data
+        
+        Provide invoice data that satisfies the requirements of this profile.
+        
+        ```ts title="data.ts"
+        import type { invoicer } from "@/lib/invoicer";
+        
+        const data: typeof invoicer.$Infer.Input.Xrechnung = {
+          exchangedDocument: {
+            invoiceNumber: "471102",
+            // ...
+          },
+          // ...
+        };
+        ```
+    </Step>
+    <Step>
+        ### Generate Invoice
+        
+        Create the invoice and embed it into a PDF/A document or serialize it for further processing.
+        
+        ```ts title="invoice.ts"
+        import { invoicer } from "@/lib/invoicer";
+        import { data } from "./data";
+        import { readFile } from "node:fs/promises";
+        
+        const invoice = await invoicer.create("xrechnung", data);
+        
+        const xml = invoice.toXML();
+        const pdfA = await invoice.toPDF(
+          await readFile("./my-invoice.pdf"),
+        );
+        ```
+    </Step>
+</Steps>
+
+## Schema
+
+<ProfileTree profile={xrechnung} />

@@ -1,5 +1,52 @@
 packages:
   - packages/**
-  - dev/**
   - docs
-  - examples/**
+  - e2e/**
+  - benchmark/**
+
+allowBuilds:
+  esbuild: true
+  sharp: true
+  workerd: true
+
+blockExoticSubdeps: true
+
+overrides:
+  yuku-analyzer: ^0.19.0
+  easy-template-x>lodash.get: npm:lodash@^4.18.1
+  easy-template-x-angular-expressions>lodash.get: npm:lodash@^4.18.1
+
+catalog:
+  tsdown: ^0.23.5
+  typescript: ^6.0.3
+  xmlbuilder2: ^4.0.3
+  pdf-lib: ^1.17.1
+
+catalogs:
+  biome:
+    "@biomejs/biome": ^2.6.5
+    "@biomejs/js-api": ^6.1.0
+    "@biomejs/wasm-nodejs": ^2.6.5
+  vitest:
+    "@vitest/coverage-istanbul": ^5.1.0
+    "@vitest/ui": ^5.1.0
+    vitest: ^5.1.0
+
+minimumReleaseAgeExclude:
+  - miniflare@5.20260730.0-alpha
+  - wrangler@4.118.0
+  - tsx@4.23.8
+  - "@node-zugferd/*"
+  - "@zugferd/xsd-validator-darwin-arm64@0.1.0"
+  - "@zugferd/xsd-validator-darwin-x64@0.1.0"
+  - "@zugferd/xsd-validator-linux-arm64-gnu@0.1.0"
+  - "@zugferd/xsd-validator-linux-x64-gnu@0.1.0"
+  - "@zugferd/xsd-validator-win32-arm64-msvc@0.1.0"
+  - "@zugferd/xsd-validator-win32-x64-msvc@0.1.0"
+  - "@zugferd/xsd-validator@0.1.0"
+
+trustPolicy: no-downgrade
+
+patchedDependencies:
+  easy-template-x-angular-expressions@0.3.0: patches/easy-template-x-angular-expressions@0.3.0.patch
+  easy-template-x@8.0.1: patches/easy-template-x@8.0.1.patch

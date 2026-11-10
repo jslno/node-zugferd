@@ -1,0 +1,17 @@
+import defaultMdxComponents from "@fumadocs/base-ui/mdx";
+import type { MDXComponents } from "mdx/types";
+import { TypeTable } from "./type-table";
+
+export function getMDXComponents(components?: MDXComponents) {
+	return {
+		...defaultMdxComponents,
+		TypeTable,
+		...components,
+	} satisfies MDXComponents;
+}
+
+export const useMDXComponents = getMDXComponents;
+
+declare global {
+	type MDXProvidedComponents = ReturnType<typeof getMDXComponents>;
+}

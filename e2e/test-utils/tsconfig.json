@@ -1,0 +1,39 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["node", "bun"]
+  },
+  "references": [
+    {
+      "path": "../../packages/node-zugferd/tsconfig.json"
+    },
+    {
+      "path": "../../packages/profiles/minimum/tsconfig.json"
+    },
+    {
+      "path": "../../packages/profiles/basic-wl/tsconfig.json"
+    },
+    {
+      "path": "../../packages/profiles/basic/tsconfig.json"
+    },
+    {
+      "path": "../../packages/profiles/en-16931/tsconfig.json"
+    },
+    {
+      "path": "../../packages/profiles/extended/tsconfig.json"
+    },
+    {
+      "path": "../../packages/profiles/xrechnung/tsconfig.json"
+    },
+    {
+      "path": "../../packages/profiles/order-x-basic/tsconfig.json"
+    },
+    {
+      "path": "../../packages/profiles/order-x/tsconfig.json"
+    },
+    {
+      "path": "../../packages/profiles/order-x-extended/tsconfig.json"
+    }
+  ]
+}

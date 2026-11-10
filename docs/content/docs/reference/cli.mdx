@@ -1,0 +1,47 @@
+---
+icon: SquareTerminal
+title: CLI
+---
+
+## Parse
+
+```package-install title="Terminal"
+npx @node-zugferd/cli parse
+```
+
+### Options
+
+- `--cwd` - The current working directory.
+- `--profile` - The profile to use for parsing the invoice.
+- `--input` - The invoice file to parse.
+- `--output` - The output file to write the JSON to.
+- `--minify` - Minify the output.
+
+## Init
+
+```package-install title="Terminal"
+npx @node-zugferd/cli init
+```
+
+### Options
+
+- `--cwd` - The current working directory.
+- `--config` - The path to the zugferd configuration file. Defaults to the first `invoicer.ts` or `zugferd.ts` file found.
+- `--package-manager` - The package manager to use.
+- `--dry-run` - Run the command without making any changes.
+
+## Upgrade
+
+The `upgrade` commands upgrades older `node-zugferd` dependencies and `@node-zugferd/*` packages
+that participate in the synchronized release train to the version of the CLI being run.
+It compares the minimum version allowed by each `package.json` specifier; specifiers
+whose minimum is the same or newer are left unchanged.
+
+```package-install title="Terminal"
+npx @node-zugferd/cli upgrade
+```
+
+### Options
+
+- `--cwd` - The project directory containing the `package.json` to update. Defaults to the current working directory.
+- `--yes` - Skip the confirmation prompt and install updates directly.

@@ -1,95 +1,73 @@
 ---
+icon: dot-[#f97316]
 title: Extended
-description: Extension of EN16931 for complex processes and French business cases.
-priority: 0.7
 ---
 
-import { EXTENDED } from "node-zugferd/profile/extended";
+import { extended } from "@node-zugferd/extended";
 
-This profile constitutes an extension of [EN16931 (Comfort)](/docs/profiles/en16931)
-aimed at supporting complex business processes (i.e. invoices which are being invoiced across
-multiple deliveries or delivery locations, structured terms of payment, further details at item level to
-facilitate warehousing etc.), and any business case inventoried in France (gathered in a subset named
-EXTENDED B2B FR and its subset EXTENDED-CTC-FR, as referenced by the French Tax Administration
-and National Platform PPF – Portail Public de Facturation). This includes additional code lists values
-which are not part of the [European Norm EN 16931 code lists](https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931).
-
-```ts
-import { EXTENDED, type ProfileExtended } from "node-zugferd/profile/extended";
-```
+This profile constitutes an extension of [EN16931](/docs/profiles/en-16931) aimed at supporting complex business processes (i.e. invoices which are being invoiced across multiple deliveries or delivery locations, structured terms of payment, further details at item level to facilitate warehousing etc.), and any business case inventoried in France (gathered in a subset named EXTENDED B2B FR and its subset EXTENDED-CTC-FR, as referenced by the French Tax Administration and National Platform PPF – Portail Public de Facturation). This includes additional code lists values which are not part of the [European Norm EN 16931 code lists](https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931).
 
 ## Basic Usage
 
 <Steps>
-
-<Step>
-### Setup the Profile
-
-First configure the zugferd instance (`invoicer`) to use the Extended profile.
-This defines the standard and complexity level of the invoice.
-
-```ts title="invoicer.ts"
-import { EXTENDED } from "node-zugferd/profile/extended"; // [!code highlight]
-
-export const invoicer = zugferd({
-  profile: EXTENDED, // [!code highlight]
-});
-```
-
-</Step>
-
-<Step>
-### Define Invoice Data
-
-Now define the actual invoice content, including all required fields of the
-profile, using the `ProfileExtended` type for type safety.
-
-```ts
-import { ProfileExtended } from "node-zugferd/profile/extended";
-
-const data: ProfileExtended = {
-  number: "INV-001",
-  // ...
-};
-```
-
-</Step>
-
-<Step>
-### Create Invoice
-
-Use the previously created instance (`invoicer`) to generate the invoice from your data. You can either:
-
-- Generate standalone XML
-- Embed the XML inside a PDF/A-3b compliant file.
-
-```ts
-import fs from "fs";
-import { invoicer } from "./invoicer";
-
-const invoice = invoicer.create(data);
-
-// Only generate xml
-const xml = await invoice.toXML();
-
-// Or embed xml in a PDF-A/3b
-const pdf = fs.readFileSync("./your/invoice.pdf");
-const pdfA = await invoicer.embedInPdf(pdf); // [!code highlight]
-```
-
-</Step>
-
-<Step>
-### 🎉 That's it [#thats-it]
-
-Your invoice is now ready! You've successfully created a ZUGFeRD invoice using the Extended profile.
-
-</Step>
-
+    <Step>
+        ### Install the Profile
+        
+        ```package-install tab-group="pm"
+        npm install @node-zugferd/extended
+        ```
+    </Step>
+    <Step>
+        ### Setup the Profile
+        
+        Register the profile when creating your zugferd instance:
+        
+        ```ts title="lib/invoicer.ts"
+        import { basicWL } from "@node-zugferd/extended"; // [!code highlight]
+        import { zugferd } from "node-zugferd";
+        
+        export const invoicer = zugferd({
+          profiles: [extended], // [!code highlight]
+        });
+        ```
+    </Step>
+    <Step>
+        ### Define Invoice Data
+        
+        Provide invoice data that satisfies the requirements of this profile.
+        
+        ```ts title="data.ts"
+        import type { invoicer } from "@/lib/invoicer";
+        
+        const data: typeof invoicer.$Infer.Input.Extended = {
+          exchangedDocument: {
+            invoiceNumber: "471102",
+            // ...
+          },
+          // ...
+        };
+        ```
+    </Step>
+    <Step>
+        ### Generate Invoice
+        
+        Create the invoice and embed it into a PDF/A document or serialize it for further processing.
+        
+        ```ts title="invoice.ts"
+        import { invoicer } from "@/lib/invoicer";
+        import { data } from "./data";
+        import { readFile } from "node:fs/promises";
+        
+        const invoice = await invoicer.create("extended", data);
+        
+        const xml = invoice.toXML();
+        const pdfA = await invoice.toPDF(
+          await readFile("./my-invoice.pdf"),
+        );
+        ```
+    </Step>
 </Steps>
 
 ## Schema
 
-Extends [EN16931 (COMFORT)](/docs/profiles/en16931)
-
-<ProfileTree schema={EXTENDED.schema} />
+<ProfileTree profile={extended} />
