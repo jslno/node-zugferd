@@ -12,6 +12,6 @@
     "---Order-X---",
     "order-x-basic",
     "order-x",
-    "order-x-extended"
+    "!order-x-extended"
   ]
 }

@@ -38,6 +38,19 @@ const invoicer = zugferd({
 });
 ```
 
+### `prettyPrint`
+
+Whether to pretty print the XML output. Defaults to `false`.
+
+```ts
+import { zugferd } from "node-zugferd";
+
+export const invoicer = zugferd({
+  prettyPrint: true,
+  // ...
+});
+```
+
 ### `logger`
 
 Logger configuration for node-zugferd.
@@ -112,6 +125,63 @@ export const invoicer = zugferd({
     afterXMLBuild: ({ xml, profile, context }) => {
       // Custom logic to execute after XML is built
       validate(profile.id, xml);
+    },
+  },
+  // ...
+});
+```
+
+### `advanced`
+
+Advanced configuration options.
+
+```ts
+import { zugferd } from "node-zugferd";
+
+export const invoicer = zugferd({
+  advanced: {
+    // ...
+  },
+});
+```
+
+#### `instrumentation`
+
+Instrumentation configuration.
+
+```ts
+import { zugferd } from "node-zugferd";
+
+export const invoicer = zugferd({
+  advanced: {
+    instrumentation: {
+      // ...
+    },
+  },
+});
+```
+
+The instrumentation configuration allows you to customize the span implementation. It supports the following options:
+
+- ##### `span`
+  Custom span implementation that receives:
+  - `name`: The span name
+  - `attr`: The span attributes
+  - `fn`: The span function
+
+Example with custom span implementation:
+
+```ts
+import { zugferd } from "node-zugferd";
+
+export const invoicer = zugferd({
+  advanced: {
+    instrumentation: {
+      span: async (name, attr, fn) => {
+        const result = await fn();
+        console.log(`Span ${name} completed with result:`, result);
+        return result;
+      }
     },
   },
   // ...

@@ -676,7 +676,7 @@ const FEATURES = [
 		label: "Generate",
 		description:
 			"Create ZUGFeRD/Factur-X compliant electronic invoices from structured data with a simple, developer-friendly API.",
-		href: "/docs/basic-usage",
+		href: "/docs/installation",
 		className: "sm:col-span-2 lg:col-span-5 lg:row-span-2",
 		Visual: GenerateVisual,
 	},

@@ -30,7 +30,7 @@ const eas = [
 	},
 	{
 		value: "0106",
-		name: "Vereniging van Kamers van Koophandel en Fabrieken in Nederland (Association of\nChambers of Commerce and Industry in the Netherlands), Scheme (EDIRA compliant)",
+		name: "Vereniging van Kamers van Koophandel en Fabrieken in Nederland (Association of\r\nChambers of Commerce and Industry in the Netherlands), Scheme (EDIRA compliant)",
 		key: "VERENIGING_VAN_KAMERS_VAN_KOOPHANDEL_EN_FABRIEKEN_IN_NEDERLAND_ASSOCIATION_OF_CHAMBERS_OF_COMMERCE_AND_INDUSTRY_IN_THE_NETHERLANDS_SCHEME_EDIRA_COMPLIANT",
 	},
 	{
@@ -220,7 +220,7 @@ const eas = [
 	},
 	{
 		value: "9915",
-		name: "Österreichisches Verwaltungs bzw.\nOrganisationskennzeichen",
+		name: "Österreichisches Verwaltungs bzw.\r\nOrganisationskennzeichen",
 		key: "O_STERREICHISCHES_VERWALTUNGS_BZW_ORGANISATIONSKENNZEICHEN",
 	},
 	{

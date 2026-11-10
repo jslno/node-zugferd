@@ -35,7 +35,7 @@ let uncl: string | null = null;
 async function getUnclSource() {
 	if (!uncl) {
 		uncl = await readFile(
-			join(dirname(fileURLToPath(import.meta.url)), "./UNCL.22A"),
+			join(dirname(fileURLToPath(import.meta.url)), "./UNCL.24A"),
 			"utf-8",
 		);
 	}

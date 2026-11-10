@@ -82,7 +82,7 @@ export const invoicer = zugferd({
 
 ## Manual validation
 
-`invoicer.mustang.validate` takes a profile id and the invoice XML as a string. The id may also be an object with an `id` field. Pass XML from disk, or the string returned by `toXML()`. The id has to be one of the [supported profiles](#supported-profiles). Mustang then reads the rules from the XML itself.
+`invoicer.mustang.validate` takes a profile id and the invoice XML or PDF. The id may also be an object with an `id` field and has to be one of the [supported profiles](#supported-profiles). Mustang then reads the rules from the bytes itself.
 
 ```ts title="validate.ts"
 import { readFile } from "node:fs/promises";
@@ -92,7 +92,7 @@ import { invoicer } from "./invoicer";
 try {
   await invoicer.mustang.validate(
     "en-16931",
-    await readFile("factur-x.xml", "utf-8"),
+    await readFile("invoice.pdf"),
   );
 } catch (error) {
   if (error instanceof ZugferdError) {
@@ -133,11 +133,6 @@ Mustang prints an XML report. This plugin treats that report as follows:
 Mustang is slower than the [XSD](/docs/plugins/validators/xsd) validator. Each check starts a Java process and runs the CLI, while XSD validates in-process in JavaScript.
 
 Mustang also requires a Java runtime, which XSD does not. In return, Mustang checks more than the XML schema. It also applies the business rules of each profile and checks PDF/A compliance, so it reports errors that XSD alone does not catch.
-
-<Callout title="XML only" type="warn">
-	Mustang validates XML only. PDF validation is not supported yet, so extract the embedded
-	XML before you call `validate`.
-</Callout>
 
 ## Options
 

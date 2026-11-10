@@ -1,11 +1,13 @@
 import defaultMdxComponents from "@fumadocs/base-ui/mdx";
 import type { MDXComponents } from "mdx/types";
+import * as TabsComponents from "./tabs";
 import { TypeTable } from "./type-table";
 
 export function getMDXComponents(components?: MDXComponents) {
 	return {
 		...defaultMdxComponents,
 		TypeTable,
+		...TabsComponents,
 		...components,
 	} satisfies MDXComponents;
 }

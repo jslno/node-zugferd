@@ -1,10 +1,10 @@
 import "@node-zugferd/codelist-untdid-1153";
 import "@node-zugferd/codelist-untdid-3139";
-import "@node-zugferd/codelist-untdid-4461";
+import "@node-zugferd/codelist-payment";
 import "@node-zugferd/codelist-untdid-5189";
 import "@node-zugferd/codelist-untdid-5305";
-import "@node-zugferd/codelist-untdid-7143";
-import "@node-zugferd/codelist-untdid-7161";
+import "@node-zugferd/codelist-item";
+import "@node-zugferd/codelist-charge";
 import {
 	array,
 	arrayAsync,
@@ -123,7 +123,7 @@ const transaction = objectAsync({
 													}),
 												),
 												listId: pipe(
-													code("untdid7143"),
+													code("item"),
 													metadata({
 														xpath:
 															"/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:DesignatedProductClassification/ram:ClassCode/@listID",
@@ -422,7 +422,7 @@ const transaction = objectAsync({
 													}),
 												),
 												reasonCode: pipe(
-													nullish(code("untdid7161")),
+													nullish(code("charge")),
 													metadata({
 														xpath:
 															"/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ReasonCode",
@@ -630,7 +630,7 @@ const transaction = objectAsync({
 											}),
 										),
 										reasonCode: pipe(
-											nullish(code("untdid7161")),
+											nullish(code("charge")),
 											metadata({
 												xpath:
 													"/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge/ram:ReasonCode",
@@ -1501,7 +1501,7 @@ const transaction = objectAsync({
 		paymentMeans: nullish(
 			object({
 				typeCode: pipe(
-					nullish(code("untdid4461")),
+					nullish(code("payment")),
 					metadata({
 						xpath:
 							"/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:TypeCode",
@@ -1607,7 +1607,7 @@ const transaction = objectAsync({
 							}),
 						),
 						reasonCode: pipe(
-							nullish(code("untdid7161")),
+							nullish(code("charge")),
 							metadata({
 								xpath:
 									"/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge/ram:ReasonCode",

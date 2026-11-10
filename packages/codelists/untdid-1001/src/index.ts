@@ -342,24 +342,32 @@ const untdid1001 = [
 	{
 		value: "500",
 		name: " Self Prepayment invoice, invoice type, Original",
+		description:
+			"An invoice produced by the buyer (invoicee) instead of the seller, which indicates that the buyer has to pay amounts for goods and services in advance; these amounts will be subtracted from the final invoice.",
 		interpretation: "Invoice",
 		key: "SELF_PREPAYMENT_INVOICE_INVOICE_TYPE_ORIGINAL",
 	},
 	{
 		value: "501",
 		name: " Self billed factored invoice, invoice type, Original",
+		description:
+			"An invoice assigned to a third party for collection, produced by the buyer (invoicee) instead of the seller.",
 		interpretation: "Invoice",
 		key: "SELF_BILLED_FACTORED_INVOICE_INVOICE_TYPE_ORIGINAL",
 	},
 	{
 		value: "502",
 		name: " Self billet factored Credit Note, Credit note type, Corrected",
+		description:
+			"An invoice assigned to a third party for collection, produced by the buyer (invoicee) which indicates that the buyer is claiming credit.",
 		interpretation: "Credit Note",
 		key: "SELF_BILLET_FACTORED_CREDIT_NOTE_CREDIT_NOTE_TYPE_CORRECTED",
 	},
 	{
 		value: "503",
 		name: " Prepayment credit note, credit note type, Corrected",
+		description:
+			"A document/message providing credit information to the relevant party which indicates that the buyer has to pay amounts for goods and services in advance; these amounts will be subtracted from the prepayment invoice. +    504   Consumer Product Circularity Performance Report A document detailing how effectively a product follows circular economy principles throughout its lifecycle, from design and production to use and end-of-life management. +    505   Corporate Sustainability Due Diligence Report A document detailing the actions taken by a company to identify and act on actual and potential risks to people and to the environment. Not only within its own operations but throughout its entire supply chain. +    506   Resource Consumption Report A document detailing the organization's energy use, including electricity, heating, and cooling, across different facilities and operations or water consumption. +    507   Emission Inventory Report A document detailing the types and quantities of pollutants, greenhouse gases (GHGs), and other harmful emissions released into the environment as a result of an organization's activities.",
 		interpretation: "Credit Note",
 		key: "PREPAYMENT_CREDIT_NOTE_CREDIT_NOTE_TYPE_CORRECTED",
 	},
@@ -3339,8 +3347,15 @@ const untdid1001 = [
 		value: "470",
 		name: "Waste disposal report",
 		description:
-			"Document/message sent by a shipping agent to an authority for reporting information on waste disposal.",
+			"Document/message sent by a shipping agent to an authority for reporting information on waste disposal. +    471   Self-billed corrective invoice Invoice produced by the invoicee is producing instead of the seller that includes revised information differing from an earlier submission of the same invoice. +    472   Factored corrective Invoice Invoice assigned to a third party for collection that includes revised information differing from an earlier submission of the same invoice. +    473   Self-billed factored corrective invoice Invoice produced by the invoicee instead of the seller, assigned to a third party for collection, that includes revised information differing from an earlier submission of the same invoice. +    474   Product Circularity Data A document/message providing data relating to how well the product adheres to circular principles, such as durability, recyclability, or ease of repair. +    475   Sustainability Report A document commonly addressed to customers, employees, and the general public, detailing a company's initiatives, goals, performance, and impacts across environmental, social, and economic dimensions. +    476   Disposal Instructions A document detailing how to safely dispose of products, especially those that may contain hazardous materials. +    477   Recycling Instructions A document or guideline detailing how products can be recycled correctly and efficiently (such as sorting instructions, disassembly procedures, hazardous material handling, recycling techniques). +    478   Chemical Safety Assessment (CSA) A document that details the process and findings of a Chemical Safety Assessment. +    479   Environmental, Social, and Governance (ESG) Report A document commonly addressed to investors and regulators, containing standardized data to assess corporate performance and risk, detailing a company's impact and efforts regarding environmental and social issues, as well as corporate board and management.",
 		key: "WASTE_DISPOSAL_REPORT",
+	},
+	{
+		value: "480",
+		name: "Invoice out of scope of tax",
+		description:
+			"An invoice issued by a party who is out of the scope of tax regulations and shall not collect tax on the invoice. The invoice should not contain tax details or information about the party tax registrations.",
+		key: "INVOICE_OUT_OF_SCOPE_OF_TAX",
 	},
 	{
 		value: "481",
@@ -3742,7 +3757,7 @@ const untdid1001 = [
 		value: "625",
 		name: "Heat Treatment Certificate",
 		description:
-			"A certificate verifying the heat treatment of the product is in conformance with international standards to ensure the product�s healthiness and/or shows the mode of heat treatment indicating the temperature and the amount of time the product or raw material used in the product was treated (such as milk).",
+			"A certificate verifying the heat treatment of the product is in conformance with international standards to ensure the product’s healthiness and/or shows the mode of heat treatment indicating the temperature and the amount of time the product or raw material used in the product was treated (such as milk).",
 		key: "HEAT_TREATMENT_CERTIFICATE",
 	},
 	{
@@ -3974,6 +3989,13 @@ const untdid1001 = [
 		key: "BAYPLAN_STOWAGE_PLAN_PARTIAL",
 	},
 	{
+		value: "660",
+		name: "Production Report",
+		description:
+			"A document that provides production information such as the identification and number of units of materials used and produced commonly related to manufacturing instructions, purchase orders and other documents. +    661   Declaration of Conformity A self-issued document in which the manufacturer or supplier declares that their product, process, or service meets the specified standards or regulatory requirements.",
+		key: "PRODUCTION_REPORT",
+	},
+	{
 		value: "700",
 		name: "Waybill",
 		description:
@@ -4097,7 +4119,7 @@ const untdid1001 = [
 	},
 	{
 		value: "718",
-		name: "Seaman�s book",
+		name: "Seaman’s book",
 		description:
 			"A national identity document issued to professional seamen that contains a record of their rank and service career.",
 		key: "SEAMAN_S_BOOK",
@@ -5117,8 +5139,15 @@ const untdid1001 = [
 		value: "896",
 		name: "INTRASTAT declaration",
 		description:
-			"Document/message in which a declarant provides information about goods required by the body responsible for the collection of trade statistics. |    897   Transit certificate of approval Certificate of approval for vehicles and containers used to transit goods under customs seals.",
+			"Document/message in which a declarant provides information about goods required by the body responsible for the collection of trade statistics.",
 		key: "INTRASTAT_DECLARATION",
+	},
+	{
+		value: "897",
+		name: "Transit certificate of approval",
+		description:
+			"Certificate of approval for vehicles and containers used to transit goods under customs seals.",
+		key: "TRANSIT_CERTIFICATE_OF_APPROVAL",
 	},
 	{
 		value: "898",
@@ -5164,8 +5193,41 @@ const untdid1001 = [
 		value: "904",
 		name: "Sustainability Inspection response",
 		description:
-			"Document/message reporting the results of a sustainability inspection. +    905   Transport Means Forecast Information Message Message to provide the forecast information about ships, trains, vehicles and aircrafts arrival at the destination. +    906   Transport Means Actual Information Message Message to provide the actual information about ships, trains, vehicles and aircrafts arrival at the destination. +    907   Arrival Report Message Message to provide the arrival information of transport means and goods. +    908   Tally Message Message to provide the information of goods tallying. +    909   Goods Loading Message Message to provide the information of goods loading.",
+			"Document/message reporting the results of a sustainability inspection.",
 		key: "SUSTAINABILITY_INSPECTION_RESPONSE",
+	},
+	{
+		value: "905",
+		name: "Transport Means Forecast Information Message",
+		description:
+			"Message to provide the forecast information about ships, trains, vehicles and aircrafts arrival at the destination.",
+		key: "TRANSPORT_MEANS_FORECAST_INFORMATION_MESSAGE",
+	},
+	{
+		value: "906",
+		name: "Transport Means Actual Information Message",
+		description:
+			"Message to provide the actual information about ships, trains, vehicles and aircrafts arrival at the destination.",
+		key: "TRANSPORT_MEANS_ACTUAL_INFORMATION_MESSAGE",
+	},
+	{
+		value: "907",
+		name: "Arrival Report Message",
+		description:
+			"Message to provide the arrival information of transport means and goods.",
+		key: "ARRIVAL_REPORT_MESSAGE",
+	},
+	{
+		value: "908",
+		name: "Tally Message",
+		description: "Message to provide the information of goods tallying.",
+		key: "TALLY_MESSAGE",
+	},
+	{
+		value: "909",
+		name: "Goods Loading Message",
+		description: "Message to provide the information of goods loading.",
+		key: "GOODS_LOADING_MESSAGE",
 	},
 	{
 		value: "910",
@@ -5178,8 +5240,15 @@ const untdid1001 = [
 		value: "911",
 		name: "Import licence",
 		description:
-			"Document/message issued by the competent body in accordance with import regulations in force, by which authorization is granted to a named party to import either a limited quantity of designated articles or an unlimited quantity of such articles during a limited period, under conditions specified in the document. +    912   Transport Means and Goods Release Message. Message to provide the releasing information of transport means and goods.",
+			"Document/message issued by the competent body in accordance with import regulations in force, by which authorization is granted to a named party to import either a limited quantity of designated articles or an unlimited quantity of such articles during a limited period, under conditions specified in the document.",
 		key: "IMPORT_LICENCE",
+	},
+	{
+		value: "912",
+		name: "Transport Means and Goods Release Message.",
+		description:
+			"Message to provide the releasing information of transport means and goods.",
+		key: "TRANSPORT_MEANS_AND_GOODS_RELEASE_MESSAGE",
 	},
 	{
 		value: "913",
@@ -5299,6 +5368,13 @@ const untdid1001 = [
 		key: "TAX_DECLARATION_GENERAL",
 	},
 	{
+		value: "939",
+		name: "Environmental, Social, and Governance (ESG) Report",
+		description:
+			"A document commonly addressed to investors and regulators, containing standardized data to assess corporate performance and risk, detailing a company's impact and efforts regarding environmental and social issues, as well as corporate board and management.",
+		key: "ENVIRONMENTAL_SOCIAL_AND_GOVERNANCE_ESG_REPORT",
+	},
+	{
 		value: "940",
 		name: "Tax demand",
 		description: "Document/message containing the demand of tax.",
@@ -5310,6 +5386,13 @@ const untdid1001 = [
 		description:
 			"Document/message giving the permission to export specified goods.",
 		key: "EMBARGO_PERMIT",
+	},
+	{
+		value: "948",
+		name: "Declaration of Conformity",
+		description:
+			"A self-issued document in which the manufacturer or supplier declares that their product, process, or service meets the specified standards or regulatory requirements.",
+		key: "DECLARATION_OF_CONFORMITY",
 	},
 	{
 		value: "950",

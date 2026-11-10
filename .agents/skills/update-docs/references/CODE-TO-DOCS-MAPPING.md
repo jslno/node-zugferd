@@ -10,7 +10,7 @@ package exports.
 | Documentation Area | Path                                  | Purpose                                  |
 | ------------------ | ------------------------------------- | ---------------------------------------- |
 | Introduction       | `docs/content/docs/introduction.mdx`  | Project overview                         |
-| Basic Usage        | `docs/content/docs/basic-usage.mdx`   | Getting started and creating invoices    |
+| Installation       | `docs/content/docs/installation.mdx`  | Getting started and creating invoices    |
 | Profiles           | `docs/content/docs/profiles/*.mdx`    | One page per ZUGFeRD / Order-X profile   |
 | Plugins            | `docs/content/docs/plugins/*.mdx`     | Parser, templates, validators, utilities |
 | Codelists          | `docs/content/docs/codelists/*.mdx`   | One page per code list                   |
@@ -22,18 +22,18 @@ package exports.
 
 ### Public API and Configuration
 
-| Source Path                                            | Documentation Path                                                             |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `packages/node-zugferd/src/index.ts`                   | `docs/content/docs/basic-usage.mdx`, `docs/content/docs/reference/options.mdx` |
-| `packages/node-zugferd/src/context.ts`                 | `docs/content/docs/reference/options.mdx`                                      |
-| `packages/node-zugferd/src/internal-plugins/create.ts` | `docs/content/docs/basic-usage.mdx`                                            |
-| `packages/node-zugferd/src/pdf/`                       | `docs/content/docs/plugins/templates.mdx` (PDF/A embedding)                    |
-| `packages/core/src/types/options.ts`                   | `docs/content/docs/reference/options.mdx`                                      |
-| `packages/core/src/types/context.ts`                   | `docs/content/docs/reference/options.mdx`                                      |
-| `packages/core/src/types/plugin.ts`                    | `docs/content/docs/plugins/*.mdx` (plugin behavior and options)                |
-| `packages/core/src/types/profile.ts`                   | `docs/content/docs/profiles/*.mdx`                                             |
-| `packages/core/src/types/codelist.ts`                  | `docs/content/docs/codelists/*.mdx`                                            |
-| `packages/core/src/utils/logger.ts`                    | `docs/content/docs/reference/options.mdx` (`logger` option)                    |
+| Source Path                                            | Documentation Path                                                              |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| `packages/node-zugferd/src/index.ts`                   | `docs/content/docs/installation.mdx`, `docs/content/docs/reference/options.mdx` |
+| `packages/node-zugferd/src/context.ts`                 | `docs/content/docs/reference/options.mdx`                                       |
+| `packages/node-zugferd/src/internal-plugins/create.ts` | `docs/content/docs/installation.mdx`                                            |
+| `packages/node-zugferd/src/pdf/`                       | `docs/content/docs/plugins/templates.mdx` (PDF/A embedding)                     |
+| `packages/core/src/types/options.ts`                   | `docs/content/docs/reference/options.mdx`                                       |
+| `packages/core/src/types/context.ts`                   | `docs/content/docs/reference/options.mdx`                                       |
+| `packages/core/src/types/plugin.ts`                    | `docs/content/docs/plugins/*.mdx` (plugin behavior and options)                 |
+| `packages/core/src/types/profile.ts`                   | `docs/content/docs/profiles/*.mdx`                                              |
+| `packages/core/src/types/codelist.ts`                  | `docs/content/docs/codelists/*.mdx`                                             |
+| `packages/core/src/utils/logger.ts`                    | `docs/content/docs/reference/options.mdx` (`logger` option)                     |
 
 ### Profiles
 
@@ -168,11 +168,11 @@ Use the repository search tools:
 
 Changes often affect more than one page:
 
-- `basic-usage.mdx` and `introduction.mdx` contain cross-cutting setup examples
+- `installation.mdx` and `introduction.mdx` contain cross-cutting setup examples
 - `plugins/templates.mdx` covers `templates`, `default-template`,
   `pdf-template`, and `docx-template` in one page
 - `plugins/validators/xsd.mdx` covers both schema-definition packages
-- Profile pages reuse examples from `docs/content/docs/basic-usage.mdx`
+- Profile pages reuse examples from `docs/content/docs/installation.mdx`
 - `docs/content/docs/reference/meta.json` links to the generated API Reference
 
 Update navigation when adding a page:
@@ -189,7 +189,7 @@ Update navigation when adding a page:
 1. Add the option to `packages/core/src/types/options.ts`.
 2. Document it in `docs/content/docs/reference/options.mdx`.
 3. Regenerate API reference if the type package exposes it.
-4. Check `basic-usage.mdx` and plugin pages for examples that set the option.
+4. Check `installation.mdx` and plugin pages for examples that set the option.
 
 ### New Plugin
 

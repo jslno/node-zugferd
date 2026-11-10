@@ -18,7 +18,7 @@
       "path": "../../codelists/untdid-1001/tsconfig.json"
     },
     {
-      "path": "../../codelists/untdid-1229/tsconfig.json"
+      "path": "../../codelists/line-status/tsconfig.json"
     },
     {
       "path": "../../codelists/untdid-1373/tsconfig.json"
@@ -28,6 +28,9 @@
     },
     {
       "path": "../../codelists/untdid-4055/tsconfig.json"
+    },
+    {
+      "path": "../../codelists/untdid-5153/tsconfig.json"
     },
     {
       "path": "../../codelists/text/tsconfig.json"

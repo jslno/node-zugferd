@@ -1,6 +1,5 @@
 {
   "name": "@node-zugferd/cli",
-  "private": true,
   "type": "module",
   "license": "MIT",
   "publishConfig": {

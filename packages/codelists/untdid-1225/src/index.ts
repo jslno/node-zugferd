@@ -436,8 +436,42 @@ const untdid1225 = [
 		value: "68",
 		name: "Start of operation guarantee",
 		description:
-			"A message related to a guarantee containing information about the start of an operation. #|   69    New declaration data A message related to a guarantee containing new declaration data. +    70    Amended declaration data A message related to the amendment of declaration data. +    71    Refusal to start operation guarantee A message related to a guarantee containing information about the refusal to start of an operation. +    72    Seals information (Start) A message related to a guarantee containing information about the seals during the start of an operation. +    73    Seals information (Terminate) A message related to a guarantee containing information about the seals during the termination of an operation.",
+			"A message related to a guarantee containing information about the start of an operation.",
 		key: "START_OF_OPERATION_GUARANTEE",
+	},
+	{
+		value: "69",
+		name: "New declaration data",
+		description:
+			"A message related to a guarantee containing new declaration data.",
+		key: "NEW_DECLARATION_DATA",
+	},
+	{
+		value: "70",
+		name: "Amended declaration data",
+		description: "A message related to the amendment of declaration data.",
+		key: "AMENDED_DECLARATION_DATA",
+	},
+	{
+		value: "71",
+		name: "Refusal to start operation guarantee",
+		description:
+			"A message related to a guarantee containing information about the refusal to start of an operation.",
+		key: "REFUSAL_TO_START_OPERATION_GUARANTEE",
+	},
+	{
+		value: "72",
+		name: "Seals information (Start)",
+		description:
+			"A message related to a guarantee containing information about the seals during the start of an operation.",
+		key: "SEALS_INFORMATION_START",
+	},
+	{
+		value: "73",
+		name: "Seals information (Terminate)",
+		description:
+			"A message related to a guarantee containing information about the seals during the termination of an operation.",
+		key: "SEALS_INFORMATION_TERMINATE",
 	},
 ] as const satisfies Codelist;
 

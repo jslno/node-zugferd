@@ -282,9 +282,55 @@ const untdid1373 = [
 	{
 		value: "44",
 		name: "Accepted with warnings",
-		description:
-			"The document is accepted, but has generated warnings. +    45    In process Indicates that the document is being processed. +    46    Under query Indicates that the document has been halted pending response to a query. +    47    Paid Indicates that the document has been paid. +    48    Acknowledged Indicates that the document is acknowledged as understood and submitted for further processing. +    49    Conditionally accepted Indicates that the document is accepted under conditions stated and proceeded accordingly unless disputed. +    50    Rejected, no further processing Indicates that the document has been rejected, and a clarification or reason is required.",
+		description: "The document is accepted, but has generated warnings.",
 		key: "ACCEPTED_WITH_WARNINGS",
+	},
+	{
+		value: "45",
+		name: "In process",
+		description: "Indicates that the document is being processed.",
+		key: "IN_PROCESS",
+	},
+	{
+		value: "46",
+		name: "Under query",
+		description:
+			"Indicates that the document has been halted pending response to a query.",
+		key: "UNDER_QUERY",
+	},
+	{
+		value: "47",
+		name: "Paid",
+		description: "Indicates that the document has been paid.",
+		key: "PAID",
+	},
+	{
+		value: "48",
+		name: "Acknowledged",
+		description:
+			"Indicates that the document is acknowledged as understood and submitted for further processing.",
+		key: "ACKNOWLEDGED",
+	},
+	{
+		value: "49",
+		name: "Conditionally accepted",
+		description:
+			"Indicates that the document is accepted under conditions stated and proceeded accordingly unless disputed.",
+		key: "CONDITIONALLY_ACCEPTED",
+	},
+	{
+		value: "50",
+		name: "Rejected, no further processing",
+		description:
+			"Indicates that the document has been rejected, and a clarification or reason is required.",
+		key: "REJECTED_NO_FURTHER_PROCESSING",
+	},
+	{
+		value: "51",
+		name: "To arrive by electronic means",
+		description:
+			"Notice that a specific document or message will be sent by electronic means.",
+		key: "TO_ARRIVE_BY_ELECTRONIC_MEANS",
 	},
 ] as const satisfies Codelist;
 

@@ -1,72 +1,265 @@
 ---
 icon: Form
 title: Templates
+description: Register named templates and pass one to toPDF when you create an invoice.
 ---
+
+The templates plugin registers named templates on a `zugferd()` instance. `invoicer.template()` returns the template you choose. Pass that return value to [`toPDF()`](/docs/basic-usage) on the invoice from `create`. `toPDF()` runs the template, then embeds the invoice XML in the PDF.
+
+A template is a function you provide. It receives the invoice and returns a PDF. Drawing that PDF is the template's job. [`@node-zugferd/default-template`](#default-template), [`@node-zugferd/pdf-template`](#pdf-templates), and [`@node-zugferd/docx-template`](#docx-templates) are helpers you can register as templates.
 
 ## Installation
 
 <Steps>
-    <Step>
-        ### Install the plugin
-        
-        ```package-install tab-group="pm"
-        @node-zugferd/templates
-        ```
-    </Step>
-    <Step>
-        ### Add the plugin to your instance
-        
-        ```ts title="invoicer.ts"
-        import { zugferd } from "node-zugferd";
-        import { en16931 } from "@node-zugferd/en-16931";
-        import { templates } from "@node-zugferd/templates"; // [!code highlight]
-        
-        export const invoicer = zugferd({
-          profiles: [en16931],
-          plugins: [
-            templates({ // [!code highlight]
-              templates: { // [!code highlight]
-                // ... // [!code highlight]
-              }, // [!code highlight]
-            }), // [!code highlight]
-          ],
-          // ...
-        });
-        ```
-    </Step>
+	<Step>
+		### Install the plugin
+
+		```package-install
+		@node-zugferd/templates @node-zugferd/default-template
+		```
+
+	</Step>
+	<Step>
+		### Add the plugin to your instance
+
+		Register the plugin on the `zugferd()` instance that creates the invoice. `templates` is the map of templates, keyed by name. `defaultTemplate` is the name used when a call does not pass one.
+
+		```ts title="invoicer.ts"
+		import { zugferd } from "node-zugferd";
+		import { en16931 } from "@node-zugferd/en-16931";
+		import { templates } from "@node-zugferd/templates"; // [!code highlight]
+		import { defaultTemplate } from "@node-zugferd/default-template";
+
+		export const invoicer = zugferd({
+		  profiles: [en16931],
+		  plugins: [
+		    templates({ // [!code highlight]
+		      defaultTemplate: "default", // [!code highlight]
+		      templates: { // [!code highlight]
+		        default: defaultTemplate(), // [!code highlight]
+		      }, // [!code highlight]
+		    }), // [!code highlight]
+		  ],
+		  // ...
+		});
+		```
+
+	</Step>
 </Steps>
 
-## Default Template
+## Rendering
+
+`create` returns the invoice. `template()` returns a function. `toPDF()` calls that function with the invoice, then stores the XML inside the PDF.
+
+```ts title="invoice.ts"
+const invoice = await invoicer.create("en-16931", data);
+const pdf = await invoice.toPDF(invoicer.template());
+const bytes = await pdf.save();
+```
+
+Pass props as the argument when the selected template accepts them:
+
+```ts title="invoice.ts"
+await invoice.toPDF(
+  invoicer.template({
+    locale: "de",
+  }),
+);
+```
+
+Pass a name to select a template other than the default. Props are the second argument:
+
+```ts title="invoice.ts"
+await invoice.toPDF(invoicer.template("compact", { accent: "blue" }));
+```
+
+## A template
+
+Each entry in `templates` has a `template` function. `props` is the object passed to `invoicer.template()`. `ctx` is the invoice. The function returns a PDF document, PDF bytes, or a string of PDF data. With no props, it receives `{}`.
+
+```ts title="invoicer.ts"
+templates({
+  templates: {
+    note: {
+      async template(_props, ctx) {
+        ctx.data;
+        ctx.xml;
+        ctx.profile;
+        ctx.context;
+      },
+    },
+  },
+});
+```
+
+`ctx.data` is the invoice data. `ctx.xml` is the XML from `create`. `ctx.profile` is the profile used for that invoice. `ctx.context` is the zugferd context.
+
+`props` is an optional [Standard Schema](https://standardschema.dev/). When it is set, the props are validated before `template` runs. A failed schema throws `ZugferdValidationError`.
+
+`transformProps` runs after that validation, when a props value is present, and before `template`. It receives the props and `ctx`, and its return value is what `template` receives.
+
+```ts title="invoicer.ts"
+templates({
+  templates: {
+    note: {
+      props: propsSchema,
+      async transformProps(props, ctx) {
+        return { ...props, title: ctx.profile.id };
+      },
+      async template(props, ctx) {
+        // ...
+      },
+    },
+  },
+});
+```
+
+## Default template
+
+`@node-zugferd/default-template` is a PDF invoice layout. Register it under a name, the same way as any other template.
 
 ```package-install
 @node-zugferd/default-template
 ```
 
-## PDF Templates
+It renders these profiles: Minimum, Basic WL, Basic, EN 16931, Extended, and XRechnung. Another profile throws `ZugferdError`. The message names the profile id and lists the supported ids: `minimum`, `basic-wl`, `basic`, `en-16931`, `extended`, `xrechnung`.
+
+Built-in locales are `en`, `de`, and `fr`. The default locale is `en`. The default fonts are Helvetica, Helvetica Bold, and Helvetica Oblique. The default page size is A4. Pass `translations` to add a locale or replace a built-in one. A missing locale throws `ZugferdError`. The message names the locale and lists the locales from the merged translations.
+
+```ts title="invoicer.ts"
+import { defaultTemplate } from "@node-zugferd/default-template";
+import { PageSizes } from "@node-zugferd/pdf-template";
+
+defaultTemplate({
+  defaultLocale: "de",
+  defaultPageSize: PageSizes.A4,
+});
+```
+
+Props passed to `invoicer.template()` override those defaults for one render:
+
+### Props
+
+<TypeTable
+	type={{
+		locale: {
+			type: "string",
+			description: "Locale for this render.",
+			default: "en",
+			required: false,
+		},
+		pageSize: {
+			type: "PageSizes",
+			description: "Page size for this render.",
+			default: "A4",
+			required: false,
+		},
+		fonts: {
+			type: "Record<\"font\" | \"bold\" | \"italic\", Font>",
+			description: "Fonts for this render.",
+			default: "Helvetica",
+			required: false,
+		},
+		theme: {
+			type: "Function",
+			description: "A function that receives the embedded fonts and returns the theme.",
+			default: "stripeTheme",
+			required: false,
+		}
+	}}
+/>
+
+### Options
+
+<TypeTable
+	type={{
+		defaultLocale: {
+			type: "string",
+			description: "The default locale for all renders.",
+			default: "en",
+			required: false,
+		},
+		defaultPageSize: {
+			type: "PageSizes",
+			description: "The default page size for all renders.",
+			default: "A4",
+			required: false,
+		},
+		translations: {
+			type: "Record<string, Record<string, string>>",
+			description: "Translations for all locales.",
+			required: false,
+		},
+	}}
+/>
+
+## PDF templates
+
+`@node-zugferd/pdf-template` builds a template that draws on a PDF. `definePdfTemplate` creates the document, passes it to your function, and returns that document.
 
 ```package-install
 @node-zugferd/pdf-template
 ```
 
-## DOCX Templates
+```ts title="invoicer.ts"
+import { definePdfTemplate } from "@node-zugferd/pdf-template";
+
+const compact = definePdfTemplate({
+  async template(pdf, _props, ctx) {
+    const page = pdf.addPage();
+    page.drawText(ctx.profile.id, { x: 50, y: 800 });
+  },
+});
+```
+
+`text` draws a string. When its options include `props`, the string is formatted as an ICU message first. `locale` on those options is the message locale. The rest of the package is [`boxpdf`](https://github.com/jslno/boxpdf), re-exported: layout nodes such as `vstack`, `hstack`, and `table`, plus fonts, page sizes, and themes.
+
+<Callout>
+	`definePdfTemplate` checks for full ICU data in Node.js. Without it, the zugferd logger warns with `Full ICU support is not available in this environment. Please ensure that your Node.js environment has full ICU support enabled.` The template still runs.
+</Callout>
+
+## DOCX templates
+
+`@node-zugferd/docx-template` fills a Word file and converts the result to PDF. `defineDocxTemplate` takes the template file as a `Blob`, `ArrayBuffer`, or `Uint8Array`, or as a function of the props and context. The filled document is converted to PDF with LibreOffice through `@matbee/libreoffice-converter`. `toPDF()` receives those PDF bytes. The converter is created the first time a DOCX template renders.
 
 ```package-install
 @node-zugferd/docx-template
 ```
 
-## Basic Usage
+```ts title="invoicer.ts"
+import { readFile } from "node:fs/promises";
+import { defineDocxTemplate } from "@node-zugferd/docx-template";
+
+const letter = defineDocxTemplate({
+  templateFile: await readFile("./letter.docx"),
+});
+```
+
+The Word file is processed with [easy-template-x](https://github.com/alonrbar/easy-template-x). Empty tags are skipped. The scope is the invoice under `data` and the template props under `props`. Nested objects are collapsed into dotted keys, so a seller name is the key `data.seller.name`. Arrays stay arrays, and each object in an array is flattened the same way. An array item that has a `_type` field is passed through unchanged, which is how easy-template-x represents images and other rich content.
+
+## Errors
+
+A call with no name, and no `defaultTemplate`, throws `ZugferdError` with the message `No template name provided and no default template configured.`
+
+A name that is not a key of `templates` throws `ZugferdError` with the message `Template "<name>" not found in templates configuration.`
+
+A props schema that rejects the props throws `ZugferdValidationError`. The template function does not run.
 
 ## Options
 
 <TypeTable
-  type={{
-    templates: {
-      type: "Templates",
-      required: true,
-    },
-    defaultTemplate: {
-      type: "string",
-      required: false,
-    },
-  }}
+	type={{
+		templates: {
+			type: "Record<string, Template>",
+			description:
+				"Templates keyed by name. Each entry has a template function. props is an optional Standard Schema for the props passed to invoicer.template(). transformProps runs after validation, when a props value is present, and before template.",
+			required: true,
+		},
+		defaultTemplate: {
+			type: "string",
+			description:
+				"Name used when invoicer.template() is called without a name. The name has to be a key of templates.",
+			required: false,
+		},
+	}}
 />

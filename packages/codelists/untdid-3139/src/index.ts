@@ -283,7 +283,7 @@ const untdid3139 = [
 	},
 	{
 		value: "BP",
-		name: "Company Security Officer�s 24-hour contact",
+		name: "Company Security Officer’s 24-hour contact",
 		description:
 			"The round the clock contact of the Company Security Officer who is responsible for the vessel.",
 		key: "COMPANY_SECURITY_OFFICER_S_24_HOUR_CONTACT",
@@ -570,6 +570,13 @@ const untdid3139 = [
 		description:
 			"Department/person to contact for questions regarding this order.",
 		key: "PRODUCT_MANAGEMENT_CONTACT",
+	},
+	{
+		value: "PP",
+		name: "Prescribing physician",
+		description:
+			"The subject providing the prescription for the ordered pharmaceutical or medical item.",
+		key: "PRESCRIBING_PHYSICIAN",
 	},
 	{
 		value: "QA",

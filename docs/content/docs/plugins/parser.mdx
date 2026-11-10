@@ -100,11 +100,11 @@ The id has to be one of the profiles registered on the instance. `parse` throws 
 | [EN 16931](/docs/profiles/en-16931) | `en-16931` | `urn:cen.eu:en16931:2017` |
 | [Extended](/docs/profiles/extended) | `extended` | `urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended` |
 
-Field names on the result follow that profile's schema, the same names you use with [`create`](/docs/basic-usage).
+Field names on the result follow that profile's schema, the same names you use with [`create`](/docs/installation).
 
 ## Parsed values
 
-Each schema field is read from the XML. Absent fields are left off the object. Some values come back wrapped, including fields that [`create`](/docs/basic-usage) accepts as a plain number or `Date`.
+Each schema field is read from the XML. Absent fields are left off the object. Some values come back wrapped, including fields that [`create`](/docs/installation) accepts as a plain number or `Date`.
 
 | Schema type | Parsed value |
 | --- | --- |

@@ -12,10 +12,10 @@ node-zugferd is built to follow the published specifications, but it does not gu
 
 ## Why node-zugferd?
 
-Electronic invoicing is no longer optional. Public-sector buyers and a growing share of private ones already require ZUGFeRD, Factur-X, or EN 16931 compliant invoices, and regulation keeps pushing the rest of the market the same way. If your product issues invoices, compliance has become part of the job.
+Electronic invoicing is no longer optional. Public-sector buyers and an increasing number of private businesses already require ZUGFeRD, Factur-X, or EN 16931-aligned invoices, while regulatory requirements continue to expand. If your product issues invoices, supporting electronic invoicing is becoming an essential part of the job.
 
-The difficulty is that the standard is not a single format. It is a family of profiles, a large XML schema, a set of business rules, and a PDF/A-3 container that has to carry the XML and metadata correctly. Most teams reach for a Java microservice built on libraries like Mustang. That means standing up, deploying, and operating another service just to produce a document, then bridging it back into a TypeScript codebase.
+The challenge is that e-invoicing is more than generating an XML file. It involves multiple profiles, extensive XML schemas, business rules, and PDF/A-3 documents that must embed the corresponding XML and metadata correctly. Many development teams turn to Java-based solutions such as Mustang, introducing a separate service that needs to be built, deployed, maintained, and integrated into an otherwise TypeScript-based stack.
 
-node-zugferd exists so you don't have to. It treats e-invoicing as one typed workflow rather than a pile of formats: a single API covers the whole document lifecycle, one data model spans the profiles, and the specification details stay out of your application code. You get compliance without needing an in-house e-invoicing specialist, and you stay free to self-host, extend, and deploy wherever your app already runs.
+node-zugferd brings these capabilities directly into the Node.js ecosystem. Instead of juggling separate tools and formats, it provides a unified, typed API for working with electronic invoices throughout their lifecycle. A shared data model supports the different profiles, while the underlying specification details are handled by the library rather than scattered throughout your application code.
 
-## Comparison
+This gives developers the building blocks to implement ZUGFeRD and Factur-X support without introducing an entirely separate Java service.

@@ -33,6 +33,7 @@
     "@node-zugferd/codelist-untdid-3035": "workspace:*",
     "@node-zugferd/codelist-untdid-3139": "workspace:*",
     "@node-zugferd/codelist-untdid-4053": "workspace:*",
+    "@node-zugferd/codelist-untdid-5153": "workspace:*",
     "@node-zugferd/codelist-untdid-5305": "workspace:*",
     "@node-zugferd/codelist-untdid-1153": "workspace:*",
     "@node-zugferd/codelist-payment": "workspace:*",

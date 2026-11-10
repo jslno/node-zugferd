@@ -1531,7 +1531,7 @@ const untdid3035 = [
 		value: "DGO",
 		name: "Recycler",
 		description:
-			"The party who collects waste in�order�to�produce�materials�that can be used again.",
+			"The party who collects waste in order to produce materials that can be used again.",
 		key: "RECYCLER",
 	},
 	{
@@ -1581,14 +1581,15 @@ const untdid3035 = [
 	{
 		value: "DGW",
 		name: "Weaver",
-		description: "The party who weaves fabric.",
+		description:
+			"The party who weaves fabric. +    DHF   Waste Sorter A person or company that separates different types of waste materials into designated categories for recycling, composting, or disposal (landfilling or incineration). +    DHG   Waste Aggregator A company that consolidates and collects, often across multiple municipalities or even regions, various types of waste materials from multiple sources for efficient processing, recycling, or disposal. +    DHH   Reseller A person or company that purchases goods or services with the intention of selling them rather than consuming or using them.",
 		key: "WEAVER",
 	},
 	{
 		value: "DH",
 		name: "Documentary credit account party",
 		description:
-			"Party which is responsible for the payment settlement of the documentary credit with the applicant's bank/issuing bank, if different from the documentary credit applicant.",
+			"Party which is responsible for the payment settlement of the documentary credit with the applicant's bank/issuing bank, if different from the documentary credit applicant. +    DHI   Finishing Treatment Provider A person or company that specializes in applying various treatments or processes to enhance the appearance, functionality, durability, or other properties of materials or products. +    DHJ   Refurbisher A person or company that specializes in refurbishing, repairing, and restoring used or pre-owned products to a functional and often like-new condition. +    DHK   Waste Collector A person or a company responsible for collecting and transporting waste materials from residential, commercial, and industrial areas to designated facilities for further processing or disposal. +    DHL   Waste Incinerator Operator A person or a company responsible for overseeing and managing the operation of a waste incineration facility. +    DHM   House Notify Party The party linked to the house bill of lading for the customs regulatory information.",
 		key: "DOCUMENTARY_CREDIT_ACCOUNT_PARTY",
 	},
 	{
@@ -3102,6 +3103,12 @@ const untdid3035 = [
 		description:
 			"A governmental commission in charge of the traffic and regulations of a port.",
 		key: "PORT_AUTHORITY",
+	},
+	{
+		value: "PP",
+		name: "Platform provider party",
+		description: "Party providing platform for electronic document exchange.",
+		key: "PLATFORM_PROVIDER_PARTY",
 	},
 	{
 		value: "PQ",

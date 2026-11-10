@@ -40,8 +40,6 @@ export const schema = defineProfileSchema(
 					id: "BG-2",
 				}),
 			),
-			// TODO: Check why BT-34 is defined twice in basic-wl schema
-			// TODO: Check identifiers again
 			transaction: pipe(
 				object({
 					line: pipe(
@@ -50,14 +48,12 @@ export const schema = defineProfileSchema(
 								billing: pipe(
 									nullish(
 										object({
-											// BG-30 -> required
 											vatBreakdown: pipe(
 												object({}),
 												metadata({
 													id: "BG-30",
 												}),
 											),
-											// BG-27 -> optional max 1
 											allowances: pipe(
 												nullish(pipe(array(object({})), maxLength(1))),
 												metadata({
@@ -66,7 +62,6 @@ export const schema = defineProfileSchema(
 														'/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="false"]',
 												}),
 											),
-											// BG-28 -> optional max 1
 											charges: pipe(
 												nullish(pipe(array(object({})), maxLength(1))),
 												metadata({
@@ -92,7 +87,6 @@ export const schema = defineProfileSchema(
 					),
 					contract: pipe(
 						object({
-							// BT-10 -> required
 							buyerReference: pipe(
 								text(),
 								metadata({
@@ -111,10 +105,8 @@ export const schema = defineProfileSchema(
 												"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Description",
 										}),
 									),
-									// BG-6 -> required
 									contact: pipe(
 										object({
-											// BT-41 -> required
 											personName: pipe(
 												text(),
 												metadata({
@@ -123,7 +115,6 @@ export const schema = defineProfileSchema(
 														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:DefinedTradeContact/ram:PersonName",
 												}),
 											),
-											// BT-42 -> required
 											phoneNumber: pipe(
 												text(),
 												metadata({
@@ -132,7 +123,6 @@ export const schema = defineProfileSchema(
 														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber",
 												}),
 											),
-											// BT-43 -> required
 											emailAddress: pipe(
 												text(),
 												metadata({
@@ -148,7 +138,6 @@ export const schema = defineProfileSchema(
 									),
 									postalAddress: pipe(
 										object({
-											// BT-38 -> required
 											postCode: pipe(
 												text(),
 												metadata({
@@ -157,7 +146,6 @@ export const schema = defineProfileSchema(
 														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode",
 												}),
 											),
-											// BT-37 -> required
 											city: pipe(
 												text(),
 												metadata({
@@ -180,7 +168,6 @@ export const schema = defineProfileSchema(
 								object({
 									postalAddress: pipe(
 										object({
-											// BT-53 -> required
 											postCode: pipe(
 												text(),
 												metadata({
@@ -189,7 +176,6 @@ export const schema = defineProfileSchema(
 														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode",
 												}),
 											),
-											// BT-52 -> required
 											city: pipe(
 												text(),
 												metadata({
@@ -222,7 +208,6 @@ export const schema = defineProfileSchema(
 											postalAddress: pipe(
 												nullish(
 													object({
-														// BT-78 -> required
 														postCode: pipe(
 															text(),
 															metadata({
@@ -233,7 +218,6 @@ export const schema = defineProfileSchema(
 																	"The identifier for an addressable group of properties according to the relevant postal service.",
 															}),
 														),
-														// BT-77 -> required
 														city: pipe(
 															text(),
 															metadata({
@@ -261,7 +245,6 @@ export const schema = defineProfileSchema(
 								actualDelivery: pipe(
 									nullish(
 										object({
-											// BT-72 -> optional
 											date: pipe(
 												nullish(date()),
 												metadata({
@@ -290,7 +273,6 @@ export const schema = defineProfileSchema(
 								payee: pipe(
 									nullish(
 										object({
-											// BT-60 -> optional schemeId
 											id: pipe(
 												nullish(identifier({ requireSchemeId: "optional" })),
 												metadata({
@@ -307,13 +289,11 @@ export const schema = defineProfileSchema(
 											"A group of business terms providing information about the Payee, i.e. the role that receives the payment.",
 									}),
 								),
-								// BG-16 -> required
 								paymentMeans: pipe(
 									object({
 										buyerBankDetails: pipe(
 											nullish(
 												object({
-													// BT-91 -> required
 													iban: pipe(
 														identifier({ requireSchemeId: "never" }),
 														metadata({
@@ -336,7 +316,6 @@ export const schema = defineProfileSchema(
 								vatBreakdown: pipe(
 									array(
 										object({
-											// BT-119 -> required
 											rateApplicablePercent: pipe(
 												percentage(),
 												metadata({

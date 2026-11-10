@@ -2181,14 +2181,15 @@ const characteristic = [
 		"@source": "Factur-X",
 		value: "DEPOSIT_SYSTEM",
 		name: "Deposit system",
-		description: "Permitted values:\n\nDISPOSABLE\nRETURNABLE",
+		description: "Permitted values:\r\n\r\nDISPOSABLE\r\nRETURNABLE",
 		key: "DEPOSIT_SYSTEM",
 	},
 	{
 		"@source": "Factur-X",
 		value: "DEPOSIT_TYPE",
 		name: "Deposit type",
-		description: "Permitted values:\n\nPRODUCT_PACKAGING\nTRANSPORT_EQUIPMENT",
+		description:
+			"Permitted values:\r\n\r\nPRODUCT_PACKAGING\r\nTRANSPORT_EQUIPMENT",
 		key: "DEPOSIT_TYPE",
 	},
 	{
@@ -2214,7 +2215,7 @@ const characteristic = [
 		"@source": "Factur-X",
 		value: "KIND_OF_ARTICLE",
 		name: "Type of article",
-		description: "Allowed values:\nGOODS\nOTHER_SERVICES",
+		description: "Allowed values:\r\nGOODS\r\nOTHER_SERVICES",
 		key: "TYPE_OF_ARTICLE",
 	},
 	{
@@ -2286,7 +2287,7 @@ const characteristic = [
 		value: "TRADING_UNIT",
 		name: "Type of trading unit",
 		description:
-			"Permitted values:\nMIXED_ASSORTMENT = Assortment\nUNMIXED_UNIT = Container",
+			"Permitted values:\r\nMIXED_ASSORTMENT = Assortment\r\nUNMIXED_UNIT = Container",
 		key: "TYPE_OF_TRADING_UNIT",
 	},
 	{

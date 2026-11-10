@@ -22,7 +22,7 @@
     "@node-zugferd/codelist-incoterms": "workspace:*",
     "@node-zugferd/codelist-untdid-1001": "workspace:*",
     "@node-zugferd/codelist-untdid-1225": "workspace:*",
-    "@node-zugferd/codelist-untdid-1229": "workspace:*",
+    "@node-zugferd/codelist-line-status": "workspace:*",
     "@node-zugferd/codelist-untdid-1373": "workspace:*",
     "@node-zugferd/codelist-untdid-4053": "workspace:*",
     "@node-zugferd/codelist-untdid-4055": "workspace:*",

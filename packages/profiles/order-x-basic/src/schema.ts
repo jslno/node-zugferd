@@ -4,7 +4,7 @@ import "@node-zugferd/codelist-unit";
 import "@node-zugferd/codelist-incoterms";
 import "@node-zugferd/codelist-untdid-1001";
 import "@node-zugferd/codelist-untdid-1225";
-import "@node-zugferd/codelist-untdid-1229";
+import "@node-zugferd/codelist-line-status";
 import "@node-zugferd/codelist-untdid-1373";
 import "@node-zugferd/codelist-untdid-4053";
 import "@node-zugferd/codelist-untdid-4055";
@@ -158,7 +158,7 @@ export const schema = object({
 								}),
 							),
 							lineStatusCode: pipe(
-								nullish(code("untdid1229")),
+								nullish(code("lineStatus")),
 								metadata({
 									xpath:
 										"/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:AssociatedDocumentLineDocument/ram:LineStatusCode",

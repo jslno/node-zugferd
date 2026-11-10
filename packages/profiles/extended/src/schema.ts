@@ -16,6 +16,7 @@ import "@node-zugferd/codelist-untdid-3139";
 import "@node-zugferd/codelist-untdid-4053";
 import "@node-zugferd/codelist-untdid-5305";
 import "@node-zugferd/codelist-untdid-1153";
+import "@node-zugferd/codelist-untdid-5153";
 import "@node-zugferd/codelist-vat-cat";
 import {
 	amount,
@@ -2051,7 +2052,7 @@ const transaction = pipeAsync(
 											array(
 												object({
 													reasonCode: pipe(
-														nullish(union([code("charge"), code("vatCat")])),
+														nullish(code("untdid5153")),
 														metadata({
 															id: ["BT-145", "BT-193", "BT-193-1"],
 															xpath:
@@ -6330,7 +6331,7 @@ const transaction = pipeAsync(
 											}),
 										),
 										reasonCode: pipe(
-											nullish(union([code("charge"), code("vatCat")])),
+											nullish(code("untdid5153")),
 											metadata({
 												id: ["BT-105", "BT-177", "BT-177-1"],
 												xpath:
