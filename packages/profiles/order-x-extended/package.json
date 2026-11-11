@@ -1,5 +1,6 @@
 {
   "name": "@node-zugferd/order-x-extended",
+  "version": "1.0.0-beta.0",
   "private": true,
   "type": "module",
   "license": "MIT",
@@ -9,9 +10,9 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
-    "_lint:package": "publint run --strict --pack false",
-    "_lint:types": "attw --profile esm-only --pack .",
-    "_typecheck": "tsc --project tsconfig.json"
+    "lint:package": "publint run --strict --pack false",
+    "lint:types": "attw --profile esm-only --pack .",
+    "typecheck": "tsc --project tsconfig.json"
   },
   "peerDependencies": {
     "xmlbuilder2": "catalog:"

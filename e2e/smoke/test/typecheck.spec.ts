@@ -14,10 +14,10 @@ test.for([
 	if (shouldSkip) skip();
 
 	const cwd = resolve(fixturesDir, dir);
-	const output = spawnSync("pnpm run typecheck", {
+	const output = spawnSync("pnpm", ["run", "typecheck"], {
 		stdio: "inherit",
+		shell: !process.env.CI && process.platform === "win32",
 		cwd,
-		shell: process.platform === "win32",
 		timeout: 60 * 1000, // 60 seconds
 	});
 	expect(output.error).toBeUndefined();

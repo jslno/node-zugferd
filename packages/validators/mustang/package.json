@@ -1,5 +1,6 @@
 {
   "name": "@node-zugferd/validator-mustang",
+  "version": "1.0.0-beta.0",
   "type": "module",
   "license": "MIT",
   "bin": {
