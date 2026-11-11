@@ -41,16 +41,16 @@ Each profile package has a matching profile page. `src/schema.ts` changes also
 belong on the same page because the page renders `<ProfileTree>` from the
 package's `schema`.
 
-| Source Path                           | Documentation Path                                |
-| ------------------------------------- | ------------------------------------------------- |
-| `packages/profiles/minimum/`          | `docs/content/docs/profiles/minimum.mdx`          |
-| `packages/profiles/basic-wl/`         | `docs/content/docs/profiles/basic-wl.mdx`         |
-| `packages/profiles/basic/`            | `docs/content/docs/profiles/basic.mdx`            |
-| `packages/profiles/en-16931/`         | `docs/content/docs/profiles/en-16931.mdx`         |
-| `packages/profiles/extended/`         | `docs/content/docs/profiles/extended.mdx`         |
-| `packages/profiles/xrechnung/`        | `docs/content/docs/profiles/xrechnung.mdx`        |
-| `packages/profiles/order-x-basic/`    | `docs/content/docs/profiles/order-x-basic.mdx`    |
-| `packages/profiles/order-x/`          | `docs/content/docs/profiles/order-x.mdx`          |
+| Source Path                        | Documentation Path                             |
+| ---------------------------------- | ---------------------------------------------- |
+| `packages/profiles/minimum/`       | `docs/content/docs/profiles/minimum.mdx`       |
+| `packages/profiles/basic-wl/`      | `docs/content/docs/profiles/basic-wl.mdx`      |
+| `packages/profiles/basic/`         | `docs/content/docs/profiles/basic.mdx`         |
+| `packages/profiles/en-16931/`      | `docs/content/docs/profiles/en-16931.mdx`      |
+| `packages/profiles/extended/`      | `docs/content/docs/profiles/extended.mdx`      |
+| `packages/profiles/xrechnung/`     | `docs/content/docs/profiles/xrechnung.mdx`     |
+| `packages/profiles/order-x-basic/` | `docs/content/docs/profiles/order-x-basic.mdx` |
+| `packages/profiles/order-x/`       | `docs/content/docs/profiles/order-x.mdx`       |
 
 ### Plugins, Templates, and Validators
 
