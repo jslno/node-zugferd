@@ -115,6 +115,9 @@
       "path": "./packages/profiles/order-x-basic/tsconfig.json"
     },
     {
+      "path": "./packages/profiles/order-x-extended/tsconfig.json"
+    },
+    {
       "path": "./packages/profiles/xrechnung/tsconfig.json"
     },
     {
