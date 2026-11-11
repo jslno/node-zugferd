@@ -48,6 +48,7 @@ node-zugferd provides the following profiles:
 
 - [**Basic**](https://node-zugferd.jsolano.de/docs/profiles/order-x-basic)
 - [**Comfort**](https://node-zugferd.jsolano.de/docs/profiles/order-x)
+- [**Extended**](https://node-zugferd.jsolano.de/docs/profiles/order-x-extended)
 
 ## Contributing
 
