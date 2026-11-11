@@ -51,7 +51,6 @@ package's `schema`.
 | `packages/profiles/xrechnung/`        | `docs/content/docs/profiles/xrechnung.mdx`        |
 | `packages/profiles/order-x-basic/`    | `docs/content/docs/profiles/order-x-basic.mdx`    |
 | `packages/profiles/order-x/`          | `docs/content/docs/profiles/order-x.mdx`          |
-| `packages/profiles/order-x-extended/` | `docs/content/docs/profiles/order-x-extended.mdx` |
 
 ### Plugins, Templates, and Validators
 

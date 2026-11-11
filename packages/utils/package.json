@@ -1,5 +1,6 @@
 {
   "name": "@node-zugferd/utils",
+  "version": "1.0.0-beta.0",
   "private": true,
   "type": "module",
   "license": "MIT",

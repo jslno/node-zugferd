@@ -18,7 +18,6 @@ const filterPackages = (pkgName: string) =>
 		"@node-zugferd/xrechnung-schema-definition",
 		"@node-zugferd/order-x-basic",
 		"@node-zugferd/order-x",
-		"@node-zugferd/order-x-extended",
 		"@node-zugferd/order-x-schema-definition",
 	].includes(pkgName) && !pkgName.startsWith("@node-zugferd/codelist-");
 

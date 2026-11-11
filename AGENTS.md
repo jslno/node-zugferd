@@ -70,7 +70,7 @@ The main library lives in `packages/node-zugferd/`. This is what gets published 
 - `packages/data-types/` — `@node-zugferd/data-types`. Schema helpers used by profiles and codelists.
 - `packages/utils/` — `@node-zugferd/utils`. Private. `defineProfile` lives in `src/profile.ts`.
 - `packages/cli/` — bins `node-zugferd` and `zugferd`. Commands: `init`, `parse`, `upgrade` (`src/commands/`).
-- `packages/profiles/<name>/` — one package per profile. Each `src/index.ts` calls `defineProfile`; `src/schema.ts` is the data schema. Profiles: `minimum`, `basic-wl`, `basic`, `en-16931`, `extended`, `xrechnung`, `order-x`, `order-x-basic`, `order-x-extended`.
+- `packages/profiles/<name>/` — one package per profile. Each `src/index.ts` calls `defineProfile`; `src/schema.ts` is the data schema. Profiles: `minimum`, `basic-wl`, `basic`, `en-16931`, `extended`, `xrechnung`, `order-x`, `order-x-basic`.
 - `packages/codelists/<name>/` — one package per code list. `src/index.ts` is generated. Edit `scripts/generators/codelist/` and run `pnpm gen`.
 - `packages/validators/xsd/` — `@node-zugferd/validator-xsd`
 - `packages/validators/mustang/` — `@node-zugferd/validator-mustang`. Needs a JDK (CI uses Temurin 25).
