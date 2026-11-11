@@ -43,6 +43,9 @@
     },
     {
       "path": "../../data-types/tsconfig.json"
+    },
+    {
+      "path": "../order-x/tsconfig.json"
     }
   ]
 }

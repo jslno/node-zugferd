@@ -56,7 +56,7 @@
 		"pnpm-lock.yaml",
 		"e2e/smoke/test/fixtures/cloudflare/worker-configuration.d.ts",
 		"scripts/generators/**/*.xml",
-		"scripts/generators/**/*.22A",
+		"scripts/generators/**/UNCL.*A",
 		"*.config.js",
 		"*.config.ts",
 		"*.json",

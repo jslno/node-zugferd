@@ -615,8 +615,8 @@ export function parseFromSchema<R = Record<string, unknown>>({
 							: new Date(year, month, day, hour, minute);
 					return {
 						format: typeof format === "string" ? format : "102",
-						value: date,
-						raw: str,
+						date: date,
+						value: str,
 					};
 				}
 				if (isSchemaType("binary_object")) {

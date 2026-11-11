@@ -85,6 +85,7 @@ describe("isPdfA3Conformant", () => {
 
 		font.set(
 			PDFName.of("ToUnicode"),
+			/* cSpell:disable-next-line */
 			pdf.context.register(pdf.context.stream("begincmap\nendcmap\n")),
 		);
 		expect(isPdfA3Conformant(pdf)).toBe(true);
@@ -200,6 +201,7 @@ function installXmp(
 	const created = iso(pdf.getCreationDate());
 	const modified = iso(pdf.getModificationDate());
 	const part = overrides?.part ?? "3";
+	/* cSpell:disable-next-line */
 	const xml = `<?xpacket begin="" id="W5M0MpCehiHzreSzNTczkc9d"?>
 <x:xmpmeta xmlns:x="adobe:ns:meta/">
   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">

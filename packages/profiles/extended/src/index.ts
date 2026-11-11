@@ -1,6 +1,7 @@
 import { en16931 } from "@node-zugferd/en-16931";
 import { base64, defineProfile } from "@node-zugferd/utils";
 import { fragment } from "xmlbuilder2";
+import { enforceExtendedRules } from "./rules";
 import { schema } from "./schema";
 
 export const extended = defineProfile({
@@ -8375,5 +8376,7 @@ export const extended = defineProfile({
 			}
 		}
 	},
-	rules(data, ctx) {},
+	rules(data, ctx) {
+		enforceExtendedRules(data, ctx);
+	},
 });

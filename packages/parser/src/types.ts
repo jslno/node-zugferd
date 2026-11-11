@@ -44,6 +44,20 @@ export type ParserHooks = {
 };
 
 export interface ParserOptions {
+	/**
+	 * Check Business Rules Hybrid.
+	 *
+	 * Note: This is only applicable for the following profiles:
+	 * - minimum
+	 * - basic-wl
+	 * - basic
+	 * - en-16931
+	 * - extended
+	 * - xrechnung
+	 *
+	 * Defaults to `true`.
+	 */
+	checkHybridRules?: boolean | undefined;
 	profileMap?: Record<string, ProfileMapEntry> | undefined;
 	/**
 	 * Decode XML entities in parsed string/identifier values (`&amp;` → `&`).

@@ -18,6 +18,9 @@
       "path": "../../codelists/country/tsconfig.json"
     },
     {
+      "path": "../../codelists/currency/tsconfig.json"
+    },
+    {
       "path": "../../codelists/untdid-2005/tsconfig.json"
     },
     {

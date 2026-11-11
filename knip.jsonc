@@ -2,7 +2,8 @@
 	"$schema": "./node_modules/knip/schema-jsonc.json",
 	"ignoreExportsUsedInFile": {
 		"interface": true,
-		"type": true
+		"type": true,
+		"function": true
 	},
 	"tags": ["-lintignore"],
 	"ignore": ["scripts/**", "**/*.test-d.ts"],
@@ -10,6 +11,7 @@
 	// keep these: scripts that reference them aren't in the graph once scripts/** is ignored;
 	// knip may hint to remove them — leave if --production still flags them
 	"ignoreDependencies": [
+		"lodash",
 		"@changesets/cli",
 		"@vitest/coverage-istanbul",
 		// root tooling only used from ignored scripts/**
@@ -22,6 +24,12 @@
 		"typedoc",
 		"xmlbuilder2"
 	],
+	"ignoreIssues": {
+		"packages/data-types/src/storages/identifier.ts": ["exports", "types"],
+		"packages/default-template/src/i18n/translations/**": ["exports"],
+		"**/isomorph.ts": ["exports"],
+		"packages/validators/**/src/index.ts": ["duplicates"]
+	},
 	"rules": {
 		"optionalPeerDependencies": "off",
 		"catalog": "off"

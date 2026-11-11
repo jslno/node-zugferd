@@ -1,10 +1,4 @@
-import type { DateFormat } from "@node-zugferd/data-types";
-import {
-	ARRAY_PATH_WILDCARD,
-	formatDate,
-	unwrapSchema,
-	walkSchema,
-} from "@node-zugferd/data-types";
+import { toInput } from "@node-zugferd/parser";
 import type { Zugferd, ZugferdOptions } from "node-zugferd";
 import { PDFDocument } from "pdf-lib";
 import { describe, expect, test } from "vitest";
@@ -76,151 +70,6 @@ function omitEmptyObjects<T>(value: T): T {
 	return out as T;
 }
 
-function setAtPath(
-	target: Record<string, any>,
-	path: readonly string[],
-	indexes: readonly number[],
-	value: unknown,
-) {
-	let current: any = target;
-	let indexCursor = 0;
-
-	for (let i = 0; i < path.length; i++) {
-		const segment = path[i]!;
-		const isLeaf = i === path.length - 1;
-
-		if (segment === ARRAY_PATH_WILDCARD) {
-			const index = indexes[indexCursor++];
-			if (index === undefined || !Array.isArray(current)) return;
-			if (isLeaf) {
-				current[index] = value;
-				return;
-			}
-			current = current[index];
-			continue;
-		}
-
-		if (isLeaf) {
-			current[segment] = value;
-			return;
-		}
-
-		current = current[segment];
-		if (current == null) return;
-	}
-}
-
-function getAtPath(
-	target: Record<string, any>,
-	path: readonly string[],
-	indexes: readonly number[],
-): unknown {
-	let current: any = target;
-	let indexCursor = 0;
-
-	for (const segment of path) {
-		if (current == null) return undefined;
-		if (segment === ARRAY_PATH_WILDCARD) {
-			const index = indexes[indexCursor++];
-			if (index === undefined) return undefined;
-			current = current[index];
-		} else {
-			current = current[segment];
-		}
-	}
-
-	return current;
-}
-
-/**
- * Align fixture Input with parser output:
- * - amounts: bare number/string → `{ value: number }`
- * - quantities: `{ value: "20.0000", unitCode }` → `{ value: 20, unitCode }`
- * - unit-price-amount / percentage: string → number
- * - dates: `Date` → `{ format, value: Date }`
- */
-function normalizeParsedLeaves(schema: unknown, data: Record<string, any>) {
-	const result = structuredClone(data);
-
-	walkSchema(
-		schema as never,
-		({ schema: fieldSchema, path, indexes }) => {
-			const unwrapped = unwrapSchema(fieldSchema as never);
-			if (unwrapped.kind !== "schema") return;
-
-			const current = getAtPath(result, path, indexes);
-
-			if (unwrapped.type === "amount") {
-				if (typeof current === "number" || typeof current === "string") {
-					setAtPath(result, path, indexes, { value: Number(current) });
-				}
-				return;
-			}
-
-			if (unwrapped.type === "quantity") {
-				if (
-					current &&
-					typeof current === "object" &&
-					"value" in current &&
-					(typeof (current as { value: unknown }).value === "string" ||
-						typeof (current as { value: unknown }).value === "number")
-				) {
-					const quantity = current as {
-						value: string | number;
-						unitCode?: string;
-					};
-					setAtPath(result, path, indexes, {
-						...quantity,
-						value: Number(quantity.value),
-					});
-				}
-				return;
-			}
-
-			if (
-				(unwrapped.type === "unit-price-amount" ||
-					unwrapped.type === "percentage") &&
-				(typeof current === "number" || typeof current === "string")
-			) {
-				setAtPath(result, path, indexes, Number(current));
-				return;
-			}
-
-			if (unwrapped.type === "date" && current instanceof Date) {
-				const config = (
-					unwrapped as {
-						config?: {
-							outputFormat?: string;
-							inputFormats?: readonly string[];
-						};
-					}
-				).config;
-				const format = (config?.outputFormat ??
-					config?.inputFormats?.[0] ??
-					"102") as DateFormat;
-				setAtPath(result, path, indexes, {
-					format,
-					value: current,
-					raw: formatDate(current, format),
-				});
-				return;
-			}
-
-			if (unwrapped.type === "binary_object" && current) {
-				setAtPath(result, path, indexes, current);
-			}
-		},
-		{
-			resolveArrayLength: (arrayPath, indexes) => {
-				const value = getAtPath(result, arrayPath, indexes);
-				return Array.isArray(value) ? value.length : 0;
-			},
-		},
-	);
-
-	return result;
-}
-
 async function bytesToArray(
 	content: Uint8Array | ArrayBuffer | Blob | ArrayBufferView,
 ): Promise<number[]> {
@@ -290,27 +139,24 @@ async function toComparableParsedInvoice(value: unknown): Promise<unknown> {
 	return out;
 }
 
-function expectedParsedInvoice(
+function expectedInvoice(
 	profileId: string,
-	schema: unknown,
 	data: Record<string, any>,
 ): Record<string, any> {
-	return omitEmptyObjects(
-		normalizeParsedLeaves(schema, {
-			...data,
-			processControl: {
-				...data.processControl,
-				applicationRecommendationInfo: {
-					...data.processControl?.applicationRecommendationInfo,
-					specificationIdentifier:
-						data.processControl?.applicationRecommendationInfo
-							?.specificationIdentifier ??
-						DEFAULT_SPECIFICATION_IDENTIFIERS[profileId] ??
-						DEFAULT_SPECIFICATION_IDENTIFIERS.minimum,
-				},
+	return omitEmptyObjects({
+		...data,
+		processControl: {
+			...data.processControl,
+			applicationRecommendationInfo: {
+				...data.processControl?.applicationRecommendationInfo,
+				specificationIdentifier:
+					data.processControl?.applicationRecommendationInfo
+						?.specificationIdentifier ??
+					DEFAULT_SPECIFICATION_IDENTIFIERS[profileId] ??
+					DEFAULT_SPECIFICATION_IDENTIFIERS.minimum,
 			},
-		}),
-	);
+		},
+	});
 }
 
 export const validInvoiceTestFactory = <const Opts extends ZugferdOptions>(
@@ -365,21 +211,23 @@ export const parseValidInvoiceTestFactory = <const Opts extends ZugferdOptions>(
 		const xml = invoice.toXML();
 		const pdf = await (await invoice.toPDF(await blankPDF())).save();
 		const profile = invoicer.$context.getProfile(profileId, { throw: true });
-		const expected = expectedParsedInvoice(
-			String(profileId),
-			profile.schema,
-			data,
-		);
+		const expected = expectedInvoice(String(profileId), data);
 
 		test("should parse valid XML", async () => {
-			const parsed = await invoicer.parse(profileId, xml);
+			const parsed = toInput(
+				profile.schema,
+				await invoicer.parse(profileId, xml),
+			);
 			await expect(toComparableParsedInvoice(parsed)).resolves.toEqual(
 				await toComparableParsedInvoice(expected),
 			);
 		});
 
 		test("should parse valid PDF", async () => {
-			const parsed = await invoicer.parse(profileId, pdf);
+			const parsed = toInput(
+				profile.schema,
+				await invoicer.parse(profileId, pdf),
+			);
 			await expect(toComparableParsedInvoice(parsed)).resolves.toEqual(
 				await toComparableParsedInvoice(expected),
 			);

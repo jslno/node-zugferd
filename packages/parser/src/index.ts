@@ -4,7 +4,7 @@ import type {
 	ZugferdPlugin,
 	ZugferdProfile,
 } from "@node-zugferd/core";
-import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
+import { checkHybridRules, NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
 import { PDFDocument } from "pdf-lib";
 import { convert, create } from "xmlbuilder2";
 import type {
@@ -12,10 +12,21 @@ import type {
 	XMLSerializedAsObjectArray,
 } from "xmlbuilder2/lib/interfaces";
 import { getAttachments, getMetadata } from "./helper";
+import type { ParserOutput } from "./output";
 import { isPdfA3Conformant as documentIsPdfA3 } from "./pdfa";
 import { defaultProfileMap } from "./profiles";
+import { toInput } from "./to-input";
 import type { MatchContext, ParserOptions } from "./types";
 import { createXPath } from "./xpath";
+
+const HYBRID_PROFILE_IDS = new Set([
+	"minimum",
+	"basic-wl",
+	"basic",
+	"en-16931",
+	"extended",
+	"xrechnung",
+]);
 
 declare module "@node-zugferd/core" {
 	interface ZugferdPluginRegistry<ZugferdOptions, Options> {
@@ -30,6 +41,7 @@ declare module "@node-zugferd/core" {
 const normalizeOptions = (options: ParserOptions | undefined) => {
 	return {
 		...(options ?? {}),
+		checkHybridRules: options?.checkHybridRules ?? true,
 		decodeEntities: options?.decodeEntities ?? false,
 		profileMap: {
 			...defaultProfileMap,
@@ -70,7 +82,7 @@ export const documentParser = async (
 	let pdf: PDFDocument | null = null;
 	let attachments: ReturnType<typeof getAttachments> | null = null;
 	try {
-		pdf = await PDFDocument.load(input);
+		pdf = await PDFDocument.load(input, { updateMetadata: false });
 		attachments = getAttachments(pdf);
 	} catch {}
 
@@ -293,7 +305,7 @@ export const documentParser = async (
 				undefined;
 			let xml: string | null = null;
 			try {
-				pdf = await PDFDocument.load(input);
+				pdf = await PDFDocument.load(input, { updateMetadata: false });
 				attachments = getAttachments(pdf);
 			} catch {}
 
@@ -366,6 +378,22 @@ export const documentParser = async (
 			await opts.hooks?.beforeParse?.(parseCtx);
 
 			let result = await config.parse(parseCtx);
+
+			if (
+				(!ctx.hasPlugin("mustang") ||
+					ctx.getPlugin("mustang")?.options?.autoRun === false) &&
+				opts.checkHybridRules &&
+				pdf &&
+				HYBRID_PROFILE_IDS.has(profile.id)
+			) {
+				await checkHybridRules(
+					profile,
+					ctx,
+					pdf,
+					toInput(profile.schema, result),
+				);
+			}
+
 			result =
 				(await opts.hooks?.afterParse?.({
 					...parseCtx,
@@ -377,23 +405,39 @@ export const documentParser = async (
 	};
 };
 
-export const parser = <_ZugferdOptions extends ZFOptions>(
+export { type ParserOutput } from "./output";
+export { toInput } from "./to-input";
+
+export type InferParserOutput<
+	ZugferdOptions extends ZFOptions,
+	ProfileID extends ZugferdOptions["profiles"][number]["id"],
+> = ParserOutput<
+	Extract<ZugferdOptions["profiles"][number], { id: ProfileID }>["schema"]
+>;
+
+export interface ParserPlugin<Options extends ZFOptions> {
+	id: "parser";
+	version: string;
+	actions: (ctx: ZugferdContext) => {
+		parse: {
+			(input: string | Uint8Array | ArrayBuffer): Promise<any>;
+			<ProfileId extends Options["profiles"][number]["id"]>(
+				profile: ProfileId,
+				input: string | Uint8Array | ArrayBuffer,
+			): Promise<InferParserOutput<Options, ProfileId>>;
+		};
+	};
+}
+
+export const parser = <ZugferdOptions extends ZFOptions>(
 	options?: ParserOptions | undefined,
-) => {
+): ParserPlugin<ZugferdOptions> => {
 	const opts = normalizeOptions(options);
 
 	return {
 		id: "parser",
 		version: NODE_ZUGFERD_VERSION,
 		actions: (ctx) => {
-			// TODO: Infer return type
-			async function parse(
-				input: string | Uint8Array | ArrayBuffer,
-			): Promise<any>;
-			async function parse(
-				profile: string,
-				input: string | Uint8Array | ArrayBuffer,
-			): Promise<any>;
 			async function parse(
 				profileOrInput: string | Uint8Array | ArrayBuffer,
 				input_?: string | Uint8Array | ArrayBuffer | undefined,

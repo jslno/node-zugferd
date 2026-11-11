@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "customConditions": [],
     "outDir": "${configDir}/node_modules/.cache/ts/test-out",
     "tsBuildInfoFile": "${configDir}/node_modules/.cache/ts/test-tsbuildinfo"
   },
@@ -8,6 +9,15 @@
   "references": [
     {
       "path": "../node-zugferd/tsconfig.json"
+    },
+    {
+      "path": "../profiles/minimum/tsconfig.json"
+    },
+    {
+      "path": "../profiles/basic-wl/tsconfig.json"
+    },
+    {
+      "path": "../profiles/en-16931/tsconfig.json"
     }
   ]
 }

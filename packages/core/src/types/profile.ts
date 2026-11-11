@@ -39,13 +39,15 @@ export type DataRelationship =
 	| "Supplement"
 	| "Unspecified";
 
+export type ZugferdRuleId = `BR-${string}` | `CII-SR-${string}`;
+
 export type ZugferdProfileRulesContext = {
 	profile: Omit<ZugferdProfile, "schema" | "rules">;
 	error: (
-		id: `BR-${number}`,
+		id: ZugferdRuleId,
 		message: string,
 	) => {
-		id: `BR-${number}`;
+		id: ZugferdRuleId;
 		message: string;
 	};
 };

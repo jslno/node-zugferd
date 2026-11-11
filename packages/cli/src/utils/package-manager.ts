@@ -140,39 +140,6 @@ const cliStrategy: Strategy = async ({ cwd }) => {
 	return null;
 };
 
-function stripQuotes(s: string): string {
-	const trimmed = s.trim();
-	if (
-		(trimmed.startsWith('"') && trimmed.endsWith('"')) ||
-		(trimmed.startsWith("'") && trimmed.endsWith("'"))
-	) {
-		return trimmed.slice(1, -1);
-	}
-	return trimmed;
-}
-
-function _parseCatalogLine(line: string): [string, string] | [] {
-	const entry = line.trim().replace(/^- /, "").trim();
-	const delimiterIndex = entry.indexOf(":");
-	if (delimiterIndex === -1) return [];
-	const key = stripQuotes(entry.slice(0, delimiterIndex));
-	const value = stripQuotes(entry.slice(delimiterIndex + 1));
-	return [key, value];
-}
-
-export function getPkgManagerStr({
-	packageManager,
-	version,
-}: {
-	packageManager: PackageManager;
-	version?: string | null | undefined;
-}) {
-	if (!version) {
-		return packageManager;
-	}
-	return `${packageManager}@${version}`;
-}
-
 async function getVersion(pkgManager: PackageManager): Promise<string | null> {
 	const version = await new Promise<string | null>((resolve) => {
 		exec(`${pkgManager} -v`, (err, stdout) => {

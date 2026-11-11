@@ -3,7 +3,7 @@ import { PLUGINS } from "./plugins";
 import type { Profile } from "./profiles";
 import { PROFILES } from "./profiles";
 
-export const INTERNAL_PLUGIN_IDS = ["~create"];
+const INTERNAL_PLUGIN_IDS = ["~create"];
 
 type WithId = { id: string };
 

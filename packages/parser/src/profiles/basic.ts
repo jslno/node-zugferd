@@ -3,9 +3,9 @@ import type { ProfileMapEntry } from "../types";
 
 export const basic = {
 	match: (ctx) =>
-		!ctx.context.hasPlugin("mustang") &&
-		ctx.isPdfA3Conformant() &&
-		ctx.matchesExtensionSchemaProfile() &&
+		((ctx.context.hasPlugin("mustang") &&
+			ctx.context.getPlugin("mustang")?.options?.autoRun !== false) ||
+			(ctx.isPdfA3Conformant() && ctx.matchesExtensionSchemaProfile())) &&
 		ctx.matchesSpecificationIdentifier(
 			"urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic",
 		),

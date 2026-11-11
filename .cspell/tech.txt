@@ -29,3 +29,14 @@ JFIF
 hline
 Flate
 unparseable
+scnr
+acsp
+xobjects
+xobj
+Procs
+Bics
+IGIC
+IPSI
+FXEXT
+mntr
+prtr

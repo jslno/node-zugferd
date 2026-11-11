@@ -7,7 +7,11 @@ import type {
 	ZugferdPlugin,
 	ZugferdProfile,
 } from "@node-zugferd/core";
-import { createBuildHelper, NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
+import {
+	checkHybridRules,
+	createBuildHelper,
+	NODE_ZUGFERD_VERSION,
+} from "@node-zugferd/core";
 import type { InferInput } from "@node-zugferd/data-types";
 import { parseAsync } from "@node-zugferd/data-types";
 import type { PDFDocument } from "pdf-lib";
@@ -179,12 +183,26 @@ export const create = <const ZugferdOptions extends ZFOptions>(
 										data: xml,
 										mimeType: "application/xml",
 										createdAt: new Date(),
+										modifiedAt: new Date(),
 										dataRelationship: opts.dataRelationship,
 									},
 								],
 							},
 							config,
 						);
+
+						if (
+							[
+								"minimum",
+								"basic-wl",
+								"basic",
+								"en-16931",
+								"extended",
+								"xrechnung",
+							].includes(profile.id)
+						) {
+							await checkHybridRules(profile, ctx, doc, data);
+						}
 
 						return doc;
 					},

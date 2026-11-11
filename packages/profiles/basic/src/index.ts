@@ -1,6 +1,7 @@
 import { basicWL } from "@node-zugferd/basic-wl";
 import { defineProfile } from "@node-zugferd/utils";
 import { fragment } from "xmlbuilder2";
+import { enforceBasicRules } from "./rules";
 import { schema } from "./schema";
 
 export const basic = defineProfile({
@@ -337,5 +338,7 @@ export const basic = defineProfile({
 			}
 		}
 	},
-	rules(data, ctx) {},
+	rules(data, ctx) {
+		enforceBasicRules(data, ctx);
+	},
 });

@@ -1,5 +1,8 @@
+import country from "@node-zugferd/codelist-country";
 import { defineProfile } from "@node-zugferd/utils";
 import { schema } from "./schema";
+
+const COUNTRY_PREFIXES = new Set<string>(country.map((entry) => entry.value));
 
 export const minimum = defineProfile({
 	id: "minimum",
@@ -284,9 +287,19 @@ export const minimum = defineProfile({
 		}
 	},
 	rules: (data, ctx) => {
-		// if (!data?.processControl?.applicationRecommendationInfo?.specificationIdentifier) {
-		//   throw ctx.error("BR-1", "An Invoice shall have a Specification identifier (BT-24).")
-		// }
+		const specificationIdentifier = data?.processControl
+			?.applicationRecommendationInfo?.specificationIdentifier as
+			| string
+			| undefined;
+		if (
+			typeof specificationIdentifier === "string" &&
+			specificationIdentifier.trim() === ""
+		) {
+			throw ctx.error(
+				"BR-1",
+				"An Invoice shall have a Specification identifier (BT-24).",
+			);
+		}
 		if (!data?.exchangedDocument?.invoiceNumber) {
 			throw ctx.error(
 				"BR-2",
@@ -323,5 +336,174 @@ export const minimum = defineProfile({
 				"An Invoice shall contain the Seller postal address (BG-5).",
 			);
 		}
+		if (!data?.transaction?.contract?.seller?.postalAddress?.countryCode) {
+			throw ctx.error(
+				"BR-9",
+				"The Seller postal address (BG-5) shall contain a Seller country code (BT-40).",
+			);
+		}
+
+		const totals = data?.transaction?.debit?.documentTotals;
+		if (!hasAmount(totals?.taxBasisTotalAmount)) {
+			throw ctx.error(
+				"BR-13",
+				"An Invoice shall have the Invoice total amount without VAT (BT-109).",
+			);
+		}
+		if (!hasAmount(totals?.grandTotalAmount)) {
+			throw ctx.error(
+				"BR-14",
+				"An Invoice shall have the Invoice total amount with VAT (BT-112).",
+			);
+		}
+		if (!hasAmount(totals?.duePayableAmount)) {
+			throw ctx.error(
+				"BR-15",
+				"An Invoice shall have the Amount due for payment (BT-115).",
+			);
+		}
+
+		for (const identifier of vatIdentifiers(data)) {
+			if (!hasIsoVatPrefix(identifier)) {
+				throw ctx.error(
+					"BR-CO-09",
+					"The Seller VAT identifier (BT-31), the Seller tax representative VAT identifier (BT-63) and the Buyer VAT identifier (BT-48) shall have a prefix in accordance with ISO code ISO 3166-1 alpha-2 by which the country of issue may be identified. Nevertheless, Greece may use the prefix 'EL'.",
+				);
+			}
+		}
+
+		if (!hasSellerIdentifier(data?.transaction?.contract?.seller)) {
+			throw ctx.error(
+				"BR-CO-26",
+				"In order for the buyer to automatically identify a supplier, the Seller identifier (BT-29), the Seller legal registration identifier (BT-30) and/or the Seller VAT identifier (BT-31) shall be present.",
+			);
+		}
+
+		if (decimalPlaces(totals?.taxBasisTotalAmount) > 2) {
+			throw ctx.error(
+				"BR-DEC-12",
+				"The allowed maximum number of decimals for the Invoice total amount without VAT (BT-109) is 2.",
+			);
+		}
+		if (
+			hasAmount(totals?.taxTotalAmount) &&
+			decimalPlaces(totals?.taxTotalAmount) > 2
+		) {
+			throw ctx.error(
+				"BR-DEC-13",
+				"The allowed maximum number of decimals for the Invoice total VAT amount (BT-110) is 2.",
+			);
+		}
+		if (decimalPlaces(totals?.grandTotalAmount) > 2) {
+			throw ctx.error(
+				"BR-DEC-14",
+				"The allowed maximum number of decimals for the Invoice total amount with VAT (BT-112) is 2.",
+			);
+		}
+		if (decimalPlaces(totals?.duePayableAmount) > 2) {
+			throw ctx.error(
+				"BR-DEC-18",
+				"The allowed maximum number of decimals for the Amount due for payment (BT-115) is 2.",
+			);
+		}
 	},
 });
+
+function hasAmount(value: unknown): boolean {
+	return amountNumber(value) !== undefined;
+}
+
+function decimalPlaces(value: unknown): number {
+	const lexical = lexicalAmount(value);
+	if (lexical !== undefined) {
+		const match = /^[+-]?\d+(?:\.(\d+))?$/.exec(lexical);
+		return match?.[1]?.length ?? 0;
+	}
+
+	const numeric = amountNumber(value);
+	if (numeric === undefined) return 0;
+	const fraction = numeric.toFixed(10).split(".")[1]?.replace(/0+$/, "") ?? "";
+	return fraction.length;
+}
+
+function lexicalAmount(value: unknown): string | undefined {
+	if (typeof value === "string") return value.trim();
+	if (isRecord(value) && typeof value.value === "string")
+		return value.value.trim();
+	return undefined;
+}
+
+function amountNumber(value: unknown): number | undefined {
+	if (typeof value === "number") {
+		return Number.isFinite(value) ? value : undefined;
+	}
+	if (typeof value === "string") {
+		const lexical = value.trim();
+		if (!/^[+-]?\d+(?:\.\d+)?$/.test(lexical)) return undefined;
+		const parsed = Number(lexical);
+		return Number.isFinite(parsed) ? parsed : undefined;
+	}
+	if (isRecord(value) && "value" in value) return amountNumber(value.value);
+	return undefined;
+}
+
+function vatIdentifiers(data: unknown): string[] {
+	const contract = readPath(data, ["transaction", "contract"]);
+	return [
+		["seller", "taxRegistration", "vat", "id"],
+		["buyer", "taxRegistration", "vat", "id"],
+		["sellerTaxRepresentative", "taxRegistration", "vat", "id"],
+	]
+		.map((path) => identifierText(readPath(contract, path)))
+		.filter((identifier): identifier is string => !!identifier);
+}
+
+function hasIsoVatPrefix(identifier: string): boolean {
+	const prefix = identifier.trim().slice(0, 2);
+	if (!/^[A-Z]{2}$/.test(prefix)) return false;
+	return prefix === "EL" || COUNTRY_PREFIXES.has(prefix);
+}
+
+function hasSellerIdentifier(seller: unknown): boolean {
+	return [
+		["id"],
+		["globalId"],
+		["organization", "id"],
+		["taxRegistration", "vat", "id"],
+	].some((path) => identifierPresent(readPath(seller, path)));
+}
+
+function identifierPresent(value: unknown): boolean {
+	if (Array.isArray(value)) return value.some(identifierPresent);
+	return identifierText(value) !== undefined;
+}
+
+function identifierText(value: unknown): string | undefined {
+	if (typeof value === "string") {
+		const trimmed = value.trim();
+		return trimmed || undefined;
+	}
+	if (!isRecord(value)) return undefined;
+	if (typeof value.identifier === "string") {
+		const trimmed = value.identifier.trim();
+		return trimmed || undefined;
+	}
+	if (typeof value.value === "string") {
+		const trimmed = value.value.trim();
+		return trimmed || undefined;
+	}
+	return undefined;
+}
+
+function readPath(value: unknown, path: string[]): unknown {
+	let current = value;
+	for (const key of path) {
+		if (!isRecord(current)) return undefined;
+		current = current[key];
+	}
+	return current;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+	return !!value && typeof value === "object" && !Array.isArray(value);
+}

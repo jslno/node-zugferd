@@ -1,6 +1,7 @@
 import "@node-zugferd/codelist-text";
 import "@node-zugferd/codelist-allowance";
 import "@node-zugferd/codelist-country";
+import "@node-zugferd/codelist-currency";
 import "@node-zugferd/codelist-charge";
 import "@node-zugferd/codelist-untdid-2005";
 import "@node-zugferd/codelist-untdid-5305";

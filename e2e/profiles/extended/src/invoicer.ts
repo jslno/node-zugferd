@@ -16,3 +16,5 @@ export const invoicer = zugferd({
 		}),
 	],
 });
+
+const _result = await invoicer.parse("extended", "");

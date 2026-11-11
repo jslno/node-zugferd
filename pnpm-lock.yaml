@@ -1320,6 +1320,9 @@ importers:
       '@standard-schema/spec':
         specifier: latest
         version: 1.1.0
+      pdf-lib:
+        specifier: 'catalog:'
+        version: 1.17.1
       xmlbuilder2:
         specifier: 'catalog:'
         version: 4.0.3

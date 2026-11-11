@@ -4,6 +4,7 @@ import type {
 	ZugferdContext,
 	ZugferdOptions,
 	ZugferdPlugin,
+	ZugferdPluginRegistry,
 	ZugferdProfile,
 } from "@node-zugferd/core";
 import { createContext } from "./context";
@@ -18,14 +19,38 @@ type InferPlugins<Opts extends ZugferdOptions> =
 	| CreatePlugin<Opts>
 	| (Opts["plugins"] extends Array<infer P> ? P : never);
 
+type InstanceActions<Plugin> = Plugin extends { actions?: infer Actions }
+	? Actions extends (...args: any[]) => infer Result
+		? Result
+		: never
+	: never;
+
+type PluginOptionsOf<Plugin> = Plugin extends { options: infer Options }
+	? Options
+	: unknown;
+
+/**
+ * `parser()` is called with no profiles of its own. Its registry creator is
+ * instantiated with the host options, so `parse` sees those profile schemas.
+ */
+type RegistryActions<Opts extends ZugferdOptions, Plugin> = Plugin extends {
+	id: infer Id extends string;
+}
+	? Id extends keyof ZugferdPluginRegistry<Opts, PluginOptionsOf<Plugin>>
+		? ZugferdPluginRegistry<Opts, PluginOptionsOf<Plugin>>[Id] extends {
+				creator: infer Creator;
+			}
+			? Creator extends (...args: any[]) => infer Created
+				? InstanceActions<Created>
+				: InstanceActions<Plugin>
+			: InstanceActions<Plugin>
+		: InstanceActions<Plugin>
+	: InstanceActions<Plugin>;
+
 type UserPluginActions<Opts extends ZugferdOptions> =
-	Opts["plugins"] extends Array<infer P>
-		? P extends ZugferdPlugin
-			? P extends { actions: infer A }
-				? A extends (...args: any[]) => infer R
-					? R
-					: never
-				: never
+	Opts["plugins"] extends Array<infer Plugin>
+		? Plugin extends ZugferdPlugin
+			? RegistryActions<Opts, Plugin>
 			: never
 		: never;
 

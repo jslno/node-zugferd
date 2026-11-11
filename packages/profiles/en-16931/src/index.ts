@@ -1,6 +1,7 @@
 import { basic } from "@node-zugferd/basic";
 import { base64, defineProfile } from "@node-zugferd/utils";
 import { fragment } from "xmlbuilder2";
+import { enforceEn16931Rules } from "./rules";
 import { schema } from "./schema";
 
 export const en16931 = defineProfile({
@@ -1016,5 +1017,7 @@ export const en16931 = defineProfile({
 			}
 		}
 	},
-	rules(data, ctx) {},
+	rules(data, ctx) {
+		enforceEn16931Rules(data, ctx);
+	},
 });

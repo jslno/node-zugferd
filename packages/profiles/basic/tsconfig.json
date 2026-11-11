@@ -6,6 +6,9 @@
       "path": "../basic-wl/tsconfig.json"
     },
     {
+      "path": "../../codelists/allowance/tsconfig.json"
+    },
+    {
       "path": "../../codelists/charge/tsconfig.json"
     },
     {
