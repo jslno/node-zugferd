@@ -160,3 +160,4 @@ export const zugferd = <
 };
 
 export type * from "@node-zugferd/core/types";
+export type * from "@node-zugferd/data-types";

@@ -213,7 +213,10 @@ export const create = <const ZugferdOptions extends ZFOptions>(
 					toYAML: () => root.end({ format: "yaml" }),
 				};
 
-				return methods;
+				return {
+					profile,
+					...methods,
+				};
 			},
 		}),
 		$Infer: {} as {

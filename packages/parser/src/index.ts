@@ -172,7 +172,10 @@ export const documentParser = async (
 			opts: ParserOptions,
 			profileOrInput: string | Uint8Array | ArrayBuffer,
 			input_?: string | Uint8Array | ArrayBuffer | undefined,
-		): Promise<Record<string, any>> {
+		): Promise<{
+			profile: ZugferdProfile;
+			data: Record<string, any>;
+		}> {
 			opts.profileMap = {
 				...defaultProfileMap,
 				...(opts.profileMap ?? {}),
@@ -400,7 +403,10 @@ export const documentParser = async (
 					data: result,
 				})) ?? result;
 
-			return result;
+			return {
+				profile,
+				data: result,
+			};
 		},
 	};
 };
@@ -420,11 +426,19 @@ export interface ParserPlugin<Options extends ZFOptions> {
 	version: string;
 	actions: (ctx: ZugferdContext) => {
 		parse: {
-			(input: string | Uint8Array | ArrayBuffer): Promise<any>;
+			(
+				input: string | Uint8Array | ArrayBuffer,
+			): Promise<{
+				profile: ZugferdProfile;
+				data: Record<string, any>;
+			}>;
 			<ProfileId extends Options["profiles"][number]["id"]>(
 				profile: ProfileId,
 				input: string | Uint8Array | ArrayBuffer,
-			): Promise<InferParserOutput<Options, ProfileId>>;
+			): Promise<{
+				profile: Extract<Options["profiles"][number], { id: ProfileId }>;
+				data: InferParserOutput<Options, ProfileId>;
+			}>;
 		};
 	};
 }

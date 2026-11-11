@@ -14,7 +14,7 @@ function testSimpleData(parsed: any) {
 			simpleData.exchangedDocument?.invoiceTypeCode,
 		);
 		expect(
-			(parsed.exchangedDocument.invoiceIssueDate as Date | undefined)
+			(parsed.exchangedDocument.invoiceIssueDate?.date as Date | undefined)
 				?.toISOString()
 				.split("T")[0],
 		).toBe(
@@ -98,7 +98,7 @@ function testSimpleData(parsed: any) {
 
 	test("delivery", () => {
 		expect(
-			parsed.transaction?.delivery?.actualDelivery?.date
+			parsed.transaction?.delivery?.actualDelivery?.date?.date
 				?.toISOString()
 				.split("T")[0],
 		).toBe(

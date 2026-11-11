@@ -13,14 +13,10 @@ const hasDeno =
 
 test("deno", { skip: !process.env.CI && !hasDeno }, () => {
 	const fixture = join(fixturesDir, "deno-simple.ts");
-	const output = spawnSync(
-		"deno",
-		["run", "-A", "--node-modules-dir=auto", fixture],
-		{
-			stdio: "inherit",
-			timeout: 60 * 1000,
-		},
-	);
+	const output = spawnSync("deno", ["run", "-A", fixture], {
+		stdio: "inherit",
+		timeout: 60 * 1000,
+	});
 	expect(output.error).toBeUndefined();
 	expect(output.status).toStrictEqual(0);
 });
