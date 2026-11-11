@@ -5,6 +5,7 @@ import {
 	BookOpenIcon,
 	ChartColumn,
 	CirclePlayIcon,
+	FileTextIcon,
 	GitPullRequestCreateArrowIcon,
 	LayoutGridIcon,
 	LibraryIcon,
@@ -119,6 +120,11 @@ export const contents: Content[] = [
 						<path d="M9 12v-6.5a2.5 2.5 0 0 1 5 0v.5" />
 					</svg>
 				),
+			},
+			{
+				title: "PDF",
+				href: "/docs/plugins/pdf",
+				Icon: FileTextIcon,
 			},
 		],
 	},
