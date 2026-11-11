@@ -1,7 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { EXTENDED } from "../../profiles";
+import { EXTENDED, MINIMUM } from "../../profiles";
 import { zugferd } from "../../zugferd";
 import type { ProfileExtended } from "../../profiles/extended";
+import { getTestInstance } from "../../test-utils/test-instance";
 
 describe("XML Formatter", () => {
 	describe("CategoryTradeTax element ordering", () => {
@@ -221,6 +222,32 @@ describe("XML Formatter", () => {
 			expect(typeCodeIndex).toBeGreaterThan(-1);
 			expect(categoryCodeIndex).toBeGreaterThan(-1);
 			expect(typeCodeIndex).toBeLessThan(categoryCodeIndex);
+		});
+	});
+
+	describe("Buyer legal registration identifier (BT-47)", () => {
+		it("should emit the buyer's SpecifiedLegalOrganization just like the seller's", async () => {
+			const { invoicer, data } = await getTestInstance({ profile: MINIMUM });
+
+			const xml = await invoicer.create(data).toXML();
+
+			const sellerParty = xml.match(
+				/<ram:SellerTradeParty>([\s\S]*?)<\/ram:SellerTradeParty>/,
+			);
+			const buyerParty = xml.match(
+				/<ram:BuyerTradeParty>([\s\S]*?)<\/ram:BuyerTradeParty>/,
+			);
+			expect(sellerParty).toBeTruthy();
+			expect(buyerParty).toBeTruthy();
+
+			// The test data sets `registrationIdentifier` on both parties (BT-30 and
+			// BT-47), so both must reach the XML.
+			expect(sellerParty![1]).toContain(
+				'<ram:ID schemeID="0002">registrationIdentifier</ram:ID>',
+			);
+			expect(buyerParty![1]).toContain(
+				'<ram:ID schemeID="0002">registrationIdentifier</ram:ID>',
+			);
 		});
 	});
 });

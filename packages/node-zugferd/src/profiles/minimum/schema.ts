@@ -442,6 +442,7 @@ BR-7: An Invoice shall contain the Buyer name (BT-44).`,
 							 * Details about the organization
 							 */
 							organization: {
+								key: "BT-47-00",
 								type: "object",
 								description: "Details about the organization",
 								required: false,
@@ -456,6 +457,7 @@ BR-7: An Invoice shall contain the Buyer name (BT-44).`,
 									 * CHORUSPRO: the identifier of the buyer (public entity) is mandatory and is always a SIRET number
 									 */
 									registrationIdentifier: {
+										key: "BT-47",
 										type: "object",
 										description: `**Buyer legal registration identifier**
 
