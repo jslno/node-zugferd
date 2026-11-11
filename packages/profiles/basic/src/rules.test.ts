@@ -317,7 +317,9 @@ describe("basic business rules", () => {
 			const duplicated = categoryInvoice(category);
 			const group = duplicated.transaction.debit.vatBreakdown[0];
 			duplicated.transaction.debit.vatBreakdown.push({ ...group });
-			await expect(check(duplicated)).rejects.toMatchObject({ cause: id });
+			await expect(check(duplicated)).rejects.toMatchObject({
+				cause: category === "O" ? "BR-O-11" : id,
+			});
 		},
 	);
 
@@ -742,6 +744,12 @@ function categoryInvoice(category: string, patch?: (data: Rec) => void): Rec {
 	if (category === "AE" || category === "K") {
 		data.transaction.contract.buyer.taxRegistration = {
 			vat: { id: "FR123456789" },
+		};
+	}
+	if (category === "K") {
+		data.transaction.delivery = {
+			actualDelivery: { date: new Date("2020-03-01") },
+			recipient: { postalAddress: { countryCode: "FR" } },
 		};
 	}
 	if (category === "B") {

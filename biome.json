@@ -91,6 +91,7 @@
   "files": {
     "includes": [
       "**",
+      "!e2e/test-utils",
       "!**/dist",
       "!**/coverage",
       "!**/build",
