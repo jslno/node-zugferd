@@ -1,0 +1,126 @@
+opencollection: 1.0.0
+info:
+  name: node-zugferd-kitchen-sink-example
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+items:
+  - info:
+      name: Generate Minimum Invoice
+      type: http
+      seq: 1
+    http:
+      method: POST
+      url: "{{BASE_URL}}/invoice/minimum/generate"
+      headers:
+        - name: Accept
+          value: application/pdf
+        - name: Accept
+          value: application/xml
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "exchangedDocument": {
+              "invoiceNumber": "471102",
+              "invoiceTypeCode": "380",
+              "invoiceIssueDate": "2020-03-05T00:00:00.000Z"
+            },
+            "transaction": {
+              "contract": {
+                "seller": {
+                  "name": "Lieferant GmbH",
+                  "postalAddress": {
+                    "countryCode": "DE"
+                  },
+                  "taxRegistration": {
+                    "local": {
+                      "id": "201/113/40209"
+                    },
+                    "vat": {
+                      "id": "DE123456789"
+                    }
+                  }
+                },
+                "buyer": {
+                  "name": "Kunden AG Frankreich"
+                }
+              },
+              "delivery": {},
+              "debit": {
+                "invoiceCurrencyCode": "EUR",
+                "documentTotals": {
+                  "taxBasisTotalAmount": 198,
+                  "taxTotalAmount": {
+                    "value": 37.62,
+                    "currency": "EUR"
+                  },
+                  "grandTotalAmount": 235.62,
+                  "duePayableAmount": 235.62
+                }
+              }
+            }
+          }
+      auth: inherit
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+      forwardAuthorizationHeader: false
+  - info:
+      name: Parse Invoice
+      type: http
+      seq: 2
+    http:
+      method: POST
+      url: "{{BASE_URL}}/invoice/:profileId/parse"
+      params:
+        - name: profileId
+          value: basic
+          type: path
+          description: The invoice profile id
+      body:
+        type: file
+        data:
+          - filePath: ./basic.pdf
+            contentType: application/pdf
+            selected: true
+      auth: inherit
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+      forwardAuthorizationHeader: false
+request:
+  variables:
+    - name: BASE_URL
+      value: http://localhost:3000
+docs:
+  content: |-
+    # Kitchen Sink (Example)
+
+    Example of using node-zugferd with most available features.
+
+    <br/>
+
+    [Documentation](https://node-zugferd.jsolano.de) | [GitHub](https://github.com/jslno/node-zugferd)
+  type: text/markdown
+bundled: true
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git
+    exportedAt: "2026-11-13T02:39:21.266Z"
+    exportedUsing: Bruno

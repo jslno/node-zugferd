@@ -1,8 +1,9 @@
 {
   "pages": [
-    "---Basic Examples---",
-    "...basic",
+    "kitchen-sink",
     "---Plugin Examples---",
-    "...plugin"
+    "...plugin",
+    "---Runtime Examples---",
+    "...runtime"
   ]
 }

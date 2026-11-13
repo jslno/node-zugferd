@@ -6,7 +6,7 @@ import { useTheme } from "fumadocs-ui/provider/base";
 import { AlertCircleIcon, ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { gitConfig } from "@/lib/shared";
+import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import {
 	Empty,
@@ -17,12 +17,10 @@ import {
 	EmptyTitle,
 } from "../ui/empty";
 import { Spinner } from "../ui/spinner";
+import { useExampleExplorer } from ".";
 
-export type StackBlitzProps = {
-	path: string;
-};
-
-export function StackBlitz({ path }: StackBlitzProps) {
+export function StackBlitz() {
+	const { path, owner, repo, branch, portaled } = useExampleExplorer();
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<Error | null>(null);
@@ -30,8 +28,8 @@ export function StackBlitz({ path }: StackBlitzProps) {
 	const { resolvedTheme = "light" } = useTheme();
 
 	const repoSlug = useMemo(() => {
-		return `${gitConfig.user}/${gitConfig.repo}/tree/${gitConfig.branch}/${path.replace(/^\/+/, "")}`;
-	}, [path]);
+		return `${owner}/${repo}/tree/${branch}/${path.replace(/^\/+/, "")}`;
+	}, [path, owner, repo, branch]);
 
 	const url = useMemo(() => {
 		const baseUrl = "https://stackblitz.com";
@@ -75,7 +73,7 @@ export function StackBlitz({ path }: StackBlitzProps) {
 			cancelled = true;
 			container.remove();
 		};
-	}, [path]);
+	}, [repoSlug]);
 
 	const openInStackBlitz = (
 		<Button
@@ -95,9 +93,9 @@ export function StackBlitz({ path }: StackBlitzProps) {
 	);
 
 	return (
-		<div className="relative">
+		<div className={cn("relative flex-1 flex flex-col", portaled && "h-full")}>
 			{error ? (
-				<Empty>
+				<Empty className="flex-1">
 					<EmptyHeader>
 						<EmptyMedia variant="icon">
 							<AlertCircleIcon />
@@ -109,7 +107,7 @@ export function StackBlitz({ path }: StackBlitzProps) {
 					</EmptyHeader>
 				</Empty>
 			) : loading ? (
-				<Empty>
+				<Empty className="flex-1">
 					<EmptyHeader>
 						<EmptyMedia variant="icon">
 							<Spinner />
@@ -122,7 +120,10 @@ export function StackBlitz({ path }: StackBlitzProps) {
 					</EmptyHeader>
 				</Empty>
 			) : (
-				<div ref={containerRef} />
+				<div
+					ref={containerRef}
+					className={cn("flex-1", portaled && "h-full [&_iframe]:h-full!")}
+				/>
 			)}
 		</div>
 	);

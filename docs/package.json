@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
+    "@codemirror/autocomplete": "^6.20.4",
     "@codesandbox/sandpack-react": "^2.20.0",
     "@floating-ui/react-dom": "^2.1.9",
     "@fuma-translate/react": "^1.0.2",
@@ -78,6 +79,7 @@
     "postprocessing": "^6.39.6",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
+    "react-resizable-panels": "^4.21.0",
     "react-use-measure": "^2.1.7",
     "shadcn": "^4.23.0",
     "shiki": "^4.6.0",

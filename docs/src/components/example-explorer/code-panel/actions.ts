@@ -2,7 +2,7 @@
 
 import type { Octokit } from "octokit";
 import { getOctokit } from "@/lib/github";
-import { gitConfig } from "@/lib/shared";
+import { gitConfig as baseGitConfig } from "@/lib/shared";
 
 type FileTree = (Awaited<
 	ReturnType<Octokit["rest"]["git"]["getTree"]>
@@ -10,7 +10,18 @@ type FileTree = (Awaited<
 
 const cache = new Map<string, FileTree>();
 
-export const getFileTree = async (path: string) => {
+export const getFileTree = async (input: {
+	owner?: string;
+	repo?: string;
+	branch?: string;
+	path: string;
+}) => {
+	const { path, ...gitConfig } = {
+		owner: baseGitConfig.user,
+		repo: baseGitConfig.repo,
+		branch: baseGitConfig.branch,
+		...input,
+	};
 	if (cache.has(path)) {
 		return cache.get(path)!;
 	}
@@ -18,7 +29,7 @@ export const getFileTree = async (path: string) => {
 	const octokit = await getOctokit();
 
 	const { data: commit } = await octokit.rest.repos.getCommit({
-		owner: gitConfig.user,
+		owner: gitConfig.owner,
 		repo: gitConfig.repo,
 		ref: gitConfig.branch,
 	});
@@ -28,7 +39,7 @@ export const getFileTree = async (path: string) => {
 
 	for (const segment of segments) {
 		const { data } = await octokit.rest.git.getTree({
-			owner: gitConfig.user,
+			owner: gitConfig.owner,
 			repo: gitConfig.repo,
 			tree_sha: sha,
 		});
@@ -48,7 +59,7 @@ export const getFileTree = async (path: string) => {
 
 	const traverse = async (treeSha: string, prefix: string) => {
 		const { data } = await octokit.rest.git.getTree({
-			owner: gitConfig.user,
+			owner: gitConfig.owner,
 			repo: gitConfig.repo,
 			tree_sha: treeSha,
 		});
@@ -64,7 +75,7 @@ export const getFileTree = async (path: string) => {
 				await traverse(entry.sha, filePath);
 			} else if (entry.type === "blob" && entry.sha) {
 				const { data: blob } = await octokit.rest.git.getBlob({
-					owner: gitConfig.user,
+					owner: gitConfig.owner,
 					repo: gitConfig.repo,
 					file_sha: entry.sha,
 				});

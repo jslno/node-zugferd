@@ -1,5 +1,5 @@
 {
-  "name": "@examples/parser",
+  "name": "@examples/templates",
   "version": "0.0.0",
   "private": true,
   "main": "src/index.ts",
@@ -9,7 +9,8 @@
   "dependencies": {
     "node-zugferd": "workspace:*",
     "@node-zugferd/basic": "workspace:*",
-    "@node-zugferd/parser": "workspace:*",
+    "@node-zugferd/templates": "workspace:*",
+    "@node-zugferd/default-template": "workspace:*",
     "@node-zugferd/validator-xsd": "workspace:*"
   },
   "devDependencies": {

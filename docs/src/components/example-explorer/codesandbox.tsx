@@ -4,7 +4,6 @@ import { useTheme } from "fumadocs-ui/provider/base";
 import { ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
-import { gitConfig } from "@/lib/shared";
 import { Button } from "../ui/button";
 import {
 	Empty,
@@ -12,18 +11,21 @@ import {
 	EmptyDescription,
 	EmptyHeader,
 } from "../ui/empty";
+import { useExampleExplorer } from ".";
 
-export function CodeSandbox({ path }: { path: string }) {
+export function CodeSandbox() {
+	const { path, owner, repo, branch } = useExampleExplorer();
 	const { resolvedTheme = "light" } = useTheme();
 	const url = useMemo(() => {
 		const baseUrl = "https://codesandbox.io";
 
-		const pathname = `/p/devbox/github/${gitConfig.user}/${gitConfig.repo}/tree/${gitConfig.branch}/${path.replace(/^\//, "").replace(/\/$/, "")}?theme=${resolvedTheme}`;
+		const pathname = `/p/devbox/github/${owner}/${repo}/tree/${branch}/${path.replace(/^\//, "").replace(/\/$/, "")}?theme=${resolvedTheme}`;
 		return new URL(pathname, baseUrl).toString();
-	}, [path]);
+	}, [path, owner, repo, branch, resolvedTheme]);
 
 	return (
-		<Empty>
+		// <div className="flex flex-1 flex-col h-full">
+		<Empty className="flex-1">
 			<EmptyHeader>
 				<EmptyDescription>
 					Open this example in a new tab to use CodeSandbox's editor and
@@ -47,5 +49,6 @@ export function CodeSandbox({ path }: { path: string }) {
 				</Button>
 			</EmptyContent>
 		</Empty>
+		// </div>
 	);
 }
