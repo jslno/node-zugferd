@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
+import { info } from "./commands/info";
 import { init } from "./commands/init";
+import { mcp } from "./commands/mcp";
 import { parse } from "./commands/parse";
 import { upgrade } from "./commands/upgrade";
 
@@ -15,8 +17,10 @@ async function main() {
 	const cliVersion = "1.0.0"; // TODO: Replace with actual CLI version
 
 	program
+		.addCommand(info)
 		.addCommand(init)
 		.addCommand(parse)
+		.addCommand(mcp)
 		.addCommand(upgrade)
 		.version(cliVersion)
 		.description("node-zugferd CLI")

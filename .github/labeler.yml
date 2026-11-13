@@ -1,0 +1,59 @@
+core:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/core/**"
+          - "packages/data-types/**"
+          - "packages/utils/**"
+          - "packages/node-zugferd/**"
+
+profiles:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/profiles/**"
+
+codelists:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/codelists/**"
+
+templates:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/default-template/**"
+          - "packages/docx-template/**"
+          - "packages/pdf-template/**"
+          - "packages/templates/**"
+
+validators:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/validators/**"
+          - "packages/magic-bytes/**"
+
+parser:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/parser/**"
+
+devtools:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/cli/**"
+          - "packages/instrumentation/**"
+
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "docs/**"
+
+devops:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**"
+          - "scripts/**"
+          - "e2e/**"
+
+examples:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "examples/**"

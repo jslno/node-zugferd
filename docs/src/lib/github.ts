@@ -1,0 +1,144 @@
+import type { Octokit } from "octokit";
+import { App } from "octokit";
+import type {
+	ActionResponse,
+	BlockFeedback,
+	PageFeedback,
+} from "@/components/feedback/schema";
+import { blockFeedback, pageFeedback } from "@/components/feedback/schema";
+import { env } from "@/env";
+import { gitConfig } from "./shared";
+
+export const DocsCategory = "Docs Feedback";
+
+let instance: Octokit | undefined;
+
+export async function getOctokit(): Promise<Octokit> {
+	if (instance) return instance;
+	const app = new App({
+		appId: env.GITHUB_APP_ID,
+		privateKey: env.GITHUB_APP_PRIVATE_KEY,
+	});
+
+	const { data } = await app.octokit.request(
+		"GET /repos/{owner}/{repo}/installation",
+		{
+			owner: gitConfig.user,
+			repo: gitConfig.repo,
+			headers: {
+				"X-GitHub-Api-Version": "2022-11-28",
+			},
+		},
+	);
+
+	instance = await app.getInstallationOctokit(data.id);
+	return instance;
+}
+
+interface RepositoryInfo {
+	id: string;
+	discussionCategories: {
+		nodes: {
+			id: string;
+			name: string;
+		}[];
+	};
+}
+
+let cachedDestination: RepositoryInfo | undefined;
+async function getFeedbackDestination() {
+	if (cachedDestination) return cachedDestination;
+	const octokit = await getOctokit();
+
+	const { repository }: { repository: RepositoryInfo } = await octokit.graphql(`
+    query {
+        repository(owner: "${gitConfig.user}", name: "${gitConfig.repo}") {
+            id
+            discussionCategories(first: 25) {
+                nodes { id name }
+            }
+        }
+    }`);
+
+	return (cachedDestination = repository);
+}
+
+export async function onPageFeedbackAction(
+	feedback: PageFeedback,
+): Promise<ActionResponse> {
+	"use server";
+	feedback = pageFeedback.parse(feedback);
+	const url = new URL(feedback.url);
+	return createDiscussionThread(
+		url.pathname,
+		`[${feedback.opinion}] ${feedback.message}\n\n> Forwarded from user feedback.`,
+	);
+}
+export async function onBlockFeedbackAction(
+	feedback: BlockFeedback,
+): Promise<ActionResponse> {
+	"use server";
+	feedback = blockFeedback.parse(feedback);
+	const url = new URL(feedback.url);
+	url.hash = feedback.blockId;
+	return createDiscussionThread(
+		url.pathname,
+		`> ${feedback.blockBody}\n\n${feedback.message}\n\n> [Forwarded from user feedback](${url.href}).`,
+	);
+}
+async function createDiscussionThread(pageId: string, body: string) {
+	const octokit = await getOctokit();
+	const destination = await getFeedbackDestination();
+	const category = destination.discussionCategories.nodes.find(
+		(category) => category.name === DocsCategory,
+	);
+	if (!category)
+		throw new Error(
+			`Please create a "${DocsCategory}" category in GitHub Discussion`,
+		);
+	const title = `Feedback for ${pageId}`;
+	const queryResult: {
+		search: {
+			nodes: { id: string; title: string; url: string }[];
+		};
+	} = await octokit.graphql(`
+            query {
+              search(type: DISCUSSION, query: ${JSON.stringify(`"${title}" in:title repo:${gitConfig.user}/${gitConfig.repo} author:@me`)}, first: 10) {
+                nodes {
+                  ... on Discussion { id, title, url }
+                }
+              }
+            }`);
+	const discussion = queryResult.search.nodes.find(
+		(item) => item.title === title,
+	);
+	if (discussion) {
+		const result: {
+			addDiscussionComment: {
+				comment: { id: string; url: string };
+			};
+		} = await octokit.graphql(`
+              mutation {
+                addDiscussionComment(input: { body: ${JSON.stringify(body)}, discussionId: "${discussion.id}" }) {
+                  comment { id, url }
+                }
+              }`);
+		return {
+			githubUrl: result.addDiscussionComment.comment.url,
+		};
+	} else {
+		const result: {
+			createDiscussion: {
+				discussion: { id: string; url: string };
+			};
+		} = await octokit.graphql(`
+              mutation {
+                createDiscussion(input: { repositoryId: "${destination.id}", categoryId: "${category.id}", body: ${JSON.stringify(body)}, title: ${JSON.stringify(title)} }) {
+                  discussion { id, url }
+                }
+              }`);
+		return {
+			githubUrl: result.createDiscussion.discussion.url,
+		};
+	}
+}

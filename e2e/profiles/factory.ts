@@ -210,24 +210,17 @@ export const parseValidInvoiceTestFactory = <const Opts extends ZugferdOptions>(
 		const invoice = await invoicer.create(profileId, data);
 		const xml = invoice.toXML();
 		const pdf = await (await invoice.toPDF(await blankPDF())).save();
-		const profile = invoicer.$context.getProfile(profileId, { throw: true });
 		const expected = expectedInvoice(String(profileId), data);
 
 		test("should parse valid XML", async () => {
-			const parsed = toInput(
-				profile.schema,
-				await invoicer.parse(profileId, xml),
-			);
+			const parsed = toInput(await invoicer.parse(profileId, xml));
 			await expect(toComparableParsedInvoice(parsed)).resolves.toEqual(
 				await toComparableParsedInvoice(expected),
 			);
 		});
 
 		test("should parse valid PDF", async () => {
-			const parsed = toInput(
-				profile.schema,
-				await invoicer.parse(profileId, pdf),
-			);
+			const parsed = toInput(await invoicer.parse(profileId, pdf));
 			await expect(toComparableParsedInvoice(parsed)).resolves.toEqual(
 				await toComparableParsedInvoice(expected),
 			);

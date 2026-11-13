@@ -1,5 +1,5 @@
-import { createWriteStream } from "node:fs";
-import { mkdir, rm } from "node:fs/promises";
+import { createWriteStream, existsSync } from "node:fs";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { Readable } from "node:stream";
 import { pipeline } from "node:stream/promises";
@@ -9,9 +9,7 @@ import which from "which";
 import { __dirname } from "./isomorph";
 
 const logger = createLogger({
-	// Add more detailed logging in CI environments
-	level: "debug",
-	// level: process.env.CI || process.env.DEBUG ? "debug" : undefined,
+	level: process.env.CI || process.env.DEBUG ? "debug" : undefined,
 });
 
 export async function setup(args?: string[]) {
@@ -62,10 +60,35 @@ async function downloadMustang() {
 		}
 	}
 
+	const hasMustangCLI =
+		existsSync(path.resolve(__dirname, "../runtime/Mustang-CLI.jar")) &&
+		existsSync(path.resolve(__dirname, "../runtime/digest.txt"));
+	const hasDigest = existsSync(
+		path.resolve(__dirname, "../runtime/digest.txt"),
+	);
+
 	if (!asset) {
-		throw new ZugferdError(
-			"Failed to find Mustang CLI asset in the latest release",
+		if (!hasMustangCLI) {
+			throw new ZugferdError(
+				"Failed to find Mustang CLI asset in the latest release",
+			);
+		}
+
+		logger.warn(
+			"No Mustang CLI asset found in the latest release, using cached asset",
 		);
+		return;
+	}
+
+	if (hasDigest && hasMustangCLI) {
+		const digest = await readFile(
+			path.resolve(__dirname, "../runtime/digest.txt"),
+			"utf-8",
+		);
+		if (digest === asset.digest) {
+			logger.info("Cached asset is up to date, using cached asset");
+			return;
+		}
 	}
 
 	logger.debug(`Downloading Mustang CLI from ${asset.browser_download_url}`);
@@ -98,6 +121,10 @@ async function downloadMustang() {
 	stream.on("data", (chunk) => logger.debug("chunk", chunk));
 
 	await pipeline(stream, createWriteStream(dest));
+	await writeFile(
+		path.resolve(__dirname, "../runtime/digest.txt"),
+		asset.digest,
+	);
 	logger.debug(`Mustang CLI downloaded successfully`);
 }
 

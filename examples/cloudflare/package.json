@@ -1,0 +1,22 @@
+{
+  "name": "@examples/cloudflare",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "start": "wrangler dev",
+    "cf-typegen": "wrangler types"
+  },
+  "dependencies": {
+    "@node-zugferd/en-16931": "workspace:*",
+    "@node-zugferd/validator-xsd": "workspace:*",
+    "@zugferd/xsd-validator-wasm32-wasip1": "catalog:xsd-validator",
+    "node-zugferd": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "wrangler": "^4.161.0"
+  }
+}

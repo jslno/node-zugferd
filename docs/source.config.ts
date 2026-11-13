@@ -29,10 +29,15 @@ import vatex from "@node-zugferd/codelist-vatex";
 import { en16931 } from "@node-zugferd/en-16931";
 import { extended } from "@node-zugferd/extended";
 import { minimum } from "@node-zugferd/minimum";
+import { rehypeCodeDefaultOptions } from "fumadocs-core/mdx-plugins";
+import type { RemarkBlockIdOptions } from "fumadocs-core/mdx-plugins/remark-block-id";
+import { remarkBlockId } from "fumadocs-core/mdx-plugins/remark-block-id";
 import { remarkSteps } from "fumadocs-core/mdx-plugins/remark-steps";
 import { metaSchema, pageSchema } from "fumadocs-core/source/schema";
 import type { PostprocessOptions } from "fumadocs-mdx/config";
 import { defineConfig, defineDocs } from "fumadocs-mdx/config";
+import { transformerTwoslash } from "fumadocs-twoslash";
+import { createFileSystemTypesCache } from "fumadocs-twoslash/cache-fs";
 import { remarkCodelistTable } from "@/lib/remark-codelist-table";
 import {
 	getProfileKeyFromMdxNode,
@@ -151,9 +156,17 @@ export const apiReference = defineDocs({
 	},
 });
 
+const blockidOptions: RemarkBlockIdOptions = {
+	addDataAttribute: "feedback",
+};
+
 export default defineConfig({
 	mdxOptions: {
-		remarkPlugins: [remarkSteps, [remarkCodelistTable, codelists]],
+		remarkPlugins: [
+			remarkSteps,
+			[remarkCodelistTable, codelists],
+			[remarkBlockId, blockidOptions],
+		],
 		remarkNpmOptions: {
 			persist: {
 				id: "pm",
@@ -165,6 +178,12 @@ export default defineConfig({
 				light: "vitesse-light",
 			},
 			defaultColor: false,
+			transformers: [
+				...(rehypeCodeDefaultOptions.transformers ?? []),
+				transformerTwoslash({
+					typesCache: createFileSystemTypesCache(),
+				}),
+			],
 		},
 	},
 });

@@ -44,3 +44,28 @@ npx @node-zugferd/cli upgrade
 
 - `--cwd` - The project directory containing the `package.json` to update. Defaults to the current working directory.
 - `--yes` - Skip the confirmation prompt and install updates directly.
+
+## Info
+
+The `info` command provides diagnostic information about your node-zugferd setup and environment.
+Useful for debugging and sharing when seeking support.
+
+```package-install title="Terminal"
+npx @node-zugferd/cli info
+```
+
+### Output
+
+The command displays:
+
+- **System:** OS, CPI, memory, Node.js version
+- **Package Manager:** Detected manager and version
+- **Frameworks:** Detected frameworks (Next.js, Hono, Cloudflare, etc.)
+- **node-zugferd:** Version and configuration
+
+### Options
+
+- `--cwd` - The current working directory.
+- `--config` - The path to your node-zugferd configuration file.
+- `--json` - Output as JSON for sharing or programmatic use.
+- `--copy` - Copy output to clipboard. (requires pbcopy/xclip)

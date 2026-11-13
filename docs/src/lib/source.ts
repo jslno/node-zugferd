@@ -1,18 +1,19 @@
 import { apiReference } from "collections/dynamic";
 import { docs, examples } from "collections/server";
-import type { Page } from "fumadocs-core/source";
-import { loader } from "fumadocs-core/source";
+import type { Folder, Root } from "fumadocs-core/page-tree";
+import { llms as createLlms, loader } from "fumadocs-core/source";
 import { icons as lucideIcons } from "lucide-react";
 import { createElement } from "react";
+import {
+	APIReferenceIcon,
+	isAPIReferenceIcon,
+} from "@/components/api-reference-icon";
 import * as icons from "@/components/icons";
 import {
-	apiReferenceRoute,
 	docsContentRoute,
 	docsImageRoute,
-	docsRoute,
 	examplesContentRoute,
 	examplesImageRoute,
-	examplesRoute,
 } from "./shared";
 
 const icon = (icon: string | undefined) => {
@@ -52,93 +53,129 @@ const icon = (icon: string | undefined) => {
 		});
 	}
 
-	const apiReferenceIconMap = {
-		type: "oklch(81% 0.117 11.638)",
-		interface: "oklch(84.5% 0.143 164.978)",
-		enum: "oklch(83.7% 0.128 66.29)",
-		class: "oklch(82.8% 0.111 230.318)",
-		function: "oklch(82.7% 0.119 306.383)",
-		variable: "oklch(78.5% 0.115 274.713)",
-	};
-	const createAPIReferenceIcon = (type: keyof typeof apiReferenceIconMap) => {
-		const color = apiReferenceIconMap[type];
-		return createElement("div", {
-			key: type,
-			className: `shrink-0 size-4 select-none grid place-items-center bg-background rounded-sm border border-(--icon-color)`,
-			children: createElement("span", {
-				children: type[0].toUpperCase(),
-				className: `font-mono text-[0.65rem] text-(--icon-color)`,
-			}),
-			style: {
-				"--icon-color": color,
-			} as React.CSSProperties,
-			"aria-hidden": true,
-		});
-	};
-
-	if (icon in apiReferenceIconMap) {
-		return createAPIReferenceIcon(icon as keyof typeof apiReferenceIconMap);
+	if (isAPIReferenceIcon(icon)) {
+		return createElement(APIReferenceIcon, { key: icon, type: icon });
 	}
 };
 
-type SourceType = "docs" | "examples" | "api-reference";
-type InferSource<T extends SourceType> = T extends "examples"
-	? typeof examplesSource
-	: T extends "api-reference"
-		? typeof apiReferenceSource
-		: typeof source;
+const sourcePrefix = {
+	docs: "docs",
+	examples: "examples",
+	apiReference: "api-reference",
+} as const;
 
-// See https://fumadocs.dev/docs/headless/source-api for more info
-export const source = loader({
-	baseUrl: docsRoute,
-	source: docs.toFumadocsSource(),
-	icon,
-});
+const sourceTreeName = {
+	docs: "Docs",
+	examples: "Examples",
+	apiReference: "API Reference",
+} as const;
 
-export const examplesSource = loader({
-	baseUrl: examplesRoute,
-	source: examples.toFumadocsSource(),
-	icon,
-});
+type SourceKey = keyof typeof sourcePrefix;
 
-export const apiReferenceSource = loader({
-	baseUrl: apiReferenceRoute,
-	source: apiReference.toFumadocsSource(),
-	icon,
-});
+const sourceKeyForFolder = (folderPath: string) =>
+	(Object.keys(sourcePrefix) as SourceKey[]).find(
+		(key) => sourcePrefix[key] === folderPath,
+	);
 
-const factory =
-	<R>(fn: (page: Page, type: SourceType) => R) =>
-	<P extends InferSource<T>["$inferPage"], T extends SourceType = "docs">(
-		page: P,
-		type: T = "docs" as T,
-	): R =>
-		fn(page, type);
+// https://fumadocs.dev/docs/headless/source-api
+export const source = loader(
+	{
+		docs: docs.toFumadocsSource({ baseDir: sourcePrefix.docs }),
+		examples: examples.toFumadocsSource({ baseDir: sourcePrefix.examples }),
+		apiReference: apiReference.toFumadocsSource({
+			baseDir: sourcePrefix.apiReference,
+		}),
+	},
+	{
+		baseUrl: "/",
+		icon,
+		pageTree: {
+			transformers: [
+				{
+					// Fumadocs prepends the root name to every breadcrumb trail, so the
+					// global root is blanked. Each source folder gets its real title instead.
+					root(node) {
+						return { ...node, name: "" };
+					},
+					folder(node, folderPath) {
+						const key = sourceKeyForFolder(folderPath);
+						if (!key) return node;
+						return { ...node, name: sourceTreeName[key] };
+					},
+				},
+			],
+		},
+	},
+);
 
-export const getPageImage = factory((page, type) => {
-	const segments = [...page.slugs, "image.webp"];
-	const baseUrl = type === "examples" ? examplesImageRoute : docsImageRoute;
+export type SourcePage = (typeof source)["$inferPage"];
+
+export function getSourcePage<T extends SourceKey>(type: T, slugs?: string[]) {
+	const page = source.getPage([sourcePrefix[type], ...(slugs ?? [])]);
+	if (page?.type !== type) return;
+	return page as Extract<SourcePage, { type: T }>;
+}
+
+export function getSourceParams(type: SourceKey) {
+	return source
+		.getPages()
+		.flatMap((page) =>
+			page.type === type ? [{ slug: page.slugs.slice(1) }] : [],
+		);
+}
+
+export function getSourcePageTree(type: SourceKey): Root {
+	const tree = source.getPageTree();
+	const folder = tree.children.find(
+		(node): node is Folder =>
+			node.type === "folder" && node.$ref?.folder === sourcePrefix[type],
+	);
+	if (!folder) return { name: tree.name, children: [] };
+
+	return {
+		$id: folder.$id,
+		$ref: folder.$ref,
+		name: sourceTreeName[type],
+		description: folder.description,
+		children: folder.index
+			? [folder.index, ...folder.children]
+			: folder.children,
+	};
+}
+
+function contentSlugs(page: SourcePage) {
+	return page.slugs.slice(1);
+}
+
+export function getContentPath(page: SourcePage) {
+	const index = page.path.indexOf("/");
+	return index === -1 ? page.path : page.path.slice(index + 1);
+}
+
+export function getPageImage(page: SourcePage) {
+	const segments = [...contentSlugs(page), "image.webp"];
+	const baseUrl =
+		page.type === "examples" ? examplesImageRoute : docsImageRoute;
 
 	return {
 		segments,
 		url: `${baseUrl}/${segments.join("/")}`,
 	};
-});
+}
 
-export const getPageMarkdownUrl = factory((page, type) => {
-	const segments = [...page.slugs, "content.md"];
-	const baseUrl = type === "examples" ? examplesContentRoute : docsContentRoute;
+export function getPageMarkdownUrl(page: SourcePage) {
+	const segments = [...contentSlugs(page), "content.md"];
+	const baseUrl =
+		page.type === "examples" ? examplesContentRoute : docsContentRoute;
 
 	return {
 		segments,
 		url: `${baseUrl}/${segments.join("/")}`,
 	};
-});
+}
 
-export const getLLMText = factory(async (page) => {
-	const processed = await page.data.getText("processed");
-
-	return `# ${page.data.title} (${page.url})
-
- ${processed}`;
+export const llms = createLlms(source, {
+	renderPage: async (page) => `# ${page.data.title} (${page.url})
+	
+${await page.data.getText("processed")}`,
 });

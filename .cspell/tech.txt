@@ -40,3 +40,6 @@ IPSI
 FXEXT
 mntr
 prtr
+elif
+xclip
+devbox

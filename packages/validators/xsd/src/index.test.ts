@@ -84,8 +84,12 @@ describe("xsd", () => {
 				plugin.options.schemaMap[
 					profile as keyof typeof plugin.options.schemaMap
 				];
-			expect(schema?.path.endsWith(fileName)).toBe(true);
-			expect(schema?.dir?.endsWith("schemas")).toBe(true);
+			expect(schema).toMatchObject({
+				content: expect.stringContaining("<xs:schema"),
+				imports: expect.objectContaining({
+					[fileName]: expect.stringContaining("<xs:schema"),
+				}),
+			});
 		}
 		expect(xsd({ autoRun: false }).options.autoRun).toBe(false);
 	});
@@ -105,9 +109,12 @@ describe("xsd", () => {
 
 		expect(plugin.options.schemaMap.minimum).toEqual({ path });
 		expect(plugin.options.schemaMap.extra).toEqual({ path, dir: directory });
-		expect(
-			plugin.options.schemaMap.extended?.path.endsWith(bundledSchemas.extended),
-		).toBe(true);
+		expect(plugin.options.schemaMap.extended).toMatchObject({
+			content: expect.stringContaining("<xs:schema"),
+			imports: expect.objectContaining({
+				[bundledSchemas.extended]: expect.stringContaining("<xs:schema"),
+			}),
+		});
 	});
 
 	it("loads each bundled schema, including its imports, and rejects a document that does not match", async () => {
@@ -153,6 +160,52 @@ describe("xsd", () => {
 		await expect(
 			validate(plugin, ctx, "invoice", '<Invoice xmlns="urn:test:invoice"/>'),
 		).rejects.toThrow(ZugferdError);
+	});
+
+	it("validates inline schema content and its imports without a filesystem", async () => {
+		const { ctx } = context();
+		const plugin = xsd({
+			schemaMap: {
+				invoice: {
+					content: importingSchema,
+					imports: { "types.xsd": importedSchema },
+				},
+				note: { content: selfContainedSchema },
+			},
+		});
+
+		await expect(
+			validate(
+				plugin,
+				ctx,
+				"invoice",
+				'<Invoice xmlns="urn:test:invoice" xmlns:t="urn:test:types"><t:Id>4711</t:Id></Invoice>',
+			),
+		).resolves.toBeUndefined();
+		await expect(
+			validate(plugin, ctx, "note", "<Note>Hello</Note>"),
+		).resolves.toBeUndefined();
+	});
+
+	it("throws when an inline schema import is missing", async () => {
+		const { ctx } = context();
+		const plugin = xsd({
+			schemaMap: {
+				invoice: {
+					content: importingSchema,
+					imports: { "other.xsd": importedSchema },
+				},
+			},
+		});
+
+		await expect(
+			validate(
+				plugin,
+				ctx,
+				"invoice",
+				'<Invoice xmlns="urn:test:invoice" xmlns:t="urn:test:types"><t:Id>4711</t:Id></Invoice>',
+			),
+		).rejects.toThrow('XSD import "types.xsd" is not present');
 	});
 
 	it("validates a self-contained schema without a directory loader", async () => {

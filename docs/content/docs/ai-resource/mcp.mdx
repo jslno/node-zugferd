@@ -1,0 +1,87 @@
+---
+icon: MCP
+title: MCP
+description: Connects node-zugferd documentation to MCP-capable clients via the remote documentation MCP server.
+---
+
+node-zugferd hosts a **remote MCP server** that exposes documentation search, examples, and setup help to any MCP-capable client (Cursor, Codex, Claude Code, Open Code, and others).
+
+Endpoint: `https://node-zugferd.jsolano.de/mcp`
+
+## Using the CLI
+
+Run the [**node-zugferd CLI**](/docs/reference/cli) and pick your client:
+
+```package-install title="Terminal"
+npx @node-zugferd/cli mcp
+```
+
+With no flags, the command lists supported targets. You can pass a target directly:
+
+<Tabs items={["Cursor", "Codex", "Claude Code", "Open Code", "Manual"]}>
+    <Tab value="Cursor">
+        ```package-install title="Terminal"
+        npx @node-zugferd/cli mcp --cursor
+        ```
+
+        This opens Cursor with a deeplink so the server is added to your MCP configuration.
+
+        You can also use the one-click control on this site:
+
+        <div className="w-max not-prose">
+            {/* TODO: add deeplink */}
+            <a href="#" className="dark:hidden hover:opacity-75 focus-visible:opacity-75 transition-opacity">
+                <img src="https://cursor.com/deeplink/mcp-install-dark.svg" height="32" alt="Add node-zugferd MCP to Cursor" />
+            </a>
+            <a href="#" className="dark:block hidden hover:opacity-75 focus-visible:opacity-75 transition-opacity">
+                <img src="https://cursor.com/deeplink/mcp-install-light.svg" height="32" alt="Add node-zugferd MCP to Cursor" />
+            </a>
+        </div>
+    </Tab>
+
+    <Tab value="Codex">
+        ```package-install title="Terminal"
+        npx @node-zugferd/cli mcp --codex
+        ```
+
+        This runs `codex mcp add` with the node-zugferd URL. Codex stores the server in its MCP configuration, which is shared by ChatGPT desktop, Codex CLI, and the Codex IDE extension on the same host.
+
+        Run `codex mcp list` to verify the connection. ChatGPT web does not read local Codex configuration; use a ChatGPT plugin for hosted web chats.
+    </Tab>
+
+    <Tab value="Claude Code">
+        ```package-install title="Terminal"
+        npx @node-zugferd/cli mcp --claude-code
+        ```
+
+        This run `claude mcp add` with the node-zugferd URL. If that fails, the CLI prints the exact command to run yourself.
+    </Tab>
+
+    <Tab value="Open Code">
+        ```package-install title="Terminal"
+        npx @node-zugferd/cli mcp --open-code
+        ```
+
+        This merges a `node-zugferd` entry into `opencode.json` in the current directory (remote transport, URL above).
+    </Tab>
+
+    <Tab value="Manual">
+        ```package-install title="Terminal"
+        npx @node-zugferd/cli mcp --manual
+        ```
+
+        Writes or merges `mcp.json` in the current working directory with:
+
+        ```json title="mcp.json"
+        {
+            "node-zugferd": {
+                "url": "https://node-zugferd.jsolano.de/mcp"
+            }
+        }
+        ```
+
+        For **Cursor**, you can add the same `node-zugferd` entry to your MCP config — commonly `~/.cursor/mcp.json` (user) or `.cursor/mcp.json` (project) — using the shape your Cursor version expects for HTTP servers (`url` for remote MCP).
+
+        Restart or reload MCP in your client after changes.
+    </Tab>
+</Tabs>

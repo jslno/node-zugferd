@@ -20,10 +20,10 @@ import { toPdfA } from "../pdf";
 import type { PDFOptions } from "../pdf/types";
 
 declare module "@node-zugferd/core" {
-	interface ZugferdPluginRegistry<ZugferdOptions, Options> {
+	interface ZugferdPluginRegistry<ZugferdOpts, Options> {
 		"~create": {
 			creator: typeof create<
-				ZugferdOptions extends infer R extends ZFOptions ? R : ZFOptions
+				ZugferdOpts extends infer R extends ZFOptions ? R : ZFOptions
 			>;
 		};
 	}

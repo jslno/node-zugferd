@@ -1,5 +1,7 @@
+/// <reference path="./virtual-schemas.d.ts" />
 import { readFileSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { join } from "node:path";
+import schemaSources from "virtual:node-zugferd/xsd-schemas";
 import type {
 	InferProfileIds,
 	ZugferdOptions as ZFOptions,
@@ -9,50 +11,36 @@ import type {
 import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
 import { ZugferdError } from "@node-zugferd/core/error";
 import { XsdValidator } from "@zugferd/xsd-validator";
-import { __dirname } from "./isomorph";
 import type { ResolvedXSDOptions, SchemaMapEntry, XSDOptions } from "./types";
 
 declare module "@node-zugferd/core" {
-	interface ZugferdPluginRegistry<ZugferdOptions, Options> {
+	interface ZugferdPluginRegistry<ZugferdOpts, Options> {
 		xsd: {
 			creator: typeof xsd<
-				ZugferdOptions extends infer R extends ZFOptions ? R : ZFOptions,
+				ZugferdOpts extends infer R extends ZFOptions ? R : ZFOptions,
 				Options extends XSDOptions ? Options : XSDOptions
 			>;
 		};
 	}
 }
 
-const getBundledXsdPath = (fileName?: string | undefined) =>
-	resolve(
-		__dirname,
-		...["../schemas", fileName].filter(
-			(val): val is string => typeof val === "string",
-		),
-	);
+const getBundledSchema = (fileName: string): SchemaMapEntry => {
+	const content = schemaSources[fileName];
+	if (content === undefined) {
+		throw new ZugferdError(
+			`The bundled XSD schema "${fileName}" is missing from this build.`,
+		);
+	}
 
-const SCHEMA_DIR = getBundledXsdPath();
+	return { content, imports: schemaSources };
+};
+
 const bundledXsdPaths = {
-	minimum: {
-		path: getBundledXsdPath("FACTUR-X_MINIMUM.xsd"),
-		dir: SCHEMA_DIR,
-	},
-	"basic-wl": {
-		path: getBundledXsdPath("FACTUR-X_BASICWL.xsd"),
-		dir: SCHEMA_DIR,
-	},
-	basic: {
-		path: getBundledXsdPath("FACTUR-X_BASIC.xsd"),
-		dir: SCHEMA_DIR,
-	},
-	"en-16931": {
-		path: getBundledXsdPath("FACTUR-X_EN16931.xsd"),
-		dir: SCHEMA_DIR,
-	},
-	extended: {
-		path: getBundledXsdPath("FACTUR-X_EXTENDED.xsd"),
-		dir: SCHEMA_DIR,
-	},
+	minimum: getBundledSchema("FACTUR-X_MINIMUM.xsd"),
+	"basic-wl": getBundledSchema("FACTUR-X_BASICWL.xsd"),
+	basic: getBundledSchema("FACTUR-X_BASIC.xsd"),
+	"en-16931": getBundledSchema("FACTUR-X_EN16931.xsd"),
+	extended: getBundledSchema("FACTUR-X_EXTENDED.xsd"),
 } as const;
 
 type BundledXsdPaths = typeof bundledXsdPaths;
@@ -88,6 +76,43 @@ export const xsd = <ZugferdOptions extends ZFOptions, Opts extends XSDOptions>(
 		return opts.schemaMap[profileId as SupportedProfileId];
 	};
 
+	const loadSchema = (
+		schema: SchemaMapEntry,
+	): {
+		content: string;
+		loader: ((filename: string) => string) | undefined;
+	} => {
+		if ("content" in schema) {
+			const imports = schema.imports;
+
+			return {
+				content: schema.content,
+				loader: imports
+					? (filename) => {
+							const key = filename.replace(/\\/g, "/");
+							const imported =
+								imports[key] ?? imports[key.split("/").pop() ?? key];
+
+							if (imported === undefined) {
+								throw new ZugferdError(
+									`XSD import "${filename}" is not present in the schema "imports" map. Add its contents to the schema entry.`,
+								);
+							}
+
+							return imported;
+						}
+					: undefined,
+			};
+		}
+
+		return {
+			content: readFileSync(schema.path, "utf-8"),
+			loader: schema.dir
+				? (filename) => readFileSync(join(schema.dir!, filename), "utf-8")
+				: undefined,
+		};
+	};
+
 	const validate = async (
 		profileId: string,
 		input: string,
@@ -99,13 +124,9 @@ export const xsd = <ZugferdOptions extends ZFOptions, Opts extends XSDOptions>(
 				`No XSD schema found for profile "${profileId}". Please provide a custom schema file name in the plugin options.`,
 			);
 		}
-		const xsdContent = readFileSync(schema.path, "utf-8");
-		const validator = await XsdValidator.create(
-			xsdContent,
-			schema.dir
-				? (filename) => readFileSync(join(schema.dir!, filename), "utf-8")
-				: undefined,
-		);
+
+		const { content, loader } = loadSchema(schema);
+		const validator = await XsdValidator.create(content, loader);
 
 		try {
 			validator.validateOrThrow(input);

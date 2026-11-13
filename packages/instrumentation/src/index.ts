@@ -4,7 +4,7 @@ import type { Span } from "@opentelemetry/api";
 import { SpanStatusCode, trace } from "@opentelemetry/api";
 
 declare module "@node-zugferd/core" {
-	interface ZugferdPluginRegistry<ZugferdOptions, Options> {
+	interface ZugferdPluginRegistry<ZugferdOpts, Options> {
 		instrumentation: {
 			creator: typeof instrumentation;
 		};

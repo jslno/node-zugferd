@@ -5,6 +5,7 @@
     "profiles",
     "plugins",
     "codelists",
+    "ai-resource",
     "reference"
   ]
 }

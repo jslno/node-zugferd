@@ -1,0 +1,39 @@
+name: npm dist-tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: "Package name (e.g., node-zugferd, @node-zugferd/core)"
+        required: true
+        type: string
+      version:
+        description: "Version to tag (e.g., 1.0.0)"
+        required: true
+        type: string
+      tag:
+        description: "npm dist-tag to apply (e.g., latest)"
+        required: true
+        type: string
+        default: "latest"
+
+permissions: {}
+
+jobs:
+  dist-tag:
+    if: github.repository == 'jslno/node-zugferd'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22.x
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+
+      - name: Add dist-tag
+        run: |
+          if [[ "$TAG" == "latest" && "$VERSION" == *"-"* ]]; then
+              echo "::error::Cannot tag a pre-release version ($VERSION) as latest."
+              exit 1
+          fi
+          npm dist-tag add "${PACKAGE}@${VERSION}" "${TAG}"

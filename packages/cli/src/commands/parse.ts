@@ -129,13 +129,13 @@ async function parseAction(opts: z.infer<typeof parseOptionsSchema>) {
 }
 
 export const parse = new Command("parse")
-	.option("-c, --cwd <dir>", "The current working directory.")
+	.option("--cwd <dir>", "The current working directory.")
 	.option(
 		"-p, --profile <profile>",
 		"The profile to use for parsing the invoice.",
 	)
-	.option("-i, --input <file>", "The invoice file to parse.")
-	.option("-o, --output <file>", "The output file to write the JSON to.")
+	.option("--input <file>", "The invoice file to parse.")
+	.option("--output <file>", "The output file to write the JSON to.")
 	.option("--minify", "Minify the output.")
 	.description("Parses a ZUGFeRD invoice and outputs it as JSON.")
 	.action(parseAction);

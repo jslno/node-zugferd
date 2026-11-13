@@ -10,7 +10,7 @@ import type {
 } from "./types";
 
 declare module "@node-zugferd/core" {
-	interface ZugferdPluginRegistry<ZugferdOptions, Options> {
+	interface ZugferdPluginRegistry<ZugferdOpts, Options> {
 		templates: {
 			creator: typeof templates;
 		};

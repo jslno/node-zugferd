@@ -66,7 +66,7 @@ export default function NotFound() {
 								>
 									<tab.icon className="mt-1" />
 									<div className="flex flex-col items-start">
-										<span>{tab.title}</span>
+										<span>{tab.label}</span>
 										<span className="text-muted-foreground">
 											{tab.description}
 										</span>

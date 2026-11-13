@@ -22,7 +22,7 @@ export type PackageManager = (typeof PACKAGE_MANAGER)[number];
 
 export async function detectPackageManager(
 	cwd: string,
-	packageJson: PackageJson,
+	packageJson?: PackageJson | undefined,
 ): Promise<{
 	packageManager: PackageManager;
 	version?: string | undefined;
@@ -48,7 +48,10 @@ export async function detectPackageManager(
 	return { packageManager: "npm" };
 }
 
-type Strategy = (ctx: { cwd: string; packageJson: PackageJson }) => Awaitable<{
+type Strategy = (ctx: {
+	cwd: string;
+	packageJson?: PackageJson | undefined;
+}) => Awaitable<{
 	packageManager: PackageManager | LiteralString;
 	version?: string | undefined;
 } | null>;
@@ -87,6 +90,7 @@ const lockFileStrategy: Strategy = ({ cwd }) => {
 };
 
 const packageJsonStrategy: Strategy = ({ packageJson }) => {
+	if (packageJson === undefined) return null;
 	const [packageManager, version] =
 		packageJson.packageManager?.split("@", 2) ?? [];
 	if (
@@ -99,6 +103,7 @@ const packageJsonStrategy: Strategy = ({ packageJson }) => {
 };
 
 const configStrategy: Strategy = ({ cwd, packageJson }) => {
+	if (packageJson === undefined) return null;
 	if (typeof packageJson.workspaces === "object") {
 		if ("nohoist" in packageJson.workspaces) {
 			return { packageManager: "yarn" };

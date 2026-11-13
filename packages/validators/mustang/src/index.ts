@@ -16,10 +16,10 @@ import { setup } from "./setup";
 import type { MustangOptions } from "./types";
 
 declare module "@node-zugferd/core" {
-	interface ZugferdPluginRegistry<ZugferdOptions, Options> {
+	interface ZugferdPluginRegistry<ZugferdOpts, Options> {
 		mustang: {
 			creator: typeof mustang<
-				ZugferdOptions extends infer R extends ZFOptions ? R : ZFOptions
+				ZugferdOpts extends infer R extends ZFOptions ? R : ZFOptions
 			>;
 		};
 	}

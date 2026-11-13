@@ -1,8 +1,26 @@
+import type { ZugferdProfile } from "@node-zugferd/core";
+import type { InferInput } from "@node-zugferd/data-types";
 import {
 	ARRAY_PATH_WILDCARD,
 	unwrapSchema,
 	walkSchema,
 } from "@node-zugferd/data-types";
+import type { ProfileSchemaType } from "@node-zugferd/utils";
+import type { ParserOutput } from "./output";
+
+/**
+ * The input accepted by `create()` for a profile.
+ *
+ * Profiles built with `defineProfile` carry their input type in `$Infer`.
+ * Fall back to the schema input for plain `ZugferdProfile` values.
+ */
+type ProfileInput<Profile extends ZugferdProfile> = Profile["$Infer"] extends {
+	Input: infer Input;
+}
+	? Input
+	: Profile["schema"] extends ProfileSchemaType
+		? InferInput<Profile["schema"]>
+		: never;
 
 /**
  * Turn parser output back into the structure accepted by `create()`.
@@ -12,11 +30,14 @@ import {
  * - amounts without a currency: `{ value }` → `number`
  * - quantities that do not take a unit: `{ value }` → `number`
  */
-export function toInput<T>(schema: unknown, data: T): T {
-	const result = structuredClone(data);
+export function toInput<Profile extends ZugferdProfile>(input: {
+	profile: Profile;
+	data: ParserOutput<Extract<Profile["schema"], ProfileSchemaType>>;
+}): ProfileInput<Profile> {
+	const result = structuredClone(input.data);
 
 	walkSchema(
-		schema as never,
+		input.profile.schema,
 		({ schema: fieldSchema, path, indexes }) => {
 			const unwrapped = unwrapSchema(fieldSchema as never);
 			if (unwrapped.kind !== "schema") return;
@@ -71,7 +92,7 @@ export function toInput<T>(schema: unknown, data: T): T {
 		},
 	);
 
-	return result;
+	return result as ProfileInput<Profile>;
 }
 
 function setAtPath(

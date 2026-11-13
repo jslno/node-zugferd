@@ -16,7 +16,7 @@ export const navItems = [
 		href: "/examples",
 	},
 	{
-		id: "api-reference" as const,
+		id: "apiReference" as const,
 		icon: BracesIcon,
 		label: "API Reference",
 		description: "reference and type docs",

@@ -1,20 +1,21 @@
-import { resolve } from "node:path";
-import type { SchemaMap } from "@node-zugferd/validator-xsd";
-import { __dirname } from "./isomorph";
+/// <reference path="./virtual-schemas.d.ts" />
 
-const getBundledXsdPath = (fileName?: string | undefined) =>
-	resolve(
-		__dirname,
-		...["../schemas", fileName].filter(
-			(val): val is string => typeof val === "string",
-		),
-	);
+import schemaSources from "virtual:node-zugferd/xrechnung-schemas";
+import type { SchemaMap, SchemaMapEntry } from "@node-zugferd/validator-xsd";
+
+const ROOT_XSD = "CrossIndustryInvoice_100pD22B.xsd";
+
+const getBundledSchema = (): SchemaMapEntry => {
+	const content = schemaSources[ROOT_XSD];
+	if (content === undefined) {
+		throw new Error("The bundled XRechnung schema is missing from this build.");
+	}
+
+	return { content, imports: schemaSources };
+};
 
 export const xrechnungSchemaDefinitions = {
-	xrechnung: {
-		path: getBundledXsdPath("./CrossIndustryInvoice_100pD22B.xsd"),
-		dir: getBundledXsdPath(),
-	},
+	xrechnung: getBundledSchema(),
 } as const satisfies SchemaMap;
 
 export default xrechnungSchemaDefinitions;

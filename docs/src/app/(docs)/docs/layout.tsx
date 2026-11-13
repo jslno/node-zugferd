@@ -1,10 +1,10 @@
 import { DocsLayout } from "@/layouts/docs";
 import { baseOptions } from "@/lib/layout.shared";
-import { source } from "@/lib/source";
+import { getSourcePageTree } from "@/lib/source";
 
 export default function Layout({ children }: LayoutProps<"/docs">) {
 	return (
-		<DocsLayout tree={source.getPageTree()} {...baseOptions()}>
+		<DocsLayout tree={getSourcePageTree("docs")} {...baseOptions()}>
 			{children}
 		</DocsLayout>
 	);

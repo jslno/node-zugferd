@@ -29,10 +29,10 @@ const HYBRID_PROFILE_IDS = new Set([
 ]);
 
 declare module "@node-zugferd/core" {
-	interface ZugferdPluginRegistry<ZugferdOptions, Options> {
+	interface ZugferdPluginRegistry<ZugferdOpts, Options> {
 		parser: {
 			creator: typeof parser<
-				ZugferdOptions extends infer R extends ZFOptions ? R : ZFOptions
+				ZugferdOpts extends infer R extends ZFOptions ? R : ZFOptions
 			>;
 		};
 	}
@@ -393,7 +393,7 @@ export const documentParser = async (
 					profile,
 					ctx,
 					pdf,
-					toInput(profile.schema, result),
+					toInput({ profile, data: result }),
 				);
 			}
 

@@ -12,3 +12,8 @@ shadcn
 Scira
 zizmor
 zizmorcore
+changelogithub
+vitesse
+solidjs
+qwik
+elysia

@@ -86,7 +86,7 @@ export function SidebarProvider({
 	const pathname = usePathname();
 	const currentTabId = useMemo(() => {
 		if (pathname.startsWith("/examples")) return "examples";
-		if (pathname.startsWith("/api-reference")) return "api-reference";
+		if (pathname.startsWith("/api-reference")) return "apiReference";
 		return "docs";
 	}, [pathname]);
 
@@ -176,7 +176,7 @@ export function Sidebar() {
 			return items.map((item) => {
 				const children =
 					item.type === "folder" ? [...item.children] : undefined;
-				if (currentTabId === "api-reference" && children) {
+				if (currentTabId === "apiReference" && children) {
 					children.sort(sort());
 				}
 				return (
@@ -188,7 +188,7 @@ export function Sidebar() {
 		};
 
 		const children = [...root.children];
-		if (currentTabId === "api-reference") {
+		if (currentTabId === "apiReference") {
 			children.sort(sort("desc"));
 		}
 

@@ -36,6 +36,10 @@ export interface TabsProps
 	 * Additional label in tabs list when `items` is provided.
 	 */
 	label?: ReactNode;
+
+	hideList?: boolean;
+
+	listChildren?: ReactNode;
 }
 
 const TabsContext = createContext<{
@@ -66,6 +70,9 @@ export function TabsList({
 	);
 }
 
+export const tabsTriggerClasses =
+	"inline-flex items-center gap-2 whitespace-nowrap text-fd-muted-foreground border-b border-transparent py-2 text-sm font-medium transition-colors [&_svg]:size-4 hover:text-fd-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[active]:border-fd-primary data-[active]:text-fd-primary";
+
 export function TabsTrigger({
 	className,
 	...props
@@ -75,7 +82,7 @@ export function TabsTrigger({
 			{...props}
 			className={(s) =>
 				cn(
-					"inline-flex items-center gap-2 whitespace-nowrap text-fd-muted-foreground border-b border-transparent py-2 text-sm font-medium transition-colors [&_svg]:size-4 hover:text-fd-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[active]:border-fd-primary data-[active]:text-fd-primary",
+					tabsTriggerClasses,
 					typeof className === "function" ? className(s) : className,
 				)
 			}
@@ -90,6 +97,8 @@ export function Tabs({
 	label,
 	defaultIndex = 0,
 	defaultValue = items ? escapeValue(items[defaultIndex]) : undefined,
+	hideList = false,
+	listChildren,
 	...props
 }: TabsProps) {
 	const [value, setValue] = useState(defaultValue);
@@ -111,7 +120,7 @@ export function Tabs({
 			}}
 			{...props}
 		>
-			{items && (
+			{items && !hideList && (
 				<TabsList>
 					{label && (
 						<span className="text-sm font-medium my-auto me-auto">{label}</span>
@@ -121,6 +130,7 @@ export function Tabs({
 							{item}
 						</TabsTrigger>
 					))}
+					{listChildren}
 				</TabsList>
 			)}
 			<TabsContext.Provider

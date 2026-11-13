@@ -1,12 +1,19 @@
 packages:
   - packages/**
+  - examples/**
   - docs
   - e2e/**
   - benchmark/**
 
 allowBuilds:
+  bufferutil: false
+  bun: true
+  deno: true
+  es5-ext: true
   esbuild: true
+  protobufjs: false
   sharp: true
+  utf-8-validate: false
   workerd: true
 
 blockExoticSubdeps: true
@@ -15,12 +22,16 @@ overrides:
   yuku-analyzer: ^0.19.0
   easy-template-x>lodash.get: npm:lodash@^4.18.1
   easy-template-x-angular-expressions>lodash.get: npm:lodash@^4.18.1
+  "@react-hook/intersection-observer@3.1.2>intersection-observer": "-"
 
 catalog:
   tsdown: ^0.23.5
   typescript: ^6.0.3
   xmlbuilder2: ^4.0.3
   pdf-lib: ^1.17.1
+  zod: ^4.6.7
+  tsx: ^4.23.15
+  "@types/node": ^26.6.6
 
 catalogs:
   biome:
@@ -31,22 +42,27 @@ catalogs:
     "@vitest/coverage-istanbul": ^5.1.0
     "@vitest/ui": ^5.1.0
     vitest: ^5.1.0
+  xsd-validator:
+    "@zugferd/xsd-validator": ^0.1.2
+    "@zugferd/xsd-validator-wasm32-wasip1": ^0.1.2
 
 minimumReleaseAgeExclude:
-  - miniflare@5.20260730.0-alpha
-  - wrangler@4.118.0
+  - miniflare@5.20260730.0-alpha || 5.20261110.2-beta
+  - wrangler@4.118.0 || 4.161.0
   - tsx@4.23.8
   - "@node-zugferd/*"
-  - "@zugferd/xsd-validator-darwin-arm64@0.1.0"
-  - "@zugferd/xsd-validator-darwin-x64@0.1.0"
-  - "@zugferd/xsd-validator-linux-arm64-gnu@0.1.0"
-  - "@zugferd/xsd-validator-linux-x64-gnu@0.1.0"
-  - "@zugferd/xsd-validator-win32-arm64-msvc@0.1.0"
-  - "@zugferd/xsd-validator-win32-x64-msvc@0.1.0"
-  - "@zugferd/xsd-validator@0.1.0"
+  - "@zugferd/xsd-validator-darwin-arm64@0.1.0 || 0.1.1 || 0.1.2"
+  - "@zugferd/xsd-validator-darwin-x64@0.1.0 || 0.1.1 || 0.1.2"
+  - "@zugferd/xsd-validator-linux-arm64-gnu@0.1.0 || 0.1.1 || 0.1.2"
+  - "@zugferd/xsd-validator-linux-x64-gnu@0.1.0 || 0.1.1 || 0.1.2"
+  - "@zugferd/xsd-validator-win32-arm64-msvc@0.1.0 || 0.1.1 || 0.1.2"
+  - "@zugferd/xsd-validator-win32-x64-msvc@0.1.0 || 0.1.1 || 0.1.2"
+  - "@zugferd/xsd-validator@0.1.0 || 0.1.1 || 0.1.2"
+  - "@zugferd/xsd-validator-wasm32-wasip1@0.1.1 || 0.1.2"
 
 trustPolicy: no-downgrade
 
 patchedDependencies:
+  "@react-hook/intersection-observer@3.1.2": patches/@react-hook__intersection-observer@3.1.2.patch
   easy-template-x-angular-expressions@0.3.0: patches/easy-template-x-angular-expressions@0.3.0.patch
   easy-template-x@8.0.1: patches/easy-template-x@8.0.1.patch

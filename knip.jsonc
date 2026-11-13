@@ -6,18 +6,15 @@
 		"function": true
 	},
 	"tags": ["-lintignore"],
-	"ignore": ["scripts/**", "**/*.test-d.ts"],
-	"ignoreBinaries": ["changesets"],
+	"ignore": ["scripts/**", "examples/**", "**/*.test-d.ts"],
 	// keep these: scripts that reference them aren't in the graph once scripts/** is ignored;
 	// knip may hint to remove them — leave if --production still flags them
 	"ignoreDependencies": [
 		"lodash",
-		"@changesets/cli",
 		"@vitest/coverage-istanbul",
 		// root tooling only used from ignored scripts/**
 		"@biomejs/js-api",
 		"@biomejs/wasm-nodejs",
-		"@changesets/changelog-github",
 		"@turbo/gen",
 		"@types/serialize-javascript",
 		"serialize-javascript",

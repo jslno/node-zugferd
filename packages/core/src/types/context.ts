@@ -16,8 +16,12 @@ export type ZugferdCodelistRegistryValue<
 	? ZugferdCodelistRegistry[K]
 	: Codelist;
 
+// Declarations merged into this interface must use identical type parameter
+// names. Keep `ZugferdOpts` unique: the .d.mts bundler renames a type parameter
+// that shadows another identifier (e.g. `ZugferdOptions` -> `ZugferdOptions$1`),
+// which makes TypeScript see extra type parameters and resolve plugins to `any`.
 // biome-ignore lint/correctness/noUnusedVariables: declarations must have identical type parameters
-export interface ZugferdPluginRegistry<ZugferdOptions, Options> {}
+export interface ZugferdPluginRegistry<ZugferdOpts, Options> {}
 export type ZugferdPluginRegistryId = keyof ZugferdPluginRegistry<
 	unknown,
 	unknown

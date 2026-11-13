@@ -1,0 +1,76 @@
+name: 🚩 Bug report
+description: Report a bug or unexpected behavior
+type: Bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug with node-zugferd!
+
+        - If you have a feature request, please use the [feature request form](https://github.com/jslno/node-zugferd/issues/new?template=feature_request.yml) instead.
+        - Before opening a new issue, please check for [existing issues](https://github.com/jslno/node-zugferd/issues) and :+1: upvote the existing issue instead. This wil result in a quicker resolution.
+  - type: textarea
+    attributes:
+      label: Reproduction
+      description: Provide a step-by-step description or a minimum reproduction repository link. This helps us investigate and resolve the issue faster.
+      placeholder: |
+        Steps to reproduce:
+        1. Configure node-zugferd with ...
+        2. Call `invoicer.create(...)` with ...
+        3. Observe ...
+
+        Or provide a link to a minimal reproduction repository.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Current vs. Expected Behavior
+      description: |
+        A clear and concise description of what the bug is (e.g., screenshots, logs, etc.), and what you expected to happen.
+
+        **Skipping this/failure to provide complete information of the bug will result in the issue being closed.**
+      placeholder: "Following the steps from the previous section, I expected A to happen, but I observed B instead."
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: What version of node-zugferd are you using?
+      description: Please provide the current version of 'node-zugferd' that you are reporting the bug on.
+      placeholder: "1.x.x"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: System information
+      description: Output of `npx @node-zugferd/cli info --json`
+      render: bash
+      placeholder: System and node-zugferd info
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Which area(s) are affected? (Select all that apply)
+      multiple: true
+      options:
+        - "Package"
+        - "Types"
+        - "Documentation"
+        - "Other"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: node-zugferd config (if applicable)
+      description: If you haven't already shared a reproducible example or don't think it's unrelated, include the node-zugferd config. Make sure to remove any sensitive information.
+      render: typescript
+      value: |
+        import { createZugferd } from "node-zugferd";
+        import { en16931 } from "@node-zugferd/en-16931";
+        export const invoicer = createZugferd({
+          profiles: [en16931],
+        });
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: Any extra information that might help us investigate the issue.
+      placeholder: I tested my reproduction against the latest release.

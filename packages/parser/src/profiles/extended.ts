@@ -5,7 +5,7 @@ export const extended = {
 	match: (ctx) =>
 		((ctx.context.hasPlugin("mustang") &&
 			ctx.context.getPlugin("mustang")?.options?.autoRun !== false) ||
-			(ctx.isPdfA3Conformant() && ctx.matchesExtensionSchemaProfile())) &&
+			ctx.matchesExtensionSchemaProfile()) &&
 		ctx.matchesSpecificationIdentifier(
 			"urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended",
 		),

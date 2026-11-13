@@ -425,7 +425,7 @@ async function readConfiguredCatalog(
 
 export const init = new Command("init")
 	.description("Initialize a new or customize a node-zugferd project.")
-	.option("-c, --cwd <cwd>", "The current working directory.")
+	.option("--cwd <cwd>", "The current working directory.")
 	.option(
 		"--config <config>",
 		"The path to the zugferd configuration file. Defaults to the first `invoicer.ts` or `zugferd.ts` file found.",

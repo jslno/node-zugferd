@@ -1,0 +1,38 @@
+{
+  "name": "@examples/kitchen-sink",
+  "version": "0.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "tsx --import ./instrumentation.ts ./src/index.ts",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
+  },
+  "dependencies": {
+    "@node-zugferd/minimum": "workspace:*",
+    "@node-zugferd/basic-wl": "workspace:*",
+    "@node-zugferd/basic": "workspace:*",
+    "@node-zugferd/en-16931": "workspace:*",
+    "@node-zugferd/extended": "workspace:*",
+    "@node-zugferd/xrechnung": "workspace:*",
+    "@node-zugferd/default-template": "workspace:*",
+    "@node-zugferd/instrumentation": "workspace:*",
+    "@node-zugferd/magic-bytes": "workspace:*",
+    "@node-zugferd/parser": "workspace:*",
+    "@node-zugferd/templates": "workspace:*",
+    "@node-zugferd/validator-xsd": "workspace:*",
+    "@node-zugferd/xrechnung-schema-definition": "workspace:*",
+    "@opentelemetry/api": "^1.10.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.83.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.301.1",
+    "@opentelemetry/resources": "^3.1.1",
+    "@opentelemetry/sdk-node": "^0.301.1",
+    "@opentelemetry/semantic-conventions": "^1.45.0",
+    "node-zugferd": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  }
+}

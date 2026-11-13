@@ -10,6 +10,7 @@ test.for([
 	{ dir: "tsconfig-exact-optional-property-types", skip: false },
 	{ dir: "tsconfig-verbatim-module-syntax-node10", skip: false },
 	{ dir: "tsconfig-isolated-module-bundler", skip: false },
+	{ dir: "plugin-inference", skip: false },
 ])("typecheck $dir", ({ dir, skip: shouldSkip }, { skip }) => {
 	if (shouldSkip) skip();
 

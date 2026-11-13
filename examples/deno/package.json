@@ -1,0 +1,19 @@
+{
+  "name": "@examples/deno",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "deno run --watch src/index.ts"
+  },
+  "dependencies": {
+    "@node-zugferd/basic": "workspace:*",
+    "@node-zugferd/validator-xsd": "workspace:*",
+    "node-zugferd": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/deno": "^2.7.0",
+    "deno": "latest"
+  }
+}

@@ -167,6 +167,6 @@ async function upgradeAction(opts: z.infer<typeof upgradeOptionsSchema>) {
 
 export const upgrade = new Command("upgrade")
 	.description("Upgrade node-zugferd packages to their latest versions.")
-	.option("-c, --cwd <cwd>", "The current working directory.")
+	.option("--cwd <cwd>", "The current working directory.")
 	.option("-y, --yes", "Automatically accept and upgrade without prompting.")
 	.action(upgradeAction);

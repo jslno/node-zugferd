@@ -4,7 +4,9 @@ title: XSD
 description: Validate invoice XML against an XML Schema in-process.
 ---
 
-The XSD plugin checks invoice XML against an XML Schema. Validation runs inside the Node.js process, with no Java runtime. A valid document resolves with no value. An invalid document throws [`ZugferdError`](#findings).
+The XSD plugin checks invoice XML against an XML Schema. Validation runs inside the current JavaScript runtime, with no Java runtime. A valid document resolves with no value. An invalid document throws [`ZugferdError`](#findings).
+
+Bundled schemas are embedded as source text, so validation also works in runtimes without a filesystem, such as Cloudflare Workers.
 
 ## Installation
 
@@ -108,7 +110,12 @@ These profiles ship with a schema:
 
 ## Custom schemas
 
-`schemaMap` is merged over the bundled Factur-X schemas. An entry you list replaces the bundled schema for that id. Each entry has the schema file and, when that file imports other schemas, the directory those files are loaded from.
+`schemaMap` is merged over the bundled Factur-X schemas. An entry you list replaces the bundled schema for that id.
+
+An entry uses one of two forms:
+
+- `path` and optional `dir` read the root schema and its imports from disk. Use this in Node.js.
+- `content` and optional `imports` keep the schema in memory. Use this in runtimes without a filesystem, such as Cloudflare Workers.
 
 ```ts title="invoicer.ts"
 import { xsd } from "@node-zugferd/validator-xsd";
@@ -123,7 +130,28 @@ xsd({
 });
 ```
 
-`path` is the main XSD file. `dir` is the folder used to read imported schema files by name. The bundled Factur-X schemas set `dir` because each profile schema imports the data-type schemas next to it.
+`path` is the main XSD file. `dir` is the folder used to read imported schema files by name. The bundled Factur-X schemas use `content` and `imports` because each profile schema imports the data-type schemas next to it.
+
+For a schema that imports other files, import each file as text with your bundler and pass the contents. The keys of `imports` are the `schemaLocation` values used by the root schema.
+
+```ts title="invoicer.ts"
+import invoiceXsd from "./schemas/invoice.xsd?raw";
+import typesXsd from "./schemas/types.xsd?raw";
+import { xsd } from "@node-zugferd/validator-xsd";
+
+xsd({
+  schemaMap: {
+    invoice: {
+      content: invoiceXsd,
+      imports: {
+        "types.xsd": typesXsd,
+      },
+    },
+  },
+});
+```
+
+The XRechnung and Order-X schema definitions below already use `content` and `imports`.
 
 ### XRechnung
 
@@ -195,9 +223,9 @@ XSD checks the document against its XML Schema: which elements are present, how 
 			required: false,
 		},
 		schemaMap: {
-			type: "Record<string, { path: string, dir?: string }>",
+			type: "Record<string, { path: string, dir?: string } | { content: string, imports?: Record<string, string> }>",
 			description:
-				"Schemas keyed by profile id, merged over the bundled Factur-X schemas. path is the XSD file. dir is the folder imported schema files are loaded from. A listed id replaces the bundled schema.",
+				"Schemas keyed by profile id, merged over the bundled Factur-X schemas. Use path and dir to read from disk, or content and imports to run without a filesystem. A listed id replaces the bundled schema.",
 			required: false,
 		},
 	}}

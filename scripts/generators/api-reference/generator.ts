@@ -1,3 +1,4 @@
+import { readdirSync, readFileSync } from "node:fs";
 import fs from "node:fs/promises";
 import path from "node:path";
 import type { PlopGeneratorConfig } from "plop";
@@ -35,23 +36,25 @@ type PackageRecord = {
 
 let lazyPackages: Map<string, PackageRecord> | null = null;
 
-const collectPackages = async () => {
+// Synchronous on purpose: plop's bypass path (`pnpm gen api-reference <pkg>`)
+// needs `choices` to be a plain array, so this runs at config load time.
+const collectPackages = () => {
 	if (lazyPackages) return lazyPackages;
 	const result = new Map<string, PackageRecord>();
-	const lookup = async (directory: string) => {
-		const entries = await fs.readdir(directory, { withFileTypes: true });
+	const lookup = (directory: string) => {
+		const entries = readdirSync(directory, { withFileTypes: true });
 
 		if (
 			!entries.some((entry) => entry.isFile() && entry.name === "package.json")
 		) {
 			for (const dir of entries.filter((entry) => entry.isDirectory())) {
-				await lookup(path.join(dir.parentPath, dir.name));
+				lookup(path.join(dir.parentPath, dir.name));
 			}
 			return;
 		}
 
 		const packageJson = JSON.parse(
-			await fs.readFile(path.join(directory, "package.json"), "utf-8"),
+			readFileSync(path.join(directory, "package.json"), "utf-8"),
 		) as PackageJson;
 		if (
 			packageJson.private === true ||
@@ -66,7 +69,7 @@ const collectPackages = async () => {
 		});
 	};
 
-	await lookup(path.join(workspaceRoot, "packages"));
+	lookup(path.join(workspaceRoot, "packages"));
 	lazyPackages = result;
 	return lazyPackages;
 };
@@ -90,7 +93,7 @@ function devSourceEntryPoints(
 const contentBasePath = path.join(workspaceRoot, "docs/content/api-reference");
 
 export async function generateApiReference(selection: string | string[]) {
-	const packages = await collectPackages();
+	const packages = collectPackages();
 	const packageNames =
 		selection === "*" || (Array.isArray(selection) && selection.includes("*"))
 			? [...packages.keys()]
@@ -184,10 +187,7 @@ export const apiReferenceGeneratorConfig: Partial<PlopGeneratorConfig> = {
 		{
 			type: "list",
 			name: "package",
-			choices: async () => {
-				const packages = await collectPackages();
-				return ["*", ...packages.keys()];
-			},
+			choices: ["*", ...collectPackages().keys()],
 			default: "*",
 			message: "Select a package to generate API reference for:",
 		},

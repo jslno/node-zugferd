@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ImageResponse } from "takumi-js/response";
 import { OG_BACKGROUND } from "@/lib/og-background";
 import { appName } from "@/lib/shared";
-import { examplesSource, getPageImage } from "@/lib/source";
+import { getPageImage, getSourcePage, source } from "@/lib/source";
 
 export const revalidate = false;
 
@@ -18,7 +18,7 @@ export async function GET(
 	{ params }: RouteContext<"/og/examples/[...slug]">,
 ) {
 	const { slug } = await params;
-	const page = examplesSource.getPage(slug.slice(0, -1));
+	const page = getSourcePage("examples", slug.slice(0, -1));
 	if (!page) notFound();
 
 	return new ImageResponse(
@@ -64,8 +64,14 @@ export async function GET(
 }
 
 export function generateStaticParams() {
-	return examplesSource.getPages().map((page) => ({
-		lang: page.locale,
-		slug: getPageImage(page, "examples").segments,
-	}));
+	return source.getPages().flatMap((page) =>
+		page.type === "examples"
+			? [
+					{
+						lang: page.locale,
+						slug: getPageImage(page).segments,
+					},
+				]
+			: [],
+	);
 }

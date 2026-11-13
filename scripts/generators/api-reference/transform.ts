@@ -121,6 +121,7 @@ function collectPages(project: ProjectReflection): Page[] {
 		child.kindOf(ReflectionKind.Module),
 	);
 	const containers = modules.length > 0 ? modules : [project];
+	const seen = new Set<string>();
 	const used = new Map<string, number>();
 	const pages: Page[] = [];
 
@@ -135,7 +136,11 @@ function collectPages(project: ProjectReflection): Page[] {
 			}
 			const kind = PAGE_KINDS.find((entry) => resolved.kind === entry.kind);
 			if (!kind) continue;
-			const fileName = uniqueFileName(child.name, used);
+			// Entry points re-export the same declaration (package root and `./types`).
+			const key = declarationKey(resolved);
+			if (seen.has(key)) continue;
+			seen.add(key);
+			const fileName = uniqueFileName(kind.dir, child.name, used);
 			pages.push({
 				name: child.name,
 				fileName,
@@ -160,10 +165,19 @@ function resolveDeclaration(
 	return undefined;
 }
 
-function uniqueFileName(name: string, used: Map<string, number>) {
+function declarationKey(reflection: DeclarationReflection) {
+	const source = reflection.sources?.[0];
+	if (source?.fullFileName) {
+		return `${reflection.kind}:${source.fullFileName}:${source.line}:${reflection.name}`;
+	}
+	return `${reflection.kind}:id:${reflection.id}`;
+}
+
+function uniqueFileName(dir: string, name: string, used: Map<string, number>) {
 	const safe = name.replace(/[<>:"/\\|?*]/g, "-");
-	const count = used.get(safe) ?? 0;
-	used.set(safe, count + 1);
+	const key = `${dir}/${safe}`;
+	const count = used.get(key) ?? 0;
+	used.set(key, count + 1);
 	return count === 0 ? safe : `${safe}-${count + 1}`;
 }
 

@@ -5,7 +5,7 @@ import { defaultMimeTypes, verifyMagicBytes } from "./mime-types";
 import type { MagicBytesOptions } from "./types";
 
 declare module "@node-zugferd/core" {
-	interface ZugferdPluginRegistry<ZugferdOptions, Options> {
+	interface ZugferdPluginRegistry<ZugferdOpts, Options> {
 		"magic-bytes": {
 			creator: typeof magicBytes;
 		};

@@ -6,10 +6,7 @@ import {
 	MarkdownCopyButton,
 	ViewOptionsPopover,
 } from "@/components/ai/page-actions";
-import { CodelistTable } from "@/components/codelist-table";
 import { getMDXComponents } from "@/components/mdx";
-import { ProfileTree } from "@/components/profile-tree";
-import { Step, Steps } from "@/components/steps";
 import {
 	DocsBody,
 	DocsDescription,
@@ -18,22 +15,28 @@ import {
 } from "@/layouts/docs/page";
 import { gitConfig } from "@/lib/shared";
 import {
-	apiReferenceSource,
+	getContentPath,
 	getPageImage,
 	getPageMarkdownUrl,
+	getSourcePage,
+	getSourceParams,
+	source,
 } from "@/lib/source";
 
 export default async function Page(
 	props: PageProps<"/api-reference/[...slug]">,
 ) {
 	const params = await props.params;
-	const page = apiReferenceSource.getPage(params.slug?.map(decodeURIComponent));
+	const page = getSourcePage(
+		"apiReference",
+		params.slug?.map(decodeURIComponent),
+	);
 	if (!page) notFound();
 
 	const MDX = (await page.data.load()).body;
-	const markdownUrl = getPageMarkdownUrl(page, "api-reference").url;
+	const markdownUrl = getPageMarkdownUrl(page).url;
 
-	const gitPath = `docs/content/api-reference/${page.path}`;
+	const gitPath = `docs/content/api-reference/${getContentPath(page)}`;
 	const lastEditedAt = await getGithubLastEdit({
 		owner: gitConfig.user,
 		repo: gitConfig.repo,
@@ -50,52 +53,50 @@ export default async function Page(
 			lastEditedAt={lastEditedAt ?? undefined}
 			full={page.data.full}
 		>
-			<div className="flex flex-col gap-2.5">
-				<DocsTitle>{page.data.title}</DocsTitle>
-				<DocsDescription className="mb-0">
-					{page.data.description}
-				</DocsDescription>
+			<div className="flex w-full flex-col gap-6">
+				<div className="flex flex-col gap-2.5">
+					<DocsTitle>{page.data.title}</DocsTitle>
+					<DocsDescription className="mb-0">
+						{page.data.description}
+					</DocsDescription>
+				</div>
+				<div className="flex flex-row gap-2 items-center border-b pb-6">
+					<MarkdownCopyButton markdownUrl={markdownUrl} />
+					<ViewOptionsPopover
+						markdownUrl={markdownUrl}
+						githubUrl={`https://github.com/${gitConfig.user}/${gitConfig.repo}/blob/${gitConfig.branch}/${gitPath}`}
+					/>
+				</div>
+				<DocsBody>
+					<MDX
+						components={getMDXComponents({
+							// this allows you to link to other pages with relative file paths
+							a: createRelativeLink(source, page),
+							code: "code",
+						})}
+					/>
+				</DocsBody>
 			</div>
-			<div className="flex flex-row gap-2 items-center border-b pb-6">
-				<MarkdownCopyButton markdownUrl={markdownUrl} />
-				<ViewOptionsPopover
-					markdownUrl={markdownUrl}
-					githubUrl={`https://github.com/${gitConfig.user}/${gitConfig.repo}/blob/${gitConfig.branch}/${gitPath}`}
-				/>
-			</div>
-			<DocsBody>
-				<MDX
-					components={getMDXComponents({
-						// this allows you to link to other pages with relative file paths
-						a: createRelativeLink(apiReferenceSource, page),
-						Steps,
-						Step,
-						ProfileTree,
-						CodelistTable,
-						code: "code",
-					})}
-				/>
-			</DocsBody>
 		</DocsPage>
 	);
 }
 
 export async function generateStaticParams() {
-	return apiReferenceSource.generateParams();
+	return getSourceParams("apiReference");
 }
 
 export async function generateMetadata(
 	props: PageProps<"/docs/[[...slug]]">,
 ): Promise<Metadata> {
 	const params = await props.params;
-	const page = apiReferenceSource.getPage(params.slug);
+	const page = getSourcePage("apiReference", params.slug);
 	if (!page) notFound();
 
 	return {
 		title: page.data.title,
 		description: page.data.description,
 		openGraph: {
-			images: getPageImage(page, "api-reference").url,
+			images: getPageImage(page).url,
 		},
 	};
 }

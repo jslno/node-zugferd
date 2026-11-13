@@ -1,0 +1,29 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "cloudflare",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-11-10",
+	// IMPORTANT: This is required for node-zugferd to work properly.
+	"compatibility_flags": ["nodejs_compat"],
+	"observability": {
+		"enabled": true
+	},
+	"queues": {
+		"consumers": [
+			{
+				"queue": "invoice-queue"
+			}
+		],
+		"producers": [
+			{
+				"binding": "INVOICE_QUEUE",
+				"queue": "invoice-queue"
+			}
+		]
+	},
+	"upload_source_maps": true
+}
