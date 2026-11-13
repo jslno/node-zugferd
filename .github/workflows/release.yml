@@ -78,4 +78,6 @@ jobs:
           echo "Using npm tag: $NPM_TAG"
 
       - name: Publish to npm (staged)
-        run: pnpm stage publish --recursive --access public --no-git-checks --tag ${{ steps.determine-npm-tag.outputs.npm_tag }}
+        env:
+          NPM_TAG: ${{ steps.determine-npm-tag.outputs.npm_tag }}
+        run: pnpm stage publish --recursive --access public --no-git-checks --tag "$NPM_TAG"

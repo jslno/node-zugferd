@@ -1,4 +1,7 @@
 rules:
+  dangerous-triggers:
+    ignore:
+      - auto-label.yml
   use-trusted-publishing:
     ignore:
       - preview.yml
