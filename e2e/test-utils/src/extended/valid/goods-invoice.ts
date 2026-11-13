@@ -31,12 +31,10 @@ export const goodsInvoiceData: typeof extended.$Infer.Input = {
 				subjectCode: "ACB",
 			},
 			{
-				contentCode: "ST3",
 				content: "Es bestehen Rabatt- oder Bonusvereinbarungen.",
 				subjectCode: "AAK",
 			},
 			{
-				contentCode: "EEV",
 				content:
 					"Der Verkäufer bleibt Eigentümer der Waren bis zu vollständigen Erfüllung der Kaufpreisforderung.",
 				subjectCode: "AAJ",

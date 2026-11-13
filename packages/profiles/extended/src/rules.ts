@@ -410,8 +410,14 @@ function checkTotals(
 	if (
 		!withinTolerance(
 			readPath(totals, ["taxBasisTotalAmount"]),
-			sum(nets) - sum(allowanceAmounts) + sum(chargeAmounts),
-			nets.length + allowanceAmounts.length + chargeAmounts.length,
+			sum(nets) -
+				sum(allowanceAmounts) +
+				sum(chargeAmounts) +
+				sum(logisticsAmounts),
+			nets.length +
+				allowanceAmounts.length +
+				chargeAmounts.length +
+				logisticsAmounts.length,
 		)
 	) {
 		fail(

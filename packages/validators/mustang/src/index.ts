@@ -32,6 +32,7 @@ export const mustang = <ZugferdOptions extends ZFOptions>(
 		tempDir: tmpdir(),
 		maximumHeapSize: 1024,
 		autoRun: true,
+		failOnWarnings: false,
 		language: "en",
 		...(options ?? {}),
 	} satisfies MustangOptions;
@@ -91,6 +92,8 @@ export const mustang = <ZugferdOptions extends ZFOptions>(
 			"-jar",
 			cli,
 			"--no-notices",
+			// TODO: Will be supported in next Mustang CLI version
+			// !!opts.failOnWarnings && "--fail-on-warnings",
 			"--action",
 			"validate",
 			`--source`,
@@ -102,7 +105,7 @@ export const mustang = <ZugferdOptions extends ZFOptions>(
 
 		const result = stdout.includes("<validation") ? stdout : stderr;
 
-		return parseValidatorResult(ctx, result);
+		return parseValidatorResult(ctx, opts, result);
 	};
 
 	return {
@@ -185,7 +188,11 @@ function textOf(value: unknown) {
 		.filter((entry) => entry !== "");
 }
 
-function parseValidatorResult(ctx: ZugferdContext, output: string) {
+function parseValidatorResult(
+	ctx: ZugferdContext,
+	opts: MustangOptions,
+	output: string,
+) {
 	const out = (
 		convert(output.trim(), { format: "object" }) as Record<string, any>
 	)?.validation;
@@ -213,9 +220,13 @@ function parseValidatorResult(ctx: ZugferdContext, output: string) {
 				messages.push(...textOf(msg.exception));
 			}
 			if ("warning" in msg) {
-				const message = textOf(msg.warning).join("\n\n");
-				if (message !== "") {
-					ctx.logger.warn(message);
+				if (opts.failOnWarnings) {
+					messages.push(...textOf(msg.warning));
+				} else {
+					const message = textOf(msg.warning).join("\n\n");
+					if (message !== "") {
+						ctx.logger.warn(message);
+					}
 				}
 			}
 		}

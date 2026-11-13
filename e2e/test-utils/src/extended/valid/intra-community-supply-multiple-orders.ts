@@ -77,7 +77,7 @@ export const intraCommunitySupplyMultipleOrders: typeof extended.$Infer.Input =
 							{
 								typeCode: "VAT",
 								exemptionReason:
-									"Kein Ausweis der Umsatzsteuer bei innergemeinschaftlichen Lieferungen",
+								"Intra-community supply",
 								categoryCode: "K",
 								rateApplicablePercent: 0,
 							},
@@ -132,7 +132,7 @@ export const intraCommunitySupplyMultipleOrders: typeof extended.$Infer.Input =
 							{
 								typeCode: "VAT",
 								exemptionReason:
-									"Kein Ausweis der Umsatzsteuer bei innergemeinschaftlichen Lieferungen",
+								"Intra-community supply",
 								categoryCode: "K",
 								rateApplicablePercent: 0,
 							},
@@ -244,7 +244,7 @@ export const intraCommunitySupplyMultipleOrders: typeof extended.$Infer.Input =
 						calculatedAmount: 0,
 						typeCode: "VAT",
 						exemptionReason:
-							"Kein Ausweis der Umsatzsteuer bei innergemeinschaftlichen Lieferungen",
+							"Intra-community supply",
 						basisAmount: 2000,
 						categoryCode: "K",
 						rateApplicablePercent: 0,

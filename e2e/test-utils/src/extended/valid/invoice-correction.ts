@@ -16,7 +16,6 @@ export const invoiceCorrectionData: typeof extended.$Infer.Input = {
 		invoiceIssueDate: new Date("2025-10-01"),
 		invoiceNotes: [
 			{
-				contentCode: "ST3",
 				content: "Es bestehen Rabatt- oder Bonusvereinbarungen.",
 				subjectCode: "AAK",
 			},

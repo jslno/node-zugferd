@@ -10,6 +10,7 @@ export const invoicer = zugferd({
 		parser(),
 		mustang({
 			autoRun: false,
+			failOnWarnings: true,
 		}),
 		xsd({
 			autoRun: false,

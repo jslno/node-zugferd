@@ -13,12 +13,10 @@ export const costAccountingData: typeof extended.$Infer.Input = {
 		invoiceIssueDate: new Date("2025-12-01"),
 		invoiceNotes: [
 			{
-				contentCode: "ST3",
 				content: "Es bestehen Rabatt- oder Bonusvereinbarungen.",
 				subjectCode: "AAK",
 			},
 			{
-				contentCode: "EEV",
 				content:
 					"Der Verkäufer bleibt Eigentümer der Waren bis zur vollständigen Erfüllung der Kaufpreisforderung.",
 				subjectCode: "AAJ",

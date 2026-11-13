@@ -119,22 +119,54 @@ async function toComparableBinary(value: unknown): Promise<unknown> {
 	return value;
 }
 
-async function toComparableParsedInvoice(value: unknown): Promise<unknown> {
+async function toComparableParsedInvoice(
+	value: unknown,
+	fieldName?: string,
+	insideAmount = false,
+): Promise<unknown> {
 	if (value instanceof File) return toComparableBinary(value);
+	if (
+		typeof value === "string" &&
+		(insideAmount || fieldName?.endsWith("Amount")) &&
+		value.trim() !== "" &&
+		Number.isFinite(Number(value))
+	) {
+		return Number(value);
+	}
 	if (isBinaryLike(value) || value == null || typeof value !== "object") {
 		return value;
 	}
 	if (Array.isArray(value)) {
-		return Promise.all(value.map((item) => toComparableParsedInvoice(item)));
+		return Promise.all(
+			value.map((item) =>
+				toComparableParsedInvoice(
+					item,
+					fieldName,
+					insideAmount || fieldName?.endsWith("Amount") === true,
+				),
+			),
+		);
+	}
+	if (
+		insideAmount &&
+		"value" in value &&
+		Object.keys(value).every((key) => key === "value")
+	) {
+		return toComparableParsedInvoice(value.value, "value", true);
 	}
 	if ("content" in value && "filename" in value && "mimeType" in value) {
 		return toComparableBinary(value);
 	}
 
+	const isQuantity = "value" in value && "unitCode" in value;
 	const out: Record<string, unknown> = {};
 	for (const [key, child] of Object.entries(value)) {
 		if (child === "") continue;
-		out[key] = await toComparableParsedInvoice(child);
+		out[key] = await toComparableParsedInvoice(
+			child,
+			key,
+			insideAmount || isQuantity || key.endsWith("Amount"),
+		);
 	}
 	return out;
 }

@@ -10,11 +10,10 @@ export const invoicer = zugferd({
 		parser(),
 		mustang({
 			autoRun: false,
+			failOnWarnings: true,
 		}),
 		xsd({
 			autoRun: false,
 		}),
 	],
 });
-
-const _result = await invoicer.parse("extended", "");

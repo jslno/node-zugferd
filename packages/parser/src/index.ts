@@ -307,10 +307,14 @@ export const documentParser = async (
 			let attachments: ReturnType<typeof getAttachments> | undefined =
 				undefined;
 			let xml: string | null = null;
-			try {
-				pdf = await PDFDocument.load(input, { updateMetadata: false });
-				attachments = getAttachments(pdf);
-			} catch {}
+			const rawXml =
+				typeof input === "string" && input.trimStart().startsWith("<");
+			if (!rawXml) {
+				try {
+					pdf = await PDFDocument.load(input, { updateMetadata: false });
+					attachments = getAttachments(pdf);
+				} catch {}
+			}
 
 			if (!profile) {
 				for (const profileId in opts.profileMap) {

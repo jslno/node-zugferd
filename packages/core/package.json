@@ -15,6 +15,14 @@
     "test": "vitest",
     "coverage": "vitest run --coverage --coverage.provider=istanbul"
   },
+  "peerDependenciesMeta": {
+    "pdf-lib": {
+      "optional": true
+    },
+    "xmlbuilder2": {
+      "optional": true
+    }
+  },
   "peerDependencies": {
     "pdf-lib": "catalog:",
     "xmlbuilder2": "catalog:"

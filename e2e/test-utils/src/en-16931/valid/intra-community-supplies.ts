@@ -204,6 +204,7 @@ export const intraCommunitySuppliesData: typeof en16931.$Infer.Input = {
 				{
 					calculatedAmount: 0,
 					typeCode: "VAT",
+					exemptionReasonCode: "VATEX-EU-IC",
 					exemptionReason:
 						"Mehrwertsteuerbefreiung für die innergemeinschaftliche Lieferung von Waren und Dienstleistungen in der EU",
 					basisAmount: 2000,

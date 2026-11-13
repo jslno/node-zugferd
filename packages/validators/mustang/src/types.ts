@@ -20,6 +20,12 @@ export type MustangOptions = {
 	 */
 	autoRun?: boolean | undefined;
 	/**
+	 * Whether to fail on warnings.
+	 *
+	 * @default false
+	 */
+	failOnWarnings?: boolean | undefined;
+	/**
 	 * Language for messages returned by the Mustang validator.
 	 *
 	 * @default "en"

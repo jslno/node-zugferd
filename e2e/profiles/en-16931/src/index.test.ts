@@ -78,8 +78,6 @@ const invoices = [
 
 describe("en-16931 profile", () => {
 	validInvoiceTestFactory(invoicer, "en-16931", invoices);
-
-	// todo: test rules
 });
 
 describe("parse en-16931 profile", () => {

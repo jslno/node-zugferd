@@ -9,6 +9,7 @@ export const invoicer = zugferd({
 	plugins: [
 		mustang({
 			autoRun: false,
+			failOnWarnings: true,
 		}),
 		xsd({
 			autoRun: false,

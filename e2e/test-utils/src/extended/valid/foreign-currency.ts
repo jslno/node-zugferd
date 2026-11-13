@@ -102,13 +102,13 @@ export const foreignCurrencyData: typeof extended.$Infer.Input = {
 							basisAmount: 1000,
 							actualAmount: 100,
 							reasonCode: "64",
-							reason: "Lagerware",
+						reason: "Special agreement",
 						},
 						{
 							basisAmount: 1000,
 							actualAmount: 50,
 							reasonCode: "70",
-							reason: "Direktbelieferung",
+						reason: "Incoterm discount",
 						},
 					],
 					itemTotals: {
@@ -245,7 +245,7 @@ export const foreignCurrencyData: typeof extended.$Infer.Input = {
 					basisAmount: 850,
 					actualAmount: 21.25,
 					reasonCode: "102",
-					reason: "Stammkundenrabatt",
+					reason: "Fixed long term",
 					categoryTradeTax: {
 						categoryCode: "S",
 						rateApplicablePercent: 19,

@@ -390,9 +390,13 @@ export function enforceBasicWlRules(data: unknown, ctx: Ctx): void {
 	}
 
 	if (due !== undefined && due > 0) {
-		const terms = readPath(debit, ["paymentTerms"]);
-		const hasDueDate = dateGiven(readPath(terms, ["dueDate"]));
-		const hasTerms = !!present(readPath(terms, ["description"]));
+		const terms = items(readPath(debit, ["paymentTerms"]));
+		const hasDueDate = terms.some((term) =>
+			dateGiven(readPath(term, ["dueDate"])),
+		);
+		const hasTerms = terms.some(
+			(term) => !!present(readPath(term, ["description"])),
+		);
 		if (!hasDueDate && !hasTerms) {
 			fail(
 				ctx,
