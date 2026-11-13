@@ -113,6 +113,10 @@ jobs:
             "@node-zugferd/basic",
             "@node-zugferd/en-16931",
             "@node-zugferd/extended",
+            "@node-zugferd/xrechnung",
+            "@node-zugferd/order-x-basic",
+            "@node-zugferd/order-x",
+            "@node-zugferd/order-x-extended",
           ]
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1

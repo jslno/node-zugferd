@@ -701,13 +701,14 @@ function logisticsInvoice(fee: number): Rec {
 		},
 	];
 	data.transaction.debit.documentTotals.chargeTotalAmount = fee;
+	data.transaction.debit.documentTotals.taxBasisTotalAmount = basis;
 	data.transaction.debit.vatBreakdown = [breakdown("S", basis, 19, tax)];
 	data.transaction.debit.documentTotals.taxTotalAmount = {
 		value: tax,
 		currency: "EUR",
 	};
-	data.transaction.debit.documentTotals.grandTotalAmount = 100 + tax;
-	data.transaction.debit.documentTotals.duePayableAmount = 100 + tax;
+	data.transaction.debit.documentTotals.grandTotalAmount = basis + tax;
+	data.transaction.debit.documentTotals.duePayableAmount = basis + tax;
 	return data;
 }
 

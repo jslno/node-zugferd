@@ -74,7 +74,6 @@ Handelsregisternummer: H A 123`,
 				name: "Grundbesitz GmbH & Co.",
 				contact: {
 					personName: "Max Mustermann",
-					departmentName: "Muster-Einkauf",
 					phoneNumber: "+49891234567",
 					emailAddress: "Max@Mustermann.de",
 				},

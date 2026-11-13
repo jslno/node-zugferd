@@ -13,6 +13,4 @@ describe("xrechnung profile", () => {
 		{ label: "Operating cost statement", data: operatingCostStatementData },
 		{ label: "Simple", data: simpleData },
 	]);
-
-	// todo: test rules
 });
