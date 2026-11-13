@@ -92,6 +92,7 @@
     "includes": [
       "**",
       "!e2e/test-utils",
+      "!**/.wrangler",
       "!**/dist",
       "!**/coverage",
       "!**/build",
