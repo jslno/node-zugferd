@@ -31,7 +31,7 @@ const dateFormats = {
 	"102": {
 		matches: (value: string) => /^\d{8}$/.test(value),
 		format: (date: Date) =>
-			`${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, "0")}${String(date.getDate()).padStart(2, "0")}`,
+			`${date.getUTCFullYear()}${String(date.getUTCMonth() + 1).padStart(2, "0")}${String(date.getUTCDate()).padStart(2, "0")}`,
 		parse(value: string) {
 			if (!this.matches(value)) return null;
 
@@ -47,7 +47,7 @@ const dateFormats = {
 	"203": {
 		matches: (value: string) => /^\d{12}$/.test(value),
 		format: (date: Date) =>
-			`${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, "0")}${String(date.getDate()).padStart(2, "0")}${String(date.getHours()).padStart(2, "0")}${String(date.getMinutes()).padStart(2, "0")}`,
+			`${date.getUTCFullYear()}${String(date.getUTCMonth() + 1).padStart(2, "0")}${String(date.getUTCDate()).padStart(2, "0")}${String(date.getUTCHours()).padStart(2, "0")}${String(date.getUTCMinutes()).padStart(2, "0")}`,
 		parse(value: string) {
 			if (!this.matches(value)) return null;
 
@@ -57,7 +57,7 @@ const dateFormats = {
 			const hours = Number(value.slice(8, 10));
 			const minutes = Number(value.slice(10, 12));
 
-			const date = new Date(year, month, day, hours, minutes);
+			const date = new Date(Date.UTC(year, month, day, hours, minutes));
 			return !isNaN(+date) ? date : null;
 		},
 	},
