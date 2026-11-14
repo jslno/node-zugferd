@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "next build && pnpm run sync:api-reference",
+    "build": "pnpm run sync:api-reference && next build",
     "dev": "portless node-zugferd next dev",
     "start": "next start",
     "sync:api-reference": "pnpm run -w gen api-reference '*'",
