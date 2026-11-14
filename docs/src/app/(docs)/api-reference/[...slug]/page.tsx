@@ -86,7 +86,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(
-	props: PageProps<"/docs/[[...slug]]">,
+	props: PageProps<"/docs/[...slug]">,
 ): Promise<Metadata> {
 	const params = await props.params;
 	const page = getSourcePage("apiReference", params.slug);

@@ -78,11 +78,11 @@ export default function HomePage() {
 						<br />
 						your first invoice?
 					</h2>
-					<p className="max-w-3xl text-lg text-muted-foreground">
+					<p className="max-w-3xl base text-muted-foreground">
 						Build electronic invoice workflows without fighting the
-						specification. Generate, parse, validate, and customize ZUGFeRD and
-						Factur-X documents through a consistent API while node-zugferd
-						handles the complexity of XML, profiles, and compliance.
+						specification. Generate, parse, validate, and customize
+						ZUGFeRD/Factur-X documents through a consistent API while
+						node-zugferd handles the complexity.
 					</p>
 					<div className="mt-2 flex items-center gap-2">
 						<Button

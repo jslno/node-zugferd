@@ -152,8 +152,15 @@ function SandpackSelectionSync({
 	return null;
 }
 
-export function CodePanel() {
-	const { path: rootPath, entry, owner, repo, branch } = useExampleExplorer();
+export function CodePanel({ className }: { className?: string }) {
+	const {
+		path: rootPath,
+		entry,
+		owner,
+		repo,
+		branch,
+		filesOnly,
+	} = useExampleExplorer();
 	const { data: tree, isPending } = useFileTree({
 		path: rootPath,
 		owner,
@@ -220,10 +227,13 @@ export function CodePanel() {
 			options={{
 				activeFile,
 				visibleFiles,
-				autorun: true,
+				autorun: !filesOnly,
 				initMode: "immediate",
 			}}
-			className="flex-1! flex! flex-col items-stretch! justify-stretch!"
+			className={cn(
+				"h-full! min-h-0! w-full! flex-1! flex! flex-col items-stretch! justify-stretch!",
+				className,
+			)}
 		>
 			<SandpackSelectionSync
 				activeFile={activeFile}
@@ -231,7 +241,7 @@ export function CodePanel() {
 				onChange={handleSelectionChange}
 			/>
 			<SandpackLayout className="flex! min-h-0! not-prose h-full! border-none! flex-1!">
-				<ResizablePanelGroup className="h-full! flex-1!">
+				<ResizablePanelGroup className="h-full! min-h-0! flex-1!">
 					<ResizablePanel
 						className="contents"
 						defaultSize="10rem"
@@ -249,7 +259,7 @@ export function CodePanel() {
 					<ResizablePanel className="contents">
 						<SandpackCodeEditor
 							className={cn(
-								"[&_.sp-code-editor_.cm-scroller]:scroll-fade [&_.sp-code-editor_.cm-scroller]:scrollbar-none [&_.sp-tabs-scrollable-container]:scroll-fade-x [&_.sp-tabs-scrollable-container]:scrollbar-none",
+								"[&_.sp-code-editor_.cm-scroller]:scroll-fade &_.sp-code-editor_.cm-scroller]:scroll-fade-10 [&_.sp-code-editor_.cm-scroller]:scrollbar-none [&_.sp-tabs-scrollable-container]:scroll-fade-x [&_.sp-tabs-scrollable-container]:scrollbar-none",
 								"[&_.sp-tabs-scrollable-container]:gap-x-1 [&_.sp-tabs]:border-none! [&_.sp-tab-container]:transition-colors! [&_.sp-tabs]:pt-2 [&_.sp-tab-container]:outline-none! [&_.sp-tab-container]:aria-selected:bg-accent! [&_.sp-tab-container]:aria-selected:text-accent-foreground! [&_.sp-tab-container]:text-muted-foreground! [&_.sp-tab-container]:bg-muted/60! [&_.sp-tab-container]:hover:bg-muted! [&_.sp-tab-container]:rounded-md [&_.sp-tab-container]:h-7 [&_.sp-tab-button]:h-7! [&_.sp-close-button]:mr-1 [&_.sp-close-button]:visible! [&_.sp-close-button]:transition-opacity! [&_.sp-close-button]:opacity-0! [&_.sp-tab-container]:aria-selected:[&_.sp-close-button]:opacity-100! [&_.sp-tab-container]:hover:[&_.sp-close-button]:opacity-100!",
 							)}
 							extensions={[
@@ -265,20 +275,29 @@ export function CodePanel() {
 								}),
 							]}
 							extensionsKeymap={[...completionKeymap]}
+							showRunButton={!filesOnly}
 							closableTabs
 							showTabs
 						/>
 					</ResizablePanel>
-					<ResizableHandle className="bg-muted/30" />
-					<ResizablePanel
-						className="contents"
-						defaultSize="35"
-						minSize="14rem"
-						maxSize="50"
-						collapsible
-					>
-						<SandpackConsole standalone showSetupProgress showHeader={false} />
-					</ResizablePanel>
+					{!filesOnly && (
+						<>
+							<ResizableHandle className="bg-muted/30" />
+							<ResizablePanel
+								className="contents"
+								defaultSize="35"
+								minSize="14rem"
+								maxSize="50"
+								collapsible
+							>
+								<SandpackConsole
+									standalone
+									showSetupProgress
+									showHeader={false}
+								/>
+							</ResizablePanel>
+						</>
+					)}
 				</ResizablePanelGroup>
 			</SandpackLayout>
 		</SandpackProvider>

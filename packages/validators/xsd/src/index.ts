@@ -115,7 +115,7 @@ export const xsd = <ZugferdOptions extends ZFOptions, Opts extends XSDOptions>(
 
 	const validate = async (
 		profileId: string,
-		input: string,
+		input: string | Uint8Array | ArrayBuffer,
 		ctx: ZugferdContext,
 	) => {
 		const schema = getSchema(profileId);
@@ -129,7 +129,9 @@ export const xsd = <ZugferdOptions extends ZFOptions, Opts extends XSDOptions>(
 		const validator = await XsdValidator.create(content, loader);
 
 		try {
-			validator.validateOrThrow(input);
+			validator.validateOrThrow(
+				typeof input === "string" ? input : new TextDecoder().decode(input),
+			);
 		} catch (err) {
 			if (err instanceof Error) {
 				throw new ZugferdError(err.message);
@@ -169,9 +171,9 @@ export const xsd = <ZugferdOptions extends ZFOptions, Opts extends XSDOptions>(
 						const ProfileID extends
 							| SupportedProfileId
 							| { id: SupportedProfileId },
-					>(profileId: ProfileID, xml: string) {
+					>(profileId: ProfileID, input: string | Uint8Array | ArrayBuffer) {
 						const id = typeof profileId === "string" ? profileId : profileId.id;
-						return await validate(id, xml, ctx);
+						return await validate(id, input, ctx);
 					},
 				},
 			};

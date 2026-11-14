@@ -1,5 +1,3 @@
-import { createGetUrl } from "fumadocs-core/source";
-
 export const appName = "node-zugferd";
 export const docsRoute = "/docs";
 export const docsImageRoute = "/og/docs";
@@ -18,25 +16,6 @@ export const gitConfig = {
 	repo: "node-zugferd",
 	branch: "main",
 };
-
-const getContentUrl = createGetUrl("/llms.mdx");
-
-export function getPageMarkdownUrl(page: {
-	slugs: string[];
-	locale?: string;
-	type: string;
-}) {
-	const segments = [
-		page.type === "apiReference" ? "api-reference" : page.type,
-		...page.slugs,
-		"content.md",
-	];
-
-	return {
-		segments,
-		url: getContentUrl(segments, page.locale),
-	};
-}
 
 type Success<T> = {
 	data: T;
@@ -59,4 +38,20 @@ export async function tryCatch<T, E = Error>(
 	} catch (error) {
 		return { data: null, error: error as E };
 	}
+}
+
+export function toURLSearchParams(
+	params: Record<string, string | string[] | undefined>,
+): URLSearchParams {
+	const searchParams = new URLSearchParams();
+
+	for (const [key, value] of Object.entries(params)) {
+		if (Array.isArray(value)) {
+			value.forEach((v) => searchParams.append(key, v));
+		} else if (value !== undefined) {
+			searchParams.set(key, value);
+		}
+	}
+
+	return searchParams;
 }

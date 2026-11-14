@@ -14,10 +14,8 @@ export function getMDXComponents(components?: MDXComponents) {
 		...Twoslash,
 		...TabsComponents,
 		...components,
-	} satisfies MDXComponents;
+	} as unknown as MDXComponents;
 }
-
-export const useMDXComponents = getMDXComponents;
 
 declare global {
 	type MDXProvidedComponents = ReturnType<typeof getMDXComponents>;

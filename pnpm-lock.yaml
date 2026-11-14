@@ -1090,24 +1090,9 @@ importers:
       '@clack/prompts':
         specifier: ^1.8.1
         version: 1.8.1
-      '@node-zugferd/basic':
-        specifier: workspace:*
-        version: link:../profiles/basic
-      '@node-zugferd/basic-wl':
-        specifier: workspace:*
-        version: link:../profiles/basic-wl
       '@node-zugferd/core':
         specifier: workspace:*
         version: link:../core
-      '@node-zugferd/en-16931':
-        specifier: workspace:*
-        version: link:../profiles/en-16931
-      '@node-zugferd/extended':
-        specifier: workspace:*
-        version: link:../profiles/extended
-      '@node-zugferd/minimum':
-        specifier: workspace:*
-        version: link:../profiles/minimum
       c12:
         specifier: 4.0.0-rc.4
         version: 4.0.0-rc.4(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magicast@0.5.5)
@@ -1130,6 +1115,21 @@ importers:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
+      '@node-zugferd/basic':
+        specifier: workspace:*
+        version: link:../profiles/basic
+      '@node-zugferd/basic-wl':
+        specifier: workspace:*
+        version: link:../profiles/basic-wl
+      '@node-zugferd/en-16931':
+        specifier: workspace:*
+        version: link:../profiles/en-16931
+      '@node-zugferd/extended':
+        specifier: workspace:*
+        version: link:../profiles/extended
+      '@node-zugferd/minimum':
+        specifier: workspace:*
+        version: link:../profiles/minimum
       '@node-zugferd/parser':
         specifier: workspace:*
         version: link:../parser

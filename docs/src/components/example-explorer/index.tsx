@@ -60,6 +60,7 @@ type ExampleExplorerProps = {
 	branch?: string;
 	path: string;
 	entry?: string;
+	filesOnly?: boolean;
 };
 
 type ExampleExplorerContextType = (Required<
@@ -235,6 +236,7 @@ export function ExampleExplorer(props: ExampleExplorerProps) {
 		owner: gitConfig.user,
 		repo: gitConfig.repo,
 		branch: gitConfig.branch,
+		filesOnly: false,
 		...props,
 		maximized,
 		portaled,
@@ -246,8 +248,11 @@ export function ExampleExplorer(props: ExampleExplorerProps) {
 
 	const tabs = (
 		<Tabs
-			items={["Playground", "StackBlitz", "CodeSandbox"]}
-			className={portaled ? "my-0 min-h-0 flex-1" : "h-[50svh]"}
+			items={[
+				"Playground",
+				...(!ctx.filesOnly ? ["StackBlitz", "CodeSandbox"] : []),
+			]}
+			className={portaled ? "my-0 min-h-0 flex-1" : undefined}
 			listChildren={
 				<>
 					<Link
@@ -275,27 +280,41 @@ export function ExampleExplorer(props: ExampleExplorerProps) {
 			<Tab
 				value="Playground"
 				className={cn(
-					"flex-1 flex! flex-col p-0! not-prose overflow-clip",
+					"flex-1 min-h-0! flex! flex-col p-0! not-prose overflow-clip",
 					portaled && "min-h-0 [&_.sp-wrapper]:h-full! [&_.sp-layout]:h-full",
 				)}
 			>
-				<CodePanel />
+				<div
+					className={cn(
+						"flex min-h-0 flex-col",
+						portaled ? "flex-1" : "h-[50svh]",
+					)}
+				>
+					<CodePanel className="h-full min-h-0" />
+				</div>
 			</Tab>
-			<Tab
-				value="StackBlitz"
-				className={cn(
-					"p-0! not-prose flex-1 flex flex-col",
-					portaled && "min-h-0",
-				)}
-			>
-				<StackBlitz />
-			</Tab>
-			<Tab
-				value="CodeSandbox"
-				className={cn("not-prose flex-1 flex flex-col", portaled && "min-h-0")}
-			>
-				<CodeSandbox />
-			</Tab>
+			{!ctx.filesOnly && (
+				<>
+					<Tab
+						value="StackBlitz"
+						className={cn(
+							"p-0! not-prose flex-1 flex flex-col",
+							portaled ? "min-h-0" : "min-h-[50svh]",
+						)}
+					>
+						<StackBlitz />
+					</Tab>
+					<Tab
+						value="CodeSandbox"
+						className={cn(
+							"not-prose flex-1 flex flex-col",
+							portaled ? "min-h-0" : "min-h-[50svh]",
+						)}
+					>
+						<CodeSandbox />
+					</Tab>
+				</>
+			)}
 		</Tabs>
 	);
 

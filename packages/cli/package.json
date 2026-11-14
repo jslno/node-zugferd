@@ -25,6 +25,42 @@
     "test": "vitest",
     "coverage": "vitest run --coverage --coverage.provider=istanbul"
   },
+  "peerDependenciesMeta": {
+    "@node-zugferd/basic": {
+      "optional": true
+    },
+    "@node-zugferd/basic-wl": {
+      "optional": true
+    },
+    "@node-zugferd/en-16931": {
+      "optional": true
+    },
+    "@node-zugferd/extended": {
+      "optional": true
+    },
+    "@node-zugferd/minimum": {
+      "optional": true
+    },
+    "@node-zugferd/parser": {
+      "optional": true
+    },
+    "@node-zugferd/validator-mustang": {
+      "optional": true
+    },
+    "@node-zugferd/validator-xsd": {
+      "optional": true
+    }
+  },
+  "peerDependencies": {
+    "@node-zugferd/basic": "workspace:*",
+    "@node-zugferd/basic-wl": "workspace:*",
+    "@node-zugferd/en-16931": "workspace:*",
+    "@node-zugferd/extended": "workspace:*",
+    "@node-zugferd/minimum": "workspace:*",
+    "@node-zugferd/parser": "workspace:*",
+    "@node-zugferd/validator-mustang": "workspace:*",
+    "@node-zugferd/validator-xsd": "workspace:*"
+  },
   "dependencies": {
     "@babel/core": "^8.1.0",
     "@babel/preset-react": "^8.0.1",
@@ -32,21 +68,22 @@
     "@biomejs/js-api": "catalog:biome",
     "@biomejs/wasm-nodejs": "catalog:biome",
     "@clack/prompts": "^1.8.1",
+    "c12": "4.0.0-rc.4",
+    "chalk": "^6.0.1",
+    "commander": "^15.0.0",
+    "get-tsconfig": "^4.14.3",
+    "@node-zugferd/core": "workspace:*",
+    "node-zugferd": "workspace:*",
+    "semver": "^7.8.6",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
     "@node-zugferd/basic": "workspace:*",
     "@node-zugferd/basic-wl": "workspace:*",
     "@node-zugferd/core": "workspace:*",
     "@node-zugferd/en-16931": "workspace:*",
     "@node-zugferd/extended": "workspace:*",
     "@node-zugferd/minimum": "workspace:*",
-    "c12": "4.0.0-rc.4",
-    "chalk": "^6.0.1",
-    "commander": "^15.0.0",
-    "get-tsconfig": "^4.14.3",
-    "node-zugferd": "workspace:*",
-    "semver": "^7.8.6",
-    "zod": "catalog:"
-  },
-  "devDependencies": {
     "@node-zugferd/parser": "workspace:*",
     "@node-zugferd/validator-mustang": "workspace:*",
     "@node-zugferd/validator-xsd": "workspace:*",

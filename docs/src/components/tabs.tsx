@@ -60,6 +60,7 @@ export function TabsList({
 	return (
 		<Unstyled.TabsList
 			{...props}
+			data-slot="tabs-list"
 			className={(s) =>
 				cn(
 					"flex gap-3.5 text-fd-secondary-foreground overflow-x-auto px-4 not-prose",

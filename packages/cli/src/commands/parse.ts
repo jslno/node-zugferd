@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { cancel, isCancel, path as pathPrompt } from "@clack/prompts";
+import { cancel, isCancel, log, path as pathPrompt } from "@clack/prompts";
 import { Command } from "commander";
 import * as z from "zod";
 import { tryCatch } from "../utils/helper";
@@ -28,6 +28,10 @@ async function parseAction(opts: z.infer<typeof parseOptionsSchema>) {
 			message: "Select the invoice file to parse",
 			root: options.cwd,
 			directory: false,
+			validate: (value) =>
+				value && !/\.(pdf|xml)$/i.test(value)
+					? "Only PDF and XML files are supported."
+					: undefined,
 		});
 		if (isCancel(result)) {
 			cancel("✋ Operation cancelled.");
@@ -38,7 +42,7 @@ async function parseAction(opts: z.infer<typeof parseOptionsSchema>) {
 
 	const { data: inputContent, error } = await tryCatch(fs.readFile(inputFile));
 	if (error) {
-		console.error(`Failed to read file at ${inputFile}: ${error.message}`);
+		log.error(`Failed to read file at ${inputFile}: ${error.message}`);
 		process.exit(1);
 	}
 
@@ -50,9 +54,8 @@ async function parseAction(opts: z.infer<typeof parseOptionsSchema>) {
 			documentParser: typeof import("@node-zugferd/parser").documentParser;
 		}>("@node-zugferd/parser").then(({ data, error }) => {
 			if (error) {
-				console.error(
-					"An error occurred while importing the parser package:",
-					error,
+				log.error(
+					`An error occurred while importing the parser package: ${error.message}`,
 				);
 				process.exit(1);
 			}
@@ -70,7 +73,7 @@ async function parseAction(opts: z.infer<typeof parseOptionsSchema>) {
 		};
 		const xml = getXml();
 		if (!xml) {
-			console.log("No XML found in the input file.");
+			log.error("No XML found in the input file.");
 			process.exit(1);
 		}
 		const profileId =
@@ -80,7 +83,7 @@ async function parseAction(opts: z.infer<typeof parseOptionsSchema>) {
 				) as keyof typeof specificationIdentifierMap
 			];
 		if (!profileId) {
-			console.log("Could not determine profile from the input file.");
+			log.error("Could not determine profile from the input file.");
 			process.exit(1);
 		}
 		profile = profileId;
@@ -119,21 +122,18 @@ async function parseAction(opts: z.infer<typeof parseOptionsSchema>) {
 		const outputFile = path.resolve(options.cwd, options.output);
 		const { error } = await tryCatch(fs.writeFile(outputFile, result, "utf-8"));
 		if (error) {
-			console.error(`Failed to write file at ${outputFile}: ${error.message}`);
+			log.error(`Failed to write file at ${outputFile}: ${error.message}`);
 			process.exit(1);
 		}
-		console.log(`Parsed invoice written to "${outputFile}".`);
+		log.success(`✓ Parsed invoice written to "${outputFile}".`);
 	} else {
-		console.log(result);
+		log.message(result);
 	}
 }
 
 export const parse = new Command("parse")
 	.option("--cwd <dir>", "The current working directory.")
-	.option(
-		"-p, --profile <profile>",
-		"The profile to use for parsing the invoice.",
-	)
+	.option("--profile <profile>", "The profile to use for parsing the invoice.")
 	.option("--input <file>", "The invoice file to parse.")
 	.option("--output <file>", "The output file to write the JSON to.")
 	.option("--minify", "Minify the output.")
