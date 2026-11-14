@@ -147,8 +147,8 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile --ignore-scripts
 
-      - name: Cache Mustang CLI
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      - name: Restore Mustang CLI cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: packages/validators/mustang/dist/runtime
           key: ${{ runner.os }}-mustang-cli
@@ -160,6 +160,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: pnpm --filter=@node-zugferd/validator-mustang run postinstall
+
+      - name: Save Mustang CLI cache
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: packages/validators/mustang/dist/runtime
+          key: ${{ runner.os }}-mustang-cli
 
       - name: Profiles Integration
         env:
