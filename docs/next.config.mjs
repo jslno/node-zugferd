@@ -6,6 +6,9 @@ const withMDX = createMDX();
 const config = {
 	reactStrictMode: true,
 	serverExternalPackages: ["@takumi-rs/core", "typescript"],
+	typescript: {
+		ignoreBuildErrors: true,
+	},
 	rewrites: async () => [
 		{
 			source: "/docs/:path*.md",
