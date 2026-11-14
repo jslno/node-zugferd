@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import { parse, safeParse } from "../methods";
 import { date, detectDateFormat, formatDate } from "./date";
 
@@ -27,8 +27,8 @@ describe("date", () => {
 
 		expect(output.format).toBe("203");
 		expect(output.value).toBe("202003051430");
-		expect(output.date.getFullYear()).toBe(2020);
-		expect(output.date.getHours()).toBe(14);
+		expect(output.date.getUTCFullYear()).toBe(2020);
+		expect(output.date.getUTCHours()).toBe(14);
 		expect(detectDateFormat("202003051430")).toBe("203");
 	});
 
@@ -42,4 +42,44 @@ describe("date", () => {
 		expect(safeParse(date(), "202003051430").success).toBe(false);
 		expect(detectDateFormat("nope")).toBeNull();
 	});
+
+	/**
+	 * @see https://github.com/jslno/node-zugferd/issues/125
+	 */
+	const originalTimezone = process.env.TZ;
+	describe.each(["UTC", "Europe/Berlin", "America/Los_Angeles"])(
+		"date parsing in %s",
+		(timezone) => {
+			afterEach(() => {
+				if (originalTimezone === undefined) {
+					delete process.env.TZ;
+				} else {
+					process.env.TZ = originalTimezone;
+				}
+			});
+
+			it("parses a format 102 calendar date as UTC midnight", () => {
+				process.env.TZ = timezone;
+
+				const output = parse(date(), "20200305");
+
+				expect(output.date).toEqual(new Date(Date.UTC(2020, 2, 5)));
+				expect(output.value).toBe("20200305");
+			});
+
+			it("parses and formats a format 203 timestamp in UTC", () => {
+				process.env.TZ = timezone;
+
+				const output = parse(
+					date({ inputFormats: ["102", "203"], outputFormat: "203" }),
+					"202003051430",
+				);
+
+				expect(output.date).toEqual(new Date(Date.UTC(2020, 2, 5, 14, 30)));
+				expect(output.date.getUTCHours()).toBe(14);
+				expect(output.date.getUTCMinutes()).toBe(30);
+				expect(output.value).toBe("202003051430");
+			});
+		},
+	);
 });
