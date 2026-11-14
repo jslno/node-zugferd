@@ -12,6 +12,8 @@ const logger = createLogger({
 	level: process.env.CI || process.env.DEBUG ? "debug" : undefined,
 });
 
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+
 export async function setup(args?: string[]) {
 	const force = args?.some((a) => a.toLowerCase() === "--force");
 	try {
@@ -96,6 +98,8 @@ async function downloadMustang() {
 		headers: {
 			"User-Agent": "node-zugferd",
 			Accept: "application/octet-stream",
+			"X-GitHub-Api-Version": "2022-11-28",
+			Authorization: GITHUB_TOKEN ? `Bearer ${GITHUB_TOKEN}` : "",
 		},
 	});
 	logger.debug(`GitHub status: ${response.status}`);
@@ -146,6 +150,8 @@ async function fetchReleases(data: {
 		headers: {
 			"User-Agent": "node-zugferd",
 			Accept: "application/vnd.github.v3+json",
+			"X-GitHub-Api-Version": "2022-11-28",
+			Authorization: GITHUB_TOKEN ? `Bearer ${GITHUB_TOKEN}` : "",
 		},
 	});
 	if (!response.ok) {
