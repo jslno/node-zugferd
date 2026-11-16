@@ -51,6 +51,7 @@ const clients = {
 			} catch {
 				process.exitCode = 1;
 				log.error("Could not automatically open Cursor for MCP installation.");
+				log.message(`Open the link manually: ${remoteDeeplink}`);
 				return;
 			}
 
