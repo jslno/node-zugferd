@@ -30,6 +30,7 @@ export const navItems = [
 	{
 		id: "changelog" as const,
 		icon: ScrollTextIcon,
+		hideInSearch: true,
 		label: "Changelog",
 		description: "release notes and version history",
 		href: "/changelog",

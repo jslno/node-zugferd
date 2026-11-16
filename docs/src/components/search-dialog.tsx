@@ -39,19 +39,22 @@ export function CustomSearchDialog(props: SharedProps) {
 						tag={tag}
 						onTagChange={(tag) => setTag(tag ?? "docs")}
 					>
-						{[...SIDEBAR_TABS.values()].map(({ id, label, icon: Icon }) => (
-							<TagsListItem
-								key={id}
-								value={id}
-								className="flex items-center gap-1"
-							>
-								<Icon
-									className="size-3.5 shrink-0 -ms-0.5"
-									aria-hidden="true"
-								/>
-								{label}
-							</TagsListItem>
-						))}
+						{[...SIDEBAR_TABS.values()].map(
+							({ id, label, icon: Icon, hideInSearch }) =>
+								!!hideInSearch ? null : (
+									<TagsListItem
+										key={id}
+										value={id}
+										className="flex items-center gap-1"
+									>
+										<Icon
+											className="size-3.5 shrink-0 -ms-0.5"
+											aria-hidden="true"
+										/>
+										{label}
+									</TagsListItem>
+								),
+						)}
 					</TagsList>
 				</SearchDialogFooter>
 			</SearchDialogContent>
