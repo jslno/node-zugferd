@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { LangSwitcher } from "@/app/(home)/legal/[...slug]/client";
 import { getMDXComponents } from "@/components/mdx";
@@ -44,4 +45,24 @@ export default async function LegalPage({
 			<MDX components={getMDXComponents()} />
 		</>
 	);
+}
+
+export async function generateMetadata({
+	params,
+	searchParams,
+}: PageProps<"/legal/[...slug]">): Promise<Metadata> {
+	const { slug } = await params;
+	if (!slug || slug.length !== 1) notFound();
+
+	const search = await searchParams;
+	const explicitLang = (
+		Array.isArray(search.lang) ? search.lang[0] : search.lang
+	)?.toLowerCase();
+	const lang = explicitLang ?? ((await prefersLanguage("de")) ? "de" : "en");
+	const { frontmatter } = await import(`./${slug}/content.${lang}.mdx`);
+
+	return {
+		title: frontmatter.title,
+		description: frontmatter.description,
+	};
 }

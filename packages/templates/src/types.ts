@@ -36,9 +36,19 @@ export type Template<
 		  }
 		| undefined;
 };
-export type Templates<T extends string = string> = Record<T, Template>;
+export type Templates<
+	T extends Record<string, Template<any, any>> = Record<
+		string,
+		Template<any, any>
+	>,
+> = T;
 
-export interface TemplatesOptions<T extends string = string> {
-	templates: Templates<T>;
-	defaultTemplate?: T | undefined;
+export interface TemplatesOptions<
+	T extends Record<string, Template<any, any>> = Record<
+		string,
+		Template<any, any>
+	>,
+> {
+	templates: T;
+	defaultTemplate?: keyof T | undefined;
 }

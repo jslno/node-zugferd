@@ -43,3 +43,4 @@ prtr
 elif
 xclip
 devbox
+pkce

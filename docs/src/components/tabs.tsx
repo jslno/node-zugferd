@@ -8,6 +8,7 @@ import {
 	useEffect,
 	useId,
 	useMemo,
+	useRef,
 	useState,
 } from "react";
 import { cn } from "@/lib/utils";
@@ -63,7 +64,7 @@ export function TabsList({
 			data-slot="tabs-list"
 			className={(s) =>
 				cn(
-					"flex gap-3.5 text-fd-secondary-foreground overflow-x-auto px-4 not-prose",
+					"flex gap-3.5 scroll-fade-x scrollbar-none text-fd-secondary-foreground overflow-x-auto px-4 not-prose",
 					typeof className === "function" ? className(s) : className,
 				)
 			}
@@ -105,6 +106,32 @@ export function Tabs({
 	const [value, setValue] = useState(defaultValue);
 	const collection = useMemo<CollectionKey[]>(() => [], []);
 
+	const isInitialRender = useRef(true);
+	const listRef = useRef<HTMLDivElement>(null);
+	useEffect(() => {
+		const list = listRef.current;
+		if (!list) return;
+
+		const active = list.querySelector<HTMLElement>(
+			':scope > [role="tab"][aria-selected="true"]',
+		);
+
+		if (!active) return;
+
+		const left =
+			active.getBoundingClientRect().left -
+			list.getBoundingClientRect().left +
+			list.scrollLeft -
+			(list.clientWidth - active.clientWidth) / 2;
+
+		list.scrollTo({
+			left,
+			behavior: isInitialRender.current ? "instant" : "smooth",
+		});
+
+		isInitialRender.current = false;
+	}, [value]);
+
 	return (
 		<Unstyled.Tabs
 			ref={ref}
@@ -122,7 +149,7 @@ export function Tabs({
 			{...props}
 		>
 			{items && !hideList && (
-				<TabsList>
+				<TabsList ref={listRef}>
 					{label && (
 						<span className="text-sm font-medium my-auto me-auto">{label}</span>
 					)}

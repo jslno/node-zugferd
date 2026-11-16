@@ -1,0 +1,1009 @@
+---
+icon: Traffiqx
+title: TRAFFIQX®
+description: Send and receive electronic invoices through the TRAFFIQX® Invoice API (TIA).
+---
+
+The TRAFFIQX® Invoice API connects your application to the TRAFFIQX® network. It supports sending and receiving invoices through the customer’s chosen TRAFFIQX® provider. This plugin wraps the TIA endpoints for ZUGFeRD and structured data uploads, and for inbox and outbox operations.
+
+Before using the API, your organization needs access to TIA and credentials for a supported provider. The provider supplies the client ID and OAuth setup; sandbox availability and configuration depend on that provider. See [TRAFFIQX® Invoice API](https://traffiqx.net/tia/) and DATEV’s [first steps](https://developer.datev.de/en/product-detail/traffiqx-invoice/1.0.0/documentation/first-steps).
+
+For endpoint details, see the [DATEV TIA API reference](https://developer.datev.de/en/product-detail/traffiqx-invoice/1.0.0/reference/reference-overview/traffiqxinvoice).
+
+## Installation
+
+<Steps>
+    <Step>
+        ### Install the plugin
+
+        ```package-install
+        @node-zugferd/traffiqx
+        ```
+
+    </Step>
+    <Step>
+        ### Add the plugin to your instance
+
+        ```ts title="invoicer.ts"
+        import { zugferd } from "node-zugferd";
+        import { en16931 } from "@node-zugferd/en-16931";
+        import { traffiqx } from "@node-zugferd/traffiqx"; // [!code highlight]
+        import {
+            b4value,
+            bundesdruckerei,
+        } from "@node-zugferd/traffiqx/provider"; // [!code highlight]
+
+        export const invoicer = zugferd({
+            profiles: [en16931],
+            plugins: [
+                traffiqx({ // [!code highlight]
+                    provider: [ // [!code highlight]
+                        b4value({ // [!code highlight]
+                            clientId: process.env.B4VALUE_CLIENT_ID!, // [!code highlight]
+                            sandbox: process.env.NODE_ENV !== "production", // [!code highlight]
+                        }), // [!code highlight]
+                        bundesdruckerei({ // [!code highlight]
+                            clientId: process.env.BUNDESDRUCKEREI_CLIENT_ID!, // [!code highlight]
+                        }), // [!code highlight]
+                    ], // [!code highlight]
+                }), // [!code highlight]
+            ],
+            // ...
+        });
+        ```
+    </Step>
+</Steps>
+
+## Provider
+
+The plugin accepts one provider or an array of providers. With an array, pass `providerId` to every operation so the plugin can route the request to the matching base URL and provider-specific headers. The value must match the selected factory's `providerId` exactly (for example, `b4value.net GmbH`). With one configured provider, `providerId` is optional. Use the client ID and sandbox setting issued for each provider.
+
+<Tabs groupId="traffiqx-provider" items={["b4value.net GmbH", "Bundesdruckerei GmbH", "DATEV E-Rechnungsplattform", "DATEV SmartTransfer", "Quadient CXM Germany GmbH", "SGH Service GmbH", "Ricoh Deutschland GmbH"]}>
+    <Tab value="b4value.net GmbH">
+        ```ts
+        import { b4value } from "@node-zugferd/traffiqx/provider/b4value";
+
+        b4value({
+            clientId: process.env.B4VALUE_CLIENT_ID,
+            sandbox: process.env.NODE_ENV !== "production",
+        });
+        ```
+
+        ### Options [!toc]
+
+        <TypeTable
+            type={{
+                clientId: {
+                    type: "string",
+                    description: "Client ID issued for this provider.",
+                    required: true,
+                },
+                sandbox: {
+                    type: "boolean",
+                    description: "Use the provider sandbox environment when available.",
+                },
+            }}
+        />
+    </Tab>
+    <Tab value="Bundesdruckerei GmbH">
+        ```ts
+        import { bundesdruckerei } from "@node-zugferd/traffiqx/provider/bundesdruckerei";
+
+        bundesdruckerei({
+            clientId: process.env.BUNDESDRUCKEREI_CLIENT_ID,
+        });
+        ```
+
+        ### Options [!toc]
+
+        <TypeTable
+        type={{
+            clientId: {
+                type: "string",
+                description: "Client ID issued for this provider.",
+                required: true,
+            },
+        }}
+        />
+    </Tab>
+    <Tab value="DATEV E-Rechnungsplattform">
+        ```ts
+        import { datevERechnungsplattform } from "@node-zugferd/traffiqx/provider/datev-e-rechnungsplattform";
+
+        datevERechnungsplattform({
+            appName: "My App",
+            clientId: process.env.DATEV_CLIENT_ID,
+            sandbox: process.env.NODE_ENV !== "production",
+        });
+        ```
+
+        ### Options [!toc]
+
+        <TypeTable
+            type={{
+                appName: {
+                    type: "string",
+                    description: "Name of the calling application. Must match the name registered with DATEV that is also used for display in the consent page.",
+                    required: true,
+                },
+                clientId: {
+                    type: "string",
+                    description: "Client ID issued for this provider.",
+                    required: true,
+                },
+                sandbox: {
+                    type: "boolean",
+                    description: "Use the provider sandbox environment when available.",
+                },
+            }}
+        />
+    </Tab>
+    <Tab value="DATEV SmartTransfer">
+        ```ts
+        import { datevSmartTransfer } from "@node-zugferd/traffiqx/provider/datev-smarttransfer";
+
+        datevSmartTransfer({
+            appName: "My App",
+            clientId: process.env.DATEV_CLIENT_ID,
+        });
+        ```
+
+        ### Options [!toc]
+
+        <TypeTable
+        type={{
+            appName: {
+                type: "string",
+                description: "Application display name sent to DATEV.",
+                required: true,
+            },
+            clientId: {
+                type: "string",
+                description: "Client ID issued for this provider.",
+                required: true,
+            },
+        }}
+        />
+    </Tab>
+    <Tab value="Quadient CXM Germany GmbH">
+        ```ts
+        import { quadient } from "@node-zugferd/traffiqx/provider/quadient";
+
+        quadient({
+            clientId: process.env.QUADIENT_CLIENT_ID,
+        });
+        ```
+
+        ### Options [!toc]
+
+        <TypeTable
+        type={{
+            clientId: {
+                type: "string",
+                description: "Client ID issued for this provider.",
+                required: true,
+            },
+        }}
+        />
+    </Tab>
+    <Tab value="SGH Service GmbH">
+        ```ts
+        import { sgh } from "@node-zugferd/traffiqx/provider/sgh";
+
+        sgh({
+            clientId: process.env.SGH_CLIENT_ID,
+        });
+        ```
+
+        ### Options [!toc]
+
+        <TypeTable
+        type={{
+            clientId: {
+                type: "string",
+                description: "Client ID issued for this provider.",
+                required: true,
+            },
+        }}
+        />
+    </Tab>
+    <Tab value="Ricoh Deutschland GmbH">
+        ```ts
+        import { ricoh } from "@node-zugferd/traffiqx/provider/ricoh";
+
+        ricoh({
+            clientId: process.env.RICOH_CLIENT_ID,
+        });
+        ```
+
+        ### Options [!toc]
+
+        <TypeTable
+        type={{
+            clientId: {
+                type: "string",
+                description: "Client ID issued for this provider.",
+                required: true,
+            },
+        }}
+        />
+    </Tab>
+</Tabs>
+
+## Usage
+
+Every operation accepts `providerId`. It is required when `provider` is configured as an array and optional when a single provider is configured. Use the exact provider ID shown by the selected provider factory.
+
+### Upload ZUGFeRD Invoices
+
+Customers can upload a document data in the ZUGFeRD format to the outbox workspace so that an invoice can be created from them.
+
+```ts
+const pdf = await invoicer.toPDF(await readFile("./invoice.pdf"));
+
+const { data, error } = await invoicer.traffiqx.upload({
+    data: await pdf.save(),
+    traffiqxId: "0042000711688",
+    providerId: "b4value.net GmbH",
+    accessToken: async (ctx) => {
+        // Return provider access token
+        return await getAccessToken(ctx.meta.userId);
+    },
+    // Additional metadata accessible in context
+    meta: {
+        userId: "12345",
+    },
+});
+```
+
+#### Options [!toc]
+
+<TypeTable
+    type={{
+        data: {
+            type: "string | Uint8Array | ArrayBuffer | Blob",
+            description: "Invoice file to upload: PDF for upload or structured XML for uploadStructuredData.",
+            required: true,
+        },
+        traffiqxId: {
+            type: "string",
+            description: "Identifier of the member in the TRAFFIQX® Network.",
+            required: true,
+        },
+        accessToken: {
+            type: "TraffiqxAccessTokenInput",
+            description: "Provider OAuth access token or callback that retrieves one.",
+            required: false,
+        },
+        meta: {
+            type: "any",
+            description: "Application context passed to the access token callback.",
+            required: false,
+        },
+        fetchOptions: {
+            type: "BetterFetchOption",
+            description: "Per-request options forwarded to the HTTP request.",
+            required: false,
+        },
+    }}
+/>
+
+### Upload Structured Data (XRechnung)
+
+Customers can upload document data in UBL or CII format with a corresponding PDF view to the outbox workspace so that an invoice can be created from them.
+
+```ts
+const { data, error } = await invoicer.traffiqx.uploadStructuredData({
+    data: await readFile("./invoice.xml"),
+    view_component: await readFile("./invoice.pdf"),
+    traffiqxId: "0042000711688",
+    providerId: "b4value.net GmbH",
+    accessToken: async (ctx) => {
+        // Return provider access token
+        return await getAccessToken(ctx.meta.userId);
+    },
+    // Additional metadata accessible in context
+    meta: {
+        userId: "12345",
+    },
+});
+```
+
+#### Options [!toc]
+
+<TypeTable
+    type={{
+        data: {
+            type: "string | Uint8Array | ArrayBuffer | Blob",
+            description: "Invoice file to upload: PDF for upload or structured XML for uploadStructuredData.",
+            required: true,
+        },
+        view_component: {
+            type: "string | Uint8Array | ArrayBuffer | Blob",
+            description: "PDF view component paired with the structured invoice data.",
+            required: true,
+        },
+        traffiqxId: {
+            type: "string",
+            description: "Identifier of the member in the TRAFFIQX® Network.",
+            required: true,
+        },
+        accessToken: {
+            type: "TraffiqxAccessTokenInput",
+            description: "Provider OAuth access token or callback that retrieves one.",
+            required: false,
+        },
+        meta: {
+            type: "any",
+            description: "Application context passed to the access token callback.",
+            required: false,
+        },
+        fetchOptions: {
+            type: "BetterFetchOption",
+            description: "Per-request options forwarded to the HTTP request.",
+            required: false,
+        },
+    }}
+/>
+
+### Query Document Status
+
+Query the status of an uploaded document using the unique document ID.
+
+```ts
+const { data, error } = await invoicer.traffiqx.outbox.status({
+    documentId: "ea096fd8-6f98-4e19-b600-b75b7068f961",
+    traffiqxId: "0042000711688",
+    providerId: "b4value.net GmbH",
+    accessToken: async (ctx) => {
+        // Return provider access token
+        return await getAccessToken(ctx.meta.userId);
+    },
+    // Additional metadata accessible in context
+    meta: {
+        userId: "12345",
+    },
+});
+```
+
+#### Options [!toc]
+
+<TypeTable
+    type={{
+        documentId: {
+            type: "string",
+            description: "identifier of the document.",
+            required: true,
+        },
+        traffiqxId: {
+            type: "string",
+            description: "Identifier of the member in the TRAFFIQX® Network.",
+            required: true,
+        },
+        accessToken: {
+            type: "TraffiqxAccessTokenInput",
+            description: "Provider OAuth access token or callback that retrieves one.",
+            required: false,
+        },
+        meta: {
+            type: "any",
+            description: "Application context passed to the access token callback.",
+            required: false,
+        },
+        fetchOptions: {
+            type: "BetterFetchOption",
+            description: "Per-request options forwarded to the HTTP request.",
+            required: false,
+        },
+    }}
+/>
+
+### List Outbox Documents
+
+Retrieve the document IDs of all uploaded invoice data, depending on the set filter.
+
+```ts
+const { data, error } = await invoicer.traffiqx.outbox.list({
+    traffiqxId: "0042000711688",
+    providerId: "b4value.net GmbH",
+    // query filter
+    downloaded: false,
+    status: "inProcess",
+    accessToken: async (ctx) => {
+        // Return provider access token
+        return await getAccessToken(ctx.meta.userId);
+    },
+    // Additional metadata accessible in context
+    meta: {
+        userId: "12345",
+    },
+});
+```
+
+#### Options [!toc]
+
+<TypeTable
+    type={{
+        traffiqxId: {
+            type: "string",
+            description: "Identifier of the member in the TRAFFIQX® Network.",
+            required: true,
+        },
+        downloaded: {
+            type: "boolean",
+            description: "controls whether the Ids of already downloaded documents or the Ids of not yet downloaded documents are returned.",
+            required: false,
+        },
+        status: {
+            type: "TraffiqxStatus",
+            description: "allows the filtering of the Id according to the status of the document",
+            required: false,
+        },
+        accessToken: {
+            type: "TraffiqxAccessTokenInput",
+            description: "Provider OAuth access token or callback that retrieves one.",
+            required: false,
+        },
+        meta: {
+            type: "any",
+            description: "Application context passed to the access token callback.",
+            required: false,
+        },
+        fetchOptions: {
+            type: "BetterFetchOption",
+            description: "Per-request options forwarded to the HTTP request.",
+            required: false,
+        },
+    }}
+/>
+
+### Download Outbox Document
+
+Downloading a sent original document from the outbox workspace.
+
+```ts
+const { data, error } = await invoicer.traffiqx.outbox.download({
+    documentId: "ea096fd8-6f98-4e19-b600-b75b7068f961",
+    traffiqxId: "0042000711688",
+    providerId: "b4value.net GmbH",
+    accessToken: async (ctx) => {
+        // Return provider access token
+        return await getAccessToken(ctx.meta.userId);
+    },
+    // Additional metadata accessible in context
+    meta: {
+        userId: "12345",
+    },
+});
+
+if (error) throw new Error(error.title);
+const zip = await data.arrayBuffer();
+```
+
+#### Options [!toc]
+
+<TypeTable
+    type={{
+        traffiqxId: {
+            type: "string",
+            description: "Identifier of the member in the TRAFFIQX® Network.",
+            required: true,
+        },
+        documentId: {
+            type: "string",
+            description: "identifier of the document.",
+            required: true,
+        },
+        accessToken: {
+            type: "TraffiqxAccessTokenInput",
+            description: "Provider OAuth access token or callback that retrieves one.",
+            required: false,
+        },
+        meta: {
+            type: "any",
+            description: "Application context passed to the access token callback.",
+            required: false,
+        },
+        fetchOptions: {
+            type: "BetterFetchOption",
+            description: "Per-request options forwarded to the HTTP request.",
+            required: false,
+        },
+    }}
+/>
+
+### Outbox Document Metadata
+
+Retrieve the metadata of a document using the unique document ID.
+
+```ts
+const { data, error } = await invoicer.traffiqx.outbox.metadata({
+    documentId: "ea096fd8-6f98-4e19-b600-b75b7068f961",
+    traffiqxId: "0042000711688",
+    providerId: "b4value.net GmbH",
+    accessToken: async (ctx) => {
+        // Return provider access token
+        return await getAccessToken(ctx.meta.userId);
+    },
+    // Additional metadata accessible in context
+    meta: {
+        userId: "12345",
+    },
+});
+```
+
+#### Options [!toc]
+
+<TypeTable
+    type={{
+        documentId: {
+            type: "string",
+            description: "identifier of the document.",
+            required: true,
+        },
+        traffiqxId: {
+            type: "string",
+            description: "Identifier of the member in the TRAFFIQX® Network.",
+            required: true,
+        },
+        accessToken: {
+            type: "TraffiqxAccessTokenInput",
+            description: "Provider OAuth access token or callback that retrieves one.",
+            required: false,
+        },
+        meta: {
+            type: "any",
+            description: "Metadata passed to the access token callback.",
+            required: false,
+        },
+        fetchOptions: {
+            type: "BetterFetchOption",
+            description: "Per-request options forwarded to the HTTP request.",
+            required: false,
+        },
+    }}
+/>
+
+### List Inbox Documents
+
+Retrieve the `InboxDocumentId` of all received documents by downloaded status
+
+```ts
+const { data, error } = await invoicer.traffiqx.inbox.list({
+    traffiqxId: "0042000711688",
+    providerId: "b4value.net GmbH",
+    // query filter
+    downloaded: false,
+    from_date: "2026-08-10",
+    to_date: new Date(),
+    accessToken: async (ctx) => {
+        // Return provider access token
+        return await getAccessToken(ctx.meta.userId);
+    },
+    // Additional metadata accessible in context
+    meta: {
+        userId: "12345",
+    },
+});
+```
+
+#### Options [!toc]
+
+<TypeTable
+    type={{
+        traffiqxId: {
+            type: "string",
+            description: "Identifier of the member in the TRAFFIQX® Network.",
+            required: true,
+        },
+        downloaded: {
+            type: "boolean",
+            description: "controls whether the Ids of already downloaded documents or the Ids of not yet downloaded documents are returned.",
+            required: false,
+        },
+        from_date: {
+            type: "Date | string",
+            description: "Filter invoices where date_of_receipt is equal or newer than this date and time (inclusive).",
+            required: false,
+        },
+        to_date: {
+            type: "Date | string",
+            description: "Filter invoices where date_of_receipt is older than or equal to this date and time (inclusive). ",
+            required: false,
+        },
+        accessToken: {
+            type: "TraffiqxAccessTokenInput",
+            description: "Provider OAuth access token or callback that retrieves one.",
+            required: false,
+        },
+        meta: {
+            type: "any",
+            description: "Metadata passed to the access token callback.",
+            required: false,
+        },
+        fetchOptions: {
+            type: "BetterFetchOption",
+            description: "Per-request options forwarded to the HTTP request.",
+            required: false,
+        },
+    }}
+/>
+
+### Download Inbox Document
+
+Downloading the data of a received document from the inbox workspace
+
+```ts
+const { data, error } = await invoicer.traffiqx.inbox.download({
+    documentId: "ea096fd8-6f98-4e19-b600-b75b7068f961",
+    traffiqxId: "0042000711688",
+    providerId: "b4value.net GmbH",
+    accessToken: async (ctx) => {
+        // Return provider access token
+        return await getAccessToken(ctx.meta.userId);
+    },
+    // Additional metadata accessible in context
+    meta: {
+        userId: "12345",
+    },
+});
+
+if (error) throw new Error(error.title);
+const zip = await data.arrayBuffer();
+```
+
+#### Options [!toc]
+
+<TypeTable
+    type={{
+        documentId: {
+            type: "string",
+            description: "identifier of the document.",
+            required: true,
+        },
+        traffiqxId: {
+            type: "string",
+            description: "Identifier of the member in the TRAFFIQX® Network.",
+            required: true,
+        },
+        accessToken: {
+            type: "TraffiqxAccessTokenInput",
+            description: "Provider OAuth access token or callback that retrieves one.",
+            required: false,
+        },
+        meta: {
+            type: "any",
+            description: "Metadata passed to the access token callback.",
+            required: false,
+        },
+        fetchOptions: {
+            type: "BetterFetchOption",
+            description: "Per-request options forwarded to the HTTP request.",
+            required: false,
+        },
+    }}
+/>
+
+### Inbox Document Metadata
+
+Retrieve the metadata of a received document using the unique document ID.
+
+```ts
+const { data, error } = await invoicer.traffiqx.inbox.metadata({
+    documentId: "ea096fd8-6f98-4e19-b600-b75b7068f961",
+    traffiqxId: "0042000711688",
+    providerId: "b4value.net GmbH",
+    accessToken: async (ctx) => {
+        // Return provider access token
+        return await getAccessToken(ctx.meta.userId);
+    },
+    // Additional metadata accessible in context
+    meta: {
+        userId: "12345",
+    },
+});
+```
+
+#### Options [!toc]
+
+<TypeTable
+    type={{
+        documentId: {
+            type: "string",
+            description: "identifier of the document.",
+            required: true,
+        },
+        traffiqxId: {
+            type: "string",
+            description: "Identifier of the member in the TRAFFIQX® Network.",
+            required: true,
+        },
+        accessToken: {
+            type: "TraffiqxAccessTokenInput",
+            description: "Provider OAuth access token or callback that retrieves one.",
+            required: false,
+        },
+        meta: {
+            type: "any",
+            description: "Metadata passed to the access token callback.",
+            required: false,
+        },
+        fetchOptions: {
+            type: "BetterFetchOption",
+            description: "Per-request options forwarded to the HTTP request.",
+            required: false,
+        },
+    }}
+/>
+
+## Usage with Better Auth
+
+<Steps>
+    <Step>
+        ### Register the OAuth Provider
+
+        node-zugferd bundles better-auth presets for each provider's IdP:
+
+        <Tabs groupId="traffiqx-provider" items={["b4value.net GmbH", "Bundesdruckerei GmbH", "DATEV E-Rechnungsplattform", "DATEV SmartTransfer", "Quadient CXM Germany GmbH", "SGH Service GmbH", "Ricoh Deutschland GmbH"]}>
+            <Tab value="b4value.net GmbH">
+                | Provider ID | Discovery Endpoint |
+                | --- | --- |
+                | `b4value` | https://login.b4value.net/realms/prod/.well-known/openid-configuration|
+                | | https://login.qs.b4value.net/realms/qs/.well-known/openid-configuration (Sandbox) |
+
+                ```ts title="auth.ts"
+                import { betterAuth } from "better-auth";
+                import { genericOAuth } from "better-auth/plugins";
+                import { b4value } from "@node-zugferd/traffiqx/better-auth/b4value"; // [!code highlight]
+
+                const auth = betterAuth({
+                    plugins: [
+                        genericOAuth({
+                            config: [
+                                b4value({ // [!code highlight]
+                                    clientId: process.env.B4VALUE_CLIENT_ID!, // [!code highlight]
+                                    clientSecret: process.env.B4VALUE_CLIENT_SECRET!, // [!code highlight]
+                                    sandbox: process.env.NODE_ENV !== "production", // [!code highlight]
+                                }), // [!code highlight]
+                            ],
+                        }),
+                    ],
+                });
+                ```
+            </Tab>
+            <Tab value="Bundesdruckerei GmbH">
+
+                | Provider ID | Discovery Endpoint |
+                | --- | --- |
+                | `bundesdruckerei` | https://login.bdr-businessportal.de/realms/prod/.well-known/openid-configuration |
+
+                ```ts title="auth.ts"
+                import { betterAuth } from "better-auth";
+                import { genericOAuth } from "better-auth/plugins";
+                import { bundesdruckerei } from "@node-zugferd/traffiqx/better-auth/bundesdruckerei"; // [!code highlight]
+
+                const auth = betterAuth({
+                    plugins: [
+                        genericOAuth({
+                            config: [
+                                bundesdruckerei({ // [!code highlight]
+                                    clientId: process.env.BUNDESDRUCKEREI_CLIENT_ID!, // [!code highlight]
+                                    clientSecret: process.env.BUNDESDRUCKEREI_CLIENT_SECRET!, // [!code highlight]
+                                }), // [!code highlight]
+                            ],
+                        }),
+                    ],
+                });
+                ```
+            </Tab>
+            <Tab value="DATEV E-Rechnungsplattform">
+
+                | Provider ID | Discovery Endpoint |
+                | --- | --- |
+                | `datev-e-rechnungsplattform` | https://signin.datev.de/datevam/oauth2/realms/root/realms/user/.well-known/openid-configuration |
+
+                ```ts title="auth.ts"
+                import { betterAuth } from "better-auth";
+                import { genericOAuth } from "better-auth/plugins";
+                import { datevERechnungsplattform } from "@node-zugferd/traffiqx/better-auth/datev-e-rechnungsplattform"; // [!code highlight]
+
+                const auth = betterAuth({
+                    plugins: [
+                        genericOAuth({
+                            config: [
+                                datevERechnungsplattform({ // [!code highlight]
+                                    clientId: process.env.DATEV_CLIENT_ID!, // [!code highlight]
+                                    clientSecret: process.env.DATEV_CLIENT_SECRET!, // [!code highlight]
+                                }), // [!code highlight]
+                            ],
+                        }),
+                    ],
+                });
+                ```
+            </Tab>
+            <Tab value="DATEV SmartTransfer">
+
+                | Provider ID | Discovery Endpoint |
+                | --- | --- |
+                | `datev-smarttransfer` | https://login.smarttransfer.datev.de/realms/prod/.well-known/openid-configuration |
+
+                ```ts title="auth.ts"
+                import { betterAuth } from "better-auth";
+                import { genericOAuth } from "better-auth/plugins";
+                import { datevSmartTransfer } from "@node-zugferd/traffiqx/better-auth/datev-smarttransfer"; // [!code highlight]
+
+                const auth = betterAuth({
+                    plugins: [
+                        genericOAuth({
+                            config: [
+                                datevSmartTransfer({ // [!code highlight]
+                                    clientId: process.env.DATEV_CLIENT_ID!, // [!code highlight]
+                                    clientSecret: process.env.DATEV_CLIENT_SECRET!, // [!code highlight]
+                                }), // [!code highlight]
+                            ],
+                        }),
+                    ],
+                });
+                ```
+            </Tab>
+            <Tab value="Quadient CXM Germany GmbH">
+
+                | Provider ID | Discovery Endpoint |
+                | --- | --- |
+                | `quadient` | https://login.quadient-eservices.com/realms/prod/.well-known/openid-configuration |
+
+                ```ts title="auth.ts"
+                import { betterAuth } from "better-auth";
+                import { genericOAuth } from "better-auth/plugins";
+                import { quadient } from "@node-zugferd/traffiqx/better-auth/quadient"; // [!code highlight]
+
+                const auth = betterAuth({
+                    plugins: [
+                        genericOAuth({
+                            config: [
+                                quadient({ // [!code highlight]
+                                    clientId: process.env.QUADIENT_CLIENT_ID!, // [!code highlight]
+                                    clientSecret: process.env.QUADIENT_CLIENT_SECRET!, // [!code highlight]
+                                }), // [!code highlight]
+                            ],
+                        }),
+                    ],
+                });
+                ```
+            </Tab>
+            <Tab value="SGH Service GmbH">
+
+                | Provider ID | Discovery Endpoint |
+                | --- | --- |
+                | `sgh` | https://login.ivi.sgh-net.de/realms/prod/.well-known/openid-configuration |
+
+                ```ts title="auth.ts"
+                import { betterAuth } from "better-auth";
+                import { genericOAuth } from "better-auth/plugins";
+                import { sgh } from "@node-zugferd/traffiqx/better-auth/sgh"; // [!code highlight]
+
+                const auth = betterAuth({
+                    plugins: [
+                        genericOAuth({
+                            config: [
+                                sgh({ // [!code highlight]
+                                    clientId: process.env.SGH_CLIENT_ID!, // [!code highlight]
+                                    clientSecret: process.env.SGH_CLIENT_SECRET!, // [!code highlight]
+                                }), // [!code highlight]
+                            ],
+                        }),
+                    ],
+                });
+                ```
+            </Tab>
+            <Tab value="Ricoh Deutschland GmbH">
+
+                | Provider ID | Discovery Endpoint |
+                | --- | --- |
+                | `ricoh` | https://login.ricoh-idx.net/realms/prod/.well-known/openid-configuration |
+
+                ```ts title="auth.ts"
+                import { betterAuth } from "better-auth";
+                import { genericOAuth } from "better-auth/plugins";
+                import { ricoh } from "@node-zugferd/traffiqx/better-auth/ricoh"; // [!code highlight]
+
+                const auth = betterAuth({
+                    plugins: [
+                        genericOAuth({
+                            config: [
+                                ricoh({ // [!code highlight]
+                                    clientId: process.env.RICOH_CLIENT_ID!, // [!code highlight]
+                                    clientSecret: process.env.RICOH_CLIENT_SECRET!, // [!code highlight]
+                                }), // [!code highlight]
+                            ],
+                        }),
+                    ],
+                });
+                ```
+            </Tab>
+        </Tabs>
+    </Step>
+    <Step>
+        ### Retrieve an accessToken
+
+        The following example will use the `b4value` provider.
+
+        ```ts
+        async function getAccessToken() {
+            const accounts = await auth.api.listUserAccounts({
+                headers: await headers(),
+            });
+
+            const account = accounts.find((acc) => acc.providerId === "b4value");
+
+            if (!account) {
+                throw new Error("B4Value account is not linked");
+            }
+
+            const { accessToken } = await auth.api.getAccessToken({
+                body: {
+                    accountId: account.id,
+                },
+                headers: await headers(),
+            });
+
+            return accessToken;
+        }
+        ```
+
+        For more details, please refer to the [official Better Auth Documentation](https://better-auth.com/docs/concepts/oauth#get-access-token).
+    </Step>
+    <Step>
+        ### Call a TRAFFIQX endpoint
+
+        Use the access token for the signed-in user's linked provider account. The `meta` value is passed to the token callback, so it can carry your own user or tenant identifier. Keep token retrieval on your server and do not expose provider tokens to browser code.
+
+        ```ts title="send-invoice.ts"
+        const { data, error } = await invoicer.traffiqx.upload({
+            data: await readFile("./invoice.pdf"),
+            traffiqxId: "0042000711688",
+            providerId: "b4value.net GmbH",
+            accessToken: getAccessToken,
+            meta: { userId: "12345" },
+        });
+        ```
+    </Step>
+</Steps>
+
+## Best Practices
+
+- Run uploads and follow-up status checks in a durable background worker. Persist the job state so transient failures or process restarts do not lose track of a document.
+- Make uploads idempotent in your application. Create a stable idempotency key for each business document, record the returned `document_id`, and check that record before retrying a request whose outcome is unknown. The TRAFFIQX plugin does not provide an idempotency key itself.
+- Retry transient failures with bounded exponential backoff. Before retrying an upload after a timeout, reconcile against the outbox so a successful request with a lost response does not create a duplicate.
+
+## Options
+
+<TypeTable
+    type={{
+        provider: {
+            type: "TraffiqxProvider | TraffiqxProvider[]",
+            description: "Provider configuration, or a list of configurations for multiple providers.",
+            required: true,
+        },
+        accessToken: {
+            type: "TraffiqxAccessTokenInput",
+            description: "Provider OAuth access token or callback that retrieves one.",
+            required: false,
+        },
+        metaSchema: {
+            type: "StandardSchemaV1",
+            description: "Schema used to validate and infer the shape of meta context.",
+            required: false,
+        },
+        fetch: {
+            type: "FetchEsque",
+            description: "Custom fetch implementation used for HTTP requests.",
+            required: false,
+        },
+        $fetch: {
+            type: "BetterFetch",
+            description: "Custom Better Fetch instance used for API requests.",
+            required: false,
+        },
+    }}
+/>

@@ -128,11 +128,57 @@ export function DocsTitle(props: ComponentProps<"h1">) {
 	);
 }
 
+export type DocsFooterProps = {
+	editOnGithub?: EditOnGitHubOptions;
+};
+
+export function DocsFooter({ editOnGithub }: DocsFooterProps) {
+	return (
+		<div className="flex w-full">
+			{editOnGithub &&
+			editOnGithub.owner &&
+			editOnGithub.repo &&
+			editOnGithub.path ? (
+				<Button
+					variant="secondary"
+					render={
+						<Link
+							href={`https://github.com/${editOnGithub.owner}/${editOnGithub.repo}/blob/${editOnGithub.sha}/${editOnGithub.path.startsWith("/") ? editOnGithub.path.slice(1) : editOnGithub.path}`}
+						/>
+					}
+					className="me-auto"
+					nativeButton={false}
+				>
+					<EditIcon className="-ms-0.5" />
+					Edit on GitHub
+				</Button>
+			) : null}
+			<Button
+				variant="link"
+				size="lg"
+				className="ms-auto text-muted-foreground underline"
+				render={<Link href="/legal/privacy" />}
+				nativeButton={false}
+			>
+				Privacy
+			</Button>
+			<Button
+				variant="link"
+				size="lg"
+				className="text-muted-foreground underline"
+				render={<Link href="/legal/imprint" />}
+				nativeButton={false}
+			>
+				Imprint
+			</Button>
+		</div>
+	);
+}
+
 function Footer({
 	editOnGithub,
 	lastEditedAt,
-}: {
-	editOnGithub?: EditOnGitHubOptions;
+}: DocsFooterProps & {
 	lastEditedAt?: Date;
 }) {
 	const { root } = useTreeContext();
@@ -222,44 +268,7 @@ function Footer({
 					<div />
 				)}
 			</div>
-			<div className="flex">
-				{editOnGithub &&
-				editOnGithub.owner &&
-				editOnGithub.repo &&
-				editOnGithub.path ? (
-					<Button
-						variant="secondary"
-						render={
-							<Link
-								href={`https://github.com/${editOnGithub.owner}/${editOnGithub.repo}/blob/${editOnGithub.sha}/${editOnGithub.path.startsWith("/") ? editOnGithub.path.slice(1) : editOnGithub.path}`}
-							/>
-						}
-						className="me-auto"
-						nativeButton={false}
-					>
-						<EditIcon className="-ms-0.5" />
-						Edit on GitHub
-					</Button>
-				) : null}
-				<Button
-					variant="link"
-					size="lg"
-					className="text-muted-foreground underline"
-					render={<Link href="/legal/privacy" />}
-					nativeButton={false}
-				>
-					Privacy
-				</Button>
-				<Button
-					variant="link"
-					size="lg"
-					className="text-muted-foreground underline"
-					render={<Link href="/legal/imprint" />}
-					nativeButton={false}
-				>
-					Imprint
-				</Button>
-			</div>
+			<DocsFooter editOnGithub={editOnGithub} />
 		</div>
 	);
 }

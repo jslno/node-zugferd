@@ -17,6 +17,7 @@
     "@floating-ui/react-dom": "^2.1.9",
     "@fuma-translate/react": "^1.0.2",
     "@fumadocs/base-ui": "^16.18.0",
+    "@fumadocs/mdx-remote": "^1.5.3",
     "@modelcontextprotocol/server": "^2.4.0",
     "@node-zugferd/basic": "workspace:*",
     "@node-zugferd/basic-wl": "workspace:*",

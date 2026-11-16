@@ -63,6 +63,7 @@ package's `schema`.
 | `packages/docx-template/`                          | `docs/content/docs/plugins/templates.mdx`          |
 | `packages/instrumentation/`                        | `docs/content/docs/plugins/instrumentation.mdx`    |
 | `packages/magic-bytes/`                            | `docs/content/docs/plugins/magic-bytes.mdx`        |
+| `packages/traffiqx/`                               | `docs/content/docs/plugins/traffiqx.mdx`           |
 | `packages/validators/xsd/`                         | `docs/content/docs/plugins/validators/xsd.mdx`     |
 | `packages/validators/mustang/`                     | `docs/content/docs/plugins/validators/mustang.mdx` |
 | `packages/validators/xrechnung-schema-definition/` | `docs/content/docs/plugins/validators/xsd.mdx`     |
@@ -107,6 +108,7 @@ the package to render `<CodelistTable>`.
 | `packages/core/src/types/`                 | `docs/content/docs/reference/options.mdx` | Public option and plugin types |
 | `packages/profiles/<name>/`                | `docs/content/docs/profiles/<name>.mdx`   | One page per profile           |
 | `packages/parser/`                         | `docs/content/docs/plugins/parser.mdx`    | Parser plugin                  |
+| `packages/traffiqx/`                       | `docs/content/docs/plugins/traffiqx.mdx`  | TRAFFIQX Invoice API plugin    |
 | `packages/templates/` and template plugins | `docs/content/docs/plugins/templates.mdx` | Shared templates page          |
 | `packages/codelists/<name>/`               | `docs/content/docs/codelists/<name>.mdx`  | One page per codelist          |
 | `packages/cli/src/commands/`               | `docs/content/docs/reference/cli.mdx`     | One section per command        |

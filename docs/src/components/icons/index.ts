@@ -5,4 +5,5 @@ export * from "./mustangproject";
 export * from "./npm";
 export * from "./opentelemetry";
 export * from "./pnpm";
+export * from "./traffiqx";
 export * from "./yarn";

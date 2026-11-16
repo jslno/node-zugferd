@@ -1,5 +1,6 @@
 "use client";
 
+import { useTheme } from "fumadocs-ui/provider/base";
 import {
 	ArrowRightIcon,
 	CheckIcon,
@@ -9,7 +10,7 @@ import {
 } from "lucide-react";
 import { motion, stagger } from "motion/react";
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import useMeasure from "react-use-measure";
 import {
 	CodeBlockTab,
@@ -44,67 +45,7 @@ export default function HomePage() {
 		<main className="flex w-full max-w-full flex-1 flex-col justify-center overflow-x-hidden">
 			<Hero />
 			<FeaturesBento />
-			<div className="mx-auto flex w-full max-w-400 flex-col gap-24 px-4 py-24 md:px-6 md:py-32">
-				<motion.div
-					initial={{ opacity: 0, y: 28 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true, amount: 0.3 }}
-					transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-					className="relative flex flex-col justify-center gap-4 overflow-clip rounded-3xl border bg-muted p-8 dark:bg-muted/50"
-				>
-					<div className="absolute -z-[1] inset-0 mask-l-from-40% mask-l-to-90% mask-b-from-0% mask-b-to-80%">
-						<Silk
-							color="#12805f"
-							sheenColor="#e3fff4"
-							speed={5}
-							scale={1}
-							rotation={0.35}
-							sheen={0.5}
-							depth={0.5}
-							glow={0.3}
-							noiseIntensity={1.5}
-							clickRipple={false}
-							intro
-							ripple={1}
-							wave={1}
-							variation={7}
-							interactionStrength={0.7}
-							fade={0}
-							lightMode={false}
-						/>
-					</div>
-					<h2 className="font-pixel-square text-4xl font-semibold md:text-5xl">
-						Ready to build
-						<br />
-						your first invoice?
-					</h2>
-					<p className="max-w-3xl base text-muted-foreground">
-						Build electronic invoice workflows without fighting the
-						specification. Generate, parse, validate, and customize
-						ZUGFeRD/Factur-X documents through a consistent API while
-						node-zugferd handles the complexity.
-					</p>
-					<div className="mt-2 flex items-center gap-2">
-						<Button
-							size="lg"
-							nativeButton={false}
-							render={<Link href="/docs" />}
-						>
-							Get Started
-							<ArrowRightIcon data-icon="inline-end" />
-						</Button>
-						<Button
-							size="lg"
-							variant="secondary"
-							nativeButton={false}
-							render={<Link href="/examples" />}
-						>
-							<LightbulbIcon data-icon="inline-start" />
-							Examples
-						</Button>
-					</div>
-				</motion.div>
-			</div>
+			<CTA />
 			<div className="mx-auto flex w-full max-w-400 items-center px-4 py-4 md:px-6">
 				<span className="font-mono text-sm text-muted-foreground">
 					&copy; {new Date().getFullYear()} Joél de Olivèira Solano da Silva
@@ -136,7 +77,7 @@ function Hero() {
 	const [copyPopoverOpen, setCopyPopoverOpen] = useState(false);
 	const { copied, copying, copyToClipboard } = useCopyToClipboard();
 	return (
-		<div className="relative grid min-h-[calc(100svh-var(--spacing)*14)] place-items-center">
+		<div className="relative grid min-h-[calc(60svh-var(--spacing)*14)] md:min-h-[calc(100svh-var(--spacing)*14)] place-items-center">
 			<div className="absolute inset-0 -z-1 size-full">
 				<HomeBackground />
 			</div>
@@ -188,7 +129,7 @@ function Hero() {
 												},
 											},
 										}}
-										className="font-pixel-square text-[4.75rem] leading-tight font-bold tracking-wide"
+										className="font-pixel-square text-[clamp(2.5rem,11vw,4.75rem)] leading-tight font-bold tracking-wide 2xl:text-[4.75rem]"
 										transition={{
 											delayChildren: stagger(0.025),
 										}}
@@ -231,10 +172,10 @@ function Hero() {
 								},
 							},
 						}}
-						className="flex h-10 w-fit items-center rounded-lg border bg-background font-mono drop-shadow-md"
+						className="flex h-10 w-fit max-w-[calc(100vw-2rem)] items-center overflow-hidden rounded-lg border bg-background font-mono text-sm drop-shadow-md sm:max-w-none sm:overflow-visible sm:text-base"
 					>
 						<div className="flex items-center">
-							<span className="mr-[-0.375rem] ml-3 font-mono text-muted-foreground select-none">
+							<span className="mr-[-0.375rem] ml-3 hidden shrink-0 font-mono text-muted-foreground select-none sm:inline">
 								<span className="font-medium text-teal-600 dark:text-teal-500">
 									git:
 								</span>
@@ -270,7 +211,7 @@ function Hero() {
 									}
 									e.preventDefault();
 								}}
-								className="outline-none"
+								className="min-w-0 whitespace-nowrap outline-none"
 							>
 								<CodeBlock
 									lang="bash"
@@ -424,7 +365,7 @@ function Editor() {
 					},
 				},
 			}}
-			className="w-full max-w-2xl overflow-clip rounded-xl border bg-background text-left drop-shadow-2xl"
+			className="hidden w-full max-w-2xl overflow-clip rounded-xl border bg-background text-left drop-shadow-2xl md:block"
 		>
 			<motion.div
 				animate={{
@@ -464,5 +405,81 @@ function Editor() {
 				</div>
 			</motion.div>
 		</motion.div>
+	);
+}
+
+function CTA() {
+	const { resolvedTheme = "light" } = useTheme();
+
+	const theme = useMemo(
+		() =>
+			resolvedTheme === "dark"
+				? {
+						color: "#12805f",
+						sheenColor: "#e3fff4",
+						lightMode: false,
+					}
+				: {
+						color: "#d4d4d4",
+						lightMode: true,
+					},
+		[resolvedTheme],
+	);
+
+	return (
+		<div className="mx-auto flex w-full max-w-400 flex-col gap-24 px-4 py-24 md:px-6 md:py-32">
+			<motion.div
+				initial={{ opacity: 0, y: 28 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				viewport={{ once: true, amount: 0.3 }}
+				transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+				className="relative z-2 flex flex-col justify-center gap-4 overflow-clip rounded-3xl border bg-muted p-8 dark:bg-muted/50"
+			>
+				<div className="absolute -z-1 inset-0 mask-l-from-40% mask-l-to-90% mask-b-from-0% mask-b-to-80%">
+					<Silk
+						{...theme}
+						speed={5}
+						scale={1}
+						rotation={0.35}
+						sheen={0.5}
+						depth={0.5}
+						glow={0.3}
+						noiseIntensity={1.5}
+						clickRipple={false}
+						intro
+						ripple={1}
+						wave={1}
+						variation={7}
+						interactionStrength={0.7}
+						fade={0}
+					/>
+				</div>
+				<h2 className="font-pixel-square text-4xl font-semibold md:text-5xl">
+					Ready to build
+					<br />
+					your first invoice?
+				</h2>
+				<p className="max-w-3xl base text-muted-foreground">
+					Build electronic invoice workflows without fighting the specification.
+					Generate, parse, validate, and customize ZUGFeRD/Factur-X documents
+					through a consistent API while node-zugferd handles the complexity.
+				</p>
+				<div className="mt-2 flex items-center gap-2">
+					<Button size="lg" nativeButton={false} render={<Link href="/docs" />}>
+						Get Started
+						<ArrowRightIcon data-icon="inline-end" />
+					</Button>
+					<Button
+						size="lg"
+						variant="secondary"
+						nativeButton={false}
+						render={<Link href="/examples" />}
+					>
+						<LightbulbIcon data-icon="inline-start" />
+						Examples
+					</Button>
+				</div>
+			</motion.div>
+		</div>
 	);
 }

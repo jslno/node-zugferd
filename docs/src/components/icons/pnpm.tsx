@@ -71,4 +71,4 @@ const Pnpm = (props: SVGProps<SVGSVGElement>) => (
 	</svg>
 );
 
-export { Pnpm };
+export { Pnpm, Pnpm as PnpmIcon };

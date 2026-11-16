@@ -59,4 +59,4 @@ const BUN = (props: SVGProps<SVGSVGElement>) => (
 	</svg>
 );
 
-export { BUN };
+export { BUN, BUN as BunIcon };

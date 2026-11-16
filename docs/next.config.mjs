@@ -6,8 +6,24 @@ const withMDX = createMDX();
 const config = {
 	reactStrictMode: true,
 	serverExternalPackages: ["@takumi-rs/core", "typescript"],
+	cacheComponents: true,
+	partialPrefetching: true,
 	typescript: {
 		ignoreBuildErrors: true,
+	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "avatars.githubusercontent.com",
+				pathname: "/**",
+			},
+			{
+				protocol: "https",
+				hostname: "github.com",
+				pathname: "/**",
+			},
+		],
 	},
 	rewrites: async () => [
 		{

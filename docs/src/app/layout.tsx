@@ -2,6 +2,7 @@ import "./global.css";
 import { GeistMono } from "geist/font/mono";
 import { GeistPixelSquare } from "geist/font/pixel";
 import { GeistSans } from "geist/font/sans";
+import type { Metadata } from "next";
 import { Provider } from "@/components/provider";
 import { cn } from "@/lib/utils";
 
@@ -24,8 +25,11 @@ export default function Layout({ children }: LayoutProps<"/">) {
 	);
 }
 
-export const metadata = {
-	title: "node-zugferd",
+export const metadata: Metadata = {
+	title: {
+		absolute: "node-zugferd",
+		template: "%s | node-zugferd",
+	},
 	icons: [
 		{
 			rel: "icon",

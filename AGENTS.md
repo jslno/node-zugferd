@@ -23,7 +23,8 @@ node-zugferd/
 │   ├── pdf-template/         # `@node-zugferd/pdf-template`
 │   ├── docx-template/        # `@node-zugferd/docx-template`
 │   ├── instrumentation/      # `@node-zugferd/instrumentation`
-│   └── magic-bytes/          # `@node-zugferd/magic-bytes`
+│   ├── magic-bytes/          # `@node-zugferd/magic-bytes`
+│   └── traffiqx/             # `@node-zugferd/traffiqx` (TRAFFIQX Invoice API plugin)
 ├── e2e/                      # End-to-end tests
 │   ├── smoke/                # Node, Bun, and Deno smoke tests
 │   ├── integration/          # Vanilla-Node create/parse integration
@@ -77,6 +78,7 @@ The main library lives in `packages/node-zugferd/`. This is what gets published 
 - `packages/validators/xrechnung-schema-definition/` and `packages/validators/order-x-schema-definition/`
 - `packages/templates/`, `packages/default-template/`, `packages/pdf-template/`, `packages/docx-template/`
 - `packages/instrumentation/`, `packages/magic-bytes/`
+- `packages/traffiqx/` — `@node-zugferd/traffiqx`. TRAFFIQX Invoice API plugin; see `docs/content/docs/plugins/traffiqx.mdx`.
 
 ### README files
 

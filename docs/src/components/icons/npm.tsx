@@ -10,4 +10,4 @@ const NPM = (props: SVGProps<SVGSVGElement>) => (
 	</svg>
 );
 
-export { NPM };
+export { NPM, NPM as NPMIcon };

@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@node-zugferd/core": "workspace:*",
-    "@standard-schema/spec": "latest"
+    "@standard-schema/spec": "catalog:"
   },
   "devDependencies": {
     "tsdown": "catalog:"

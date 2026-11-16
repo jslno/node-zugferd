@@ -4,6 +4,8 @@
     "---General---",
     "parser",
     "templates",
+    "---Exchange Networks---",
+    "traffiqx",
     "---Validators---",
     "...validators",
     "---Utilities---",

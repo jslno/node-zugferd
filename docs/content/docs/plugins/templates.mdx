@@ -73,47 +73,6 @@ Pass a name to select a template other than the default. Props are the second ar
 await invoice.toPDF(invoicer.template("compact", { accent: "blue" }));
 ```
 
-## A template
-
-Each entry in `templates` has a `template` function. `props` is the object passed to `invoicer.template()`. `ctx` is the invoice. The function returns a PDF document, PDF bytes, or a string of PDF data. With no props, it receives `{}`.
-
-```ts title="invoicer.ts"
-templates({
-  templates: {
-    note: {
-      async template(_props, ctx) {
-        ctx.data;
-        ctx.xml;
-        ctx.profile;
-        ctx.context;
-      },
-    },
-  },
-});
-```
-
-`ctx.data` is the invoice data. `ctx.xml` is the XML from `create`. `ctx.profile` is the profile used for that invoice. `ctx.context` is the zugferd context.
-
-`props` is an optional [Standard Schema](https://standardschema.dev/). When it is set, the props are validated before `template` runs. A failed schema throws `ZugferdValidationError`.
-
-`transformProps` runs after that validation, when a props value is present, and before `template`. It receives the props and `ctx`, and its return value is what `template` receives.
-
-```ts title="invoicer.ts"
-templates({
-  templates: {
-    note: {
-      props: propsSchema,
-      async transformProps(props, ctx) {
-        return { ...props, title: ctx.profile.id };
-      },
-      async template(props, ctx) {
-        // ...
-      },
-    },
-  },
-});
-```
-
 ## Default template
 
 `@node-zugferd/default-template` is a PDF invoice layout. Register it under a name, the same way as any other template.
@@ -236,6 +195,47 @@ const letter = defineDocxTemplate({
 ```
 
 The Word file is processed with [easy-template-x](https://github.com/alonrbar/easy-template-x). Empty tags are skipped. The scope is the invoice under `data` and the template props under `props`. Nested objects are collapsed into dotted keys, so a seller name is the key `data.seller.name`. Arrays stay arrays, and each object in an array is flattened the same way. An array item that has a `_type` field is passed through unchanged, which is how easy-template-x represents images and other rich content.
+
+## Custom templates
+
+Each entry in `templates` has a `template` function. `props` is the object passed to `invoicer.template()`. `ctx` is the invoice. The function returns a PDF document, PDF bytes, or a string of PDF data. With no props, it receives `{}`.
+
+```ts title="invoicer.ts"
+templates({
+  templates: {
+    note: {
+      async template(_props, ctx) {
+        ctx.data;
+        ctx.xml;
+        ctx.profile;
+        ctx.context;
+      },
+    },
+  },
+});
+```
+
+`ctx.data` is the invoice data. `ctx.xml` is the XML from `create`. `ctx.profile` is the profile used for that invoice. `ctx.context` is the zugferd context.
+
+`props` is an optional [Standard Schema](https://standardschema.dev/). When it is set, the props are validated before `template` runs. A failed schema throws `ZugferdValidationError`.
+
+`transformProps` runs after that validation, when a props value is present, and before `template`. It receives the props and `ctx`, and its return value is what `template` receives.
+
+```ts title="invoicer.ts"
+templates({
+  templates: {
+    note: {
+      props: propsSchema,
+      async transformProps(props, ctx) {
+        return { ...props, title: ctx.profile.id };
+      },
+      async template(props, ctx) {
+        // ...
+      },
+    },
+  },
+});
+```
 
 ## Errors
 

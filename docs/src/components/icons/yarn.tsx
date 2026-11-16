@@ -13,4 +13,4 @@ const Yarn = (props: SVGProps<SVGSVGElement>) => (
 	</svg>
 );
 
-export { Yarn };
+export { Yarn, Yarn as YarnIcon };

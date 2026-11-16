@@ -1,4 +1,9 @@
-import { BookTextIcon, BracesIcon, LightbulbIcon } from "lucide-react";
+import {
+	BookTextIcon,
+	BracesIcon,
+	LightbulbIcon,
+	ScrollTextIcon,
+} from "lucide-react";
 
 export const navItems = [
 	{
@@ -21,5 +26,12 @@ export const navItems = [
 		label: "API Reference",
 		description: "reference and type docs",
 		href: "/api-reference",
+	},
+	{
+		id: "changelog" as const,
+		icon: ScrollTextIcon,
+		label: "Changelog",
+		description: "release notes and version history",
+		href: "/changelog",
 	},
 ];

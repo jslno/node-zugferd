@@ -55,6 +55,7 @@
 		"pnpm-workspace.yaml",
 		"pnpm-lock.yaml",
 		"e2e/smoke/test/fixtures/cloudflare/worker-configuration.d.ts",
+		"docs/src/**/*.mdx",
 		"scripts/generators/**/*.xml",
 		"scripts/generators/**/UNCL.*A",
 		"**/worker-configuration.d.ts",

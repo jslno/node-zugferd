@@ -2,12 +2,7 @@ import type { Awaitable, ZugferdPlugin } from "@node-zugferd/core";
 import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
 import { ZugferdError, ZugferdValidationError } from "@node-zugferd/core/error";
 import type { PDFDocument } from "pdf-lib";
-import type {
-	Template,
-	TemplateContext,
-	Templates,
-	TemplatesOptions,
-} from "./types";
+import type { Template, TemplateContext, TemplatesOptions } from "./types";
 
 declare module "@node-zugferd/core" {
 	interface ZugferdPluginRegistry<ZugferdOpts, Options> {
@@ -30,15 +25,12 @@ type PropsArgs<T> = [T] extends [never | undefined]
 		: [props?: T];
 
 export const templates = <
-	const T extends string,
-	const Opts extends TemplatesOptions<T>,
-	const DefaultTemplate extends T | undefined = undefined,
+	const Opts extends TemplatesOptions,
+	const DefaultTemplate extends keyof Opts["templates"] | undefined = undefined,
 >(
-	options: Opts & {
-		templates: Templates<T>;
-		defaultTemplate?: DefaultTemplate;
-	},
+	options: Opts & { defaultTemplate?: DefaultTemplate },
 ) => {
+	type T = keyof Opts["templates"] & string;
 	return {
 		id: "templates",
 		version: NODE_ZUGFERD_VERSION,
@@ -51,7 +43,7 @@ export const templates = <
 				<K extends T>(
 					name: K | ((ctx: TemplateContext) => Awaitable<K>),
 					...props: PropsArgs<
-						Opts["templates"][K] extends Template<infer P> ? P : never
+						Opts["templates"][K] extends Template<infer P, any> ? P : never
 					>
 				): TemplateFnResult;
 			};
@@ -60,7 +52,10 @@ export const templates = <
 				? {
 						(
 							...args: PropsArgs<
-								Opts["templates"][DefaultTemplate] extends Template<infer P>
+								Opts["templates"][DefaultTemplate] extends Template<
+									infer P,
+									any
+								>
 									? P
 									: never
 							>

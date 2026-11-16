@@ -1,3 +1,4 @@
+import { cacheLife, cacheTag } from "next/cache";
 import type { Octokit } from "octokit";
 import { App } from "octokit";
 import type {
@@ -10,6 +11,35 @@ import { env } from "@/env";
 import { gitConfig } from "./shared";
 
 export const DocsCategory = "Docs Feedback";
+
+export const getChangelog = async () => {
+	"use cache";
+	cacheLife("hours");
+	cacheTag("changelog");
+
+	const octokit = await getOctokit();
+	const { data: releases } = await octokit.rest.repos.listReleases({
+		owner: gitConfig.user,
+		repo: gitConfig.repo,
+		per_page: 100,
+	});
+
+	return Promise.all(
+		releases.map(async (release, index) => {
+			const previousRelease = releases[index + 1];
+			if (!previousRelease) return { ...release, commits: [] };
+
+			const { data } = await octokit.rest.repos.compareCommits({
+				owner: gitConfig.user,
+				repo: gitConfig.repo,
+				base: previousRelease.tag_name,
+				head: release.tag_name,
+			});
+
+			return { ...release, commits: data.commits };
+		}),
+	);
+};
 
 let instance: Octokit | undefined;
 

@@ -1,0 +1,66 @@
+{
+  "name": "@node-zugferd/traffiqx",
+  "version": "1.0.0-beta.0",
+  "type": "module",
+  "license": "MIT",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint:package": "publint run --strict --pack false",
+    "lint:types": "attw --profile esm-only --pack .",
+    "typecheck": "tsc --project tsconfig.json",
+    "test": "vitest",
+    "coverage": "vitest run --coverage --coverage.provider=istanbul"
+  },
+  "peerDependenciesMeta": {
+    "better-auth": {
+      "optional": true
+    }
+  },
+  "peerDependencies": {
+    "@node-zugferd/core": "workspace:*",
+    "@node-zugferd/utils": "workspace:*",
+    "better-auth": "^1.7.25"
+  },
+  "dependencies": {
+    "@better-fetch/fetch": "^1.3.3",
+    "@standard-schema/spec": "catalog:"
+  },
+  "devDependencies": {
+    "better-auth": "^1.7.25",
+    "tsdown": "catalog:"
+  },
+  "exports": {
+    ".": {
+      "dev-source": "./src/index.ts",
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./provider": {
+      "dev-source": "./src/provider/index.ts",
+      "types": "./src/provider/index.d.mts",
+      "default": "./src/provider/index.mjs"
+    },
+    "./provider/*": {
+      "dev-source": "./src/provider/*.ts",
+      "types": "./src/provider/*.d.mts",
+      "default": "./src/provider/*.mjs"
+    },
+    "./better-auth": {
+      "dev-source": "./src/better-auth/index.ts",
+      "types": "./src/better-auth/index.d.mts",
+      "default": "./src/better-auth/index.mjs"
+    },
+    "./better-auth/*": {
+      "dev-source": "./src/better-auth/*.ts",
+      "types": "./src/better-auth/*.d.mts",
+      "default": "./src/better-auth/*.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ]
+}

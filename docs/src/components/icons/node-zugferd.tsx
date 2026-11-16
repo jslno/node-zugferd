@@ -28,4 +28,4 @@ const NodeZugferd = (props: SVGProps<SVGSVGElement>) => {
 	);
 };
 
-export { NodeZugferd };
+export { NodeZugferd, NodeZugferd as NodeZugferdIcon };

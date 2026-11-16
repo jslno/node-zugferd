@@ -32,6 +32,7 @@ catalog:
   zod: ^4.6.7
   tsx: ^4.23.15
   "@types/node": ^26.6.6
+  "@standard-schema/spec": latest
 
 catalogs:
   biome:
@@ -59,8 +60,19 @@ minimumReleaseAgeExclude:
   - "@zugferd/xsd-validator-win32-x64-msvc@0.1.0 || 0.1.1 || 0.1.2"
   - "@zugferd/xsd-validator@0.1.0 || 0.1.1 || 0.1.2"
   - "@zugferd/xsd-validator-wasm32-wasip1@0.1.1 || 0.1.2"
+  - "@better-auth/core@1.7.25"
+  - "@better-auth/drizzle-adapter@1.7.25"
+  - "@better-auth/kysely-adapter@1.7.25"
+  - "@better-auth/memory-adapter@1.7.25"
+  - "@better-auth/mongo-adapter@1.7.25"
+  - "@better-auth/prisma-adapter@1.7.25"
+  - "@better-auth/telemetry@1.7.25"
+  - better-auth@1.7.25
 
 trustPolicy: no-downgrade
+
+trustPolicyExclude:
+  - jose@4.15.9
 
 patchedDependencies:
   "@react-hook/intersection-observer@3.1.2": patches/@react-hook__intersection-observer@3.1.2.patch
