@@ -1176,8 +1176,6 @@ importers:
         specifier: ^5.10.0
         version: 5.10.0
 
-  packages/cli/dev: {}
-
   packages/codelists/allowance:
     dependencies:
       '@node-zugferd/core':

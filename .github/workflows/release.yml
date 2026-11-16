@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "v*"
+  workflow_call:
 
 permissions: {}
 
@@ -18,7 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      id-token: write
     env:
       LEFTHOOK: "0"
     steps:
@@ -82,5 +82,7 @@ jobs:
 
       - name: Publish to npm (staged)
         env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
           NPM_TAG: ${{ steps.determine-npm-tag.outputs.npm_tag }}
         run: pnpm stage publish --recursive --access public --no-git-checks --tag "$NPM_TAG"
