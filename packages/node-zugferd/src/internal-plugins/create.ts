@@ -203,6 +203,8 @@ export const create = <const ZugferdOptions extends ZFOptions>(
 						) {
 							await checkHybridRules(profile, ctx, doc, data);
 						}
+
+						return doc;
 					},
 					toXML: () => xml,
 					toMap: () => root.end({ format: "map" }),
