@@ -26,7 +26,7 @@ npx @node-zugferd/cli@beta init
             node-zugferd uses Node.js APIs such as `AsyncLocalStorage`.
             Cloudflare Workers enable [Node.js compatibility](https://developers.cloudflare.com/workers/runtime-apis/nodejs/)
             by default from compatibility date `2026-08-04`.
-            For an earlier date, add the `nodejs_compat` flat to your Wrangler configuration:
+            For an earlier date, add the `nodejs_compat` flag to your Wrangler configuration:
 
             ```json title="wrangler.jsonc"
             {
@@ -75,9 +75,7 @@ npx @node-zugferd/cli@beta init
         import { en16931 } from "@node-zugferd/en-16931";
         
         export const invoicer = zugferd({
-          profiles: [
-            en16931(),
-          ],
+          profiles: [en16931],
         });
         ```
     </Step>
