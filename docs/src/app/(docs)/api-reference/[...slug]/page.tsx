@@ -89,7 +89,10 @@ export async function generateMetadata(
 	props: PageProps<"/docs/[...slug]">,
 ): Promise<Metadata> {
 	const params = await props.params;
-	const page = getSourcePage("apiReference", params.slug);
+	const page = getSourcePage(
+		"apiReference",
+		params.slug?.map(decodeURIComponent),
+	);
 	if (!page) notFound();
 
 	return {
