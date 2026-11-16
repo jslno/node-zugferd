@@ -6,8 +6,6 @@ const withMDX = createMDX();
 const config = {
 	reactStrictMode: true,
 	serverExternalPackages: ["@takumi-rs/core", "typescript"],
-	cacheComponents: true,
-	partialPrefetching: true,
 	typescript: {
 		ignoreBuildErrors: true,
 	},
