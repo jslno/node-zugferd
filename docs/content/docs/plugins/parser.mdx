@@ -20,7 +20,7 @@ Detection uses the specification identifier in the XML. On a PDF it also checks 
 		### Install the plugin
 
 		```package-install
-		@node-zugferd/parser
+		@node-zugferd/parser@beta
 		```
 
 	</Step>
@@ -231,5 +231,5 @@ A custom entry is the full `match` and `parse` implementation for that profile. 
 The CLI reads an invoice file and prints the parsed data as JSON. It uses `@node-zugferd/parser`, and runs Mustang or XSD when those packages are installed. See the [CLI reference](/docs/reference/cli) for the flags.
 
 ```package-install
-npx @node-zugferd/cli parse
+npx @node-zugferd/cli@beta parse
 ```

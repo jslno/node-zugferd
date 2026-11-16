@@ -13,7 +13,7 @@ Endpoint: `https://node-zugferd.jsolano.de/mcp`
 Run the [**node-zugferd CLI**](/docs/reference/cli) and pick your client:
 
 ```package-install title="Terminal"
-npx @node-zugferd/cli mcp
+npx @node-zugferd/cli@beta mcp
 ```
 
 With no flags, the command lists supported targets. You can pass a target directly:
@@ -21,7 +21,7 @@ With no flags, the command lists supported targets. You can pass a target direct
 <Tabs items={["Cursor", "Codex", "Claude Code", "Open Code", "Manual"]}>
     <Tab value="Cursor">
         ```package-install title="Terminal"
-        npx @node-zugferd/cli mcp --cursor
+        npx @node-zugferd/cli@beta mcp --cursor
         ```
 
         This opens Cursor with a deeplink so the server is added to your MCP configuration.
@@ -41,7 +41,7 @@ With no flags, the command lists supported targets. You can pass a target direct
 
     <Tab value="Codex">
         ```package-install title="Terminal"
-        npx @node-zugferd/cli mcp --codex
+        npx @node-zugferd/cli@beta mcp --codex
         ```
 
         This runs `codex mcp add` with the node-zugferd URL. Codex stores the server in its MCP configuration, which is shared by ChatGPT desktop, Codex CLI, and the Codex IDE extension on the same host.
@@ -51,7 +51,7 @@ With no flags, the command lists supported targets. You can pass a target direct
 
     <Tab value="Claude Code">
         ```package-install title="Terminal"
-        npx @node-zugferd/cli mcp --claude-code
+        npx @node-zugferd/cli@beta mcp --claude-code
         ```
 
         This run `claude mcp add` with the node-zugferd URL. If that fails, the CLI prints the exact command to run yourself.
@@ -59,7 +59,7 @@ With no flags, the command lists supported targets. You can pass a target direct
 
     <Tab value="Open Code">
         ```package-install title="Terminal"
-        npx @node-zugferd/cli mcp --open-code
+        npx @node-zugferd/cli@beta mcp --open-code
         ```
 
         This merges a `node-zugferd` entry into `opencode.json` in the current directory (remote transport, URL above).
@@ -67,7 +67,7 @@ With no flags, the command lists supported targets. You can pass a target direct
 
     <Tab value="Manual">
         ```package-install title="Terminal"
-        npx @node-zugferd/cli mcp --manual
+        npx @node-zugferd/cli@beta mcp --manual
         ```
 
         Writes or merges `mcp.json` in the current working directory with:

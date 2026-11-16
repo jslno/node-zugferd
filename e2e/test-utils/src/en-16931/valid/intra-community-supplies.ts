@@ -34,7 +34,6 @@ export const intraCommunitySuppliesData: typeof en16931.$Infer.Input = {
 					sellerAssignedId: "CO-123/V2A",
 					buyerAssignedId: "Toolbox 0815",
 					name: "Stahlcoil",
-					// TODO: Fix type
 					originTradeCountry: "DE",
 				},
 				priceDetails: {

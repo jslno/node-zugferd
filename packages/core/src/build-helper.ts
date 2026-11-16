@@ -1,4 +1,3 @@
-// TODO: move xmlbuilder2 to peer deps
 import { fragment } from "xmlbuilder2";
 import type { XMLBuilder } from "./types";
 

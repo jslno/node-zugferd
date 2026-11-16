@@ -46,7 +46,6 @@ export const originCountryCustomsTariffHS_UNSPSC_TST_eClass_STQData: typeof exte
 						buyerAssignedId: "AG A987654",
 						name: "Artikel A",
 						description: "Artikel speziell für XXX",
-						// TODO: Should be an array in extended
 						classification: {
 							classCode: [
 								{

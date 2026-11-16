@@ -16,8 +16,6 @@ const invoices = [
 
 describe("basic profile", () => {
 	validInvoiceTestFactory(invoicer, "basic", invoices);
-
-	// todo: test rules
 });
 
 describe("parse basic profile", () => {

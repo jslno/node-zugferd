@@ -144,7 +144,6 @@ export const schema = defineProfileSchema(
 															nullish(identifier("ISO/IEC-6523")),
 															metadata({
 																id: ["BT-30", "BT-30-1"],
-																// TODO:
 																xpath:
 																	"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID",
 																description:

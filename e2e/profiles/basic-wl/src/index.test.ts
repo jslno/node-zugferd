@@ -14,8 +14,6 @@ const invoices = [
 
 describe("basic-wl profile", () => {
 	validInvoiceTestFactory(invoicer, "basic-wl", invoices);
-
-	// todo: test rules
 });
 
 describe("parse basic-wl profile", () => {

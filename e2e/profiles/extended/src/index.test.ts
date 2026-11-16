@@ -84,8 +84,6 @@ const invoices = [
 
 describe("extended profile", () => {
 	validInvoiceTestFactory(invoicer, "extended", invoices);
-
-	// todo: test rules
 });
 
 describe("parse extended profile", () => {

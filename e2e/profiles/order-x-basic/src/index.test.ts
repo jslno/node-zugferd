@@ -63,6 +63,4 @@ describe("order-x basic profile", () => {
 			config: { type: "ORDER_RESPONSE" },
 		},
 	]);
-
-	// todo: test rules
 });

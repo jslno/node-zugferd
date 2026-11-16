@@ -15,7 +15,7 @@ A template is a function you provide. It receives the invoice and returns a PDF.
 		### Install the plugin
 
 		```package-install
-		@node-zugferd/templates @node-zugferd/default-template
+		@node-zugferd/templates@beta @node-zugferd/default-template@beta
 		```
 
 	</Step>
@@ -78,7 +78,7 @@ await invoice.toPDF(invoicer.template("compact", { accent: "blue" }));
 `@node-zugferd/default-template` is a PDF invoice layout. Register it under a name, the same way as any other template.
 
 ```package-install
-@node-zugferd/default-template
+@node-zugferd/default-template@beta
 ```
 
 It renders these profiles: Minimum, Basic WL, Basic, EN 16931, Extended, and XRechnung. Another profile throws `ZugferdError`. The message names the profile id and lists the supported ids: `minimum`, `basic-wl`, `basic`, `en-16931`, `extended`, `xrechnung`.
@@ -157,7 +157,7 @@ Props passed to `invoicer.template()` override those defaults for one render:
 `@node-zugferd/pdf-template` builds a template that draws on a PDF. `definePdfTemplate` creates the document, passes it to your function, and returns that document.
 
 ```package-install
-@node-zugferd/pdf-template
+@node-zugferd/pdf-template@beta
 ```
 
 ```ts title="invoicer.ts"
@@ -182,7 +182,7 @@ const compact = definePdfTemplate({
 `@node-zugferd/docx-template` fills a Word file and converts the result to PDF. `defineDocxTemplate` takes the template file as a `Blob`, `ArrayBuffer`, or `Uint8Array`, or as a function of the props and context. The filled document is converted to PDF with LibreOffice through `@matbee/libreoffice-converter`. `toPDF()` receives those PDF bytes. The converter is created the first time a DOCX template renders.
 
 ```package-install
-@node-zugferd/docx-template
+@node-zugferd/docx-template@beta
 ```
 
 ```ts title="invoicer.ts"
