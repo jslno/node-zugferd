@@ -5,6 +5,11 @@ on:
     tags:
       - "v*"
   workflow_dispatch:
+    inputs:
+      tag:
+        description: Git tag to release (for example, v1.2.3)
+        required: true
+        type: string
 
 permissions: {}
 
@@ -24,6 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ inputs.tag || github.ref }}
           fetch-depth: 0
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -56,15 +62,18 @@ jobs:
       - name: Determine npm tag
         id: determine-npm-tag
         shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
         run: |
-          TAG="${GITHUB_REF#refs/tags/}"
+          TAG="${RELEASE_TAG:-${GITHUB_REF#refs/tags/}}"
+          TARGET_SHA=$(git rev-parse "$TAG^{commit}")
           if [[ "$TAG" =~ -(next|canary|beta|rc) ]]; then
               # Extract pre-release tag (e.g., beta, rc)
               NPM_TAG=${BASH_REMATCH[1]}
           else
               # Check if the commit is on the main branch or a version branch
               git fetch origin main
-              CURRENT_BRANCH=$(git branch -r --contains "$GITHUB_SHA" | grep -E 'origin/(main|v[0-9]+\.x-latest)' | head -1 | sed 's/.*origin\///')
+              CURRENT_BRANCH=$(git branch -r --contains "$TARGET_SHA" | grep -E 'origin/(main|v[0-9]+\.x-latest)' | head -1 | sed 's/.*origin\///')
 
               if [[ "$CURRENT_BRANCH" == "main" ]]; then
                   NPM_TAG="latest"
