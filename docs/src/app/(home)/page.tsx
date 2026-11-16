@@ -77,7 +77,7 @@ function Hero() {
 	const [copyPopoverOpen, setCopyPopoverOpen] = useState(false);
 	const { copied, copying, copyToClipboard } = useCopyToClipboard();
 	return (
-		<div className="relative grid min-h-[calc(60svh-var(--spacing)*14)] md:min-h-[calc(100svh-var(--spacing)*14)] place-items-center">
+		<div className="relative grid min-h-[calc(85svh-var(--spacing)*14)] md:min-h-[calc(100svh-var(--spacing)*14)] place-items-center">
 			<div className="absolute inset-0 -z-1 size-full">
 				<HomeBackground />
 			</div>

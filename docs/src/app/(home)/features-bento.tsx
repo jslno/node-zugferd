@@ -718,7 +718,7 @@ const MotionLink = motion.create(Link);
 
 export function FeaturesBento() {
 	return (
-		<section className="mx-auto flex min-h-screen w-full max-w-400 flex-col gap-12 px-4 md:gap-24 md:px-6">
+		<section className="mx-auto flex min-h-dvh w-full max-w-400 flex-col gap-12 px-4 md:gap-24 md:px-6">
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
