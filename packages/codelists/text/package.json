@@ -1,6 +1,12 @@
 {
   "name": "@node-zugferd/codelist-text",
   "version": "1.0.0-beta.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jslno/node-zugferd.git",
+    "directory": "packages/codelists/text"
+  },
+  "homepage": "https://node-zugferd.jsolano.de/docs/codelists/text",
   "type": "module",
   "license": "MIT",
   "main": "dist/index.mjs",

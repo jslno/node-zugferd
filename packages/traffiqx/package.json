@@ -1,6 +1,12 @@
 {
   "name": "@node-zugferd/traffiqx",
   "version": "1.0.0-beta.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jslno/node-zugferd.git",
+    "directory": "packages/traffiqx"
+  },
+  "homepage": "https://node-zugferd.jsolano.de/docs/plugins/traffiqx",
   "type": "module",
   "license": "MIT",
   "main": "dist/index.mjs",

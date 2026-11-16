@@ -1,6 +1,12 @@
 {
   "name": "@node-zugferd/validator-mustang",
   "version": "1.0.0-beta.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jslno/node-zugferd.git",
+    "directory": "packages/validators/mustang"
+  },
+  "homepage": "https://node-zugferd.jsolano.de/docs/plugins/validators/mustang",
   "type": "module",
   "license": "MIT",
   "bin": {

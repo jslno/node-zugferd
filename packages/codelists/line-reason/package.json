@@ -1,6 +1,12 @@
 {
   "name": "@node-zugferd/codelist-line-reason",
   "version": "1.0.0-beta.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jslno/node-zugferd.git",
+    "directory": "packages/codelists/line-reason"
+  },
+  "homepage": "https://node-zugferd.jsolano.de/docs/codelists/line-reason",
   "type": "module",
   "license": "MIT",
   "main": "dist/index.mjs",

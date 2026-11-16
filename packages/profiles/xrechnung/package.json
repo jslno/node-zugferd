@@ -1,6 +1,12 @@
 {
   "name": "@node-zugferd/xrechnung",
   "version": "1.0.0-beta.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jslno/node-zugferd.git",
+    "directory": "packages/profiles/xrechnung"
+  },
+  "homepage": "https://node-zugferd.jsolano.de/docs/profiles/xrechnung",
   "type": "module",
   "license": "MIT",
   "main": "dist/index.mjs",

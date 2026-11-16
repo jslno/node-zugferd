@@ -1,6 +1,12 @@
 {
   "name": "@node-zugferd/pdf-template",
   "version": "1.0.0-beta.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jslno/node-zugferd.git",
+    "directory": "packages/pdf-template"
+  },
+  "homepage": "https://node-zugferd.jsolano.de/docs/plugins/templates",
   "type": "module",
   "license": "MIT",
   "main": "dist/index.mjs",

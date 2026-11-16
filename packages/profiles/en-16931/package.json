@@ -1,6 +1,12 @@
 {
   "name": "@node-zugferd/en-16931",
   "version": "1.0.0-beta.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jslno/node-zugferd.git",
+    "directory": "packages/profiles/en-16931"
+  },
+  "homepage": "https://node-zugferd.jsolano.de/docs/profiles/en-16931",
   "type": "module",
   "license": "MIT",
   "main": "dist/index.mjs",

@@ -1,6 +1,12 @@
 {
   "name": "@node-zugferd/magic-bytes",
   "version": "1.0.0-beta.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jslno/node-zugferd.git",
+    "directory": "packages/magic-bytes"
+  },
+  "homepage": "https://node-zugferd.jsolano.de/docs/plugins/magic-bytes",
   "type": "module",
   "license": "MIT",
   "main": "dist/index.mjs",
