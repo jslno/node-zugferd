@@ -1,0 +1,15 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "node-zugferd",
+  "description": "A TypeScript library for creating, parsing, and validating ZUGFeRD/Factur-X electronic invoices, with support for EN 16931, XRechnung, and Order-X profiles.",
+  "folders": [
+    "docs/content/docs",
+    "docs/content/examples",
+    "docs/content/api-reference"
+  ],
+  "rules": [
+    "Use the documentation and API reference for the current version; do not invent APIs or claim compliance beyond what the documentation states.",
+    "Prefer TypeScript examples using the documented public API, and name any profile or plugin required by the example.",
+    "Treat ZUGFeRD/Factur-X, XRechnung, and Order-X as distinct profiles or formats; follow the documented support and limitations for each."
+  ]
+}
