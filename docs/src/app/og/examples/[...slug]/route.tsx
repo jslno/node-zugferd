@@ -6,8 +6,6 @@ import { OG_BACKGROUND } from "@/lib/og-background";
 import { appName } from "@/lib/shared";
 import { getPageImage, getSourcePage, source } from "@/lib/source";
 
-export const revalidate = false;
-
 const stylesheet = readFileSync(
 	join(process.cwd(), "src/app/global.css"),
 	"utf-8",
