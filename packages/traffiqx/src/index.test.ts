@@ -86,6 +86,23 @@ describe("traffiqx plugin", () => {
 		await expect(request.auth.token()).resolves.toBe("dynamic-token");
 	});
 
+	it.each([
+		["from_date", { from_date: "not-a-date" }],
+		["to_date", { to_date: "not-a-date" }],
+	])("rejects an invalid %s", async (field, date) => {
+		const fetch = vi.fn();
+		const { actions } = createActions({ $fetch: fetch });
+
+		await expect(
+			actions.inbox.list({
+				traffiqxId: "client",
+				accessToken: "token",
+				...date,
+			}),
+		).rejects.toThrow(`Field \`${field}\` must be a valid date.`);
+		expect(fetch).not.toHaveBeenCalled();
+	});
+
 	it("allows per-request access tokens to override the configured token", async () => {
 		const fetch = vi.fn().mockResolvedValue({ data: "ok", error: null });
 		const { actions } = createActions({

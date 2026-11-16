@@ -169,6 +169,22 @@ export const traffiqx = <
 								ProviderInput,
 						) => {
 							const provider = getProvider(input);
+							const fromDate = input.from_date
+								? new Date(input.from_date)
+								: undefined;
+							const toDate = input.to_date
+								? new Date(input.to_date)
+								: undefined;
+
+							if (fromDate && Number.isNaN(fromDate.getTime())) {
+								throw new ZugferdError(
+									"Field `from_date` must be a valid date.",
+								);
+							}
+							if (toDate && Number.isNaN(toDate.getTime())) {
+								throw new ZugferdError("Field `to_date` must be a valid date.");
+							}
+
 							const token = getAccessToken(
 								{
 									meta: input.meta,
@@ -193,12 +209,8 @@ export const traffiqx = <
 								query: {
 									...(input.fetchOptions?.query ?? {}),
 									downloaded: input.downloaded,
-									from_date: input.from_date
-										? new Date(input.from_date).toISOString()
-										: undefined,
-									to_date: input.to_date
-										? new Date(input.to_date).toISOString()
-										: undefined,
+									from_date: fromDate?.toISOString(),
+									to_date: toDate?.toISOString(),
 								},
 								headers: {
 									accept: "application/json",
