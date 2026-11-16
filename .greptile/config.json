@@ -1,0 +1,13 @@
+{
+  "strictness": 2,
+  "triggerOnUpdates": true,
+  "triggerOnDrafts": false,
+  "statusCheck": true,
+  "commentTypes": ["logic", "syntax", "style"],
+  "includeBranches": ["main"],
+  "excludeAuthors": ["dependabot[bot]", "renovate[bot]", "node-zugferd[bot]"],
+  "ignorePatterns": "**/pnpm-lock.yaml\n**/__snapshots__/**",
+  "context": {
+    "repos": ["jslno/xsd-validator"]
+  }
+}
