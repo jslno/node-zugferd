@@ -21,6 +21,19 @@ npx @node-zugferd/cli@beta init
         ```package-install
         node-zugferd@beta
         ```
+
+        <Callout title="Running on Cloudflare Workers">
+            node-zugferd uses Node.js APIs such as `AsyncLocalStorage`.
+            Cloudflare Workers enable [Node.js compatibility](https://developers.cloudflare.com/workers/runtime-apis/nodejs/)
+            by default from compatibility date `2026-08-04`.
+            For an earlier date, add the `nodejs_compat` flat to your Wrangler configuration:
+
+            ```json title="wrangler.jsonc"
+            {
+              "compatibility_flags": ["nodejs_compat"]
+            }
+            ```
+        </Callout>
     </Step>
     <Step>
         ### Install a profile
