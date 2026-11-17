@@ -114,104 +114,115 @@ export const create = <const ZugferdOptions extends ZFOptions>(
 					context: ctx,
 				});
 
-				const methods = {
-					async toPDF(
-						pdf:
-							| PDFDocument
-							| string
-							| Uint8Array
-							| ArrayBuffer
-							| ((ctx: {
-									data: Record<string, any>;
-									xml: string;
-									profile: ZugferdProfile;
-									context: ZugferdContext;
-							  }) => Awaitable<
-									PDFDocument | string | Uint8Array | ArrayBuffer
-							  >),
-						options?:
-							| (PDFOptions & {
-									dataRelationship?: InferProfileFromId<
-										ZugferdOptions,
-										ProfileId
-									>["dataRelationship"] extends Array<
-										infer R extends DataRelationship
-									>
+				const toPDF = async (
+					pdf:
+						| PDFDocument
+						| string
+						| Uint8Array
+						| ArrayBuffer
+						| ((ctx: {
+								data: Record<string, any>;
+								xml: string;
+								profile: ZugferdProfile<any, boolean>;
+								context: ZugferdContext;
+						  }) => Awaitable<PDFDocument | string | Uint8Array | ArrayBuffer>),
+					options?:
+						| (PDFOptions & {
+								dataRelationship?: InferProfileFromId<
+									ZugferdOptions,
+									ProfileId
+								>["dataRelationship"] extends Array<
+									infer R extends DataRelationship
+								>
+									? R
+									: InferProfileFromId<
+												ZugferdOptions,
+												ProfileId
+											>["dataRelationship"] extends infer R extends
+												DataRelationship
 										? R
-										: InferProfileFromId<
-													ZugferdOptions,
-													ProfileId
-												>["dataRelationship"] extends infer R extends
-													DataRelationship
-											? R
-											: never;
-							  })
-							| undefined,
+										: never;
+						  })
+						| undefined,
+				) => {
+					const opts = {
+						...options,
+						dataRelationship: ((options?.dataRelationship ??
+						Array.isArray(profile.dataRelationship))
+							? profile.dataRelationship[0]
+							: profile.dataRelationship) as DataRelationship,
+					};
+					const pdfDoc =
+						typeof pdf === "function"
+							? await pdf({
+									data,
+									xml,
+									profile,
+									context: ctx,
+								})
+							: pdf;
+
+					const doc = await toPdfA(
+						profile,
+						pdfDoc,
+						{
+							metadata: opts.metadata,
+							attachments: [
+								...[...filesToAttach.values()].map((data) => ({
+									filename: data.filename,
+									data: data.content,
+									mimeType: data.mimeType,
+									dataRelationship: "Supplement" as const,
+								})),
+								...(opts.attachments ?? []),
+								{
+									filename: profile.extensionSchema.fileName,
+									data: xml,
+									mimeType: "application/xml",
+									createdAt: new Date(),
+									modifiedAt: new Date(),
+									dataRelationship: opts.dataRelationship,
+								},
+							],
+						},
+						config,
+					);
+
+					if (
+						[
+							"minimum",
+							"basic-wl",
+							"basic",
+							"en-16931",
+							"extended",
+							"xrechnung",
+						].includes(profile.id)
 					) {
-						const opts = {
-							...options,
-							dataRelationship: ((options?.dataRelationship ??
-							Array.isArray(profile.dataRelationship))
-								? profile.dataRelationship[0]
-								: profile.dataRelationship) as DataRelationship,
-						};
-						const pdfDoc =
-							typeof pdf === "function"
-								? await pdf({
-										data,
-										xml,
-										profile,
-										context: ctx,
-									})
-								: pdf;
+						await checkHybridRules(profile, ctx, doc, data);
+					}
 
-						const doc = await toPdfA(
-							profile,
-							pdfDoc,
-							{
-								metadata: opts.metadata,
-								attachments: [
-									...[...filesToAttach.values()].map((data) => ({
-										filename: data.filename,
-										data: data.content,
-										mimeType: data.mimeType,
-										dataRelationship: "Supplement" as const,
-									})),
-									...(opts.attachments ?? []),
-									{
-										filename: profile.extensionSchema.fileName,
-										data: xml,
-										mimeType: "application/xml",
-										createdAt: new Date(),
-										modifiedAt: new Date(),
-										dataRelationship: opts.dataRelationship,
-									},
-								],
-							},
-							config,
-						);
+					return doc;
+				};
 
-						if (
-							[
-								"minimum",
-								"basic-wl",
-								"basic",
-								"en-16931",
-								"extended",
-								"xrechnung",
-							].includes(profile.id)
-						) {
-							await checkHybridRules(profile, ctx, doc, data);
-						}
-
-						return doc;
-					},
+				const baseMethods = {
 					toXML: () => xml,
 					toMap: () => root.end({ format: "map" }),
 					toObject: () => root.end({ format: "object" }),
 					toJSON: () => root.end({ format: "json" }),
 					toYAML: () => root.end({ format: "yaml" }),
 				};
+
+				const methods = {
+					...baseMethods,
+					...((profile.supportsPDF as boolean | undefined) === false
+						? {}
+						: {
+								toPDF,
+							}),
+				} as typeof baseMethods &
+					(typeof profile extends { supportsPDF: false }
+						? {}
+						: { toPDF: typeof toPDF });
 
 				return {
 					input,

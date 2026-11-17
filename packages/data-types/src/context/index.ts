@@ -6,7 +6,7 @@ const ALS_SYMBOL = Symbol.for("node-zugferd::data-types:async_hooks");
 
 export type DataTypeContext = {
 	context: ZugferdContext;
-	profile: ZugferdProfile;
+	profile: ZugferdProfile<any, boolean>;
 	pdf: {
 		autoAttachBinaryObjects: boolean;
 		embedFile: (data: {

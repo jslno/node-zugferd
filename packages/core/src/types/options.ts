@@ -5,7 +5,10 @@ import type { ZugferdProfile } from "./profile";
 import type { Awaitable } from "./utils";
 
 export interface ZugferdOptions<
-	P extends readonly ZugferdProfile[] = readonly ZugferdProfile[],
+	P extends readonly (
+		| ZugferdProfile<any, true>
+		| ZugferdProfile<any, false>
+	)[] = readonly (ZugferdProfile<any, true> | ZugferdProfile<any, false>)[],
 > {
 	profiles: P;
 	plugins?: ZugferdPlugin[] | undefined;
@@ -15,7 +18,7 @@ export interface ZugferdOptions<
 		afterXMLBuild?:
 			| ((ctx: {
 					xml: string;
-					profile: ZugferdProfile;
+					profile: ZugferdProfile<any, boolean>;
 					context: ZugferdContext;
 			  }) => Promise<void> | void)
 			| undefined;
@@ -44,7 +47,7 @@ export interface ZugferdOptions<
 								filename: string;
 							};
 							context: ZugferdContext;
-							profile: ZugferdProfile;
+							profile: ZugferdProfile<any, boolean>;
 					  }) => Awaitable<void>)
 					| undefined;
 		  }

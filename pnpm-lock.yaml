@@ -2269,6 +2269,9 @@ importers:
       '@node-zugferd/core':
         specifier: workspace:*
         version: link:../../core
+      pdf-lib:
+        specifier: 'catalog:'
+        version: 1.17.1
       which:
         specifier: ^7.0.0
         version: 7.0.0
@@ -2309,6 +2312,9 @@ importers:
       '@zugferd/xsd-validator':
         specifier: catalog:xsd-validator
         version: 0.1.2
+      pdf-lib:
+        specifier: 'catalog:'
+        version: 1.17.1
     devDependencies:
       tsdown:
         specifier: 'catalog:'

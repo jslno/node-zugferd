@@ -23,7 +23,7 @@ import {
 export function ProfileTree({
 	profile: { schema: $schema },
 }: {
-	profile: ZugferdProfile;
+	profile: ZugferdProfile<any, boolean>;
 }) {
 	const schema: AnySchema = $schema;
 	const fields = useMemo(() => collectProfileFields(schema), [schema]);
