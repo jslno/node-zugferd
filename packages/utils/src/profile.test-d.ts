@@ -1,3 +1,4 @@
+import type { ZugferdProfile } from "@node-zugferd/core/types";
 import {
 	amount,
 	asArray,
@@ -6,6 +7,7 @@ import {
 	text,
 } from "@node-zugferd/data-types";
 import { expectTypeOf, test } from "vitest";
+import type { DefinedProfile } from "./profile.js";
 import { defineProfile } from "./profile.js";
 
 const root = defineProfile({
@@ -29,6 +31,14 @@ const root = defineProfile({
 		}),
 	}),
 	build() {},
+});
+
+const nonPdfProfile = defineProfile({
+	id: "non-pdf",
+	supportsPDF: false,
+	schema: object({}),
+	build() {},
+	rules() {},
 });
 
 const middle = defineProfile({
@@ -195,6 +205,43 @@ test("keeps inherited nullish amount fields optional", () => {
 
 	expectTypeOf<{}>().toExtend<Pick<Totals, "prepaidAmount">>();
 	expectTypeOf<{}>().toExtend<Pick<Totals, "chargeTotalAmount">>();
+});
+
+test("preserves PDF support on defined profiles", () => {
+	expectTypeOf<typeof root.supportsPDF>().toEqualTypeOf<true | undefined>();
+	expectTypeOf<
+		typeof root.extensionSchema.fileName
+	>().toEqualTypeOf<"factur-x.xml">();
+});
+
+test("allows profiles that do not support PDF", () => {
+	type NonPdfProfile = ZugferdProfile<ReturnType<typeof object>, false>;
+	type DefinedNonPdfProfile = DefinedProfile<
+		"non-pdf",
+		ZugferdProfile["dataRelationship"],
+		unknown,
+		unknown,
+		ZugferdProfile["extensionSchema"],
+		false
+	>;
+
+	expectTypeOf<NonPdfProfile["supportsPDF"]>().toEqualTypeOf<false>();
+	expectTypeOf<NonPdfProfile["dataRelationship"]>().toEqualTypeOf<undefined>();
+	expectTypeOf<NonPdfProfile["extensionSchema"]>().toEqualTypeOf<undefined>();
+	expectTypeOf<DefinedNonPdfProfile["supportsPDF"]>().toEqualTypeOf<false>();
+	expectTypeOf<
+		DefinedNonPdfProfile["dataRelationship"]
+	>().toEqualTypeOf<undefined>();
+	expectTypeOf<
+		DefinedNonPdfProfile["extensionSchema"]
+	>().toEqualTypeOf<undefined>();
+	expectTypeOf<typeof nonPdfProfile.supportsPDF>().toEqualTypeOf<false>();
+	expectTypeOf<
+		typeof nonPdfProfile.dataRelationship
+	>().toEqualTypeOf<undefined>();
+	expectTypeOf<
+		typeof nonPdfProfile.extensionSchema
+	>().toEqualTypeOf<undefined>();
 });
 
 test("merges a parent object into a child array and keeps both fields optional", () => {
