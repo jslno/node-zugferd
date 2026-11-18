@@ -1,0 +1,11 @@
+diff --git a/from.js b/from.js
+index 9eaf8bfc191aef9218ad382b5149b2b6207b4812..1602f99206feb328edf75943470cdca85385c77f 100644
+--- a/from.js
++++ b/from.js
+@@ -1,6 +1,5 @@
+ import { statSync, createReadStream, promises as fs } from 'node:fs'
+ import { basename } from 'node:path'
+-import DOMException from 'node-domexception'
+ 
+ import File from './file.js'
+ import Blob from './index.js'

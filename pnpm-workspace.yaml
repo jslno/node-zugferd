@@ -24,6 +24,8 @@ overrides:
   easy-template-x>lodash.get: npm:lodash@^4.18.1
   easy-template-x-angular-expressions>lodash.get: npm:lodash@^4.18.1
   "@react-hook/intersection-observer@3.1.2>intersection-observer": "-"
+  rimraf>glob: npm:tinyglobby@^0.2.17
+  fetch-blob>node-domexception: "-"
 
 catalog:
   tsdown: ^0.23.5
@@ -80,3 +82,4 @@ patchedDependencies:
   "@react-hook/intersection-observer@3.1.2": patches/@react-hook__intersection-observer@3.1.2.patch
   easy-template-x-angular-expressions@0.3.0: patches/easy-template-x-angular-expressions@0.3.0.patch
   easy-template-x@8.0.1: patches/easy-template-x@8.0.1.patch
+  fetch-blob@3.2.0: patches/fetch-blob@3.2.0.patch
