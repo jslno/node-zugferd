@@ -13,6 +13,6 @@ export interface ZugferdPlugin {
 		  } | void)
 		| undefined;
 	actions?: ((ctx: ZugferdContext) => Record<string, unknown>) | undefined;
-	options?: Record<string, unknown> | undefined;
-	$Infer?: Record<string, unknown> | undefined;
+	options?: Record<string, any> | undefined;
+	$Infer?: Record<string, any> | undefined;
 }
