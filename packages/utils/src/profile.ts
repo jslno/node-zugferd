@@ -106,9 +106,9 @@ export type DefinedProfile<
 	Input,
 	Output,
 	ExtensionSchema extends ZugferdProfile["extensionSchema"],
+	SupportsPDF extends boolean = true,
 > = {
 	readonly id: Id;
-	readonly dataRelationship: DataRelationship;
 	readonly use?: readonly ParentProfile[];
 	readonly build: (
 		data: ProfileData<Output>,
@@ -119,21 +119,30 @@ export type DefinedProfile<
 		ctx: ZugferdProfileRulesContext,
 	) => void | Promise<void>;
 	readonly schema: CompactProfileSchema<Input, Output>;
-	readonly extensionSchema: Omit<
-		Required<MarkOptional<ExtensionSchema, "uri" | "fieldNameMap">>,
-		"uri" | "namespace" | "fieldNameMap"
-	> & {
-		uri?: string;
-		namespace?: string;
-		fieldNameMap?: Record<keyof ExtensionSchema, string>;
-	};
 	readonly $Infer: {
 		readonly Input: Input;
 		readonly Output: Output;
 	};
-};
+} & (SupportsPDF extends true
+	? {
+			readonly dataRelationship: DataRelationship;
+			readonly extensionSchema: Omit<
+				Required<MarkOptional<ExtensionSchema, "uri" | "fieldNameMap">>,
+				"uri" | "namespace" | "fieldNameMap"
+			> & {
+				uri?: string;
+				namespace?: string;
+				fieldNameMap?: Record<keyof ExtensionSchema, string>;
+			};
+			readonly supportsPDF?: SupportsPDF | undefined;
+		}
+	: {
+			readonly dataRelationship: undefined;
+			readonly extensionSchema: undefined;
+			readonly supportsPDF: SupportsPDF;
+		});
 
-type ZugferdProfileInputBase<_Input, Output> = {
+type ZugferdProfileInputBase<_Input, Output, SupportsPDF extends boolean> = {
 	build: (
 		data: ProfileData<Output>,
 		ctx: ZugferdProfileBuildContext,
@@ -142,31 +151,48 @@ type ZugferdProfileInputBase<_Input, Output> = {
 		data: ProfileData<Output>,
 		ctx: ZugferdProfileRulesContext,
 	) => void | Promise<void>;
-	extensionSchema: MarkOptional<
-		ZugferdProfile["extensionSchema"],
-		"uri" | "namespace" | "fieldNameMap"
-	>;
-};
+} & (SupportsPDF extends true
+	? {
+			extensionSchema: MarkOptional<
+				ZugferdProfile["extensionSchema"],
+				"uri" | "namespace" | "fieldNameMap"
+			>;
+		}
+	: {});
 
 export type ZugferdProfileInput<
 	S extends ProfileSchemaType,
 	Use extends readonly ParentProfile[] | undefined,
-> = Omit<ZugferdProfile<S>, "build" | "rules" | "extensionSchema"> &
+	SupportsPDF extends boolean = true,
+> = Omit<
+	ZugferdProfile<S, SupportsPDF>,
+	"build" | "rules" | "extensionSchema" | "dataRelationship"
+> &
 	ZugferdProfileInputBase<
+		Use extends readonly ParentProfile[]
+			? MergedProfileInput<Use, S>
+			: InferInput<S>,
 		Use extends readonly ParentProfile[]
 			? MergedProfileOutput<Use, S>
 			: InferOutput<S>,
-		Use extends readonly ParentProfile[]
-			? MergedProfileOutput<Use, S>
-			: InferOutput<S>
-	> & {
+		SupportsPDF
+	> &
+	(SupportsPDF extends true
+		? {
+				dataRelationship: ZugferdProfile["dataRelationship"];
+			}
+		: {
+				dataRelationship?: undefined;
+				extensionSchema?: undefined;
+			}) & {
 		use?: Use | undefined;
 	};
 
 type DefineProfileImpl = ZugferdProfileInput<
 	| BaseSchema<unknown, unknown, BaseIssue<unknown>>
 	| BaseSchemaAsync<unknown, unknown, BaseIssue<unknown>>,
-	readonly ParentProfile[] | undefined
+	readonly ParentProfile[] | undefined,
+	boolean
 > & {
 	schema: ProfileSchemaType;
 };
@@ -220,22 +246,57 @@ export function defineProfile<
 
 export function defineProfile<
 	const Id extends string,
-	const DataRelationship extends ZugferdProfile["dataRelationship"],
 	const Schema extends ProfileSchemaType,
-	const ExtensionSchema extends ZugferdProfile["extensionSchema"],
-	const Use extends readonly ParentProfile[] | undefined,
-	const Input,
-	const Output,
+	const Input extends InferInput<Schema> = InferInput<Schema>,
+	const Output extends InferOutput<Schema> = InferOutput<Schema>,
 >(
-	profile: DefineProfileImpl & {
+	profile: ZugferdProfileInput<Schema, undefined, false> & {
 		id: Id;
-		dataRelationship: DataRelationship;
-		extensionSchema: ExtensionSchema;
 		schema: Schema;
-		use?: Use;
+		use?: undefined;
 	},
-): DefinedProfile<Id, DataRelationship, Input, Output, ExtensionSchema> {
-	const { extensionSchema, use, schema, build, rules, ...input } = profile;
+): DefinedProfile<
+	Id,
+	never,
+	Input,
+	Output,
+	ZugferdProfile["extensionSchema"],
+	false
+>;
+
+export function defineProfile<
+	const Id extends string,
+	const Schema extends ProfileSchemaType,
+	const Use extends readonly ParentProfile[],
+	const Input extends MergedProfileInput<Use, Schema> = MergedProfileInput<
+		Use,
+		Schema
+	>,
+	const Output extends MergedProfileOutput<Use, Schema> = MergedProfileOutput<
+		Use,
+		Schema
+	>,
+>(
+	profile: ZugferdProfileInput<Schema, Use, false> & {
+		id: Id;
+		schema: Schema;
+		use: Use;
+	},
+): DefinedProfile<
+	Id,
+	never,
+	Input,
+	Output,
+	ZugferdProfile["extensionSchema"],
+	false
+>;
+
+export function defineProfile(
+	profile: DefineProfileImpl & { id: string; schema: ProfileSchemaType },
+): any {
+	const extensionSchema =
+		"extensionSchema" in profile ? profile.extensionSchema : undefined;
+	const { use, schema, build, rules, ...input } = profile;
 
 	const mergedSchemas = use ? [...use.map((p) => p.schema), schema] : undefined;
 
@@ -247,21 +308,30 @@ export function defineProfile<
 
 	return {
 		...input,
-		schema: mergedSchema as CompactProfileSchema<Input, Output>,
-		extensionSchema: {
-			...extensionSchema,
-			uri:
-				extensionSchema.uri ??
-				"urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#",
-			namespace: extensionSchema.namespace ?? "fx",
-			fieldNameMap: {
-				type: extensionSchema.fieldNameMap?.type ?? "DocumentType",
-				fileName: extensionSchema.fieldNameMap?.fileName ?? "DocumentFileName",
-				version: extensionSchema.fieldNameMap?.version ?? "Version",
-				conformanceLevel:
-					extensionSchema.fieldNameMap?.conformanceLevel ?? "ConformanceLevel",
-			},
-		},
+		schema: mergedSchema,
+		...(profile.supportsPDF === false
+			? { dataRelationship: undefined, extensionSchema: undefined }
+			: {}),
+		...(extensionSchema
+			? {
+					extensionSchema: {
+						...extensionSchema,
+						uri:
+							extensionSchema.uri ??
+							"urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#",
+						namespace: extensionSchema.namespace ?? "fx",
+						fieldNameMap: {
+							type: extensionSchema.fieldNameMap?.type ?? "DocumentType",
+							fileName:
+								extensionSchema.fieldNameMap?.fileName ?? "DocumentFileName",
+							version: extensionSchema.fieldNameMap?.version ?? "Version",
+							conformanceLevel:
+								extensionSchema.fieldNameMap?.conformanceLevel ??
+								"ConformanceLevel",
+						},
+					},
+				}
+			: {}),
 		async build(
 			data: Record<string, unknown>,
 			ctx: ZugferdProfileBuildContext,
@@ -283,17 +353,8 @@ export function defineProfile<
 			}
 			await rules?.(data, ctx);
 		},
-		$Infer: {} as {
-			Input: Input;
-			Output: Output;
-		},
-	} as unknown as DefinedProfile<
-		Id,
-		DataRelationship,
-		Input,
-		Output,
-		ExtensionSchema
-	>;
+		$Infer: {},
+	};
 }
 
 export type { XMLBuilder };

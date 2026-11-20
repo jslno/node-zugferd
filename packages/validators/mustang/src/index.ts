@@ -10,6 +10,7 @@ import type {
 } from "@node-zugferd/core";
 import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
 import { ZugferdError } from "@node-zugferd/core/error";
+import { PDFDocument } from "pdf-lib";
 import { convert } from "xmlbuilder2";
 import { __dirname } from "./isomorph";
 import { setup } from "./setup";
@@ -55,6 +56,13 @@ export const mustang = <ZugferdOptions extends ZFOptions>(
 		input: string | Uint8Array | ArrayBuffer,
 		ctx: ZugferdContext,
 	) => {
+		const pdf = await isPdf(input);
+		if (ctx.getProfile(profileId)?.supportsPDF === false && pdf) {
+			throw new ZugferdError(
+				`Profile ${profileId} does not support PDF input.`,
+			);
+		}
+
 		if (!isSupportedProfile(profileId)) {
 			ctx.logger.warn(
 				`The Mustang validator does not support the profile "${profileId}". Skipping validation.`,
@@ -70,7 +78,6 @@ export const mustang = <ZugferdOptions extends ZFOptions>(
 		}
 
 		const tempDir = await mkdtemp(join(opts.tempDir, "node-zugferd_mustang-"));
-		const pdf = isPdf(input);
 		const tmpFile = join(tempDir, pdf ? "input.pdf" : "input.xml");
 		await writeFile(
 			tmpFile,
@@ -150,19 +157,20 @@ export const mustang = <ZugferdOptions extends ZFOptions>(
 };
 mustang.setup = setup;
 
-function isPdf(input: string | Uint8Array | ArrayBuffer) {
-	if (typeof input === "string") {
-		return input.startsWith("%PDF");
-	}
+async function isPdf(input: string | Uint8Array | ArrayBuffer) {
+	const bytes =
+		typeof input === "string"
+			? Uint8Array.from(input, (character) => character.charCodeAt(0))
+			: input instanceof Uint8Array
+				? input
+				: new Uint8Array(input);
 
-	const bytes = input instanceof Uint8Array ? input : new Uint8Array(input);
-	return (
-		bytes.length >= 4 &&
-		bytes[0] === 0x25 &&
-		bytes[1] === 0x50 &&
-		bytes[2] === 0x44 &&
-		bytes[3] === 0x46
-	);
+	try {
+		await PDFDocument.load(bytes, { ignoreEncryption: true });
+		return true;
+	} catch {
+		return false;
+	}
 }
 
 function arrayable<T>(value: T | T[] | undefined): T[] {

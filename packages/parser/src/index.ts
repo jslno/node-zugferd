@@ -99,7 +99,7 @@ export const documentParser = async (
 								fileName?: never;
 						  }
 						| {
-								profile?: ZugferdProfile | undefined;
+								profile?: ZugferdProfile<any, boolean> | undefined;
 								context?: ZugferdContext | undefined;
 								fileName?: never;
 						  }
@@ -123,6 +123,7 @@ export const documentParser = async (
 						? opts.context.getProfile(opts.profile)
 						: opts.profile
 					: null;
+				if (profile?.supportsPDF === false) return null;
 				const fallbackFileNames = [
 					"factur-x.xml",
 					"xrechnung.xml",
@@ -130,7 +131,7 @@ export const documentParser = async (
 				];
 				const fileNames =
 					!!profile || !!opts?.fileName
-						? profile?.extensionSchema.fileName
+						? profile?.extensionSchema?.fileName
 							? [profile.extensionSchema.fileName]
 							: opts?.fileName
 								? Array.isArray(opts.fileName)
@@ -173,7 +174,7 @@ export const documentParser = async (
 			profileOrInput: string | Uint8Array | ArrayBuffer,
 			input_?: string | Uint8Array | ArrayBuffer | undefined,
 		): Promise<{
-			profile: ZugferdProfile;
+			profile: ZugferdProfile<any, boolean>;
 			data: Record<string, any>;
 		}> {
 			opts.profileMap = {
@@ -187,15 +188,17 @@ export const documentParser = async (
 			};
 
 			const resolveXmlForProfile = (
-				candidateProfile: ZugferdProfile,
+				candidateProfile: ZugferdProfile<any, boolean>,
 				pdfDoc: PDFDocument | undefined,
 				pdfAttachments: ReturnType<typeof getAttachments> | undefined,
 				rawInput: string | Uint8Array | ArrayBuffer,
 			): string | null => {
 				if (pdfDoc) {
+					if (candidateProfile.supportsPDF === false) return null;
+					const fileName = candidateProfile.extensionSchema?.fileName;
+					if (!fileName) return null;
 					const file = pdfAttachments?.find(
-						(attachment) =>
-							attachment.name === candidateProfile.extensionSchema.fileName,
+						(attachment) => attachment.name === fileName,
 					);
 					return file ? new TextDecoder().decode(file.data) : null;
 				}
@@ -208,7 +211,7 @@ export const documentParser = async (
 			let lazyXml: XMLSerializedAsObject | XMLSerializedAsObjectArray | null =
 				null;
 			const createBaseContext = (
-				profile: ZugferdProfile,
+				profile: ZugferdProfile<any, boolean>,
 				pdfDoc: PDFDocument | undefined,
 				xmlString: string,
 			) => {
@@ -223,7 +226,7 @@ export const documentParser = async (
 
 			let lazyMetadata: any | null = null;
 			const createMatchContext = (
-				candidateProfile: ZugferdProfile,
+				candidateProfile: ZugferdProfile<any, boolean>,
 				pdfDoc: PDFDocument | undefined,
 				xmlString: string,
 			): MatchContext => {
@@ -231,6 +234,8 @@ export const documentParser = async (
 					...createBaseContext(candidateProfile, pdfDoc, xmlString),
 					matchesExtensionSchemaProfile() {
 						if (!pdfDoc) return true;
+						const extensionSchema = candidateProfile.extensionSchema;
+						if (!extensionSchema) return false;
 						lazyMetadata ??= getMetadata(pdfDoc);
 						if (!lazyMetadata) return false;
 
@@ -239,12 +244,11 @@ export const documentParser = async (
 						);
 
 						return descriptions.some((description: any) => {
-							const namespace =
-								candidateProfile.extensionSchema.namespace ?? "fx";
+							const namespace = extensionSchema.namespace ?? "fx";
 							const uri =
-								candidateProfile.extensionSchema.uri ??
+								extensionSchema.uri ??
 								"urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#";
-							const conformanceLevelKey = `${namespace}:${candidateProfile.extensionSchema.fieldNameMap?.conformanceLevel ?? "ConformanceLevel"}`;
+							const conformanceLevelKey = `${namespace}:${extensionSchema.fieldNameMap?.conformanceLevel ?? "ConformanceLevel"}`;
 
 							if (
 								!(`@xmlns:${namespace}` in description) ||
@@ -256,7 +260,7 @@ export const documentParser = async (
 							if (
 								!(conformanceLevelKey in description) ||
 								description[conformanceLevelKey] !==
-									candidateProfile.extensionSchema.conformanceLevel
+									extensionSchema.conformanceLevel
 							) {
 								return false;
 							}
@@ -284,7 +288,7 @@ export const documentParser = async (
 				};
 			};
 
-			let profile: ZugferdProfile | null = null;
+			let profile: ZugferdProfile<any, boolean> | null = null;
 			let input: string | Uint8Array | ArrayBuffer;
 			const explicitProfile = input_ !== undefined;
 
@@ -314,6 +318,11 @@ export const documentParser = async (
 					pdf = await PDFDocument.load(input, { updateMetadata: false });
 					attachments = getAttachments(pdf);
 				} catch {}
+			}
+			if (pdf && profile?.supportsPDF === false) {
+				throw new TypeError(
+					`Profile ${profile.id} does not support PDF input.`,
+				);
 			}
 
 			if (!profile) {
@@ -391,6 +400,7 @@ export const documentParser = async (
 					ctx.getPlugin("mustang")?.options?.autoRun === false) &&
 				opts.checkHybridRules &&
 				pdf &&
+				profile.supportsPDF !== false &&
 				HYBRID_PROFILE_IDS.has(profile.id)
 			) {
 				await checkHybridRules(
@@ -433,7 +443,7 @@ export interface ParserPlugin<Options extends ZFOptions> {
 			(
 				input: string | Uint8Array | ArrayBuffer,
 			): Promise<{
-				profile: ZugferdProfile;
+				profile: ZugferdProfile<any, boolean>;
 				data: Record<string, any>;
 			}>;
 			<ProfileId extends Options["profiles"][number]["id"]>(
