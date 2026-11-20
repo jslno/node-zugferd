@@ -1,0 +1,14 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "monitoring-test",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-11-18",
+	"compatibility_flags": ["nodejs_compat"],
+	"vars": {
+		"CONFIDENCE_THRESHOLD": "0.85",
+		"ALLOWED_SENDERS": "info@awv-net.de",
+		"TRUSTED_ORIGINS": "https://ferd-net.de,https://*.ferd-net.de",
+		"GIT_USER": "test-user",
+		"GIT_REPO": "test-repo"
+	}
+}

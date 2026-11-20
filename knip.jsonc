@@ -6,7 +6,13 @@
 		"function": true
 	},
 	"tags": ["-lintignore"],
-	"ignore": ["scripts/**", "examples/**", "**/*.test-d.ts"],
+	"ignore": [
+		"scripts/**",
+		"examples/**",
+		"services/**",
+		"benchmark/**",
+		"**/*.test-d.ts"
+	],
 	// keep these: scripts that reference them aren't in the graph once scripts/** is ignored;
 	// knip may hint to remove them — leave if --production still flags them
 	"ignoreDependencies": [

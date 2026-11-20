@@ -51,6 +51,7 @@ devops:
       - any-glob-to-any-file:
           - ".github/**"
           - "scripts/**"
+          - "services/**"
           - "e2e/**"
 
 examples:
