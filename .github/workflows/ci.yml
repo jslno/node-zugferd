@@ -125,7 +125,7 @@ jobs:
     permissions:
       contents: read
     concurrency:
-      group: ${{ github.workflow }}-test-${{ github.event.pull_request.number || github.event.merge_group.head_ref || github.ref }}
+      group: ${{ github.workflow }}-test-${{ github.event.pull_request.number || github.event.merge_group.head_ref || github.ref }}-${{ matrix.node-version }}
       cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     strategy:
       fail-fast: false
@@ -158,6 +158,18 @@ jobs:
 
       - name: Test
         run: pnpm coverage
+
+      - name: Upload Coverage
+        if: >-
+          matrix.node-version == '24.x' &&
+          (github.event_name != 'pull_request' ||
+          github.event.pull_request.head.repo.full_name == github.repository)
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 #v7.1.1
+        with:
+          files: ./coverage/lcov.info
+          disable_search: true
+          fail_ci_if_error: true
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   ci:
     runs-on: ubuntu-latest
