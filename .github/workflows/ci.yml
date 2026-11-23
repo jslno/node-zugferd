@@ -125,7 +125,7 @@ jobs:
     permissions:
       contents: read
     concurrency:
-      group: ${{ github.workflow }}-test-${{ github.event.pull_request.number || github.event.merge_group.head_ref || github.ref }}
+      group: ${{ github.workflow }}-test-${{ github.event.pull_request.number || github.event.merge_group.head_ref || github.ref }}-${{ matrix.node-version }}
       cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     strategy:
       fail-fast: false
