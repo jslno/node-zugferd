@@ -1,41 +1,57 @@
+flags:
+  core:
+    paths:
+      - "packages/core/"
+      - "packages/data-types/"
+      - "packages/utils/"
+      - "packages/node-zugferd/"
+  profiles:
+    paths:
+      - "packages/profiles/"
+  codelists:
+    paths:
+      - "packages/codelists/"
+  templates:
+    paths:
+      - "packages/default-template/"
+      - "packages/docx-template/"
+      - "packages/pdf-template/"
+      - "packages/templates/"
+  validators:
+    paths:
+      - "packages/validators/"
+      - "packages/magic-bytes/"
+  parser:
+    paths:
+      - "packages/parser/"
+  devtools:
+    paths:
+      - "packages/cli/"
+      - "packages/instrumentation/"
+
 coverage:
   status:
     project:
       default:
         target: auto
-
       core:
-        paths:
-          - "packages/core/"
-          - "packages/data-types/"
-          - "packages/utils/"
-          - "packages/node-zugferd/"
-
+        flags:
+          - core
       profiles:
-        paths:
-          - "packages/profiles/"
-
+        flags:
+          - profiles
       codelists:
-        path:
-          - "packages/codelists/"
-
+        flags:
+          - codelists
       templates:
-        path:
-          - "packages/default-template/"
-          - "packages/docx-template/"
-          - "packages/pdf-template/"
-          - "packages/templates/"
-
+        flags:
+          - templates
       validators:
-        paths:
-          - "packages/validators/"
-          - "packages/magic-bytes/"
-
+        flags:
+          - validators
       parser:
-        paths:
-          - "packages/parser/"
-
+        flags:
+          - parser
       devtools:
-        paths:
-          - "packages/cli/"
-          - "packages/instrumentation/"
+        flags:
+          - devtools
