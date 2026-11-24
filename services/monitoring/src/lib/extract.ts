@@ -1,12 +1,7 @@
-import { env } from "cloudflare:workers";
 import { createAI } from "agents/models/ai-sdk";
 import { generateText, Output } from "ai";
 import type { EmailJobsQueuePayload } from "../index";
 import { updateSchema } from "./schema";
-
-const ai = createAI({ binding: env.AI });
-
-const model = ai(env.AI_MODEL);
 
 const SYSTEM_PROMPT = `
 You are an assistant responsible for monitoring and analyzing
@@ -97,7 +92,11 @@ Return only valid JSON matching the provided schema.
 Do not include Markdown fences, explanations, or additional text.
 `;
 
-export async function extractUpdate(email: EmailJobsQueuePayload) {
+export async function extractUpdate(env: Env, email: EmailJobsQueuePayload) {
+	const ai = createAI({ binding: env.AI });
+
+	const model = ai(env.AI_MODEL);
+
 	return await generateText({
 		model,
 		instructions: [

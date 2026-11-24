@@ -16,7 +16,7 @@ export type EmailJobsQueuePayload = {
 	body: string;
 };
 
-export interface Env {
+export interface Env extends Cloudflare.Env {
 	EMAIL_JOBS: Queue<EmailJobsQueuePayload>;
 }
 
@@ -69,7 +69,10 @@ export default {
 	async queue(batch, env, ctx): Promise<void> {
 		for (const message of batch.messages) {
 			try {
-				const { output: extractedUpdate } = await extractUpdate(message.body);
+				const { output: extractedUpdate } = await extractUpdate(
+					env,
+					message.body,
+				);
 
 				if (
 					!extractedUpdate.isUpdate ||

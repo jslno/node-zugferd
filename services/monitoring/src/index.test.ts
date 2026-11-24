@@ -108,7 +108,7 @@ describe("monitoring email flow", () => {
 			{} as never,
 		);
 
-		expect(extractUpdate).toHaveBeenCalledWith(sent[0]);
+		expect(extractUpdate).toHaveBeenCalledWith(expect.anything(), sent[0]);
 		expect(createIssue).toHaveBeenCalledWith(
 			"<release-123@example.com>",
 			validUpdate,
