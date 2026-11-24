@@ -145,7 +145,7 @@ export type ZugferdWithInfer<Opts extends ZugferdOptions> = Zugferd<Opts> & {
 };
 
 export const zugferd = <
-	const Profiles extends ZugferdProfile[],
+	const Profiles extends ZugferdProfile<any, boolean>[],
 	const Opts extends ZugferdOptions<Profiles>,
 >(
 	options: Opts & { profiles: Profiles },

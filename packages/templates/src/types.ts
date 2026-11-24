@@ -9,7 +9,7 @@ import type { PDFDocument } from "pdf-lib";
 export type TemplateContext = {
 	data: Record<string, any>;
 	xml: string;
-	profile: ZugferdProfile;
+	profile: ZugferdProfile<any, boolean>;
 	context: ZugferdContext;
 };
 

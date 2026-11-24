@@ -26,10 +26,11 @@
     "coverage": "vitest run --coverage --coverage.provider=istanbul"
   },
   "peerDependencies": {
-    "xmlbuilder2": "catalog:",
-    "@node-zugferd/core": "workspace:*"
+    "@node-zugferd/core": "workspace:*",
+    "xmlbuilder2": "catalog:"
   },
   "dependencies": {
+    "pdf-lib": "catalog:",
     "which": "^7.0.0"
   },
   "devDependencies": {

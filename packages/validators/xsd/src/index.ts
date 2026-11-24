@@ -11,6 +11,7 @@ import type {
 import { NODE_ZUGFERD_VERSION } from "@node-zugferd/core";
 import { ZugferdError } from "@node-zugferd/core/error";
 import { XsdValidator } from "@zugferd/xsd-validator";
+import { PDFDocument } from "pdf-lib";
 import type { ResolvedXSDOptions, SchemaMapEntry, XSDOptions } from "./types";
 
 declare module "@node-zugferd/core" {
@@ -118,6 +119,15 @@ export const xsd = <ZugferdOptions extends ZFOptions, Opts extends XSDOptions>(
 		input: string | Uint8Array | ArrayBuffer,
 		ctx: ZugferdContext,
 	) => {
+		if (
+			ctx.getProfile(profileId)?.supportsPDF === false &&
+			(await isPdf(input))
+		) {
+			throw new ZugferdError(
+				`Profile ${profileId} does not support PDF input.`,
+			);
+		}
+
 		const schema = getSchema(profileId);
 		if (!schema) {
 			throw new ZugferdError(
@@ -181,5 +191,21 @@ export const xsd = <ZugferdOptions extends ZFOptions, Opts extends XSDOptions>(
 		options: opts,
 	} satisfies ZugferdPlugin;
 };
+
+async function isPdf(input: string | Uint8Array | ArrayBuffer) {
+	const bytes =
+		typeof input === "string"
+			? Uint8Array.from(input, (character) => character.charCodeAt(0))
+			: input instanceof Uint8Array
+				? input
+				: new Uint8Array(input);
+
+	try {
+		await PDFDocument.load(bytes, { ignoreEncryption: true });
+		return true;
+	} catch {
+		return false;
+	}
+}
 
 export type * from "./types";

@@ -9,7 +9,7 @@ import type { createXPath } from "./xpath";
 interface BaseContext {
 	pdf?: PDFDocument | undefined;
 	xml: XMLSerializedAsObject | XMLSerializedAsObjectArray;
-	profile: ZugferdProfile;
+	profile: ZugferdProfile<any, boolean>;
 	context: ZugferdContext;
 }
 

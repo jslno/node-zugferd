@@ -23,7 +23,8 @@
   },
   "dependencies": {
     "@node-zugferd/core": "workspace:*",
-    "@zugferd/xsd-validator": "catalog:xsd-validator"
+    "@zugferd/xsd-validator": "catalog:xsd-validator",
+    "pdf-lib": "catalog:"
   },
   "devDependencies": {
     "tsdown": "catalog:"

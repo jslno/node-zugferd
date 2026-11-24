@@ -60,11 +60,12 @@ export type ZugferdProfileBuildContext = {
 export type InferProfileIds<Opts> =
 	Opts extends ZugferdOptions<infer Profiles> ? Profiles[number]["id"] : never;
 
-export interface ZugferdProfile<
+export type ZugferdProfile<
 	Schema extends
 		| BaseSchema<unknown, unknown, BaseIssue<unknown>>
 		| BaseSchemaAsync<unknown, unknown, BaseIssue<unknown>> = any,
-> {
+	SupportsPDF extends boolean = true,
+> = {
 	id: string;
 	version?: string | undefined;
 	schema:
@@ -72,17 +73,6 @@ export interface ZugferdProfile<
 		| (<Ctx extends { profile: Omit<ZugferdProfile, "schema" | "rules"> }>(
 				ctx: Ctx,
 		  ) => Schema);
-	dataRelationship:
-		| Exclude<DataRelationship, "Supplement" | "Unspecified">
-		| [
-				Exclude<DataRelationship, "Supplement" | "Unspecified">,
-				...Exclude<DataRelationship, "Supplement" | "Unspecified">[],
-		  ];
-	extensionSchema: {
-		uri?: string | undefined;
-		namespace?: string | undefined;
-		fieldNameMap?: Record<keyof ExtensionSchema, string> | undefined;
-	} & ExtensionSchema;
 	build: (
 		data: SchemaOutput<Schema> & Record<string, any>,
 		ctx: ZugferdProfileBuildContext,
@@ -99,6 +89,25 @@ export interface ZugferdProfile<
 				readonly Output: unknown;
 		  }
 		| undefined;
-}
+} & (SupportsPDF extends true
+	? {
+			supportsPDF?: SupportsPDF | undefined;
+			dataRelationship:
+				| Exclude<DataRelationship, "Supplement" | "Unspecified">
+				| [
+						Exclude<DataRelationship, "Supplement" | "Unspecified">,
+						...Exclude<DataRelationship, "Supplement" | "Unspecified">[],
+				  ];
+			extensionSchema: {
+				uri?: string | undefined;
+				namespace?: string | undefined;
+				fieldNameMap?: Record<keyof ExtensionSchema, string> | undefined;
+			} & ExtensionSchema;
+		}
+	: {
+			supportsPDF: SupportsPDF;
+			dataRelationship?: never;
+			extensionSchema?: never;
+		});
 
 export type { XMLBuilder };
