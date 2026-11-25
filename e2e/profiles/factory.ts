@@ -227,6 +227,14 @@ export const validInvoiceTestFactory = <const Opts extends ZugferdOptions>(
 						invoicer.mustang.validate(profile, xml),
 					).resolves.not.toThrow();
 				});
+
+			test
+				.skipIf(invoicer.kosit === undefined)
+				.concurrent("should validate against KoSIT rules", async () => {
+					await expect(
+						invoicer.kosit.validate(profile, xml),
+					).resolves.not.toThrow();
+				});
 		},
 	);
 };

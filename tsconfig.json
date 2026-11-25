@@ -121,6 +121,9 @@
       "path": "./packages/utils/tsconfig.json"
     },
     {
+      "path": "./packages/validators/kosit/tsconfig.json"
+    },
+    {
       "path": "./packages/validators/mustang/tsconfig.json"
     },
     {

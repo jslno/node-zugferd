@@ -65,6 +65,7 @@ package's `schema`.
 | `packages/magic-bytes/`                            | `docs/content/docs/plugins/magic-bytes.mdx`        |
 | `packages/traffiqx/`                               | `docs/content/docs/plugins/traffiqx.mdx`           |
 | `packages/validators/xsd/`                         | `docs/content/docs/plugins/validators/xsd.mdx`     |
+| `packages/validators/kosit/`                       | `docs/content/docs/plugins/validators/kosit.mdx`   |
 | `packages/validators/mustang/`                     | `docs/content/docs/plugins/validators/mustang.mdx` |
 | `packages/validators/xrechnung-schema-definition/` | `docs/content/docs/plugins/validators/xsd.mdx`     |
 | `packages/validators/order-x-schema-definition/`   | `docs/content/docs/plugins/validators/xsd.mdx`     |

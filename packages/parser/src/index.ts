@@ -70,6 +70,14 @@ const normalizeOptions = (options: ParserOptions | undefined) => {
 						)?.mustang?.validate?.(ctx.profile.id, getXml(), ctx.context);
 					}
 				}
+				if (ctx.context.hasPlugin("kosit")) {
+					const kositPlugin = ctx.context.getPlugin("kosit");
+					if (kositPlugin && kositPlugin.options?.autoRun !== false) {
+						await (
+							kositPlugin.actions?.(ctx.context) as any
+						)?.kosit?.validate?.(ctx.profile.id, getXml(), ctx.context);
+					}
+				}
 				return options?.hooks?.beforeParse?.(ctx);
 			},
 		},

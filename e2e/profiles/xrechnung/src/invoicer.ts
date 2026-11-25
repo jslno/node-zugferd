@@ -1,3 +1,4 @@
+import { kosit } from "@node-zugferd/validator-kosit";
 import { mustang } from "@node-zugferd/validator-mustang";
 import { xsd } from "@node-zugferd/validator-xsd";
 import { xrechnung } from "@node-zugferd/xrechnung";
@@ -7,6 +8,10 @@ import { zugferd } from "node-zugferd";
 export const invoicer = zugferd({
 	profiles: [xrechnung],
 	plugins: [
+		kosit({
+			autoRun: false,
+			failOnWarnings: true,
+		}),
 		mustang({
 			autoRun: false,
 			failOnWarnings: true,

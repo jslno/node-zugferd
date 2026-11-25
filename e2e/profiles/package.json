@@ -3,6 +3,7 @@
   "type": "module",
   "private": true,
   "dependencies": {
+    "@node-zugferd/validator-kosit": "workspace:*",
     "@node-zugferd/validator-mustang": "workspace:*",
     "@node-zugferd/validator-xsd": "workspace:*",
     "@node-zugferd/parser": "workspace:*",
