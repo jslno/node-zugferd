@@ -44,3 +44,4 @@ elif
 xclip
 devbox
 pkce
+xhigh

@@ -1,0 +1,42 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["./src", "./package.json"],
+  "references": [
+    {
+      "path": "../codelists/vatex/tsconfig.json"
+    },
+    {
+      "path": "../codelists/allowance/tsconfig.json"
+    },
+    {
+      "path": "../codelists/payment/tsconfig.json"
+    },
+    {
+      "path": "../codelists/text/tsconfig.json"
+    },
+    {
+      "path": "../codelists/time/tsconfig.json"
+    },
+    {
+      "path": "../codelists/currency/tsconfig.json"
+    },
+    {
+      "path": "../codelists/country/tsconfig.json"
+    },
+    {
+      "path": "../codelists/untdid-1001/tsconfig.json"
+    },
+    {
+      "path": "../codelists/untdid-5305/tsconfig.json"
+    },
+    {
+      "path": "../core/tsconfig.json"
+    },
+    {
+      "path": "../data-types/tsconfig.json"
+    },
+    {
+      "path": "../utils/tsconfig.json"
+    }
+  ]
+}
