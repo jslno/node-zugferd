@@ -109,11 +109,14 @@ export const en16931 = defineProfile({
 							line.item.attributes?.length &&
 							line.item.attributes.length > 0
 						) {
-							for (const attr of line.item.attributes) {
-								const applicableProductCharacteristic =
+							for (let j = 0; j < line.item.attributes.length; j++) {
+								const attr = line.item.attributes[j]!;
+								const applicableProductCharacteristic = setCachedNode(
+									`BG-32[${i}][${j}]`,
 									specifiedTradeProduct.ele(
 										"ram:ApplicableProductCharacteristic",
-									);
+									),
+								);
 								if (attr.description) {
 									applicableProductCharacteristic
 										.ele("ram:Description")
