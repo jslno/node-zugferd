@@ -39,10 +39,12 @@ export const minimum = defineProfile({
 		);
 
 		if (data.processControl?.businessContextInfo) {
-			const businessProcressSpecifiedDocumentContextParameter =
+			const businessProcressSpecifiedDocumentContextParameter = setCachedNode(
+				"BT-23-00",
 				exchangedDocumentContext.ele(
 					"ram:BusinessProcessSpecifiedDocumentContextParameter",
-				);
+				),
+			);
 
 			if (data.processControl.businessContextInfo.processType) {
 				businessProcressSpecifiedDocumentContextParameter
@@ -51,10 +53,12 @@ export const minimum = defineProfile({
 			}
 		}
 
-		const guidelineSpecifiedDocumentContextParameter =
+		const guidelineSpecifiedDocumentContextParameter = setCachedNode(
+			"BT-24-00",
 			exchangedDocumentContext.ele(
 				"ram:GuidelineSpecifiedDocumentContextParameter",
-			);
+			),
+		);
 		guidelineSpecifiedDocumentContextParameter.ele("ram:ID").txt(
 			data.processControl?.applicationRecommendationInfo
 				?.specificationIdentifier?.identifier ??
@@ -84,9 +88,9 @@ export const minimum = defineProfile({
 			exchangedDocument
 				.ele("ram:ID")
 				.txt(data.exchangedDocument.invoiceNumber.identifier);
-			exchangedDocument
-				.ele("ram:TypeCode")
-				.txt(data.exchangedDocument.invoiceTypeCode.value);
+			setCachedNode("BT-3", exchangedDocument.ele("ram:TypeCode")).txt(
+				data.exchangedDocument.invoiceTypeCode.value,
+			);
 			exchangedDocument
 				.ele("ram:IssueDateTime")
 				.ele("udt:DateTimeString")
@@ -116,9 +120,9 @@ export const minimum = defineProfile({
 						"BG-4",
 						applicableHeaderTradeAgreement.ele("ram:SellerTradeParty"),
 					);
-					sellerTradeParty
-						.ele("ram:Name")
-						.txt(data.transaction.contract.seller.name);
+					setCachedNode("BT-27", sellerTradeParty.ele("ram:Name")).txt(
+						data.transaction.contract.seller.name,
+					);
 					if (data.transaction.contract.seller.organization) {
 						const specifiedLegalOrganization = setCachedNode(
 							"BT-30-00",
@@ -187,8 +191,9 @@ export const minimum = defineProfile({
 					);
 
 					if (data.transaction.contract.buyer.organization) {
-						const specifiedLegalOrganization = buyerTradeParty.ele(
-							"ram:SpecifiedLegalOrganization",
+						const specifiedLegalOrganization = setCachedNode(
+							"BT-47-00",
+							buyerTradeParty.ele("ram:SpecifiedLegalOrganization"),
 						);
 						if (data.transaction.contract.buyer.organization.id) {
 							const id = specifiedLegalOrganization

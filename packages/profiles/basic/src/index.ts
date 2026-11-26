@@ -48,7 +48,12 @@ export const basic = defineProfile({
 							),
 						)
 					)?.node ?? null;
-				for (const line of data.transaction.line) {
+				for (
+					let lineIdx = 0;
+					lineIdx < data.transaction.line.length;
+					lineIdx++
+				) {
+					const line = data.transaction.line[lineIdx]!;
 					const includedSupplyChainTradeLineItem = fragment().ele(
 						"ram:IncludedSupplyChainTradeLineItem",
 					);
@@ -58,10 +63,12 @@ export const basic = defineProfile({
 					);
 
 					if (line.position) {
-						const associatedDocumentLineDocument =
+						const associatedDocumentLineDocument = setCachedNode(
+							`BT-126-00[${lineIdx}]`,
 							includedSupplyChainTradeLineItem.ele(
 								"ram:AssociatedDocumentLineDocument",
-							);
+							),
+						);
 						associatedDocumentLineDocument
 							.ele("ram:LineID")
 							.txt(line.position.lineId.identifier);
@@ -82,28 +89,38 @@ export const basic = defineProfile({
 					}
 
 					if (line.item) {
-						const specifiedTradeProduct = includedSupplyChainTradeLineItem.ele(
-							"ram:SpecifiedTradeProduct",
+						const specifiedTradeProduct = setCachedNode(
+							`BG-31[${lineIdx}]`,
+							includedSupplyChainTradeLineItem.ele("ram:SpecifiedTradeProduct"),
 						);
 						if (line.item.globalId) {
-							specifiedTradeProduct
-								.ele("ram:GlobalID")
+							setCachedNode(
+								`BT-157[${lineIdx}]`,
+								specifiedTradeProduct.ele("ram:GlobalID"),
+							)
 								.txt(line.item.globalId.identifier)
 								.att("schemeID", line.item.globalId.schemeId);
 						}
-						specifiedTradeProduct.ele("ram:Name").txt(line.item.name);
+						setCachedNode(
+							`BT-153[${lineIdx}]`,
+							specifiedTradeProduct.ele("ram:Name"),
+						).txt(line.item.name);
 					}
 
 					if (line.priceDetails) {
-						const specifiedLineTradeAgreement =
+						const specifiedLineTradeAgreement = setCachedNode(
+							`BG-29[${lineIdx}]`,
 							includedSupplyChainTradeLineItem.ele(
 								"ram:SpecifiedLineTradeAgreement",
-							);
+							),
+						);
 						if (line.priceDetails.grossPrice) {
-							const grossPriceProductTradePrice =
+							const grossPriceProductTradePrice = setCachedNode(
+								`BT-148-00[${lineIdx}]`,
 								specifiedLineTradeAgreement.ele(
 									"ram:GrossPriceProductTradePrice",
-								);
+								),
+							);
 							if (
 								typeof line.priceDetails.grossPrice.chargeAmount === "number"
 							) {
@@ -156,8 +173,11 @@ export const basic = defineProfile({
 						}
 
 						if (line.priceDetails.netPrice) {
-							const netPriceProductTradePrice = specifiedLineTradeAgreement.ele(
-								"ram:NetPriceProductTradePrice",
+							const netPriceProductTradePrice = setCachedNode(
+								`BT-146-00[${lineIdx}]`,
+								specifiedLineTradeAgreement.ele(
+									"ram:NetPriceProductTradePrice",
+								),
 							);
 
 							netPriceProductTradePrice
@@ -185,10 +205,12 @@ export const basic = defineProfile({
 					}
 
 					if (line.delivery) {
-						const specifiedLineTradeDelivery =
+						const specifiedLineTradeDelivery = setCachedNode(
+							`BT-129-00[${lineIdx}]`,
 							includedSupplyChainTradeLineItem.ele(
 								"ram:SpecifiedLineTradeDelivery",
-							);
+							),
+						);
 
 						if (line.delivery.billedQuantity) {
 							const billedQuantity = specifiedLineTradeDelivery
@@ -202,10 +224,12 @@ export const basic = defineProfile({
 					}
 
 					if (line.billing) {
-						const specifiedLineTradeSettlement =
+						const specifiedLineTradeSettlement = setCachedNode(
+							`BG-30-00[${lineIdx}]`,
 							includedSupplyChainTradeLineItem.ele(
 								"ram:SpecifiedLineTradeSettlement",
-							);
+							),
+						);
 
 						if (
 							(typeof line.billing.vatBreakdown === "object" &&
@@ -322,8 +346,11 @@ export const basic = defineProfile({
 
 						if (line.billing.itemTotals) {
 							const specifiedTradeSettlementLineMonetarySummation =
-								specifiedLineTradeSettlement.ele(
-									"ram:SpecifiedTradeSettlementLineMonetarySummation",
+								setCachedNode(
+									`BT-131-00[${lineIdx}]`,
+									specifiedLineTradeSettlement.ele(
+										"ram:SpecifiedTradeSettlementLineMonetarySummation",
+									),
 								);
 							if (line.billing.itemTotals.lineTotalAmount) {
 								specifiedTradeSettlementLineMonetarySummation

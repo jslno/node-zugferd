@@ -70,7 +70,10 @@ export const en16931 = defineProfile({
 									specifiedTradeProduct,
 									(node) => node.node.nodeName === "ram:Name",
 								)?.node ?? null;
-							const sellerAssignedId = fragment().ele("ram:SellerAssignedID");
+							const sellerAssignedId = setCachedNode(
+								`BT-155[${i}]`,
+								fragment().ele("ram:SellerAssignedID"),
+							);
 							sellerAssignedId.txt(line.item.sellerAssignedId.identifier);
 							specifiedTradeProduct.node.insertBefore(
 								sellerAssignedId.node,
@@ -85,7 +88,10 @@ export const en16931 = defineProfile({
 									specifiedTradeProduct,
 									(node) => node.node.nodeName === "ram:Name",
 								)?.node ?? null;
-							const buyerAssignedId = fragment().ele("ram:BuyerAssignedID");
+							const buyerAssignedId = setCachedNode(
+								`BT-156[${i}]`,
+								fragment().ele("ram:BuyerAssignedID"),
+							);
 							buyerAssignedId.txt(line.item.buyerAssignedId.identifier);
 							specifiedTradeProduct.node.insertBefore(
 								buyerAssignedId.node,
@@ -103,11 +109,14 @@ export const en16931 = defineProfile({
 							line.item.attributes?.length &&
 							line.item.attributes.length > 0
 						) {
-							for (const attr of line.item.attributes) {
-								const applicableProductCharacteristic =
+							for (let j = 0; j < line.item.attributes.length; j++) {
+								const attr = line.item.attributes[j]!;
+								const applicableProductCharacteristic = setCachedNode(
+									`BG-32[${i}][${j}]`,
 									specifiedTradeProduct.ele(
 										"ram:ApplicableProductCharacteristic",
-									);
+									),
+								);
 								if (attr.description) {
 									applicableProductCharacteristic
 										.ele("ram:Description")
@@ -122,8 +131,11 @@ export const en16931 = defineProfile({
 						}
 
 						if (line.item.classification) {
-							const designatedProductClassification = specifiedTradeProduct.ele(
-								"ram:DesignatedProductClassification",
+							const designatedProductClassification = setCachedNode(
+								`BT-158-00[${i}]`,
+								specifiedTradeProduct.ele(
+									"ram:DesignatedProductClassification",
+								),
 							);
 
 							if (
@@ -149,8 +161,10 @@ export const en16931 = defineProfile({
 						}
 
 						if (line.item.originTradeCountry) {
-							specifiedTradeProduct
-								.ele("ram:OriginTradeCountry")
+							setCachedNode(
+								`BT-159-00[${i}]`,
+								specifiedTradeProduct.ele("ram:OriginTradeCountry"),
+							)
 								.ele("ram:ID")
 								.txt(line.item.originTradeCountry.value);
 						}
@@ -184,8 +198,9 @@ export const en16931 = defineProfile({
 										),
 									)
 								)?.node ?? null;
-							const associatedOrder = fragment().ele(
-								"ram:BuyerOrderReferencedDocument",
+							const associatedOrder = setCachedNode(
+								`BT-132-00[${i}]`,
+								fragment().ele("ram:BuyerOrderReferencedDocument"),
 							);
 							specifiedLineTradeAgreement.node.insertBefore(
 								associatedOrder.node,
@@ -193,9 +208,10 @@ export const en16931 = defineProfile({
 							);
 
 							if (line.priceDetails.associatedOrder.lineId) {
-								associatedOrder
-									.ele("ram:LineID")
-									.txt(line.priceDetails.associatedOrder.lineId);
+								setCachedNode(
+									`BT-132[${i}]`,
+									associatedOrder.ele("ram:LineID"),
+								).txt(line.priceDetails.associatedOrder.lineId);
 							}
 						}
 					})();
@@ -324,10 +340,12 @@ export const en16931 = defineProfile({
 						}
 
 						if (line.billing.additionalReferencedDocument) {
-							const additionalReferencedDocument =
+							const additionalReferencedDocument = setCachedNode(
+								`BT-128-00[${i}]`,
 								specifiedLineTradeSettlement.ele(
 									"ram:AdditionalReferencedDocument",
-								);
+								),
+							);
 
 							if (line.billing.additionalReferencedDocument.issuerAssignedId) {
 								additionalReferencedDocument
@@ -436,7 +454,10 @@ export const en16931 = defineProfile({
 								sellerTradeParty,
 								(node) => node.node.nodeName === "ram:PostalTradeAddress",
 							)?.node ?? null;
-						const description = fragment().ele("ram:Description");
+						const description = setCachedNode(
+							"BT-33",
+							fragment().ele("ram:Description"),
+						);
 						description.txt(data.transaction.contract.seller.description);
 						sellerTradeParty.node.insertBefore(description.node, refNode);
 					}
@@ -604,8 +625,9 @@ export const en16931 = defineProfile({
 				})();
 
 				if (data.transaction.contract.sellerOrderReferencedDocument) {
-					const sellerOrderReferencedDocument = fragment().ele(
-						"ram:SellerOrderReferencedDocument",
+					const sellerOrderReferencedDocument = setCachedNode(
+						"BT-14-00",
+						fragment().ele("ram:SellerOrderReferencedDocument"),
 					);
 					const refNode =
 						(
@@ -721,8 +743,9 @@ export const en16931 = defineProfile({
 				}
 
 				if (data.transaction.contract.projectReference) {
-					const specifiedProcuringProject = applicableHeaderTradeAgreement.ele(
-						"ram:SpecifiedProcuringProject",
+					const specifiedProcuringProject = setCachedNode(
+						"BT-11-00",
+						applicableHeaderTradeAgreement.ele("ram:SpecifiedProcuringProject"),
 					);
 					if (data.transaction.contract.projectReference.id) {
 						specifiedProcuringProject
@@ -760,10 +783,12 @@ export const en16931 = defineProfile({
 				);
 
 				if (data.transaction.delivery.associatedGoodsReceipt) {
-					const receivingAdviceReferencedDocument =
+					const receivingAdviceReferencedDocument = setCachedNode(
+						"BT-15-00",
 						applicableHeaderTradeDelivery.ele(
 							"ram:ReceivingAdviceReferencedDocument",
-						);
+						),
+					);
 					if (
 						data.transaction.delivery.associatedGoodsReceipt.issuerAssignedId
 					) {
@@ -912,10 +937,12 @@ export const en16931 = defineProfile({
 					}
 
 					if (data.transaction.debit.paymentMeans.sellerBankDetails) {
-						const payeeSpecifiedCreditorFinancialInstitution =
+						const payeeSpecifiedCreditorFinancialInstitution = setCachedNode(
+							"BT-86-00",
 							specifiedTradeSettlementPaymentMeans.ele(
 								"ram:PayeeSpecifiedCreditorFinancialInstitution",
-							);
+							),
+						);
 						if (data.transaction.debit.paymentMeans.sellerBankDetails.bic) {
 							payeeSpecifiedCreditorFinancialInstitution
 								.ele("ram:BICID")

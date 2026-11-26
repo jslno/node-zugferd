@@ -12,7 +12,7 @@ export const orderXBasic = defineProfile({
 		fileName: "order-x.xml",
 	},
 	schema,
-	build(data, { root, profile }) {
+	build(data, { root, profile, setCachedNode }) {
 		const SCRDMCCBDACIOMessageStructure = root.ele(
 			"rsm:SCRDMCCBDACIOMessageStructure",
 		);
@@ -79,8 +79,9 @@ export const orderXBasic = defineProfile({
 		})();
 
 		(() => {
-			const exchangedDocument = SCRDMCCBDACIOMessageStructure.ele(
-				"rsm:ExchangedDocument",
+			const exchangedDocument = setCachedNode(
+				"8",
+				SCRDMCCBDACIOMessageStructure.ele("rsm:ExchangedDocument"),
 			);
 			exchangedDocument.ele("ram:ID").txt(data.exchangedDocument.orderId);
 			if (data.exchangedDocument.name) {
@@ -131,11 +132,13 @@ export const orderXBasic = defineProfile({
 			}
 		})();
 
-		const supplyChainTradeTransaction = SCRDMCCBDACIOMessageStructure.ele(
-			"rsm:SupplyChainTradeTransaction",
+		const supplyChainTradeTransaction = setCachedNode(
+			"32",
+			SCRDMCCBDACIOMessageStructure.ele("rsm:SupplyChainTradeTransaction"),
 		);
 		if (data.transaction.line?.length && data.transaction.line.length > 0) {
-			for (const line of data.transaction.line) {
+			for (let lineIdx = 0; lineIdx < data.transaction.line.length; lineIdx++) {
+				const line = data.transaction.line[lineIdx]!;
 				const includedSupplyChainTradeLineItem =
 					supplyChainTradeTransaction.ele(
 						"ram:IncludedSupplyChainTradeLineItem",
@@ -167,8 +170,9 @@ export const orderXBasic = defineProfile({
 					}
 				}
 				if (line.item) {
-					const specifiedTradeProduct = includedSupplyChainTradeLineItem.ele(
-						"ram:SpecifiedTradeProduct",
+					const specifiedTradeProduct = setCachedNode(
+						`41[${lineIdx}]`,
+						includedSupplyChainTradeLineItem.ele("ram:SpecifiedTradeProduct"),
 					);
 					if (line.item.globalId) {
 						specifiedTradeProduct
@@ -191,10 +195,12 @@ export const orderXBasic = defineProfile({
 					}
 				}
 				if (line.substitutedItem) {
-					const substitutedReferencedProduct =
+					const substitutedReferencedProduct = setCachedNode(
+						`98[${lineIdx}]`,
 						includedSupplyChainTradeLineItem.ele(
 							"ram:SubstitutedReferencedProduct",
-						);
+						),
+					);
 					if (
 						line.substitutedItem.globalId?.length &&
 						line.substitutedItem.globalId.length > 0
@@ -222,18 +228,21 @@ export const orderXBasic = defineProfile({
 							.txt(line.substitutedItem.name);
 					}
 				}
-				const specifiedLineTradeAgreement =
+				const specifiedLineTradeAgreement = setCachedNode(
+					`107[${lineIdx}]`,
 					includedSupplyChainTradeLineItem.ele(
 						"ram:SpecifiedLineTradeAgreement",
-					);
+					),
+				);
 				if (line.priceDetails.associatedOrder?.lineId) {
 					specifiedLineTradeAgreement
 						.ele("ram:BuyerOrderReferencedDocument")
 						.ele("ram:LineID")
 						.txt(line.priceDetails.associatedOrder.lineId);
 				}
-				const netPriceProductTradePrice = specifiedLineTradeAgreement.ele(
-					"ram:NetPriceProductTradePrice",
+				const netPriceProductTradePrice = setCachedNode(
+					`178[${lineIdx}]`,
+					specifiedLineTradeAgreement.ele("ram:NetPriceProductTradePrice"),
 				);
 				netPriceProductTradePrice
 					.ele("ram:ChargeAmount")
@@ -253,14 +262,21 @@ export const orderXBasic = defineProfile({
 				}
 
 				if (line.priceDetails.blanketOrderReference) {
-					specifiedLineTradeAgreement
-						.ele("ram:BlanketOrderReferencedDocument")
+					setCachedNode(
+						`199[${lineIdx}]`,
+						specifiedLineTradeAgreement.ele(
+							"ram:BlanketOrderReferencedDocument",
+						),
+					)
 						.ele("ram:LineID")
 						.txt(line.priceDetails.blanketOrderReference.lineId);
 				}
 
-				const specifiedLineTradeDelivery = includedSupplyChainTradeLineItem.ele(
-					"ram:SpecifiedLineTradeDelivery",
+				const specifiedLineTradeDelivery = setCachedNode(
+					`207[${lineIdx}]`,
+					includedSupplyChainTradeLineItem.ele(
+						"ram:SpecifiedLineTradeDelivery",
+					),
 				);
 				if (typeof line.delivery.partialDeliveryAllowed === "boolean") {
 					specifiedLineTradeDelivery
@@ -281,19 +297,26 @@ export const orderXBasic = defineProfile({
 						.att("unitCode", line.delivery.agreedQuantity.unitCode);
 				}
 
-				const specifiedLineTradeSettlement =
+				const specifiedLineTradeSettlement = setCachedNode(
+					`310[${lineIdx}]`,
 					includedSupplyChainTradeLineItem.ele(
 						"ram:SpecifiedLineTradeSettlement",
-					);
-				specifiedLineTradeSettlement
-					.ele("ram:SpecifiedTradeSettlementLineMonetarySummation")
+					),
+				);
+				setCachedNode(
+					`334[${lineIdx}]`,
+					specifiedLineTradeSettlement.ele(
+						"ram:SpecifiedTradeSettlementLineMonetarySummation",
+					),
+				)
 					.ele("ram:LineTotalAmount")
 					.txt(line.billing.itemTotals.lineTotalAmount.value.toString());
 			}
 		}
 
-		const applicableHeaderTradeAgreement = supplyChainTradeTransaction.ele(
-			"ram:ApplicableHeaderTradeAgreement",
+		const applicableHeaderTradeAgreement = setCachedNode(
+			"343",
+			supplyChainTradeTransaction.ele("ram:ApplicableHeaderTradeAgreement"),
 		);
 		if (data.transaction.contract.buyerReference) {
 			applicableHeaderTradeAgreement
@@ -302,8 +325,9 @@ export const orderXBasic = defineProfile({
 		}
 
 		(() => {
-			const sellerTradeParty = applicableHeaderTradeAgreement.ele(
-				"ram:SellerTradeParty",
+			const sellerTradeParty = setCachedNode(
+				"345",
+				applicableHeaderTradeAgreement.ele("ram:SellerTradeParty"),
 			);
 			if (data.transaction.contract.seller.id) {
 				sellerTradeParty.ele("ram:ID").txt(data.transaction.contract.seller.id);
@@ -323,8 +347,9 @@ export const orderXBasic = defineProfile({
 				.ele("ram:Name")
 				.txt(data.transaction.contract.seller.name);
 			if (data.transaction.contract.seller.organization) {
-				const specifiedLegalOrganization = sellerTradeParty.ele(
-					"ram:SpecifiedLegalOrganization",
+				const specifiedLegalOrganization = setCachedNode(
+					"351",
+					sellerTradeParty.ele("ram:SpecifiedLegalOrganization"),
 				);
 				if (data.transaction.contract.seller.organization.id) {
 					const id = specifiedLegalOrganization
@@ -378,8 +403,9 @@ export const orderXBasic = defineProfile({
 				}
 			}
 			if (data.transaction.contract.seller.postalAddress) {
-				const postalTradeAddress = sellerTradeParty.ele(
-					"ram:PostalTradeAddress",
+				const postalTradeAddress = setCachedNode(
+					"373",
+					sellerTradeParty.ele("ram:PostalTradeAddress"),
 				);
 				if (data.transaction.contract.seller.postalAddress.postCode) {
 					postalTradeAddress
@@ -420,8 +446,10 @@ export const orderXBasic = defineProfile({
 				}
 			}
 			if (data.transaction.contract.seller.electronicAddress) {
-				sellerTradeParty
-					.ele("ram:URIUniversalCommunication")
+				setCachedNode(
+					"381",
+					sellerTradeParty.ele("ram:URIUniversalCommunication"),
+				)
 					.ele("ram:URIID")
 					.txt(data.transaction.contract.seller.electronicAddress.identifier)
 					.att(
@@ -448,8 +476,9 @@ export const orderXBasic = defineProfile({
 		})();
 
 		(() => {
-			const buyerTradeParty = applicableHeaderTradeAgreement.ele(
-				"ram:BuyerTradeParty",
+			const buyerTradeParty = setCachedNode(
+				"390",
+				applicableHeaderTradeAgreement.ele("ram:BuyerTradeParty"),
 			);
 			if (data.transaction.contract.buyer.id) {
 				buyerTradeParty
@@ -591,8 +620,9 @@ export const orderXBasic = defineProfile({
 		})();
 
 		if (data.transaction.contract.deliveryTerms) {
-			const applicableTradeDeliveryTerms = applicableHeaderTradeAgreement.ele(
-				"ram:ApplicableTradeDeliveryTerms",
+			const applicableTradeDeliveryTerms = setCachedNode(
+				"517",
+				applicableHeaderTradeAgreement.ele("ram:ApplicableTradeDeliveryTerms"),
 			);
 			if (data.transaction.contract.deliveryTerms.deliveryCode) {
 				applicableTradeDeliveryTerms
@@ -600,50 +630,69 @@ export const orderXBasic = defineProfile({
 					.txt(data.transaction.contract.deliveryTerms.deliveryCode.value);
 			}
 			if (data.transaction.contract.deliveryTerms.deliveryMode) {
-				applicableTradeDeliveryTerms
-					.ele("ram:FunctionCode")
-					.txt(data.transaction.contract.deliveryTerms.deliveryMode.value);
+				setCachedNode(
+					"520",
+					applicableTradeDeliveryTerms.ele("ram:FunctionCode"),
+				).txt(data.transaction.contract.deliveryTerms.deliveryMode.value);
 			}
 		}
 
 		if (data.transaction.contract.associatedOrder) {
-			applicableHeaderTradeAgreement
-				.ele("ram:BuyerOrderReferencedDocument")
+			setCachedNode(
+				"529",
+				applicableHeaderTradeAgreement.ele("ram:BuyerOrderReferencedDocument"),
+			)
 				.ele("ram:IssuerAssignedID")
 				.txt(data.transaction.contract.associatedOrder.issuerAssignedId);
 		}
 
 		if (data.transaction.contract.quotationReference) {
-			applicableHeaderTradeAgreement
-				.ele("ram:QuotationReferencedDocument")
+			setCachedNode(
+				"534",
+				applicableHeaderTradeAgreement.ele("ram:QuotationReferencedDocument"),
+			)
 				.ele("ram:IssuerAssignedID")
 				.txt(data.transaction.contract.quotationReference.issuerAssignedId);
 		}
 
 		if (data.transaction.contract.contractReference) {
-			applicableHeaderTradeAgreement
-				.ele("ram:ContractReferencedDocument")
+			setCachedNode(
+				"539",
+				applicableHeaderTradeAgreement.ele("ram:ContractReferencedDocument"),
+			)
 				.ele("ram:IssuerAssignedID")
 				.txt(data.transaction.contract.contractReference.issuerAssignedId);
 		}
 
 		if (data.transaction.contract.blanketOrderReference) {
-			applicableHeaderTradeAgreement
-				.ele("ram:BlanketOrderReferencedDocument")
+			setCachedNode(
+				"614",
+				applicableHeaderTradeAgreement.ele(
+					"ram:BlanketOrderReferencedDocument",
+				),
+			)
 				.ele("ram:IssuerAssignedID")
 				.txt(data.transaction.contract.blanketOrderReference.issuerAssignedId);
 		}
 
 		if (data.transaction.contract.previousOrderReference) {
-			applicableHeaderTradeAgreement
-				.ele("ram:PreviousOrderReferencedDocument")
+			setCachedNode(
+				"619",
+				applicableHeaderTradeAgreement.ele(
+					"ram:PreviousOrderReferencedDocument",
+				),
+			)
 				.ele("ram:IssuerAssignedID")
 				.txt(data.transaction.contract.previousOrderReference.issuerAssignedId);
 		}
 
 		if (data.transaction.contract.previousOrderChangeReference) {
-			applicableHeaderTradeAgreement
-				.ele("ram:PreviousOrderChangeReferencedDocument")
+			setCachedNode(
+				"624",
+				applicableHeaderTradeAgreement.ele(
+					"ram:PreviousOrderChangeReferencedDocument",
+				),
+			)
 				.ele("ram:IssuerAssignedID")
 				.txt(
 					data.transaction.contract.previousOrderChangeReference
@@ -652,8 +701,12 @@ export const orderXBasic = defineProfile({
 		}
 
 		if (data.transaction.contract.previousOrderResponseReference) {
-			applicableHeaderTradeAgreement
-				.ele("ram:PreviousOrderResponseReferencedDocument")
+			setCachedNode(
+				"629",
+				applicableHeaderTradeAgreement.ele(
+					"ram:PreviousOrderResponseReferencedDocument",
+				),
+			)
 				.ele("ram:IssuerAssignedID")
 				.txt(
 					data.transaction.contract.previousOrderResponseReference
@@ -661,13 +714,15 @@ export const orderXBasic = defineProfile({
 				);
 		}
 
-		const applicableHeaderTradeDelivery = supplyChainTradeTransaction.ele(
-			"ram:ApplicableHeaderTradeDelivery",
+		const applicableHeaderTradeDelivery = setCachedNode(
+			"642",
+			supplyChainTradeTransaction.ele("ram:ApplicableHeaderTradeDelivery"),
 		);
 
 		if (data.transaction.delivery.recipient) {
-			const shipToTradeParty = applicableHeaderTradeDelivery.ele(
-				"ram:ShipToTradeParty",
+			const shipToTradeParty = setCachedNode(
+				"643",
+				applicableHeaderTradeDelivery.ele("ram:ShipToTradeParty"),
 			);
 
 			if (data.transaction.delivery.recipient.id) {
@@ -724,7 +779,10 @@ export const orderXBasic = defineProfile({
 				}
 			}
 
-			const postalTradeAddress = shipToTradeParty.ele("ram:PostalTradeAddress");
+			const postalTradeAddress = setCachedNode(
+				"670",
+				shipToTradeParty.ele("ram:PostalTradeAddress"),
+			);
 
 			if (data.transaction.delivery.recipient.postalAddress.postCode) {
 				postalTradeAddress
@@ -780,8 +838,9 @@ export const orderXBasic = defineProfile({
 		}
 
 		if (data.transaction.delivery.sender) {
-			const shipFromTradeParty = applicableHeaderTradeDelivery.ele(
-				"ram:ShipFromTradeParty",
+			const shipFromTradeParty = setCachedNode(
+				"725",
+				applicableHeaderTradeDelivery.ele("ram:ShipFromTradeParty"),
 			);
 
 			if (data.transaction.delivery.sender.id) {
@@ -836,8 +895,9 @@ export const orderXBasic = defineProfile({
 				}
 			}
 			if (data.transaction.delivery.sender.postalAddress) {
-				const postalTradeAddress = shipFromTradeParty.ele(
-					"ram:PostalTradeAddress",
+				const postalTradeAddress = setCachedNode(
+					"752",
+					shipFromTradeParty.ele("ram:PostalTradeAddress"),
 				);
 				if (data.transaction.delivery.sender.postalAddress.postCode) {
 					postalTradeAddress
@@ -878,8 +938,10 @@ export const orderXBasic = defineProfile({
 				}
 			}
 			if (data.transaction.delivery.sender.electronicAddress) {
-				shipFromTradeParty
-					.ele("ram:URIUniversalCommunication")
+				setCachedNode(
+					"760",
+					shipFromTradeParty.ele("ram:URIUniversalCommunication"),
+				)
 					.ele("ram:URIID")
 					.txt(data.transaction.delivery.sender.electronicAddress.identifier)
 					.att(
@@ -969,17 +1031,20 @@ export const orderXBasic = defineProfile({
 			}
 		}
 
-		const applicableHeaderTradeSettlement = supplyChainTradeTransaction.ele(
-			"ram:ApplicableHeaderTradeSettlement",
+		const applicableHeaderTradeSettlement = setCachedNode(
+			"788",
+			supplyChainTradeTransaction.ele("ram:ApplicableHeaderTradeSettlement"),
 		);
 		applicableHeaderTradeSettlement
 			.ele("ram:OrderCurrencyCode")
 			.txt(data.transaction.debit.orderCurrency.value);
 
-		const specifiedTradeSettlementHeaderMonetarySummation =
+		const specifiedTradeSettlementHeaderMonetarySummation = setCachedNode(
+			"927",
 			applicableHeaderTradeSettlement.ele(
 				"ram:SpecifiedTradeSettlementHeaderMonetarySummation",
-			);
+			),
+		);
 		specifiedTradeSettlementHeaderMonetarySummation
 			.ele("ram:LineTotalAmount")
 			.txt(

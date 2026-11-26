@@ -6,8 +6,8 @@ import type {
 import type { ZugferdProfile } from "node-zugferd";
 import { zugferd } from "node-zugferd";
 import { PDFDocument } from "pdf-lib";
-import type { BenchOptions } from "vitest";
-import { bench, describe } from "vitest";
+import type { BenchRunOptions } from "vitest";
+import { describe, test } from "vitest";
 
 export function benchProfile<
 	S extends
@@ -19,7 +19,7 @@ export function benchProfile<
 		string,
 		{
 			input: S["~types"] extends { input: infer I } ? I : any;
-			options?: BenchOptions | undefined;
+			options?: BenchRunOptions | undefined;
 		}
 	>,
 ) {
@@ -29,16 +29,23 @@ export function benchProfile<
 		});
 		const blankPdf = await PDFDocument.create();
 
-		for (const [label, { input, options }] of Object.entries(data)) {
-			bench(
+		test.for(
+			Object.entries(data).map(([label, { input, options }]) => ({
 				label,
-				async () => {
-					const invoice = await invoicer.create(profile.id, input);
-					const pdf = await invoice.toPDF(blankPdf);
-					await pdf.save();
-				},
+				input,
 				options,
-			);
-		}
+			})),
+		)("$label", async ({ label, input, options }, { bench }) => {
+			await bench(label, async () => {
+				const invoice = await invoicer.create(profile.id, input);
+				const pdf = await invoice.toPDF(blankPdf);
+				await pdf.save();
+			}).run({
+				time: 5_000,
+				warmupTime: 1_000,
+				iterations: 100,
+				...(options ?? {}),
+			});
+		});
 	});
 }

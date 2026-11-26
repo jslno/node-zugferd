@@ -87,7 +87,7 @@ export const extended = defineProfile({
 					const exchangedDocument = fragment.ele("rsm:ExchangedDocument");
 					const refNode =
 						findNode(
-							"BT-25-00",
+							"BG-25-00",
 							crossIndustryInvoice,
 							(node) =>
 								node.node.nodeName === "rsm:SupplyChainTradeTransaction",
@@ -4041,7 +4041,7 @@ export const extended = defineProfile({
 							);
 						const refNode =
 							findNode(
-								"BG-63-00",
+								"BT-63-00",
 								sellerTaxRepresentativeTradeParty,
 								(node) => node.node.nodeName === "ram:SpecifiedTaxRegistration",
 							)?.node ?? null;
