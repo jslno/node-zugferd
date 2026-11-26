@@ -18,3 +18,5 @@ Uncl
 UNCL
 vatex
 VATEX
+UNSPSC
+GTIN

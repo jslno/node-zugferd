@@ -1,0 +1,188 @@
+{
+  "fixtures": [
+    {
+      "match": {
+        "context": "Invoice OCR Fixtures",
+        "userMessage": "Focus this pass on document notes and invoice header. Capture document-level notes and the listed header fields. Use the schema descriptions to distinguish the invoice issue date, invoice type, currencies, and the net payment due date from other dates. Do not use an early-payment discount date as paymentDueDate.\n\nRe-read every page specifically for these fields: exchangedDocument, transaction.invoiceNumber, transaction.invoiceIssueDate, transaction.invoiceTypeCode, transaction.invoiceCurrencyCode, transaction.taxCurrencyCode, transaction.paymentDueDate. Leave fields outside this list null or absent.\n\n/no_think\n\nExtract the fields requested for this pass from the provided document images.\n\nUse the supplied output schema as the authoritative definition of field meanings and value formats. Return only fields with visible evidence in the document. Use null or omit fields that are absent or unreadable.\n\nUse plain values for every field:\n\n- Dates: a single date string in YYYY-MM-DD format.\n- Codes: only the code value, for example EUR, DE, or S.\n- Identifiers: only the identifier text, for example an invoice number or IBAN.\n- Amounts, prices, and percentages: plain numbers with a decimal point, with no currency symbol, thousands separator, or percent sign. Interpret decimal and thousands separators according to the document's locale. A unit price is not the extended line total.\n- Quantities that require a unit: an object with \"value\" and \"unitCode\", for example {\"value\": 20, \"unitCode\": \"C62\"}.\n- Absent or unreadable values: null.\n\nDo not return objects containing \"value\", \"identifier\", \"date\", \"format\", or \"codelist\" wrapper keys; the supplied schema already uses plain values.\n\nReturn the extraction using the supplied structured output schema.\n",
+        "model": "unsloth/qwen3.6-27b",
+        "turnIndex": 0,
+        "hasToolResult": false
+      },
+      "response": {
+        "content": "{\n  \"exchangedDocument\": {\n    \"invoiceNotes\": [\n      {\n        \"content\": \"Rechnung gemäß Bestellung vom 01.03.2026.\"\n      },\n      {\n        \"content\": \"Geschäftsführer: Hans Muster\",\n        \"subjectCode\": \"REG\"\n      },\n      {\n        \"content\": \"Handelsregisternummer: H A 123\",\n        \"subjectCode\": \"REG\"\n      },\n      {\n        \"content\": \"ZUGFeRD vers 2.5.0 EN16931 (Comfort)\",\n        \"subjectCode\": \"ACB\"\n      }\n    ]\n  },\n  \"transaction\": {\n    \"invoiceNumber\": \"471102\",\n    \"invoiceIssueDate\": \"2026-03-05\",\n    \"invoiceTypeCode\": \"380\",\n    \"invoiceCurrencyCode\": \"EUR\",\n    \"taxCurrencyCode\": null,\n    \"paymentDueDate\": \"2026-04-05\"\n  }\n}",
+        "usage": {
+          "prompt_tokens": 4181,
+          "completion_tokens": 254,
+          "total_tokens": 4435,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        }
+      },
+      "metadata": {
+        "systemHash": "26e64153"
+      }
+    },
+    {
+      "match": {
+        "context": "Invoice OCR Fixtures",
+        "userMessage": "Focus this pass on references and payment terms. Capture every reference identifier shown in the document and the full payment-terms text. Preserve each identifier's own value; do not copy an invoice date or another date into an identifier field.\n\nRe-read every page specifically for these fields: transaction.buyerReference, transaction.projectReference, transaction.contractReference, transaction.purchaseOrderReference, transaction.salesOrderReference, transaction.receivingAdviceReference, transaction.despatchAdviceReference, transaction.tenderOrLotReference, transaction.invoicedObjectIdentifier, transaction.buyerAccountingReference, transaction.paymentTerms. Leave fields outside this list null or absent.\n\n/no_think\n\nExtract the fields requested for this pass from the provided document images.\n\nUse the supplied output schema as the authoritative definition of field meanings and value formats. Return only fields with visible evidence in the document. Use null or omit fields that are absent or unreadable.\n\nUse plain values for every field:\n\n- Dates: a single date string in YYYY-MM-DD format.\n- Codes: only the code value, for example EUR, DE, or S.\n- Identifiers: only the identifier text, for example an invoice number or IBAN.\n- Amounts, prices, and percentages: plain numbers with a decimal point, with no currency symbol, thousands separator, or percent sign. Interpret decimal and thousands separators according to the document's locale. A unit price is not the extended line total.\n- Quantities that require a unit: an object with \"value\" and \"unitCode\", for example {\"value\": 20, \"unitCode\": \"C62\"}.\n- Absent or unreadable values: null.\n\nDo not return objects containing \"value\", \"identifier\", \"date\", \"format\", or \"codelist\" wrapper keys; the supplied schema already uses plain values.\n\nReturn the extraction using the supplied structured output schema.\n",
+        "model": "unsloth/qwen3.6-27b",
+        "turnIndex": 0,
+        "hasToolResult": false
+      },
+      "response": {
+        "content": "{\n  \"transaction\": {\n    \"buyerReference\": null,\n    \"projectReference\": null,\n    \"contractReference\": null,\n    \"purchaseOrderReference\": \"01.03.2026\",\n    \"salesOrderReference\": null,\n    \"receivingAdviceReference\": null,\n    \"despatchAdviceReference\": null,\n    \"tenderOrLotReference\": null,\n    \"invoicedObjectIdentifier\": null,\n    \"buyerAccountingReference\": null,\n    \"paymentTerms\": \"Zahlbar innerhalb 30 Tagen netto bis 05.04.2026, 3% Skonto innerhalb 10 Tagen bis 15.03.2026\"\n  }\n}",
+        "usage": {
+          "prompt_tokens": 4196,
+          "completion_tokens": 169,
+          "total_tokens": 4365,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        }
+      },
+      "metadata": {
+        "systemHash": "26e64153"
+      }
+    },
+    {
+      "match": {
+        "context": "Invoice OCR Fixtures",
+        "userMessage": "Focus this pass on seller, buyer, and payee. Identify the seller, buyer, and any distinct payee. Capture party identifiers, names, addresses, contacts, and bank details under the correct party according to the schema descriptions. Only set payee when a distinct beneficiary is shown.\n\nRe-read every page specifically for these fields: transaction.seller, transaction.buyer, transaction.payee. Leave fields outside this list null or absent.\n\n/no_think\n\nExtract the fields requested for this pass from the provided document images.\n\nUse the supplied output schema as the authoritative definition of field meanings and value formats. Return only fields with visible evidence in the document. Use null or omit fields that are absent or unreadable.\n\nUse plain values for every field:\n\n- Dates: a single date string in YYYY-MM-DD format.\n- Codes: only the code value, for example EUR, DE, or S.\n- Identifiers: only the identifier text, for example an invoice number or IBAN.\n- Amounts, prices, and percentages: plain numbers with a decimal point, with no currency symbol, thousands separator, or percent sign. Interpret decimal and thousands separators according to the document's locale. A unit price is not the extended line total.\n- Quantities that require a unit: an object with \"value\" and \"unitCode\", for example {\"value\": 20, \"unitCode\": \"C62\"}.\n- Absent or unreadable values: null.\n\nDo not return objects containing \"value\", \"identifier\", \"date\", \"format\", or \"codelist\" wrapper keys; the supplied schema already uses plain values.\n\nReturn the extraction using the supplied structured output schema.\n",
+        "model": "unsloth/qwen3.6-27b",
+        "turnIndex": 0,
+        "hasToolResult": false
+      },
+      "response": {
+        "content": "{\n  \"transaction\": {\n    \"seller\": {\n      \"globalId\": [\n        {\n          \"value\": \"4000001123452\",\n          \"schemeId\": \"0088\"\n        }\n      ],\n      \"contact\": null\n    },\n    \"buyer\": {\n      \"globalId\": null,\n      \"vatTaxIdentifier\": null,\n      \"electronicAddress\": null,\n      \"postalAddress\": {\n        \"line1\": \"Kundenstraße 15\",\n        \"city\": \"Frankfurt\",\n        \"countryCode\": \"DE\"\n      }\n    },\n    \"payee\": null\n  }\n}",
+        "usage": {
+          "prompt_tokens": 4160,
+          "completion_tokens": 160,
+          "total_tokens": 4320,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        }
+      },
+      "metadata": {
+        "systemHash": "26e64153"
+      }
+    },
+    {
+      "match": {
+        "context": "Invoice OCR Fixtures",
+        "userMessage": "Focus this pass on delivery, payment instructions, and VAT. Capture delivery information, payment instructions, and VAT information. Use the schema descriptions to distinguish the delivery date, tax point date, invoice date, and payment due date.\n\nRe-read every page specifically for these fields: transaction.delivery, transaction.paymentMeans, transaction.applicableTradeTax. Leave fields outside this list null or absent.\n\n/no_think\n\nExtract the fields requested for this pass from the provided document images.\n\nUse the supplied output schema as the authoritative definition of field meanings and value formats. Return only fields with visible evidence in the document. Use null or omit fields that are absent or unreadable.\n\nUse plain values for every field:\n\n- Dates: a single date string in YYYY-MM-DD format.\n- Codes: only the code value, for example EUR, DE, or S.\n- Identifiers: only the identifier text, for example an invoice number or IBAN.\n- Amounts, prices, and percentages: plain numbers with a decimal point, with no currency symbol, thousands separator, or percent sign. Interpret decimal and thousands separators according to the document's locale. A unit price is not the extended line total.\n- Quantities that require a unit: an object with \"value\" and \"unitCode\", for example {\"value\": 20, \"unitCode\": \"C62\"}.\n- Absent or unreadable values: null.\n\nDo not return objects containing \"value\", \"identifier\", \"date\", \"format\", or \"codelist\" wrapper keys; the supplied schema already uses plain values.\n\nReturn the extraction using the supplied structured output schema.\n",
+        "model": "unsloth/qwen3.6-27b",
+        "turnIndex": 0,
+        "hasToolResult": false
+      },
+      "response": {
+        "content": "{\n  \"transaction\": {\n    \"delivery\": {\n      \"actualDeliveryDate\": null,\n      \"postalAddress\": null\n    },\n    \"paymentMeans\": null,\n    \"applicableTradeTax\": null\n  }\n}",
+        "usage": {
+          "prompt_tokens": 4148,
+          "completion_tokens": 55,
+          "total_tokens": 4203,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        }
+      },
+      "metadata": {
+        "systemHash": "26e64153"
+      }
+    },
+    {
+      "match": {
+        "context": "Invoice OCR Fixtures",
+        "userMessage": "Focus this pass on allowances and totals. Capture all document-level allowances, charges, VAT breakdowns, and monetary totals. Use the schema descriptions to distinguish net total, VAT amount, gross total, and amount due; preserve the printed values after locale normalization.\n\nRe-read every page specifically for these fields: transaction.allowances, transaction.monetarySummation, transaction.vatBreakdown. Leave fields outside this list null or absent.\n\n/no_think\n\nExtract the fields requested for this pass from the provided document images.\n\nUse the supplied output schema as the authoritative definition of field meanings and value formats. Return only fields with visible evidence in the document. Use null or omit fields that are absent or unreadable.\n\nUse plain values for every field:\n\n- Dates: a single date string in YYYY-MM-DD format.\n- Codes: only the code value, for example EUR, DE, or S.\n- Identifiers: only the identifier text, for example an invoice number or IBAN.\n- Amounts, prices, and percentages: plain numbers with a decimal point, with no currency symbol, thousands separator, or percent sign. Interpret decimal and thousands separators according to the document's locale. A unit price is not the extended line total.\n- Quantities that require a unit: an object with \"value\" and \"unitCode\", for example {\"value\": 20, \"unitCode\": \"C62\"}.\n- Absent or unreadable values: null.\n\nDo not return objects containing \"value\", \"identifier\", \"date\", \"format\", or \"codelist\" wrapper keys; the supplied schema already uses plain values.\n\nReturn the extraction using the supplied structured output schema.\n",
+        "model": "unsloth/qwen3.6-27b",
+        "turnIndex": 0,
+        "hasToolResult": false
+      },
+      "response": {
+        "content": "{\n  \"transaction\": {\n    \"allowances\": [],\n    \"vatBreakdown\": {\n      \"categoryCode\": null,\n      \"rateApplicablePercent\": null,\n      \"exemptionReason\": null,\n      \"exemptionReasonCode\": null\n    }\n  }\n}",
+        "usage": {
+          "prompt_tokens": 4158,
+          "completion_tokens": 68,
+          "total_tokens": 4226,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        }
+      },
+      "metadata": {
+        "systemHash": "26e64153"
+      }
+    },
+    {
+      "match": {
+        "context": "Invoice OCR Fixtures",
+        "userMessage": "Focus this pass on invoice line descriptions, identifiers, and quantities. Return EVERY invoice line in document order. Capture line position identifiers, item names and descriptions, item identifiers, and billed quantities with units. Do not extract prices in this pass.\n\nRe-read every page specifically for these fields: transaction.line.position, transaction.line.item, transaction.line.delivery. Leave fields outside this list null or absent.\n\n/no_think\n\nExtract the fields requested for this pass from the provided document images.\n\nUse the supplied output schema as the authoritative definition of field meanings and value formats. Return only fields with visible evidence in the document. Use null or omit fields that are absent or unreadable.\n\nUse plain values for every field:\n\n- Dates: a single date string in YYYY-MM-DD format.\n- Codes: only the code value, for example EUR, DE, or S.\n- Identifiers: only the identifier text, for example an invoice number or IBAN.\n- Amounts, prices, and percentages: plain numbers with a decimal point, with no currency symbol, thousands separator, or percent sign. Interpret decimal and thousands separators according to the document's locale. A unit price is not the extended line total.\n- Quantities that require a unit: an object with \"value\" and \"unitCode\", for example {\"value\": 20, \"unitCode\": \"C62\"}.\n- Absent or unreadable values: null.\n\nDo not return objects containing \"value\", \"identifier\", \"date\", \"format\", or \"codelist\" wrapper keys; the supplied schema already uses plain values.\n\nReturn the extraction using the supplied structured output schema.\n",
+        "model": "unsloth/qwen3.6-27b",
+        "turnIndex": 0,
+        "hasToolResult": false
+      },
+      "response": {
+        "content": "{\n  \"transaction\": {\n    \"line\": [\n      {\n        \"position\": {\n          \"lineId\": \"1\"\n        },\n        \"item\": {\n          \"description\": \"Trennblätter A4\",\n          \"buyerAssignedId\": \"TB100A4\",\n          \"globalId\": \"4012345001235\"\n        },\n        \"delivery\": {\n          \"billedQuantity\": {\n            \"value\": 20,\n            \"unitCode\": \"H87\"\n          }\n        }\n      },\n      {\n        \"position\": {\n          \"lineId\": \"2\"\n        },\n        \"item\": {\n          \"description\": \"Joghurt Banane\",\n          \"buyerAssignedId\": \"ARNR2\",\n          \"globalId\": \"4000050986428\"\n        },\n        \"delivery\": {\n          \"billedQuantity\": {\n            \"value\": 50,\n            \"unitCode\": \"H87\"\n          }\n        }\n      }\n    ]\n  }\n}",
+        "usage": {
+          "prompt_tokens": 4150,
+          "completion_tokens": 263,
+          "total_tokens": 4413,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        }
+      },
+      "metadata": {
+        "systemHash": "26e64153"
+      }
+    },
+    {
+      "match": {
+        "context": "Invoice OCR Fixtures",
+        "userMessage": "Focus this pass on invoice line item identifiers. Re-read the invoice line table in the same document order. Use the item name only as context. Capture the item identifiers printed in the document in the field whose schema description matches them. Do not use the line number or item name as an identifier.\n\nRe-read every page specifically for these fields: transaction.line.item.name, transaction.line.item.sellerAssignedId, transaction.line.item.buyerAssignedId, transaction.line.item.globalId. Leave fields outside this list null or absent.\n\n/no_think\n\nExtract the fields requested for this pass from the provided document images.\n\nUse the supplied output schema as the authoritative definition of field meanings and value formats. Return only fields with visible evidence in the document. Use null or omit fields that are absent or unreadable.\n\nUse plain values for every field:\n\n- Dates: a single date string in YYYY-MM-DD format.\n- Codes: only the code value, for example EUR, DE, or S.\n- Identifiers: only the identifier text, for example an invoice number or IBAN.\n- Amounts, prices, and percentages: plain numbers with a decimal point, with no currency symbol, thousands separator, or percent sign. Interpret decimal and thousands separators according to the document's locale. A unit price is not the extended line total.\n- Quantities that require a unit: an object with \"value\" and \"unitCode\", for example {\"value\": 20, \"unitCode\": \"C62\"}.\n- Absent or unreadable values: null.\n\nDo not return objects containing \"value\", \"identifier\", \"date\", \"format\", or \"codelist\" wrapper keys; the supplied schema already uses plain values.\n\nReturn the extraction using the supplied structured output schema.\n",
+        "model": "unsloth/qwen3.6-27b",
+        "turnIndex": 0,
+        "hasToolResult": false
+      },
+      "response": {
+        "content": "{\n  \"transaction\": {\n    \"line\": [\n      {\n        \"item\": {\n          \"name\": \"Trennblätter A4\",\n          \"sellerAssignedId\": \"TB100A4\",\n          \"buyerAssignedId\": null,\n          \"globalId\": \"4012345001235\"\n        }\n      },\n      {\n        \"item\": {\n          \"name\": \"Joghurt Banane\",\n          \"sellerAssignedId\": \"ARNR2\",\n          \"buyerAssignedId\": null,\n          \"globalId\": \"4000050986428\"\n        }\n      }\n    ]\n  }\n}",
+        "usage": {
+          "prompt_tokens": 4176,
+          "completion_tokens": 164,
+          "total_tokens": 4340,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        }
+      },
+      "metadata": {
+        "systemHash": "26e64153"
+      }
+    },
+    {
+      "match": {
+        "context": "Invoice OCR Fixtures",
+        "userMessage": "Focus this pass on invoice line prices and totals. Return EVERY invoice line in the same document order, using the same line count. Use line position, item name, and billed quantity only as context. Capture unit prices before and after discount and the line total from the printed line values. Do not copy a line total into a unit-price field. Copy printed values; do not calculate.\n\nRe-read every page specifically for these fields: transaction.line.position.lineId, transaction.line.item.name, transaction.line.delivery.billedQuantity, transaction.line.priceDetails, transaction.line.billing.itemTotals. Leave fields outside this list null or absent.\n\n/no_think\n\nExtract the fields requested for this pass from the provided document images.\n\nUse the supplied output schema as the authoritative definition of field meanings and value formats. Return only fields with visible evidence in the document. Use null or omit fields that are absent or unreadable.\n\nUse plain values for every field:\n\n- Dates: a single date string in YYYY-MM-DD format.\n- Codes: only the code value, for example EUR, DE, or S.\n- Identifiers: only the identifier text, for example an invoice number or IBAN.\n- Amounts, prices, and percentages: plain numbers with a decimal point, with no currency symbol, thousands separator, or percent sign. Interpret decimal and thousands separators according to the document's locale. A unit price is not the extended line total.\n- Quantities that require a unit: an object with \"value\" and \"unitCode\", for example {\"value\": 20, \"unitCode\": \"C62\"}.\n- Absent or unreadable values: null.\n\nDo not return objects containing \"value\", \"identifier\", \"date\", \"format\", or \"codelist\" wrapper keys; the supplied schema already uses plain values.\n\nReturn the extraction using the supplied structured output schema.\n",
+        "model": "unsloth/qwen3.6-27b",
+        "turnIndex": 0,
+        "hasToolResult": false
+      },
+      "response": {
+        "content": "{\n  \"transaction\": {\n    \"line\": [\n      {\n        \"position\": {\n          \"lineId\": \"1\"\n        },\n        \"item\": {\n          \"name\": \"Trennblätter A4\"\n        },\n        \"delivery\": {\n          \"billedQuantity\": {\n            \"value\": 20,\n            \"unitCode\": \"C62\"\n          }\n        },\n        \"priceDetails\": {\n          \"grossPrice\": null,\n          \"netPrice\": {\"chargeAmount\": 9.9000}\n        },\n        \"billing\": {\n          \"itemTotals\": {\"lineTotalAmount\": 198.00}\n        }\n      },\n      {\n        \"position\": {\n          \"lineId\": \"2\"\n        },\n        \"item\": {\n          \"name\": \"Joghurt Banane\"\n        },\n        \"delivery\": {\n          \"billedQuantity\": {\n            \"value\": 50,\n            \"unitCode\": \"C62\"\n          }\n        },\n        \"priceDetails\": {\n          \"grossPrice\": null,\n          \"netPrice\": {\"chargeAmount\": 5.5000}\n        },\n        \"billing\": {\n          \"itemTotals\": {\"lineTotalAmount\": 275.00}\n        }\n      }\n    ]\n  }\n}",
+        "usage": {
+          "prompt_tokens": 4198,
+          "completion_tokens": 324,
+          "total_tokens": 4522,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        }
+      },
+      "metadata": {
+        "systemHash": "26e64153"
+      }
+    }
+  ]
+}

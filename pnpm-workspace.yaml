@@ -71,6 +71,7 @@ minimumReleaseAgeExclude:
   - "@better-auth/prisma-adapter@1.7.25"
   - "@better-auth/telemetry@1.7.25"
   - better-auth@1.7.25
+  - "@tanstack/ai@1.8.0"
 
 trustPolicy: no-downgrade
 

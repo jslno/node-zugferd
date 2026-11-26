@@ -1,0 +1,23 @@
+{
+  "name": "credit-note",
+  "fixturesDir": "../fixtures/credit-note",
+  "pdf": "../../scripts/generate-fixtures/credit-note.pdf",
+  "cases": [
+    {
+      "fixture": "zai-org__glm-4.6v-flash.json",
+      "model": "zai-org/glm-4.6v-flash",
+      "imageScale": 1.5,
+      "think": false,
+      "maxOutputTokens": 2048,
+      "defaultPrompt": "/no_think\n\nExtract the fields requested for this pass from the provided document images.\n\nUse the supplied output schema as the authoritative definition of field meanings and value formats. Return only fields with visible evidence in the document. Use null or omit fields that are absent or unreadable.\n\nUse plain values for every field:\n\n- Dates: a single date string in YYYY-MM-DD format.\n- Codes: only the code value, for example EUR, DE, or S.\n- Identifiers: only the identifier text, for example an invoice number or IBAN.\n- Amounts, prices, and percentages: plain numbers with a decimal point, with no currency symbol, thousands separator, or percent sign. Interpret decimal and thousands separators according to the document's locale. A unit price is not the extended line total.\n- Quantities that require a unit: an object with \"value\" and \"unitCode\", for example {\"value\": 20, \"unitCode\": \"C62\"}.\n- Absent or unreadable values: null.\n\nDo not return objects containing \"value\", \"identifier\", \"date\", \"format\", or \"codelist\" wrapper keys; the supplied schema already uses plain values.\n\nReturn the extraction using the supplied structured output schema.\n"
+    },
+    {
+      "fixture": "unsloth__qwen3.6-27b.json",
+      "model": "unsloth/qwen3.6-27b",
+      "imageScale": 1.5,
+      "think": false,
+      "maxOutputTokens": 2048,
+      "defaultPrompt": "/no_think\n\nExtract the fields requested for this pass from the provided document images.\n\nUse the supplied output schema as the authoritative definition of field meanings and value formats. Return only fields with visible evidence in the document. Use null or omit fields that are absent or unreadable.\n\nUse plain values for every field:\n\n- Dates: a single date string in YYYY-MM-DD format.\n- Codes: only the code value, for example EUR, DE, or S.\n- Identifiers: only the identifier text, for example an invoice number or IBAN.\n- Amounts, prices, and percentages: plain numbers with a decimal point, with no currency symbol, thousands separator, or percent sign. Interpret decimal and thousands separators according to the document's locale. A unit price is not the extended line total.\n- Quantities that require a unit: an object with \"value\" and \"unitCode\", for example {\"value\": 20, \"unitCode\": \"C62\"}.\n- Absent or unreadable values: null.\n\nDo not return objects containing \"value\", \"identifier\", \"date\", \"format\", or \"codelist\" wrapper keys; the supplied schema already uses plain values.\n\nReturn the extraction using the supplied structured output schema.\n"
+    }
+  ]
+}
