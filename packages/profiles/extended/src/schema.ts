@@ -300,6 +300,21 @@ const transaction = pipeAsync(
 								classification: pipe(
 									nullish(
 										object({
+											classCode: pipe(
+												nullish(
+													array(
+														identifier({
+															requireSchemeId: "always",
+															requireSchemeVersion: "optional",
+														}),
+													),
+												),
+												metadata({
+													id: ["BT-158", "BT-158-1", "BT-158-2"],
+													xpath:
+														"/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:DesignatedProductClassification/ram:ClassCode",
+												}),
+											),
 											className: pipe(
 												nullish(text()),
 												metadata({

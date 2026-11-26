@@ -572,19 +572,22 @@ export function parseFromSchema<R = Record<string, unknown>>({
 						any
 					>;
 
+					const schemeId = value["@schemeID"] ?? value["@listID"];
 					if (
-						value["@schemeID"] &&
+						schemeId &&
 						identifierSchema.config?.requireSchemeId !== "never"
 					) {
-						assertType(value["@schemeID"], "string");
-						result["schemeId"] = value["@schemeID"];
+						assertType(schemeId, "string");
+						result["schemeId"] = schemeId;
 					}
+					const schemeVersion =
+						value["@schemeVersion"] ?? value["@listVersionID"];
 					if (
-						value["@schemeVersion"] &&
+						schemeVersion &&
 						identifierSchema.config?.requireSchemeVersion !== "never"
 					) {
-						assertType(value["@schemeVersion"], "string");
-						result["schemeVersion"] = value["@schemeVersion"];
+						assertType(schemeVersion, "string");
+						result["schemeVersion"] = schemeVersion;
 					}
 
 					if (Object.keys(result).length === 1) {

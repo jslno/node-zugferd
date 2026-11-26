@@ -144,9 +144,7 @@ export const en16931 = defineProfile({
 							) {
 								for (const classCode of line.item.classification.classCode) {
 									const productClassificationCode =
-										designatedProductClassification.ele(
-											"ram:ProductClassificationCode",
-										);
+										designatedProductClassification.ele("ram:ClassCode");
 									productClassificationCode
 										.txt(classCode.identifier)
 										.att("listID", classCode.schemeId);

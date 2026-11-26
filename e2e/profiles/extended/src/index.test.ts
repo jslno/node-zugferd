@@ -9,6 +9,7 @@ import { foreignCurrencyData } from "@node-zugferd-test/test-utils/extended/vali
 import { goodsInvoiceData } from "@node-zugferd-test/test-utils/extended/valid/goods-invoice.js";
 import { intraCommunitySupplyMultipleOrders } from "@node-zugferd-test/test-utils/extended/valid/intra-community-supply-multiple-orders.js";
 import { invoiceCorrectionData } from "@node-zugferd-test/test-utils/extended/valid/invoice-correction.js";
+import { itemAttributesClassificationOriginData } from "@node-zugferd-test/test-utils/extended/valid/item-attributes-classification-origin.js";
 import { machineSerialNoData } from "@node-zugferd-test/test-utils/extended/valid/machine-serial-no.js";
 import { simpleConstructionProFormaInvoice1Data } from "@node-zugferd-test/test-utils/extended/valid/simple-construction-pro-forma-invoice-1.js";
 import { simpleConstructionProFormaInvoice2Data } from "@node-zugferd-test/test-utils/extended/valid/simple-construction-pro-forma-invoice-2.js";
@@ -60,6 +61,10 @@ const invoices = [
 		data: foreignCurrencyData,
 	},
 	{ label: "Goods invoice", data: goodsInvoiceData },
+	{
+		label: "Item attributes, classification, and origin country",
+		data: itemAttributesClassificationOriginData,
+	},
 	{ label: "Invoice correction", data: invoiceCorrectionData },
 	{ label: "Final project invoice", data: finalProjectInvoiceData },
 	{ label: "Cost accounting", data: costAccountingData },
