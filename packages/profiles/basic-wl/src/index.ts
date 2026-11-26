@@ -383,18 +383,26 @@ export const basicWL = defineProfile({
 						buyerTradeParty.node.insertBefore(globalId.node, refNode);
 					}
 
-					const postalTradeAddress = (() => {
-						const postalTradeAddress = fragment().ele("ram:PostalTradeAddress");
-						const refNode =
-							findNode(
-								"BT-49-00",
-								buyerTradeParty,
-								(node) =>
-									node.node.nodeName === "ram:URIUniversalCommunication",
-							)?.node ?? null;
-						buyerTradeParty.node.insertBefore(postalTradeAddress.node, refNode);
-						return postalTradeAddress;
-					})();
+					const postalTradeAddress = setCachedNode(
+						"BG-8",
+						(() => {
+							const postalTradeAddress = fragment().ele(
+								"ram:PostalTradeAddress",
+							);
+							const refNode =
+								findNode(
+									"BT-49-00",
+									buyerTradeParty,
+									(node) =>
+										node.node.nodeName === "ram:URIUniversalCommunication",
+								)?.node ?? null;
+							buyerTradeParty.node.insertBefore(
+								postalTradeAddress.node,
+								refNode,
+							);
+							return postalTradeAddress;
+						})(),
+					);
 
 					if (data.transaction.contract.buyer.postalAddress.postCode) {
 						const postcodeCode = postalTradeAddress.ele("ram:PostcodeCode");
@@ -439,9 +447,10 @@ export const basicWL = defineProfile({
 					}
 
 					if (data.transaction.contract.buyer.electronicAddress) {
-						const uriid = buyerTradeParty
-							.ele("ram:URIUniversalCommunication")
-							.ele("ram:URIID");
+						const uriid = setCachedNode(
+							"BT-49-00",
+							buyerTradeParty.ele("ram:URIUniversalCommunication"),
+						).ele("ram:URIID");
 						uriid.txt(
 							data.transaction.contract.buyer.electronicAddress.identifier,
 						);
@@ -467,29 +476,33 @@ export const basicWL = defineProfile({
 				}
 
 				if (data.transaction.contract.sellerTaxRepresentative) {
-					const sellerTaxRepresentative = (() => {
-						const sellerTaxRepresentative = fragment().ele(
-							"ram:SellerTaxRepresentativeTradeParty",
-						);
-						const refNode =
-							findNode(
-								"BT-13-00",
-								applicableHeaderTradeAgreement,
-								(node) =>
-									node.node.nodeName === "ram:BuyerOrderReferencedDocument",
-							)?.node ?? null;
-						applicableHeaderTradeAgreement.node.insertBefore(
-							sellerTaxRepresentative.node,
-							refNode,
-						);
-						return sellerTaxRepresentative;
-					})();
-					sellerTaxRepresentative
-						.ele("ram:Name")
-						.txt(data.transaction.contract.sellerTaxRepresentative.name);
+					const sellerTaxRepresentative = setCachedNode(
+						"BG-11",
+						(() => {
+							const sellerTaxRepresentative = fragment().ele(
+								"ram:SellerTaxRepresentativeTradeParty",
+							);
+							const refNode =
+								findNode(
+									"BT-13-00",
+									applicableHeaderTradeAgreement,
+									(node) =>
+										node.node.nodeName === "ram:BuyerOrderReferencedDocument",
+								)?.node ?? null;
+							applicableHeaderTradeAgreement.node.insertBefore(
+								sellerTaxRepresentative.node,
+								refNode,
+							);
+							return sellerTaxRepresentative;
+						})(),
+					);
+					setCachedNode("BT-62", sellerTaxRepresentative.ele("ram:Name")).txt(
+						data.transaction.contract.sellerTaxRepresentative.name,
+					);
 
-					const postalAddress = sellerTaxRepresentative.ele(
-						"ram:PostalTradeAddress",
+					const postalAddress = setCachedNode(
+						"BG-12",
+						sellerTaxRepresentative.ele("ram:PostalTradeAddress"),
 					);
 
 					if (
@@ -582,8 +595,11 @@ export const basicWL = defineProfile({
 				}
 
 				if (data.transaction.contract.associatedContract) {
-					const contractReferencedDocument = applicableHeaderTradeAgreement.ele(
-						"ram:ContractReferencedDocument",
+					const contractReferencedDocument = setCachedNode(
+						"BT-12-00",
+						applicableHeaderTradeAgreement.ele(
+							"ram:ContractReferencedDocument",
+						),
 					);
 					if (data.transaction.contract.associatedContract.issuerAssignedId) {
 						contractReferencedDocument
@@ -620,8 +636,9 @@ export const basicWL = defineProfile({
 				);
 
 				if (data.transaction.delivery.recipient) {
-					const shipToTradeParty = applicableHeaderTradeDelivery.ele(
-						"ram:ShipToTradeParty",
+					const shipToTradeParty = setCachedNode(
+						"BG-13",
+						applicableHeaderTradeDelivery.ele("ram:ShipToTradeParty"),
 					);
 					if (data.transaction.delivery.recipient.locationId) {
 						shipToTradeParty
@@ -647,8 +664,9 @@ export const basicWL = defineProfile({
 							.txt(data.transaction.delivery.recipient.name);
 					}
 					if (data.transaction.delivery.recipient.postalAddress) {
-						const postalTradeAddress = shipToTradeParty.ele(
-							"ram:PostalTradeAddress",
+						const postalTradeAddress = setCachedNode(
+							"BG-15",
+							shipToTradeParty.ele("ram:PostalTradeAddress"),
 						);
 						if (data.transaction.delivery.recipient.postalAddress.postCode) {
 							postalTradeAddress
@@ -698,10 +716,12 @@ export const basicWL = defineProfile({
 				}
 
 				if (data.transaction.delivery.actualDelivery) {
-					const actualDeliverySupplyChainEvent =
+					const actualDeliverySupplyChainEvent = setCachedNode(
+						"BT-72-000",
 						applicableHeaderTradeDelivery.ele(
 							"ram:ActualDeliverySupplyChainEvent",
-						);
+						),
+					);
 					if (data.transaction.delivery.actualDelivery.date) {
 						actualDeliverySupplyChainEvent
 							.ele("ram:OccurrenceDateTime")
@@ -715,10 +735,12 @@ export const basicWL = defineProfile({
 				}
 
 				if (data.transaction.delivery.despatchAdvice) {
-					const despatchAdviceReferencedDocument =
+					const despatchAdviceReferencedDocument = setCachedNode(
+						"BT-16-00",
 						applicableHeaderTradeDelivery.ele(
 							"ram:DespatchAdviceReferencedDocument",
-						);
+						),
+					);
 					if (data.transaction.delivery.despatchAdvice.issuerAssignedId) {
 						despatchAdviceReferencedDocument
 							.ele("ram:IssuerAssignedID")
@@ -787,22 +809,25 @@ export const basicWL = defineProfile({
 				}
 
 				if (data.transaction.debit.payee) {
-					const payeeTradeParty = (() => {
-						const payeeTradeParty = fragment().ele("ram:PayeeTradeParty");
-						const refNode =
-							findNode(
-								"BG-22",
-								applicableHeaderTradeSettlement,
-								(node) =>
-									node.node.nodeName ===
-									"ram:SpecifiedTradeSettlementHeaderMonetarySummation",
-							)?.node ?? null;
-						applicableHeaderTradeSettlement.node.insertBefore(
-							payeeTradeParty.node,
-							refNode,
-						);
-						return payeeTradeParty;
-					})();
+					const payeeTradeParty = setCachedNode(
+						"BG-10",
+						(() => {
+							const payeeTradeParty = fragment().ele("ram:PayeeTradeParty");
+							const refNode =
+								findNode(
+									"BG-22",
+									applicableHeaderTradeSettlement,
+									(node) =>
+										node.node.nodeName ===
+										"ram:SpecifiedTradeSettlementHeaderMonetarySummation",
+								)?.node ?? null;
+							applicableHeaderTradeSettlement.node.insertBefore(
+								payeeTradeParty.node,
+								refNode,
+							);
+							return payeeTradeParty;
+						})(),
+					);
 
 					if (data.transaction.debit.payee.id) {
 						const id = payeeTradeParty
@@ -847,34 +872,39 @@ export const basicWL = defineProfile({
 				}
 
 				if (data.transaction.debit.paymentMeans) {
-					const specifiedTradeSettlementPaymentMeans = (() => {
-						const specifiedTradeSettlementPaymentMeans = fragment().ele(
-							"ram:SpecifiedTradeSettlementPaymentMeans",
-						);
-						const refNode =
-							findNode(
-								"BG-22",
-								applicableHeaderTradeSettlement,
-								(node) =>
-									node.node.nodeName ===
-									"ram:SpecifiedTradeSettlementHeaderMonetarySummation",
-							)?.node ?? null;
-						applicableHeaderTradeSettlement.node.insertBefore(
-							specifiedTradeSettlementPaymentMeans.node,
-							refNode,
-						);
-						return specifiedTradeSettlementPaymentMeans;
-					})();
+					const specifiedTradeSettlementPaymentMeans = setCachedNode(
+						"BG-16",
+						(() => {
+							const specifiedTradeSettlementPaymentMeans = fragment().ele(
+								"ram:SpecifiedTradeSettlementPaymentMeans",
+							);
+							const refNode =
+								findNode(
+									"BG-22",
+									applicableHeaderTradeSettlement,
+									(node) =>
+										node.node.nodeName ===
+										"ram:SpecifiedTradeSettlementHeaderMonetarySummation",
+								)?.node ?? null;
+							applicableHeaderTradeSettlement.node.insertBefore(
+								specifiedTradeSettlementPaymentMeans.node,
+								refNode,
+							);
+							return specifiedTradeSettlementPaymentMeans;
+						})(),
+					);
 
 					specifiedTradeSettlementPaymentMeans
 						.ele("ram:TypeCode")
 						.txt(data.transaction.debit.paymentMeans.typeCode.value);
 
 					if (data.transaction.debit.paymentMeans.buyerBankDetails) {
-						const payerPartyDebtorFinancialAccount =
+						const payerPartyDebtorFinancialAccount = setCachedNode(
+							"BT-91-00",
 							specifiedTradeSettlementPaymentMeans.ele(
 								"ram:PayerPartyDebtorFinancialAccount",
-							);
+							),
+						);
 						if (data.transaction.debit.paymentMeans.buyerBankDetails.iban) {
 							payerPartyDebtorFinancialAccount
 								.ele("ram:IBANID")
@@ -957,24 +987,27 @@ export const basicWL = defineProfile({
 				})();
 
 				if (data.transaction.debit.invoicingPeriod) {
-					const billingSpecifiedPeriod = (() => {
-						const billingSpecifiedPeriod = fragment().ele(
-							"ram:BillingSpecifiedPeriod",
-						);
-						const refNode =
-							findNode(
-								"BG-22",
-								applicableHeaderTradeSettlement,
-								(node) =>
-									node.node.nodeName ===
-									"ram:SpecifiedTradeSettlementHeaderMonetarySummation",
-							)?.node ?? null;
-						applicableHeaderTradeSettlement.node.insertBefore(
-							billingSpecifiedPeriod.node,
-							refNode,
-						);
-						return billingSpecifiedPeriod;
-					})();
+					const billingSpecifiedPeriod = setCachedNode(
+						"BG-14",
+						(() => {
+							const billingSpecifiedPeriod = fragment().ele(
+								"ram:BillingSpecifiedPeriod",
+							);
+							const refNode =
+								findNode(
+									"BG-22",
+									applicableHeaderTradeSettlement,
+									(node) =>
+										node.node.nodeName ===
+										"ram:SpecifiedTradeSettlementHeaderMonetarySummation",
+								)?.node ?? null;
+							applicableHeaderTradeSettlement.node.insertBefore(
+								billingSpecifiedPeriod.node,
+								refNode,
+							);
+							return billingSpecifiedPeriod;
+						})(),
+					);
 
 					if (data.transaction.debit.invoicingPeriod.startDate) {
 						billingSpecifiedPeriod
@@ -1324,10 +1357,12 @@ export const basicWL = defineProfile({
 				}
 
 				if (data.transaction.debit.accounting) {
-					const receivableSpecifiedTradeAccountingAccount =
+					const receivableSpecifiedTradeAccountingAccount = setCachedNode(
+						"BT-19-00",
 						applicableHeaderTradeSettlement.ele(
 							"ram:ReceivableSpecifiedTradeAccountingAccount",
-						);
+						),
+					);
 					if (data.transaction.debit.accounting.buyerReference) {
 						receivableSpecifiedTradeAccountingAccount
 							.ele("ram:ID")
