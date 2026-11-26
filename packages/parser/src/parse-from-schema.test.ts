@@ -1,6 +1,7 @@
 import {
 	array,
 	date,
+	identifier,
 	metadata,
 	nullish,
 	object,
@@ -103,6 +104,38 @@ describe("parse-from-schema", () => {
 
 		expect(result.section?.[0]?.book?.[1]?.pages).toBe("210");
 		expect(result.section?.[1]?.book?.[0]?.rating).toBe("5.0");
+	});
+
+	it("reads listID and listVersionID attributes as identifier fields", () => {
+		const xml = `
+          <classification>
+            <ClassCode listID="HS" listVersionID="2022">23456789123</ClassCode>
+          </classification>
+        `;
+		const xpath = createXPath(xml);
+		const schema = object({
+			classCode: pipe(
+				identifier({
+					requireSchemeId: "always",
+					requireSchemeVersion: "optional",
+				}),
+				metadata({ xpath: "classification/ClassCode" }),
+			),
+		});
+		const profile = { schema } as never;
+
+		const result: any = parseFromSchema({
+			profile,
+			xml: xpath.querySelector("classification")!.original as never,
+			xpath,
+			context: {} as never,
+		});
+
+		expect(result.classCode).toEqual({
+			value: "23456789123",
+			schemeId: "HS",
+			schemeVersion: "2022",
+		});
 	});
 });
 
