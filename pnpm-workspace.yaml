@@ -4,10 +4,12 @@ packages:
   - docs
   - e2e/**
   - benchmark/**
+  - services/*
 
 allowBuilds:
   bufferutil: false
   bun: true
+  core-js-pure: true
   deno: true
   es5-ext: true
   esbuild: true
@@ -36,6 +38,7 @@ catalog:
   tsx: ^4.23.15
   "@types/node": ^26.6.6
   "@standard-schema/spec": latest
+  octokit: ^5.0.5
 
 catalogs:
   biome:

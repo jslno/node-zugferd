@@ -17,3 +17,6 @@ Hafen
 elektronische
 Facturation
 Rechnungsplattform
+Spezifikation
+wurde
+veröffentlicht

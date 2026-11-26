@@ -1,0 +1,42 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "monitoring",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-11-18",
+	"compatibility_flags": ["nodejs_compat"],
+	"observability": {
+		"enabled": true
+	},
+	"upload_source_maps": true,
+	"ai": {
+		"binding": "AI"
+	},
+	"queues": {
+		"producers": [
+			{
+				"queue": "email-jobs",
+				"binding": "EMAIL_JOBS"
+			}
+		],
+		"consumers": [
+			{
+				"queue": "email-jobs"
+			}
+		]
+	},
+	"vars": {
+		"AI_MODEL": "@cf/qwen/qwen3.8-27b",
+		"CONFIDENCE_THRESHOLD": "0.85",
+		"ALLOWED_SENDERS": "info@awv-net.de",
+		"GIT_USER": "jslno",
+		"GIT_REPO": "node-zugferd",
+		"TRUSTED_ORIGINS": "https://ferd-net.de,https://*.ferd-net.de"
+	},
+	"secrets": {
+		"required": ["GITHUB_APP_ID", "GITHUB_APP_PRIVATE_KEY"]
+	}
+}
