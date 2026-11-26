@@ -1,0 +1,115 @@
+---
+icon: ShieldCheck
+title: KoSIT
+description: Validate EN 16931 and XRechnung XML against the official KoSIT rules, without Java.
+---
+
+The KoSIT plugin checks invoice XML against the rules of the [KoSIT validator](https://github.com/itplr-kosit/validator), the reference the German public sector uses for XRechnung: the XML Schema, the EN 16931 Schematron, and the XRechnung Schematron, including the scenario selection and severity overrides of the [KoSIT configuration](https://github.com/itplr-kosit/validator-configuration-xrechnung). It runs in-process through [`xrechnung-validator`](https://www.npmjs.com/package/xrechnung-validator) and needs no Java runtime. A valid document resolves with no value. An invalid document throws [`ZugferdError`](#findings).
+
+## Installation
+
+<Steps>
+	<Step>
+		### Install the plugin
+
+		```package-install
+		@node-zugferd/validator-kosit@beta
+		```
+	</Step>
+
+	<Step>
+		### Add the plugin to your instance
+
+		```ts title="invoicer.ts"
+		import { zugferd } from "node-zugferd";
+		import { xrechnung } from "@node-zugferd/xrechnung";
+		import { kosit } from "@node-zugferd/validator-kosit"; // [!code highlight]
+
+		export const invoicer = zugferd({
+		  profiles: [xrechnung],
+		  plugins: [
+		    kosit(), // [!code highlight]
+		  ],
+		  // ...
+		});
+		```
+	</Step>
+</Steps>
+
+## Automatic validation
+
+`autoRun` defaults to `true`. `create` then validates the XML it just built, and a KoSIT failure rejects that call. An `afterXMLBuild` hook on your `zugferd()` options still runs after this check.
+
+```ts title="invoice.ts"
+import { invoicer } from "./invoicer";
+import { data } from "./data";
+
+await invoicer.create("xrechnung", data);
+```
+
+With the [parser](/docs/plugins/parser) plugin on the same instance, `parse` also runs the KoSIT check on the XML before it maps fields. Set `autoRun: false` to keep `invoicer.kosit.validate` available and skip both of those automatic checks.
+
+## Manual validation
+
+`invoicer.kosit.validate` takes a profile id and the invoice XML. The id may also be an object with an `id` field and has to be one of the [supported profiles](#supported-profiles).
+
+```ts title="validate.ts"
+import { readFile } from "node:fs/promises";
+import { ZugferdError } from "@node-zugferd/core/error";
+import { invoicer } from "./invoicer";
+
+try {
+  await invoicer.kosit.validate("xrechnung", await readFile("invoice.xml"));
+} catch (error) {
+  if (error instanceof ZugferdError) {
+    console.error(error.message);
+  } else {
+    throw error;
+  }
+}
+```
+
+Any other profile id logs a warning and the call resolves, leaving the XML unchecked. PDF input throws a `ZugferdError`: extract the embedded XML first, for example with the [parser](/docs/plugins/parser) plugin.
+
+## Supported profiles
+
+- [EN 16931](/docs/profiles/en-16931)
+- [XRechnung](/docs/profiles/xrechnung)
+
+The KoSIT configuration contains rule sets for EN 16931 and XRechnung only. The rule set is chosen from the specification identifier (BT-24) in the XML, the same way the KoSIT validator does it.
+
+## Findings
+
+- Schema errors, with their line numbers, and Schematron errors are joined with a blank line and thrown as a `ZugferdError`. Each Schematron finding starts with its rule id, for example `[BR-DE-15]`.
+- Warnings are written with the zugferd logger. This includes rules that KoSIT downgrades from error to warning. A warning on its own leaves the document valid. Set `failOnWarnings: true` to throw on warnings as well.
+- Information-level findings are omitted.
+- XML that is not well-formed, or that has no matching KoSIT scenario, throws `ZugferdError` with an explanation.
+
+## Compared to XSD and Mustang
+
+Like [XSD](/docs/plugins/validators/xsd), KoSIT validates in-process and needs no Java runtime. In addition to the schema, it applies the EN 16931 and XRechnung business rules, so it reports errors that XSD alone does not catch.
+
+[Mustang](/docs/plugins/validators/mustang) covers more profiles and also checks PDF/A compliance, but it starts a Java process for every check. Use KoSIT when you produce EN 16931 or XRechnung XML and want the official business rules without a JVM, for example in serverless functions.
+
+The rules are a compiled copy of a pinned KoSIT configuration. The version is listed in the [`xrechnung-validator` README](https://github.com/altovate-GmbH/xrechnung-validator#same-verdict-as-the-official-validator).
+
+## Options
+
+<TypeTable
+	type={{
+		autoRun: {
+			type: "boolean",
+			description:
+				"Validate XML produced by create, and XML read by the parser plugin. Set to false to validate only through kosit.validate.",
+			default: "true",
+			required: false,
+		},
+		failOnWarnings: {
+			type: "boolean",
+			description:
+				"Throw on warnings as well, including rules that KoSIT downgrades from error to warning.",
+			default: "false",
+			required: false,
+		},
+	}}
+/>

@@ -74,6 +74,7 @@ The main library lives in `packages/node-zugferd/`. This is what gets published 
 - `packages/profiles/<name>/` — one package per profile. Each `src/index.ts` calls `defineProfile`; `src/schema.ts` is the data schema. Profiles: `minimum`, `basic-wl`, `basic`, `en-16931`, `extended`, `xrechnung`, `order-x`, `order-x-basic`.
 - `packages/codelists/<name>/` — one package per code list. `src/index.ts` is generated. Edit `scripts/generators/codelist/` and run `pnpm gen`.
 - `packages/validators/xsd/` — `@node-zugferd/validator-xsd`
+- `packages/validators/kosit/` — `@node-zugferd/validator-kosit`. KoSIT rules (EN 16931, XRechnung) in-process via `xrechnung-validator`; no JDK.
 - `packages/validators/mustang/` — `@node-zugferd/validator-mustang`. Needs a JDK (CI uses Temurin 25).
 - `packages/validators/xrechnung-schema-definition/` and `packages/validators/order-x-schema-definition/`
 - `packages/templates/`, `packages/default-template/`, `packages/pdf-template/`, `packages/docx-template/`
