@@ -23,7 +23,8 @@
   },
   "dependencies": {
     "@node-zugferd/core": "workspace:*",
-    "@standard-schema/spec": "catalog:"
+    "@standard-schema/spec": "catalog:",
+    "@valibot/to-json-schema": "^1.8.0"
   },
   "devDependencies": {
     "tsdown": "catalog:"
